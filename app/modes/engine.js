@@ -5,7 +5,7 @@ void setup()
     frameRate(90);
 }
 
-void
+void draw()
 {
     background(0);
 }
