@@ -5,7 +5,6 @@
  * the Processing.js engine.
  */
 
-
 if ( window.addEventListener ) {
 	window.addEventListener("load", function() {
 		var scripts = document.getElementsByTagName("script");
@@ -22,27 +21,10 @@ if ( window.addEventListener ) {
 				}
 
 				if ( canvas ) {
-          if(scripts[i].text != ""){
-            // handle case where it's inline script
-            var str = scripts[i].text;
-            Processing(canvas, str);
-          }else{
-            // handle case where it's a script file, by grabbing the contents with ajax
-            if(window.XMLHttpRequest) {
-              var xhr = new XMLHttpRequest();                 
-              xhr.onreadystatechange = function() {
-// status 200 for success over http, status 0 for local filesystem
-                if((xhr.status == 200 || xhr.status == 0) && xhr.readyState == 4) {
-                  var str = xhr.responseText;
-                  Processing(canvas, str);
-                }
-              }
-              xhr.open("GET", scripts[i].src,true);
-              xhr.send(null);
-            }
-          }
-        }
+					Processing(canvas, scripts[i].text);
+				}
 			}
 		}
 	}, false);
 }
+
