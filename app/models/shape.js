@@ -7,6 +7,8 @@ function Tetromino ()
     for (int i = 0; i < 4; i++)
     {
       blocks[i] = new Array(4);
+    }
+    return blocks;
   }
   this.modify_block = function(x, y, i)
   {
