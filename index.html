@@ -3,9 +3,30 @@
     <title></title>
     <script type="text/javascript" src="vendor/processing-0.8.min.js"></script>
     <script type="text/javascript" src="app/modes/init.js"></script>
+    <script type="text/javascript" src="app/models/shape.js"></script>
   </head>
   <body>
-    <script type="application/processing" src="app/modes/engine.js#some-id"></script>
-    <canvas id="some-id" width="200" height="200" ></canvas>
+    <script type="application/processing">
+void setup()
+{
+  size(800,600);
+  stroke(255);
+  frameRate(24);
+}
+float y = 100;
+var lshape = new Shape();
+
+void draw()
+{
+  background(0);
+  y = y - 1
+  if (y < 0)
+  { y = height }
+  line(0,y,width,y);
+}
+      
+      </script>
+    <canvas>
+    </canvas>
   </body>
 </html>
