@@ -1,9 +1,9 @@
 
-function Shape ()
+function Tetromino ()
 {
   this.blocks = [4][4];
-  function modify_block(x,y,i)
+  this.modify_block = function(x,y,i)
   {
-    this.blocks[x][y];
+    this.blocks[x][y] = i;
   }
 }
