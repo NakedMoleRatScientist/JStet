@@ -14,6 +14,21 @@ function Tetromino ()
   {
    
     this.blocks[x][y] = i;
+  },
+  this.get_list = function()
+  {
+    var suitable = new Array();
+    for (r = 0; r < 4; r++)
+    {
+      for (c = 0; c < 4; c++)
+      {
+        if (this.blocks[r][c] == 1)
+	{
+          suitable.push([r,c]);
+        }
+      }
+    }
+    return suitable;
   }
   this.blocks = this.create_blocks();
 }
