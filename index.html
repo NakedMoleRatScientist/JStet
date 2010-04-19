@@ -3,6 +3,7 @@
     <title></title>
     <script type="text/javascript" src="vendor/processing-0.8.min.js"></script>
     <script type="text/javascript" src="app/modes/init.js"></script>
+    <script type="text/javascript" src="app/models/tetromino_draw.js"></script>
     <script type="text/javascript" src="app/models/tetromino.js"></script>
   </head>
   <body>
@@ -16,15 +17,9 @@ void setup()
 float y = 100;
 var lshape = new Tetromino();
 lshape.modify_block(0,0,1);
-var stuff = lshape.get_list();
+var drawShape = new TetrominoDraw();
+drawShape.create_blocks(lshape.get_list());
 
-void draw_tet()
-{
-  for (i = 0; i < stuff.length(); i++)
-  {
-    rect(stuff[i][0] * 20,stuff[i][1] * 20,20,20);
-  }
-}
 void draw()
 {
   background(0);
@@ -32,7 +27,6 @@ void draw()
   if (y < 0)
   { y = height }
   line(0,y,width,y);
-  draw_tet();
 }
       
       </script>
