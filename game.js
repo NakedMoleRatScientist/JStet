@@ -43,7 +43,8 @@ function TetrominoDraw()
       this.blocks.push(rect(pos[i][0] * 20,pos[i][1] * 20, 20, 20));
     }
   }
-}void setup()
+}
+void setup()
 {
   size(800,600);
   stroke(255);
