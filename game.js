@@ -77,5 +77,5 @@ void draw()
 
 void mousePressed()
 {
-    lshpe.rotate();
+    lshape.rotate();
 }
