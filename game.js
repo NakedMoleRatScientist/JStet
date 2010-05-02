@@ -40,7 +40,7 @@ function Tetromino ()
 	      new_matrix[r,j] = this.blocks[4 - c - 1,r];
           }
       }
-      return new_matrix;
+      this.blocks = new_matrix;
   }
   this.blocks = this.create_blocks();
 }
