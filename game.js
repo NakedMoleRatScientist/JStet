@@ -74,3 +74,8 @@ void draw()
   background(0,0,0);
   drawShape.create_blocks(lshape.get_list());
 }
+
+void mousePressed()
+{
+    lshpe.rotate();
+}
