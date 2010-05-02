@@ -29,6 +29,18 @@ function Tetromino ()
       }
     }
     return suitable;
+  },
+  this.rotate = function()
+  {
+      var new_matrix = this.create_blocks();
+      for (int r = 0; r < 4; r++)
+      {
+          for (int c = 0; c < 4; c++)
+          {
+	      new_matrix[r,j] = this.blocks[4 - c - 1,r];
+          }
+      }
+      return new_matrix;
   }
   this.blocks = this.create_blocks();
 }
