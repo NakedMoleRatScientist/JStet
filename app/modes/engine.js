@@ -19,11 +19,6 @@ void draw()
   drawShape.create_blocks(lshape.get_list(),lshape.x,lshape.y);
 }
 
-void mousePressed()
-{
-    lshape.rotate();
-}
-
 void keyPressed()
 {
     if (key == 100)
