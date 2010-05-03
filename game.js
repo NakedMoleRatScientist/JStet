@@ -37,7 +37,7 @@ function Tetromino ()
       {
           for (int c = 0; c < 4; c++)
           {
-	      new_matrix[r,j] = this.blocks[4 - c - 1,r];
+	      new_matrix[r][c] = this.blocks[4 - c - 1][r];
           }
       }
       this.blocks = new_matrix;
