@@ -91,6 +91,6 @@ void keyPressed()
 {
     if (key == 100)
     {
-	lsphape.move(20,0);
+	lshape.move(20,0);
     }
 }
