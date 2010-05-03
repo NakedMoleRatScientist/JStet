@@ -41,13 +41,20 @@ function Tetromino ()
           }
       }
       this.blocks = new_matrix;
-  }
+  },
+  this.move = function (x,y)
+  {
+    this.x += x;
+    this.y += y;
+  }  
   this.blocks = this.create_blocks();
+  this.x = 0;
+  this.y = 0;
 }
 function TetrominoDraw()
 {
   this.blocks = new Array();
-  this.create_blocks = function(pos)
+  this.create_blocks = function(pos,x,y)
   {
     for (i = 0; i < pos.length; i++)
     {
@@ -78,4 +85,12 @@ void draw()
 void mousePressed()
 {
     lshape.rotate();
+}
+
+void keyPressed()
+{
+    if (key == 100)
+    {
+	lsphape.move(20,0);
+    }
 }
