@@ -21,20 +21,22 @@ void draw()
 
 void keyPressed()
 {
-    if (key == 100)
+    switch(key)
     {
-	lshape.move(20,0);
-    }
-    else if (key == 115)
-    {
-	lshape.move(0,20);
-    }
-    else if (key == 97)
-    {
-	lshape.move(-20,0);
-    }
-    else if (key == 119)
-    {
-	lshape.rotate();
+    case 100:
+        lshape.move(20,0);
+        break;
+    case 115:
+        lshape.move(0,20);
+        break;
+    case 97:
+        lshape.move(-20,0);
+        break;
+    case 119:
+        lshape.rotate();
+        break;
+    default:
+	console.log(key);
+	break;
     }
 }
