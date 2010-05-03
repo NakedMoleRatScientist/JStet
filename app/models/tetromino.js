@@ -41,7 +41,12 @@ function Tetromino ()
           }
       }
       this.blocks = new_matrix;
-  }
+  },
+  this.move = function (x,y)
+  {
+    this.x += x;
+    this.y += y;
+  }  
   this.blocks = this.create_blocks();
   this.x = 0;
   this.y = 0;
