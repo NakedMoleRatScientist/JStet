@@ -79,7 +79,7 @@ var drawShape = new TetrominoDraw();
 void draw()
 {
   background(0,0,0);
-  drawShape.create_blocks(lshape.get_list());
+  drawShape.create_blocks(lshape.get_list(),lshape.x,lshape.y);
 }
 
 void mousePressed()
