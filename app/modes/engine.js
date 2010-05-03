@@ -30,8 +30,16 @@ void keyPressed()
     {
 	lshape.move(20,0);
     }
-    elseif (key ==115)
+    else if (key == 115)
     {
 	lshape.move(0,20);
+    }
+    else if (key == 97)
+    {
+	lshape.move(-20,0);
+    }
+    else if (key == 119)
+    {
+	lshape.rotate();
     }
 }
