@@ -4,7 +4,7 @@ require 'secret.rb'
 task :deploy => [:concat]
 task :concat do
   sh "rm game.js"
-  sh "cat app/models/tetromino.js app/models/tetromino_draw.js app/modes/engine.js > game.js"
+  sh "cat app/models/tetromino.js app/models/shape_generator.rb app/models/tetromino_draw.js app/modes/engine.js > game.js"
 end
 
 task :deploy do
