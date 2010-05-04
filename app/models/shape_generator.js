@@ -67,5 +67,6 @@ function ShapeGenerator ()
         break;
       }
     }
+    return list;
   }
 }
