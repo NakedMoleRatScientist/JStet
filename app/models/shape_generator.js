@@ -42,6 +42,14 @@ function ShapeGenerator ()
         list.add([1,1]);
         break;
       }
+    case 5:
+      {
+        list.add([1,0]);
+        list.add([2,0]);
+        list.add([1,1]);
+        list.add([0,1]);
+        break;
+      }
     }
   }
 }
