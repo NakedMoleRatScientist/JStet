@@ -14,7 +14,7 @@ function Tetromino ()
   {
     for (int i = 0; i < blocks.length; i++)
     {
-      this.modify_block(blocks[i][0],blocks[i][1]);
+      this.modify_block(blocks[i][0],blocks[i][1],1);
     }
   }
   this.modify_block = function(x, y, i)
