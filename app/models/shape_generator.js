@@ -3,13 +3,12 @@ function ShapeGenerator ()
 {
   this.randomChoice = function ()
   {
-    return Math.random() * 6;
+    return Math.floor(Math.random() * 6);
   }
   this.getShape = function()
   {
     var list = new Array();
     var choice = this.randomChoice();
-    console.log(choice);
     switch(choice)
     {
     case 0:

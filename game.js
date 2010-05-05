@@ -64,13 +64,12 @@ function ShapeGenerator ()
 {
   this.randomChoice = function ()
   {
-    return Math.random() * 6;
+    return Math.floor(Math.random() * 6);
   }
   this.getShape = function()
   {
     var list = new Array();
     var choice = this.randomChoice();
-    console.log(choice);
     switch(choice)
     {
     case 0:
@@ -153,6 +152,7 @@ void setup()
 
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
+console.log(generator.current);
 shape.modify_bulk(generator.current);
 var drawShape = new TetrominoDraw();
 
