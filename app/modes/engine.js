@@ -22,17 +22,20 @@ void keyPressed()
     switch(key)
     {
     case 100:
-        shape.move(20,0);
-        break;
+      shape.move(20,0);
+      break;
     case 115:
-        shape.move(0,20);
-        break;
+      shape.move(0,20);
+      break;
     case 97:
-        shape.move(-20,0);
-        break;
+      shape.move(-20,0);
+      break;
     case 119:
-        shape.rotate();
-        break;
+      shape.rotate();
+      break;
+    case 101:
+      generator.current = generator.getShape();
+      break;
     default:
 	console.log(key);
 	break;
