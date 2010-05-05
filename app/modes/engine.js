@@ -7,17 +7,17 @@ void setup()
 }
 
 var generator = new ShapeGenerator();
-var lshape = new Tetromino();
-lshape.modify_block(0,0,1);
-lshape.modify_block(0,1,1);
-lshape.modify_block(0,2,1);
-lshape.modify_block(1,2,1);
+var shape = new Tetromino();
+shape.modify_block(0,0,1);
+shape.modify_block(0,1,1);
+shape.modify_block(0,2,1);
+shape.modify_block(1,2,1);
 var drawShape = new TetrominoDraw();
 
 void draw()
 {
   background(0,0,0);
-  drawShape.create_blocks(lshape.get_list(),lshape.x,lshape.y);
+  drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
 }
 
 void keyPressed()
@@ -25,16 +25,16 @@ void keyPressed()
     switch(key)
     {
     case 100:
-        lshape.move(20,0);
+        shape.move(20,0);
         break;
     case 115:
-        lshape.move(0,20);
+        shape.move(0,20);
         break;
     case 97:
-        lshape.move(-20,0);
+        shape.move(-20,0);
         break;
     case 119:
-        lshape.rotate();
+        shape.rotate();
         break;
     default:
 	console.log(key);
