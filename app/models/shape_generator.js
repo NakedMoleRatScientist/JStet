@@ -9,9 +9,10 @@ function ShapeGenerator ()
   {
     var list = new Array();
     var choice = this.randomChoice();
+    console.log(choice);
     switch(choice)
     {
-    case 1:
+    case 0:
       {
         list.push([0,0]);
         list.push([0,1]);
@@ -19,7 +20,7 @@ function ShapeGenerator ()
         list.push([1,2]);
         break;
       }
-    case 2:
+    case 1:
       {
         list.push([0,0]);
         list.push([0,1]);
@@ -27,30 +28,30 @@ function ShapeGenerator ()
         list.push([0,3]);
         break;
       }
+    case 2:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([1,1]);
+      }
     case 3:
       {
         list.push([0,0]);
         list.push([1,0]);
-        list.push([2,0]);
+        list.push([0,1]);
         list.push([1,1]);
+        break;
       }
     case 4:
       {
-        list.push([0,0]);
-        list.push([1,0]);
-        list.push([0,1]);
-        list.push([1,1]);
-        break;
-      }
-    case 5:
-      {
         list.push([1,0]);
         list.push([2,0]);
         list.push([1,1]);
         list.push([0,1]);
         break;
       }
-    case 6:
+    case 5:
       {
         list.push([0,0]);
         list.push([1,0]);
@@ -58,7 +59,7 @@ function ShapeGenerator ()
         list.push([2,1]);
         break;
       }
-    case 7:
+    case 6:
       {
         list.push([1,0]);
         list.push([1,1]);
