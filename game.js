@@ -10,13 +10,14 @@ function Tetromino ()
     }
     return blocks;
   },
-  this.modify_bulk = function(blocks)
+  this.modify_bulk = function(shape)
   {
-    for (int i = 0; i < blocks.length; i++)
+    console.log(shape);
+    for (int i = 0; i < shape.length; i++)
     {
-      this.modify_block(blocks[i][0],blocks[i][1],1);
+      this.modify_block(shape[i][0],shape[i][1],1);
     }
-  }
+  },
   this.modify_block = function(x, y, i)
   {
    
@@ -69,9 +70,10 @@ function ShapeGenerator ()
   {
     var list = new Array();
     var choice = this.randomChoice();
+    console.log(choice);
     switch(choice)
     {
-    case 1:
+    case 0:
       {
         list.push([0,0]);
         list.push([0,1]);
@@ -79,7 +81,7 @@ function ShapeGenerator ()
         list.push([1,2]);
         break;
       }
-    case 2:
+    case 1:
       {
         list.push([0,0]);
         list.push([0,1]);
@@ -87,30 +89,30 @@ function ShapeGenerator ()
         list.push([0,3]);
         break;
       }
+    case 2:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([1,1]);
+      }
     case 3:
       {
         list.push([0,0]);
         list.push([1,0]);
-        list.push([2,0]);
+        list.push([0,1]);
         list.push([1,1]);
+        break;
       }
     case 4:
       {
-        list.push([0,0]);
-        list.push([1,0]);
-        list.push([0,1]);
-        list.push([1,1]);
-        break;
-      }
-    case 5:
-      {
         list.push([1,0]);
         list.push([2,0]);
         list.push([1,1]);
         list.push([0,1]);
         break;
       }
-    case 6:
+    case 5:
       {
         list.push([0,0]);
         list.push([1,0]);
@@ -118,7 +120,7 @@ function ShapeGenerator ()
         list.push([2,1]);
         break;
       }
-    case 7:
+    case 6:
       {
         list.push([1,0]);
         list.push([1,1]);
