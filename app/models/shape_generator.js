@@ -69,4 +69,5 @@ function ShapeGenerator ()
     }
     return list;
   }
+  this.current = this.getShape();
 }
