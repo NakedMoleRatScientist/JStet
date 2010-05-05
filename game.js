@@ -123,7 +123,7 @@ function ShapeGenerator ()
         list.push([1,0]);
         list.push([1,1]);
         list.push([1,2]);
-        list.push([0,3]);
+        list.push([0,2]);
         break;
       }
     }
