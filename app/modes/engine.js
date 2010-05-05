@@ -6,6 +6,7 @@ void setup()
   frameRate(24);
 }
 
+var generator = new ShapeGenerator();
 var lshape = new Tetromino();
 lshape.modify_block(0,0,1);
 lshape.modify_block(0,1,1);
