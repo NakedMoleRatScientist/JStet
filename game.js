@@ -178,6 +178,8 @@ void keyPressed()
       break;
     case 101:
       generator.current = generator.getShape();
+      shape.blocks = shape.create_blocks();
+      shape.modify_bulk(generator.current);
       break;
     default:
       console.log(key);
