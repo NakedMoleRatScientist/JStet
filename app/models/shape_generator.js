@@ -13,57 +13,57 @@ function ShapeGenerator ()
     {
     case 1:
       {
-        list.add([0,0]);
-        list.add([0,1]);
-        list.add([0,2]);
-        list.add([1,2]);
+        list.push([0,0]);
+        list.push([0,1]);
+        list.push([0,2]);
+        list.push([1,2]);
         break;
       }
     case 2:
       {
-        list.add([0,0]);
-        list.add([0,1]);
-        list.add([0,2]);
-        list.add([0,3]);
+        list.push([0,0]);
+        list.push([0,1]);
+        list.push([0,2]);
+        list.push([0,3]);
         break;
       }
     case 3:
       {
-        list.add([0,0]);
-        list.add([1,0]);
-        list.add([2,0]);
-        list.add([1,1]);
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([1,1]);
       }
     case 4:
       {
-        list.add([0,0]);
-        list.add([1,0]);
-        list.add([0,1]);
-        list.add([1,1]);
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([0,1]);
+        list.push([1,1]);
         break;
       }
     case 5:
       {
-        list.add([1,0]);
-        list.add([2,0]);
-        list.add([1,1]);
-        list.add([0,1]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([1,1]);
+        list.push([0,1]);
         break;
       }
     case 6:
       {
-        list.add([0,0]);
-        list.add([1,0]);
-        list.add([1,1]);
-        list.add([2,1]);
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([1,1]);
+        list.push([2,1]);
         break;
       }
     case 7:
       {
-        list.add([1,0]);
-        list.add([1,1]);
-        list.add([1,2]);
-        list.add([0,3]);
+        list.push([1,0]);
+        list.push([1,1]);
+        list.push([1,2]);
+        list.push([0,3]);
         break;
       }
     }
