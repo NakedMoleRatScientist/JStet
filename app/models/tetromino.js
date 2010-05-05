@@ -10,13 +10,14 @@ function Tetromino ()
     }
     return blocks;
   },
-  this.modify_bulk = function(blocks)
+  this.modify_bulk = function(shape)
   {
-    for (int i = 0; i < blocks.length; i++)
+    console.log(shape);
+    for (int i = 0; i < shape.length; i++)
     {
-      this.modify_block(blocks[i][0],blocks[i][1],1);
+      this.modify_block(shape[i][0],shape[i][1],1);
     }
-  }
+  },
   this.modify_block = function(x, y, i)
   {
    
