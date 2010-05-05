@@ -37,7 +37,7 @@ function Tetromino ()
     }
     return suitable;
   },
-  this.rotate = function()
+  this.rotate_left = function()
   {
       var new_matrix = this.create_blocks();
       for (int r = 0; r < 4; r++)
