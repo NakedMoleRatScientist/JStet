@@ -63,7 +63,7 @@ function ShapeGenerator ()
 {
   this.randomChoice = function ()
   {
-    return Math.floor(Math.random() * 6);
+    return Math.floor(Math.random() * 7);
   }
   this.getShape = function()
   {
@@ -93,6 +93,7 @@ function ShapeGenerator ()
         list.push([1,0]);
         list.push([2,0]);
         list.push([1,1]);
+        break;
       }
     case 3:
       {
