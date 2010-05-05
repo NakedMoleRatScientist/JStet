@@ -37,7 +37,7 @@ void keyPressed()
       generator.current = generator.getShape();
       break;
     default:
-	console.log(key);
-	break;
+      console.log(key);
+      break;
     }
 }

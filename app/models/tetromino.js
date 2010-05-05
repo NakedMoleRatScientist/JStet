@@ -12,7 +12,6 @@ function Tetromino ()
   },
   this.modify_bulk = function(shape)
   {
-    console.log(shape);
     for (int i = 0; i < shape.length; i++)
     {
       this.modify_block(shape[i][0],shape[i][1],1);

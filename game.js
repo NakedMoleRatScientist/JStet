@@ -12,7 +12,6 @@ function Tetromino ()
   },
   this.modify_bulk = function(shape)
   {
-    console.log(shape);
     for (int i = 0; i < shape.length; i++)
     {
       this.modify_block(shape[i][0],shape[i][1],1);
@@ -152,7 +151,6 @@ void setup()
 
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
-console.log(generator.current);
 shape.modify_bulk(generator.current);
 var drawShape = new TetrominoDraw();
 
@@ -167,19 +165,22 @@ void keyPressed()
     switch(key)
     {
     case 100:
-        shape.move(20,0);
-        break;
+      shape.move(20,0);
+      break;
     case 115:
-        shape.move(0,20);
-        break;
+      shape.move(0,20);
+      break;
     case 97:
-        shape.move(-20,0);
-        break;
+      shape.move(-20,0);
+      break;
     case 119:
-        shape.rotate();
-        break;
+      shape.rotate();
+      break;
+    case 101:
+      generator.current = generator.getShape();
+      break;
     default:
-	console.log(key);
-	break;
+      console.log(key);
+      break;
     }
 }
