@@ -220,8 +220,8 @@ function ZShape()
         list.push([2,1]);
         break;
       }
-      return list;
     }
+    return list;
   }
 }
 function SShape()
@@ -319,6 +319,7 @@ function ShapeGenerator ()
       }
     case 3:
       {
+        console.log("blah");
         return new ZShape();
       }
     case 4:
