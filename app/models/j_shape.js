@@ -18,7 +18,7 @@ function JShape()
       {
         list.push([0,1]);
         list.push([1,1]);
-        list.push([2,1]):
+        list.push([2,1]);
         list.push([2,0]);
         break;
       }
