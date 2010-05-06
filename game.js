@@ -116,7 +116,7 @@ function JShape()
 }
 function IShape()
 {
-  this.get_data(choice)
+  this.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
@@ -253,7 +253,7 @@ function SShape()
 }
 function TShape()
 {
-  this.get_data(choice)
+  this.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
@@ -357,7 +357,7 @@ void setup()
 
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
-shape.modify_bulk(generator.current);
+shape.modify_bulk(generator.current.get_data(0));
 var drawShape = new TetrominoDraw();
 
 void draw()
