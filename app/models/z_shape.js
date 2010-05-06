@@ -22,7 +22,7 @@ function ZShape()
         list.push([2,1]);
         break;
       }
-      return list;
     }
+    return list;
   }
 }
