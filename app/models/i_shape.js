@@ -1,7 +1,7 @@
 
 function IShape()
 {
-  this.get_data(choice)
+  this.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
