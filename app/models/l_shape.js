@@ -1,6 +1,7 @@
 
 function LShape()
 {
+  this.length = 4;
   this.get_data = function(choice)
   {
     var list = new Array();
