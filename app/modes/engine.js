@@ -36,7 +36,7 @@ void keyPressed()
     case 101:
       generator.current = generator.getShape();
       shape.blocks = shape.create_blocks();
-      shape.modify_bulk(generator.current);
+      shape.modify_bulk(generator.current.get_data(0));
       break;
     default:
       console.log(key);
