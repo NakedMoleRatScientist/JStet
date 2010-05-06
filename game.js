@@ -71,16 +71,81 @@ function Tetromino ()
   this.y = 0;
 }
 
-function ShapeGenerator ()
+function JShape
 {
-  this.randomChoice = function ()
-  {
-    return Math.floor(Math.random() * 7);
-  }
-  this.getShape = function()
+  this.get_data(choice)
   {
     var list = new Array();
-    var choice = this.randomChoice();
+    switch(choice)
+    {
+    case 0:
+      {
+        list.push([1,0]);
+        list.push([1,1]);
+        list.push([1,2]);
+        list.push([0,2]);
+        break;
+      }
+    case 1:
+      {
+        list.push([0,1]);
+        list.push([1,1]);
+        list.push([2,1]):
+        list.push([2,0]);
+        break;
+      }
+    case 2:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([1,1]);
+        list.push([1,2]);
+        break;
+      }
+    case 3:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([3,0]);
+        break;
+      }
+    }
+    return list;
+  }
+}
+function IShape()
+{
+  this.get_data(choice)
+  {
+    var list = new Array();
+    switch(choice)
+    {
+    case 0:
+      {
+        list.push([0,0]);
+        list.push([0,1]);
+        list.push([0,2]);
+        list.push([0,3]);
+        break;
+      }
+    case 1:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([3,0]);
+        break;
+      }
+    }
+    return list;
+  }
+}
+function LShape()
+{
+  this.get_data = function(choice)
+  {
+    var list = new Array();
     switch(choice)
     {
     case 0:
@@ -93,37 +158,53 @@ function ShapeGenerator ()
       }
     case 1:
       {
-        list.push([0,0]);
+        list.push([2,0]);
         list.push([0,1]);
-        list.push([0,2]);
-        list.push([0,3]);
+        list.push([1,1]):
+        list.push([2,1]);
         break;
       }
     case 2:
       {
         list.push([0,0]);
         list.push([1,0]);
-        list.push([2,0]);
         list.push([1,1]);
+        list.push([1,2]);
         break;
       }
     case 3:
       {
         list.push([0,0]);
         list.push([1,0]);
-        list.push([0,1]);
-        list.push([1,1]);
-        break;
-      }
-    case 4:
-      {
-        list.push([1,0]);
         list.push([2,0]);
-        list.push([1,1]);
-        list.push([0,1]);
+        list.push([3,0]);
         break;
       }
-    case 5:
+    }
+    return list;
+  }
+}
+
+function OShape()
+{
+  this.get_data = function(choice)
+  {
+    var list = new Array();
+    list.push([0,0]);
+    list.push([1,0]);
+    list.push([0,1]);
+    list.push([1,1]);
+    return list;
+  }
+}
+function ZShape()
+{
+  this.get_data = function(choice)
+  {
+    var list = new Array();
+    switch(choice)
+    {
+    case 0:
       {
         list.push([0,0]);
         list.push([1,0]);
@@ -131,16 +212,128 @@ function ShapeGenerator ()
         list.push([2,1]);
         break;
       }
-    case 6:
+    case 1:
+      {
+        list.push([0,0]);
+        list.push([0,1]);
+        list.push([1,1]);
+        list.push([2,1]);
+        break;
+      }
+      return list;
+    }
+  }
+}
+function SShape()
+{
+  this.get_data = function(choice)
+  {
+    var list = new Array();
+    switch(choice)
+    {
+    case 0:
       {
         list.push([1,0]);
+        list.push([2,0]);
+        list.push([0,1]);
         list.push([1,1]);
-        list.push([1,2]);
-        list.push([0,2]);
+        break;
+      }
+    case 1:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([1,1]);
+        list.push([2,1]);
         break;
       }
     }
     return list;
+  }
+}
+function TShape
+{
+  this.get_data(choice)
+  {
+    var list = new Array();
+    switch(choice)
+    {
+    case 0:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([1,1]);
+        break;
+      }
+    case 1:
+      {
+        list.push([0,0]);
+        list.push([0,1]);
+        list.push([0,2]);
+        list.push([1,1]);
+        break;
+      }
+    case 2:
+      {
+        list.push([1,0]);
+        list.push([0,1]);
+        list.push([1,1]);
+        list.push([2,1]);
+        break;
+      }
+    case 3:
+      {
+        list.push([1,0]);
+        list.push([0,1]);
+        list.push([1,1]);
+        list.push([2,1]);
+        break;
+      }
+    }
+    return list;
+  }
+}
+function ShapeGenerator ()
+{
+  this.randomChoice = function ()
+  {
+    return Math.floor(Math.random() * 7);
+  }
+  this.getShape = function()
+  {
+    var choice = this.randomChoice();
+    switch(choice)
+    {
+    case 0:
+      {
+        return new LShape();
+      }
+    case 1:
+      {
+        return new SShape();
+      }
+    case 2:
+      {
+        return new OShape();
+      }
+    case 3:
+      {
+        return new ZShape();
+      }
+    case 4:
+      {
+        return new TShape();
+      }
+    case 5:
+      {
+        return new JShape();
+      }
+    case 6:
+      {
+        return new IShape();
+      }
+    }
   }
   this.current = this.getShape();
 }
@@ -192,7 +385,7 @@ void keyPressed()
     case 101:
       generator.current = generator.getShape();
       shape.blocks = shape.create_blocks();
-      shape.modify_bulk(generator.current);
+      shape.modify_bulk(generator.current.get_data(0));
       break;
     default:
       console.log(key);
