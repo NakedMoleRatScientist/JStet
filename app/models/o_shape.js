@@ -1,6 +1,7 @@
 
 function OShape()
 {
+  this.length = 1;
   this.get_data = function(choice)
   {
     var list = new Array();
