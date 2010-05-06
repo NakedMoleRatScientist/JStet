@@ -71,9 +71,9 @@ function Tetromino ()
   this.y = 0;
 }
 
-function JShape
+function JShape()
 {
-  this.get_data(choice)
+  this.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
@@ -90,7 +90,7 @@ function JShape
       {
         list.push([0,1]);
         list.push([1,1]);
-        list.push([2,1]):
+        list.push([2,1]);
         list.push([2,0]);
         break;
       }
@@ -160,7 +160,7 @@ function LShape()
       {
         list.push([2,0]);
         list.push([0,1]);
-        list.push([1,1]):
+        list.push([1,1]);
         list.push([2,1]);
         break;
       }
@@ -251,7 +251,7 @@ function SShape()
     return list;
   }
 }
-function TShape
+function TShape()
 {
   this.get_data(choice)
   {
