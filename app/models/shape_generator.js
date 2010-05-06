@@ -7,68 +7,38 @@ function ShapeGenerator ()
   }
   this.getShape = function()
   {
-    var list = new Array();
     var choice = this.randomChoice();
     switch(choice)
     {
     case 0:
       {
-        list.push([0,0]);
-        list.push([0,1]);
-        list.push([0,2]);
-        list.push([1,2]);
-        break;
+        return new LShape();
       }
     case 1:
       {
-        list.push([0,0]);
-        list.push([0,1]);
-        list.push([0,2]);
-        list.push([0,3]);
-        break;
+        return new SShape();
       }
     case 2:
       {
-        list.push([0,0]);
-        list.push([1,0]);
-        list.push([2,0]);
-        list.push([1,1]);
-        break;
+        return new OShape();
       }
     case 3:
       {
-        list.push([0,0]);
-        list.push([1,0]);
-        list.push([0,1]);
-        list.push([1,1]);
-        break;
+        return new ZShape();
       }
     case 4:
       {
-        list.push([1,0]);
-        list.push([2,0]);
-        list.push([1,1]);
-        list.push([0,1]);
-        break;
+        return new TShape();
       }
     case 5:
       {
-        list.push([0,0]);
-        list.push([1,0]);
-        list.push([1,1]);
-        list.push([2,1]);
-        break;
+        return new JShape();
       }
     case 6:
       {
-        list.push([1,0]);
-        list.push([1,1]);
-        list.push([1,2]);
-        list.push([0,2]);
-        break;
+        return new IShape();
       }
     }
-    return list;
-  }
+}
   this.current = this.getShape();
 }
