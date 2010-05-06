@@ -1,7 +1,7 @@
 
 function OShape()
 {
-  this.get_data = function()
+  this.get_data = function(choice)
   {
     var list = new Array();
     list.push([0,0]);
