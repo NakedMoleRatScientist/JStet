@@ -39,6 +39,6 @@ function ShapeGenerator ()
         return new IShape();
       }
     }
-}
+  }
   this.current = this.getShape();
 }
