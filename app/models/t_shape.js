@@ -1,5 +1,5 @@
 
-function TShape
+function TShape()
 {
   this.get_data(choice)
   {
