@@ -4,7 +4,7 @@ function IShape()
   this.get_data(choice)
   {
     var list = new Array();
-    switch(choice);
+    switch(choice)
     {
     case 0:
       {

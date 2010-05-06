@@ -4,7 +4,7 @@ function ZShape()
   this.get_data = function(choice)
   {
     var list = new Array();
-    switch(choice);
+    switch(choice)
     {
     case 0:
       {
