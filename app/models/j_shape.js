@@ -1,5 +1,5 @@
 
-function JShape
+function JShape()
 {
   this.get_data = function(choice)
   {
