@@ -30,6 +30,14 @@ function LShape()
         list.push([1,2]);
         break;
       }
+    case 3:
+      {
+        list.push([0,0]);
+        list.push([1,0]);
+        list.push([2,0]);
+        list.push([3,0]);
+        break;
+      }
     }
     return list;
   }
