@@ -2,11 +2,12 @@
 function Tetromino ()
 {
   this.shape = null;
+  this.switch = 0;
   this.change_shape = function(new_shape)
   {
     this.shape = new_shape;
     this.blocks = this.create_blocks();
-    this.modify_bulk(this.shape.get_data(0));
+    this.modify_bulk(this.shape.get_data(this.switch));
   }
   this.create_blocks = function()
   {
