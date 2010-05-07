@@ -54,7 +54,7 @@ function Tetromino ()
     {
       this.choice = 0;
     }
-    this.modify_bulk(this.shape.get_data(choice));
+    this.modify_bulk(this.shape.get_data(this.choice));
   }
   this.move = function (x,y)
   {
