@@ -8,7 +8,7 @@ void setup()
 
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
-shape.change_shape(generator.current());
+shape.change_shape(generator.current);
 var drawShape = new TetrominoDraw();
 
 void draw()
