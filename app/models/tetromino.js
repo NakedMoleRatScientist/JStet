@@ -1,6 +1,11 @@
 
 function Tetromino ()
 {
+  this.shape = null;
+  this.change_shape = function(new_shape)
+  {
+    this.shape = new_shape;
+  }
   this.create_blocks = function()
   {
     var blocks = new Array(4);
