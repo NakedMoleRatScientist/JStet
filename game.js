@@ -2,11 +2,12 @@
 function Tetromino ()
 {
   this.shape = null;
+  this.switch = 0;
   this.change_shape = function(new_shape)
   {
     this.shape = new_shape;
     this.blocks = this.create_blocks();
-    this.modify_bulk(this.shape.get_data(0));
+    this.modify_bulk(this.shape.get_data(this.switch));
   }
   this.create_blocks = function()
   {
@@ -44,29 +45,15 @@ function Tetromino ()
     }
     return suitable;
   },
-  this.rotate_left = function()
+  this.rotate = function()
   {
-      var new_matrix = this.create_blocks();
-      for (int r = 0; r < 4; r++)
-      {
-          for (int c = 0; c < 4; c++)
-          {
-	    new_matrix[r][c] = this.blocks[3 - c][r];
-          }
-      }
-      this.blocks = new_matrix;
-  },
-  this.rotate_right = function()
-  {
-    var new_matrix = this.create_blocks();
-    for (int r = 0; r < 4; r ++)
+    this.blocks = this.create_blocks();
+    this.switch += 1;
+    if (this.switch == this.shape.length)
     {
-      for (int c = 0; c < 4; c++)
-      {
-        new_matrix[r][c] = this.blocks[c][r];
-      }
+      this.switch = 0;
     }
-    this.blocks = new_matrix;
+    this.modify_bulk(this.shape.get_data(switch);
   }
   this.move = function (x,y)
   {
