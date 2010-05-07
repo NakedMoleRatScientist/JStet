@@ -2,12 +2,13 @@
 function Tetromino ()
 {
   this.shape = null;
-  this.switch = 0;
+  this.choice = 0;
   this.change_shape = function(new_shape)
   {
     this.shape = new_shape;
     this.blocks = this.create_blocks();
-    this.modify_bulk(this.shape.get_data(this.switch));
+    this.choice = 0;
+    this.modify_bulk(this.shape.get_data(this.choice));
   }
   this.create_blocks = function()
   {
@@ -48,12 +49,12 @@ function Tetromino ()
   this.rotate = function()
   {
     this.blocks = this.create_blocks();
-    this.switch += 1;
-    if (this.switch == this.shape.length)
+    this.choice += 1;
+    if (this.choice == this.shape.length)
     {
-      this.switch = 0;
+      this.choice = 0;
     }
-    this.modify_bulk(this.shape.get_data(switch);
+    this.modify_bulk(this.shape.get_data(choice);
   }
   this.move = function (x,y)
   {
