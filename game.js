@@ -175,7 +175,7 @@ function LShape()
         list.push([0,0]);
         list.push([1,0]);
         list.push([2,0]);
-        list.push([3,0]);
+        list.push([2,1]);
         break;
       }
     }
@@ -289,7 +289,7 @@ function TShape()
         list.push([1,0]);
         list.push([0,1]);
         list.push([1,1]);
-        list.push([2,1]);
+        list.push([1,2]);
         break;
       }
     }
