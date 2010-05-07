@@ -6,7 +6,7 @@ function Tetromino ()
   {
     this.shape = new_shape;
     this.blocks = this.create_blocks();
-    this.modify_bulk(this.shape.get_data(0);
+    this.modify_bulk(this.shape.get_data(0));
   }
   this.create_blocks = function()
   {

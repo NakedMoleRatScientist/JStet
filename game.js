@@ -1,6 +1,13 @@
 
 function Tetromino ()
 {
+  this.shape = null;
+  this.change_shape = function(new_shape)
+  {
+    this.shape = new_shape;
+    this.blocks = this.create_blocks();
+    this.modify_bulk(this.shape.get_data(0));
+  }
   this.create_blocks = function()
   {
     var blocks = new Array(4);
@@ -73,6 +80,7 @@ function Tetromino ()
 
 function JShape()
 {
+  this.length = 4;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -116,6 +124,7 @@ function JShape()
 }
 function IShape()
 {
+  this.length = 2;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -143,6 +152,7 @@ function IShape()
 }
 function LShape()
 {
+  this.length = 4;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -187,6 +197,7 @@ function LShape()
 
 function OShape()
 {
+  this.length = 1;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -199,6 +210,7 @@ function OShape()
 }
 function ZShape()
 {
+  this.length = 2;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -226,6 +238,7 @@ function ZShape()
 }
 function SShape()
 {
+  this.length = 2;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -253,6 +266,7 @@ function SShape()
 }
 function TShape()
 {
+  this.length = 4;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -319,7 +333,6 @@ function ShapeGenerator ()
       }
     case 3:
       {
-        console.log("blah");
         return new ZShape();
       }
     case 4:
@@ -358,7 +371,7 @@ void setup()
 
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
-shape.modify_bulk(generator.current.get_data(0));
+shape.change_shape(generator.current());
 var drawShape = new TetrominoDraw();
 
 void draw()
@@ -385,8 +398,7 @@ void keyPressed()
       break;
     case 101:
       generator.current = generator.getShape();
-      shape.blocks = shape.create_blocks();
-      shape.modify_bulk(generator.current.get_data(0));
+      shape.change_shape(generator.current);
       break;
     default:
       console.log(key);
