@@ -84,10 +84,10 @@ function JShape()
       }
     case 1:
       {
-        list.push([0,1]);
-        list.push([1,1]);
-        list.push([2,1]);
+        list.push([0,0]);
+        list.push([1,0]);
         list.push([2,0]);
+        list.push([2,1]);
         break;
       }
     case 2:
@@ -175,7 +175,7 @@ function LShape()
         list.push([0,0]);
         list.push([1,0]);
         list.push([2,0]);
-        list.push([2,1]);
+        list.push([0,1]);
         break;
       }
     }
@@ -214,10 +214,10 @@ function ZShape()
       }
     case 1:
       {
-        list.push([0,0]);
-        list.push([0,1]);
+        list.push([1,0]);
         list.push([1,1]);
-        list.push([2,1]);
+        list.push([0,1]);
+        list.push([0,2]);
         break;
       }
     }
@@ -242,8 +242,8 @@ function SShape()
       }
     case 1:
       {
-        list.push([0,0]);
         list.push([1,0]);
+        list.push([1,1]);
         list.push([1,1]);
         list.push([2,1]);
         break;
