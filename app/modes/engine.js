@@ -8,7 +8,7 @@ void setup()
 
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
-shape.change_shape(generator.getShape());
+shape.change_shape(generator.current());
 var drawShape = new TetrominoDraw();
 
 void draw()
@@ -35,8 +35,7 @@ void keyPressed()
       break;
     case 101:
       generator.current = generator.getShape();
-      shape.blocks = shape.create_blocks();
-      shape.modify_bulk(generator.current.get_data(0));
+      shape.change_shape(generator.current);
       break;
     default:
       console.log(key);
