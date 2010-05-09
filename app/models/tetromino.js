@@ -60,7 +60,7 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0)
+    if (this.x < 0 || this.x > 200)
     {
       this.x -= x;
     }
