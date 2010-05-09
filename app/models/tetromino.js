@@ -100,6 +100,10 @@ function Tetromino ()
     {
       this.x -= x;
     }
+    if (this.y >  380 - (this.find_max_y() * 20))
+    {
+      this.y -= y;
+    }
   }  
   this.blocks = this.create_blocks();
   this.x = 0;

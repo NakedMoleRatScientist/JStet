@@ -41,6 +41,24 @@ function Tetromino ()
     }
     return max;
   },
+  this.find_max_y = function()
+  {
+    max = 0;
+    for (x = 0; x < 4; x++)
+    {
+      for (y = 0; y < 4; y++)
+      {
+        if (this.blocks[x][y] == 1)
+        {
+          if (y > max)
+          {
+            max = y;
+          }
+        }
+      }
+    }
+    return max;
+  }
   this.change_shape = function(new_shape)
   {
     this.shape = new_shape;
@@ -98,12 +116,14 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    console.log(this.x);
     if (this.x < 0 || this.x > 180 - (this.find_max_x() * 20))
     {
       this.x -= x;
     }
-    console.log(this.x);
+    if (this.y >  380 - (this.find_max_y() * 20))
+    {
+      this.y -= y;
+    }
   }  
   this.blocks = this.create_blocks();
   this.x = 0;
