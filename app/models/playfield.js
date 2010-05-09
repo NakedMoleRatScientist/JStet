@@ -10,4 +10,5 @@ function Playfield()
     }
     return field;
   }
+  this.field = this.create_field();
 }
