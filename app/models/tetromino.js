@@ -78,12 +78,10 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    console.log(this.x);
     if (this.x < 0 || this.x > 180 - (this.find_max_x() * 20))
     {
       this.x -= x;
     }
-    console.log(this.x);
   }  
   this.blocks = this.create_blocks();
   this.x = 0;
