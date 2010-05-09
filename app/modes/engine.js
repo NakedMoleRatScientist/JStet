@@ -15,7 +15,8 @@ void draw()
 {
   background(0,0,0);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
-  color(205,201,201);
+  stroke(205,201,201);
+  fill(0,0,0);
   rect(drawField.x,drawField.y,drawField.width,drawField.height)
 }
 
