@@ -3,6 +3,6 @@ function PlayFieldDraw()
 {
   this.x = 50;
   this.y = 50;
-  this.width = 200;
-  this.height = 100;
+  this.width = 100;
+  this.height = 200;
 }

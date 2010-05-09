@@ -1,4 +1,24 @@
 
+function Playfield()
+{
+  this.create_field = function()
+  {
+    var field = new Array(20);
+    for (i = 0; i < 20; i++)
+    {
+      field[i] = new Array(10);
+    }
+    return field;
+  }
+  this.field = this.create_field();
+}
+function PlayFieldDraw()
+{
+  this.x = 50;
+  this.y = 50;
+  this.width = 200;
+  this.height = 100;
+}
 function Tetromino ()
 {
   this.shape = null;
@@ -361,11 +381,12 @@ var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
 var drawShape = new TetrominoDraw();
-
+var drawField = new PlayFieldDraw();
 void draw()
 {
   background(0,0,0);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+  rect(drawField.x,drawField.y,drawField.width,drawField.height);
 }
 
 void keyPressed()
