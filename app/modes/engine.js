@@ -15,7 +15,8 @@ void draw()
 {
   background(0,0,0);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
-  rect(drawField.x,drawField.y,drawField.width,drawField.height);
+  color(205,201,201);
+  rect(drawField.x,drawField.y,drawField.width,drawField.height)
 }
 
 void keyPressed()
