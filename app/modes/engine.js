@@ -14,10 +14,13 @@ var drawField = new PlayFieldDraw();
 void draw()
 {
   background(0,0,0);
-  drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+ 
   stroke(205,201,201);
   fill(0,0,0);
   rect(drawField.x,drawField.y,drawField.width,drawField.height)
+  stroke(255,255,255);
+  fill(255,255,255);
+  drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
 }
 
 void keyPressed()
