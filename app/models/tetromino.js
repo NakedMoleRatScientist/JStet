@@ -21,6 +21,24 @@ function Tetromino ()
     }
     return max;
   },
+  this.find_max_y = function()
+  {
+    max = 0;
+    for (x = 0; x < 4; x++)
+    {
+      for (y = 0; y < 4; y++)
+      {
+        if (this.blocks[x][y] == 1)
+        {
+          if (y > max)
+          {
+            max = y;
+          }
+        }
+      }
+    }
+    return max;
+  }
   this.change_shape = function(new_shape)
   {
     this.shape = new_shape;
