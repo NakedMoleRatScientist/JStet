@@ -60,6 +60,10 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
+    if (this.x < 0)
+    {
+      this.x -= x;
+    }
   }  
   this.blocks = this.create_blocks();
   this.x = 0;
