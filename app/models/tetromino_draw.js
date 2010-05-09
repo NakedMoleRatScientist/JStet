@@ -6,7 +6,7 @@ function TetrominoDraw()
   {
     for (i = 0; i < pos.length; i++)
     {
-      this.blocks.push(rect(pos[i][0] * 20 + x,pos[i][1] * 20 + y, 20, 20));
+      this.blocks.push(rect(pos[i][0] * 20 + x + 50,pos[i][1] * 20 + y + 50, 20, 20));
     }
   }
 }
