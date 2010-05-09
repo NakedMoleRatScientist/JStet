@@ -6,21 +6,21 @@ function Tetromino ()
   this.find_max_x = function()
   {
     max = 0;
-    for (r = 0; r < 4; r++)
+    for (x = 0; x < 4; x++)
     {
-      for (c = 0; c < 4; c++)
+      for (y = 0; y < 4; y++)
       {
-        if (this.blocks[r][c] == 1)
+        if (this.blocks[x][y] == 1)
         {
-          if (c > max)
+          if (x > max)
           {
-          max = c;
+            max = x;
           }
         }
       }
     }
     return max;
-  }
+  },
   this.change_shape = function(new_shape)
   {
     this.shape = new_shape;
@@ -78,10 +78,12 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0 || this.x > 200)
+    console.log(this.x);
+    if (this.x < 0 || this.x > 180 - (this.find_max_x() * 20))
     {
       this.x -= x;
     }
+    console.log(this.x);
   }  
   this.blocks = this.create_blocks();
   this.x = 0;
