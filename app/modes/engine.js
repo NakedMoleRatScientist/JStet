@@ -10,7 +10,7 @@ var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
 var drawShape = new TetrominoDraw();
-
+var drawField = new PlayFieldDraw();
 void draw()
 {
   background(0,0,0);
