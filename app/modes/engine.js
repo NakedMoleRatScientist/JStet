@@ -17,7 +17,12 @@ void draw()
 {
   if (timer.react())
   {
-    shape.move(0,20);
+    if (shape.move(0,20) == 2)
+    {
+      shape.return_to_normal()
+      generator.current = generator.getShape();
+      shape.change_shape(generator.current);
+    }
   }
   
   background(0,0,0);
