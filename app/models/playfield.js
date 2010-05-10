@@ -3,10 +3,10 @@ function PlayField()
 {
   this.create_field = function()
   {
-    var field = new Array(20);
-    for (i = 0; i < 20; i++)
+    var field = new Array(10);
+    for (i = 0; i < 10; i++)
     {
-      field[i] = new Array(10);
+      field[i] = new Array(20);
     }
     return field;
   }
