@@ -14,7 +14,10 @@ var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 void draw()
 {
-  timer.react();
+  if (timer.react())
+  {
+    shape.move(0,20);
+  }
   
   background(0,0,0);
   stroke(205,201,201);
