@@ -17,7 +17,7 @@ function TetrominoDraw()
       {
         if (field[x][y] == 1)
         {
-          rect(x * 20) + 50,(y * 20) + 50,20,20);
+          rect((x * 20) + 50,(y * 20) + 50,20,20);
         }
       }
     }
