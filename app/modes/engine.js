@@ -19,6 +19,7 @@ void draw()
   {
     if (shape.move(0,20) == 2)
     {
+      field.insert_blocks(shape.blocks,shape.x,shape.y);
       shape.return_to_normal()
       generator.current = generator.getShape();
       shape.change_shape(generator.current);
