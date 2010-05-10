@@ -9,6 +9,7 @@ function TimerAction()
     if (new_time - this.time >= 1000)
     {
       console.log("time");
+      this.time = new_time;
     }
   }
 }
