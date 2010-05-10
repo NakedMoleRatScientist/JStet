@@ -33,6 +33,7 @@ void draw()
   stroke(255,255,255);
   fill(255,255,255);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+  drawShape.draw_field(field);
 }
 
 void keyPressed()
