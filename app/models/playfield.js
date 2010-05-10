@@ -1,5 +1,5 @@
 
-function Playfield()
+function PlayField()
 {
   this.create_field = function()
   {
