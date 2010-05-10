@@ -8,8 +8,9 @@ function TimerAction()
     var new_time = new Date();
     if (new_time - this.time >= 1000)
     {
-      console.log("time");
       this.time = new_time;
+      return true;
     }
+    return false;
   }
 }
