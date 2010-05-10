@@ -14,6 +14,8 @@ var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 void draw()
 {
+  timer.react();
+  
   background(0,0,0);
   stroke(205,201,201);
   fill(0,0,0);
