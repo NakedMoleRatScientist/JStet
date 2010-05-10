@@ -11,10 +11,10 @@ var shape = new Tetromino();
 shape.change_shape(generator.current);
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
+var timer = new TimerAction();
 void draw()
 {
   background(0,0,0);
- 
   stroke(205,201,201);
   fill(0,0,0);
   rect(drawField.x,drawField.y,drawField.width,drawField.height)
