@@ -4,9 +4,9 @@ function PlayField()
   this.create_field = function()
   {
     var field = new Array(10);
-    for (i = 0; i < 10; i++)
+    for (x = 0; x < 10; x++)
     {
-      field[i] = new Array(20);
+      field[x] = new Array(20);
     }
     return field;
   }
