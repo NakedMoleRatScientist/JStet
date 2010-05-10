@@ -33,7 +33,7 @@ function PlayField()
       {
         if (blocks[x][y] == 1)
         {
-          this.field[x + c][y + r] = 1
+          this.field[x][y] = 1;
         }
       }
     }
