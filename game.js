@@ -14,16 +14,29 @@ function TimerAction()
     return false;
   }
 }
-function Playfield()
+function PlayField()
 {
   this.create_field = function()
   {
-    var field = new Array(20);
-    for (i = 0; i < 20; i++)
+    var field = new Array(10);
+    for (x = 0; x < 10; x++)
     {
-      field[i] = new Array(10);
+      field[x] = new Array(20);
     }
     return field;
+  },
+  this.insert_blocks = function(blocks,c,r)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      for (int y = 0; y < 4; y++)
+      {
+        if (blocks[x][y] == 1)
+        {
+          this.field[x + c][y + r] = 1
+        }
+      }
+    }
   }
   this.field = this.create_field();
 }
@@ -134,12 +147,20 @@ function Tetromino ()
     if (this.x < 0 || this.x > 180 - (this.find_max_x() * 20))
     {
       this.x -= x;
+      return 1;
     }
     if (this.y >  380 - (this.find_max_y() * 20))
     {
       this.y -= y;
+      return 2;
     }
-  }  
+    return 0;
+  },
+  this.return_to_normal = function()
+  {
+    this.x = 0;
+    this.y = 0;
+  }
   this.blocks = this.create_blocks();
   this.x = 0;
   this.y = 0;
@@ -439,6 +460,7 @@ void setup()
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
+var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
@@ -446,7 +468,12 @@ void draw()
 {
   if (timer.react())
   {
-    shape.move(0,20);
+    if (shape.move(0,20) == 2)
+    {
+      shape.return_to_normal()
+      generator.current = generator.getShape();
+      shape.change_shape(generator.current);
+    }
   }
   
   background(0,0,0);
