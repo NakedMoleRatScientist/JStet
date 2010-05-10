@@ -107,7 +107,12 @@ function Tetromino ()
       return 2;
     }
     return 0;
-  }  
+  },
+  this.return_to_normal = function()
+  {
+    this.x = 0;
+    this.y = 0;
+  }
   this.blocks = this.create_blocks();
   this.x = 0;
   this.y = 0;
