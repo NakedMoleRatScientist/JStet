@@ -24,7 +24,7 @@ function PlayField()
           
           if (new_field[x + x_position][y + y_position] == 0)
           {
-            new_field[x + x_position][y+ + y_position] = 1);
+            new_field[x + x_position][y+ + y_position] = 1;
           }
         }
       }
