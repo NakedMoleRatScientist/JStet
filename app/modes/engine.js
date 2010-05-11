@@ -18,7 +18,7 @@ function cleanEvent()
 {
   shape.return_to_normal();
   generator.current = generator.getShape();
-  shape.change_shape();
+  shape.change_shape(generator.current);
 }
 void draw()
 {
