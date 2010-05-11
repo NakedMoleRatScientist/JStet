@@ -42,7 +42,6 @@ function PlayField()
           }
           else
           {
-            console.log("noo!");
             return false;
           }
         }
@@ -489,16 +488,24 @@ var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
+
+function cleanEvent()
+{
+  shape.return_to_normal();
+  generator.current = generator.getShape();
+  shape.change_shape(generator.current);
+}
 void draw()
 {
   if (timer.react())
   {
     if (shape.move(0,20) == 2)
     {
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      shape.return_to_normal()
-      generator.current = generator.getShape();
-      shape.change_shape(generator.current);
+      while (field.insert_blocks(shape.blocks,shape.x,shape.y) == false)
+      {
+        shape.move(0,-20);
+      }
+      cleanEvent();
     }
   }
   
