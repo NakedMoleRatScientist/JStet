@@ -19,11 +19,11 @@ function PlayField()
       {
         if (blocks[x][y] == 1)
         {
-          var y_position = r / 20;
-          var x_position = c / 20;
-          if (new_field[x + x_position][y + y_position] != 1)
+          var y_position = x + (r / 20);
+          var x_position = y + (c / 20);
+          if (new_field[x_position][y_position] != 1)
           {
-            new_field[x + x_position][y + y_position] = 1;
+            new_field(x_position][y_position] = 1;
           }
           else
           {
