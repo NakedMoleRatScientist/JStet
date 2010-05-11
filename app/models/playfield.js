@@ -32,6 +32,7 @@ function PlayField()
         }
       }
     }
+    this.field = new_field;
   }
   this.field = this.create_field();
 }
