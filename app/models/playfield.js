@@ -25,6 +25,10 @@ function PlayField()
           {
             new_field[x + x_position][y + y_position] = 1;
           }
+          else
+          {
+            return false;
+          }
         }
       }
     }
