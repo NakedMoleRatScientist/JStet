@@ -18,7 +18,8 @@ function PlayField()
       {
         if (blocks[x][y] == 1)
         {
-          this.field[x][y] = 1;
+          var position = r / 20;
+          this.field[x][y + position] = 1;
         }
       }
     }
