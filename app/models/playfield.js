@@ -20,7 +20,11 @@ function PlayField()
         {
           var y_position = r / 20;
           var x_position = c / 20;
-          this.field[x + x_position][y + y_position] = 1;
+          
+          if(this.field[x + x_position][y + y_position] == 0)
+          {
+            this.field[x + x_position][y+ + y_position] = 1)
+          };
         }
       }
     }
