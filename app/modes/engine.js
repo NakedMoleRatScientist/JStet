@@ -26,7 +26,10 @@ void draw()
   {
     if (shape.move(0,20) == 2)
     {
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
+      while (field.insert_blocks(shape.blocks,shape.x,shape.y) == false)
+      {
+        shape.move(0,-20);
+      }
       cleanEvent();
     }
   }
