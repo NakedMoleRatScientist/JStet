@@ -33,6 +33,7 @@ function PlayField()
       }
     }
     this.field = new_field;
+    return true;
   }
   this.field = this.create_field();
 }
