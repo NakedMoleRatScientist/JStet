@@ -27,7 +27,6 @@ function PlayField()
           }
           else
           {
-            console.log("noo!");
             return false;
           }
         }
