@@ -21,12 +21,13 @@ function PlayField()
         {
           var y_position = r / 20;
           var x_position = c / 20;
-          if (new_field[x + x_position][y + y_position] == 0)
+          if (new_field[x + x_position][y + y_position] != 1)
           {
             new_field[x + x_position][y + y_position] = 1;
           }
           else
           {
+            console.log("noo!");
             return false;
           }
         }
