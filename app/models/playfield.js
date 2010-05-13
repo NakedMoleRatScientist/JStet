@@ -14,7 +14,21 @@ function PlayField()
   {
     var x_position = x + (c / 20);
     var y_position = y + (r / 20);
-  }
+  },
+  this.check = function(x_offset,y_offset)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      for (int y = 0; y < 4; y++)
+      {
+        if (this.field[x + x_offset][y + y_offset] == 1)
+        {
+          return false;
+        }
+      }
+    }
+    return true;
+  },
   this.insert_blocks = function(blocks,c,r)
   {
     var new_field = this.field;
