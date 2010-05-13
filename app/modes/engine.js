@@ -24,9 +24,10 @@ void draw()
 {
   if (timer.react())
   {
-    if (shape.move(0,20) == 2)
+    shape.move(0,20)
+    if (field.check(this.get_list(blocks)) == false)
     {
-      field.insert_blocks(shape.blocks,shape.x,shape.y)
+      shape.move(0,-20);
       cleanEvent();
     }
   }
