@@ -25,30 +25,46 @@ function PlayField()
     }
     return field;
   },
-  this.insert_blocks = function(blocks,c,r)
+  this.calculate_positions = function(c,r)
   {
-    var new_field = this.field;
+    var x_position = c / 20;
+    var y_position = r / 20;
+    return [x_position,y_position];
+  },
+  this.get_list = function(blocks)
+  {
+    var coord = new Array();
     for (int x = 0; x < 4; x++)
     {
       for (int y = 0; y < 4; y++)
       {
-        if (blocks[x][y] == 1)
+        if(blocks[x][y] == 1)
         {
-          var y_position = x + (r / 20);
-          var x_position = y + (c / 20);
-          if (new_field[x_position][y_position] != 1)
-          {
-            new_field(x_position][y_position] = 1;
-          }
-          else
-          {
-            return false;
-          }
+          coord.add([x,y]);
         }
       }
     }
-    this.field = new_field;
+    return coord;
+  }
+  this.check = function(blocks)
+  {
+    for (int i = 0; i < 4; i++)
+    {
+      if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] == 1)
+      {
+        return false;
+      }
+    }
     return true;
+  },
+  this.insert_blocks = function(blocks,c,r)
+  {
+    var offset = this.calculate_positions(c,r);
+    var list = this.get_list(blocks);
+    for (int i = 0; i < 4; i ++)
+    {
+      this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
+    }
   }
   this.field = this.create_field();
 }
