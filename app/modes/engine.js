@@ -25,7 +25,7 @@ void draw()
   if (timer.react())
   {
     shape.move(0,20)
-    if (field.check(this.get_list(blocks)) == false)
+    if (field.check(this.get_list(shape.blocks)) == false)
     {
       shape.move(0,-20);
       cleanEvent();
