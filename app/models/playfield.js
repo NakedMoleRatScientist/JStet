@@ -35,7 +35,17 @@ function PlayField()
   },
   this.insert_blocks = function(blocks,c,r)
   {
-    var offset = this.calculate_positions(c,r);    
+    var offset = this.calculate_positions(c,r);
+    for (int x = 0; x < 4; x++)
+    {
+      for (int y = 0; y < 4; y ++)
+      {
+        if (blocks[x][y] == 1)
+        {
+          this.field[x + offset[0]][y + offset[1]] == 1;
+        }
+      }
+    }
   }
   this.field = this.create_field();
 }
