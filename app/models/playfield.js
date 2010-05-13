@@ -25,7 +25,7 @@ function PlayField()
       {
         if(blocks[x][y] == 1)
         {
-          coord.add([x,y]);
+          coord.push([x,y]);
         }
       }
     }
