@@ -31,19 +31,13 @@ function PlayField()
     }
     return coord;
   }
-  this.check = function(blocks,x_offset,y_offset)
+  this.check = function(blocks)
   {
-    for (int x = 0; x < 4; x++)
+    for (int i = 0; i < 4; i++)
     {
-      for (int y = 0; y < 4; y++)
+      if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] == 1)
       {
-        if (blocks[x][y] == 1)
-        {
-           if (this.field[x + x_offset][y + y_offset] == 1)
-           {
-             return false;
-           }
-        }
+        return false;
       }
     }
     return true;
