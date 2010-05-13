@@ -10,6 +10,11 @@ function PlayField()
     }
     return field;
   },
+  this.calculate_positions = function(c,r)
+  {
+    var x_position = x + (c / 20);
+    var y_position = y + (r / 20);
+  }
   this.insert_blocks = function(blocks,c,r)
   {
     var new_field = this.field;
