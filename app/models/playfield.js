@@ -14,6 +14,7 @@ function PlayField()
   {
     var x_position = x + (c / 20);
     var y_position = y + (r / 20);
+    return [x_position,y_position];
   },
   this.check = function(x_offset,y_offset)
   {
