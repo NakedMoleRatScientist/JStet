@@ -31,7 +31,7 @@ function PlayField()
     }
     return coord;
   }
-  this.check = function(blocks)
+  this.check = function(blocks,x_offset,y_offset)
   {
     for (int i = 0; i < 4; i++)
     {
