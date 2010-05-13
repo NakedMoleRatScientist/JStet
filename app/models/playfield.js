@@ -16,6 +16,21 @@ function PlayField()
     var y_position = r / 20;
     return [x_position,y_position];
   },
+  this.get_list = function(blocks)
+  {
+    var coord = new Array();
+    for (int x = 0; x < 4; x++)
+    {
+      for (int y = 0; y < 4; y++)
+      {
+        if(blocks[x][y] == 1)
+        {
+          coord.add([x,y]);
+        }
+      }
+    }
+    return coord;
+  }
   this.check = function(blocks,x_offset,y_offset)
   {
     for (int x = 0; x < 4; x++)
