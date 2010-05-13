@@ -23,7 +23,7 @@ function PlayField()
           var x_position = y + (c / 20);
           if (new_field[x_position][y_position] != 1)
           {
-            new_field(x_position][y_position] = 1;
+            new_field[x_position][y_position] = 1;
           }
           else
           {

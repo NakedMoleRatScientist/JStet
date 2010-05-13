@@ -34,11 +34,11 @@ function PlayField()
       {
         if (blocks[x][y] == 1)
         {
-          var y_position = r / 20;
-          var x_position = c / 20;
-          if (new_field[x + x_position][y + y_position] != 1)
+          var y_position = x + (r / 20);
+          var x_position = y + (c / 20);
+          if (new_field[x_position][y_position] != 1)
           {
-            new_field[x + x_position][y + y_position] = 1;
+            new_field(x_position][y_position] = 1;
           }
           else
           {
@@ -48,6 +48,7 @@ function PlayField()
       }
     }
     this.field = new_field;
+    return true;
   }
   this.field = this.create_field();
 }
@@ -501,10 +502,7 @@ void draw()
   {
     if (shape.move(0,20) == 2)
     {
-      while (field.insert_blocks(shape.blocks,shape.x,shape.y) == false)
-      {
-        shape.move(0,-20);
-      }
+      field.insert_blocks(shape.blocks,shape.x,shape.y)
       cleanEvent();
     }
   }
