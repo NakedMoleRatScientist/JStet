@@ -32,28 +32,7 @@ function PlayField()
   },
   this.insert_blocks = function(blocks,c,r)
   {
-    var new_field = this.field;
-    for (int x = 0; x < 4; x++)
-    {
-      for (int y = 0; y < 4; y++)
-      {
-        if (blocks[x][y] == 1)
-        {
-          var y_position = y + (r / 20);
-          var x_position = x + (c / 20);
-          if (new_field[x_position][y_position] != 1)
-          {
-            new_field[x_position][y_position] = 1;
-          }
-          else
-          {
-            return false;
-          }
-        }
-      }
-    }
-    this.field = new_field;
-    return true;
+    var offset = this.calculate_positions();    
   }
   this.field = this.create_field();
 }
