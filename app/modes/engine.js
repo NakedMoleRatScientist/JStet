@@ -29,6 +29,7 @@ void draw()
     if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)
     {
       shape.move(0,-20);
+      field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
   }
