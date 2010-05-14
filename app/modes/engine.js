@@ -25,7 +25,8 @@ void draw()
   if (timer.react())
   {
     shape.move(0,20)
-    if (field.check(field.get_list(shape.blocks)) == false)
+    var offset = field.calculate_positions(shape.x,shape,y);
+    if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)
     {
       shape.move(0,-20);
       cleanEvent();
