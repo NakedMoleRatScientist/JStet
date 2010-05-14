@@ -40,13 +40,13 @@ function PlayField()
       {
         if(blocks[x][y] == 1)
         {
-          coord.add([x,y]);
+          coord.push([x,y]);
         }
       }
     }
     return coord;
   }
-  this.check = function(blocks)
+  this.check = function(blocks,x_offset,y_offset)
   {
     for (int i = 0; i < 4; i++)
     {
@@ -516,9 +516,12 @@ void draw()
 {
   if (timer.react())
   {
-    if (shape.move(0,20) == 2)
+    shape.move(0,20)
+    var offset = field.calculate_positions(shape.x,shape,y);
+    if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)
     {
-      field.insert_blocks(shape.blocks,shape.x,shape.y)
+      shape.move(0,-20);
+      field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
   }
