@@ -74,11 +74,11 @@ void keyPressed()
       break;
     case 115:
       shape.move(0,20);
-      checkEvent(0,-20);
+      downEvent();
       break;
     case 97:
       shape.move(-20,0);
-      downEvent();
+      checkEvent(20,0);
       break;
     case 119:
       shape.rotate();
