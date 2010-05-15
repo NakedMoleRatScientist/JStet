@@ -50,11 +50,8 @@ void draw()
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
-    if (checkEvent(0,-20))
-    {
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      cleanEvent();
-    }
+    downEvent();
+
   }
   
   background(0,0,0);
