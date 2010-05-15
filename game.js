@@ -512,6 +512,17 @@ function cleanEvent()
   generator.current = generator.getShape();
   shape.change_shape(generator.current);
 }
+
+function checkEvent(x,y)
+{
+  var offset = field.calculate_positions(shape.x,shape.y);
+  if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)  
+    {
+      shape.move(x,y);
+      field.insert_blocks(shape.blocks,shape.x,shape.y);
+      cleanEvent();
+    }
+}
 void draw()
 {
   if (timer.react())
@@ -521,13 +532,7 @@ void draw()
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
-    var offset = field.calculate_positions(shape.x,shape.y);
-    if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)
-    {
-      shape.move(0,-20);
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      cleanEvent();
-    }
+    checkEvent(0,-20);
   }
   
   background(0,0,0);
@@ -549,6 +554,7 @@ void keyPressed()
       break;
     case 115:
       shape.move(0,20);
+      checkEvent(0,-20);
       break;
     case 97:
       shape.move(-20,0);
