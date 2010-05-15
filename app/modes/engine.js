@@ -40,7 +40,7 @@ void draw()
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
-    checkEvent();
+    checkEvent(0,-20);
   }
   
   background(0,0,0);
