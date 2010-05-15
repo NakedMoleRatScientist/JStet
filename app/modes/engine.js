@@ -21,12 +21,12 @@ function cleanEvent()
   shape.change_shape(generator.current);
 }
 
-function checkEvent()
+function checkEvent(x,y)
 {
   var offset = field.calculate_positions(shape.x,shape.y);
   if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)  
     {
-      shape.move(0,-20);
+      shape.move(x,y);
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
