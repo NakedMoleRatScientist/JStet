@@ -78,7 +78,7 @@ void keyPressed()
       break;
     case 97:
       shape.move(-20,0);
-      checkEvent(20,0);
+      downEvent();
       break;
     case 119:
       shape.rotate();
