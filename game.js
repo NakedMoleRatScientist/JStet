@@ -517,12 +517,22 @@ function checkEvent(x,y)
 {
   var offset = field.calculate_positions(shape.x,shape.y);
   if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)  
-    {
-      shape.move(x,y);
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      cleanEvent();
-    }
+  {
+    shape.move(x,y);
+    return true;
+  }
+  return false;
 }
+
+function downEvent()
+{
+  if (checkEvent(0,-20))
+  {
+    field.insert_blocks(shape.blocks,shape.x,shape.y);
+    cleanEvent();
+  }
+}
+
 void draw()
 {
   if (timer.react())
@@ -532,7 +542,8 @@ void draw()
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
-    checkEvent(0,-20);
+    downEvent();
+
   }
   
   background(0,0,0);
@@ -551,6 +562,7 @@ void keyPressed()
     {
     case 100:
       shape.move(20,0);
+      checkEvent(-20,0);
       break;
     case 115:
       shape.move(0,20);
@@ -558,6 +570,7 @@ void keyPressed()
       break;
     case 97:
       shape.move(-20,0);
+      downEvent();
       break;
     case 119:
       shape.rotate();
