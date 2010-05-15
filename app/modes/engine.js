@@ -59,6 +59,7 @@ void keyPressed()
     {
     case 100:
       shape.move(20,0);
+      checkEvent(-20,0);
       break;
     case 115:
       shape.move(0,20);
@@ -66,6 +67,7 @@ void keyPressed()
       break;
     case 97:
       shape.move(-20,0);
+      checkEvent(20,0);
       break;
     case 119:
       shape.rotate();
