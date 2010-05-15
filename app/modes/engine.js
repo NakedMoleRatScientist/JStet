@@ -62,7 +62,7 @@ void keyPressed()
       break;
     case 115:
       shape.move(0,20);
-      checkEvent();
+      checkEvent(0,-20);
       break;
     case 97:
       shape.move(-20,0);
