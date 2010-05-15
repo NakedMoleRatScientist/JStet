@@ -31,6 +31,16 @@ function checkEvent(x,y)
   }
   return false;
 }
+
+function downEvent()
+{
+  if (checkEvent(0,-20))
+  {
+    field.insert_blocks(shape.blocks,shape.x,shape.y);
+    cleanEvent();
+  }
+}
+
 void draw()
 {
   if (timer.react())
