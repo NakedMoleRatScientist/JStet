@@ -25,11 +25,11 @@ function checkEvent(x,y)
 {
   var offset = field.calculate_positions(shape.x,shape.y);
   if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)  
-    {
-      shape.move(x,y);
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      cleanEvent();
-    }
+  {
+    shape.move(x,y);
+    return true;
+  }
+  return false;
 }
 void draw()
 {
@@ -40,7 +40,11 @@ void draw()
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
     }
-    checkEvent(0,-20);
+    if (checkEvent(0,-20))
+    {
+      field.insert_blocks(shape.blocks,shape.x,shape.y);
+      cleanEvent();
+    }
   }
   
   background(0,0,0);
