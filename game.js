@@ -516,8 +516,12 @@ void draw()
 {
   if (timer.react())
   {
-    shape.move(0,20)
-    var offset = field.calculate_positions(shape.x,shape,y);
+    if (shape.move(0,20) == 2)
+    {
+      field.insert_blocks(shape.blocks,shape.x,shape.y);
+      cleanEvent();
+    }
+    var offset = field.calculate_positions(shape.x,shape.y);
     if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)
     {
       shape.move(0,-20);
