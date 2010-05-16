@@ -118,12 +118,12 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0 || this.x > 180 - (this.find_max_x() * 20))
+    if (this.x < 0 || this.rotation_collision())
     {
       this.x -= x;
       return 1;
     }
-    if (this.y >  380 - (this.find_max_y() * 20))
+    if (this.rotation_collision())
     {
       this.y -= y;
       return 2;
