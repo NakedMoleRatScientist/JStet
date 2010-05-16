@@ -92,6 +92,16 @@ function Tetromino ()
     }
     this.modify_bulk(this.shape.get_data(this.choice));
   }
+  this.rotate_backward = function()
+  {
+    this.blocks = this.create_blocks()
+    this.choice -= 1;
+    if (this.choice == -1)
+    {
+      this.choice = this.shape.length;
+    }
+    this.modify_bulk(this.shape.get_data(this.choice));
+  }
   this.move = function (x,y)
   {
     this.x += x;
