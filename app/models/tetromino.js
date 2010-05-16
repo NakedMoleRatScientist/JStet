@@ -102,15 +102,18 @@ function Tetromino ()
     }
     this.modify_bulk(this.shape.get_data(this.choice));
   },
-  this.rotation_collision = function()
+  this.rotation_collision_x = function()
   {
     if (this.x > 180 - (this.find_max_x() * 20))
     {
-      return 1;
+      return true;
     }
+  }
+  this.function_collision_y = function()
+  {
     if (this.y > 380 - (this.find_max_y() * 20))
     {
-      return 2;
+      return true;
     }
     return true;
   },
@@ -118,12 +121,12 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0 || this.rotation_collision() == 1)
+    if (this.x < 0 || this.rotation_collison_x() == true)
     {
       this.x -= x;
       return 1;
     }
-    if (this.rotation_collision() == 2)
+    if (this.rotation_collision_y() == true)
     {
       this.y -= y;
       return 2;
