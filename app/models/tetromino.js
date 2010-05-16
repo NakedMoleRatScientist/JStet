@@ -106,12 +106,13 @@ function Tetromino ()
   {
     if (this.x > 180 - (this.find_max_x() * 20))
     {
-      return 1;
+      return false;
     }
     if (this.y > 380 - (this.find_max_y() * 20))
     {
-      return 2;
+      return false;
     }
+    return true;
   }
   this.move = function (x,y)
   {
