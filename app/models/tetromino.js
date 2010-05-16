@@ -90,6 +90,10 @@ function Tetromino ()
     {
       this.choice = 0;
     }
+    if (this.rotation_collision_x || this.rotation_collision_y)
+    {
+      this.rotate_backward();
+    }
     this.modify_bulk(this.shape.get_data(this.choice));
   },
   this.rotate_backward = function()
