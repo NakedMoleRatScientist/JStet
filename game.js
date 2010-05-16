@@ -167,17 +167,46 @@ function Tetromino ()
       this.choice = 0;
     }
     this.modify_bulk(this.shape.get_data(this.choice));
-  }
+    if (this.rotation_collision_x() == true || this.rotation_collision_y() == true)       {
+      this.rotate_backward();
+    }
+  },
+  this.rotate_backward = function()
+  {
+    this.blocks = this.create_blocks()
+    this.choice -= 1;
+    if (this.choice == -1)
+    {
+      this.choice = this.shape.length;
+    }
+    this.modify_bulk(this.shape.get_data(this.choice));
+  },
+  this.rotation_collision_x = function()
+  {
+    if (this.x > 180 - (this.find_max_x() * 20))
+    {
+      return true;
+    }
+    return false;
+  },
+  this.rotation_collision_y = function()
+  {
+    if (this.y > 380 - (this.find_max_y() * 20))
+    {
+      return true;
+    }
+    return false;
+  },
   this.move = function (x,y)
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0 || this.x > 180 - (this.find_max_x() * 20))
+    if (this.x < 0 || this.rotation_collision_x() == true)
     {
       this.x -= x;
       return 1;
     }
-    if (this.y >  380 - (this.find_max_y() * 20))
+    if (this.rotation_collision_y() == true)
     {
       this.y -= y;
       return 2;
