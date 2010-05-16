@@ -91,7 +91,7 @@ function Tetromino ()
       this.choice = 0;
     }
     this.modify_bulk(this.shape.get_data(this.choice));
-  }
+  },
   this.rotate_backward = function()
   {
     this.blocks = this.create_blocks()
@@ -101,6 +101,17 @@ function Tetromino ()
       this.choice = this.shape.length;
     }
     this.modify_bulk(this.shape.get_data(this.choice));
+  },
+  this.rotation_collision = function()
+  {
+    if (this.x > 180 - (this.find_max_x() * 20))
+    {
+      return 1;
+    }
+    if (this.y > 380 - (this.find_max_y() * 20))
+    {
+      return 2;
+    }
   }
   this.move = function (x,y)
   {
