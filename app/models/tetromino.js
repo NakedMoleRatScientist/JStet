@@ -106,24 +106,24 @@ function Tetromino ()
   {
     if (this.x > 180 - (this.find_max_x() * 20))
     {
-      return false;
+      return 1;
     }
     if (this.y > 380 - (this.find_max_y() * 20))
     {
-      return false;
+      return 2;
     }
     return true;
-  }
+  },
   this.move = function (x,y)
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0 || this.rotation_collision())
+    if (this.x < 0 || this.rotation_collision() == 1)
     {
       this.x -= x;
       return 1;
     }
-    if (this.rotation_collision())
+    if (this.rotation_collision() == 2)
     {
       this.y -= y;
       return 2;
