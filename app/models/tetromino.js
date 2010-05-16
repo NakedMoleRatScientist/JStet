@@ -121,7 +121,7 @@ function Tetromino ()
   {
     this.x += x;
     this.y += y;
-    if (this.x < 0 || this.rotation_collison_x() == true)
+    if (this.x < 0 || this.rotation_collision_x() == true)
     {
       this.x -= x;
       return 1;
