@@ -108,6 +108,7 @@ function Tetromino ()
     {
       return true;
     }
+    return false;
   },
   this.rotation_collision_y = function()
   {
@@ -115,7 +116,7 @@ function Tetromino ()
     {
       return true;
     }
-    return true;
+    return false;
   },
   this.move = function (x,y)
   {
