@@ -61,6 +61,7 @@ function PlayField()
     {
       this.field[x][line] = 0;
     }
+    return true;
   },
   this.check_field = function()
   {
