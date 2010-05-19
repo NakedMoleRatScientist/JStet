@@ -64,11 +64,13 @@ function PlayField()
         {
           score ++;
         }
-        if (score == 20)
+        console.log(score);
+        if (score == 10)
         {
-          return true;
+          return line;
         }
       }
+      return line;
     }
     return false;
   }
