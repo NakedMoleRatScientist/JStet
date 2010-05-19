@@ -50,7 +50,14 @@ function PlayField()
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
     }
-  }
+  },
+  this.clear_line = function(line)
+  {
+    for (int x = 0; x < 10; x++)
+    {
+      this.field[x][line] = 0;
+    }
+  },
   this.check_field = function()
   {
     var line = 0;
