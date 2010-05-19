@@ -64,7 +64,10 @@ function PlayField()
         {
           score ++;
         }
-        console.log(score);
+        else
+        {
+          break;
+        }
         if (score == 10)
         {
           return line;
