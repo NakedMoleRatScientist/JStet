@@ -53,7 +53,7 @@ function PlayField()
   },
   this.clear_line = function(line)
   {
-    if (line == false)
+    if (line == false && line != 0)
     {
       return false;
     }
