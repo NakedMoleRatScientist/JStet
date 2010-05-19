@@ -57,7 +57,7 @@ function PlayField()
     }
     return true;
   },
-  this.insert_blocks = function(blocks,c,r)
+ this.insert_blocks = function(blocks,c,r)
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
@@ -65,6 +65,59 @@ function PlayField()
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
     }
+  },
+  this.move_lines = function(line)
+  {
+    if (line == false)
+    {
+      return false;
+    }
+    for (int y = line; y > 1; y--)
+    {
+      for (int x = 0; x < 10; x++)
+      {
+        this.field[x][y] = this.field[x][y - 1];
+      }
+    }
+    return true;
+  },
+  this.clear_line = function(line)
+  {
+    if (line == false)
+    {
+      return false;
+    }
+    for (int x = 0; x < 10; x++)
+    {
+      this.field[x][line] = 0;
+    }
+    return line;
+  },
+  this.check_field = function()
+  {
+    var line = 0;
+    var score = 0;
+    for (int y = 0; y < 20; y++)
+    {
+      score = 0;
+      for (int x = 0; x < 10; x++)
+      {
+        if (this.field[x][y] == 1)
+        {
+          score ++;
+        }
+        else
+        {
+          x = 10;
+        }
+        if (score == 10)
+        {
+          return line;
+        }
+      }
+      line ++;
+    }
+    return false;
   }
   this.field = this.create_field();
 }
@@ -557,9 +610,15 @@ function downEvent()
 {
   if (checkEvent(0,-20))
   {
-    field.insert_blocks(shape.blocks,shape.x,shape.y);
-    cleanEvent();
+    insertEvent();
   }
+}
+
+function insertEvent()
+{
+  field.insert_blocks(shape.blocks,shape.x,shape.y);
+  cleanEvent();
+  while (field.move_lines(field.clear_line(field.check_field()))) {}
 }
 
 void draw()
@@ -568,11 +627,9 @@ void draw()
   {
     if (shape.move(0,20) == 2)
     {
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      cleanEvent();
+      insertEvent();
     }
     downEvent();
-
   }
   
   background(0,0,0);
