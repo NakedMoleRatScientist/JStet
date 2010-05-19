@@ -101,7 +101,7 @@ function Tetromino ()
     this.choice -= 1;
     if (this.choice == -1)
     {
-      this.choice = this.shape.length;
+      this.choice = 0;
     }
     this.modify_bulk(this.shape.get_data(this.choice));
   },
