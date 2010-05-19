@@ -44,6 +44,7 @@ function insertEvent()
 {
   field.insert_blocks(shape.blocks,shape.x,shape.y);
   cleanEvent();
+  console.log(field.check_field());
 }
 
 void draw()
@@ -52,9 +53,7 @@ void draw()
   {
     if (shape.move(0,20) == 2)
     {
-      field.insert_blocks(shape.blocks,shape.x,shape.y);
-      cleanEvent();
-      console.log(field.check_field());
+      insertEvent();
     }
     downEvent();
 
