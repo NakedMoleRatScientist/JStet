@@ -53,13 +53,13 @@ function PlayField()
   },
   this.clear_line = function(line)
   {
-    if (line == false && line != 0)
+    if (line == false)
     {
       return false;
     }
     for (int x = 0; x < 10; x++)
     {
-      this.field[x][y] = 0;
+      this.field[x][line] = 0;
     }
   },
   this.check_field = function()
