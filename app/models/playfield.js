@@ -42,7 +42,7 @@ function PlayField()
     }
     return true;
   },
-  this.insert_blocks = function(blocks,c,r)
+ this.insert_blocks = function(blocks,c,r)
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
@@ -50,6 +50,27 @@ function PlayField()
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
     }
+  }
+  this.check_field = function()
+  {
+    var line = 0;
+    var score = 0;
+    for (int y = 0; y < 10; y++)
+    {
+      score = 0;
+      for (int x = 0; x < 20; x++)
+      {
+        if (this.field[x][y] == 1)
+        {
+          score ++;
+        }
+        if (score == 20)
+        {
+          return true;
+        }
+      }
+    }
+    return false;
   }
   this.field = this.create_field();
 }
