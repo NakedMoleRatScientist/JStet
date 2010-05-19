@@ -44,7 +44,7 @@ function insertEvent()
 {
   field.insert_blocks(shape.blocks,shape.x,shape.y);
   cleanEvent();
-  console.log(field.clear_line(field.check_field()));
+  console.log(field.move_lines(field.clear_line(field.check_field())));
 }
 
 void draw()
