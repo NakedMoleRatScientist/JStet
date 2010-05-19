@@ -51,6 +51,13 @@ function PlayField()
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
     }
   },
+  this.move_lines = function(line)
+  {
+    for (int y = line; line > 1; line--)
+    {
+      this.field[x][y] = this.field[x][y - 1];
+    }
+  },
   this.clear_line = function(line)
   {
     if (line == false)
