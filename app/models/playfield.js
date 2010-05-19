@@ -57,7 +57,7 @@ function PlayField()
     {
       return false;
     }
-    for (int y = line; line > 1; line--)
+    for (int y = line; y > 1; y--)
     {
       for (int x = 0; x < 10; x++)
       {
