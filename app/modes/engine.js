@@ -82,6 +82,10 @@ void keyPressed()
       break;
     case 119:
       shape.rotate();
+      if (checkEvent(0,0))
+      {
+        shape.rotate_backward();
+      }
       break;
     case 101:
       generator.current = generator.getShape();
