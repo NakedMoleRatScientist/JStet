@@ -49,6 +49,7 @@ void draw()
     {
       field.insert_blocks(shape.blocks,shape.x,shape.y);
       cleanEvent();
+      console.log(field.check_field());
     }
     downEvent();
 
