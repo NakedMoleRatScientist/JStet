@@ -53,6 +53,10 @@ function PlayField()
   },
   this.clear_line = function(line)
   {
+    if (line == false)
+    {
+      return;
+    }
     for (int x = 0; x < 10; x++)
     {
       this.field[x][line] = 0;
