@@ -55,7 +55,10 @@ function PlayField()
   {
     for (int y = line; line > 1; line--)
     {
-      this.field[x][y] = this.field[x][y - 1];
+      for (int x = 0; x < 10; x++)
+      {
+        this.field[x][y] = this.field[x][y - 1];
+      }
     }
   },
   this.clear_line = function(line)
