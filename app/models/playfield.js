@@ -55,7 +55,7 @@ function PlayField()
   {
     if (line == false)
     {
-      return;
+      return false;
     }
     for (int x = 0; x < 10; x++)
     {
@@ -77,14 +77,13 @@ function PlayField()
         }
         else
         {
-          break;
+          x = 10;
         }
         if (score == 10)
         {
           return line;
         }
       }
-      return line;
     }
     return false;
   }
