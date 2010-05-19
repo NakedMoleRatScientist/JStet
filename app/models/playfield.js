@@ -59,7 +59,7 @@ function PlayField()
     }
     for (int x = 0; x < 10; x++)
     {
-      this.field[x][line] = 0;
+      this.field[x][y] = 0;
     }
   },
   this.check_field = function()
@@ -84,6 +84,7 @@ function PlayField()
           return line;
         }
       }
+      line ++;
     }
     return false;
   }
