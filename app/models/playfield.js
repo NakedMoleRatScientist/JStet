@@ -53,6 +53,10 @@ function PlayField()
   },
   this.move_lines = function(line)
   {
+    if (line == false)
+    {
+      return false;
+    }
     for (int y = line; line > 1; line--)
     {
       for (int x = 0; x < 10; x++)
@@ -60,6 +64,7 @@ function PlayField()
         this.field[x][y] = this.field[x][y - 1];
       }
     }
+    return true;
   },
   this.clear_line = function(line)
   {
