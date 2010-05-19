@@ -55,10 +55,10 @@ function PlayField()
   {
     var line = 0;
     var score = 0;
-    for (int y = 0; y < 10; y++)
+    for (int y = 0; y < 20; y++)
     {
       score = 0;
-      for (int x = 0; x < 20; x++)
+      for (int x = 0; x < 10; x++)
       {
         if (this.field[x][y] == 1)
         {
