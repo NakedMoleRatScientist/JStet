@@ -3,7 +3,7 @@ void setup()
 {
   size(800,600);
   stroke(255);
-  PFont font= loadFont("serif");
+  PFont font= loadFont("monospace");
   textFont(font,18);
   frameRate(24);
 }
@@ -55,7 +55,7 @@ function insertEvent()
 void draw()
 {
   if (timer.react())
-  {
+  { 
     if (shape.move(0,20) == 2)
     {
       insertEvent();
@@ -70,7 +70,7 @@ void draw()
   stroke(255,255,255);
   fill(255,255,255);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
-  text(score.toString(),300,400);
+  text(score.toString(),300,50);
   drawShape.draw_field(field.field);
 }
 
