@@ -130,4 +130,11 @@ void keyPressed()
       break;
     }
   }
+  else
+  {
+    if (key == 110)
+    {
+      status = true;
+    }
+  }
 }
