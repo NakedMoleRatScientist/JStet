@@ -7,6 +7,7 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
+var speed = 1.0;
 var status = true;
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
