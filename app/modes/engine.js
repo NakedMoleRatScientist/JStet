@@ -7,7 +7,7 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
-
+var status = true;
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
@@ -42,6 +42,10 @@ function downEvent()
 {
   if (checkEvent(0,-20))
   {
+    if (shape.y == 0)
+    {
+      console.log("FAIL!");
+    }
     insertEvent();
   }
 }
