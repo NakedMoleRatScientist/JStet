@@ -60,6 +60,15 @@ function insertEvent()
   }
 }
 
+void drawInstruction()
+{
+  text("Instruction: ",400,50);
+  text("a - left",400,80);
+  text("s - down",400,100);
+  text("d - right",400,120);
+  text("w - rotate",400,140);
+}
+
 void draw()
 {
   if (status == true)
@@ -85,6 +94,7 @@ void draw()
     text("Next: ", 300,250);
     drawShape.create_blocks(future.get_list(),250,210);
     text(score.toString(),300,50);
+    drawInstruction();
     drawShape.draw_field(field.field);
   }
   else
