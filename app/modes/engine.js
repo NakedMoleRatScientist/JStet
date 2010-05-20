@@ -62,28 +62,38 @@ function insertEvent()
 
 void draw()
 {
-  if (timer.react())
-  { 
-    if (shape.move(0,20) == 2)
-    {
-      insertEvent();
+  if (status == true)
+  {
+    if (timer.react())
+    { 
+      if (shape.move(0,20) == 2)
+      {
+        insertEvent();
+      }
+      downEvent();
     }
-    downEvent();
+    
+    background(0,0,0);
+    stroke(205,201,201);
+    fill(0,0,0);
+    rect(drawField.x,drawField.y,drawField.width,drawField.height)
+    stroke(255,255,255);
+    fill(255,255,255);
+    drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+    text("Current: ",300,135);
+    drawShape.create_blocks(shape.get_list(),250,100);
+    text("Next: ", 300,250);
+    drawShape.create_blocks(future.get_list(),250,210);
+    text(score.toString(),300,50);
+    drawShape.draw_field(field.field);
   }
-  
-  background(0,0,0);
-  stroke(205,201,201);
-  fill(0,0,0);
-  rect(drawField.x,drawField.y,drawField.width,drawField.height)
-  stroke(255,255,255);
-  fill(255,255,255);
-  drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
-  text("Current: ",300,135);
-  drawShape.create_blocks(shape.get_list(),250,100);
-  text("Next: ", 300,250);
- drawShape.create_blocks(future.get_list(),250,210);
-  text(score.toString(),300,50);
-  drawShape.draw_field(field.field);
+  else
+  {
+    background(0,0,0);
+    PFont font = loadFont("monospace");
+    textFont(font,35);
+    text("GAME OVER",300,300);
+  }
 }
 
 void keyPressed()
