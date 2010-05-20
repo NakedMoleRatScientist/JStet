@@ -7,8 +7,6 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
-var speed = 1.0;
-var cycle = 0;
 var status = true;
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
@@ -29,15 +27,6 @@ function cleanEvent()
   future.change_shape(generator.current);
 }
 
-function tickCycle()
-{
-  cycle++;
-  if (cycle == 20)
-  {
-    speed -= .1;
-    cycle = 0;
-  }
-}
 function checkEvent(x,y)
 {
   var offset = field.calculate_positions(shape.x,shape.y);
