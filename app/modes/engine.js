@@ -70,7 +70,8 @@ void draw()
   stroke(255,255,255);
   fill(255,255,255);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
-  drawShape.create_blocks(shape.get_list(),300,400);
+  text("Current: ",300,75);
+  drawShape.create_blocks(shape.get_list(),250,100);
   text(score.toString(),300,50);
   drawShape.draw_field(field.field);
 }
