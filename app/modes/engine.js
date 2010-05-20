@@ -8,6 +8,7 @@ void setup()
   frameRate(24);
 }
 var speed = 1.0;
+var cycle = 0;
 var status = true;
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
