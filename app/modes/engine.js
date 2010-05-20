@@ -94,7 +94,7 @@ void draw()
     textFont(font,35);
     text("GAME OVER",300,300);
     textFont(font,18);
-    text("Press n to start a new game.",300,20);
+    text("Press n to start a new game.",300,320);
   }
 }
 
