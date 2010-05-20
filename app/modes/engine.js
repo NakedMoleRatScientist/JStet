@@ -62,11 +62,11 @@ function insertEvent()
 
 void drawInstruction()
 {
-  text("Instruction: ",400,50);
-  text("a - left",400,80);
-  text("s - down",400,100);
-  text("d - right",400,120);
-  text("w - rotate",400,140);
+  text("Instruction: ",450,50);
+  text("a - left",450,80);
+  text("s - down",450,100);
+  text("d - right",450,120);
+  text("w - rotate",450,140);
 }
 
 void draw()
@@ -90,7 +90,9 @@ void draw()
     fill(255,255,255);
     drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
     text("Current: ",300,135);
-    drawShape.create_blocks(shape.get_list(),250,100);
+    current = shape;
+    current.return_to_zero();
+    drawShape.create_blocks(current.get_list(),250,100);
     text("Next: ", 300,250);
     drawShape.create_blocks(future.get_list(),250,210);
     text(score.toString(),300,50);
