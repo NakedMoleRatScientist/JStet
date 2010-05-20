@@ -76,7 +76,8 @@ void draw()
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
   text("Current: ",300,135);
   drawShape.create_blocks(shape.get_list(),250,100);
-  drawShape.create_blocks(future.get_list(),250,150);
+  text("Next: ", 300,175);
+  drawShape.create_blocks(future.get_list(),250,200);
   text(score.toString(),300,50);
   drawShape.draw_field(field.field);
 }
