@@ -2,16 +2,33 @@
 function TimerAction()
 {
   this.speed = 1000;
+  this.cycle = 0;
   this.time = new Date();
+  this.tickCycle = function()
+  {
+    this.cycle++;
+    if (this.cycle == 20)
+    {
+      this.speed -= 100;
+      this.cycle = 0;
+    }
+  },
   this.react = function()
   {
     var new_time = new Date();
-    if (new_time - this.time >= 1000)
+    if (new_time - this.time >= this.speed)
     {
+      console.log(this.speed);
       this.time = new_time;
+      this.tickCycle();
       return true;
     }
     return false;
+  },
+  this.reset = function()
+  {
+    this.cycle = 0;
+    this.speed = 1000;
   }
 }
 function Score()
@@ -223,6 +240,11 @@ function Tetromino ()
     }
     return suitable;
   },
+  this.return_to_zero = function ()
+  {
+    this.choice = 0;
+    this.modify_bulk(this.shape.get_data(this.choice));
+  }
   this.rotate = function()
   {
     this.blocks = this.create_blocks();
@@ -645,6 +667,15 @@ function insertEvent()
   }
 }
 
+void drawInstruction()
+{
+  text("Instruction: ",450,50);
+  text("a - left",450,80);
+  text("s - down",450,100);
+  text("d - right",450,120);
+  text("w - rotate",450,140);
+}
+
 void draw()
 {
   if (status == true)
@@ -666,10 +697,13 @@ void draw()
     fill(255,255,255);
     drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
     text("Current: ",300,135);
-    drawShape.create_blocks(shape.get_list(),250,100);
+    current = new Tetromino();
+    current.change_shape(shape.shape);
+    drawShape.create_blocks(current.get_list(),250,100);
     text("Next: ", 300,250);
     drawShape.create_blocks(future.get_list(),250,210);
     text(score.toString(),300,50);
+    drawInstruction();
     drawShape.draw_field(field.field);
   }
   else
@@ -723,6 +757,8 @@ void keyPressed()
     {
       field.field = field.create_field();
       status = true;
+      score = 0;
+      timer.reset();
     }
   }
 }
