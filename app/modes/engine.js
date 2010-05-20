@@ -150,6 +150,8 @@ void keyPressed()
     {
       field.field = field.create_field();
       status = true;
+      score = 0;
+      timer.reset();
     }
   }
 }
