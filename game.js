@@ -9,7 +9,7 @@ function TimerAction()
     this.cycle++;
     if (this.cycle == 20)
     {
-      this.speed -= 100;
+      this.speed--;
       this.cycle = 0;
     }
   },
@@ -18,7 +18,6 @@ function TimerAction()
     var new_time = new Date();
     if (new_time - this.time >= this.speed)
     {
-      console.log(this.speed);
       this.time = new_time;
       this.tickCycle();
       return true;
@@ -41,6 +40,10 @@ function Score()
   this.toString = function()
   {
     return "Score: " + this.points;
+  }
+  this.reset = function()
+  {
+    this.points = 0;
   }
 }
 function PlayField()
@@ -757,7 +760,7 @@ void keyPressed()
     {
       field.field = field.create_field();
       status = true;
-      score = 0;
+      score.reset();
       timer.reset();
     }
   }
