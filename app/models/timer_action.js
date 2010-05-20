@@ -19,6 +19,7 @@ function TimerAction()
     if (new_time - this.time >= this.speed)
     {
       this.time = new_time;
+      this.tickCycle();
       return true;
     }
     return false;
