@@ -29,6 +29,15 @@ function cleanEvent()
   future.change_shape(generator.current);
 }
 
+function tickCycle()
+{
+  cycle++;
+  if (cycle == 20)
+  {
+    speed -= .1;
+    cycle = 0;
+  }
+}
 function checkEvent(x,y)
 {
   var offset = field.calculate_positions(shape.x,shape.y);
