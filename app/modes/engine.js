@@ -90,8 +90,8 @@ void draw()
     fill(255,255,255);
     drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
     text("Current: ",300,135);
-    current = shape;
-    current.return_to_zero();
+    current = new Tetromino();
+    current.change_shape(shape.shape);
     drawShape.create_blocks(current.get_list(),250,100);
     text("Next: ", 300,250);
     drawShape.create_blocks(future.get_list(),250,210);
