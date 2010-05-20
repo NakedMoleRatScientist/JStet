@@ -44,7 +44,10 @@ function insertEvent()
 {
   field.insert_blocks(shape.blocks,shape.x,shape.y);
   cleanEvent();
-  while (field.move_lines(field.clear_line(field.check_field()))) {}
+  while (field.move_lines(field.clear_line(field.check_field())))
+  {
+    score.increase();
+  }
 }
 
 void draw()
