@@ -44,7 +44,7 @@ function downEvent()
   {
     if (shape.y == 0)
     {
-      console.log("FAIL!");
+      status = false;
     }
     insertEvent();
   }
