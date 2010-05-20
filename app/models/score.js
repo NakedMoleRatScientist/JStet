@@ -10,4 +10,8 @@ function Score()
   {
     return "Score: " + this.points;
   }
+  this.reset = function()
+  {
+    this.points = 0;
+  }
 }
