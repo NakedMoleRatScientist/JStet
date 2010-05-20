@@ -3,6 +3,8 @@ void setup()
 {
   size(800,600);
   stroke(255);
+  PFont font= loadFont("DoulosSILR.ttf");
+  textFont(font,18);
   frameRate(24);
 }
 
@@ -67,6 +69,7 @@ void draw()
   rect(drawField.x,drawField.y,drawField.width,drawField.height)
   stroke(255,255,255);
   fill(255,255,255);
+  
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
   drawShape.draw_field(field.field);
 }
