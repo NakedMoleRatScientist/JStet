@@ -9,14 +9,14 @@ function TimerAction()
     this.cycle++;
     if (this.cycle == 20)
     {
-      this.speed - 1;
+      this.speed--;
       this.cycle = 0;
     }
   },
   this.react = function()
   {
     var new_time = new Date();
-    if (new_time - this.time >= 1000)
+    if (new_time - this.time >= this.speed)
     {
       this.time = new_time;
       return true;
