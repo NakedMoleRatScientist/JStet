@@ -134,6 +134,7 @@ void keyPressed()
   {
     if (key == 110)
     {
+      field.field = field.create_field();
       status = true;
     }
   }
