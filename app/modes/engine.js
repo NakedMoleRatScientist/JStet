@@ -88,6 +88,8 @@ void draw()
 
 void keyPressed()
 {
+  if (status == true)
+  {
     switch(key)
     {
     case 100:
@@ -117,4 +119,5 @@ void keyPressed()
       console.log(key);
       break;
     }
+  }
 }
