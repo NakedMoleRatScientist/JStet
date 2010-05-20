@@ -14,6 +14,18 @@ function TimerAction()
     return false;
   }
 }
+function Score()
+{
+  this.points = 0;
+  this.increase = function()
+  {
+    this.points ++;
+  },
+  this.toString = function()
+  {
+    return "Score: " + this.points;
+  }
+}
 function PlayField()
 {
   this.create_field = function()
@@ -551,12 +563,11 @@ function ShapeGenerator ()
 }
 function TetrominoDraw()
 {
-  this.blocks = new Array();
   this.create_blocks = function(pos,x,y)
   {
     for (i = 0; i < pos.length; i++)
     {
-      this.blocks.push(rect(pos[i][0] * 20 + x + 50,pos[i][1] * 20 + y + 50, 20, 20));
+      rect(pos[i][0] * 20 + x + 50,pos[i][1] * 20 + y + 50, 20, 20);
     }
   }
   this.draw_field = function(field)
@@ -577,6 +588,8 @@ void setup()
 {
   size(800,600);
   stroke(255);
+  PFont font= loadFont("monospace");
+  textFont(font,18);
   frameRate(24);
 }
 
@@ -587,7 +600,7 @@ var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-
+var score = new Score();
 function cleanEvent()
 {
   shape.return_to_normal();
@@ -618,13 +631,16 @@ function insertEvent()
 {
   field.insert_blocks(shape.blocks,shape.x,shape.y);
   cleanEvent();
-  while (field.move_lines(field.clear_line(field.check_field()))) {}
+  while (field.move_lines(field.clear_line(field.check_field())))
+  {
+    score.increase();
+  }
 }
 
 void draw()
 {
   if (timer.react())
-  {
+  { 
     if (shape.move(0,20) == 2)
     {
       insertEvent();
@@ -639,6 +655,7 @@ void draw()
   stroke(255,255,255);
   fill(255,255,255);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+  text(score.toString(),300,50);
   drawShape.draw_field(field.field);
 }
 
