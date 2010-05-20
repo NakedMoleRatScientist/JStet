@@ -11,6 +11,9 @@ void setup()
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
+var future = new Tetromino();
+generator.getShape();
+future.change_shape(generator.current);
 var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
@@ -19,8 +22,9 @@ var score = new Score();
 function cleanEvent()
 {
   shape.return_to_normal();
-  generator.current = generator.getShape();
   shape.change_shape(generator.current);
+  generator.current = generator.getShape();
+  future.change_shape(generator.current);
 }
 
 function checkEvent(x,y)
@@ -70,8 +74,9 @@ void draw()
   stroke(255,255,255);
   fill(255,255,255);
   drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
-  text("Current: ",300,75);
+  text("Current: ",300,135);
   drawShape.create_blocks(shape.get_list(),250,100);
+  drawShape.create_blocks(future.get_list(),250,150);
   text(score.toString(),300,50);
   drawShape.draw_field(field.field);
 }
