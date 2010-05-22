@@ -2,6 +2,7 @@
 function ZShape()
 {
   this.length = 2;
+  this.color = #FF0019;
   this.get_data = function(choice)
   {
     var list = new Array();

@@ -2,6 +2,7 @@
 function JShape()
 {
   this.length = 4;
+  this.color = #14FF00;
   this.get_data = function(choice)
   {
     var list = new Array();

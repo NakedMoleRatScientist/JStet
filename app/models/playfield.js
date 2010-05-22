@@ -7,6 +7,10 @@ function PlayField()
     for (x = 0; x < 10; x++)
     {
       field[x] = new Array(20);
+      for (z = 0; z < 20; z++)
+      {
+        field[x][z] = 0;
+      }
     }
     return field;
   },
@@ -35,20 +39,20 @@ function PlayField()
   {
     for (int i = 0; i < 4; i++)
     {
-      if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] == 1)
+      if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] != 0)
       {
         return false;
       }
     }
     return true;
   },
- this.insert_blocks = function(blocks,c,r)
+ this.insert_blocks = function(blocks,c,r,color)
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
     for (int i = 0; i < 4; i ++)
     {
-      this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
+      this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
     }
   },
   this.move_lines = function(line)
@@ -87,7 +91,7 @@ function PlayField()
       score = 0;
       for (int x = 0; x < 10; x++)
       {
-        if (this.field[x][y] == 1)
+        if (this.field[x][y] != 0)
         {
           score ++;
         }

@@ -2,6 +2,7 @@
 function SShape()
 {
   this.length = 2;
+  this.color = #00FFD9;
   this.get_data = function(choice)
   {
     var list = new Array();

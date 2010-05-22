@@ -157,6 +157,7 @@ function PlayField()
   }
   this.field = this.create_field();
 }
+
 function PlayFieldDraw()
 {
   this.x = 50;
@@ -362,6 +363,7 @@ function JShape()
     return list;
   }
 }
+
 function IShape()
 {
   this.length = 2;
@@ -391,6 +393,7 @@ function IShape()
     return list;
   }
 }
+
 function LShape()
 {
   this.length = 4;
@@ -451,6 +454,7 @@ function OShape()
     return list;
   }
 }
+
 function ZShape()
 {
   this.length = 2;
@@ -480,6 +484,7 @@ function ZShape()
     return list;
   }
 }
+
 function SShape()
 {
   this.length = 2;
@@ -509,6 +514,7 @@ function SShape()
     return list;
   }
 }
+
 function TShape()
 {
   this.length = 4;
@@ -554,6 +560,7 @@ function TShape()
     return list;
   }
 }
+
 function ShapeGenerator ()
 {
   this.randomChoice = function ()
@@ -628,6 +635,7 @@ function TetrominoDraw()
     }
   }
 }
+
 void setup()
 {
   size(800,600);
@@ -721,7 +729,7 @@ void draw()
     text("Current: ",300,135);
     current = new Tetromino();
     current.change_shape(shape.shape);
-    drawShape.create_blocks(current.get_list(),250,100,shape.shape.color);
+    drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
     text("Next: ", 300,250);
     drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);

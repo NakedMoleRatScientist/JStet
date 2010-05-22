@@ -52,7 +52,7 @@ function downEvent()
 
 function insertEvent()
 {
-  field.insert_blocks(shape.blocks,shape.x,shape.y);
+  field.insert_blocks(shape.blocks,shape.x,shape.y,shape.shape.color);
   cleanEvent();
   while (field.move_lines(field.clear_line(field.check_field())))
   {
@@ -88,13 +88,13 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+    drawShape.create_blocks(shape.get_list(),shape.x,shape.y,shape.shape.color);
     text("Current: ",300,135);
     current = new Tetromino();
     current.change_shape(shape.shape);
-    drawShape.create_blocks(current.get_list(),250,100);
+    drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
     text("Next: ", 300,250);
-    drawShape.create_blocks(future.get_list(),250,210);
+    drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
