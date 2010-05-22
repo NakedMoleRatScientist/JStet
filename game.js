@@ -54,6 +54,10 @@ function PlayField()
     for (x = 0; x < 10; x++)
     {
       field[x] = new Array(20);
+      for (z = 0; z < 20; z++)
+      {
+        field[x][z] = 0;
+      }
     }
     return field;
   },
@@ -82,20 +86,20 @@ function PlayField()
   {
     for (int i = 0; i < 4; i++)
     {
-      if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] == 1)
+      if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] != 0)
       {
         return false;
       }
     }
     return true;
   },
- this.insert_blocks = function(blocks,c,r)
+ this.insert_blocks = function(blocks,c,r,color)
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
     for (int i = 0; i < 4; i ++)
     {
-      this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
+      this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
     }
   },
   this.move_lines = function(line)
@@ -134,7 +138,7 @@ function PlayField()
       score = 0;
       for (int x = 0; x < 10; x++)
       {
-        if (this.field[x][y] == 1)
+        if (this.field[x][y] != 0)
         {
           score ++;
         }
@@ -316,6 +320,7 @@ function Tetromino ()
 function JShape()
 {
   this.length = 4;
+  this.color = #14FF00;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -360,6 +365,7 @@ function JShape()
 function IShape()
 {
   this.length = 2;
+  this.color = #FFFF00;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -388,6 +394,7 @@ function IShape()
 function LShape()
 {
   this.length = 4;
+  this.color = #0011FF;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -433,6 +440,7 @@ function LShape()
 function OShape()
 {
   this.length = 1;
+  this.color = 50;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -446,6 +454,7 @@ function OShape()
 function ZShape()
 {
   this.length = 2;
+  this.color = #FF0019;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -474,6 +483,7 @@ function ZShape()
 function SShape()
 {
   this.length = 2;
+  this.color = #00FFD9;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -502,6 +512,7 @@ function SShape()
 function TShape()
 {
   this.length = 4;
+  this.color = #FF00F2;
   this.get_data = function(choice)
   {
     var list = new Array();
@@ -588,11 +599,15 @@ function ShapeGenerator ()
 }
 function TetrominoDraw()
 {
-  this.create_blocks = function(pos,x,y)
+  this.create_blocks = function(pos,x,y,color)
   {
     for (i = 0; i < pos.length; i++)
     {
+      stroke(color);
+      fill(color);
       rect(pos[i][0] * 20 + x + 50,pos[i][1] * 20 + y + 50, 20, 20);
+      stroke(255);
+      fill(255);
     }
   }
   this.draw_field = function(field)
@@ -601,9 +616,13 @@ function TetrominoDraw()
     {
       for (y = 0; y < 20; y++)
       {
-        if (field[x][y] == 1)
+        if (field[x][y] != 0)
         {
+          stroke(field[x][y]);
+          fill(field[x][y]);
           rect((x * 20) + 50,(y * 20) + 50,20,20);
+          stroke(255);
+          fill(255);
         }
       }
     }
@@ -662,7 +681,7 @@ function downEvent()
 
 function insertEvent()
 {
-  field.insert_blocks(shape.blocks,shape.x,shape.y);
+  field.insert_blocks(shape.blocks,shape.x,shape.y,shape.shape.color);
   cleanEvent();
   while (field.move_lines(field.clear_line(field.check_field())))
   {
@@ -698,13 +717,13 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    drawShape.create_blocks(shape.get_list(),shape.x,shape.y);
+    drawShape.create_blocks(shape.get_list(),shape.x,shape.y,shape.shape.color);
     text("Current: ",300,135);
     current = new Tetromino();
     current.change_shape(shape.shape);
-    drawShape.create_blocks(current.get_list(),250,100);
+    drawShape.create_blocks(current.get_list(),250,100,shape.shape.color);
     text("Next: ", 300,250);
-    drawShape.create_blocks(future.get_list(),250,210);
+    drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
