@@ -2,6 +2,7 @@
 function IShape()
 {
   this.length = 2;
+  this.color = #FFFF00;
   this.get_data = function(choice)
   {
     var list = new Array();

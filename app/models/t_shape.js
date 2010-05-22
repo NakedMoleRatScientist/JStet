@@ -2,6 +2,7 @@
 function TShape()
 {
   this.length = 4;
+  this.color = #FF00F2;
   this.get_data = function(choice)
   {
     var list = new Array();
