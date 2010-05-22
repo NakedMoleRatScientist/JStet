@@ -1,5 +1,7 @@
 require 'net/ftp'
-require 'secret.rb'
+if File.exist?("secret.rb")
+  require 'secret.rb'
+end
 
 task :deploy => [:concat]
 task :concat do
