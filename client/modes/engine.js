@@ -135,10 +135,6 @@ void keyPressed()
         shape.rotate_backward();
       }
       break;
-    case 101:
-      generator.current = generator.getShape();
-      shape.change_shape(generator.current);
-      break;
     default:
       console.log(key);
       break;
