@@ -1,5 +1,5 @@
-var tcp = require('tcp');
-var server = tcp.createServer(function (socket) {
+var net = require('net');
+var server = net.createServer(function (socket) {
   socket.addListener("connect", function () {
     console.log("wwwwwaah!");
   });
