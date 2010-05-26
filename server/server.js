@@ -1,6 +1,8 @@
 var sys = require('sys');
-var data = require('../server/models/database');
 var ws = require('../vendor/ws/ws');
+
+var db = couchdb.createClient(5000,'localhost');
+var data = require('../server/models/database');
 
 var server = ws.createServer();
 server.listen(7000);
