@@ -45,6 +45,7 @@ function downEvent()
     if (shape.y == 0)
     {
       status = false;
+      score.send();
     }
     insertEvent();
   }
@@ -101,7 +102,6 @@ void draw()
   }
   else
   {
-    finalScore(score.points);
     background(0,0,0);
     PFont font = loadFont("monospace");
     textFont(font,35);
