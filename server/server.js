@@ -1,8 +1,24 @@
-var net = require('net');
-var server = net.createServer(function (socket) {
-  socket.addListener("connect", function () {
-    console.log("wwwwwaah!");
-  });
+var sys = require('sys');
+var ws = require('./lib/ws');
+
+var server = ws.createServer();
+server.listen(7000);
+
+server.addListener("listening",function(){
+  console.log("Listening for connection.");
 });
 
-server.listen(7000,"localhost");
+server.addListener("connection",function(conn){
+  sys.log("<"+conn._id+"> connected");
+  server.broadcast("<"+conn._id+"> connected");
+
+  conn.addListener("message",function(message){
+    sys.log("<"+conn._id+"> "+message);
+    server.broadcast("<"+conn._id+"> "+message);
+  });
+
+  conn.addListern("close",function(){
+    sys.log("<"+conn._id+"> onClose");
+    server.broadcast("<"+conn._id+"> disconnected");
+  });
+});
