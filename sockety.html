@@ -4,6 +4,12 @@
     </head>
   <body>
     <script type="text/javascript">
+      client = new WebSocket("ws://localhost:7000");
+      client.onopen = function ()
+      {
+        console.log("onopen");
+      }
+      client.send("blah.blah.blah");
       </script>
     </body>
   </html>
