@@ -15,6 +15,10 @@ task :copy do
   sh "cp -r vendor /srv/http"
 end
 
+task :test do
+  sh "cp sockety.html /srv/http"
+end
+
 task :deploy do
   ftp = Net::FTP.new()
   ftp.connect("kibabase.com",21)
