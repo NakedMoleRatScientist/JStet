@@ -1,4 +1,5 @@
 var sys = require('sys');
+var data = require('../server/models/database');
 var ws = require('../vendor/ws/ws');
 
 var server = ws.createServer();
