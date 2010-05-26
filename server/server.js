@@ -1,11 +1,11 @@
 var sys = require('sys');
-var ws = require('./lib/ws');
+var ws = require('../vendor/ws/ws');
 
 var server = ws.createServer();
 server.listen(7000);
 
 server.addListener("listening",function(){
-  console.log("Listening for connection.");
+  sys.log("Listening for connection.");
 });
 
 server.addListener("connection",function(conn){
