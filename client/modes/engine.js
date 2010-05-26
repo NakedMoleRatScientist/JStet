@@ -110,44 +110,4 @@ void draw()
   }
 }
 
-void keyPressed()
-{
-  if (status == true)
-  {
-    switch(key)
-    {
-    case 100:
-      shape.move(20,0);
-      checkEvent(-20,0);
-      break;
-    case 115:
-      shape.move(0,20);
-      downEvent();
-      break;
-    case 97:
-      shape.move(-20,0);
-      checkEvent(20,0);
-      break;
-    case 119:
-      shape.rotate();
-      if (checkEvent(0,0))
-      {
-        shape.rotate_backward();
-      }
-      break;
-    default:
-      console.log(key);
-      break;
-    }
-  }
-  else
-  {
-    if (key == 110)
-    {
-      field.field = field.create_field();
-      status = true;
-      score.reset();
-      timer.reset();
-    }
-  }
-}
+
