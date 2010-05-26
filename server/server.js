@@ -17,7 +17,7 @@ server.addListener("connection",function(conn){
     server.broadcast("<"+conn._id+"> "+message);
   });
 
-  conn.addListern("close",function(){
+  conn.addListener("close",function(){
     sys.log("<"+conn._id+"> onClose");
     server.broadcast("<"+conn._id+"> disconnected");
   });
