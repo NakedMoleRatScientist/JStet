@@ -1,4 +1,69 @@
 
+
+//Use the ASCII chart to figure out what keys respond to what integer
+
+void keyPressed()
+{
+  if (status == true)
+  {
+    switch(key)
+    {
+    //move right, d
+    case 100:
+      shape.move(20,0);
+      checkEvent(-20,0);
+      break;
+    //move down, s
+    case 115:
+      shape.move(0,20);
+      downEvent();
+      break;
+    //move left, a
+    case 97:
+      shape.move(-20,0);
+      checkEvent(20,0);
+      break;
+    //rotate, w
+    case 119:
+      shape.rotate();
+      if (checkEvent(0,0))
+      {
+        shape.rotate_backward();
+      }
+      break;
+    default:
+      console.log(key);
+      break;
+    }
+  }
+  else
+  {
+    if (key == 110)
+    {
+      field.field = field.create_field();
+      status = true;
+      score.reset();
+      timer.reset();
+    }
+  }
+}
+
+network = new WebSocket("ws://localhost:7000");
+network.onopen = function ()
+{
+  console.log("onopen");
+}
+network.onmessage = function (ev)
+{
+  console.log(ev.data);
+}
+
+function finalScore(score)
+{
+  var name = "test";
+  var points = score;
+  network.send(name + ": " + score);
+}
 function TimerAction()
 {
   this.speed = 1000;
@@ -44,6 +109,10 @@ function Score()
   this.reset = function()
   {
     this.points = 0;
+  }
+  this.send = function()
+  {
+    network.send("test: " + score);
   }
 }
 function PlayField()
@@ -682,6 +751,7 @@ function downEvent()
     if (shape.y == 0)
     {
       status = false;
+      score.send();
     }
     insertEvent();
   }
@@ -747,44 +817,4 @@ void draw()
   }
 }
 
-void keyPressed()
-{
-  if (status == true)
-  {
-    switch(key)
-    {
-    case 100:
-      shape.move(20,0);
-      checkEvent(-20,0);
-      break;
-    case 115:
-      shape.move(0,20);
-      downEvent();
-      break;
-    case 97:
-      shape.move(-20,0);
-      checkEvent(20,0);
-      break;
-    case 119:
-      shape.rotate();
-      if (checkEvent(0,0))
-      {
-        shape.rotate_backward();
-      }
-      break;
-    default:
-      console.log(key);
-      break;
-    }
-  }
-  else
-  {
-    if (key == 110)
-    {
-      field.field = field.create_field();
-      status = true;
-      score.reset();
-      timer.reset();
-    }
-  }
-}
+
