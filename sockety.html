@@ -3,13 +3,24 @@
     <title>websocket test</title>
     </head>
   <body>
+    <a href="#" id="send">Send</a>
     <script type="text/javascript">
+      document.getElementById("send").addEventListener("click",function()
+      {
+        if (client)
+        {
+          client.send("test");
+        }
+      });
       client = new WebSocket("ws://localhost:7000");
       client.onopen = function ()
       {
         console.log("onopen");
       }
-      client.send("blah.blah.blah");
+      client.onmessage = function (ev)
+      {
+        console.log(ev.data);
+      }
       </script>
     </body>
   </html>
