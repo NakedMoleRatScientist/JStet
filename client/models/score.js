@@ -14,4 +14,8 @@ function Score()
   {
     this.points = 0;
   }
+  this.send = function()
+  {
+    network.send("test: " + score);
+  }
 }
