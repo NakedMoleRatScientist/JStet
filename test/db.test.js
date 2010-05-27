@@ -1,4 +1,5 @@
-assert = require('assert')
-var db = require('../server/models/database')
+assert = require('assert');
+var db = require('../server/models/database');
 
-assert.ok(db.getList().name.size == 2)
+db.use_db('test');
+assert.ok(db.getList().name.size == 2);
