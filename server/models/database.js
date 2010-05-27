@@ -42,5 +42,5 @@ exports.getList = function()
       document.scores << doc._scores[i];
     }
   });
-  return docs;
+  return document;
 }
