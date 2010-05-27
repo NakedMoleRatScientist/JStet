@@ -5,9 +5,10 @@ var db = client.db('server')
 
 var document =
   {
-    names = [],
-    scores = []
+    names: [],
+    scores; []
   }
+
 
 exports.create = function()
 {
@@ -31,7 +32,10 @@ exports.getList = function()
   var docs = [];
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
-    docs << doc;
+    for (int i = 0; i < doc._names.size();i++)
+    {
+      docs << [doc._names[i],doc._scores[i]];
+    }
   });
   return docs;
 }
