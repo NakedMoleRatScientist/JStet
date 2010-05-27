@@ -34,12 +34,12 @@ exports.destroy = function()
 
 exports.getList = function()
 {
-  var docs = [];
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     for(var i = 0; i < doc._names.size();i++)
     {
-      docs << [doc._names[i],doc._scores[i]];
+      document.names << doc._names[i];
+      document.scores << doc._scores[i];
     }
   });
   return docs;
