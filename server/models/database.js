@@ -9,9 +9,10 @@ var document =
     scores; []
   }
 
-exports.add_to_list = function(name)
+exports.add_to_list = function(name,points)
 {
   document.names << name;
+  document.scores << points;
 }
 exports.create = function()
 {
