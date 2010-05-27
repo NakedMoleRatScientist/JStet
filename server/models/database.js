@@ -22,4 +22,10 @@ exports.destroy = function()
 
 exports.getList = function()
 {
+  var docs = [];
+  db.getDoc('score',function(er,doc){
+    if (er) throw new Error(JSON.stringify(er));
+    docs << doc;
+  });
+  return docs;
 }
