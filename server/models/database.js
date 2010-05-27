@@ -14,7 +14,8 @@ exports.add_to_list = function(name,points)
   document.names << name;
   document.scores << points;
 }
-exports.create = function()
+
+exports.save = function()
 {
   db.saveDoc('score', document,function(er,ok) {
     if (er) throw new Error(JSON.stringify(er));
