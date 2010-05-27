@@ -9,7 +9,10 @@ var document =
     scores; []
   }
 
-
+exports.add_to_list = function(name)
+{
+  document.names << name;
+}
 exports.create = function()
 {
   db.saveDoc('score', document,function(er,ok) {
