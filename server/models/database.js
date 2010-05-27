@@ -3,9 +3,15 @@ var couch = require('node-couchdb/lib/couchdb')
 var client = couch.createClient(5984,'localhost');
 var db = client.db('server')
 
+var document =
+  {
+    names = [],
+    scores = []
+  }
+
 exports.create = function()
 {
-  db.saveDoc('score', {name: 'Test', points: 10},function(er,ok) {
+  db.saveDoc('score', document,function(er,ok) {
     if (er) throw new Error(JSON.stringify(er));
     sys.puts("save a document");
   });
