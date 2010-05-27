@@ -29,4 +29,4 @@ server.addListener("connection",function(conn){
   });
 });
 
-db.create();
+db.save();
