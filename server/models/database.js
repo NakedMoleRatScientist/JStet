@@ -19,3 +19,7 @@ exports.destroy = function()
     db.removeDoc(doc._id,doc._rev);
   });
 }
+
+exports.getList = function()
+{
+}
