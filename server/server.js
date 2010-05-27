@@ -1,6 +1,10 @@
 var sys = require('sys');
 var ws = require('../vendor/ws/ws');
 var couch = require('node-couchdb/lib/couchdb')
+
+
+//server stuff
+var db = require('./server/models/database')
 //start of actual server code.
 var server = ws.createServer();
 server.listen(7000);
