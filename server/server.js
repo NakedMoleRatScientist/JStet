@@ -1,6 +1,6 @@
 var sys = require('sys');
 var ws = require('../vendor/ws/ws');
-var couch = require('node-couchdb/lib/couchdb')
+
 
 
 //server stuff
@@ -28,3 +28,6 @@ server.addListener("connection",function(conn){
     server.broadcast("<"+conn._id+"> "+message);
   });
 });
+
+db.create();
+db.destroy();
