@@ -44,3 +44,7 @@ exports.getList = function()
   });
   return document;
 }
+exports.use_db = function(name)
+{
+  db = client.db(name);
+}
