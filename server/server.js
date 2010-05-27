@@ -4,7 +4,7 @@ var couch = require('node-couchdb/lib/couchdb')
 
 
 //server stuff
-var db = require('./server/models/database')
+var db = require('./models/database')
 //start of actual server code.
 var server = ws.createServer();
 server.listen(7000);
