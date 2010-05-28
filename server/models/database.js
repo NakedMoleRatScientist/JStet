@@ -3,11 +3,11 @@ var couch = require('node-couchdb/lib/couchdb')
 var client = couch.createClient(5984,'localhost');
 var db = client.db('server')
 
-var rev = 0;
 var document =
   {
     names: [],
-    scores: []
+    scores: [],
+    rev: 0
   }
 
 exports.add_to_list = function(name,points)
@@ -42,7 +42,7 @@ exports.getList = function()
       document.names << doc._names[i];
       document.scores << doc._scores[i];
     }
-    rev = document._rev;
+    rev = doc._rev;
   });
   return document;
 }
