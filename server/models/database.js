@@ -42,6 +42,7 @@ exports.getList = function()
       document.names << doc._names[i];
       document.scores << doc._scores[i];
     }
+    rev = document._rev;
   });
   return document;
 }
