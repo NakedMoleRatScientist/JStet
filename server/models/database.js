@@ -3,6 +3,7 @@ var couch = require('node-couchdb/lib/couchdb')
 var client = couch.createClient(5984,'localhost');
 var db = client.db('server')
 
+var rev = 0;
 var document =
   {
     names: [],
