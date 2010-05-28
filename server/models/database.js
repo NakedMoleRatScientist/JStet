@@ -17,12 +17,9 @@ exports.add_to_list = function(name,points)
 
 exports.create = function()
 {
-  document = exports.getDoc(function(rev){
-    sys.puts(rev);
-    db.saveDoc('score', document,function(er,ok) {
-      if (er) throw new Error(JSON.stringify(er));
-      sys.puts("save a document");
-    });
+  db.saveDoc('score', document,function(er,ok) {
+     if (er) throw new Error(JSON.stringify(er));
+    sys.puts("save a document");
   });
 }
 
