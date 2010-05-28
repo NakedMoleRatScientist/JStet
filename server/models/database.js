@@ -15,11 +15,24 @@ exports.add_to_list = function(name,points)
   document.scores << points;
 }
 
+exports.create = function()
+{
+  document = exports.getDoc(function(rev){
+    sys.puts(rev);
+    db.saveDoc('score', document,function(er,ok) {
+      if (er) throw new Error(JSON.stringify(er));
+      sys.puts("save a document");
+    });
+  });
+}
+
 exports.save = function()
 {
-  db.saveDoc('score', document,function(er,ok) {
-    if (er) throw new Error(JSON.stringify(er));
-    sys.puts("save a document");
+  exports.getDoc(function(rev){
+    db.saveDoc('score',document,function(er,ok){
+      if (er) throw new Error(JSON.stringify(er));
+      sys.puts("save a document");
+    });
   });
 }
 
@@ -32,13 +45,14 @@ exports.destroy = function()
   });
 }
 
-exports.getList = function()
+exports.getDoc = function(callback)
 {
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     document = doc;
+    callback(document._rev);
   });
-  return document;
+
 }
 exports.use_db = function(name)
 {
