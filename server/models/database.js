@@ -7,7 +7,6 @@ var document =
   {
     names: [],
     scores: [],
-    rev: 0
   }
 
 exports.add_to_list = function(name,points)
@@ -42,7 +41,6 @@ exports.getList = function()
       document.names << doc._names[i];
       document.scores << doc._scores[i];
     }
-    rev = doc._rev;
   });
   return document;
 }
