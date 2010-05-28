@@ -29,5 +29,5 @@ server.addListener("connection",function(conn){
   });
 });
 
-db.getList();
 db.save();
+db.destroy();
