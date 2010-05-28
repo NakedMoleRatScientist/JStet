@@ -9,5 +9,7 @@ function setup()
   db.add_to_list("great",20);
 }
 setup();
-document = db.getDoc();
-assert.ok(document.names.size == 2);
+
+document = db.getDoc(function(){
+  assert.ok(document.names.size == 2);
+});
