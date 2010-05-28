@@ -37,7 +37,7 @@ exports.getList = function()
 {
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
-    for(var i = 0; i < doc._names.size();i++)
+    for(var i = 0; i < doc.names.size;i++)
     {
       document.names << doc._names[i];
       document.scores << doc._scores[i];
