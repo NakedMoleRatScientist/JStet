@@ -7,7 +7,6 @@ var document =
   {
     names: [],
     scores: [],
-    rev: 0
   }
 
 exports.add_to_list = function(name,points)
@@ -37,11 +36,7 @@ exports.getList = function()
 {
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
-    for(var i = 0; i < doc.names.size;i++)
-    {
-      document.names << doc._names[i];
-      document.scores << doc._scores[i];
-    }
+    document = doc;
   });
   return document;
 }
