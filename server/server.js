@@ -30,4 +30,3 @@ server.addListener("connection",function(conn){
 });
 
 db.save();
-db.destroy();
