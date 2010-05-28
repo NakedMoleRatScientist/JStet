@@ -7,6 +7,7 @@ var document =
   {
     names: [],
     scores: [],
+    rev: 0
   }
 
 exports.add_to_list = function(name,points)
