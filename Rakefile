@@ -17,7 +17,7 @@ task :copy do
 end
 
 task :test do
-  sh "node test/db.test.js"
+  sh "node test/score.db.test.js"
 end
 
 task :deploy do
