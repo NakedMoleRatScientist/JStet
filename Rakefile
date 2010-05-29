@@ -17,6 +17,8 @@ task :copy do
 end
 
 task :test do
+  sh "node test/delete.db.js"
+  sh "node test/create.db.js"
   sh "node test/score.db.test.js"
 end
 
