@@ -12,10 +12,11 @@ function setup(callback)
   callback();
 }
 
-
 setup(function test(){
   db.getDoc(function(doc){
-    sys.puts("test if names size is two")
+    sys.puts("test if names size is two");
     assert.ok(doc.names.length == 2);
+    sys.puts("test if names[0] is equal to great");
+    assert.ok(doc.names[0] == "great");
   });
 });
