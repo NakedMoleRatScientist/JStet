@@ -4,21 +4,17 @@ var db = require('../server/models/database');
 
 db.use_db('test');
 
-function setup()
+function setup(callback)
 {
   db.add_to_list("blah",10);
   db.add_to_list("great",20);
+  sys.puts("which goes first?");
+  callback();
 }
 
-
-test_for_size = function(callback)
-{
+setup(function test(){
   db.getDoc(function(doc){
     sys.puts("test if names size is two")
-    assert.ok(doc.names.size == 2);
+    assert.ok(doc.names.length == 2);
   });
-}
-
-setup(function(){
-  test_for_size();
 });
