@@ -8,8 +8,11 @@ function setup()
   db.add_to_list("blah",10);
   db.add_to_list("great",20);
 }
-setup();
 
-document = db.getDoc(function(){
-  assert.ok(document.names.size == 2);
+db.create(function(){
+    document = db.getDoc(function(){
+      assert.ok(document.names.size == 2);
+      db.destroy();
+  });
 });
+
