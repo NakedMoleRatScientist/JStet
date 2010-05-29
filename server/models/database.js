@@ -5,8 +5,9 @@ var db = client.db('server')
 
 var document =
   {
-    names: [],
-    scores: [],
+    names: [100],
+    scores: [100],
+    key: 0
   }
 
 exports.add_to_list = function(name,points)
