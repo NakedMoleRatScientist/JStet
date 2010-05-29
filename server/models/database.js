@@ -13,7 +13,7 @@ exports.add_to_list = function(name,points)
 {
   document.names << name;
   document.scores << points;
-  sys.puts("add to the list of highscores.");
+  sys.puts("add to the list of highscores");
 }
 
 exports.create = function()
@@ -43,6 +43,14 @@ exports.destroy = function()
   });
 }
 
+exports.getRev = function(callback)
+{
+  db.getDoc('score',function(er,doc){
+    if (er) throw new Error(JSON.stringify(er));
+    rev = doc._rev;
+    callback(rev);
+  })
+}
 exports.getDoc = function(callback)
 {
   db.getDoc('score',function(er,doc){
