@@ -9,10 +9,10 @@ function setup()
   db.add_to_list("great",20);
 }
 
-db.create(function(){
-    document = db.getDoc(function(){
-      assert.ok(document.names.size == 2);
-      sys.puts("Test for document's name size OK")
+db.destroy(function(){
+  document = db.create(function(){
+    assert.ok(document.names.size == 2);
+    sys.puts("Test for document's name size OK")
   });
 });
 
