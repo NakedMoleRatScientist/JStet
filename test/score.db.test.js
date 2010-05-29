@@ -4,10 +4,15 @@ var db = require('../server/models/database');
 
 db.use_db('test');
 
-function setup(callback)
+function add(callback)
 {
   db.add_to_list("blah",10);
   db.add_to_list("great",20);
+  callback();
+}
+
+function setup(callback)
+{
   db.save();
   callback();
 }
