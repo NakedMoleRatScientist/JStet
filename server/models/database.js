@@ -11,8 +11,8 @@ var document =
 
 exports.add_to_list = function(name,points)
 {
-  document.names << name;
-  document.scores << points;
+  document.names.push(name);
+  document.scores.push(points);
   sys.puts("add to the list of highscores");
 }
 
