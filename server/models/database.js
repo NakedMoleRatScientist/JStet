@@ -5,8 +5,8 @@ var db = client.db('server')
 
 var document =
   {
-    names: [100],
-    scores: [100],
+    names: new Array(100),
+    scores: new Array(100),
     key: 0
   }
 
