@@ -17,7 +17,7 @@ task :copy do
 end
 
 task :test do
-  sh "cp sockety.html /srv/http"
+  sh "node test/db.test.js"
 end
 
 task :deploy do
