@@ -25,10 +25,10 @@ exports.create = function()
 
 exports.save = function()
 {
-  exports.getDoc(function(rev){
+  exports.getDoc(function(doc){
+    sys.puts('Saving ' + doc._id);
     db.saveDoc('score',document,function(er,ok){
       if (er) throw new Error(JSON.stringify(er));
-      sys.puts("save a document");
     });
   });
 }
@@ -47,7 +47,7 @@ exports.getDoc = function(callback)
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     document = doc;
-    callback(document._rev);
+    callback(document);
   });
 
 }
