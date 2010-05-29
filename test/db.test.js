@@ -1,4 +1,5 @@
 assert = require('assert');
+var sys = require("sys");
 var db = require('../server/models/database');
 
 db.use_db('test');
