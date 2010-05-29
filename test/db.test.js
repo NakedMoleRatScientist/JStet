@@ -9,6 +9,7 @@ function setup()
   db.add_to_list("great",20);
 }
 
+
 test_for_size = function(callback)
 {
   db.getDoc(function(doc){
@@ -17,3 +18,6 @@ test_for_size = function(callback)
   });
 }
 
+setup(function(){
+  test_for_size();
+});
