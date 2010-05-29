@@ -13,6 +13,7 @@ exports.add_to_list = function(name,points)
 {
   document.names << name;
   document.scores << points;
+  sys.puts("add to the list of highscores.");
 }
 
 exports.create = function()
