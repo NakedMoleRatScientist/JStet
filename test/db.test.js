@@ -12,7 +12,7 @@ function setup()
 db.create(function(){
     document = db.getDoc(function(){
       assert.ok(document.names.size == 2);
-      db.destroy();
+      sys.puts("Test for document's name size OK")
   });
 });
 
