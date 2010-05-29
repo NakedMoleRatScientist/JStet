@@ -26,8 +26,8 @@ exports.create = function()
 
 exports.save = function()
 {
-  exports.getDoc(function(doc){
-    sys.puts('Saving ' + doc._id);
+  exports.getRev(function(rev){
+    document._rev = rev;
     db.saveDoc('score',document,function(er,ok){
       if (er) throw new Error(JSON.stringify(er));
     });
