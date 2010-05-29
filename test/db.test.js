@@ -8,9 +8,10 @@ function setup(callback)
 {
   db.add_to_list("blah",10);
   db.add_to_list("great",20);
-  sys.puts("which goes first?");
+  db.save();
   callback();
 }
+
 
 setup(function test(){
   db.getDoc(function(doc){
