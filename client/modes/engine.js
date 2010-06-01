@@ -72,7 +72,7 @@ void drawInstruction()
 
 void draw()
 {
-  if (status == true)
+  if (mode.status == 0)
   {
     if (timer.react())
     { 
@@ -100,7 +100,7 @@ void draw()
     drawInstruction();
     drawShape.draw_field(field.field);
   }
-  else
+  else if(mode.status == 1)
   {
     background(0,0,0);
     PFont font = loadFont("monospace");
