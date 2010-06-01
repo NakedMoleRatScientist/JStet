@@ -7,7 +7,7 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
-var status = true;
+var status = new Mode();
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
