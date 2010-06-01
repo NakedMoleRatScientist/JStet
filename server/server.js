@@ -21,12 +21,10 @@ server.addListener("connection",function(conn){
 
   conn.addListener("close",function(){
     sys.log("<"+conn._id+"> onClose");
-    server.broadcast("<"+conn._id+"> disconnected");
   });
   
   conn.addListener("message",function(message){
     sys.log("<"+conn._id+"> "+message);
-    server.broadcast("<"+conn._id+"> "+message);
   });
 });
 
