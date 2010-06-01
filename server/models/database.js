@@ -42,7 +42,7 @@ exports.save = function()
 
 exports.destroy = function()
 {
-  db.getDoc('score',function(er,doc){
+  db.readDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     sys.puts("destroy a document")
     db.removeDoc(doc._id,doc._rev);
@@ -51,15 +51,15 @@ exports.destroy = function()
 
 exports.getRev = function(callback)
 {
-  db.getDoc('score',function(er,doc){
+  db.readDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     rev = doc._rev;
     callback(rev);
   })
 }
-exports.getDoc = function(callback)
+exports.readDoc = function(callback)
 {
-  db.getDoc('score',function(er,doc){
+  db.readDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     document = doc;
     callback(document);
