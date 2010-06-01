@@ -11,7 +11,9 @@ server.listen(7000);
 
 server.addListener("listening",function(){
   sys.log("Listening for connection.");
-  db.readDoc();
+  db.readDoc(function() {
+    sys.log("reading document");
+  });
 });
 
 server.addListener("connection",function(conn){
