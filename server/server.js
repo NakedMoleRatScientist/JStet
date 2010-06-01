@@ -12,7 +12,7 @@ server.listen(7000);
 server.addListener("listening",function(){
   sys.log("Listening for connection.");
   db.readDoc(function() {
-    sys.log("reading document");
+    sys.log("Read successful.");
   });
 });
 

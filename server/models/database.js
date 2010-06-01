@@ -62,9 +62,9 @@ exports.readDoc = function(callback)
   db.getDoc('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     document = doc;
+    sys.log("Read.");
     callback(document);
   });
-
 }
 
 exports.getDoc = function()
