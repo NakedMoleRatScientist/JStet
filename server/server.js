@@ -11,6 +11,7 @@ server.listen(7000);
 
 server.addListener("listening",function(){
   sys.log("Listening for connection.");
+  db.getDoc();
 });
 
 server.addListener("connection",function(conn){
@@ -29,4 +30,4 @@ server.addListener("connection",function(conn){
   });
 });
 
-db.save();
+
