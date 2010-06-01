@@ -66,6 +66,11 @@ exports.readDoc = function(callback)
   });
 
 }
+
+exports.getDoc = function()
+{
+  return document;
+}
 exports.use_db = function(name)
 {
   db = client.db(name);
