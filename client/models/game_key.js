@@ -4,7 +4,7 @@
 
 void keyPressed()
 {
-  if (status == true)
+  if (mode.status == 0)
   {
     switch(key)
     {
@@ -36,12 +36,12 @@ void keyPressed()
       break;
     }
   }
-  else
+  else if (mode.status == 1)
   {
     if (key == 110)
     {
       field.field = field.create_field();
-      status = true;
+      mode.switch(0);
       score.reset();
       timer.reset();
     }
