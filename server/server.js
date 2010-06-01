@@ -16,7 +16,7 @@ server.addListener("listening",function(){
 
 server.addListener("connection",function(conn){
   sys.log("<"+conn._id+"> connected");
-  server.broadcast(JSON.stringify())
+  server.broadcast(JSON.stringify(db.getDoc()));
   
 
   conn.addListener("close",function(){
