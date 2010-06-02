@@ -41,7 +41,7 @@ void keyPressed()
     if (key == 110)
     {
       field.field = field.create_field();
-      mode.switch(0);
+      mode.change(0);
       score.reset();
       timer.reset();
     }
