@@ -44,7 +44,7 @@ function downEvent()
   {
     if (shape.y == 0)
     {
-      mode.switch(1);
+      mode.change(1);
       score.send();
     }
     insertEvent();
