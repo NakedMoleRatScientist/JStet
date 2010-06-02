@@ -1,6 +1,5 @@
 
 
-
 function scoreNetwork()
 {
   this.ws = null;
@@ -704,6 +703,14 @@ function TetrominoDraw()
   }
 }
 
+function Mode()
+{
+  this.status = 0;
+  this.change = function(n)
+  {
+    this.status = n;
+  }
+}
 void setup()
 {
   size(800,600);
