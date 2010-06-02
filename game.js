@@ -1,15 +1,19 @@
 
 
+
 function scoreNetwork()
 {
-  ws = new WebSocket('http://localhost:7000');
-  ws.onmessage = function(event)
-  {
-    data = JSON.parse(event.data);
-  }
-  ws.onclose = function()
-  {
-    console.log("Welcome to our world");
+  this.ws = null;
+  this.initialize = function(){
+    this.ws = new WebSocket('http://localhost:7000');
+    ws.onmessage = function(event)
+    {
+      data = JSON.parse(event.data);
+    }
+    ws.onclose = function()
+    {
+      console.log("Welcome to our world");
+    }
   }
 }
 
@@ -17,7 +21,7 @@ function scoreNetwork()
 
 void keyPressed()
 {
-  if (status == true)
+  if (mode.status == 0)
   {
     switch(key)
     {
@@ -49,23 +53,16 @@ void keyPressed()
       break;
     }
   }
-  else
+  else if (mode.status == 1)
   {
     if (key == 110)
     {
       field.field = field.create_field();
-      status = true;
+      mode.change(0);
       score.reset();
       timer.reset();
     }
   }
-}
-
-function finalScore(score)
-{
-  var name = "test";
-  var points = score;
-  network.send(name + ": " + score);
 }
 function TimerAction()
 {
@@ -115,7 +112,6 @@ function Score()
   }
   this.send = function()
   {
-    network.send("test: " + score);
   }
 }
 function PlayField()
@@ -716,7 +712,7 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
-var status = true;
+var mode = new Mode();
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
@@ -753,7 +749,7 @@ function downEvent()
   {
     if (shape.y == 0)
     {
-      status = false;
+      mode.change(1);
       score.send();
     }
     insertEvent();
@@ -781,7 +777,7 @@ void drawInstruction()
 
 void draw()
 {
-  if (status == true)
+  if (mode.status == 0)
   {
     if (timer.react())
     { 
@@ -809,7 +805,7 @@ void draw()
     drawInstruction();
     drawShape.draw_field(field.field);
   }
-  else
+  else if(mode.status == 1)
   {
     background(0,0,0);
     PFont font = loadFont("monospace");
