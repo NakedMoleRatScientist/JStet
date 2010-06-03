@@ -7,7 +7,6 @@ var document =
   {
     names: new Array(100),
     scores: new Array(100),
-    key: 0
   }
 
 exports.add_to_list = function(name,points)
