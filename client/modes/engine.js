@@ -8,6 +8,7 @@ void setup()
   frameRate(24);
 }
 var mode = new Mode();
+var network = new ScoreNetwork();
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
