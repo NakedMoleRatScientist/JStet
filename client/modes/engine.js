@@ -10,6 +10,8 @@ void setup()
 var mode = new Mode();
 var network = new ScoreNetwork();
 network.initialize();
+var score = new Score();
+score.changeMininum(network.getLimit());
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
