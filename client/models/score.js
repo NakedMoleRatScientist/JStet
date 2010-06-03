@@ -2,6 +2,7 @@
 function Score()
 {
   this.points = 0;
+  this.highest = 0;
   this.increase = function()
   {
     this.points ++;
