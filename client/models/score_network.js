@@ -1,6 +1,6 @@
 
 
-function scoreNetwork()
+function ScoreNetwork()
 {
   this.ws = null;
   this.initialize = function(){
