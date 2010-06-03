@@ -48,8 +48,11 @@ function downEvent()
   {
     if (shape.y == 0)
     {
+      if (score.check())
+      {
+        mode.change(2);
+      }
       mode.change(1);
-      score.send();
     }
     insertEvent();
   }
