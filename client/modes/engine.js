@@ -9,6 +9,7 @@ void setup()
 }
 var mode = new Mode();
 var network = new ScoreNetwork();
+network.initialize();
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
