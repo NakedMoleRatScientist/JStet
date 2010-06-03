@@ -15,10 +15,10 @@ function ScoreNetwork()
       console.log("Welcome to our world");
     }
   }
-  //Return the mininum score along with its name.
+  //Return the mininum score, along with its key
   this.return_lowest = function (){
     var limit = {
-      name: this.data.names[this.data.key],
+      key: this.data.key,
       score: this.data.names[this.data.key]
     }
     return limit;
