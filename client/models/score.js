@@ -21,7 +21,11 @@ function Score()
   }
   this.check = function()
   {
-    if (this.mininum == null || this.points > this.minium)
+    if (this.mininum == null || this.points != 0)
+    {
+      return true;
+    }
+    else if (this.mininum < this.points)
     {
       return true;
     }
