@@ -15,12 +15,8 @@ function ScoreNetwork()
       console.log("Welcome to our world");
     }
   }
-  //Return the mininum score, along with its key
+  //Return the mininum score to submit score to database.
   this.return_lowest = function (){
-    var limit = {
-      key: this.data.key,
-      score: this.data.names[this.data.key]
-    }
-    return limit;
+    return this.data.scores[this.data.key];
   }
 }
