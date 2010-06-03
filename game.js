@@ -3,17 +3,25 @@
 function ScoreNetwork()
 {
   this.ws = null;
+  this.data = null;
   this.initialize = function(){
     this.ws = new WebSocket('ws://localhost:7000');
     this.ws.onmessage = function(event)
     {
-      data = JSON.parse(event.data);
-      console.log(data);
+      this.data = JSON.parse(event.data);
     }
     this.ws.onclose = function()
     {
       console.log("Welcome to our world");
     }
+  }
+  //Return the mininum score to submit score to database.
+  this.getLimit = function (){
+    if (this.data.scores == null)
+    {
+      return false;
+    }
+    return this.data.scores[99];
   }
 }
 
@@ -98,11 +106,15 @@ function TimerAction()
 function Score()
 {
   this.points = 0;
-  this.highest = 0;
+  this.minimum = 0;
   this.increase = function()
   {
     this.points ++;
   },
+  this.changeMinimum = function(min)
+  {
+    this.minimum = min;
+  }
   this.toString = function()
   {
     return "Score: " + this.points;
@@ -111,8 +123,17 @@ function Score()
   {
     this.points = 0;
   }
-  this.send = function()
+  this.check = function()
   {
+    if (this.minimum == false || this.points != 0)
+    {
+      return true;
+    }
+    else if (this.minimum < this.points)
+    {
+      return true;
+    }
+    return false
   }
 }
 function PlayField()
@@ -724,6 +745,8 @@ void setup()
 var mode = new Mode();
 var network = new ScoreNetwork();
 network.initialize();
+var score = new Score();
+score.changeMininum(network.getLimit());
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
@@ -760,8 +783,11 @@ function downEvent()
   {
     if (shape.y == 0)
     {
+      if (score.check())
+      {
+        mode.change(2);
+      }
       mode.change(1);
-      score.send();
     }
     insertEvent();
   }
