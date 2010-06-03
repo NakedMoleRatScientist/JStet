@@ -1,10 +1,10 @@
 
 
-function scoreNetwork()
+function ScoreNetwork()
 {
   this.ws = null;
   this.initialize = function(){
-    this.ws = new WebSocket('http://localhost:7000');
+    this.ws = new WebSocket('ws://localhost:7000');
     ws.onmessage = function(event)
     {
       data = JSON.parse(event.data);
@@ -97,6 +97,7 @@ function TimerAction()
 function Score()
 {
   this.points = 0;
+  this.highest = 0;
   this.increase = function()
   {
     this.points ++;
@@ -720,6 +721,8 @@ void setup()
   frameRate(24);
 }
 var mode = new Mode();
+var network = new ScoreNetwork();
+network.initialize();
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
@@ -821,6 +824,11 @@ void draw()
     textFont(font,18);
     text("Press n to start a new game.",250,325);
   }
+  else if(mode.status == 2)
+  {
+    background(0,0,0)
+    PFont font = loadFont("monospace");
+    textFont(font,35);
+    text("HIGH SCORE LIST",300,0);
+  }
 }
-
-
