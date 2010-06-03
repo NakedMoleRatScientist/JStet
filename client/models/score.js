@@ -19,7 +19,12 @@ function Score()
   {
     this.points = 0;
   }
-  this.send = function()
+  this.check = function()
   {
+    if (this.mininum == null || this.points > this.minium)
+    {
+      return true;
+    }
+    return false
   }
 }
