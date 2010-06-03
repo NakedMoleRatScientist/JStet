@@ -109,6 +109,11 @@ void draw()
     textFont(font,18);
     text("Press n to start a new game.",250,325);
   }
+  else if(mode.status == 2)
+  {
+    background(0,0,0)
+    PFont font = loadFont("monospace");
+    textFont(font,35);
+    text("HIGH SCORE LIST",300,0);
+  }
 }
-
-
