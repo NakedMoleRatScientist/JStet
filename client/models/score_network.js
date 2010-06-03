@@ -15,4 +15,12 @@ function ScoreNetwork()
       console.log("Welcome to our world");
     }
   }
+  //Return the mininum score along with its name.
+  this.return_lowest = function (){
+    var limit = {
+      name: this.data.names[this.data.key],
+      score: this.data.names[this.data.key]
+    }
+    return limit;
+  }
 }
