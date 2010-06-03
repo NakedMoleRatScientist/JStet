@@ -4,7 +4,7 @@ function ScoreNetwork()
 {
   this.ws = null;
   this.initialize = function(){
-    this.ws = new WebSocket('http://localhost:7000');
+    this.ws = new WebSocket('ws://localhost:7000');
     ws.onmessage = function(event)
     {
       data = JSON.parse(event.data);
