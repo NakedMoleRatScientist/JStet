@@ -7,6 +7,10 @@ function Score()
   {
     this.points ++;
   },
+  this.changeHighest = function(min)
+  {
+    this.highest = min;
+  }
   this.toString = function()
   {
     return "Score: " + this.points;
