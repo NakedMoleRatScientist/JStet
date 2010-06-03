@@ -9,6 +9,12 @@ var document =
     scores: new Array(100),
   }
 
+for (i = 0; i < 100; i++)
+{
+  document.names[i] = "nothing";
+  document.scores[i] = 0;
+}
+
 exports.add_to_list = function(name,points)
 {
   if (document.key != 100)
