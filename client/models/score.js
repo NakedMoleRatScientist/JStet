@@ -2,14 +2,14 @@
 function Score()
 {
   this.points = 0;
-  this.highest = 0;
+  this.mininum = 0;
   this.increase = function()
   {
     this.points ++;
   },
-  this.changeHighest = function(min)
+  this.changeMininum = function(min)
   {
-    this.highest = min;
+    this.mininum = min;
   }
   this.toString = function()
   {
