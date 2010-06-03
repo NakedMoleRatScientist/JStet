@@ -17,6 +17,6 @@ function ScoreNetwork()
   }
   //Return the mininum score to submit score to database.
   this.return_lowest = function (){
-    return this.data.scores[this.data.key];
+    return this.data.scores[99];
   }
 }
