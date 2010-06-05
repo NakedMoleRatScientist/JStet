@@ -17,6 +17,10 @@ function ScoreNetwork()
   }
   //Return the mininum score to submit score to database.
   this.getLimit = function (){
-    return this.data.scores[99];
+    if (this.data.status == true)
+    {
+      return this.data.scores[99];
+    }
+    return false;
   }
 }
