@@ -7,6 +7,7 @@ var document =
   {
     names: new Array(100),
     scores: new Array(100),
+    status: false;
   }
 
 for (i = 0; i < 100; i++)
