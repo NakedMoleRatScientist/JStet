@@ -1,8 +1,11 @@
 
+
+//Deal with score keeping.
 function Score()
 {
   this.points = 0;
   this.minimum = 0;
+  this.network = new ScoreNetwork();
   this.increase = function()
   {
     this.points ++;
