@@ -35,3 +35,8 @@ end
 task :start do
   sh "node server/server.js"
 end
+
+task :db do
+  sh "node server/delete.js"
+  sh "node server/create.js"
+end
