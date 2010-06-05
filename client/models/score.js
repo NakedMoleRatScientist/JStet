@@ -13,6 +13,10 @@ function Score()
   },
   this.changeMinimum = function(min)
   {
+    if (min == false)
+    {
+      return false;
+    }
     this.minimum = min;
   }
   this.toString = function()
