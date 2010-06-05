@@ -19,7 +19,6 @@ var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-var score = new Score();
 function cleanEvent()
 {
   shape.return_to_normal();
