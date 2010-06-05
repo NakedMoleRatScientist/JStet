@@ -31,3 +31,7 @@ task :deploy do
   ftp.put("jstet.html")
   ftp.close()
 end
+
+task :start do
+  sh "node server/server.js"
+end
