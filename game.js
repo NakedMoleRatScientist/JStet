@@ -1,14 +1,16 @@
 
 
-function ScoreNetwork()
+function ScoreNetwork(score)
 {
   this.ws = null;
   this.data = null;
+  this.score = score;
   this.initialize = function(){
     this.ws = new WebSocket('ws://localhost:7000');
     this.ws.onmessage = function(event)
     {
       this.data = JSON.parse(event.data);
+      this.score.changeMinimum(this.getLimit());
     }
     this.ws.onclose = function()
     {
@@ -17,11 +19,11 @@ function ScoreNetwork()
   }
   //Return the mininum score to submit score to database.
   this.getLimit = function (){
-    if (this.data.scores == null)
+    if (this.data.status == true)
     {
-      return false;
+      return this.data.scores[99];
     }
-    return this.data.scores[99];
+    return false;
   }
 }
 
@@ -103,16 +105,24 @@ function TimerAction()
     this.speed = 1000;
   }
 }
+
+//Deal with score keeping.
 function Score()
 {
   this.points = 0;
   this.minimum = 0;
+  this.network = new ScoreNetwork(this);
+  this.network.initialize();
   this.increase = function()
   {
     this.points ++;
   },
   this.changeMinimum = function(min)
   {
+    if (min == false)
+    {
+      return false;
+    }
     this.minimum = min;
   }
   this.toString = function()
@@ -743,10 +753,7 @@ void setup()
   frameRate(24);
 }
 var mode = new Mode();
-var network = new ScoreNetwork();
-network.initialize();
 var score = new Score();
-score.changeMininum(network.getLimit());
 var generator = new ShapeGenerator();
 var shape = new Tetromino();
 shape.change_shape(generator.current);
