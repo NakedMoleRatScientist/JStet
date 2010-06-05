@@ -5,7 +5,7 @@ function Score()
 {
   this.points = 0;
   this.minimum = 0;
-  this.network = new ScoreNetwork();
+  this.network = new ScoreNetwork(this);
   this.network.initialize();
   this.increase = function()
   {
