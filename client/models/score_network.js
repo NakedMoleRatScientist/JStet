@@ -10,6 +10,7 @@ function ScoreNetwork(score)
     this.ws.onmessage = function(event)
     {
       this.data = JSON.parse(event.data);
+      this.score.changeMinimum(this.getLimit());
     }
     this.ws.onclose = function()
     {
