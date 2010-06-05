@@ -1,9 +1,10 @@
 
 
-function ScoreNetwork()
+function ScoreNetwork(score)
 {
   this.ws = null;
   this.data = null;
+  this.score = score;
   this.initialize = function(){
     this.ws = new WebSocket('ws://localhost:7000');
     this.ws.onmessage = function(event)
