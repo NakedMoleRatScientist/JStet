@@ -26,12 +26,10 @@ function ScoreNetwork(score)
     return false;
   }
   this.transmitScore = function(){
-    if (this.score.check == true){
-      var data = {
-        name: "kiba",
-        points: this.score.points
-      }
-      this.ws.send(JSON.parse(data));
+    var data = {
+      name: "kiba",
+      points: this.score.points
     }
+    this.ws.send(JSON.parse(data));
   }
 }
