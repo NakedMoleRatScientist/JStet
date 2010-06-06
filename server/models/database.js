@@ -18,12 +18,15 @@ for (i = 0; i < 100; i++)
 
 exports.add_to_list = function(name,points)
 {
-  if (document.key != 100)
+  for (n = 0; n < 100; n++)
   {
-    document.names[document.key] = name;
-    document.scores[document.key] = points;
-  }
-  sys.puts("add to the list of highscores");
+    if (document.names[n] == "nothing")
+    {
+      document.names[n] = name;
+      document.scores[n] = points;
+      sys.puts("add to the list of highscores");
+    }
+  } 
 }
 
 exports.create = function()
