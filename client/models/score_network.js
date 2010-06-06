@@ -30,6 +30,6 @@ function ScoreNetwork(score)
       name: "kiba",
       points: this.score.points
     }
-    this.ws.send(JSON.parse(data))
+    this.ws.send(JSON.parse(data));
   }
 }
