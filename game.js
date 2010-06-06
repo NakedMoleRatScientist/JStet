@@ -5,7 +5,8 @@ function ScoreNetwork(score)
   this.ws = null;
   this.data = null;
   this.score = score;
-  this.initialize = function(){
+  this.initialize = function()
+  {
     this.ws = new WebSocket('ws://localhost:7000');
     this.ws.onmessage = function(event)
     {
@@ -18,12 +19,21 @@ function ScoreNetwork(score)
     }
   }
   //Return the mininum score to submit score to database.
-  this.getLimit = function (){
+  this.getLimit = function()
+  {
     if (this.data.status == true)
     {
       return this.data.scores[99];
     }
     return false;
+  }
+  this.transmitScore = function()
+  {
+    var message = {
+      name = "kiba",
+      points = this.score.points,
+    };
+    this.ws.send(JSON.parse(message));
   }
 }
 
@@ -764,7 +774,6 @@ var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-var score = new Score();
 function cleanEvent()
 {
   shape.return_to_normal();
@@ -860,6 +869,7 @@ void draw()
   }
   else if(mode.status == 2)
   {
+    score.transmitScore();
     background(0,0,0)
     PFont font = loadFont("monospace");
     textFont(font,35);
