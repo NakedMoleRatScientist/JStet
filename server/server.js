@@ -25,8 +25,8 @@ server.addListener("connection",function(conn){
     sys.log("<"+conn._id+"> onClose");
   });
   
-  conn.addListener("message",function(message){
-    sys.log("<"+conn._id+"> "+message);
+  conn.addListener("message",function(event){
+    sys.log(event.data);
   });
 });
 
