@@ -8,7 +8,7 @@ function ScoreNetwork(score)
   this.initialize = function()
   {
     this.ws = new WebSocket('ws://localhost:7000');
-    this.ws.onmessage = function(event);
+    this.ws.onmessage = function(event)
     {
       this.data = JSON.parse(event.data);
       this.score.changeMinimum(this.getLimit());
@@ -32,7 +32,7 @@ function ScoreNetwork(score)
     var message = {
       name = "kiba",
       points = this.score.points,
-    }
+    };
     this.ws.send(JSON.parse(message));
   }
 }
