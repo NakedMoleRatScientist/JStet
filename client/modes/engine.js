@@ -114,6 +114,7 @@ void draw()
   }
   else if(mode.status == 2)
   {
+    score.transmitScore();
     background(0,0,0)
     PFont font = loadFont("monospace");
     textFont(font,35);
