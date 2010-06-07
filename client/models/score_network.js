@@ -2,37 +2,39 @@
 
 function ScoreNetwork(score)
 {
-  this.ws = null;
-  this.data = null;
-  this.score = score;
-  this.initialize = function()
+  var self = this;
+  self.ws = null;
+  self.data = null;
+  self.score = score;
+  self.net = self;
+  self.initialize = function()
   {
-    this.ws = new WebSocket('ws://localhost:7000');
-    this.ws.onmessage = function(event)
+    self.ws = new WebSocket('ws://localhost:7000');
+    self.ws.onmessage = function(event)
     {
-      this.data = JSON.parse(event.data);
-      this.score.changeMinimum(this.getLimit());
+      self.data = JSON.parse(event.data);
+      self.score.changeMinimum(self.getLimit());
     }
-    this.ws.onclose = function()
+    self.ws.onclose = function()
     {
       console.log("Welcome to our world");
     }
   }
   //Return the mininum score to submit score to database.
-  this.getLimit = function()
+  self.getLimit = function()
   {
-    if (this.data.status == true)
+    if (self.data.status == true)
     {
-      return this.data.scores[99];
+      return self.data.scores[99];
     }
     return false;
   }
-  this.transmitScore = function()
+  self.transmitScore = function()
   {
     var message = {
       name = "kiba",
-      points = this.score.points,
+      points = self.score.points,
     };
-    this.ws.send(JSON.parse(message));
+    self.ws.send(JSON.parse(message));
   }
 }
