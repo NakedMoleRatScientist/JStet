@@ -31,12 +31,12 @@ function ScoreNetwork(score)
   }
   self.transmitScore = function()
   {
-    console.log("blah");
     var message = {
       name = "kiba",
       points = self.score.points,
     };
-    self.ws.send(JSON.parse(message));
+    data = JSON.stringify(message);
+    self.ws.send(data);
   }
 }
 
@@ -802,11 +802,14 @@ function downEvent()
   {
     if (shape.y == 0)
     {
-      if (score.check())
+      if (score.check() == true)
       {
         mode.change(2);
       }
-      mode.change(1);
+      else
+      {
+        mode.change(1);
+      }
     }
     insertEvent();
   }
@@ -872,7 +875,7 @@ void draw()
   }
   else if(mode.status == 2)
   {
-    score.transmitScore();
+    score.network.transmitScore();
     background(0,0,0)
     PFont font = loadFont("monospace");
     textFont(font,35);
