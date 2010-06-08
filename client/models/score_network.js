@@ -31,6 +31,7 @@ function ScoreNetwork(score)
   }
   self.transmitScore = function()
   {
+    console.log("blah");
     var message = {
       name = "kiba",
       points = self.score.points,
