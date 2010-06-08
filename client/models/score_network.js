@@ -29,13 +29,13 @@ function ScoreNetwork(score)
     }
     return false;
   }
-  self.transmitScore = function()
+  this.transmitScore = function()
   {
-    console.log("blah");
     var message = {
       name = "kiba",
       points = self.score.points,
     };
-    self.ws.send(JSON.parse(message));
+    data = JSON.stringify(message);
+    self.ws.send(data);
   }
 }
