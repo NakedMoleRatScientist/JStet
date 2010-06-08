@@ -44,11 +44,14 @@ function downEvent()
   {
     if (shape.y == 0)
     {
-      if (score.check())
+      if (score.check() == true)
       {
         mode.change(2);
       }
-      mode.change(1);
+      else
+      {
+        mode.change(1);
+      }
     }
     insertEvent();
   }
