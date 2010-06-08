@@ -26,7 +26,7 @@ server.addListener("connection",function(conn){
   });
   
   conn.addListener("message",function(event){
-    sys.log(event.data);
+    sys.log(event);
   });
 });
 
