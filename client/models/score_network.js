@@ -29,7 +29,7 @@ function ScoreNetwork(score)
     }
     return false;
   }
-  this.transmitScore = function()
+  self.transmitScore = function()
   {
     var message = {
       name = "kiba",
