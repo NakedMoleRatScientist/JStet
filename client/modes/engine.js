@@ -47,6 +47,7 @@ function downEvent()
       if (score.check() == true)
       {
         mode.change(2);
+        score.network.transmitScore();
       }
       else
       {
@@ -117,7 +118,6 @@ void draw()
   }
   else if(mode.status == 2)
   {
-    score.network.transmitScore();
     background(0,0,0)
     PFont font = loadFont("monospace");
     textFont(font,35);
