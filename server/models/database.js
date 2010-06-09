@@ -16,14 +16,20 @@ for (i = 0; i < 100; i++)
   document.scores[i] = 0;
 }
 
+function modifyList()
+{
+  document.scores[n] = points;
+  document.names[n] = name;
+}
+
 exports.add_to_list = function(name,points)
 {
   for (n = 0; n < 100; n++)
   {
     if (document.names[n] == "nothing")
     {
-      document.names[n] = name;
-      document.scores[n] = points;
+
+
       sys.puts("add to the list of highscores");
       return;
     }
