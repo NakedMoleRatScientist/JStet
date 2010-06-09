@@ -39,14 +39,14 @@ exports.add_to_list = function(name,points)
   {
     if (document.names[n] == "nothing")
     {
-      modifyList(n);
+      modifyList(n,name,points);
       sys.log("Position " + n);
       return;
     }
     else if (document.scores[n] < points)
     {
       moveList(n);
-      modifyList(n,name,points,);
+      modifyList(n,name,points);
       sys.log("Position " + n);
       return;
     }
