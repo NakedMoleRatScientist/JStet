@@ -46,7 +46,7 @@ exports.add_to_list = function(name,points)
     else if (document.scores[n] < points)
     {
       moveList(n);
-      modifyList(n);
+      modifyList(n,name,points,);
       sys.log("Position " + n);
       return;
     }
