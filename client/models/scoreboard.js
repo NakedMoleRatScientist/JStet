@@ -1,6 +1,7 @@
-function ScoreBoard()
+function ScoreBoard(score)
 {
   var self = this;
+  self.score = score;
   self.title = function()
   {
     background(0,0,0)
