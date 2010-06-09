@@ -22,6 +22,17 @@ function modifyList(n)
   document.names[n] = name;
 }
 
+function moveList(n)
+{
+  if (n + 1 < 100)
+  {
+    score = Document.scores[n];
+    name = Document.names[n];
+    document.scores[n + 1] = score;
+    document.names[n + 1] = name;
+  }
+}
+
 exports.add_to_list = function(name,points)
 {
   for (n = 0; n < 100; n++)
