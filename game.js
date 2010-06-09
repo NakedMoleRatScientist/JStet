@@ -1,6 +1,7 @@
-function ScoreBoard()
+function ScoreBoard(score)
 {
   var self = this;
+  self.score = score;
   self.title = function()
   {
     background(0,0,0)
@@ -791,7 +792,7 @@ var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-var board = new ScoreBoard();
+var board = new ScoreBoard(score);
 function cleanEvent()
 {
   shape.return_to_normal();
