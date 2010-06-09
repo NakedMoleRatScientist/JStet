@@ -25,6 +25,12 @@ exports.add_to_list = function(name,points)
       document.names[n] = name;
       document.scores[n] = points;
       sys.puts("add to the list of highscores");
+      return;
+    }
+    else if (document.scores[n] < points)
+    {
+      documents.names[n] = name;
+      documents.scores[n] = points;
     }
   } 
 }
