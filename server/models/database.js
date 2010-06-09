@@ -28,9 +28,7 @@ exports.add_to_list = function(name,points)
   {
     if (document.names[n] == "nothing")
     {
-
-
-      sys.puts("add to the list of highscores");
+      modifyList(n)
       return;
     }
     else if (document.scores[n] < points)
