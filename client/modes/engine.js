@@ -116,6 +116,7 @@ void draw()
     text("GAME OVER",300,300);
     textFont(font,18);
     text("Press n to start a new game.",250,325);
+    text("Press d to display highscore",250,350);
   }
   else if(mode.status == 2)
   {
