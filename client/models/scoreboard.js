@@ -17,7 +17,7 @@ function ScoreBoard(score)
     {
       if (data.names[i] != "nothing")
       {
-        text(data.names[i] + " : " + data.points[i],250,y+= 20);
+        text(data.names[i] + " : " + data.score[i],250,y+= 20);
       }
       else
       {
