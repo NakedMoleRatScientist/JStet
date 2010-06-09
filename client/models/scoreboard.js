@@ -28,5 +28,6 @@ function ScoreBoard(score)
   self.display = function()
   {
     self.title();
+    self.list();
   }
 }
