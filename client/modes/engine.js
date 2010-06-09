@@ -120,7 +120,7 @@ void draw()
   {
     background(0,0,0)
     PFont font = loadFont("monospace");
-    textFont(font,35);
-    text("HIGH SCORE LIST",300,0);
+    textFont(font,18);
+    text("HIGH SCORE LIST",250,50);
   }
 }
