@@ -45,5 +45,9 @@ void keyPressed()
       score.reset();
       timer.reset();
     }
+    else if(key == 100)
+    {
+      mode.change(2);
+    }
   }
 }
