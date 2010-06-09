@@ -33,8 +33,8 @@ exports.add_to_list = function(name,points)
     }
     else if (document.scores[n] < points)
     {
-      documents.names[n] = name;
-      documents.scores[n] = points;
+      modifyList(n)
+      return;
     }
   } 
 }
