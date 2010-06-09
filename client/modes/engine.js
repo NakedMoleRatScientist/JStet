@@ -19,6 +19,7 @@ var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
+var board = new ScoreBoard();
 function cleanEvent()
 {
   shape.return_to_normal();
@@ -118,9 +119,6 @@ void draw()
   }
   else if(mode.status == 2)
   {
-    background(0,0,0)
-    PFont font = loadFont("monospace");
-    textFont(font,18);
-    text("HIGH SCORE LIST",250,50);
+    board.display();
   }
 }
