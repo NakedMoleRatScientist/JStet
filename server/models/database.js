@@ -16,7 +16,7 @@ for (i = 0; i < 100; i++)
   document.scores[i] = 0;
 }
 
-function modifyList()
+function modifyList(n)
 {
   document.scores[n] = points;
   document.names[n] = name;
