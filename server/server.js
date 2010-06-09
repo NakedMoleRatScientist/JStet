@@ -22,6 +22,7 @@ server.addListener("connection",function(conn){
   
 
   conn.addListener("close",function(){
+    db.save();
     sys.log("<"+conn._id+"> onClose");
   });
   
