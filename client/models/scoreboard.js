@@ -8,4 +8,8 @@ function ScoreBoard()
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
   }
+  self.display = function()
+  {
+    self.title();
+  }
 }
