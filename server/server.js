@@ -27,7 +27,7 @@ server.addListener("connection",function(conn){
   
   conn.addListener("message",function(event){
     data = JSON.parse(event);
-    sys.log(data.points);
+    sys.log(data[0]);
   });
 });
 
