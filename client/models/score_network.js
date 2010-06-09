@@ -6,7 +6,6 @@ function ScoreNetwork(score)
   self.ws = null;
   self.data = null;
   self.score = score;
-  self.net = self;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
