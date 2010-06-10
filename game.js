@@ -9,9 +9,26 @@ function ScoreBoard(score)
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
   }
+  self.list = function()
+  {
+    data = score.network.getData();
+    y = 70;
+    for (int i = 0;i < 100;i++)
+    {
+      if (data.names[i] != "nothing")
+      {
+        text(data.names[i] + " : " + data.scores[i],250,y+= 20);
+      }
+      else
+      {
+        return;
+      }
+    }
+  }
   self.display = function()
   {
     self.title();
+    self.list();
   }
 }
 
@@ -21,7 +38,6 @@ function ScoreNetwork(score)
   self.ws = null;
   self.data = null;
   self.score = score;
-  self.net = self;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -53,53 +69,78 @@ function ScoreNetwork(score)
     data = JSON.stringify(message);
     self.ws.send(data);
   }
+  self.getData = function()
+  {
+    return self.data;
+  }
+}
+void gameOverKey()
+{
+  if (key == 110)
+  {
+    field.field = field.create_field();
+    mode.change(0);
+    score.reset();
+    timer.reset();
+  }
+  else if(key == 100)
+  {
+    mode.change(2);
+  }
+}
+void keyPressed()
+{
+  switch(mode.status)
+  {
+  case 0:
+    gameKey();
+    break;
+  case 1:
+    gameOverKey();
+    break;
+  case 2:
+    scoreKey();
+    break;
+  }
+}
+
+void scoreKey()
+{
 }
 
 //Use the ASCII chart to figure out what keys respond to what integer
 
-void keyPressed()
+
+void gameKey()
 {
-  if (mode.status == 0)
+  switch(key)
   {
-    switch(key)
+  //move right, d
+  case 100:
+    shape.move(20,0);
+    checkEvent(-20,0);
+    break;
+  //move down, s
+  case 115:
+    shape.move(0,20);
+    downEvent();
+    break;
+  //move left, a
+  case 97:
+    shape.move(-20,0);
+    checkEvent(20,0);
+    break;
+  //rotate, w
+  case 119:
+    shape.rotate();
+    if (checkEvent(0,0))
     {
-    //move right, d
-    case 100:
-      shape.move(20,0);
-      checkEvent(-20,0);
-      break;
-    //move down, s
-    case 115:
-      shape.move(0,20);
-      downEvent();
-      break;
-    //move left, a
-    case 97:
-      shape.move(-20,0);
-      checkEvent(20,0);
-      break;
-    //rotate, w
-    case 119:
-      shape.rotate();
-      if (checkEvent(0,0))
-      {
-        shape.rotate_backward();
-      }
-      break;
-    default:
-      console.log(key);
-      break;
+      shape.rotate_backward();
     }
-  }
-  else if (mode.status == 1)
-  {
-    if (key == 110)
-    {
-      field.field = field.create_field();
-      mode.change(0);
-      score.reset();
-      timer.reset();
-    }
+    break;
+  default:
+    console.log(key);
+    break;
   }
 }
 function TimerAction()
@@ -163,11 +204,11 @@ function Score()
   }
   this.check = function()
   {
-    if (this.minimum == false || this.points != 0)
+    if (this.minimum == false & this.points != 0)
     {
       return true;
     }
-    else if (this.minimum < this.points)
+    else if (this.minimum < this.points && this.points != 0)
     {
       return true;
     }
@@ -889,6 +930,7 @@ void draw()
     text("GAME OVER",300,300);
     textFont(font,18);
     text("Press n to start a new game.",250,325);
+    text("Press d to display highscore",250,350);
   }
   else if(mode.status == 2)
   {
