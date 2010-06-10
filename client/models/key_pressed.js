@@ -1,7 +1,16 @@
 
 void keyPressed()
 {
-  gameKey();
-  gameOverKey();
-  scoreKey();
+  switch(mode.status)
+  {
+  case 0:
+    gameKey();
+    break;
+  case 1:
+    gameOverKey();
+    break;
+  case 2:
+    scoreKey();
+    break;
+  }
 }
