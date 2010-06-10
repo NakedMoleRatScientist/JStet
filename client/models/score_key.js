@@ -1,5 +1,5 @@
 
-void scoreKey()
+void gameOverKey()
 {
   if (mode.status == 1)
   {
