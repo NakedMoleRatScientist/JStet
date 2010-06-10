@@ -29,11 +29,11 @@ function Score()
   }
   this.check = function()
   {
-    if (this.minimum == false || this.points != 0)
+    if (this.minimum == false & this.points != 0)
     {
       return true;
     }
-    else if (this.minimum < this.points)
+    else if (this.minimum < this.points && this.points != 0)
     {
       return true;
     }
