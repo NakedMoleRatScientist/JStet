@@ -13,19 +13,22 @@ void enterScoreKey()
     score_data.addLetter("c");
     break;
   case 100:
-    score_data.addLetter("d")
+    score_data.addLetter("d");
     break;
   case 101:
-    score_data.addLetter("e")
+    score_data.addLetter("e");
     break;
   case 102:
-    score_data.addLetter("f")
+    score_data.addLetter("f");
     break;
   case 103:
-    score_data.addLetter("g")
+    score_data.addLetter("g");
     break;
   case 104:
-    score_data.addLetter("")
+    score_data.addLetter("h");
+    break;
+  case 105:
+    score_data.addLetter("i");
     break;
   }
 }
