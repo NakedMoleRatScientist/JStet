@@ -8,4 +8,8 @@ function HighScore()
     text("Your name: ",300,300);
     text(self.name);
   };
+  self.addLetter = function(letter)
+  {
+    self.name += letter;
+  };
 }
