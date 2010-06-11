@@ -21,5 +21,8 @@ void enterScoreKey()
   case 102:
     score_data.addLetter("f")
     break;
+  case 103:
+    score_data.addLetter("g")
+    break;
   }
 }
