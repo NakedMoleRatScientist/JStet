@@ -45,5 +45,8 @@ void enterScoreKey()
   case 110:
     score_data.addLetter("n");
     break;
+  case 111:
+    score_data.addLetter("o");
+    break;
   }
 }
