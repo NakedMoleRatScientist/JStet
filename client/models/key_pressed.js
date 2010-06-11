@@ -12,5 +12,8 @@ void keyPressed()
   case 2:
     scoreKey();
     break;
+  case 3:
+    enterScoreKey();
+    break;
   }
 }
