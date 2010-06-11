@@ -121,4 +121,8 @@ void draw()
   {
     board.display();
   }
+  else if(mode.status == 3)
+  {
+    score_data.display();
+  }
 }
