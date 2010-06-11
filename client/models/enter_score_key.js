@@ -9,5 +9,8 @@ void enterScoreKey()
   case 98:
     score_data.addLetter("b");
     break;
+  case 99:
+    score_data.addLetter("c");
+    break;
   }
 }
