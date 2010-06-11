@@ -13,7 +13,10 @@ void enterScoreKey()
     score_data.addLetter("c");
     break;
   case 100:
-    score_data.addLetter("")
+    score_data.addLetter("d")
+    break;
+  case 101:
+    score_data.addLetter("e")
     break;
   }
 }
