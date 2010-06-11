@@ -36,5 +36,8 @@ void enterScoreKey()
   case 107:
     score_data.addLetter("k");
     break;
+  case 108:
+    score_data.addLetter("l");
+    break;
   }
 }
