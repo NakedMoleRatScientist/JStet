@@ -13,12 +13,12 @@ function ScoreNetwork(score)
     {
       self.data = JSON.parse(event.data);
       self.score.changeMinimum(self.getLimit());
-    }
+    };
     self.ws.onclose = function()
     {
       console.log("Welcome to our world");
-    }
-  }
+    };
+  };
   //Return the mininum score to submit score to database.
   self.getLimit = function()
   {
@@ -27,7 +27,7 @@ function ScoreNetwork(score)
       return self.data.scores[99];
     }
     return false;
-  }
+  };
   self.transmitScore = function()
   {
     var message = {
@@ -36,9 +36,9 @@ function ScoreNetwork(score)
     };
     data = JSON.stringify(message);
     self.ws.send(data);
-  }
+  };
   self.getData = function()
   {
     return self.data;
-  }
+  };
 }
