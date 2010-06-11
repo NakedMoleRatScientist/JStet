@@ -8,7 +8,7 @@ function ScoreBoard(score)
     PFont font = loadFont("monospace");
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
-  }
+  };
   self.list = function()
   {
     data = score.network.getData();
@@ -23,14 +23,16 @@ function ScoreBoard(score)
       {
         return;
       }
-    }
-  }
+    };
+  };
   self.display = function()
   {
     self.title();
     self.list();
-  }
+  };
 }
+
+
 
 function ScoreNetwork(score)
 {
@@ -45,12 +47,12 @@ function ScoreNetwork(score)
     {
       self.data = JSON.parse(event.data);
       self.score.changeMinimum(self.getLimit());
-    }
+    };
     self.ws.onclose = function()
     {
       console.log("Welcome to our world");
-    }
-  }
+    };
+  };
   //Return the mininum score to submit score to database.
   self.getLimit = function()
   {
@@ -59,20 +61,28 @@ function ScoreNetwork(score)
       return self.data.scores[99];
     }
     return false;
-  }
+  };
   self.transmitScore = function()
   {
     var message = {
-      name = "kiba",
-      points = self.score.points,
+      "name" : "kiba",
+      "points" : self.score.points,
     };
     data = JSON.stringify(message);
     self.ws.send(data);
-  }
+  };
   self.getData = function()
   {
     return self.data;
-  }
+  };
+}
+function HighScore()
+{
+  var self = this;
+  self.display = function()
+  {
+    text("Your name: ",300,300);
+  };
 }
 void gameOverKey()
 {
