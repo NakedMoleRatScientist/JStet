@@ -8,7 +8,7 @@ task :deploy => [:concat]
 task :copy => [:concat]
 task :concat do
   sh "rm game.js"
-  sh "cat client/models/scoreboard.js client/models/score_network.js client/models/high_score.js client/models/game_over_key.js client/models/key_pressed.js client/models/score_key.js client/models/game_key.js  client/models/timer_action.js client/models/score.js client/models/playfield.js client/models/playfield_draw.js client/models/tetromino.js client/models/j_shape.js client/models/i_shape.js client/models/l_shape.js client/models/o_shape.js client/models/z_shape.js client/models/s_shape.js client/models/t_shape.js client/models/shape_generator.js client/models/tetromino_draw.js client/modes/mode.js client/modes/engine.js > game.js"
+  sh "cat client/models/scoreboard.js client/models/enter_score_key.js client/models/score_network.js client/models/high_score.js client/models/game_over_key.js client/models/key_pressed.js client/models/score_key.js client/models/game_key.js  client/models/timer_action.js client/models/score.js client/models/playfield.js client/models/playfield_draw.js client/models/tetromino.js client/models/j_shape.js client/models/i_shape.js client/models/l_shape.js client/models/o_shape.js client/models/z_shape.js client/models/s_shape.js client/models/t_shape.js client/models/shape_generator.js client/models/tetromino_draw.js client/modes/mode.js client/modes/engine.js > game.js"
 end
 
 task :copy do
