@@ -1,6 +1,4 @@
 
-var score_data = HighScore();
-
 void enterScoreKey()
 {
   switch(key)
