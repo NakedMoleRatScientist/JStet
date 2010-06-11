@@ -18,5 +18,8 @@ void enterScoreKey()
   case 101:
     score_data.addLetter("e")
     break;
+  case 102:
+    score_data.addLetter("f")
+    break;
   }
 }
