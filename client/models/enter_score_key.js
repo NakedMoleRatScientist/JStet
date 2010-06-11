@@ -12,5 +12,8 @@ void enterScoreKey()
   case 99:
     score_data.addLetter("c");
     break;
+  case 100:
+    score_data.addLetter("")
+    break;
   }
 }
