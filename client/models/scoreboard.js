@@ -8,7 +8,7 @@ function ScoreBoard(score)
     PFont font = loadFont("monospace");
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
-  }
+  };
   self.list = function()
   {
     data = score.network.getData();
@@ -23,11 +23,12 @@ function ScoreBoard(score)
       {
         return;
       }
-    }
-  }
+    };
+  };
   self.display = function()
   {
     self.title();
     self.list();
-  }
+  };
 }
+
