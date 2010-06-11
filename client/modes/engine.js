@@ -47,8 +47,7 @@ function downEvent()
     {
       if (score.check() == true)
       {
-        mode.change(2);
-        score.network.transmitScore();
+        mode.change(3);
       }
       else
       {
