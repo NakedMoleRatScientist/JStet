@@ -15,4 +15,11 @@ function HighScore()
       self.name += letter;
     }
   };
+  self.delete = function()
+  {
+    if (self.name.length != 0)
+    {
+      self.name = self.name.substring(self.name.length);
+    }
+  };
 }
