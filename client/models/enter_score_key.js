@@ -51,5 +51,11 @@ void enterScoreKey()
   case 112:
     score_data.addLetter("p");
     break;
+  case 113:
+    score_data.addLetter("q");
+    break;
+  case 114:
+    score_data.addLetter("r");
+    break;
   }
 }
