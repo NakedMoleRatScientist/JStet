@@ -6,7 +6,7 @@ function HighScore()
   self.display = function()
   {
     text("Your name: ",300,300);
-    text(self.name);
+    text(self.name,300,325);
   };
   self.addLetter = function(letter)
   {
