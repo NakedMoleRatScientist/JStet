@@ -9,7 +9,7 @@ function HighScore()
     text("You have beaten a score in the worldwide top 100 ranking.",300,250);
     text("Please enter your 5 letters identifer.",300,275);
     text("Your identifer: ",300,300);
-    rect(295,320,30,150);
+    rect(295,295,150,30);
     text(self.name,300,325);
   };
   self.addLetter = function(letter)
