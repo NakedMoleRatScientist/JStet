@@ -19,14 +19,7 @@ function HighScore()
   {
     if (self.name.length != 0)
     {
-      if (self.name.length == 1)
-      {
-        self.name = "";
-      }
-      else
-      {
-        self.name = self.name.substring(0,self.name.length - 1);
-      }
+      self.name = self.name.substring(0,self.name.length - 1);
     };
   };
 }
