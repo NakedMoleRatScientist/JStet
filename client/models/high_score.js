@@ -5,6 +5,7 @@ function HighScore()
   self.name = "";
   self.display = function()
   {
+    background(0,0,0);
     text("Your name: ",300,300);
     text(self.name,300,325);
   };
