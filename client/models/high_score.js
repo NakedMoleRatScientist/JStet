@@ -10,6 +10,9 @@ function HighScore()
   };
   self.addLetter = function(letter)
   {
-    self.name += letter;
+    if (self.name.length != 5)
+    {
+      self.name += letter;
+    }
   };
 }
