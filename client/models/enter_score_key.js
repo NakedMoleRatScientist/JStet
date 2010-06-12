@@ -57,5 +57,8 @@ void enterScoreKey()
   case 114:
     score_data.addLetter("r");
     break;
+  case 115:
+    score_data.addLetter("s");
+    break;
   }
 }
