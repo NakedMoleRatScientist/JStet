@@ -33,6 +33,90 @@ function ScoreBoard(score)
 }
 
 
+void enterScoreKey()
+{
+  switch(key)
+  {
+  case 97:
+    score_data.addLetter("a");
+    break;
+  case 98:
+    score_data.addLetter("b");
+    break;
+  case 99:
+    score_data.addLetter("c");
+    break;
+  case 100:
+    score_data.addLetter("d");
+    break;
+  case 101:
+    score_data.addLetter("e");
+    break;
+  case 102:
+    score_data.addLetter("f");
+    break;
+  case 103:
+    score_data.addLetter("g");
+    break;
+  case 104:
+    score_data.addLetter("h");
+    break;
+  case 105:
+    score_data.addLetter("i");
+    break;
+  case 106:
+    score_data.addLetter("j");
+    break;
+  case 107:
+    score_data.addLetter("k");
+    break;
+  case 108:
+    score_data.addLetter("l");
+    break;
+  case 109:
+    score_data.addLetter("m");
+    break;
+  case 110:
+    score_data.addLetter("n");
+    break;
+  case 111:
+    score_data.addLetter("o");
+    break;
+  case 112:
+    score_data.addLetter("p");
+    break;
+  case 113:
+    score_data.addLetter("q");
+    break;
+  case 114:
+    score_data.addLetter("r");
+    break;
+  case 115:
+    score_data.addLetter("s");
+    break;
+  case 116:
+    score_data.addLetter("t");
+    break;
+  case 117:
+    score_data.addLetter("u");
+    break;
+  case 118:
+    score_data.addLetter("v");
+    break;
+  case 119:
+    score_data.addLetter("w");
+    break;
+  case 120:
+    score_data.addLetter("x");
+    break;
+  case 121:
+    score_data.addLetter("y");
+    break;
+  case 122:
+    score_data.addLetter("z");
+    break;
+  }
+}
 
 function ScoreNetwork(score)
 {
@@ -65,8 +149,8 @@ function ScoreNetwork(score)
   self.transmitScore = function()
   {
     var message = {
-      "name" : "kiba",
-      "points" : self.score.points,
+      name = "kiba",
+      points = self.score.points,
     };
     data = JSON.stringify(message);
     self.ws.send(data);
@@ -79,9 +163,15 @@ function ScoreNetwork(score)
 function HighScore()
 {
   var self = this;
+  self.name = "";
   self.display = function()
   {
     text("Your name: ",300,300);
+    text(self.name);
+  };
+  self.addLetter = function(letter)
+  {
+    self.name += letter;
   };
 }
 void gameOverKey()
@@ -110,6 +200,9 @@ void keyPressed()
     break;
   case 2:
     scoreKey();
+    break;
+  case 3:
+    enterScoreKey();
     break;
   }
 }
@@ -844,6 +937,7 @@ var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var board = new ScoreBoard(score);
+var score_data = HighScore();
 function cleanEvent()
 {
   shape.return_to_normal();
@@ -871,8 +965,7 @@ function downEvent()
     {
       if (score.check() == true)
       {
-        mode.change(2);
-        score.network.transmitScore();
+        mode.change(3);
       }
       else
       {
@@ -945,5 +1038,9 @@ void draw()
   else if(mode.status == 2)
   {
     board.display();
+  }
+  else if(mode.status == 3)
+  {
+    score_data.display();
   }
 }
