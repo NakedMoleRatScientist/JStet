@@ -60,5 +60,8 @@ void enterScoreKey()
   case 115:
     score_data.addLetter("s");
     break;
+  case 116:
+    score_data.addLetter("t");
+    break;
   }
 }
