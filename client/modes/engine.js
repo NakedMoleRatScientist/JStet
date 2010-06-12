@@ -124,6 +124,7 @@ void draw()
   }
   else if(mode.status == 3)
   {
+    background(0,0,0);
     score_data.display();
   }
 }
