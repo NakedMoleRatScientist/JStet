@@ -72,5 +72,8 @@ void enterScoreKey()
   case 119:
     score_data.addLetter("w");
     break;
+  case 120:
+    score_data.addLetter("y");
+    break;
   }
 }
