@@ -83,7 +83,7 @@ void enterScoreKey()
     break;
   //backspace
   case 8:
-    score_data.delete();
+    score_data.destroy();
     break;
   }
 }
