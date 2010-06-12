@@ -33,6 +33,77 @@ function ScoreBoard(score)
 }
 
 
+
+function ScoreNetwork(score)
+{
+  var self = this;
+  self.ws = null;
+  self.data = null;
+  self.score = score;
+  self.initialize = function()
+  {
+    self.ws = new WebSocket('ws://localhost:7000');
+    self.ws.onmessage = function(event)
+    {
+      self.data = JSON.parse(event.data);
+      self.score.changeMinimum(self.getLimit());
+    };
+    self.ws.onclose = function()
+    {
+      console.log("Welcome to our world");
+    };
+  };
+  //Return the mininum score to submit score to database.
+  self.getLimit = function()
+  {
+    if (self.data.status == true)
+    {
+      return self.data.scores[99];
+    }
+    return false;
+  };
+  self.transmitScore = function()
+  {
+    var message = {
+      name = "kiba",
+      points = self.score.points,
+    };
+    data = JSON.stringify(message);
+    self.ws.send(data);
+  };
+  self.getData = function()
+  {
+    return self.data;
+  };
+}
+function HighScore()
+{
+  var self = this;
+  self.name = "";
+  self.display = function()
+  {
+    background(0,0,0);
+    text("You have beaten a score in the worldwide top 100 ranking.",300,250);
+    text("Please enter your 5 letters identifer.",300,275);
+    text("Your identifer: ",300,300);
+    rect(300,300,150,30);
+    text(self.name,300,325);
+  };
+  self.addLetter = function(letter)
+  {
+    if (self.name.length != 5)
+    {
+      self.name += letter;
+    }
+  };
+  self.destroy = function()
+  {
+    if (self.name.length != 0)
+    {
+      self.name = self.name.substring(0,self.name.length - 1);
+    };
+  };
+}
 void enterScoreKey()
 {
   switch(key)
@@ -115,64 +186,11 @@ void enterScoreKey()
   case 122:
     score_data.addLetter("z");
     break;
+  //backspace
+  case 8:
+    score_data.destroy();
+    break;
   }
-}
-
-function ScoreNetwork(score)
-{
-  var self = this;
-  self.ws = null;
-  self.data = null;
-  self.score = score;
-  self.initialize = function()
-  {
-    self.ws = new WebSocket('ws://localhost:7000');
-    self.ws.onmessage = function(event)
-    {
-      self.data = JSON.parse(event.data);
-      self.score.changeMinimum(self.getLimit());
-    };
-    self.ws.onclose = function()
-    {
-      console.log("Welcome to our world");
-    };
-  };
-  //Return the mininum score to submit score to database.
-  self.getLimit = function()
-  {
-    if (self.data.status == true)
-    {
-      return self.data.scores[99];
-    }
-    return false;
-  };
-  self.transmitScore = function()
-  {
-    var message = {
-      name = "kiba",
-      points = self.score.points,
-    };
-    data = JSON.stringify(message);
-    self.ws.send(data);
-  };
-  self.getData = function()
-  {
-    return self.data;
-  };
-}
-function HighScore()
-{
-  var self = this;
-  self.name = "";
-  self.display = function()
-  {
-    text("Your name: ",300,300);
-    text(self.name);
-  };
-  self.addLetter = function(letter)
-  {
-    self.name += letter;
-  };
 }
 void gameOverKey()
 {
@@ -937,7 +955,8 @@ var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var board = new ScoreBoard(score);
-var score_data = HighScore();
+var score_data = new HighScore();
+
 function cleanEvent()
 {
   shape.return_to_normal();
