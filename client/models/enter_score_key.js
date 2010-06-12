@@ -81,5 +81,9 @@ void enterScoreKey()
   case 122:
     score_data.addLetter("z");
     break;
+  //backspace
+  case 8:
+    score_data.delete();
+    break;
   }
 }
