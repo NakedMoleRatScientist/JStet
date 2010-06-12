@@ -20,7 +20,8 @@ var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var board = new ScoreBoard(score);
-var score_data = HighScore();
+var score_data = new HighScore();
+
 function cleanEvent()
 {
   shape.return_to_normal();
