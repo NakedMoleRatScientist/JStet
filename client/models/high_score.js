@@ -25,7 +25,7 @@ function HighScore()
       }
       else
       {
-        self.name = self.name.substring(self.name.length - 1);
+        self.name = self.name.substring(0,self.name.length - 1);
       }
     };
   };
