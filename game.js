@@ -62,10 +62,10 @@ function ScoreNetwork(score)
     }
     return false;
   };
-  self.transmitScore = function()
+  self.transmitScore = function(identifer)
   {
     var message = {
-      name = "kiba",
+      name = identifer,
       points = self.score.points,
     };
     data = JSON.stringify(message);
@@ -103,6 +103,10 @@ function HighScore()
       self.name = self.name.substring(0,self.name.length - 1);
     };
   };
+  self.getName = function()
+  {
+    return self.name;
+  }
 }
 void enterScoreKey()
 {
@@ -189,6 +193,10 @@ void enterScoreKey()
   //backspace
   case 8:
     score_data.destroy();
+    break;
+  case 13:
+    score.network.transmitScore(score_data.getName());
+    mode.change(2);
     break;
   }
 }
