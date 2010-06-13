@@ -39,13 +39,20 @@ function ScoreBoard(score)
   {
     if (self.turn == true)
     {
-      start += 20;
-      if (start == 100)
+      self.start += 20;
+      if (self.start == 100)
       {
-        start = 0;
+        self.start = 0;
       }
     }
-  }
+  };
+  self.previousPage = function()
+  {
+    if (self.start > 0)
+    {
+      self.start -= 20;
+    }
+  };
   self.display = function()
   {
     self.title();
