@@ -32,7 +32,6 @@ function TimerAction()
   self.reset = function()
   {
     self.cycle = 0;
-    self.speed = 1000;
   };
   self.getSeconds = function()
   {
