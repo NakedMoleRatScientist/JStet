@@ -26,8 +26,8 @@ function moveList(n)
 {
   if (n + 1 < 100)
   {
-    score = Document.scores[n];
-    name = Document.names[n];
+    score = document.scores[n];
+    name = document.names[n];
     document.scores[n + 1] = score;
     document.names[n + 1] = name;
   }
