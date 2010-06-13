@@ -26,4 +26,8 @@ function HighScore()
       self.name = self.name.substring(0,self.name.length - 1);
     };
   };
+  self.getName = function()
+  {
+    return self.name;
+  }
 }
