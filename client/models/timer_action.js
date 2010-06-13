@@ -1,32 +1,33 @@
 
 function TimerAction()
 {
-  this.speed = 1000;
-  this.cycle = 0;
-  this.time = new Date();
-  this.tickCycle = function()
+  self = this;
+  self.speed = 1000;
+  self.cycle = 0;
+  self.time = new Date();
+  self.tickCycle = function()
   {
-    this.cycle++;
-    if (this.cycle == 20)
+    self.cycle++;
+    if (self.cycle == 20)
     {
-      this.speed--;
-      this.cycle = 0;
+      self.speed--;
+      self.cycle = 0;
     }
   },
-  this.react = function()
+  self.react = function()
   {
     var new_time = new Date();
-    if (new_time - this.time >= this.speed)
+    if (new_time - self.time >= self.speed)
     {
-      this.time = new_time;
-      this.tickCycle();
+      self.time = new_time;
+      self.tickCycle();
       return true;
     }
     return false;
   },
-  this.reset = function()
+  self.reset = function()
   {
-    this.cycle = 0;
-    this.speed = 1000;
+    self.cycle = 0;
+    self.speed = 1000;
   }
 }
