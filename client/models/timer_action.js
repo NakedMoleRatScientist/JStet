@@ -12,6 +12,7 @@ function TimerAction()
     self.cycle++;
     if (self.cycle == self.limit)
     {
+      self.limit--;
       self.cycle = 0;
     }
   };
