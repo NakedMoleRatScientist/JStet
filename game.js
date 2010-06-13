@@ -80,7 +80,7 @@ function ScoreNetwork(score)
   self.score = score;
   self.initialize = function()
   {
-    self.ws = new WebSocket('ws://localhost:7000');
+    self.ws = new WebSocket('ws://localhost:8000');
     self.ws.onmessage = function(event)
     {
       self.data = JSON.parse(event.data);
@@ -114,6 +114,10 @@ function ScoreNetwork(score)
   {
     return self.data;
   };
+  self.sendMessage = function()
+  {
+    self.ws.send("blah");
+  }
 }
 function HighScore()
 {
@@ -332,13 +336,14 @@ function TimerAction()
   self.eclipsed = 0;
   self.speed = 1000;
   self.cycle = 0;
+  self.limit = 20;
   self.time = new Date();
   self.tickCycle = function()
   {
     self.cycle++;
-    if (self.cycle == 20)
+    if (self.cycle == self.limit)
     {
-      self.speed--;
+      self.limit--;
       self.cycle = 0;
     }
   };
@@ -347,6 +352,7 @@ function TimerAction()
     var new_time = new Date();
     if (new_time - self.time >= self.speed)
     {
+      score.network.sendMessage();
       self.time = new_time;
       self.tickCycle();
       self.eclipsed += 1; //As long as the speed is 1000, it'll be accurate
