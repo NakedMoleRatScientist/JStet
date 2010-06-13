@@ -28,10 +28,10 @@ function ScoreNetwork(score)
     }
     return false;
   };
-  self.transmitScore = function()
+  self.transmitScore = function(identifer)
   {
     var message = {
-      name = "kiba",
+      name = identifer,
       points = self.score.points,
     };
     data = JSON.stringify(message);
