@@ -10,7 +10,7 @@ function TimerAction()
   self.tickCycle = function()
   {
     self.cycle++;
-    if (self.cycle == 20)
+    if (self.cycle == self.limit)
     {
       self.cycle = 0;
     }
