@@ -35,6 +35,17 @@ function ScoreBoard(score)
       }
     };
   };
+  self.turnPage = function()
+  {
+    if (self.turn == true)
+    {
+      start += 20;
+      if (start == 100)
+      {
+        start = 0;
+      }
+    }
+  }
   self.display = function()
   {
     self.title();
