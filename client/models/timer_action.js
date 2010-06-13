@@ -14,7 +14,7 @@ function TimerAction()
       self.speed--;
       self.cycle = 0;
     }
-  },
+  };
   self.react = function()
   {
     var new_time = new Date();
@@ -22,14 +22,18 @@ function TimerAction()
     {
       self.time = new_time;
       self.tickCycle();
-      self.eclipsed += 1;
+      self.eclipsed += 1; //As long as the speed is 1000, it'll be accurate
       return true;
     }
     return false;
-  },
+  };
   self.reset = function()
   {
     self.cycle = 0;
     self.speed = 1000;
-  }
+  };
+  self.getSeconds = function()
+  {
+    return self.eclipsed;
+  };
 }
