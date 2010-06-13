@@ -2,6 +2,7 @@ function ScoreBoard(score)
 {
   var self = this;
   self.score = score;
+  slef.start = 0;
   self.title = function()
   {
     background(0,0,0)
