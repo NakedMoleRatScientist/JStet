@@ -7,7 +7,7 @@ function HighScore()
   {
     background(0,0,0);
     noFill();
-    rect(300,300,55,30);
+    rect(300,305,55,30);
     text("You have beaten a score in the worldwide top 100 ranking.",300,250);
     text("Please enter your 5 letters identifer.",300,275);
     text("Your identifer: ",300,300);
