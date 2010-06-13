@@ -1,3 +1,4 @@
+
 function ScoreBoard(score)
 {
   var self = this;
@@ -20,9 +21,9 @@ function ScoreBoard(score)
   {
     data = score.network.getData();
     y = 70;
-    limit = start + 20;
+    limit = self.start + 20;
     self.turn = true;
-    for (i = start;i < limit;i++)
+    for (var i = self.start;i < limit;i++)
     {
       if (data.names[i] != "nothing")
       {
