@@ -5,6 +5,7 @@ function TimerAction()
   self.eclipsed = 0;
   self.speed = 1000;
   self.cycle = 0;
+  self.limit = 20;
   self.time = new Date();
   self.tickCycle = function()
   {
