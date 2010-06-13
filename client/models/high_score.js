@@ -13,6 +13,10 @@ function HighScore()
     text("Your identifer: ",250,300);
     text(self.name,300,325);
   };
+  self.clean = function()
+  {
+    self.name = "";
+  }
   self.addLetter = function(letter)
   {
     if (self.name.length != 5)
