@@ -9,6 +9,11 @@ function ScoreBoard(score)
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
   };
+  self.instruction = function()
+  {
+    text("Instructions:",350,50);
+    text("n - new game",350,75);
+  }
   self.list = function()
   {
     data = score.network.getData();
