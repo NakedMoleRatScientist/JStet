@@ -16,7 +16,7 @@ function ScoreNetwork(score)
     };
     self.ws.onclose = function()
     {
-      console.log("Welcome to our world");
+      console.log("Connection ended.");
     };
   };
   //Return the mininum score to submit score to database.
