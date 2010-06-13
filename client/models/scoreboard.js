@@ -19,7 +19,8 @@ function ScoreBoard(score)
   {
     data = score.network.getData();
     y = 70;
-    for (int i = 0;i < 100;i++)
+    limit = start + 20
+    for (start = 0;start < limit;start++)
     {
       if (data.names[i] != "nothing")
       {
