@@ -22,6 +22,7 @@ function TimerAction()
     {
       self.time = new_time;
       self.tickCycle();
+      self.eclipsed += 1;
       return true;
     }
     return false;
