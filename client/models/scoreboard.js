@@ -22,7 +22,7 @@ function ScoreBoard(score)
     y = 70;
     limit = start + 20;
     self.turn = true;
-    for (start = 0;start < limit;start++)
+    for (i = start;i < limit;i++)
     {
       if (data.names[i] != "nothing")
       {
