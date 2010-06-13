@@ -33,6 +33,7 @@ server.addListener("connection",function(conn){
     data = JSON.parse(event);
     db.add_to_list(data[0],data[1]);
     sendData();
+    db.save();
   });
 });
 
