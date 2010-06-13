@@ -35,6 +35,10 @@ server.addListener("connection",function(conn){
     sendData();
     db.save();
   });
+
+  conn.addListener("error",function(event){
+    sys.log(event);
+  });
 });
 
 
