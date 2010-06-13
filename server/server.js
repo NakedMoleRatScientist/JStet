@@ -11,7 +11,7 @@ server.listen(7000);
 
 function sendData()
 {
-  server.broacast(JSON.stringify(db.getDoc()));
+  server.broadcast(JSON.stringify(db.getDoc()));
 }
 
 server.addListener("listening",function(){
