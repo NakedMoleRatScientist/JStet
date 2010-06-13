@@ -11,7 +11,6 @@ function TimerAction()
     self.cycle++;
     if (self.cycle == 20)
     {
-      self.speed--;
       self.cycle = 0;
     }
   };
