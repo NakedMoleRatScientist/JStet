@@ -13,8 +13,8 @@ function ScoreBoard(score)
   };
   self.instruction = function()
   {
-    text("Instructions:",450,50);
-    text("n - new game",450,75);
+    text("Instructions:",500,50);
+    text("n - new game",500,75);
   }
   self.list = function()
   {
