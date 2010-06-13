@@ -1,3 +1,12 @@
+
+void restartGame()
+{
+  field.field = field.create_field();
+  mode.change(0);
+  score.reset();
+  timer.reset();
+}
+
 function ScoreBoard(score)
 {
   var self = this;
@@ -13,16 +22,16 @@ function ScoreBoard(score)
   };
   self.instruction = function()
   {
-    text("Instructions:",450,50);
-    text("n - new game",450,75);
+    text("Instructions:",500,50);
+    text("n - new game",500,75);
   }
   self.list = function()
   {
     data = score.network.getData();
     y = 70;
-    limit = start + 20;
+    limit = self.start + 20;
     self.turn = true;
-    for (i = start;i < limit;i++)
+    for (var i = self.start;i < limit;i++)
     {
       if (data.names[i] != "nothing")
       {
@@ -79,7 +88,8 @@ function ScoreNetwork(score)
     };
     self.ws.onclose = function()
     {
-      console.log("Welcome to our world");
+      console.log("Connection ended.");
+      console.log(timer.getSeconds() + " seconds has eclipsed.")
     };
   };
   //Return the mininum score to submit score to database.
@@ -119,6 +129,10 @@ function HighScore()
     text("Your identifer: ",250,300);
     text(self.name,300,325);
   };
+  self.clean = function()
+  {
+    self.name = "";
+  }
   self.addLetter = function(letter)
   {
     if (self.name.length != 5)
@@ -226,6 +240,7 @@ void enterScoreKey()
     break;
   case 13:
     score.network.transmitScore(score_data.getName());
+    score_data.clean();
     mode.change(2);
     break;
   }
@@ -234,10 +249,7 @@ void gameOverKey()
 {
   if (key == 110)
   {
-    field.field = field.create_field();
-    mode.change(0);
-    score.reset();
-    timer.reset();
+    restartGame();
   }
   else if(key == 100)
   {
@@ -268,7 +280,7 @@ void scoreKey()
   switch(key)
   {
   case 110:
-    mode.change(0);
+    restartGame();
     break;
   case 106:
     board.previousPage();
@@ -316,34 +328,41 @@ void gameKey()
 }
 function TimerAction()
 {
-  this.speed = 1000;
-  this.cycle = 0;
-  this.time = new Date();
-  this.tickCycle = function()
+  self = this;
+  self.eclipsed = 0;
+  self.speed = 1000;
+  self.cycle = 0;
+  self.time = new Date();
+  self.tickCycle = function()
   {
-    this.cycle++;
-    if (this.cycle == 20)
+    self.cycle++;
+    if (self.cycle == 20)
     {
-      this.speed--;
-      this.cycle = 0;
+      self.speed--;
+      self.cycle = 0;
     }
-  },
-  this.react = function()
+  };
+  self.react = function()
   {
     var new_time = new Date();
-    if (new_time - this.time >= this.speed)
+    if (new_time - self.time >= self.speed)
     {
-      this.time = new_time;
-      this.tickCycle();
+      self.time = new_time;
+      self.tickCycle();
+      self.eclipsed += 1; //As long as the speed is 1000, it'll be accurate
       return true;
     }
     return false;
-  },
-  this.reset = function()
+  };
+  self.reset = function()
   {
-    this.cycle = 0;
-    this.speed = 1000;
-  }
+    self.cycle = 0;
+    self.speed = 1000;
+  };
+  self.getSeconds = function()
+  {
+    return self.eclipsed;
+  };
 }
 
 //Deal with score keeping.
