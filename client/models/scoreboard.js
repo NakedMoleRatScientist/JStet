@@ -33,6 +33,7 @@ function ScoreBoard(score)
   self.display = function()
   {
     self.title();
+    self.instruction();
     self.list();
   };
 }
