@@ -85,5 +85,8 @@ void enterScoreKey()
   case 8:
     score_data.destroy();
     break;
+  case 13:
+    score.network.transmitScore(score_data.getName());
+    break;
   }
 }
