@@ -9,6 +9,11 @@ var db = require('./models/database')
 var server = ws.createServer();
 server.listen(7000);
 
+function sendData()
+{
+  server.broacast(JSON.stringify(db.getDoc()));
+}
+
 server.addListener("listening",function(){
   sys.log("Listening for connection.");
   db.readDoc(function() {
@@ -18,9 +23,7 @@ server.addListener("listening",function(){
 
 server.addListener("connection",function(conn){
   sys.log("<"+conn._id+"> connected");
-  server.broadcast(JSON.stringify(db.getDoc()));
-  
-
+  sendData();
   conn.addListener("close",function(){
     db.save();
     sys.log("<"+conn._id+"> onClose");
