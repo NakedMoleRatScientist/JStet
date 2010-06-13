@@ -2,6 +2,8 @@ function ScoreBoard(score)
 {
   var self = this;
   self.score = score;
+  self.start = 0;
+  self.turn = false;
   self.title = function()
   {
     background(0,0,0)
@@ -9,11 +11,18 @@ function ScoreBoard(score)
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
   };
+  self.instruction = function()
+  {
+    text("Instructions:",450,50);
+    text("n - new game",450,75);
+  }
   self.list = function()
   {
     data = score.network.getData();
     y = 70;
-    for (int i = 0;i < 100;i++)
+    limit = start + 20;
+    self.turn = true;
+    for (i = start;i < limit;i++)
     {
       if (data.names[i] != "nothing")
       {
@@ -21,13 +30,33 @@ function ScoreBoard(score)
       }
       else
       {
+        self.turn = false;
         return;
       }
     };
   };
+  self.turnPage = function()
+  {
+    if (self.turn == true)
+    {
+      self.start += 20;
+      if (self.start == 100)
+      {
+        self.start = 0;
+      }
+    }
+  };
+  self.previousPage = function()
+  {
+    if (self.start > 0)
+    {
+      self.start -= 20;
+    }
+  };
   self.display = function()
   {
     self.title();
+    self.instruction();
     self.list();
   };
 }
@@ -236,6 +265,18 @@ void keyPressed()
 
 void scoreKey()
 {
+  switch(key)
+  {
+  case 110:
+    mode.change(0);
+    break;
+  case 106:
+    board.previousPage();
+    break;
+  case 107:
+    board.turnPage();
+    break;
+  }
 }
 
 //Use the ASCII chart to figure out what keys respond to what integer
