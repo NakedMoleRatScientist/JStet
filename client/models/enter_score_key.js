@@ -87,6 +87,7 @@ void enterScoreKey()
     break;
   case 13:
     score.network.transmitScore(score_data.getName());
+    mode.change(2);
     break;
   }
 }
