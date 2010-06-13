@@ -17,6 +17,7 @@ function ScoreNetwork(score)
     self.ws.onclose = function()
     {
       console.log("Connection ended.");
+      console.log(timer.getSeconds() + " seconds has eclipsed.")
     };
   };
   //Return the mininum score to submit score to database.
