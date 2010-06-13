@@ -42,4 +42,8 @@ function ScoreNetwork(score)
   {
     return self.data;
   };
+  self.sendMessage = function()
+  {
+    self.ws.send("blah");
+  }
 }
