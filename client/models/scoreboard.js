@@ -30,6 +30,7 @@ function ScoreBoard(score)
       }
       else
       {
+        self.turn = false;
         return;
       }
     };
