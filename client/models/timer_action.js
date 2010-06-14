@@ -19,6 +19,17 @@ function TimerAction()
       self.cycle = 0;
     }
   };
+  //A name will be returned when it reached the specificed cycle.
+  self.getEvent = function()
+  {
+    for (i = 0; i < self.actions.length;i++)
+    {
+      if (self.cycle == self.actions[i][1])
+      {
+        return self.actions[i][0];
+      }
+    };
+  };
   self.react = function()
   {
     var new_time = new Date();
