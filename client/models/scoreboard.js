@@ -22,7 +22,7 @@ function ScoreBoard(score)
     text("n - new game",500,75);
     text("k - next page",500,100);
     text("j - previous page",500,125);
-  }
+  };
   self.list = function()
   {
     data = score.network.getData();
@@ -65,6 +65,7 @@ function ScoreBoard(score)
     self.title();
     self.instruction();
     self.list();
+    self.page();
   };
 }
 
