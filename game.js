@@ -80,7 +80,7 @@ function ScoreNetwork(score)
   self.score = score;
   self.initialize = function()
   {
-    self.ws = new WebSocket('ws://localhost:8000');
+    self.ws = new WebSocket('ws://localhost:7000');
     self.ws.onmessage = function(event)
     {
       self.data = JSON.parse(event.data);
@@ -104,6 +104,7 @@ function ScoreNetwork(score)
   self.transmitScore = function(identifer)
   {
     var message = {
+      type = 0,
       name = identifer,
       points = self.score.points,
     };
@@ -114,9 +115,13 @@ function ScoreNetwork(score)
   {
     return self.data;
   };
-  self.sendMessage = function()
+  self.sendAlive = function()
   {
-    self.ws.send("blah");
+    var message = {
+      type = 1
+    };
+    data = JSON.stringify(message);
+    self.ws.send(data);
   }
 }
 function HighScore()
@@ -335,24 +340,38 @@ function TimerAction()
   self = this;
   self.eclipsed = 0;
   self.speed = 1000;
+  self.actions = [];
   self.cycle = 0;
-  self.limit = 20;
   self.time = new Date();
+  self.addAction = function(name , cycle)
+  {
+    self.actions.push([name,cycle]);
+  };
   self.tickCycle = function()
   {
     self.cycle++;
-    if (self.cycle == self.limit)
+    if (self.cycle == 100)
     {
-      self.limit--;
       self.cycle = 0;
     }
+  };
+  //A name will be returned when it reached the specificed cycle.
+  self.getEvent = function()
+  {
+    for (i = 0; i < self.actions.length;i++)
+    {
+      if (self.cycle == self.actions[i][1])
+      {
+        return self.actions[i][0];
+      }
+    };
+    return false;
   };
   self.react = function()
   {
     var new_time = new Date();
     if (new_time - self.time >= self.speed)
     {
-      score.network.sendMessage();
       self.time = new_time;
       self.tickCycle();
       self.eclipsed += 1; //As long as the speed is 1000, it'll be accurate
@@ -363,7 +382,6 @@ function TimerAction()
   self.reset = function()
   {
     self.cycle = 0;
-    self.speed = 1000;
   };
   self.getSeconds = function()
   {
@@ -1031,6 +1049,7 @@ var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var board = new ScoreBoard(score);
 var score_data = new HighScore();
+timer.addAction("network",60);
 
 function cleanEvent()
 {
@@ -1089,6 +1108,14 @@ void drawInstruction()
   text("w - rotate",450,140);
 }
 
+void sendNet()
+{
+  if (timer.getEvent() == "network")
+  {
+    score.network.sendAlive();
+  }
+}
+
 void draw()
 {
   if (mode.status == 0)
@@ -1101,7 +1128,7 @@ void draw()
       }
       downEvent();
     }
-    
+    sendNet();
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
@@ -1121,6 +1148,8 @@ void draw()
   }
   else if(mode.status == 1)
   {
+    timer.react();
+    sendNet();
     background(0,0,0);
     PFont font = loadFont("monospace");
     textFont(font,35);
@@ -1131,10 +1160,14 @@ void draw()
   }
   else if(mode.status == 2)
   {
+    timer.react();
+    sendNet();
     board.display();
   }
   else if(mode.status == 3)
   {
+    timer.react();
+    sendNet();
     score_data.display();
   }
 }
