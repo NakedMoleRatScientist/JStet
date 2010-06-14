@@ -6,20 +6,14 @@ function TimerAction()
   self.speed = 1000;
   self.actions = [];
   self.cycle = 0;
-  self.limit = 20;
   self.time = new Date();
   self.addAction = function(name , cycle)
   {
-    self.actions.push([name,cycle])
+    self.actions.push([name,cycle]);
   };
   self.tickCycle = function()
   {
     self.cycle++;
-    if (self.cycle == self.limit)
-    {
-      self.limit--;
-      self.cycle = 0;
-    }
   };
   self.react = function()
   {
