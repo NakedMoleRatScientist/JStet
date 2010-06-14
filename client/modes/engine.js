@@ -80,7 +80,8 @@ void drawInstruction()
   text("w - rotate",450,140);
 }
 
-void sendNet()
+//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive.
+void sendAlive()
 {
   if (timer.getEvent() == "network")
   {
