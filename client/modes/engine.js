@@ -124,6 +124,7 @@ void draw()
   }
   else if(mode.status == 2)
   {
+    timer.react();
     board.display();
   }
   else if(mode.status == 3)
