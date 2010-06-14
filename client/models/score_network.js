@@ -46,8 +46,7 @@ function ScoreNetwork(score)
   self.sendAlive = function()
   {
     var message = {
-      type = 0,
-      string = "I am still alive!"
+      type = 0
     };
     data = JSON.stringify(message);
     self.ws.send(data);
