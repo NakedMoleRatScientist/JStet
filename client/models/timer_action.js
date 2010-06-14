@@ -14,6 +14,10 @@ function TimerAction()
   self.tickCycle = function()
   {
     self.cycle++;
+    if (self.cycle == 100)
+    {
+      self.cycle = 0;
+    }
   };
   self.react = function()
   {
