@@ -38,6 +38,10 @@ server.addListener("connection",function(conn){
       sendData();
       db.save();
     }
+    else if(data[0] == 1)
+    {
+      sys.log("<"+conn._id+"> is still alive!");
+    }
   });
 
   conn.addListener("error",function(event){
