@@ -12,6 +12,10 @@ function ScoreBoard(score)
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
   };
+  self.page = function()
+  {
+    text("Page: " + (this.start / 20),200,550);
+  };
   self.instruction = function()
   {
     text("Instructions:",500,50);
