@@ -29,6 +29,7 @@ function TimerAction()
         return self.actions[i][0];
       }
     };
+    return false;
   };
   self.react = function()
   {
