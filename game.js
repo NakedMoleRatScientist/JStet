@@ -20,13 +20,17 @@ function ScoreBoard(score)
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
   };
+  self.page = function()
+  {
+    text("Page: " + (this.start / 20),200,550);
+  };
   self.instruction = function()
   {
     text("Instructions:",500,50);
     text("n - new game",500,75);
     text("k - next page",500,100);
     text("j - previous page",500,125);
-  }
+  };
   self.list = function()
   {
     data = score.network.getData();
@@ -69,6 +73,7 @@ function ScoreBoard(score)
     self.title();
     self.instruction();
     self.list();
+    self.page();
   };
 }
 
