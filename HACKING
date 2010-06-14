@@ -3,3 +3,15 @@
 Warnings:
 
 1. Do not hack game.js! game.js is a result of concating several various files from the client folder.
+
+
+Create New Server:
+
+1. Start couchdb
+2. rake create
+3. rake start
+
+
+Run Server:
+
+Repeat step 1 and 3 in Create New Server section.
