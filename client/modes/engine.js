@@ -80,7 +80,9 @@ void drawInstruction()
   text("w - rotate",450,140);
 }
 
-//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive.
+//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
+
+
 void sendAlive()
 {
   if (timer.getEvent() == "network")
