@@ -80,6 +80,7 @@ void drawInstruction()
   text("w - rotate",450,140);
 }
 
+
 void draw()
 {
   if (mode.status == 0)
@@ -127,6 +128,7 @@ void draw()
   }
   else if(mode.status == 3)
   {
+    timer.react();
     score_data.display();
   }
 }
