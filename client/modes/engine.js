@@ -80,6 +80,13 @@ void drawInstruction()
   text("w - rotate",450,140);
 }
 
+void sendNet()
+{
+  if (timer.getEvent() == "network")
+  {
+    score.network.sendAlive();
+  }
+}
 
 void draw()
 {
