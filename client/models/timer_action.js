@@ -8,6 +8,10 @@ function TimerAction()
   self.cycle = 0;
   self.limit = 20;
   self.time = new Date();
+  self.addAction = function(name , cycle)
+  {
+    self.actions.push([name,cycle])
+  };
   self.tickCycle = function()
   {
     self.cycle++;
