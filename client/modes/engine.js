@@ -100,7 +100,7 @@ void draw()
       }
       downEvent();
     }
-    sendNet();
+    sendAlive();
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
@@ -121,7 +121,7 @@ void draw()
   else if(mode.status == 1)
   {
     timer.react();
-    sendNet();
+    sendAlive();
     background(0,0,0);
     PFont font = loadFont("monospace");
     textFont(font,35);
@@ -133,13 +133,13 @@ void draw()
   else if(mode.status == 2)
   {
     timer.react();
-    sendNet();
+    sendAlive();
     board.display();
   }
   else if(mode.status == 3)
   {
     timer.react();
-    sendNet();
+    sendAlive();
     score_data.display();
   }
 }
