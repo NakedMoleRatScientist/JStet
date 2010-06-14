@@ -132,14 +132,14 @@ void draw()
   }
   else if(mode.status == 2)
   {
-    sendNet();
     timer.react();
+    sendNet();
     board.display();
   }
   else if(mode.status == 3)
   {
-    sendNet();
     timer.react();
+    sendNet();
     score_data.display();
   }
 }
