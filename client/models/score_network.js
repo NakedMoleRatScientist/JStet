@@ -45,6 +45,11 @@ function ScoreNetwork(score)
   };
   self.sendMessage = function()
   {
-    self.ws.send("blah");
+    var message = {
+      type = 0,
+      string = "I am still alive!"
+    };
+    data = JSON.stringify(message);
+    self.ws.send(data);
   }
 }
