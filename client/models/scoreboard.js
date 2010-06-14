@@ -16,6 +16,8 @@ function ScoreBoard(score)
   {
     text("Instructions:",500,50);
     text("n - new game",500,75);
+    text("k - next page",500,100);
+    text("j - previous page",500,125);
   }
   self.list = function()
   {
