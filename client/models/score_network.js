@@ -32,6 +32,7 @@ function ScoreNetwork(score)
   self.transmitScore = function(identifer)
   {
     var message = {
+      type = 0,
       name = identifer,
       points = self.score.points,
     };
