@@ -112,6 +112,7 @@ void draw()
   }
   else if(mode.status == 1)
   {
+    timer.react();
     background(0,0,0);
     PFont font = loadFont("monospace");
     textFont(font,35);
