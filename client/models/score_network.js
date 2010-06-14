@@ -43,7 +43,7 @@ function ScoreNetwork(score)
   {
     return self.data;
   };
-  self.sendMessage = function()
+  self.sendAlive = function()
   {
     var message = {
       type = 0,
