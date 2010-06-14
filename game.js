@@ -24,6 +24,8 @@ function ScoreBoard(score)
   {
     text("Instructions:",500,50);
     text("n - new game",500,75);
+    text("k - next page",500,100);
+    text("j - previous page",500,125);
   }
   self.list = function()
   {
@@ -51,7 +53,7 @@ function ScoreBoard(score)
       self.start += 20;
       if (self.start == 100)
       {
-        self.start = 0;
+        self.start = 80;
       }
     }
   };
@@ -288,12 +290,15 @@ void scoreKey()
 {
   switch(key)
   {
+  //n is restart the game
   case 110:
     restartGame();
     break;
+  //j, view previous page
   case 106:
     board.previousPage();
     break;
+  //k, view next page
   case 107:
     board.turnPage();
     break;
@@ -1108,7 +1113,10 @@ void drawInstruction()
   text("w - rotate",450,140);
 }
 
-void sendNet()
+//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
+
+
+void sendAlive()
 {
   if (timer.getEvent() == "network")
   {
@@ -1128,7 +1136,7 @@ void draw()
       }
       downEvent();
     }
-    sendNet();
+    sendAlive();
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
@@ -1149,7 +1157,7 @@ void draw()
   else if(mode.status == 1)
   {
     timer.react();
-    sendNet();
+    sendAlive();
     background(0,0,0);
     PFont font = loadFont("monospace");
     textFont(font,35);
@@ -1161,13 +1169,13 @@ void draw()
   else if(mode.status == 2)
   {
     timer.react();
-    sendNet();
+    sendAlive();
     board.display();
   }
   else if(mode.status == 3)
   {
     timer.react();
-    sendNet();
+    sendAlive();
     score_data.display();
   }
 }
