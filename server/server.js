@@ -30,10 +30,14 @@ server.addListener("connection",function(conn){
   });
   
   conn.addListener("message",function(event){
+    //data[0] notates data types so we know how to process the data. 
     data = JSON.parse(event);
-    db.add_to_list(data[0],data[1]);
-    sendData();
-    db.save();
+    if (data[0] == 0)
+    {
+      db.add_to_list(data[1],data[2]);
+      sendData();
+      db.save();
+    }
   });
 
   conn.addListener("error",function(event){
