@@ -37,6 +37,7 @@ function PlayField()
     var y = r / 20;
     return [x,y];
   };
+  //collision detection
   self.check = function(blocks,x_offset,y_offset)
   {
     for (i = 0; i < 4; i++)
