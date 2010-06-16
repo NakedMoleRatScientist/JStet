@@ -42,6 +42,7 @@ function PlayField()
     }
     return true;
   };
+  //Add blocks to the field and encode color information
   self.insert_blocks = function(blocks,c,r,color)
   {
     var offset = self.calculate_positions(c,r);
