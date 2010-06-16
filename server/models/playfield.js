@@ -1,0 +1,6 @@
+
+function PlayField()
+{
+  self = this;
+  
+}
