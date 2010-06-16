@@ -1,6 +1,6 @@
 
 
-function Timer()
+function GameTimer()
 {
   self = this;
   self.speed = 1000;
