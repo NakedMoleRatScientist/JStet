@@ -58,5 +58,21 @@ function PlayField()
       self.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
     }
   };
+  //move line down
+  self.move_lines = function(line)
+  {
+    if (line == false)
+    {
+      return false;
+    }
+    for (y = line; y > 1; y--)
+    {
+      for (x = 0; x < 10; x++)
+      {
+        self.field[x][y] = self.field[x][y - 1]
+      }
+    }
+    return true;
+  };
   self.field = self.create_field();
 }
