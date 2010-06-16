@@ -29,6 +29,7 @@ function PlayField()
         }
       }
     }
+    return coord;
   };
   self.field = self.create_field();
 }
