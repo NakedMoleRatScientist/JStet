@@ -1,0 +1,7 @@
+
+
+function GameEngine()
+{
+  self = this;
+  
+}
