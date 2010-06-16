@@ -5,6 +5,7 @@ function Timer()
   self = this;
   self.speed = 1000;
   self.rate = 20;
+  self.cycles = 0;
   self.time = new Date();
   self.tick = function()
   {
