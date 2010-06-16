@@ -31,6 +31,12 @@ function PlayField()
     }
     return coord;
   };
+  self.calculate_positions = function(c,r)
+  {
+    var x = c / 20;
+    var y = r / 20;
+    return [x,y];
+  };
   self.check = function(blocks,x_offset,y_offset)
   {
     for (i = 0; i < 4; i++)
