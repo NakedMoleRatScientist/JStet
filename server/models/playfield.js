@@ -87,5 +87,31 @@ function PlayField()
     }
     return line;
   };
+  self.check_field = function()
+  {
+    var line = 0;
+    var score = 0;
+    for (y = 0; y < 20; y++)
+    {
+      score = 0;
+      for (x = 0; x < 10; x++)
+      {
+        if(self.field[x][y] != 0)
+        {
+          score ++;
+        }
+        else
+        {
+          x = 10;
+        }
+        if (score == 10)
+        {
+          return line;
+        }
+      }
+      line ++;
+    }
+    return false;
+  };
   self.field = self.create_field();
 }
