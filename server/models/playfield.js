@@ -74,5 +74,18 @@ function PlayField()
     }
     return true;
   };
+  //delete a line
+  self.clear_line = function(line)
+  {
+    if (line == false)
+    {
+      return false;
+    }
+    for (x = 0; x < 10; x++)
+    {
+      self.field[x][line] = 0;
+    }
+    return line;
+  };
   self.field = self.create_field();
 }
