@@ -31,5 +31,16 @@ function PlayField()
     }
     return coord;
   };
+  self.check = function(blocks,x_offset,y_offset)
+  {
+    for (i = 0; i < 4; i++)
+    {
+      if (self.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] != 0)
+      {
+        return false;
+      }
+    }
+    return true;
+  };
   self.field = self.create_field();
 }
