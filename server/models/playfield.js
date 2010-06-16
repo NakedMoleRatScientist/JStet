@@ -15,7 +15,7 @@ function PlayField()
     }
     return field;
   };
-  //Add qualified blocks to the field.
+  //Get a list of qualified blocks to the field.
   self.get_list = function(blocks)
   {
     var coord = new Array();
