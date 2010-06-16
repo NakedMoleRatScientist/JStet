@@ -22,6 +22,7 @@ function Timer()
     if (new_time - self.time >= self.speed)
     {
       self.time = new_time;
+      self.increaseCycle();
       return true;
     }
   };
