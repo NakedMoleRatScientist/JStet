@@ -1,0 +1,7 @@
+
+
+function Timer()
+{
+  self = this;
+  
+}
