@@ -15,4 +15,5 @@ function PlayField()
     }
     return field;
   };
+  self.field = self.create_field();
 }
