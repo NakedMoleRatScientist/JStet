@@ -42,6 +42,10 @@ server.addListener("connection",function(conn){
     {
       sys.log("<"+conn._id+"> is still alive!");
     }
+    else if(data[0] == 2)
+    {
+      sys.log("gameplay commands");
+    }
   });
 
   conn.addListener("error",function(event){
