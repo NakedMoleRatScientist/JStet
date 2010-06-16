@@ -9,5 +9,10 @@ function Timer()
   self.tick = function()
   {
     Var new_time = new Date();
+    if (new_time - self.time >= self.speed)
+    {
+      self.time = new_time;
+      return true;
+    }
   };
 }
