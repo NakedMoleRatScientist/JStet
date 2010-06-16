@@ -7,6 +7,15 @@ function Timer()
   self.rate = 20;
   self.cycles = 0;
   self.time = new Date();
+  self.increaseCycle = function()
+  {
+    if (self.cycles == 20)
+    {
+      self.cycles = 0;
+      self.speed --;
+    }
+    self.cycles ++;
+  };
   self.tick = function()
   {
     Var new_time = new Date();
