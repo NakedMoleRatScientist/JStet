@@ -23,4 +23,14 @@ function Network(score)
       console.log(timer.getSeconds() + " seconds has eclipsed");
     };
   };
+  self.sendAlive = function()
+  {
+    var message = {
+      type = 0,
+      name = identifer,
+      points = self.score.points
+    };
+    data = JSON.stringify(message);
+    self.ws.send(data);
+  };
 }
