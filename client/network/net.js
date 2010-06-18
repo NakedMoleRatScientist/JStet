@@ -1,6 +1,6 @@
 
 
-function Network(score)
+function Net(score)
 {
   self = this;
   self.ws = null;
