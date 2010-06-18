@@ -17,5 +17,11 @@ function ScoreProtocol(score)
       return self.data.scores[99];
     }
     return false;
-  }
+  };
+  self.transmitScore = function(identifer)
+  {
+    var message = [0,identifer,points];
+    data = JSON.stringify(message);
+    self.ws.send(data);
+  };
 }
