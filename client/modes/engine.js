@@ -88,7 +88,7 @@ void sendAlive()
 {
   if (timer.getEvent() == "network")
   {
-    score.network.sendAlive();
+    network.sendAlive();
   }
 }
 
