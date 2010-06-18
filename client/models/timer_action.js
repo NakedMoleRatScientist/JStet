@@ -1,7 +1,7 @@
 
 function TimerAction()
 {
-  self = this;
+  var self = this;
   self.eclipsed = 0;
   self.speed = 1000;
   self.actions = [];
