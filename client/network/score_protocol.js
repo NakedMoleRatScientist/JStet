@@ -2,6 +2,6 @@
 
 function ScoreProtocol(score)
 {
-  self = this;
+  var self = this;
   self.score = score;
 }
