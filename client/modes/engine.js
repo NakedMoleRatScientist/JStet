@@ -22,6 +22,7 @@ var timer = new TimerAction();
 var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
+network.initialize();
 timer.addAction("network",60);
 
 function cleanEvent()
