@@ -4,37 +4,37 @@
 function Score()
 {
   self = this;
-  this.points = 0;
-  this.minimum = 0;
-  this.network = new ScoreProtocol(this);
-  this.network.initialize();
-  this.increase = function()
+  self.points = 0;
+  self.minimum = 0;
+  self.network = new ScoreProtocol(self);
+  self.network.initialize();
+  self.increase = function()
   {
-    this.points ++;
+    self.points ++;
   },
-  this.changeMinimum = function(min)
+  self.changeMinimum = function(min)
   {
     if (min == false)
     {
       return false;
     }
-    this.minimum = min;
+    self.minimum = min;
   }
-  this.toString = function()
+  self.toString = function()
   {
-    return "Score: " + this.points;
+    return "Score: " + self.points;
   }
-  this.reset = function()
+  self.reset = function()
   {
-    this.points = 0;
+    self.points = 0;
   }
-  this.check = function()
+  self.check = function()
   {
-    if (this.minimum == false & this.points != 0)
+    if (self.minimum == false & self.points != 0)
     {
       return true;
     }
-    else if (this.minimum < this.points && this.points != 0)
+    else if (self.minimum < self.points && self.points != 0)
     {
       return true;
     }
