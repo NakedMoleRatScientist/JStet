@@ -4,6 +4,7 @@ function Network(score)
 {
   self = this;
   self.ws = null;
+  self.score = score;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
