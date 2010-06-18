@@ -9,6 +9,7 @@ function Network()
     self.ws = new WebSocket('ws://localhost:7000');
     self.ws.onmessage = function(event)
     {
+      self.data = JSON.parse(event.data);
     }
   };
 }
