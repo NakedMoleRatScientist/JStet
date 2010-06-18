@@ -14,7 +14,7 @@ function Net(score)
       switch (self.data[0])
       {
       case 0:
-        sys.log("Excellent!");
+        console.log("Excellent!");
       }
     };
     self.ws.onclose = function()
