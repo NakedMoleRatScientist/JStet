@@ -1,4 +1,57 @@
 
+function TimerAction()
+{
+  var self = this;
+  self.eclipsed = 0;
+  self.speed = 1000;
+  self.actions = [];
+  self.cycle = 0;
+  self.time = new Date();
+  self.addAction = function(name , cycle)
+  {
+    self.actions.push([name,cycle]);
+  };
+  self.tickCycle = function()
+  {
+    self.cycle++;
+    if (self.cycle == 100)
+    {
+      self.cycle = 0;
+    }
+  };
+  //A name will be returned when it reached the specificed cycle.
+  self.getEvent = function()
+  {
+    for (i = 0; i < self.actions.length;i++)
+    {
+      if (self.cycle == self.actions[i][1])
+      {
+        return self.actions[i][0];
+      }
+    };
+    return false;
+  };
+  self.react = function()
+  {
+    var new_time = new Date();
+    if (new_time - self.time >= self.speed)
+    {
+      self.time = new_time;
+      self.tickCycle();
+      self.eclipsed += 1; //As long as the speed is 1000, it'll be accurate
+      return true;
+    }
+    return false;
+  };
+  self.reset = function()
+  {
+    self.cycle = 0;
+  };
+  self.getSeconds = function()
+  {
+    return self.eclipsed;
+  };
+}
 void restartGame()
 {
   field.field = field.create_field();
@@ -9,7 +62,7 @@ void restartGame()
 
 function ScoreBoard(score)
 {
-  var self = this;
+  self = this;
   self.score = score;
   self.start = 0;
   self.turn = false;
@@ -79,11 +132,17 @@ function ScoreBoard(score)
 
 
 
-function ScoreNetwork(score)
+function ScoreProtocol(score)
 {
-  var self = this;
+  self = this;
+  self.score = score;
+}
+
+
+function Net(score)
+{
+  self = this;
   self.ws = null;
-  self.data = null;
   self.score = score;
   self.initialize = function()
   {
@@ -91,46 +150,30 @@ function ScoreNetwork(score)
     self.ws.onmessage = function(event)
     {
       self.data = JSON.parse(event.data);
-      self.score.changeMinimum(self.getLimit());
+      switch (self.data[0])
+      {
+      case 0:
+        sys.log("Excellent!");
+      }
     };
     self.ws.onclose = function()
     {
       console.log("Connection ended.");
-      console.log(timer.getSeconds() + " seconds has eclipsed.")
+      console.log(timer.getSeconds() + " seconds has eclipsed");
     };
-  };
-  //Return the mininum score to submit score to database.
-  self.getLimit = function()
-  {
-    if (self.data.status == true)
-    {
-      return self.data.scores[99];
-    }
-    return false;
-  };
-  self.transmitScore = function(identifer)
-  {
-    var message = {
-      type = 0,
-      name = identifer,
-      points = self.score.points,
-    };
-    data = JSON.stringify(message);
-    self.ws.send(data);
-  };
-  self.getData = function()
-  {
-    return self.data;
   };
   self.sendAlive = function()
   {
     var message = {
-      type = 1
+      type = 0,
+      name = identifer,
+      points = self.score.points
     };
     data = JSON.stringify(message);
     self.ws.send(data);
-  }
+  };
 }
+
 function HighScore()
 {
   var self = this;
@@ -345,94 +388,41 @@ void gameKey()
     break;
   }
 }
-function TimerAction()
-{
-  self = this;
-  self.eclipsed = 0;
-  self.speed = 1000;
-  self.actions = [];
-  self.cycle = 0;
-  self.time = new Date();
-  self.addAction = function(name , cycle)
-  {
-    self.actions.push([name,cycle]);
-  };
-  self.tickCycle = function()
-  {
-    self.cycle++;
-    if (self.cycle == 100)
-    {
-      self.cycle = 0;
-    }
-  };
-  //A name will be returned when it reached the specificed cycle.
-  self.getEvent = function()
-  {
-    for (i = 0; i < self.actions.length;i++)
-    {
-      if (self.cycle == self.actions[i][1])
-      {
-        return self.actions[i][0];
-      }
-    };
-    return false;
-  };
-  self.react = function()
-  {
-    var new_time = new Date();
-    if (new_time - self.time >= self.speed)
-    {
-      self.time = new_time;
-      self.tickCycle();
-      self.eclipsed += 1; //As long as the speed is 1000, it'll be accurate
-      return true;
-    }
-    return false;
-  };
-  self.reset = function()
-  {
-    self.cycle = 0;
-  };
-  self.getSeconds = function()
-  {
-    return self.eclipsed;
-  };
-}
 
 //Deal with score keeping.
 function Score()
 {
-  this.points = 0;
-  this.minimum = 0;
-  this.network = new ScoreNetwork(this);
-  this.network.initialize();
-  this.increase = function()
+  self = this;
+  self.points = 0;
+  self.minimum = 0;
+  self.network = new ScoreProtocol(self);
+  self.increase = function()
   {
-    this.points ++;
+    self.points ++;
   },
-  this.changeMinimum = function(min)
+  self.changeMinimum = function(min)
   {
     if (min == false)
     {
       return false;
     }
-    this.minimum = min;
+    self.minimum = min;
   }
-  this.toString = function()
+  self.toString = function()
   {
-    return "Score: " + this.points;
+    return "Score: " + self.points;
   }
-  this.reset = function()
+  self.reset = function()
   {
-    this.points = 0;
+    self.points = 0;
   }
-  this.check = function()
+  self.check = function()
   {
-    if (this.minimum == false & this.points != 0)
+    if (self.minimum == false & self.points != 0)
     {
       return true;
     }
-    else if (this.minimum < this.points && this.points != 0)
+    else if (self.minimum < self.points && self.points != 0)
     {
       return true;
     }
@@ -1059,8 +1049,8 @@ var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var board = new ScoreBoard(score);
 var score_data = new HighScore();
-timer.addAction("network",60);
-
+var network = new Net(score);
+console.log(network);
 function cleanEvent()
 {
   shape.return_to_normal();
@@ -1125,7 +1115,7 @@ void sendAlive()
 {
   if (timer.getEvent() == "network")
   {
-    score.network.sendAlive();
+    network.sendAlive();
   }
 }
 
