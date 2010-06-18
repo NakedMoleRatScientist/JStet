@@ -16,6 +16,11 @@ function Network(score)
       case 0:
         sys.log("Excellent!");
       }
-    }
+    };
+    self.ws.onclose = function()
+    {
+      console.log("Connection ended.");
+      console.log(timer.getSeconds() + " seconds has eclipsed");
+    };
   };
 }
