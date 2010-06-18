@@ -10,6 +10,11 @@ function Network()
     self.ws.onmessage = function(event)
     {
       self.data = JSON.parse(event.data);
+      switch (self.data[0])
+      {
+      case 0:
+        sys.log("Excellent!");
+      }
     }
   };
 }
