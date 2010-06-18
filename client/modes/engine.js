@@ -21,6 +21,7 @@ var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var board = new ScoreBoard(score);
 var score_data = new HighScore();
+var network = new Net(score);
 timer.addAction("network",60);
 
 function cleanEvent()
