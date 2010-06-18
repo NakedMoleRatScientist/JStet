@@ -2,7 +2,7 @@
 
 function Net(score)
 {
-  self = this;
+  var self = this;
   self.ws = null;
   self.score = score;
   self.initialize = function()
