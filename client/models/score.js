@@ -6,7 +6,7 @@ function Score()
   self = this;
   self.points = 0;
   self.minimum = 0;
-  self.network = new ScoreProtocol(self);
+  self.protocol = new ScoreProtocol(self);
   self.increase = function()
   {
     self.points ++;
