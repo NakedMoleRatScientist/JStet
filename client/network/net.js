@@ -23,7 +23,7 @@ function Net(score)
       console.log(timer.getSeconds() + " seconds has eclipsed");
     };
   };
-  self.sendScore = function()
+  self.sendScore = function(identifer)
   {
     var message = {
       type = 0,
