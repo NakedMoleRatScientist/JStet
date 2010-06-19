@@ -23,6 +23,7 @@ var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
 network.initialize();
+score.enable_network(network);
 timer.addAction("network",60);
 
 function cleanEvent()
