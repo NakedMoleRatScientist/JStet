@@ -33,7 +33,7 @@ function ScoreBoard(score)
   };
   self.list = function()
   {
-    data = score.network.getData();
+    data = score.protocol.getData();
     y = 70;
     limit = self.start + 20;
     self.turn = true;
@@ -84,7 +84,7 @@ function ScoreProtocol(score)
   var self = this;
   self.score = score;
   self.data = null;
-  self.getData = function(data)
+  self.changeData = function(data)
   {
     self.data = data;
     self.score.changeMinimum(self.getLimit());
@@ -97,11 +97,15 @@ function ScoreProtocol(score)
     }
     return false;
   };
-  self.transmitScore = function(identifer)
+  self.toJSON = function(identifer)
   {
-    var message = [0,identifer,points];
+    var message = [0,identifer,self.score.points];
     data = JSON.stringify(message);
-    self.ws.send(data);
+    return data
+  };
+  self.getData = function()
+  {
+    return self.data;
   };
 }
 
@@ -120,7 +124,7 @@ function Net(score)
       switch (self.data[0])
       {
       case 0:
-        console.log("Excellent!");
+        self.score.protocol.changeData(self.data[1]);
       }
     };
     self.ws.onclose = function()
@@ -131,13 +135,13 @@ function Net(score)
   };
   self.sendAlive = function()
   {
-    var message = {
-      type = 0,
-      name = identifer,
-      points = self.score.points
-    };
+    var message = [2];
     data = JSON.stringify(message);
     self.ws.send(data);
+  };
+  self.transmitScore = function()
+  {
+    self.ws.send(self.score.protocol.toJSON());
   };
 }
 
@@ -265,7 +269,7 @@ void enterScoreKey()
     score_data.destroy();
     break;
   case 13:
-    score.network.transmitScore(score_data.getName());
+    network.transmitScore(score_data.getName());
     score_data.clean();
     mode.change(2);
     break;
@@ -415,7 +419,7 @@ function Score()
   self = this;
   self.points = 0;
   self.minimum = 0;
-  self.network = new ScoreProtocol(self);
+  self.protocol = new ScoreProtocol(self);
   self.increase = function()
   {
     self.points ++;
