@@ -24,4 +24,8 @@ function ScoreProtocol(score)
     data = JSON.stringify(message);
     self.ws.send(data);
   };
+  self.getData = function()
+  {
+    return self.data;
+  };
 }
