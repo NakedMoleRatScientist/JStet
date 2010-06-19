@@ -33,4 +33,8 @@ function Net(score)
   {
     self.ws.send(self.score.protocol.toJSON());
   };
+  self.send = function(data)
+  {
+    self.ws(data)
+  };
 }
