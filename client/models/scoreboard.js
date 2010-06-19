@@ -25,7 +25,7 @@ function ScoreBoard(score)
   };
   self.list = function()
   {
-    data = score.network.getData();
+    data = score.protocol.getData();
     y = 70;
     limit = self.start + 20;
     self.turn = true;
