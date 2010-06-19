@@ -11,7 +11,7 @@ function Score(net)
   self.increase = function()
   {
     self.points ++;
-  },
+  };
   self.changeMinimum = function(min)
   {
     if (min == false)
@@ -19,15 +19,15 @@ function Score(net)
       return false;
     }
     self.minimum = min;
-  }
+  };
   self.toString = function()
   {
     return "Score: " + self.points;
-  }
+  };
   self.reset = function()
   {
     self.points = 0;
-  }
+  };
   self.check = function()
   {
     if (self.minimum == false & self.points != 0)
@@ -38,6 +38,6 @@ function Score(net)
     {
       return true;
     }
-    return false
-  }
+    return false;
+  };
 }
