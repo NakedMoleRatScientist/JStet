@@ -29,4 +29,8 @@ function Net(score)
     data = JSON.stringify(message);
     self.ws.send(data);
   };
+  self.transmitScore = function()
+  {
+    self.ws.send(self.score.network.toJSON());
+  };
 }
