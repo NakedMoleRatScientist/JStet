@@ -1,10 +1,10 @@
 
 
 //Deal with score keeping.
-function Score(net)
+function Score()
 {
   var self = this;
-  self.net = net;
+  self.net = null;
   self.points = 0;
   self.minimum = 0;
   self.protocol = new ScoreProtocol(self);
