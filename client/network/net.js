@@ -23,13 +23,9 @@ function Net(score)
       console.log(timer.getSeconds() + " seconds has eclipsed");
     };
   };
-  self.sendAlive = function(identifer)
+  self.sendAlive = function()
   {
-    var message = {
-      type = 0,
-      name = identifer,
-      points = self.score.points
-    };
+    var message = [2];
     data = JSON.stringify(message);
     self.ws.send(data);
   };
