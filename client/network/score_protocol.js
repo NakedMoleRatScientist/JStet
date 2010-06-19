@@ -18,11 +18,11 @@ function ScoreProtocol(score)
     }
     return false;
   };
-  self.transmitScore = function(identifer)
+  self.toJSON = function(identifer)
   {
     var message = [0,identifer,self.score.points];
     data = JSON.stringify(message);
-    self.ws.send(data);
+    return data
   };
   self.getData = function()
   {
