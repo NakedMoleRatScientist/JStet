@@ -14,7 +14,7 @@ function Net(score)
       switch (self.data[0])
       {
       case 0:
-        self.score.network.changeData(self.data[1]);
+        self.score.protocol.changeData(self.data[1]);
       }
     };
     self.ws.onclose = function()
