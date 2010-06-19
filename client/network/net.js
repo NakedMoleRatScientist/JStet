@@ -35,6 +35,6 @@ function Net(score)
   };
   self.send = function(data)
   {
-    self.ws(data)
+    self.ws(data);
   };
 }
