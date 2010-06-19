@@ -20,8 +20,8 @@ function ScoreProtocol(score)
   };
   self.transmitScore = function(identifer)
   {
-    var message = [0,identifer,points];
-    data = JSON.stringify(message);
+    var message = [0,identifer,self.score.points];
+    Data = JSON.stringify(message);
     self.ws.send(data);
   };
   self.getData = function()
