@@ -99,6 +99,8 @@ void draw()
 {
   switch(mode.status)
   {
+  case 0:
+    over.display();
   case 4:
     if (timer.react())
     { 
