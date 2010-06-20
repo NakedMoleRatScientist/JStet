@@ -24,7 +24,6 @@ var score_data = new HighScore();
 var network = new Net(score);
 var over = new GameOver();
 network.initialize();
-score.enableNetwork(network);
 timer.addAction("network",60);
 
 function cleanEvent()
@@ -100,7 +99,10 @@ void draw()
   switch(mode.status)
   {
   case 0:
+    timer.react();
+    sendAlive();
     over.display();
+    break;
   case 4:
     if (timer.react())
     { 
@@ -127,17 +129,16 @@ void draw()
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
-  case 1:
-    timer.react();
-    sendAlive();
-    over.display();
+    break;
   case 2:
     timer.react();
     sendAlive();
     board.display();
+    break;
   case 3:
     timer.react();
     sendAlive();
     score_data.display();
+    break;
   }
 }
