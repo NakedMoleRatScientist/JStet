@@ -2,9 +2,24 @@
 void restartGame()
 {
   field.field = field.create_field();
-  mode.change(0);
+  mode.change(4);
   score.reset();
   timer.reset();
+}
+
+
+function TitleScreen()
+{
+  var self = this;
+  self.display = function()
+  {
+    background(0,0,0);
+    PFont font = loadFont("monospace");
+    textFont(font,50);
+    text("JStet",300,300);
+    textFont(font,18);
+    text("Press n for a new game.",300,375);
+  };
 }
 
 function ScoreBoard(score)
@@ -15,7 +30,7 @@ function ScoreBoard(score)
   self.turn = false;
   self.title = function()
   {
-    background(0,0,0)
+    background(0,0,0);
     PFont font = loadFont("monospace");
     textFont(font,18);
     text("HIGH SCORE LIST",250,50);
@@ -84,6 +99,11 @@ function ScoreProtocol(score)
   var self = this;
   self.score = score;
   self.data = null;
+  self.net = null;
+  self.enable_network = function(net)
+  {
+    self.net = net;
+  };
   self.changeData = function(data)
   {
     self.data = data;
@@ -142,6 +162,10 @@ function Net(score)
   self.transmitScore = function()
   {
     self.ws.send(self.score.protocol.toJSON());
+  };
+  self.send = function(data)
+  {
+    self.ws(data);
   };
 }
 
@@ -275,6 +299,22 @@ void enterScoreKey()
     break;
   }
 }
+
+function GameOver()
+{
+  var self = this;
+  self.display = function()
+  {
+    background(0,0,0);
+    PFont font = loadFont("monospace");
+    textFont(font,35);
+    text("Game OVER",300,300);
+    textFont(font,18);
+    text("Press n to start a new game.",250,325);
+    text("Press d to display highscore", 250,350);
+  };
+}
+
 void gameOverKey()
 {
   if (key == 110)
@@ -416,14 +456,19 @@ function TimerAction()
 //Deal with score keeping.
 function Score()
 {
-  self = this;
+  var self = this;
+  self.net = null;
   self.points = 0;
   self.minimum = 0;
   self.protocol = new ScoreProtocol(self);
+  self.enableNetwork = function(net)
+  {
+    self.net = net;
+  };
   self.increase = function()
   {
     self.points ++;
-  },
+  };
   self.changeMinimum = function(min)
   {
     if (min == false)
@@ -431,15 +476,15 @@ function Score()
       return false;
     }
     self.minimum = min;
-  }
+  };
   self.toString = function()
   {
     return "Score: " + self.points;
-  }
+  };
   self.reset = function()
   {
     self.points = 0;
-  }
+  };
   self.check = function()
   {
     if (self.minimum == false & self.points != 0)
@@ -450,8 +495,8 @@ function Score()
     {
       return true;
     }
-    return false
-  }
+    return false;
+  };
 }
 function PlayField()
 {
@@ -1074,7 +1119,9 @@ var timer = new TimerAction();
 var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
+var over = new GameOver();
 network.initialize();
+score.enableNetwork(network);
 timer.addAction("network",60);
 
 function cleanEvent()
@@ -1147,8 +1194,9 @@ void sendAlive()
 
 void draw()
 {
-  if (mode.status == 0)
+  switch(mode.status)
   {
+  case 4:
     if (timer.react())
     { 
       if (shape.move(0,20) == 2)
@@ -1174,27 +1222,15 @@ void draw()
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
-  }
-  else if(mode.status == 1)
-  {
+  case 1:
     timer.react();
     sendAlive();
-    background(0,0,0);
-    PFont font = loadFont("monospace");
-    textFont(font,35);
-    text("GAME OVER",300,300);
-    textFont(font,18);
-    text("Press n to start a new game.",250,325);
-    text("Press d to display highscore",250,350);
-  }
-  else if(mode.status == 2)
-  {
+    over.display();
+  case 2:
     timer.react();
     sendAlive();
     board.display();
-  }
-  else if(mode.status == 3)
-  {
+  case 3:
     timer.react();
     sendAlive();
     score_data.display();
