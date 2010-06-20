@@ -10,6 +10,6 @@ function TitleScreen()
     textFont(font,50);
     text("JStet",300,300);
     textFont(font,18);
-    text("Press n for a new game.",300,375);
+    text("Press n for a new game.",260,325);
   };
 }
