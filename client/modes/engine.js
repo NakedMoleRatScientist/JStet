@@ -96,7 +96,7 @@ void sendAlive()
 
 void draw()
 {
-  if (mode.status == 0)
+  if (mode.status == 4)
   {
     if (timer.react())
     { 
