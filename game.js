@@ -7,6 +7,18 @@ void restartGame()
   timer.reset();
 }
 
+//Data type is 2 for gameplay commands.
+function GameProtocol(net)
+{
+  var self = this;
+  self.net = net;
+  self.requestGame = function()
+  {
+    data = [2,"new"];
+    self.net.send(data);
+  };
+}
+
 
 function TitleScreen()
 {
@@ -18,7 +30,7 @@ function TitleScreen()
     textFont(font,50);
     text("JStet",300,300);
     textFont(font,18);
-    text("Press n for a new game.",300,375);
+    text("Press n for a new game.",260,325);
   };
 }
 
@@ -1120,8 +1132,10 @@ var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
 var over = new GameOver();
+var title = new TitleScreen();
 network.initialize();
 score.enableNetwork(network);
+var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
 
 function cleanEvent()
@@ -1196,6 +1210,11 @@ void draw()
 {
   switch(mode.status)
   {
+  case 0:
+    timer.react();
+    sendAlive();
+    title.display();
+    break;
   case 4:
     if (timer.react())
     { 
@@ -1222,17 +1241,21 @@ void draw()
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
+    break;
   case 1:
     timer.react();
     sendAlive();
     over.display();
+    break;
   case 2:
     timer.react();
     sendAlive();
     board.display();
+    break;
   case 3:
     timer.react();
     sendAlive();
     score_data.display();
+    break;
   }
 }
