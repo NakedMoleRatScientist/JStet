@@ -2,6 +2,6 @@
 
 function GameProtcol()
 {
-  self = this;
+  var self = this;
   
 }
