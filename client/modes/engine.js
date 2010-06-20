@@ -24,7 +24,7 @@ var score_data = new HighScore();
 var network = new Net(score);
 var over = new GameOver();
 network.initialize();
-score.enable_network(network);
+score.enableNetwork(network);
 timer.addAction("network",60);
 
 function cleanEvent()
