@@ -97,8 +97,9 @@ void sendAlive()
 
 void draw()
 {
-  if (mode.status == 4)
+  switch(mode.status)
   {
+  case 4:
     if (timer.react())
     { 
       if (shape.move(0,20) == 2)
@@ -124,21 +125,15 @@ void draw()
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
-  }
-  else if(mode.status == 1)
-  {
+  case 1:
     timer.react();
     sendAlive();
     over.display();
-  }
-  else if(mode.status == 2)
-  {
+  case 2:
     timer.react();
     sendAlive();
     board.display();
-  }
-  else if(mode.status == 3)
-  {
+  case 3:
     timer.react();
     sendAlive();
     score_data.display();
