@@ -99,10 +99,6 @@ void draw()
   switch(mode.status)
   {
   case 0:
-    timer.react();
-    sendAlive();
-    over.display();
-    break;
   case 4:
     if (timer.react())
     { 
@@ -129,6 +125,11 @@ void draw()
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
+    break;
+  case 1:
+    timer.react();
+    sendAlive();
+    over.display();
     break;
   case 2:
     timer.react();
