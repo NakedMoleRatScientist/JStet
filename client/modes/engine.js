@@ -25,6 +25,7 @@ var network = new Net(score);
 var over = new GameOver();
 var title = new TitleScreen();
 network.initialize();
+score.enableNetwork(network);
 timer.addAction("network",60);
 
 function cleanEvent()
