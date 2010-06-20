@@ -23,6 +23,7 @@ var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
 var over = new GameOver();
+var title = new TitleScreen();
 network.initialize();
 timer.addAction("network",60);
 
@@ -99,6 +100,9 @@ void draw()
   switch(mode.status)
   {
   case 0:
+    timer.react();
+    sendAlive();
+    title.display();
   case 4:
     if (timer.react())
     { 
