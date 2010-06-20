@@ -22,6 +22,7 @@ var timer = new TimerAction();
 var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
+var over = new GameOver();
 network.initialize();
 score.enable_network(network);
 timer.addAction("network",60);
