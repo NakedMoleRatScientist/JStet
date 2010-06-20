@@ -103,6 +103,7 @@ void draw()
     timer.react();
     sendAlive();
     title.display();
+    break;
   case 4:
     if (timer.react())
     { 
