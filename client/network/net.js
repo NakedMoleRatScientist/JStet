@@ -25,7 +25,7 @@ function Net(score)
   };
   self.sendAlive = function()
   {
-    var message = [2];
+    var message = [1];
     data = JSON.stringify(message);
     self.ws.send(data);
   };
