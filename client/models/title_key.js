@@ -5,5 +5,6 @@ void TitleKey
   {
   case 110:
     mode.change(0);
+    break;
   }
 }
