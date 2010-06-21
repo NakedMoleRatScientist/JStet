@@ -4,7 +4,7 @@ void keyPressed()
   switch(mode.status)
   {
   case 0:
-    titleKey();
+    TitleKey();
     break;
   case 4:
     gameKey();
