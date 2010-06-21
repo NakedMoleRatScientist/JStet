@@ -36,19 +36,19 @@ server.addListener("connection",function(conn){
     //1 - Client status
     //2 - Game
     data = JSON.parse(event);
-    if (data[0] == 0)
+    switch(data[0])
     {
+    case 0:
       db.add_to_list(data[1],data[2]);
       sendData();
       db.save();
-    }
-    else if(data[0] == 1)
-    {
+      break;
+    case 1:
       sys.log("<"+conn._id+"> is still alive!");
-    }
-    else if(data[0] == 2)
-    {
+      break;
+    case 2:
       sys.log("gameplay commands");
+      break;
     }
   });
 
