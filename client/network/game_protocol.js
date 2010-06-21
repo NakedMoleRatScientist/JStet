@@ -6,7 +6,7 @@ function GameProtocol(net)
   self.net = net;
   self.requestGame = function()
   {
-    data = [2,"new"];
+    data = [2,0];
     self.net.send(data);
   };
 }
