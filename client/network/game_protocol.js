@@ -7,7 +7,6 @@ function GameProtocol(net)
   self.requestGame = function()
   {
     data = [2,0];
-    JSON.stringify(data);
     self.net.send(data);
   };
 }
