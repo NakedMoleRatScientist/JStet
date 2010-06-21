@@ -26,8 +26,7 @@ function ScoreProtocol(score)
   self.toJSON = function(identifer)
   {
     var message = [0,identifer,self.score.points];
-    data = JSON.stringify(message);
-    return data
+    return data;
   };
   self.getData = function()
   {
