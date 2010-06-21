@@ -1,5 +1,5 @@
 
-void TitleKey
+void titleKey
 {
   switch(key)
   {
