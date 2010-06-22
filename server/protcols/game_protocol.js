@@ -1,15 +1,14 @@
 
 
-function GameProtcol()
+
+exports.process = function(data)
 {
-  var self = this;
-  self.process = function(data)
+  switch(data)
   {
-    switch(data)
-    {
-    case 0:
-      sys.log("New game");
-    }
-  };
+  case 0:
+    sys.log("New game");
+  }
+};
   
-}
+
+
