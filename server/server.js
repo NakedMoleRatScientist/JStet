@@ -43,9 +43,6 @@ server.addListener("connection",function(conn){
       sendData();
       db.save();
       break;
-    case 1:
-      sys.log("<"+conn._id+"> is still alive!");
-      break;
     case 2:
       sys.log("gameplay commands");
       break;
