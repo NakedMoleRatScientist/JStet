@@ -26,7 +26,7 @@ function Net(score)
   self.sendAlive = function()
   {
     var message = [1];
-    self.ws.send(data);
+    self.ws.send(message);
   };
   self.transmitScore = function()
   {
