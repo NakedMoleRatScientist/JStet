@@ -1,4 +1,4 @@
-
+var sys = require('sys');
 
 
 exports.process = function(data)
