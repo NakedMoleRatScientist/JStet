@@ -44,7 +44,7 @@ server.addListener("connection",function(conn){
       db.save();
       break;
     case 2:
-      sys.log("gameplay commands");
+      game.process(data[1]);
       break;
     }
   });
