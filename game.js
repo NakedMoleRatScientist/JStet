@@ -14,7 +14,7 @@ function GameProtocol(net)
   self.net = net;
   self.requestGame = function()
   {
-    data = [2,"new"];
+    data = [2,0];
     self.net.send(data);
   };
 }
@@ -132,8 +132,7 @@ function ScoreProtocol(score)
   self.toJSON = function(identifer)
   {
     var message = [0,identifer,self.score.points];
-    data = JSON.stringify(message);
-    return data
+    return data;
   };
   self.getData = function()
   {
@@ -167,9 +166,8 @@ function Net(score)
   };
   self.sendAlive = function()
   {
-    var message = [2];
-    data = JSON.stringify(message);
-    self.ws.send(data);
+    var message = [1];
+    self.ws.send(message);
   };
   self.transmitScore = function()
   {
@@ -177,7 +175,8 @@ function Net(score)
   };
   self.send = function(data)
   {
-    self.ws(data);
+    data = JSON.stringify(data);
+    self.ws.send(data);
   };
 }
 
@@ -216,6 +215,16 @@ function HighScore()
   self.getName = function()
   {
     return self.name;
+  }
+}
+void titleKey()
+{
+  switch(key)
+  {
+  case 110:
+    mode.change(4);
+    game_protocol.requestGame();
+    break;
   }
 }
 void enterScoreKey()
@@ -343,6 +352,9 @@ void keyPressed()
   switch(mode.status)
   {
   case 0:
+    titleKey();
+    break;
+  case 4:
     gameKey();
     break;
   case 1:
