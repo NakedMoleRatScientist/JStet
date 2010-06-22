@@ -1,6 +1,6 @@
 var sys = require('sys');
 var ws = require('../vendor/ws/ws');
-
+var game = require('./protocols/game_protocol')
 
 
 //server stuff
