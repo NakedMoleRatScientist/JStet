@@ -1,7 +1,7 @@
 
 
   //find max length of a shape
-  self.find_max_x = function()
+  exports.find_max_x = function()
   {
     max = 0;
     for (x = 0; x < 4; x++)
@@ -20,7 +20,7 @@
     return max;
   }
   //find max height of a shape
-  self.find_max_y = function()
+  exports.find_max_y = function()
   {
     max = 0;
     for (x = 0; x < 4; x++)
@@ -36,7 +36,7 @@
     return max;
   };
   //create a shape
-  self.create_blocks = function()
+  exports.create_blocks = function()
   {
     var blocks = new Array(4)
     for (i = 0; i< 4; i++)
@@ -46,22 +46,22 @@
     return blocks;
   };
   //modify whole shapes
-  self.modify_bluk = function(shape)
+  exports.modify_bluk = function(shape)
   {
     for (i = 0; i < shape.length; i++)
     {
-      self.modify_block(shape[i][0],shape[i][1],1);
+      exports.modify_block(shape[i][0],shape[i][1],1);
     }
   };
   //get a list of all suitable blocks
-  self.get_list = function()
+  exports.get_list = function()
   {
     new suitable = new Array();
     for (r = 0; r < 4; r++)
     {
       for (c = 0; c < 4; c++)
       {
-	if (self.blocks[r][c] == 1)
+	if (exports.blocks[r][c] == 1)
 	{
 	  suitable.push([r,c]);
 	}
@@ -70,23 +70,23 @@
     return suitable;
   };
   //return every block to zero
-  self.return_to_zero = function()
+  exports.return_to_zero = function()
   {
-    self.choice = 0;
-    self.modify_bulk(self.shape.get_data(self.choice));
+    exports.choice = 0;
+    exports.modify_bulk(exports.shape.get_data(exports.choice));
   };
   //rotate forward
-  self.rotate = function()
+  exports.rotate = function()
   {
-    self.blocks = self.create_block();
-    self.choice += 1;
-    if (self.choice == self.shape.length)
+    exports.blocks = exports.create_block();
+    exports.choice += 1;
+    if (exports.choice == exports.shape.length)
     {
-      self.choice = 0;
+      exports.choice = 0;
     }
-    self.modify_bulk(self.shape.get_data(self.choice));
-    if (self.rotation_collision_x() == true || self.rotation_collision_y() == true)
+    exports.modify_bulk(exports.shape.get_data(exports.choice));
+    if (exports.rotation_collision_x() == true || exports.rotation_collision_y() == true)
     {
-      self.rotate_backward();
+      exports.rotate_backward();
     }
   };
