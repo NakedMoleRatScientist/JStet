@@ -82,7 +82,7 @@ exports.return_to_zero = function()
   exports.modify_bulk(exports.shape.get_data(exports.choice));
 };
 
-  //rotate forward
+//rotate forward
 exports.rotate = function()
 {
   blocks = create_block();
@@ -97,3 +97,17 @@ exports.rotate = function()
     rotate_backward();
   }
 };
+
+
+
+//rotate backward
+exports.rotate_backward = function()
+{
+  blocks = create_blocks();
+  choice -= 1;
+  if (choice == -1)
+  {
+    choice = shape.length - 1;
+  }
+  modify_bulk(shape.get_data(choice));
+}
