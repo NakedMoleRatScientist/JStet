@@ -1,5 +1,5 @@
 var ishape = require('../models/i_shape');
-
+var lshape = require('../models/l_shape');
 
 function randomChoice()
 {
