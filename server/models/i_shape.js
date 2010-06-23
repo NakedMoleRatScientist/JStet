@@ -27,3 +27,9 @@ function IShape()
     return list;
   }
 }
+
+
+exports.getIShape = function()
+{
+  return new IShape();
+}
