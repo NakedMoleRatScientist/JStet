@@ -36,7 +36,7 @@ function Tetromino()
       }
     }
     return max;
-  }
+  };
   //create a shape
   self.create_blocks = function()
   {
@@ -46,5 +46,13 @@ function Tetromino()
       blocks[i] = new Array(4)
     }
     return blocks;
-  }
+  };
+  //modify whole shapes
+  self.modify_bluk = function(shape)
+  {
+    for (i = 0; i < shape.length; i++)
+    {
+      self.modify_block(shape[i][0],shape[i][1],1);
+    }
+  };
 }
