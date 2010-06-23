@@ -1,7 +1,5 @@
 
-function Tetromino()
-{
-  var self = this;
+
   //find max length of a shape
   self.find_max_x = function()
   {
@@ -92,4 +90,3 @@ function Tetromino()
       self.rotate_backward();
     }
   };
-}
