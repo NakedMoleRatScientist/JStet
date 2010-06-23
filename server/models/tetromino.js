@@ -82,17 +82,17 @@ exports.return_to_zero = function()
 };
 
   //rotate forward
-  exports.rotate = function()
+exports.rotate = function()
+{
+  blocks = exports.create_block();
+  choice += 1;
+  if (choice == shape.length)
   {
-    exports.blocks = exports.create_block();
-    exports.choice += 1;
-    if (exports.choice == exports.shape.length)
-    {
-      exports.choice = 0;
-    }
-    exports.modify_bulk(exports.shape.get_data(exports.choice));
-    if (exports.rotation_collision_x() == true || exports.rotation_collision_y() == true)
-    {
-      exports.rotate_backward();
-    }
-  };
+    choice = 0;
+  }
+  modify_bulk(exports.shape.get_data(exports.choice));
+  if (rotation_collision_x() == true || exports.rotation_collision_y() == true)
+  {
+    rotate_backward();
+  }
+};
