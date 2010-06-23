@@ -46,7 +46,7 @@ function LShape()
 }
 
 
-exports.getLShape = function()
+exports.get = function()
 {
   return new LShape();
 }
