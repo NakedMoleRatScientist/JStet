@@ -1,6 +1,4 @@
-
-
-
+var sys = require('sys')
 
 exports.initializeLoop = function()
 {
