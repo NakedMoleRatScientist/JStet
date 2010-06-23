@@ -143,7 +143,7 @@ exports.move = function(x_move,y_move)
     x -= x_move;
     return 1;
   }
-  if (this.rotation_collision_y() == true)
+  if (rotation_collision_y() == true)
   {
     y -= y;
     return 2;
