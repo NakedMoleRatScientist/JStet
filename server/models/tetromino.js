@@ -74,12 +74,13 @@ exports.get_list = function()
   return suitable;
 };
 
-  //return every block to zero
-  exports.return_to_zero = function()
-  {
-    exports.choice = 0;
-    exports.modify_bulk(exports.shape.get_data(exports.choice));
-  };
+//return every block to zero
+exports.return_to_zero = function()
+{
+  exports.choice = 0;
+  exports.modify_bulk(exports.shape.get_data(exports.choice));
+};
+
   //rotate forward
   exports.rotate = function()
   {
