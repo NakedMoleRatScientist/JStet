@@ -98,6 +98,15 @@ exports.rotate = function()
   }
 };
 
+function rotation_collision_x()
+{
+  if (x > 180 - (find_max_x() * 20))
+  {
+    return true;
+  }
+  return false;
+}
+
 
 
 //rotate backward
