@@ -55,4 +55,19 @@ function Tetromino()
       self.modify_block(shape[i][0],shape[i][1],1);
     }
   };
+  self.get_list = function()
+  {
+    new suitable = new Array();
+    for (r = 0; r < 4; r++)
+    {
+      for (c = 0; c < 4; c++)
+      {
+	if (self.blocks[r][c] == 1)
+	{
+	  suitable.push([r,c]);
+	}
+      }
+    }
+    return suitable;
+  }
 }
