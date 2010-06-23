@@ -84,15 +84,16 @@ exports.return_to_zero = function()
   //rotate forward
 exports.rotate = function()
 {
-  blocks = exports.create_block();
+  blocks = create_block();
   choice += 1;
   if (choice == shape.length)
   {
     choice = 0;
   }
-  modify_bulk(exports.shape.get_data(exports.choice));
-  if (rotation_collision_x() == true || exports.rotation_collision_y() == true)
+  modify_bulk(shape.get_data(exports.choice));
+  if (rotation_collision_x() == true || rotation_collision_y() == true)
   {
     rotate_backward();
   }
 };
+
