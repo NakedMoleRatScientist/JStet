@@ -44,3 +44,9 @@ function LShape()
     return list;
   }
 }
+
+
+exports.getLShape = function()
+{
+  return new LShape();
+}
