@@ -108,6 +108,15 @@ function rotation_collision_x()
   return false;
 }
 
+//detect if it is too low.
+function rotation_collision_y()
+{
+  if (y > 380 - find_max_y() * 20)
+  {
+    return true;
+  }
+  return false;
+}
 
 
 //rotate backward
