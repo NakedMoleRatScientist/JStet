@@ -1,15 +1,12 @@
 
 
 
-function GameLoop()
+
+exports.initializeLoop = function()
 {
-  var self = this;
-  self.initializeLoop = function()
+  var state = true;
+  while (state == true)
   {
-    var state = true;
-    while (state == true)
-    {
-      sys.log("RUNNING!")
-    }
-  };
+    sys.log("RUNNING!");
+  }
 }
