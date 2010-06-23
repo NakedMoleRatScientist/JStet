@@ -98,6 +98,7 @@ exports.rotate = function()
   }
 };
 
+//detect if it is too far to the right
 function rotation_collision_x()
 {
   if (x > 180 - (find_max_x() * 20))
