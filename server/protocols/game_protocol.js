@@ -6,7 +6,8 @@ exports.process = function(data)
   switch(data)
   {
   case 0:
-    game.initializeLoop();
+      game.initializeLoop();
+      break;
   }
 };
   
