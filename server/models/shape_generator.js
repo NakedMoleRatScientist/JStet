@@ -1,4 +1,4 @@
-
+var ishape = require('../models/i_shape');
 
 
 function randomChoice()
