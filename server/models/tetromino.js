@@ -1,3 +1,4 @@
+var shape = null;
 var blocks = null;
 
   //find max length of a shape
@@ -96,4 +97,3 @@ exports.rotate = function()
     rotate_backward();
   }
 };
-
