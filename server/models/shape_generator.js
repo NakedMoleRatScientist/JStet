@@ -1,7 +1,8 @@
 
 
 
-exports.randomChoice = function()
+function randomChoice()
 {
   return Math.floor(Math.random() * 7);
 }
+
