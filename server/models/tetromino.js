@@ -4,7 +4,7 @@ var blocks = null;
   //find max length of a shape
 exports.find_max_x = function()
 {
-  max = 0;
+  max = 0;n
   for (x = 0; x < 4; x++)
   {
     for (y = 0; y <4; y++)
@@ -129,4 +129,23 @@ exports.rotate_backward = function()
     choice = shape.length - 1;
   }
   modify_bulk(shape.get_data(choice));
+}
+
+
+//move shape
+exports.move = function(x_move,y_move)
+{
+  x += x_move;
+  y += y_move;
+  if (x < 0 || rotation_collision_x() == true)
+  {
+    x -= x_move;
+    return 1;
+  }
+  if (this.rotation_collision_y() == true)
+  {
+    y -= y;
+    return 2;
+  }
+  return 0;
 }
