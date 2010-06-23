@@ -3,7 +3,7 @@ var blocks = null;
 var x = 0;
 var y = 0;
   //find max length of a shape
-exports.find_max_x = function()
+function find_max_y()
 {
   max = 0;n
   for (x = 0; x < 4; x++)
@@ -23,7 +23,7 @@ exports.find_max_x = function()
 }
 
 //find max height of a shape
-exports.find_max_y = function()
+function find_max_y()
 {
   max = 0;
   for (x = 0; x < 4; x++)
@@ -80,7 +80,7 @@ exports.get_list = function()
 exports.return_to_zero = function()
 {
   exports.choice = 0;
-  exports.modify_bulk(exports.shape.get_data(exports.choice));
+  exports.modify_bulk(shape.get_data(exports.choice));
 };
 
 //rotate forward
@@ -92,7 +92,7 @@ exports.rotate = function()
   {
     choice = 0;
   }
-  modify_bulk(shape.get_data(choice));
+  exports.modify_bulk(shape.get_data(choice));
   if (rotation_collision_x() == true || rotation_collision_y() == true)
   {
     rotate_backward();
@@ -123,13 +123,13 @@ function rotation_collision_y()
 //rotate backward
 exports.rotate_backward = function()
 {
-  blocks = create_blocks();
+  blocks = exports.create_blocks();
   choice -= 1;
   if (choice == -1)
   {
     choice = shape.length - 1;
   }
-  modify_bulk(shape.get_data(choice));
+  exports.modify_bulk(shape.get_data(choice));
 }
 
 
