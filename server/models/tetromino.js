@@ -76,5 +76,19 @@ function Tetromino()
   {
     self.choice = 0;
     self.modify_bulk(self.shape.get_data(self.choice));
-  }
+  };
+  self.rotate = function()
+  {
+    self.blocks = self.create_block();
+    self.choice += 1;
+    if (self.choice == self.shape.length)
+    {
+      self.choice = 0;
+    }
+    self.modify_bulk(self.shape.get_data(self.choice));
+    if (self.rotation_collision_x() == true || self.rotation_collision_y() == true)
+    {
+      self.rotate_backward();
+    }
+  };
 }
