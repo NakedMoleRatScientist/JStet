@@ -91,7 +91,7 @@ exports.rotate = function()
   {
     choice = 0;
   }
-  modify_bulk(shape.get_data(exports.choice));
+  modify_bulk(shape.get_data(choice));
   if (rotation_collision_x() == true || rotation_collision_y() == true)
   {
     rotate_backward();
