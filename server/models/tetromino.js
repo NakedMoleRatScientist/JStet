@@ -37,4 +37,14 @@ function Tetromino()
     }
     return max;
   }
+  //create a shape
+  self.create_blocks = function()
+  {
+    var blocks = new Array(4)
+    for (i = 0; i< 4; i++)
+    {
+      blocks[i] = new Array(4)
+    }
+    return blocks;
+  }
 }
