@@ -19,22 +19,23 @@ exports.find_max_x = function()
   }
   return max;
 }
-  //find max height of a shape
-  exports.find_max_y = function()
+
+//find max height of a shape
+exports.find_max_y = function()
+{
+  max = 0;
+  for (x = 0; x < 4; x++)
   {
-    max = 0;
-    for (x = 0; x < 4; x++)
+    for(y = 0; y < 4; y++)
     {
-      for(y = 0; y < 4; y++)
+      if (y > max)
       {
-	if (y > max)
-	{
-	  max = y;
-	}
+	max = y;
       }
     }
-    return max;
-  };
+  }
+  return max;
+};
   //create a shape
   exports.create_blocks = function()
   {
