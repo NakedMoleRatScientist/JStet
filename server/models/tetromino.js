@@ -1,14 +1,15 @@
 var shape = null;
 var blocks = null;
 
-function positions()
+function Positions()
 {
   var self = this;
   self.x = 0;
   self.y = 0;
 }
-var x = 0;
-var y = 0;
+
+pos = new positions();
+
   //find max length of a shape
 function find_max_y()
 {
@@ -109,7 +110,7 @@ exports.rotate = function()
 //detect if it is too far to the right
 function rotation_collision_x()
 {
-  if (x > 180 - (find_max_x() * 20))
+  if (pos.x > 180 - (find_max_x() * 20))
   {
     return true;
   }
@@ -119,7 +120,7 @@ function rotation_collision_x()
 //detect if it is too low.
 function rotation_collision_y()
 {
-  if (y > 380 - find_max_y() * 20)
+  if (pos.y > 380 - find_max_y() * 20)
   {
     return true;
   }
@@ -143,16 +144,16 @@ exports.rotate_backward = function()
 //move shape
 exports.move = function(x_move,y_move)
 {
-  x += x_move;
-  y += y_move;
+  pos.x += x_move;
+  pos.y += y_move;
   if (x < 0 || rotation_collision_x() == true)
   {
-    x -= x_move;
+    pos.x -= x_move;
     return 1;
   }
   if (rotation_collision_y() == true)
   {
-    y -= y;
+    pos.y -= y;
     return 2;
   }
   return 0;
