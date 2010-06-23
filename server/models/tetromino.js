@@ -1,24 +1,24 @@
 
 
   //find max length of a shape
-  exports.find_max_x = function()
+exports.find_max_x = function()
+{
+  max = 0;
+  for (x = 0; x < 4; x++)
   {
-    max = 0;
-    for (x = 0; x < 4; x++)
+    for (y = 0; y <4; y++)
     {
-      for (y = 0; y <4; y++)
+      if (this.blocks[x][y] == 1)
       {
-	if (this.blocks[x][y] == 1)
+	if(x > max)
 	{
-	  if(x > max)
-	  {
-	    max = x;
-	  }
+	  max = x;
 	}
       }
     }
-    return max;
   }
+  return max;
+}
   //find max height of a shape
   exports.find_max_y = function()
   {
