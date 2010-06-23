@@ -1,4 +1,4 @@
-
+var blocks = null;
 
   //find max length of a shape
 exports.find_max_x = function()
