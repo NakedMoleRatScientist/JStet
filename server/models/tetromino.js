@@ -5,7 +5,7 @@ var y = 0;
   //find max length of a shape
 function find_max_y()
 {
-  max = 0;n
+  max = 0;
   for (x = 0; x < 4; x++)
   {
     for (y = 0; y <4; y++)
