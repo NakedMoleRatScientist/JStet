@@ -1,6 +1,7 @@
 var shape = null;
 var blocks = null;
-
+var x = 0;
+var y = 0;
   //find max length of a shape
 exports.find_max_x = function()
 {
@@ -149,3 +150,5 @@ exports.move = function(x_move,y_move)
   }
   return 0;
 }
+
+blocks  = create_blocks();
