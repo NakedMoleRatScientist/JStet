@@ -151,4 +151,4 @@ exports.move = function(x_move,y_move)
   return 0;
 }
 
-blocks  = create_blocks();
+blocks = exports.create_blocks();
