@@ -1,11 +1,16 @@
 var shape = null;
 var blocks = null;
+
+function positions()
+{
+  var self = this;
+}
 var x = 0;
 var y = 0;
   //find max length of a shape
 function find_max_y()
 {
-  max = 0;
+  var max = 0;
   for (x = 0; x < 4; x++)
   {
     for (y = 0; y <4; y++)
