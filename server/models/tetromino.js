@@ -36,16 +36,18 @@ exports.find_max_y = function()
   }
   return max;
 };
-  //create a shape
-  exports.create_blocks = function()
+  
+//create a shape
+exports.create_blocks = function()
+{
+  var blocks = new Array(4)
+  for (i = 0; i< 4; i++)
   {
-    var blocks = new Array(4)
-    for (i = 0; i< 4; i++)
-    {
-      blocks[i] = new Array(4)
-    }
-    return blocks;
-  };
+    blocks[i] = new Array(4)
+  }
+  return blocks;
+};
+
   //modify whole shapes
   exports.modify_bluk = function(shape)
   {
