@@ -8,7 +8,7 @@ exports.find_max_x = function()
   {
     for (y = 0; y <4; y++)
     {
-      if (this.blocks[x][y] == 1)
+      if (blocks[x][y] == 1)
       {
 	if(x > max)
 	{
