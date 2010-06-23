@@ -55,6 +55,7 @@ function Tetromino()
       self.modify_block(shape[i][0],shape[i][1],1);
     }
   };
+  //get a list of all suitable blocks
   self.get_list = function()
   {
     new suitable = new Array();
@@ -69,5 +70,5 @@ function Tetromino()
       }
     }
     return suitable;
-  }
+  };
 }
