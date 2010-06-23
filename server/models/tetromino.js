@@ -2,6 +2,7 @@
 function Tetromino()
 {
   var self = this;
+  //find max length of a block
   self.find_max_x = function()
   {
     max = 0;
