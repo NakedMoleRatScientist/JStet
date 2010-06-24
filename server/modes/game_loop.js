@@ -1,7 +1,7 @@
 var sys = require('sys');
 var current = require('../models/tetromino');
 var future = require('../models/tetromino');
-var generator = require ('..models/shape_generator');
+var generator = require ('../models/shape_generator');
 
 exports.initializeLoop = function()
 {
