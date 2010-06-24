@@ -1,9 +1,10 @@
 
 function LShape()
 {
+  var self = this;
   this.length = 4;
-  this.color = #0011FF;
-  this.get_data = function(choice)
+  self.color = #0011FF;
+  self.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
