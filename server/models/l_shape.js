@@ -2,8 +2,7 @@
 function LShape()
 {
   var self = this;
-  this.length = 4;
-  self.color = #0011FF;
+  self.length = 4;
   self.get_data = function(choice)
   {
     var list = new Array();
