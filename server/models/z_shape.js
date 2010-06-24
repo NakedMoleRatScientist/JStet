@@ -28,3 +28,9 @@ function ZShape()
     return list;
   }
 }
+
+
+exports.get = function()
+{
+  return new ZShape();
+}
