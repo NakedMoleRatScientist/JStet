@@ -2,8 +2,8 @@
 function JShape()
 {
   self = this;
-  this.length = 4;
-  this.get_data = function(choice)
+  self.length = 4;
+  self.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
