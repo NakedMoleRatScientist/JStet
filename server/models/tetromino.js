@@ -59,7 +59,7 @@ exports.create_blocks = function()
 };
 
 //modify whole shapes
-exports.modify_bluk = function(shape)
+exports.modify_bulk = function(shape)
 {
   for (i = 0; i < shape.length; i++)
   {
