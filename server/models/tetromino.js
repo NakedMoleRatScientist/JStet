@@ -8,7 +8,7 @@ function Positions()
   self.y = 0;
 }
 
-pos = new positions();
+pos = new Positions();
 
   //find max length of a shape
 function find_max_y()
