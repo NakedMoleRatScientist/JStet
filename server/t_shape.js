@@ -44,3 +44,8 @@ function TShape()
     return list;
   }
 }
+
+exports.get = function()
+{
+  return new TShape();
+}
