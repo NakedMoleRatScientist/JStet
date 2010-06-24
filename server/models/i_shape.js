@@ -29,7 +29,7 @@ function IShape()
 }
 
 
-exports.getIShape = function()
+exports.get = function()
 {
   return new IShape();
 }
