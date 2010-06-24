@@ -13,18 +13,18 @@ exports.getShape = function()
   switch(choice)
   {
   case 0:
-    return new LShape();
+    return lshape.get();
   case 1:
-    return new SShape();
+    return sshape.get();
   case 2:
-    return new OShape();
+    return oshape.get();
   case 3:
-    return new ZShape();
+    return zshape.get();
   case 4:
-    return new TShape();
+    return tshape.get();
   case 5:
-    return new JShape();
+    return jshape.get();
   case 6:
-    return new IShape();
+    return ishape.get();
   }
 }
