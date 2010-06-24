@@ -14,3 +14,9 @@ function OShape()
     return list;
   }
 }
+
+
+exports.get = function()
+{
+  return new OShape();
+}
