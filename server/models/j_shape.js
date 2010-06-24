@@ -45,3 +45,8 @@ function JShape()
     return list;
   }
 }
+
+exports.get = function()
+{
+  return new JShape();
+}
