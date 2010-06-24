@@ -3,7 +3,6 @@ function SShape()
 {
   var self = this;
   self.length = 2;
-  self.color = #00FFD9;
   self.get_data = function(choice)
   {
     var list = new Array();
