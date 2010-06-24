@@ -1,8 +1,9 @@
 function IShape()
 {
-  this.length = 2;
-  this.color = #FFFF00;
-  this.get_data = function(choice)
+  var self = this;
+  self.length = 2;
+  self.color = #FFFF00;
+  self.get_data = function(choice)
   {
     var list = new Array();
     switch(choice)
