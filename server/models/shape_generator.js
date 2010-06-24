@@ -1,6 +1,10 @@
 var ishape = require('../models/i_shape');
 var lshape = require('../models/l_shape');
-
+var sshape = require('../models/s_shape');
+var oshape = require('../models/o_shape');
+var zshape = require('../models/z_shape');
+var jshape = require('../models/j_shape');
+var tshape = require('../models/t_shape');
 function randomChoice()
 {
   return Math.floor(Math.random() * 7);
