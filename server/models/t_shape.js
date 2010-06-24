@@ -43,8 +43,8 @@ function TShape()
     return list;
   }
 }
-
+shape =  new TShape();
 exports.get = function()
 {
-  return new TShape();
+  return shape.shape();
 }
