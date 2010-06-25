@@ -87,7 +87,7 @@ exports.get_list = function()
 //return every block to zero
 exports.return_to_zero = function()
 {
-  exports.choice = 0;
+  choice = 0;
   exports.modify_bulk(shape.get_data(exports.choice));
 };
 
