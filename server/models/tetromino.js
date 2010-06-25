@@ -1,6 +1,6 @@
 var shape = null;
 var blocks = null;
-
+var choice = 0;
 function Positions()
 {
   var self = this;
