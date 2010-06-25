@@ -5,8 +5,8 @@ var generator = require ('../models/shape_generator');
 
 exports.initializeLoop = function()
 {
-  current.modify_bulk(generator.getShape());
-  future.modify_bulk(generator.getShape());
+  current.change_shape(generator.getShape());
+  future.change_shape(generator.getShape());
   var state = true;
   while (state == true)
   {
