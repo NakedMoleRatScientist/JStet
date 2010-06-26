@@ -8,7 +8,7 @@ var data = new Array();
 function shapeData()
 {
   shape = current.getShape();
-  message = [1,shape.name,current.getChoice]
+  message = [1,shape.name,current.getChoice];
 }
 
 
