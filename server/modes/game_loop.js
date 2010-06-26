@@ -3,7 +3,7 @@ var current = require('../models/tetromino');
 var future = require('../models/tetromino');
 var generator = require ('../models/shape_generator');
 
-var data = new Array();
+var events = new Array();
 
 function shapeData()
 {
@@ -29,5 +29,5 @@ exports.run_game = function()
 
 exports.get_data = function()
 {
-  return data;
+  return events;
 }
