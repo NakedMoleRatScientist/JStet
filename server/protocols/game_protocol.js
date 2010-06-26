@@ -6,11 +6,11 @@ exports.process = function(data)
   switch(data)
   {
   case 0:
-    game.initializeLoop();
+    game.initialize();
     events.push([2,game.get_data()]);
     break;
   }
-};
+};p
   
 
 exports.get_data = function()
