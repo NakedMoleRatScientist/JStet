@@ -182,4 +182,10 @@ exports.get_shape = function()
   return shape;
 }
 
+
+exports.get_choice = function()
+{
+  return choice;
+}
+
 blocks = exports.create_blocks();
