@@ -23,13 +23,13 @@ exports.initialize = function()
 
 exports.run_game = function()
 {
-  setInterval(function() { sys.log("hello world"); }, 10);
+  setInterval(function() { }, 10);
 }
 
 
 exports.get_data = function()
 {
   message = events;
-  events = []
+  events = [];
   return message;
 }
