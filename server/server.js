@@ -25,6 +25,7 @@ server.addListener("listening",function(){
 
 server.addListener("connection",function(conn){
   sys.log("<"+conn._id+"> connected");
+  players.push(conn._id);
   sendData();
   conn.addListener("close",function(){
     db.save();
