@@ -13,4 +13,8 @@ exports.process = function(data)
 };
   
 
+exports.get_data = function()
+{
+  return events;
+}
 
