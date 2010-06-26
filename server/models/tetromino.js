@@ -163,7 +163,7 @@ exports.move = function(x_move,y_move)
 exports.change_shape = function(new_shape)
 {
   shape = new_shape;
-  blocks = create_blocks();
+  blocks = exports.create_blocks();
   choice = 0;
   exports.modify_bulk(shape.get_data(choice));
 }
