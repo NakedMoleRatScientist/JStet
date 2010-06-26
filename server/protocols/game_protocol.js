@@ -8,9 +8,10 @@ exports.process = function(data)
   case 0:
     game.initialize();
     events.push([2,game.get_data()]);
+    setInterval(game.run_game());
     break;
   }
-};p
+};
   
 
 exports.get_data = function()
