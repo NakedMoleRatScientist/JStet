@@ -29,5 +29,7 @@ exports.run_game = function()
 
 exports.get_data = function()
 {
-  return events;
+  message = events;
+  events = []
+  return message;
 }
