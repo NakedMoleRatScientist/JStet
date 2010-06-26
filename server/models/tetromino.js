@@ -46,7 +46,15 @@ function find_max_y()
   }
   return max;
 };
-  
+
+//modify a block
+
+exports.modify_block = function(x,y,i)
+{
+  blocks[x][y] = i;
+}
+
+
 //create a shape
 exports.create_blocks = function()
 {
