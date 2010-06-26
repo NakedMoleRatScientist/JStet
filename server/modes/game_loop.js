@@ -23,3 +23,10 @@ exports.initializeLoop = function()
   {
   }
 }
+
+
+exports.get_data = function()
+{
+  return data;
+  data = new Array();
+}
