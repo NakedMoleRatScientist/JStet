@@ -57,3 +57,15 @@ server.addListener("connection",function(conn){
 });
 
 
+var status = true;
+while (status == true)
+{
+  for (i = 0; i < players.length; i++)
+  {
+    data = game.get_data();
+    if (data.length != 0)
+    {
+      sys.log("Let celebrate!");
+    }
+  }
+}
