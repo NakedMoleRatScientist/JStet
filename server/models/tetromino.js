@@ -176,4 +176,10 @@ exports.change_shape = function(new_shape)
   exports.modify_bulk(shape.get_data(choice));
 }
 
+//get shape
+exports.get_shape = function()
+{
+  return shape;
+}
+
 blocks = exports.create_blocks();
