@@ -9,6 +9,7 @@ function shapeData()
 {
   shape = current.getShape();
   message = [1,shape.name,current.getChoice];
+  data.push(message);
 }
 
 
@@ -16,6 +17,7 @@ exports.initializeLoop = function()
 {
   current.change_shape(generator.getShape());
   future.change_shape(generator.getShape());
+  shapeData();
   var state = true;
   while (state == true)
   {
