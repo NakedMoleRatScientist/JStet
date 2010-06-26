@@ -7,7 +7,7 @@ var data = new Array();
 
 function shapeData()
 {
-  shape = current.getShape();
+  shape = current.get_shape();
   message = [1,shape.name,current.getChoice];
   data.push(message);
 }
