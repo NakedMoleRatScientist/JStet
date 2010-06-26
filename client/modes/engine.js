@@ -9,12 +9,8 @@ void setup()
 }
 var mode = new Mode();
 var score = new Score();
-var generator = new ShapeGenerator();
 var shape = new Tetromino();
-shape.change_shape(generator.current);
 var future = new Tetromino();
-generator.getShape();
-future.change_shape(generator.current);
 var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
