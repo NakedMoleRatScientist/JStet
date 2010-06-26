@@ -13,7 +13,7 @@ function shapeData()
 }
 
 
-exports.initializeLoop = function()
+exports.initialize = function()
 {
   current.change_shape(generator.getShape());
   future.change_shape(generator.getShape());
