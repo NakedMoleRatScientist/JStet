@@ -8,7 +8,7 @@ exports.process = function(data)
   case 0:
     game.initialize();
     events.push([2,game.get_data()]);
-    setInterval(game.run_game());
+    setInterval(game.run_game(),10);
     break;
   }
 };
