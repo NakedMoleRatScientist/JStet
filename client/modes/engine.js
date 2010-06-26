@@ -104,13 +104,9 @@ void draw()
   switch(mode.status)
   {
   case 0:
-    timer.react();
-    sendAlive();
     title.display();
     break;
   case 4:
-    timer.react()
-    sendAlive();
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
@@ -129,18 +125,12 @@ void draw()
     drawShape.draw_field(field.field);
     break;
   case 1:
-    timer.react();
-    sendAlive();
     over.display();
     break;
   case 2:
-    timer.react();
-    sendAlive();
     board.display();
     break;
   case 3:
-    timer.react();
-    sendAlive();
     score_data.display();
     break;
   }
