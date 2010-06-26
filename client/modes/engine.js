@@ -10,6 +10,7 @@ void setup()
 var mode = new Mode();
 var score = new Score();
 var shape = new Tetromino();
+var current = new Tetromino();
 var future = new Tetromino();
 var field = new PlayField();
 var drawShape = new TetrominoDraw();
