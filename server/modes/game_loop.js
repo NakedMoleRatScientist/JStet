@@ -30,5 +30,5 @@ exports.run_game = function()
 exports.get_data = function()
 {
   return data;
-  data = new Array();
+  data = new [];
 }
