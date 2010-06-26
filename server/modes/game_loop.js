@@ -23,7 +23,7 @@ exports.initialize = function()
 
 exports.run_game = function()
 {
-  sys.log("DING!");
+  setInterval(function() { sys.log("hello world"); }, 10);
 }
 
 
