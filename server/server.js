@@ -54,15 +54,4 @@ server.addListener("connection",function(conn){
   conn.addListener("error",function(event){
     sys.log(event);
   });
-
-  for (i = 0; i < players.length; i++)
-  {
-    sys.log("beep");
-    data = game.get_data();
-    if (data.length != 0)
-    {
-      sys.log("Let celebrate!");
-    }
-  }
-
 });
