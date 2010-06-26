@@ -7,7 +7,7 @@ exports.process = function(data)
   {
   case 0:
     game.initializeLoop();
-    return 0
+    return game.get_data();
     break;
   }
 };
