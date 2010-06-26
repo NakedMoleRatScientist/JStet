@@ -99,6 +99,8 @@ void sendAlive()
 
 void draw()
 {
+  timer.react();
+  sendAlive();
   switch(mode.status)
   {
   case 0:
