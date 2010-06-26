@@ -16,7 +16,8 @@ exports.process = function(data)
 
 exports.get_data = function()
 {
-  return events;
-  events = new Array();
+  messages = events;
+  events = [];
+  return messages;
 }
 
