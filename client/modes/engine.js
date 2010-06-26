@@ -10,6 +10,11 @@ void setup()
 var mode = new Mode();
 var score = new Score();
 var generator = new ShapeGenerator();
+var shape = new Tetromino();
+shape.change_shape(generator.current);
+var future = new Tetromino();
+generator.getShape();
+future.change_shape(generator.current);
 var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
@@ -102,7 +107,14 @@ void draw()
     title.display();
     break;
   case 4:
-    timer.react()
+    if (timer.react())
+    { 
+      if (shape.move(0,20) == 2)
+      {
+        insertEvent();
+      }
+      downEvent();
+    }
     sendAlive();
     background(0,0,0);
     stroke(205,201,201);
@@ -110,11 +122,13 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    //drawShape.create_blocks(shape.get_list(),shape.x,shape.y,shape.shape.color);
+    drawShape.create_blocks(shape.get_list(),shape.x,shape.y,shape.shape.color);
     text("Current: ",300,135);
-    //drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
+    current = new Tetromino();
+    current.change_shape(shape.shape);
+    drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
     text("Next: ", 300,250);
-   // drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
+    drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
