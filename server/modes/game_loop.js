@@ -21,6 +21,12 @@ exports.initializeLoop = function()
 }
 
 
+exports.run_game = function()
+{
+  sys.log("DING!");
+}
+
+
 exports.get_data = function()
 {
   return data;
