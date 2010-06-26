@@ -17,6 +17,15 @@ function GameProtocol(net)
     data = [2,0];
     self.net.send(data);
   };
+  self.processData = function(data)
+  {
+    switch(data)
+    {
+    case 1:
+      console.log("success");
+      break;
+    }
+  }
 }
 
 
@@ -1130,7 +1139,9 @@ void setup()
 }
 var mode = new Mode();
 var score = new Score();
-var generator = new ShapeGenerator();
+var shape = new Tetromino();
+var current = new Tetromino();
+var future = new Tetromino();
 var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
@@ -1215,16 +1226,14 @@ void sendAlive()
 
 void draw()
 {
+  timer.react();
+  sendAlive();
   switch(mode.status)
   {
   case 0:
-    timer.react();
-    sendAlive();
     title.display();
     break;
   case 4:
-    timer.react()
-    sendAlive();
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
@@ -1235,24 +1244,18 @@ void draw()
     text("Current: ",300,135);
     //drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
     text("Next: ", 300,250);
-   // drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
+    //drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
     break;
   case 1:
-    timer.react();
-    sendAlive();
     over.display();
     break;
   case 2:
-    timer.react();
-    sendAlive();
     board.display();
     break;
   case 3:
-    timer.react();
-    sendAlive();
     score_data.display();
     break;
   }
