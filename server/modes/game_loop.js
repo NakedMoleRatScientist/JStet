@@ -18,10 +18,6 @@ exports.initializeLoop = function()
   current.change_shape(generator.getShape());
   future.change_shape(generator.getShape());
   shapeData();
-  var state = true;
-  while (state == true)
-  {
-  }
 }
 
 
