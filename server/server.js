@@ -54,4 +54,15 @@ server.addListener("connection",function(conn){
   conn.addListener("error",function(event){
     sys.log(event);
   });
+
+  setInterval(function() {
+    for (i = 0; i < players.length; i++)
+    {
+      message = game.get_data();
+      if (message.length != 0)
+      {
+	sys.log("crazy");
+      }
+    }
+  }, 10);
 });
