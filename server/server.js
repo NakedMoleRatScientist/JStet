@@ -7,6 +7,7 @@ var game = require('./protocols/game_protocol')
 var db = require('./models/database')
 //start of actual server code.
 var server = ws.createServer();
+var players = new Array();
 server.listen(7000);
 
 function sendData()
