@@ -9,4 +9,13 @@ function GameProtocol(net)
     data = [2,0];
     self.net.send(data);
   };
+  self.processData = function(data)
+  {
+    switch(data)
+    {
+    case 1:
+      console.log("success");
+      break;
+    }
+  }
 }
