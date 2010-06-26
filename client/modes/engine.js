@@ -107,14 +107,7 @@ void draw()
     title.display();
     break;
   case 4:
-    if (timer.react())
-    { 
-      if (shape.move(0,20) == 2)
-      {
-        insertEvent();
-      }
-      downEvent();
-    }
+    timer.react()
     sendAlive();
     background(0,0,0);
     stroke(205,201,201);
@@ -126,9 +119,9 @@ void draw()
     text("Current: ",300,135);
     current = new Tetromino();
     current.change_shape(shape.shape);
-   // drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
+    drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
     text("Next: ", 300,250);
-    //drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
+    drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
