@@ -9,7 +9,7 @@ function shapeData()
 {
   shape = current.get_shape();
   message = [1,shape.name,current.get_choice];
-  data.push(message);
+  events.push(message);
 }
 
 
