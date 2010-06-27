@@ -7,7 +7,7 @@ exports.process = function(data)
   {
   case 0:
     game.initialize();
-    events.push([2,game.get_data()]);
+    add_events(game.get_data());
     game.run_game();
     break;
   }
