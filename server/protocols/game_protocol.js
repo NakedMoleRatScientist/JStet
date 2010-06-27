@@ -12,7 +12,15 @@ exports.process = function(data)
     break;
   }
 };
-  
+
+function add_events(loop_events)
+{
+  for (i = 0; i < loop_events.length; i++)
+  {
+    events.push([2,loop_events[i]]);
+  }
+}
+
 
 exports.get_data = function()
 {
