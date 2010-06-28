@@ -61,6 +61,7 @@ server.addListener("connection",function(conn){
       message = game.get_data();
       if (message.length != 0)
       {
+	message = JSON.stringify(message);
 	server.send(players[i],message);
       }
     }
