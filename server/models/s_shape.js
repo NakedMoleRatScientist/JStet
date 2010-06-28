@@ -2,6 +2,7 @@
 function SShape()
 {
   var self = this;
+  self.name = "s";
   self.length = 2;
   self.get_data = function(choice)
   {
