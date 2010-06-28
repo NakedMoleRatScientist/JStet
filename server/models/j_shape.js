@@ -2,6 +2,7 @@
 function JShape()
 {
   var self = this;
+  self.name = "j";
   self.length = 4;
   self.get_data = function(choice)
   {
