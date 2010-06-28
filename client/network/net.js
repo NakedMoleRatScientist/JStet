@@ -20,7 +20,6 @@ function Net(score)
 	break;
       case 2:
 	console.log("success");
-	self.send([2,1]);
 	break;
       }
     };
