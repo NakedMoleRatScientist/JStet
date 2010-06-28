@@ -2,6 +2,7 @@
 function LShape()
 {
   var self = this;
+  self.name = "l";
   self.length = 4;
   self.get_data = function(choice)
   {
