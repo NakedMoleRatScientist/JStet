@@ -12,7 +12,7 @@ function GameProtocol(net)
   };
   self.processData = function(data)
   {
-    switch(data)
+    switch(data[0])
     {
     case 1:
       console.log("success");
