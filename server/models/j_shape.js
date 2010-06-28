@@ -1,7 +1,7 @@
 
 function JShape()
 {
-  self = this;
+  var self = this;
   self.length = 4;
   self.get_data = function(choice)
   {
