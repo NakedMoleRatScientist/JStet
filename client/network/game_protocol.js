@@ -4,6 +4,7 @@ function GameProtocol(net)
 {
   var self = this;
   self.net = net;
+  self.net.game = self;
   self.requestGame = function()
   {
     data = [2,0];
