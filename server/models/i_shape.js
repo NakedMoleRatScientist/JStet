@@ -2,6 +2,7 @@ function IShape()
 {
   var self = this;
   self.length = 2;
+  self.name = "i";
   self.get_data = function(choice)
   {
     var list = new Array();
