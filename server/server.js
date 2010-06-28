@@ -61,7 +61,7 @@ server.addListener("connection",function(conn){
       message = game.get_data();
       if (message.length != 0)
       {
-	sys.log(message);
+	server.send(players[i],message);
       }
     }
   }, 10);
