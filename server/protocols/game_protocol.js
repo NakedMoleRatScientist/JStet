@@ -24,7 +24,7 @@ function add_events(loop_events)
 
 exports.get_data = function()
 {
-  return messages;
+  return events;
 }
 
 
