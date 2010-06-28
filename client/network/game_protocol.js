@@ -17,5 +17,5 @@ function GameProtocol(net)
       console.log("success");
       break;
     }
-  }
+  };
 }
