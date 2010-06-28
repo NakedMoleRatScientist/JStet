@@ -2,6 +2,7 @@
 function OShape()
 {
   var self = this;
+  self.name = "o";
   self.length = 1;
   self.color = 50;
   self.get_data = function(choice)
