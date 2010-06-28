@@ -59,7 +59,7 @@ server.addListener("connection",function(conn){
     for (i = 0; i < players.length; i++)
     {
       events = game.get_data();
-      if (events[i].length != 0)
+      if (events.length != 0)
       {
 	for (m = 0; m < events.length; m++)
 	{
