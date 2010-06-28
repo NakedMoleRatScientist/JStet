@@ -2,6 +2,7 @@ function TShape()
 {
   var self = this;
   self.length = 4;
+  self.name = "t";
   self.get_data = function(choice)
   {
     var list = new Array();
