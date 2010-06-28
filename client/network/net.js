@@ -16,8 +16,10 @@ function Net(score)
       {
       case 0:
         self.score.protocol.changeData(self.data[1]);
+	break;
       case 2:
 	console.log("success");
+	break;
       }
     };
     self.ws.onclose = function()
