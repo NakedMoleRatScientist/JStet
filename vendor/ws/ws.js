@@ -5,22 +5,23 @@
 -----------------------------------------------*/
 
 // System
-var sys    = require("sys"),
-    http   = require("http"),
-    events = require("events"),
-    path   = require("path");
+var sys    = require("sys")
+  , http   = require("http")
+  , events = require("events")
+  , path   = require("path");
 
-// Local Path
+// Local
 require.paths.unshift(__dirname);
-var Connection = require("ws/connection");
+
+var Manager = require("ws/manager")
+  , Connection = require("ws/connection");
+
 
 /*-----------------------------------------------
   Mixin:
 -----------------------------------------------*/
 var mixin = function(target, source) {
-  var keys = Object.keys(source);
-  var length = keys.length;
-  for (var i = 0; i < length; i++) {
+  for(var i = 0, keys = Object.keys(source), l = keys.length; i < l; ++i) {
     var key = keys[i];
     target[key] = source[key];
   }
@@ -33,30 +34,40 @@ var mixin = function(target, source) {
 exports.Server = Server;
 exports.createServer = function(options){
   return new Server(options || {});
-}
+};
 
 /*-----------------------------------------------
   WebSocket Server Implementation:
 -----------------------------------------------*/
 function Server(options){
-  events.EventEmitter.call(this);
-  var ws = this;
-  
-  this.server = new http.Server();
-    
   this.options = mixin({
-    version: "auto",// string, either: draft75, draft76, auto
-    origin: "*",       // string | array, any valid domain
-    subprotocol: null, // string | array
-    debug: false
+    debug: false,         // Boolean:       Show debug information.
+    version: "auto",      // String:        Value must be either: draft75, draft76, auto
+    origin: "*",          // String, Array: A match for a valid connection origin
+    subprotocol: null,    // String, Array: A match for a valid connection subprotocol.
   }, options || {});
+
+  var ws        = this;
+  this.debug    = !!this.options.debug;
+  this.server   = new http.Server();
+  this.manager  = new Manager(this.debug);
   
-  this.count = 0;
-  this.connections = {};
-  this.routes = {};
+  events.EventEmitter.call(this);
   
+  this.server.addListener("upgrade", function(req, socket, upgradeHead){
+    if( req.method == "GET" && ( "upgrade" in req.headers && "connection" in req.headers) && 
+        req.headers.upgrade.toLowerCase() == "websocket" && req.headers.connection.toLowerCase() == "upgrade"
+    ){
+      // create a new connection, it'll handle everything else.
+      new Connection(ws, req, socket, upgradeHead);
+    } else {
+      // Close the socket, it wasn't a valid connection.
+      socket.end();
+      socket.destroy();
+    }
+  });
   
-  this.server.addListener("listening", function(){
+  this.server.addListener("listening", function(req, res){
     ws.emit("listening");
   });
   
@@ -69,26 +80,19 @@ function Server(options){
   });
   
   this.server.addListener("close", function(errno){
-    ws.emit("close", errno);
+    ws.emit("shutdown", errno);
   });
   
   this.server.addListener("clientError", function(e){
     ws.emit("clientError", e);
   });
-  
-  this.server.addListener("upgrade", function(){
-    handleUpgradeRequest.apply(ws, arguments);
-  });
 };
 
 sys.inherits(Server, events.EventEmitter);
 
-Server.prototype.broadcast = function(data){
-  for(var cid in this.connections){
-    this.connections[cid].write(data);
-  }
-};
-
+/*-----------------------------------------------
+  Public API
+-----------------------------------------------*/
 Server.prototype.listen = function(){
   this.server.listen.apply(this.server, arguments);
 };
@@ -97,16 +101,18 @@ Server.prototype.close = function(){
   this.server.close();
 };
 
-/*-----------------------------------------------
-  Specific receivers of Events
------------------------------------------------*/
+Server.prototype.send = function(id, data){
+  this.manager.find(id, function(client){
+    if(client._state === 4){
+      client.write(data);
+    }
+  });
+};
 
-function handleUpgradeRequest(req, socket, upgradeHead){
-  if(req.method == "GET" && "upgrade" in req.headers && "connection" in req.headers &&
-     req.headers.upgrade.toLowerCase() == "websocket" && req.headers.connection.toLowerCase() == "upgrade"
-  ){
-    new Connection(this, req, socket, upgradeHead);
-  } else {
-    socket.end();
-  }
+Server.prototype.broadcast = function(data){
+  this.manager.forEach(function(client){
+    if(client._state === 4){
+      client.write(data);
+    }
+  });
 };
