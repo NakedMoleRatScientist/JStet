@@ -30,5 +30,5 @@ exports.get_data = function()
 
 exports.clear = function()
 {
-  events = [];
+  events.shift();
 }
