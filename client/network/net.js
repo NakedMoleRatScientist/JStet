@@ -12,6 +12,7 @@ function Net(score)
     self.ws.onmessage = function(event)
     {
       self.data = JSON.parse(event.data);
+      console.log(self.data);
       switch (self.data[0])
       {
       case 0:
@@ -19,6 +20,7 @@ function Net(score)
 	break;
       case 2:
 	console.log("success");
+	self.send([2,1]);
 	break;
       }
     };
