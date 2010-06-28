@@ -19,7 +19,7 @@ function Net(score)
         self.score.protocol.changeData(self.data[1]);
 	break;
       case 2:
-	console.log("success");
+	self.game.processData(data[1]);
 	break;
       }
     };
