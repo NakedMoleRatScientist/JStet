@@ -12,6 +12,7 @@ function GameProtocol(net)
 {
   var self = this;
   self.net = net;
+  self.net.game = self;
   self.requestGame = function()
   {
     data = [2,0];
@@ -25,7 +26,7 @@ function GameProtocol(net)
       console.log("success");
       break;
     }
-  }
+  };
 }
 
 
@@ -155,6 +156,7 @@ function Net(score)
   var self = this;
   self.ws = null;
   self.score = score;
+  self.game = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -165,6 +167,10 @@ function Net(score)
       {
       case 0:
         self.score.protocol.changeData(self.data[1]);
+	break;
+      case 2:
+	console.log("success");
+	break;
       }
     };
     self.ws.onclose = function()
