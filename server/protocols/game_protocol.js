@@ -27,3 +27,9 @@ exports.get_data = function()
   return messages;
 }
 
+
+exports.clear = function()
+{
+  events = [];
+}
+
