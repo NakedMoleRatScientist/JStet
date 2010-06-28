@@ -5,6 +5,7 @@ function Net(score)
   var self = this;
   self.ws = null;
   self.score = score;
+  self.game = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
