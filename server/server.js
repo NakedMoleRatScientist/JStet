@@ -55,7 +55,7 @@ server.addListener("connection",function(conn){
     sys.log(event);
   });
 
-  setInterval(function() {
+  setInterval(function(server) {
     for (i = 0; i < players.length; i++)
     {
       message = game.get_data();
