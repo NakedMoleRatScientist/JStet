@@ -26,3 +26,9 @@ exports.get_data = function()
 {
   return events;
 }
+
+
+exports.clear = function()
+{
+  events = [];
+}
