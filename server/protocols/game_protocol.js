@@ -11,6 +11,7 @@ exports.process = function(data)
     game.run_game();
     break;
   case 1:
+    sys.log("clear reaction.");
     clear();
     break;
   }
