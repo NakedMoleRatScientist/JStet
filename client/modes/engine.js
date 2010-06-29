@@ -3,6 +3,7 @@ function Engine(protocol)
 {
   var self = this;
   var protocol = protocol;
+  protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
 };
