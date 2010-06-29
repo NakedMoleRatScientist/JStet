@@ -14,7 +14,7 @@ function GameProtocol(net)
   {
     switch(data[0])
     {
-    case 2:
+    case 1:
       self.net.send([2,1]);
       break;
     }
