@@ -6,6 +6,10 @@ function Engine(protocol)
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
+  self.write_current = function(name,choice)
+  {
+    self.current.choice = choice;
+  };
 };
 
 
