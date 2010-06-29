@@ -20,10 +20,10 @@ function GameProtocol(net)
   };
   self.processData = function(data)
   {
-    switch(data)
+    switch(data[0])
     {
-    case 1:
-      console.log("success");
+    case 2:
+      self.net.send([2,1]);
       break;
     }
   };
@@ -162,15 +162,15 @@ function Net(score)
     self.ws = new WebSocket('ws://localhost:7000');
     self.ws.onmessage = function(event)
     {
-      self.data = JSON.parse(event.data);
-      console.log(self.data);
-      switch (self.data[0])
+      data = JSON.parse(event.data);
+      
+      switch (data[0])
       {
       case 0:
-        self.score.protocol.changeData(self.data[1]);
+        self.score.protocol.changeData(data[1]);
 	break;
       case 2:
-	console.log("success");
+	self.game.processData(data[1]);
 	break;
       }
     };
