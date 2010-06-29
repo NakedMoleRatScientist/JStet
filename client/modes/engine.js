@@ -1,7 +1,8 @@
 
-function Engine()
+function Engine(protocol)
 {
   var self = this;
+  var protocol = protocol;
   self.current = new Tetromino();
   self.future = new Tetromino();
 };
