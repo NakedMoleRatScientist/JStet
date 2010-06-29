@@ -90,23 +90,7 @@ function Tetromino ()
       return true;
     }
     return false;
-  },
-  self.move = function (x,y)
-  {
-    self.x += x;
-    self.y += y;
-    if (self.x < 0 || self.rotation_collision_x() == true)
-    {
-      self.x -= x;
-      return 1;
-    }
-    if (self.rotation_collision_y() == true)
-    {
-      self.y -= y;
-      return 2;
-    }
-    return 0;
-  },
+  }
   self.return_to_normal = function()
   {
     self.x = 0;
