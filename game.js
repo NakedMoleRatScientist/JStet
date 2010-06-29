@@ -22,7 +22,8 @@ function GameProtocol(net)
   {
     switch(data[0])
     {
-    case 2:
+    case 1:
+      console.log("Reaction sent.");
       self.net.send([2,1]);
       break;
     }
@@ -1136,6 +1137,15 @@ function Mode()
     this.status = n;
   }
 }
+function Engine(protocol)
+{
+  var self = this;
+  var protocol = protocol;
+  self.current = new Tetromino();
+  self.future = new Tetromino();
+};
+
+
 void setup()
 {
   size(800,600);
@@ -1162,6 +1172,7 @@ network.initialize();
 score.enableNetwork(network);
 var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
+var engine = new Engine(game_protocol);
 
 function cleanEvent()
 {
