@@ -28,7 +28,7 @@ exports.get_data = function()
 }
 
 
-exports.clear = function()
+function clear()
 {
   events.shift();
 }
