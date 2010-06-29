@@ -4,24 +4,6 @@ function Tetromino ()
   var self = this;
   self.shape = null;
   self.choice = 0;
-  self.find_max_y = function()
-  {
-    max = 0;
-    for (x = 0; x < 4; x++)
-    {
-      for (y = 0; y < 4; y++)
-      {
-        if (self.blocks[x][y] == 1)
-        {
-          if (y > max)
-          {
-            max = y;
-          }
-        }
-      }
-    }
-    return max;
-  }
   self.change_shape = function(new_shape)
   {
     self.shape = new_shape;
