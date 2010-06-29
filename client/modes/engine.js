@@ -2,6 +2,7 @@
 function Engine()
 {
   var self = this;
+  self.current = new Tetromino();
 };
 
 
