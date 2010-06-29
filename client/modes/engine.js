@@ -1,4 +1,10 @@
 
+function Engine()
+{
+  var self = this;
+};
+
+
 void setup()
 {
   size(800,600);
@@ -25,6 +31,7 @@ network.initialize();
 score.enableNetwork(network);
 var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
+
 
 function cleanEvent()
 {
