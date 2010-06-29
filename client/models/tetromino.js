@@ -3,24 +3,6 @@ function Tetromino ()
 {
   this.shape = null;
   this.choice = 0;
-  this.find_max_x = function()
-  {
-    max = 0;
-    for (x = 0; x < 4; x++)
-    {
-      for (y = 0; y < 4; y++)
-      {
-        if (this.blocks[x][y] == 1)
-        {
-          if (x > max)
-          {
-            max = x;
-          }
-        }
-      }
-    }
-    return max;
-  },
   this.find_max_y = function()
   {
     max = 0;
