@@ -14,8 +14,8 @@ function GameProtocol(net)
   {
     switch(data[0])
     {
-    case 1:
-      console.log("success");
+    case 2:
+      self.net.send([2,1]);
       break;
     }
   };
