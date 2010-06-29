@@ -34,7 +34,7 @@ network.initialize();
 score.enableNetwork(network);
 var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
-
+var engine = new Engine(game_protocol);
 
 function cleanEvent()
 {
