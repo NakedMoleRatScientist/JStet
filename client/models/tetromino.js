@@ -75,22 +75,6 @@ function Tetromino ()
     }
     self.modify_bulk(self.shape.get_data(self.choice));
   },
-  self.rotation_collision_x = function()
-  {
-    if (self.x > 180 - (self.find_max_x() * 20))
-    {
-      return true;
-    }
-    return false;
-  },
-  self.rotation_collision_y = function()
-  {
-    if (self.y > 380 - (self.find_max_y() * 20))
-    {
-      return true;
-    }
-    return false;
-  }
   self.return_to_normal = function()
   {
     self.x = 0;
