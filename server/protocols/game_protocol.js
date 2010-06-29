@@ -10,6 +10,9 @@ exports.process = function(data)
     add_events(game.get_data());
     game.run_game();
     break;
+  case 1:
+    clear();
+    break;
   }
 };
 
