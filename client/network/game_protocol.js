@@ -5,6 +5,7 @@ function GameProtocol(net)
   var self = this;
   self.net = net;
   self.net.game = self;
+  self.engine = null;
   self.requestGame = function()
   {
     data = [2,0];
