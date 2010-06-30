@@ -5,7 +5,7 @@ var generator = require ('../models/shape_generator');
 
 var events = new Array();
 
-function create_message(shape)
+function create_shape_message(shape)
 {
   //1 in the first element denotates incoming new shape
   //The second element indicate the which type of shape
@@ -20,7 +20,7 @@ exports.initialize = function()
 {
   current.change_shape(generator.getShape());
   future.change_shape(generator.getShape());
-  create_current_event();
+  create_shape_message(current.get_shape());
 }
 
 
