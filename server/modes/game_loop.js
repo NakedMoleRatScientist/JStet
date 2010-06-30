@@ -5,7 +5,7 @@ var generator = require ('../models/shape_generator');
 
 var events = new Array();
 
-function shapeData()
+function create_shape_event()
 {
   shape = current.get_shape();
   message = [1,shape.name,current.get_choice()];
@@ -17,7 +17,7 @@ exports.initialize = function()
 {
   current.change_shape(generator.getShape());
   future.change_shape(generator.getShape());
-  shapeData();
+  create_shape_event();
 }
 
 
