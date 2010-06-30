@@ -8,7 +8,7 @@ var events = new Array();
 function create_current_event()
 {
   shape = current.get_shape();
-  message = [1,shape.name,current.get_choice()];
+  message = [1,shape.name,current.get_choice(),1];
   events.push(message);
 }
 
