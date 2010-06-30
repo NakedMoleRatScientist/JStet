@@ -126,7 +126,6 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    console.log(engine.current.shape);
     drawShape.create_blocks(engine.current,engine.current.x,engine.current.y,engine.current.shape.color);
     text("Current: ",300,135);
     //drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
