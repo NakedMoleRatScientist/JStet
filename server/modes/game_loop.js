@@ -8,7 +8,14 @@ var events = new Array();
 function create_current_event()
 {
   shape = current.get_shape();
+  create_message(shape);
+  events.push(message);
+}
+
+function create_message(shape)
+{
   //1 in the first element denotates incoming new shape
+  //The second element indicate the which type of shape
   //The third element contains the shape's rotation
   //The last element indicate which is the upcoming shape and which is current
   message = [1,shape.name,current.get_choice(),1];
