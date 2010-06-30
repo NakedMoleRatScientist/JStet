@@ -28,6 +28,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
         console.log("Reaction sent.");
+	engine.write_current(data[1],data[2]);
         self.net.send([2,1]);
       }
       break;
@@ -987,41 +988,37 @@ function TShape()
   }
 }
 
-function ShapeGenerator ()
+function getShape (choice)
 {
-  this.getShape = function()
+  switch(choice)
   {
-    var choice = this.randomChoice();
-    switch(choice)
+  case "l":
     {
-    case 0:
-      {
-        return new LShape();
-      }
-    case 1:
-      {
-        return new SShape();
-      }
-    case 2:
-      {
-        return new OShape();
-      }
-    case 3:
-      {
-        return new ZShape();
-      }
-    case 4:
-      {
-        return new TShape();
-      }
-    case 5:
-      {
-        return new JShape();
-      }
-    case 6:
-      {
-        return new IShape();
-      }
+      return new LShape();
+    }
+  case "s":
+    {
+      return new SShape();
+    }
+  case "o":
+    {
+      return new OShape();
+    }
+  case "z":
+   {
+      return new ZShape();
+    }
+  case "t":
+    {
+      return new TShape();
+    }
+  case "j":
+    {
+       return new JShape();
+    }
+  case "i":
+    {
+      return new IShape();
     }
   }
 }
@@ -1074,6 +1071,7 @@ function Engine(protocol)
   self.future = new Tetromino();
   self.write_current = function(name,choice)
   {
+    self.shape = getShape(name);
     self.current.choice = choice;
   };
 };
