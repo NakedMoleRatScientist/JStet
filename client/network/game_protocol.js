@@ -17,8 +17,11 @@ function GameProtocol(net)
     switch(data[0])
     {
     case 1:
-      console.log("Reaction sent.");
-      self.net.send([2,1]);
+      if (self.checkIdentical(data))
+      {
+        console.log("Reaction sent.");
+        self.net.send([2,1]);
+      }
       break;
     }
   };
