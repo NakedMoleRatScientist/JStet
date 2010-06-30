@@ -5,13 +5,13 @@ var generator = require ('../models/shape_generator');
 
 var events = new Array();
 
-function create_shape_message(shape)
+function create_shape_message(shape,type)
 {
   //1 in the first element denotates incoming new shape
   //The second element indicate the which type of shape
   //The third element contains the shape's rotation
-  //The last element indicate which is the upcoming shape and which is current
-  message = [1,shape.name,current.get_choice(),1];
+  //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
+  message = [1,shape.name,current.get_choice(),type];
   events.push(message);
 }
 
