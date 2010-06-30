@@ -6,6 +6,7 @@ function GameProtocol(net)
   self.net = net;
   self.net.game = self;
   self.engine = null;
+  self.lastMessage = null;
   self.requestGame = function()
   {
     data = [2,0];
