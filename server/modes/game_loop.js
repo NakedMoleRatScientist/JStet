@@ -5,13 +5,6 @@ var generator = require ('../models/shape_generator');
 
 var events = new Array();
 
-function create_current_event()
-{
-  shape = current.get_shape();
-  create_message(shape);
-  events.push(message);
-}
-
 function create_message(shape)
 {
   //1 in the first element denotates incoming new shape
