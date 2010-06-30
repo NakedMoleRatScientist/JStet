@@ -29,6 +29,7 @@ function GameProtocol(net)
   {
     if (self.lastMessage == null)
     {
+      self.lastMessage = [data[1],data[2]];
       return true;
     }
   };
