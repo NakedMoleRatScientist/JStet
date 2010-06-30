@@ -1,5 +1,5 @@
 
-function ShapeGenerator ()
+function getShape ()
 {
   this.getShape = function()
   {
