@@ -20,8 +20,8 @@ exports.initialize = function()
 {
   current.change_shape(generator.getShape());
   future.change_shape(generator.getShape());
-  create_shape_message(current.get_shape());
-  create_shape_message(future.get_shape());
+  create_shape_message(current.get_shape(),0); //0 being current
+  create_shape_message(future.get_shape(),1);  //1 is the future
 }
 
 
