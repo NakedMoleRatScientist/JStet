@@ -32,5 +32,10 @@ function GameProtocol(net)
       self.lastMessage = [data[1],data[2]];
       return true;
     }
+    else if(self.lastMessage[0] != data[1] && self.lastMessage[1] != data[2])
+    {
+      self.lastMessage = [data[1],data[2]];
+      return true;
+    }
   };
 }
