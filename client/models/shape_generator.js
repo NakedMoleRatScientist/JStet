@@ -1,10 +1,6 @@
 
 function ShapeGenerator ()
 {
-  this.randomChoice = function ()
-  {
-    return Math.floor(Math.random() * 7);
-  }
   this.getShape = function()
   {
     var choice = this.randomChoice();
@@ -40,5 +36,4 @@ function ShapeGenerator ()
       }
     }
   }
-  this.current = this.getShape();
 }
