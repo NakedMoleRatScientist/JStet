@@ -8,8 +8,9 @@ function Engine(protocol)
   self.future = new Tetromino();
   self.write_current = function(name,choice)
   {
-    self.current.shape = getShape(name);
+    self.current.change_shape(getShape(name));
     self.current.choice = choice;
+    self.current.update_shape();
   };
 };
 
