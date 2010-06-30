@@ -37,5 +37,6 @@ function GameProtocol(net)
       self.lastMessage = [data[1],data[2]];
       return true;
     }
+    return false;
   };
 }
