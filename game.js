@@ -28,7 +28,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
         console.log("Reaction sent.");
-	engine.write_current(data[1],data[2]);
+	engine.write_shape(data[1],data[2],data[3]);
         self.net.send([2,1]);
       }
       break;
@@ -38,12 +38,12 @@ function GameProtocol(net)
   {
     if (self.lastMessage == null)
     {
-      self.lastMessage = [data[1],data[2]];
+      self.lastMessage = [data[1],data[2],data[3]];
       return true;
     }
-    else if(self.lastMessage[0] != data[1] && self.lastMessage[1] != data[2])
+    else if(self.lastMessage[0] != data[1] && self.lastMessage[1] != data[2] && self.lastMessage[2] != data[3])
     {
-      self.lastMessage = [data[1],data[2]];
+      self.lastMessage = [data[1],data[2],data[3]];
       return true;
     }
     return false;
@@ -1069,10 +1069,20 @@ function Engine(protocol)
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
-  self.write_current = function(name,choice)
+  self.write_shape = function(name,choice,type)
   {
-    self.shape = getShape(name);
-    self.current.choice = choice;
+    if (type == 0)
+    {
+      self.current.change_shape(getShape(name));
+      self.current.choice = choice;
+      self.current.update_shape();
+    }
+    else if (type == 0)
+    {
+      self.future.change_shape(getShape(name));
+      self.future.choice = choice;
+      self.future.update_shape();
+    }
   };
 };
 
@@ -1189,9 +1199,9 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    //drawShape.create_blocks(shape.get_list(),shape.x,shape.y,shape.shape.color);
+    drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
     text("Current: ",300,135);
-    //drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
+    drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
     text("Next: ", 300,250);
     //drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
