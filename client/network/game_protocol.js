@@ -21,4 +21,8 @@ function GameProtocol(net)
       break;
     }
   };
+  self.checkIdentical = function()
+  {
+    
+  };
 }
