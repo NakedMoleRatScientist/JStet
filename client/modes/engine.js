@@ -6,11 +6,20 @@ function Engine(protocol)
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
-  self.write_current = function(name,choice)
+  self.write_shape = function(name,choice,type)
   {
-    self.current.change_shape(getShape(name));
-    self.current.choice = choice;
-    self.current.update_shape();
+    if (type == 0)
+    {
+      self.current.change_shape(getShape(name));
+      self.current.choice = choice;
+      self.current.update_shape();
+    }
+    else if (type == 0)
+    {
+      self.future.change_shape(getShape(name));
+      self.future.choice = choice;
+      self.future.update_shape();
+    }
   };
 };
 
