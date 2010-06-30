@@ -20,6 +20,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
         console.log("Reaction sent.");
+	engine.write_current(data[1],data[2]);
         self.net.send([2,1]);
       }
       break;
