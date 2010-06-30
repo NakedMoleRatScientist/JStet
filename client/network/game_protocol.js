@@ -22,8 +22,11 @@ function GameProtocol(net)
       break;
     }
   };
-  self.checkIdentical = function()
+  self.checkIdentical = function(data)
   {
-    
+    if (self.lastMessage == null)
+    {
+      return;
+    }
   };
 }
