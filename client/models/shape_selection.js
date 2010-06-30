@@ -1,7 +1,6 @@
 
-function getShape ()
+function getShape (choice)
 {
-  var choice = this.randomChoice();
   switch(choice)
   {
   case "l":
