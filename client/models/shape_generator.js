@@ -4,31 +4,31 @@ function getShape ()
   var choice = this.randomChoice();
   switch(choice)
   {
-  case 0:
+  case "l":
     {
       return new LShape();
     }
-  case 1:
+  case "s":
     {
       return new SShape();
     }
-  case 2:
+  case "o":
     {
       return new OShape();
     }
-  case 3:
+  case "z":
    {
       return new ZShape();
     }
-  case 4:
+  case "t":
     {
       return new TShape();
     }
-  case 5:
+  case "j":
     {
        return new JShape();
     }
-  case 6:
+  case "i":
     {
       return new IShape();
     }
