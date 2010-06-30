@@ -20,7 +20,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
         console.log("Reaction sent.");
-	engine.write_current(data[1],data[2]);
+	engine.write_shape(data[1],data[2],data[3]);
         self.net.send([2,1]);
       }
       break;
@@ -30,12 +30,12 @@ function GameProtocol(net)
   {
     if (self.lastMessage == null)
     {
-      self.lastMessage = [data[1],data[2]];
+      self.lastMessage = [data[1],data[2],data[3]];
       return true;
     }
-    else if(self.lastMessage[0] != data[1] && self.lastMessage[1] != data[2])
+    else if(self.lastMessage[0] != data[1] && self.lastMessage[1] != data[2] && self.lastMessage[2] != data[3])
     {
-      self.lastMessage = [data[1],data[2]];
+      self.lastMessage = [data[1],data[2],data[3]];
       return true;
     }
     return false;
