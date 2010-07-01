@@ -58,7 +58,7 @@ server.addListener("connection",function(conn){
   setInterval(function() {
     for (i = 0; i < players.length; i++)
     {
-      events = game.get_data();
+      events = game.get_data(players[i]);
       if (events.length != 0)
       {
 	message = JSON.stringify(events[0]);
