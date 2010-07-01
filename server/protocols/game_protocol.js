@@ -48,9 +48,3 @@ exports.get_data = function()
 {
   return events;
 }
-
-
-function clear()
-{
-  events.shift();
-}
