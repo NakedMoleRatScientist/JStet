@@ -62,5 +62,5 @@ function find_by_id(id)
 
 exports.get_data = function(id)
 {
-  return sessions[find_by_id(id)].events
+  return sessions[find_by_id(id)].events;
 }
