@@ -4,6 +4,7 @@ function Tetromino ()
   var self = this;
   self.shape = null;
   self.choice = 0;
+  self.draw? = false;
   self.change_shape = function(new_shape)
   {
     self.shape = new_shape;
