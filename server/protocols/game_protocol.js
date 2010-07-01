@@ -24,14 +24,14 @@ function Session()
   };
 }
 
-exports.process = function(data)
+exports.process = function(data,id)
 {
   switch(data)
   {
   case 0:
     game.initialize();
     add_events(game.get_data());
-    game.run_game();
+    game.run_game()
     break;
   case 1:
     sys.log("Reaction clear.");
