@@ -683,6 +683,7 @@ function Tetromino ()
   var self = this;
   self.shape = null;
   self.choice = 0;
+  self.draw = false;
   self.change_shape = function(new_shape)
   {
     self.shape = new_shape;
@@ -1076,12 +1077,14 @@ function Engine(protocol)
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
+      self.current.draw = true;
     }
-    else if (type == 0)
+    else if (type == 1)
     {
       self.future.change_shape(getShape(name));
       self.future.choice = choice;
       self.future.update_shape();
+      self.future.draw = true;
     }
   };
 };
@@ -1199,11 +1202,17 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
-    text("Current: ",300,135);
-    drawShape.create_blocks(current.get_list(),250,100,current.shape.color);
+    if (engine.current.draw == true)
+    {
+      drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+      text("Current: ",300,135);
+      drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
+    }
     text("Next: ", 300,250);
-    //drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
+    if (engine.future.draw == true)
+    {
+    drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
+    }
     text(score.toString(),300,50);
     drawInstruction();
     drawShape.draw_field(field.field);
