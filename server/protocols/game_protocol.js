@@ -61,5 +61,10 @@ function find_by_id(id)
 
 exports.get_data = function(id)
 {
+  id = find_by_id(id)
+  if (id == false)
+  {
+    return false;
+  }
   return sessions[find_by_id(id)].events;
 }
