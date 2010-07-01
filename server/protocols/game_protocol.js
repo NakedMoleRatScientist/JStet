@@ -1,6 +1,6 @@
 var sys = require('sys');
 var game = require('../modes/game_loop')
-var events = new Array();
+var sessions = new Array();
 
 function Session()
 {
