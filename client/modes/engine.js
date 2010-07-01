@@ -13,12 +13,14 @@ function Engine(protocol)
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
+      self.current.draw? = true;
     }
     else if (type == 1)
     {
       self.future.change_shape(getShape(name));
       self.future.choice = choice;
       self.future.update_shape();
+      self.current.draw? = true;
     }
   };
 };
