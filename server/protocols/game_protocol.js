@@ -37,9 +37,9 @@ exports.process = function(data,id)
   switch(data)
   {
   case 0:
-    game.initialize();
-    add_events(game.get_data());
-    game.run_game()
+    new_game = new Session();
+    new_game.initialize(id);
+    sessions.push(new_game);
     break;
   case 1:
     sys.log("Reaction clear.");
