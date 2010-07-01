@@ -11,7 +11,7 @@ exports.process = function(data)
     game.run_game();
     break;
   case 1:
-    sys.log("clear reaction.");
+    sys.log("Reaction clear.");
     clear();
     break;
   }
@@ -34,5 +34,5 @@ exports.get_data = function()
 
 function clear()
 {
-  events = events.shift();
+  events.shift();
 }
