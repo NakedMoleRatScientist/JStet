@@ -13,6 +13,13 @@ function Session()
     self.id = id;
     game.initialize();
   };
+  self.add_events = function(loop_events)
+  {
+    for (i = 0; i < loop_events.length; i++)
+    {
+      events.push([2,loop_events[i]]);
+    }
+  };
 }
 
 exports.process = function(data)
