@@ -20,7 +20,7 @@ function Engine(protocol)
       self.future.change_shape(getShape(name));
       self.future.choice = choice;
       self.future.update_shape();
-      self.current.draw = true;
+      self.future.draw = true;
     }
   };
 };
