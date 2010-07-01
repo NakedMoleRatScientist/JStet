@@ -49,7 +49,7 @@ exports.process = function(data,id)
 
 function find_by_id(id)
 {
-  for (i = 0;i < sessions.length:i++)
+  for (i = 0;i < sessions.length;i++)
   {
     if (id == sessions[i])
     {
