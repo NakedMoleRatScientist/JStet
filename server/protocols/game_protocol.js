@@ -11,6 +11,7 @@ function Session()
   self.initialize = function(id)
   {
     self.id = id;
+    game.initialize();
   };
 }
 
