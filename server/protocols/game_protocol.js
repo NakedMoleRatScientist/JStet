@@ -26,6 +26,10 @@ function Session()
   {
     events.shift();
   };
+  self.get_data = function()
+  {
+    return events;
+  };
 }
 
 exports.process = function(data,id)
