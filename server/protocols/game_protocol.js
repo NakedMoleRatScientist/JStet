@@ -7,6 +7,7 @@ function Session()
   var self = this;
   self.events = new Array();
   self.id = null;
+  self.game = require('../modes/game_loop');
   self.initialize = function(id)
   {
     self.id = id;
