@@ -138,9 +138,11 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+    if (engine.current.draw? == true)
+    {drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
     text("Current: ",300,135);
     drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
+    }
     text("Next: ", 300,250);
     //drawShape.create_blocks(future.get_list(),250,210,future.shape.color);
     text(score.toString(),300,50);
