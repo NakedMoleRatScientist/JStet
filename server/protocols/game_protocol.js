@@ -48,6 +48,18 @@ exports.process = function(data,id)
   }
 };
 
+function find_by_id(id)
+{
+  for (i = 0;i < sessions.length:i++)
+  {
+    if (id == sessions[i])
+    {
+      return i;
+    }
+  }
+
+}
+
 exports.get_data = function()
 {
   return events;
