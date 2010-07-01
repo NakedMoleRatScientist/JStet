@@ -14,7 +14,7 @@ function Engine(protocol)
       self.current.choice = choice;
       self.current.update_shape();
     }
-    else if (type == 0)
+    else if (type == 1)
     {
       self.future.change_shape(getShape(name));
       self.future.choice = choice;
