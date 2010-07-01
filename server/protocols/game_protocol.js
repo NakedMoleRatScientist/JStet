@@ -57,7 +57,7 @@ function find_by_id(id)
       return i;
     }
   }
-
+  return false;
 }
 
 exports.get_data = function()
