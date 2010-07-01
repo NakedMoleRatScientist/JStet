@@ -4,7 +4,7 @@ var events = new Array();
 
 function Session()
 {
-  
+  var self = this;
 }
 
 exports.process = function(data)
