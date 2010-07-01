@@ -1,6 +1,12 @@
 var sys = require('sys');
 var game = require('../modes/game_loop')
 var events = new Array();
+
+function Session()
+{
+  
+}
+
 exports.process = function(data)
 {
   switch(data)
