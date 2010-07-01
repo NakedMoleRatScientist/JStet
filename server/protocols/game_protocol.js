@@ -7,6 +7,10 @@ function Session()
   var self = this;
   self.events = new Array();
   self.id = null;
+  self.initialize = function(id)
+  {
+    self.id = id;
+  };
 }
 
 exports.process = function(data)
