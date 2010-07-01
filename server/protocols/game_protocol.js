@@ -22,6 +22,10 @@ function Session()
       events.push([2,loop_events[i]]);
     }
   };
+  self.clear = function()
+  {
+    events.shift();
+  };
 }
 
 exports.process = function(data,id)
