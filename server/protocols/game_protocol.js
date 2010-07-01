@@ -6,6 +6,7 @@ function Session()
 {
   var self = this;
   self.events = new Array();
+  self.id = null;
 }
 
 exports.process = function(data)
