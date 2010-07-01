@@ -13,14 +13,14 @@ function Engine(protocol)
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
-      self.current.draw? = true;
+      self.current.draw = true;
     }
     else if (type == 1)
     {
       self.future.change_shape(getShape(name));
       self.future.choice = choice;
       self.future.update_shape();
-      self.current.draw? = true;
+      self.current.draw = true;
     }
   };
 };
@@ -138,7 +138,7 @@ void draw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height)
     stroke(255,255,255);
     fill(255,255,255);
-    if (engine.current.draw? == true)
+    if (engine.current.draw == true)
     {drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
     text("Current: ",300,135);
     drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
