@@ -60,7 +60,7 @@ function find_by_id(id)
   return false;
 }
 
-exports.get_data = function()
+exports.get_data = function(id)
 {
-  return events;
+  return sessions[find_by_id(id)].events
 }
