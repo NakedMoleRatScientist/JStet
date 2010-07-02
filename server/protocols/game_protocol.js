@@ -10,7 +10,7 @@ function Session()
   self.initialize = function(id)
   {
     self.id = id;
-    game.initialize();
+    self.game.initialize();
     add_events(game.get_data());
     game.run_game();
   };
