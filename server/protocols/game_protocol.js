@@ -51,22 +51,20 @@ function find_by_id(id)
 {
   for (i = 0;i < sessions.length;i++)
   {
-    sys.log(sessions[i].id);
-    sys.log(id);
     if (id == sessions[i].id)
     {
       return i;
     }
   }
-  return false;
+  return -1;
 }
 
 exports.get_data = function(id)
 {
   location = find_by_id(id)
-  if (location == false)
+  if (location == -1)
   {
     return false;
   }
-  return sessions[location].events;
+  return sessions[location].get_data();
 }
