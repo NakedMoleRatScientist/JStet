@@ -15,7 +15,12 @@ function GameProtocol(net)
   self.moveRight = function()
   {
     data = [2,1];
-    self.netsend(data);
+    self.net.send(data);
+  };
+  self.moveLeft = function()
+  {
+    data = [2,2];
+    self.net.send(data);
   };
   self.processData = function(data)
   {
