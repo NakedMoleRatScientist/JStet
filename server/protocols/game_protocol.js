@@ -36,6 +36,7 @@ exports.process = function(data,id)
   switch(data)
   {
   case 0:
+    sys.log("beep");
     new_game = new Session();
     new_game.initialize(id);
     sessions.push(new_game);
@@ -51,7 +52,7 @@ function find_by_id(id)
 {
   for (i = 0;i < sessions.length;i++)
   {
-    if (id == sessions[i])
+    if (id == sessions[i].id)
     {
       return i;
     }
