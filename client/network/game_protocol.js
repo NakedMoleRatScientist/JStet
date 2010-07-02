@@ -61,7 +61,7 @@ function GameProtocol(net)
   {
     if (self.lastMessage == null)
     {
-      self.lastMessage = [data[1],data[2],data[3]];
+      self.pushMessage(data);
       return true;
     }
     else if(self.lastMessage[0] != data[1] || self.lastMessage[1] != data[2] || self.lastMessage[2] != data[3])
