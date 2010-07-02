@@ -9,26 +9,19 @@ void gameKey()
   {
   //move right, d
   case 100:
-    shape.move(20,0);
-    checkEvent(-20,0);
+    game_protocol.moveRight();
     break;
   //move down, s
   case 115:
-    shape.move(0,20);
-    downEvent();
+    game_protocol.moveDown();
     break;
   //move left, a
   case 97:
-    shape.move(-20,0);
-    checkEvent(20,0);
+    game_protocol.moveLeft();
     break;
   //rotate, w
   case 119:
-    shape.rotate();
-    if (checkEvent(0,0))
-    {
-      shape.rotate_backward();
-    }
+    game_protocol.rotate();
     break;
   default:
     console.log(key);
