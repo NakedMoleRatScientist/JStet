@@ -47,22 +47,26 @@ exports.get_data = function()
 exports.move_right = function()
 {
   current.move(20,0);
+  create_xy_message();
 }
 
 
 exports.move_left = function()
 {
   current.move(-20,0);
+  create_xy_message();
 }
 
 
 exports.move_down = function()
 {
   current.move(0,20);
+  create_xy_message();
 }
 
 
 exports.rotate = function()
 {
   current.rotate();
+  create_xy_message();
 }
