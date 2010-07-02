@@ -55,3 +55,9 @@ exports.move_down = function()
 {
   current.move(0,20);
 }
+
+
+exports.rotate = function()
+{
+  current.rotate();
+}
