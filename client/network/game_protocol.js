@@ -14,22 +14,22 @@ function GameProtocol(net)
   };
   self.moveRight = function()
   {
-    data = [2,1];
+    data = [2,2];
     self.net.send(data);
   };
   self.moveLeft = function()
   {
-    data = [2,2];
+    data = [2,3];
     self.net.send(data);
   };
   self.moveDown = function()
   {
-    data = [2,3];
+    data = [2,4];
     self.net.send(data);
   };
   self.rotate = function()
   {
-    data = [2,4];
+    data = [2,5];
     self.net.send(data);
   };
   self.processData = function(data)
