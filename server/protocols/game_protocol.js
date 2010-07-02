@@ -61,10 +61,17 @@ function find_by_id(id)
 
 exports.get_data = function(id)
 {
-  location = find_by_id(id)
+  location = find_by_id(id);
   if (location == -1)
   {
     return false;
   }
   return sessions[location].get_data();
+}
+
+
+exports.destory = function(id)
+{
+  location = find_by_id(id);
+  sessions.splice(location,1); 
 }
