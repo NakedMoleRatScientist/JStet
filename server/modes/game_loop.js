@@ -37,3 +37,9 @@ exports.get_data = function()
   events = [];
   return message;
 }
+
+
+exports.move_right = function()
+{
+  current.move(20,0);
+}
