@@ -22,6 +22,11 @@ function GameProtocol(net)
     data = [2,2];
     self.net.send(data);
   };
+  self.moveDown = function()
+  {
+    data = [2,3];
+    self.net.send(data);
+  };
   self.processData = function(data)
   {
     switch(data[0])
