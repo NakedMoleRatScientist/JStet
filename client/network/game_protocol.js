@@ -44,6 +44,9 @@ function GameProtocol(net)
         self.net.send([2,1]);
       }
       break;
+    case 2:
+      engine.move(data[1],data[2]);
+      break;
     }
   };
   self.checkIdentical = function(data)
