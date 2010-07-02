@@ -19,7 +19,7 @@ function destroy(id)
       players.splice(i,1);
     }
   }
-
+  game.destroy(id);
 }
 
 function sendData()
