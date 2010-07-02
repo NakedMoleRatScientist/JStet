@@ -23,7 +23,7 @@ function Session()
   };
   self.clear = function()
   {
-    events.shift();
+    self.events.shift();
   };
   self.get_data = function()
   {
