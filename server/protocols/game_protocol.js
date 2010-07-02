@@ -27,7 +27,7 @@ function Session()
   };
   self.get_data = function()
   {
-    return events;
+    return self.events;
   };
 }
 
@@ -36,7 +36,6 @@ exports.process = function(data,id)
   switch(data)
   {
   case 0:
-    sys.log("beep");
     new_game = new Session();
     new_game.initialize(id);
     sessions.push(new_game);
@@ -52,6 +51,8 @@ function find_by_id(id)
 {
   for (i = 0;i < sessions.length;i++)
   {
+    sys.log(sessions[i].id);
+    sys.log(id);
     if (id == sessions[i].id)
     {
       return i;
