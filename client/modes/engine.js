@@ -147,7 +147,7 @@ void draw()
     text("Next: ", 300,250);
     if (engine.future.draw == true)
     {
-    drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
+      drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
     }
     text(score.toString(),300,50);
     drawInstruction();
