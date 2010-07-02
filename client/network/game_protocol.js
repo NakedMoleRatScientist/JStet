@@ -27,6 +27,11 @@ function GameProtocol(net)
     data = [2,3];
     self.net.send(data);
   };
+  self.rotate = function()
+  {
+    data = [2,4];
+    self.net.send(data);
+  };
   self.processData = function(data)
   {
     switch(data[0])
