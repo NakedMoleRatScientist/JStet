@@ -20,6 +20,26 @@ function GameProtocol(net)
     data = [2,0];
     self.net.send(data);
   };
+  self.moveRight = function()
+  {
+    data = [2,2];
+    self.net.send(data);
+  };
+  self.moveLeft = function()
+  {
+    data = [2,3];
+    self.net.send(data);
+  };
+  self.moveDown = function()
+  {
+    data = [2,4];
+    self.net.send(data);
+  };
+  self.rotate = function()
+  {
+    data = [2,5];
+    self.net.send(data);
+  };
   self.processData = function(data)
   {
     switch(data[0])
@@ -32,18 +52,41 @@ function GameProtocol(net)
         self.net.send([2,1]);
       }
       break;
+    case 2:
+      if (self.checkIdentical(data))
+      {
+	console.log("Reaction sent.");
+	engine.move(data[1],data[2]);
+	self.net.send([2,1]);
+      }
+      break;
+    }
+  };
+  self.pushMessage = function(data)
+  {
+    self.lastMessage = new Array();
+    for (i = 1;i < data.length;i++)
+    {
+      self.lastMessage.push(data[i]);
     }
   };
   self.checkIdentical = function(data)
   {
     if (self.lastMessage == null)
     {
-      self.lastMessage = [data[1],data[2],data[3]];
+      self.pushMessage(data);
       return true;
     }
-    else if(self.lastMessage[0] != data[1] || self.lastMessage[1] != data[2] || self.lastMessage[2] != data[3])
+    else
     {
-      self.lastMessage = [data[1],data[2],data[3]];
+      for (i = 0;i < self.lastMessage.length;i++)
+      {
+	if (self.lastMessage[i] == data[i + 1])
+	{
+	  return true;
+	}
+      }
+
       return true;
     }
     return false;
@@ -434,26 +477,19 @@ void gameKey()
   {
   //move right, d
   case 100:
-    shape.move(20,0);
-    checkEvent(-20,0);
+    game_protocol.moveRight();
     break;
   //move down, s
   case 115:
-    shape.move(0,20);
-    downEvent();
+    game_protocol.moveDown();
     break;
   //move left, a
   case 97:
-    shape.move(-20,0);
-    checkEvent(20,0);
+    game_protocol.moveLeft();
     break;
   //rotate, w
   case 119:
-    shape.rotate();
-    if (checkEvent(0,0))
-    {
-      shape.rotate_backward();
-    }
+    game_protocol.rotate();
     break;
   default:
     console.log(key);
@@ -1087,6 +1123,11 @@ function Engine(protocol)
       self.future.draw = true;
     }
   };
+  self.move = function(x,y)
+  {
+    self.current.x = x;
+    self.current.y = y;
+  };
 };
 
 
@@ -1126,36 +1167,6 @@ function cleanEvent()
   future.change_shape(generator.current);
 }
 
-function checkEvent(x,y)
-{
-  var offset = field.calculate_positions(shape.x,shape.y);
-  if (field.check(field.get_list(shape.blocks),offset[0],offset[1]) == false)  
-  {
-    shape.move(x,y);
-    return true;
-  }
-  return false;
-}
-
-function downEvent()
-{
-  if (checkEvent(0,-20))
-  {
-    if (shape.y == 0)
-    {
-      if (score.check() == true)
-      {
-        mode.change(3);
-      }
-      else
-      {
-        mode.change(1);
-      }
-    }
-    insertEvent();
-  }
-}
-
 function insertEvent()
 {
   field.insert_blocks(shape.blocks,shape.x,shape.y,shape.shape.color);
@@ -1178,6 +1189,30 @@ void drawInstruction()
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
 
+void gameDisplay()
+{
+  background(0,0,0);
+  stroke(205,201,201);
+  fill(0,0,0);
+  rect(drawField.x,drawField.y,drawField.width,drawField.height)
+  stroke(255,255,255);
+  fill(255,255,255);
+  if (engine.current.draw == true)
+  {
+    drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+    text("Current: ",300,135);
+    drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
+  }
+  text("Next: ", 300,250);
+  if (engine.future.draw == true)
+  {
+    drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
+  }
+  text(score.toString(),300,50);
+  drawInstruction();
+  drawShape.draw_field(field.field);
+}
+
 void sendAlive()
 {
   if (timer.getEvent() == "network")
@@ -1196,26 +1231,7 @@ void draw()
     title.display();
     break;
   case 4:
-    background(0,0,0);
-    stroke(205,201,201);
-    fill(0,0,0);
-    rect(drawField.x,drawField.y,drawField.width,drawField.height)
-    stroke(255,255,255);
-    fill(255,255,255);
-    if (engine.current.draw == true)
-    {
-      drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
-      text("Current: ",300,135);
-      drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
-    }
-    text("Next: ", 300,250);
-    if (engine.future.draw == true)
-    {
-    drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
-    }
-    text(score.toString(),300,50);
-    drawInstruction();
-    drawShape.draw_field(field.field);
+    gameDisplay();
     break;
   case 1:
     over.display();
