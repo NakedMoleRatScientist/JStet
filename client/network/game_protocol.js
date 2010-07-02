@@ -49,6 +49,14 @@ function GameProtocol(net)
       break;
     }
   };
+  self.pushMessage = function(data)
+  {
+    self.lastMessage = new Array();
+    for (i = 1;i < data.length;i++)
+    {
+      self.lastMessage.push(data[i]);
+    }
+  };
   self.checkIdentical = function(data)
   {
     if (self.lastMessage == null)
