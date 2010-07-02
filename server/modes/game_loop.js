@@ -43,3 +43,9 @@ exports.move_right = function()
 {
   current.move(20,0);
 }
+
+
+exports.move_left = function()
+{
+  current.move(-20,0);
+}
