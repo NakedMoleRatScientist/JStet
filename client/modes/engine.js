@@ -23,6 +23,11 @@ function Engine(protocol)
       self.future.draw = true;
     }
   };
+  self.move = function(x,y)
+  {
+    self.current.x = x;
+    self.current.y = y;
+  };
 };
 
 
