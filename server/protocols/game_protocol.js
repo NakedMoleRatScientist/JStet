@@ -18,7 +18,7 @@ function Session()
   {
     for (i = 0; i < loop_events.length; i++)
     {
-      events.push([2,loop_events[i]]);
+      self.events.push([2,loop_events[i]]);
     }
   };
   self.clear = function()
