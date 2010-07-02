@@ -59,7 +59,7 @@ server.addListener("connection",function(conn){
     for (i = 0; i < players.length; i++)
     {
       events = game.get_data(players[i]);
-      if (events.length != 0)
+      if (events.length != 0 && events != false)
       {
 	message = JSON.stringify(events[0]);
 	server.send(players[i],message);
