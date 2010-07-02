@@ -13,8 +13,7 @@ function randomChoice()
 
 exports.getShape = function()
 {
-  var choice = randomChoice();
-  switch(choice)
+  switch(randomChoice())
   {
   case 0:
     return lshape.get();
