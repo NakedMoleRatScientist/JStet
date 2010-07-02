@@ -73,25 +73,6 @@ function checkEvent(x,y)
   return false;
 }
 
-function downEvent()
-{
-  if (checkEvent(0,-20))
-  {
-    if (shape.y == 0)
-    {
-      if (score.check() == true)
-      {
-        mode.change(3);
-      }
-      else
-      {
-        mode.change(1);
-      }
-    }
-    insertEvent();
-  }
-}
-
 function insertEvent()
 {
   field.insert_blocks(shape.blocks,shape.x,shape.y,shape.shape.color);
