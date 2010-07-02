@@ -11,8 +11,8 @@ function Session()
   {
     self.id = id;
     self.game.initialize();
-    add_events(game.get_data());
-    game.run_game();
+    add_events(self.game.get_data());
+    self.game.run_game();
   };
   self.add_events = function(loop_events)
   {
