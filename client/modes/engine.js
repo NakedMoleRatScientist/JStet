@@ -156,6 +156,7 @@ void draw()
     title.display();
     break;
   case 4:
+    gameDisplay();
     break;
   case 1:
     over.display();
