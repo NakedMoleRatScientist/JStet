@@ -88,8 +88,8 @@ function Tetromino()
   //return every block to zero
   self.return_to_zero = function()
   {
-    choice = 0;
-    exports.modify_bulk(shape.get_data(exports.choice));
+    self.choice = 0;
+    self.modify_bulk(shape.get_data(exports.choice));
   };
 }
 
