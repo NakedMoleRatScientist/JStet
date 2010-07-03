@@ -45,6 +45,13 @@ function Tetromino()
     }
     return max;
   };
+  
+//modify a block
+
+exports.modify_block = function(x,y,i)
+{
+  blocks[x][y] = i;
+}
 }
 
   
@@ -52,12 +59,6 @@ function Tetromino()
 
 
 
-//modify a block
-
-exports.modify_block = function(x,y,i)
-{
-  blocks[x][y] = i;
-}
 
 
 //create a shape
