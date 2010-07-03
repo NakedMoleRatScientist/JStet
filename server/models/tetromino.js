@@ -89,7 +89,7 @@ function Tetromino()
   self.return_to_zero = function()
   {
     self.choice = 0;
-    self.modify_bulk(shape.get_data(self.choice));
+    self.modify_bulk(self.shape.get_data(self.choice));
   };
   //rotate forward
   self.rotate = function()
