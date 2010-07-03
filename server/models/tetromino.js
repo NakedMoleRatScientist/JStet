@@ -7,27 +7,29 @@ function Tetromino()
   self.choice = null;
   self.x = 0;
   self.y = 0;
+  function find_max_y()
+  {
+    var max = 0;
+    for (x = 0; x < 4; x++)
+    {
+      for (y = 0; y <4; y++)
+      {
+        if (blocks[x][y] == 1)
+        {
+	  if(x > max)
+	  {
+	    max = x;
+	  }
+        }
+      }
+    }
+    return max;
+  }
+
 }
 
   //find max length of a shape
-function find_max_y()
-{
-  var max = 0;
-  for (x = 0; x < 4; x++)
-  {
-    for (y = 0; y <4; y++)
-    {
-      if (blocks[x][y] == 1)
-      {
-	if(x > max)
-	{
-	  max = x;
-	}
-      }
-    }
-  }
-  return max;
-}
+
 
 //find max height of a shape
 function find_max_y()
