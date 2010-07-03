@@ -52,7 +52,7 @@ function Tetromino()
     self.blocks[x][y] = i;
   }
   //create a shape
-  exports.create_blocks = function()
+  self.create_blocks = function()
   {
     var blocks = new Array(4)
     for (i = 0; i< 4; i++)
