@@ -70,7 +70,7 @@ function Tetromino()
     }
   };
   //get a list of all suitable blocks
-  exports.get_list = function()
+  self.get_list = function()
   {
     var suitable = new Array();
     for (r = 0; r < 4; r++)
