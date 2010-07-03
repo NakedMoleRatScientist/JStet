@@ -94,16 +94,16 @@ function Tetromino()
   //rotate forward
   self.rotate = function()
   {
-    blocks = create_block();
-    choice += 1;
-    if (choice == shape.length)
+    self.blocks = create_block();
+    self.choice += 1;
+    if (self.choice == self.shape.length)
     {
-      choice = 0;
+      self.choice = 0;
     }
-    exports.modify_bulk(shape.get_data(choice));
-    if (rotation_collision_x() == true || rotation_collision_y() == true)
+    self.modify_bulk(shape.get_data(choice));
+    if (self.rotation_collision_x() == true || self.rotation_collision_y() == true)
     {
-      rotate_backward();
+      self.rotate_backward();
     }
   };
 }
