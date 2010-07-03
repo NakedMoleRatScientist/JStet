@@ -51,16 +51,7 @@ function Tetromino()
   {
     self.blocks[x][y] = i;
   }
-}
-
-  
-
-
-
-
-
-
-//create a shape
+  //create a shape
 exports.create_blocks = function()
 {
   var blocks = new Array(4)
@@ -70,6 +61,16 @@ exports.create_blocks = function()
   }
   return blocks;
 };
+}
+
+  
+
+
+
+
+
+
+
 
 //modify whole shapes
 exports.modify_bulk = function(shape)
