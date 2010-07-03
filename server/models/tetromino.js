@@ -1,3 +1,10 @@
+
+
+function Tetromino()
+{
+  self = this;
+}
+
 var shape = null;
 var blocks = null;
 var choice = 0;
