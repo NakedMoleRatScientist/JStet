@@ -91,6 +91,21 @@ function Tetromino()
     self.choice = 0;
     self.modify_bulk(shape.get_data(self.choice));
   };
+  //rotate forward
+  exports.rotate = function()
+  {
+    blocks = create_block();
+    choice += 1;
+    if (choice == shape.length)
+    {
+      choice = 0;
+    }
+    exports.modify_bulk(shape.get_data(choice));
+    if (rotation_collision_x() == true || rotation_collision_y() == true)
+    {
+      rotate_backward();
+    }
+  };
 }
 
   
@@ -101,21 +116,7 @@ function Tetromino()
 
 
 
-//rotate forward
-exports.rotate = function()
-{
-  blocks = create_block();
-  choice += 1;
-  if (choice == shape.length)
-  {
-    choice = 0;
-  }
-  exports.modify_bulk(shape.get_data(choice));
-  if (rotation_collision_x() == true || rotation_collision_y() == true)
-  {
-    rotate_backward();
-  }
-};
+
 
 //detect if it is too far to the right
 function rotation_collision_x()
