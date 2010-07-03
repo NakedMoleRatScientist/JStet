@@ -26,13 +26,7 @@ function Tetromino()
     }
     return max;
   }
-
-}
-
-  
-
-
-//find max height of a shape
+  //find max height of a shape
 function find_max_y()
 {
   max = 0;
@@ -48,6 +42,13 @@ function find_max_y()
   }
   return max;
 };
+
+}
+
+  
+
+
+
 
 //modify a block
 
