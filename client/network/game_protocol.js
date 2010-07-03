@@ -75,6 +75,7 @@ function GameProtocol(net)
       {
 	if (self.lastMessage[i] != data[i + 1])
 	{
+	  self.pushMessage(data);
 	  return true;
 	}
       }
