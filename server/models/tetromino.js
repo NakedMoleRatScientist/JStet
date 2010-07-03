@@ -66,7 +66,7 @@ function Tetromino()
   {
     for (i = 0; i < shape.length; i++)
     {
-      exports.modify_block(shape[i][0],shape[i][1],1);
+      self.modify_block(shape[i][0],shape[i][1],1);
     }
   };
 }
