@@ -81,13 +81,12 @@ function GameProtocol(net)
     {
       for (i = 0;i < self.lastMessage.length;i++)
       {
-	if (self.lastMessage[i] == data[i + 1])
+	if (self.lastMessage[i] != data[i + 1])
 	{
+	  self.pushMessage(data);
 	  return true;
 	}
       }
-
-      return true;
     }
     return false;
   };
