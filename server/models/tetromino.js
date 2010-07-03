@@ -69,28 +69,29 @@ function Tetromino()
       self.modify_block(shape[i][0],shape[i][1],1);
     }
   };
+  //get a list of all suitable blocks
+  exports.get_list = function()
+  {
+    var suitable = new Array();
+    for (r = 0; r < 4; r++)
+    {
+      for (c = 0; c < 4; c++)
+      {
+        if (exports.blocks[r][c] == 1)
+        {
+	  suitable.push([r,c]);
+        }
+      }
+    }
+    return suitable;
+  };
 }
 
   
 
 
 
-//get a list of all suitable blocks
-exports.get_list = function()
-{
-  var suitable = new Array();
-  for (r = 0; r < 4; r++)
-  {
-    for (c = 0; c < 4; c++)
-    {
-      if (exports.blocks[r][c] == 1)
-      {
-	suitable.push([r,c]);
-      }
-    }
-  }
-  return suitable;
-};
+
 
 //return every block to zero
 exports.return_to_zero = function()
