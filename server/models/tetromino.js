@@ -34,10 +34,13 @@ function Tetromino()
     {
       for(y = 0; y < 4; y++)
       {
-        if (y > max)
-        {
-	  max = y;
-        }
+	if (self.blocks[x][y] == 1)
+	{
+          if (y > max)
+          {
+	    max = y;
+          }
+	}
       }
     }
     return max;
