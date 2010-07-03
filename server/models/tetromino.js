@@ -62,13 +62,13 @@ function Tetromino()
     return blocks;
   };
   //modify whole shapes
-exports.modify_bulk = function(shape)
-{
-  for (i = 0; i < shape.length; i++)
+  exports.modify_bulk = function(shape)
   {
-    exports.modify_block(shape[i][0],shape[i][1],1);
-  }
-};
+    for (i = 0; i < shape.length; i++)
+    {
+      exports.modify_block(shape[i][0],shape[i][1],1);
+    }
+  };
 }
 
   
