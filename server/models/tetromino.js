@@ -25,7 +25,7 @@ function Tetromino()
       }
     }
     return max;
-  }
+  };
   //find max height of a shape
   function find_max_y()
   {
