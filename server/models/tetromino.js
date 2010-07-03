@@ -77,7 +77,7 @@ function Tetromino()
     {
       for (c = 0; c < 4; c++)
       {
-        if (exports.blocks[r][c] == 1)
+        if (self.blocks[r][c] == 1)
         {
 	  suitable.push([r,c]);
         }
