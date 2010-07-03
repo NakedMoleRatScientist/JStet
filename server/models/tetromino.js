@@ -5,6 +5,8 @@ function Tetromino()
   self = this;
   self.blocks = null;
   self.choice = null;
+  self.x = 0;
+  self.y = 0;
 }
 
 var shape = null;
