@@ -14,7 +14,7 @@ function Tetromino()
     {
       for (y = 0; y <4; y++)
       {
-        if (blocks[x][y] == 1)
+        if (self.blocks[x][y] == 1)
         {
 	  if(x > max)
 	  {
