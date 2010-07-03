@@ -9,18 +9,6 @@ function Tetromino()
   self.y = 0;
 }
 
-var shape = null;
-var blocks = null;
-var choice = 0;
-function Positions()
-{
-  var self = this;
-  self.x = 0;
-  self.y = 0;
-}
-
-pos = new Positions();
-
   //find max length of a shape
 function find_max_y()
 {
