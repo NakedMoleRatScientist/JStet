@@ -27,22 +27,21 @@ function Tetromino()
     return max;
   }
   //find max height of a shape
-function find_max_y()
-{
-  max = 0;
-  for (x = 0; x < 4; x++)
+  function find_max_y()
   {
-    for(y = 0; y < 4; y++)
+    max = 0;
+    for (x = 0; x < 4; x++)
     {
-      if (y > max)
+      for(y = 0; y < 4; y++)
       {
-	max = y;
+        if (y > max)
+        {
+	  max = y;
+        }
       }
     }
-  }
-  return max;
-};
-
+    return max;
+  };
 }
 
   
