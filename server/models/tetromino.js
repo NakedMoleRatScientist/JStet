@@ -85,6 +85,12 @@ function Tetromino()
     }
     return suitable;
   };
+  //return every block to zero
+exports.return_to_zero = function()
+{
+  choice = 0;
+  exports.modify_bulk(shape.get_data(exports.choice));
+};
 }
 
   
@@ -93,12 +99,7 @@ function Tetromino()
 
 
 
-//return every block to zero
-exports.return_to_zero = function()
-{
-  choice = 0;
-  exports.modify_bulk(shape.get_data(exports.choice));
-};
+
 
 //rotate forward
 exports.rotate = function()
