@@ -78,8 +78,6 @@ function GameProtocol(net)
 	  return true;
 	}
       }
-
-      return true;
     }
     return false;
   };
