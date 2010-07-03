@@ -49,7 +49,7 @@ function Tetromino()
   //modify a block
   self.modify_block = function(x,y,i)
   {
-    blocks[x][y] = i;
+    self.blocks[x][y] = i;
   }
 }
 
