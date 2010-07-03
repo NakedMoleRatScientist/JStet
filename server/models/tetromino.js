@@ -7,6 +7,7 @@ function Tetromino()
   self.choice = null;
   self.x = 0;
   self.y = 0;
+  //find max length of a shape
   function find_max_y()
   {
     var max = 0;
@@ -28,7 +29,7 @@ function Tetromino()
 
 }
 
-  //find max length of a shape
+  
 
 
 //find max height of a shape
