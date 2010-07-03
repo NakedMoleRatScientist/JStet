@@ -46,12 +46,11 @@ function Tetromino()
     return max;
   };
   
-//modify a block
-
-exports.modify_block = function(x,y,i)
-{
-  blocks[x][y] = i;
-}
+  //modify a block
+  exports.modify_block = function(x,y,i)
+  {
+    blocks[x][y] = i;
+  }
 }
 
   
