@@ -184,3 +184,9 @@ exports.move = function(x_move,y_move)
   };
   self.blocks = self.create_blocks();
 }
+
+
+exports.get_tetromino = function()
+{
+  return new Tetromino();
+}
