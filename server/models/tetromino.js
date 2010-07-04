@@ -158,7 +158,7 @@ function Tetromino()
     self.shape = new_shape;
     self.blocks = self.create_blocks();
     self.choice = 0;
-    self.modify_bulk(self.shape.get_data(choice));
+    self.modify_bulk(self.shape.get_data(self.choice));
   };
   //get shape
   self.get_shape = function()
