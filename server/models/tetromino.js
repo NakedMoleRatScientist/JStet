@@ -163,12 +163,12 @@ function Tetromino()
   //get shape
   self.get_shape = function()
   {
-    return shape;
+    return self.shape;
   };
   //get choice
   self.get_choice = function()
   {
-    return choice;
+    return self.choice;
   };
   self.blocks = self.create_blocks();
 }
