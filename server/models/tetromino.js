@@ -118,7 +118,7 @@ function Tetromino()
   //detect if it is too low.
   self.rotation_collision_y = function()
   {
-    if (pos.y > 380 - find_max_y() * 20)
+    if (self.y > 380 - find_max_y() * 20)
     {
       return true;
     }
