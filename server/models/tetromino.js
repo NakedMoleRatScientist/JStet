@@ -123,7 +123,7 @@ function Tetromino()
       return true;
     }
     return false;
-  }
+  };
 }
 
   
