@@ -8,7 +8,7 @@ function Tetromino()
   self.x = 0;
   self.y = 0;
   //find max length of a shape
-  self.find_max_y()
+  self.find_max_x = function()
   {
     var max = 0;
     for (x = 0; x < 4; x++)
