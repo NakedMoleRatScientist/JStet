@@ -152,8 +152,6 @@ function Tetromino()
     }
     return 0;
   };
-}
-
   //change the shape
   self.change_shape = function(new_shape)
   {
@@ -174,6 +172,8 @@ function Tetromino()
   };
   self.blocks = self.create_blocks();
 }
+
+  
 
 
 exports.get_tetromino = function()
