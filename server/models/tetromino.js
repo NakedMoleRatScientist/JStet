@@ -167,10 +167,10 @@ exports.move = function(x_move,y_move)
   //change the shape
   self.change_shape = function(new_shape)
   {
-    shape = new_shape;
-    blocks = exports.create_blocks();
-    choice = 0;
-    exports.modify_bulk(shape.get_data(choice));
+    self.shape = new_shape;
+    self.blocks = self.create_blocks();
+    self.choice = 0;
+    self.modify_bulk(self.shape.get_data(choice));
   };
 }
 
