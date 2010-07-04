@@ -138,16 +138,16 @@ function Tetromino()
   //move shape
   exports.move = function(x_move,y_move)
   {
-    pos.x += x_move;
-    pos.y += y_move;
-    if (x < 0 || rotation_collision_x() == true)
+    self.x += x_move;
+    self.y += y_move;
+    if (self.x < 0 || rotation_collision_x() == true)
     {
-      pos.x -= x_move;
+      self.x -= x_move;
       return 1;
     }
     if (rotation_collision_y() == true)
     {
-      pos.y -= y;
+      self.y -= y_move;
       return 2;
     }
     return 0;
