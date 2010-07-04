@@ -107,7 +107,7 @@ function Tetromino()
     }
   };
   //detect if it is too far to the right
-  function rotation_collision_x()
+  self.rotation_collision_x = function()
   {
     if (pos.x > 180 - (find_max_x() * 20))
     {
