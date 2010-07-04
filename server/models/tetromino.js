@@ -177,6 +177,7 @@ exports.move = function(x_move,y_move)
   {
     return shape;
   };
+  //get choice
   self.get_choice = function()
   {
     return choice;
