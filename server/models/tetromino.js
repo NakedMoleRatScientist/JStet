@@ -116,7 +116,7 @@ function Tetromino()
     return false;
   };
   //detect if it is too low.
-  function rotation_collision_y()
+  self.rotation_collision_y = function()
   {
     if (pos.y > 380 - find_max_y() * 20)
     {
