@@ -182,13 +182,5 @@ exports.move = function(x_move,y_move)
   {
     return choice;
   };
+  self.blocks = self.create_blocks();
 }
-
-
-
-
-
-
-
-
-blocks = self.create_blocks();
