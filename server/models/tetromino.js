@@ -127,13 +127,13 @@ function Tetromino()
   //rotate backward
   self.rotate_backward = function()
   {
-    blocks = exports.create_blocks();
-    choice -= 1;
-    if (choice == -1)
+    self.blocks = self.create_blocks();
+    self.choice -= 1;
+    if (self.choice == -1)
     {
-      choice = shape.length - 1;
+      self.choice = self.shape.length - 1;
     }
-    exports.modify_bulk(shape.get_data(choice));
+    self.modify_bulk(self.shape.get_data(choice));
   };
 }
 
