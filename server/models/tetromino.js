@@ -173,10 +173,10 @@ exports.move = function(x_move,y_move)
     self.modify_bulk(self.shape.get_data(choice));
   };
   //get shape
-self.get_shape = function()
-{
-  return shape;
-}
+  self.get_shape = function()
+  {
+    return shape;
+  };
 }
 
 
