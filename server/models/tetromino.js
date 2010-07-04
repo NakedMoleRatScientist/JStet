@@ -124,17 +124,7 @@ function Tetromino()
     }
     return false;
   };
-}
-
-  
-
-
-
-
-
-
-
-//rotate backward
+  //rotate backward
 exports.rotate_backward = function()
 {
   blocks = exports.create_blocks();
@@ -145,6 +135,17 @@ exports.rotate_backward = function()
   }
   exports.modify_bulk(shape.get_data(choice));
 }
+}
+
+  
+
+
+
+
+
+
+
+
 
 
 //move shape
