@@ -125,7 +125,7 @@ function Tetromino()
     return false;
   };
   //rotate backward
-exports.rotate_backward = function()
+self.rotate_backward = function()
 {
   blocks = exports.create_blocks();
   choice -= 1;
