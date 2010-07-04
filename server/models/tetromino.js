@@ -135,21 +135,7 @@ function Tetromino()
     }
     self.modify_bulk(self.shape.get_data(choice));
   };
-}
-
-  
-
-
-
-
-
-
-
-
-
-
-//move shape
-exports.move = function(x_move,y_move)
+  exports.move = function(x_move,y_move)
 {
   pos.x += x_move;
   pos.y += y_move;
@@ -164,6 +150,10 @@ exports.move = function(x_move,y_move)
     return 2;
   }
   return 0;
+}
+}
+//move shape
+
   //change the shape
   self.change_shape = function(new_shape)
   {
