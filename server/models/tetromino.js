@@ -164,9 +164,7 @@ exports.move = function(x_move,y_move)
     return 2;
   }
   return 0;
-}
-
-//change the shape
+  //change the shape
 exports.change_shape = function(new_shape)
 {
   shape = new_shape;
@@ -174,6 +172,9 @@ exports.change_shape = function(new_shape)
   choice = 0;
   exports.modify_bulk(shape.get_data(choice));
 }
+}
+
+
 
 //get shape
 exports.get_shape = function()
