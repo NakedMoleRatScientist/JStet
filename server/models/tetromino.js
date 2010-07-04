@@ -151,9 +151,8 @@ function Tetromino()
       return 2;
     }
     return 0;
-  }
+  };
 }
-//move shape
 
   //change the shape
   self.change_shape = function(new_shape)
