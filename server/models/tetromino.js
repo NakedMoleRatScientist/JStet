@@ -106,15 +106,15 @@ function Tetromino()
       self.rotate_backward();
     }
   };
-//detect if it is too far to the right
-function rotation_collision_x()
-{
-  if (pos.x > 180 - (find_max_x() * 20))
+  //detect if it is too far to the right
+  function rotation_collision_x()
   {
-    return true;
+    if (pos.x > 180 - (find_max_x() * 20))
+    {
+      return true;
+    }
+    return false;
   }
-  return false;
-}
 }
 
   
