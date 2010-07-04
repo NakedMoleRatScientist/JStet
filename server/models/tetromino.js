@@ -114,7 +114,7 @@ function Tetromino()
       return true;
     }
     return false;
-  }
+  };
   //detect if it is too low.
   function rotation_collision_y()
   {
