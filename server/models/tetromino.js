@@ -125,16 +125,16 @@ function Tetromino()
     return false;
   };
   //rotate backward
-self.rotate_backward = function()
-{
-  blocks = exports.create_blocks();
-  choice -= 1;
-  if (choice == -1)
+  self.rotate_backward = function()
   {
-    choice = shape.length - 1;
+    blocks = exports.create_blocks();
+    choice -= 1;
+    if (choice == -1)
+    {
+      choice = shape.length - 1;
+    }
+    exports.modify_bulk(shape.get_data(choice));
   }
-  exports.modify_bulk(shape.get_data(choice));
-}
 }
 
   
