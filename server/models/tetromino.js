@@ -177,15 +177,15 @@ exports.move = function(x_move,y_move)
 
 
 //get shape
-exports.get_shape = function()
+self.get_shape = function()
 {
   return shape;
 }
 
 
-exports.get_choice = function()
+self.get_choice = function()
 {
   return choice;
 }
 
-blocks = exports.create_blocks();
+blocks = self.create_blocks();
