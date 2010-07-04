@@ -27,7 +27,7 @@ function Tetromino()
     return max;
   };
   //find max height of a shape
-  self.find_max_y()
+  self.find_max_y = function()
   {
     max = 0;
     for (x = 0; x < 4; x++)
