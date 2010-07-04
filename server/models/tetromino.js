@@ -136,21 +136,21 @@ function Tetromino()
     self.modify_bulk(self.shape.get_data(choice));
   };
   exports.move = function(x_move,y_move)
-{
-  pos.x += x_move;
-  pos.y += y_move;
-  if (x < 0 || rotation_collision_x() == true)
   {
-    pos.x -= x_move;
-    return 1;
+    pos.x += x_move;
+    pos.y += y_move;
+    if (x < 0 || rotation_collision_x() == true)
+    {
+      pos.x -= x_move;
+      return 1;
+    }
+    if (rotation_collision_y() == true)
+    {
+      pos.y -= y;
+      return 2;
+    }
+    return 0;
   }
-  if (rotation_collision_y() == true)
-  {
-    pos.y -= y;
-    return 2;
-  }
-  return 0;
-}
 }
 //move shape
 
