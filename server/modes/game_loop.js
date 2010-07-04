@@ -1,7 +1,7 @@
 var sys = require('sys');
 var tetro = require('../models/tetromino');
-var current = require('../models/tetromino');
-var future = require('../models/tetromino');
+var current = tetro.get_tetromino();
+var future = tetro.get_tetromino();
 var generator = require ('../models/shape_generator');
 
 var events = new Array();
