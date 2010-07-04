@@ -178,9 +178,9 @@ exports.move = function(x_move,y_move)
     return shape;
   };
   self.get_choice = function()
-{
-  return choice;
-}
+  {
+    return choice;
+  };
 }
 
 
