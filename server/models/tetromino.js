@@ -165,7 +165,7 @@ exports.move = function(x_move,y_move)
   }
   return 0;
   //change the shape
-  exports.change_shape = function(new_shape)
+  self.change_shape = function(new_shape)
   {
     shape = new_shape;
     blocks = exports.create_blocks();
