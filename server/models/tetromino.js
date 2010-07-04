@@ -134,7 +134,7 @@ function Tetromino()
       choice = shape.length - 1;
     }
     exports.modify_bulk(shape.get_data(choice));
-  }
+  };
 }
 
   
