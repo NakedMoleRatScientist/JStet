@@ -115,21 +115,7 @@ function Tetromino()
     }
     return false;
   }
-}
-
-  
-
-
-
-
-
-
-
-
-
-
-
-//detect if it is too low.
+  //detect if it is too low.
 function rotation_collision_y()
 {
   if (pos.y > 380 - find_max_y() * 20)
@@ -138,6 +124,14 @@ function rotation_collision_y()
   }
   return false;
 }
+}
+
+  
+
+
+
+
+
 
 
 //rotate backward
