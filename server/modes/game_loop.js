@@ -36,9 +36,9 @@ function EventManager(id)
   }
 }
 
-exports.initialize = function()
+exports.initialize = function(id)
 {
-  
+  var game = new EventManager(id);
 }
 
 
