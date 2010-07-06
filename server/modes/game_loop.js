@@ -6,6 +6,7 @@ var generator = require ('../models/shape_generator');
 
 function EventManager()
 {
+  var self = this;
 }
 
 var events = new Array();
