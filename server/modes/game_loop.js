@@ -18,7 +18,7 @@ function EventManager(id)
     message = [1,shape.name,current.get_choice(),type];
     events.push(message);
   }
-  function create_xy_message()
+  self.create_xy_message = function()
   {
     message = [2,current.x,current.y];
     events.push(message);
