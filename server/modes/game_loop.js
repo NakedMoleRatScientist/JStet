@@ -18,15 +18,16 @@ function EventManager(id)
     message = [1,shape.name,current.get_choice(),type];
     events.push(message);
   }
+  function create_xy_message()
+  {
+    message = [2,current.x,current.y];
+    events.push(message);
+  }
 }
 
 
 
-function create_xy_message()
-{
-  message = [2,current.x,current.y];
-  events.push(message);
-}
+
 
 exports.initialize = function()
 {
