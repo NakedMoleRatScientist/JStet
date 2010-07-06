@@ -19,13 +19,13 @@ function EventManager(id)
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
     var message = [1,shape.name,shape.get_choice(),type];
     self.events.push(message);
-  }
+  };
   //Send data about current's movement.
   self.create_xy_message = function()
   {
     var message = [2,self.current.x,self.current.y];
     self.events.push(message);
-  }
+  };
   //get the initial shapes for current and future.
   self.initialize = function()
   {
@@ -33,13 +33,13 @@ function EventManager(id)
     self.future.change_shape(generator.getShape());
     self.create_shape_message(current.get_shape(),0); //0 is current
     self.create_shape_message(future.get_shape(),1);  //1 is the future
-  }
+  };
   self.get_data = function()
   {
     var message = events;
     self.events = [];
     return message;
-  }
+  };
 }
 
 exports.initialize = function(id)
