@@ -9,6 +9,8 @@ function EventManager(id)
   var self = this;
   self.events = new Array();
   self.id = id;
+  self.current = tetro.get_tetromino();
+  self.future = tetro.get_current();
   self.create_shape_message = function (shape,type)
   {
     //1 in the first element denotates incoming new shape
