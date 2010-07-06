@@ -36,8 +36,8 @@ function EventManager(id)
   }
   self.get_data = function()
   {
-    message = events;
-    events = [];
+    var message = events;
+    self.events = [];
     return message;
   }
 }
