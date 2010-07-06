@@ -26,11 +26,14 @@ function EventManager(id)
     var message = [2,self.current.x,self.current.y];
     self.events.push(message);
   }
+  self.initialize = function()
+  {
+    self.current.change_shape(generator.getShape());
+    self.future.change_shape(generator.getShape());
+    self.create_shape_message(current.get_shape(),0); //0 is current
+    self.create_shape_message(future.get_shape(),1);  //1 is the future
+  }
 }
-
-
-
-
 
 exports.initialize = function()
 {
