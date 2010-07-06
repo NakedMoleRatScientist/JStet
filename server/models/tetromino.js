@@ -56,7 +56,7 @@ function Tetromino()
   self.create_blocks = function()
   {
     var blocks = new Array(4)
-    for (i = 0; i< 4; i++)
+    for (var i = 0; i< 4; i++)
     {
       blocks[i] = new Array(4)
     }
