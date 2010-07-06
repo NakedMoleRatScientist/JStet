@@ -34,6 +34,12 @@ function EventManager(id)
     self.create_shape_message(current.get_shape(),0); //0 is current
     self.create_shape_message(future.get_shape(),1);  //1 is the future
   }
+  exports.get_data = function()
+{
+  message = events;
+  events = [];
+  return message;
+}
 }
 
 exports.initialize = function(id)
@@ -50,12 +56,7 @@ exports.run_game = function()
 }
 
 
-exports.get_data = function()
-{
-  message = events;
-  events = [];
-  return message;
-}
+
 
 
 exports.move_right = function()
