@@ -8,6 +8,7 @@ function EventManager()
 {
   var self = this;
   var events = new Array();
+  var id = id;
 }
 
 var events = new Array();
