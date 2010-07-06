@@ -10,14 +10,14 @@ function EventManager(id)
   var events = new Array();
   var id = id;
   self.create_shape_message = function (shape,type)
-{
-  //1 in the first element denotates incoming new shape
-  //The second element indicate the which type of shape
-  //The third element contains the shape's rotation
-  //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
-  message = [1,shape.name,current.get_choice(),type];
-  events.push(message);
-}
+  {
+    //1 in the first element denotates incoming new shape
+    //The second element indicate the which type of shape
+    //The third element contains the shape's rotation
+    //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
+    message = [1,shape.name,current.get_choice(),type];
+    events.push(message);
+  }
 }
 
 
