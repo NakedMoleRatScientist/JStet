@@ -65,7 +65,7 @@ function Tetromino()
   //modify whole shapes
   self.modify_bulk = function(shape)
   {
-    for (i = 0; i < shape.length; i++)
+    for (var i = 0; i < shape.length; i++)
     {
       self.modify_block(shape[i][0],shape[i][1],1);
     }
