@@ -26,6 +26,7 @@ function EventManager(id)
     var message = [2,self.current.x,self.current.y];
     self.events.push(message);
   }
+  //get the initial shapes for current and future.
   self.initialize = function()
   {
     self.current.change_shape(generator.getShape());
