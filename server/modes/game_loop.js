@@ -9,7 +9,7 @@ function EventManager(id)
   var self = this;
   var events = new Array();
   var id = id;
-  function create_shape_message(shape,type)
+  self.create_shape_message = function (shape,type)
 {
   //1 in the first element denotates incoming new shape
   //The second element indicate the which type of shape
