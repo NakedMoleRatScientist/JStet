@@ -11,8 +11,6 @@ function EventManager(id)
   var id = id;
 }
 
-var events = new Array();
-
 function create_shape_message(shape,type)
 {
   //1 in the first element denotates incoming new shape
