@@ -22,7 +22,7 @@ function EventManager(id)
   self.create_xy_message = function()
   {
     message = [2,current.x,current.y];
-    events.push(message);
+    self.events.push(message);
   }
 }
 
