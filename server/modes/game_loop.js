@@ -41,10 +41,10 @@ function EventManager(id)
     return message;
   };
   exports.move_right = function()
-{
-  current.move(20,0);
-  create_xy_message();
-}
+  {
+    current.move(20,0);
+    create_xy_message();
+  }
 }
 
 exports.initialize = function(id)
