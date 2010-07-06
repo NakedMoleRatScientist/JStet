@@ -30,10 +30,10 @@ function Tetromino()
   //find max height of a shape
   self.find_max_y = function()
   {
-    max = 0;
-    for (x = 0; x < 4; x++)
+    var max = 0;
+    for (var x = 0; x < 4; x++)
     {
-      for(y = 0; y < 4; y++)
+      for(var y = 0; y < 4; y++)
       {
 	if (self.blocks[x][y] == 1)
 	{
