@@ -4,6 +4,10 @@ var current = tetro.get_tetromino();
 var future = tetro.get_tetromino();
 var generator = require ('../models/shape_generator');
 
+function EventManager()
+{
+}
+
 var events = new Array();
 
 function create_shape_message(shape,type)
