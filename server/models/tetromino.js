@@ -12,9 +12,9 @@ function Tetromino()
   self.find_max_x = function()
   {
     var max = 0;
-    for (x = 0; x < 4; x++)
+    for (var x = 0; x < 4; x++)
     {
-      for (y = 0; y <4; y++)
+      for (var y = 0; y <4; y++)
       {
         if (self.blocks[x][y] == 1)
         {
