@@ -39,6 +39,8 @@ function EventManager(id)
 exports.initialize = function(id)
 {
   var game = new EventManager(id);
+  game.initialize();
+  sessions.push(game);
 }
 
 
