@@ -15,7 +15,7 @@ function EventManager(id)
     //The second element indicate the which type of shape
     //The third element contains the shape's rotation
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
-    message = [1,shape.name,current.get_choice(),type];
+    var message = [1,shape.name,current.get_choice(),type];
     events.push(message);
   }
   //Send data about current's movement.
