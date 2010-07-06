@@ -7,8 +7,8 @@ var generator = require ('../models/shape_generator');
 function EventManager(id)
 {
   var self = this;
-  var events = new Array();
-  var id = id;
+  self.events = new Array();
+  self.id = id;
   self.create_shape_message = function (shape,type)
   {
     //1 in the first element denotates incoming new shape
@@ -18,6 +18,7 @@ function EventManager(id)
     message = [1,shape.name,current.get_choice(),type];
     events.push(message);
   }
+  //Send data about current's movement.
   self.create_xy_message = function()
   {
     message = [2,current.x,current.y];
