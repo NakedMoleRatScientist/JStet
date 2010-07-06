@@ -2,7 +2,7 @@
 
 function Tetromino()
 {
-  self = this;
+  var self = this;
   self.blocks = null;
   self.choice = null;
   self.x = 0;
