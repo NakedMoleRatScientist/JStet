@@ -47,8 +47,8 @@ function EventManager(id)
   };
   self.move_left = function()
   {
-    current.move(-20,0);
-    create_xy_message();
+    self.current.move(-20,0);
+    self.create_xy_message();
   };
 }
 
