@@ -40,16 +40,19 @@ function EventManager(id)
     self.events = [];
     return message;
   };
+  //move right
   self.move_right = function()
   {
     current.move(20,0);
     create_xy_message();
   };
+  //move left
   self.move_left = function()
   {
     self.current.move(-20,0);
     self.create_xy_message();
   };
+  //move down
   self.move_down = function()
   {
     self.current.move(0,20);
