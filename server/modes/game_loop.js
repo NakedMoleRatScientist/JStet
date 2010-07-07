@@ -50,6 +50,11 @@ function EventManager(id)
     self.current.move(-20,0);
     self.create_xy_message();
   };
+  exports.move_down = function()
+{
+  current.move(0,20);
+  create_xy_message();
+}
 }
 
 exports.initialize = function(id)
@@ -57,6 +62,7 @@ exports.initialize = function(id)
   var game = new EventManager(id);
   game.initialize();
   sessions.push(game);
+  
 }
 
 
@@ -66,20 +72,6 @@ exports.run_game = function()
 }
 
 
-
-
-
-
-
-
-
-
-
-exports.move_down = function()
-{
-  current.move(0,20);
-  create_xy_message();
-}
 
 
 exports.rotate = function()
