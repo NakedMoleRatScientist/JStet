@@ -58,11 +58,11 @@ function EventManager(id)
     self.current.move(0,20);
     self.create_xy_message();
   };
-  exports.rotate = function()
-{
-  current.rotate();
-  create_xy_message();
-}
+  self.rotate = function()
+  {
+    current.rotate();
+    create_xy_message();
+  };
 }
 
 exports.initialize = function(id)
