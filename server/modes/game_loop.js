@@ -45,7 +45,7 @@ function EventManager(id)
     current.move(20,0);
     create_xy_message();
   };
-  exports.move_left = function()
+  self.move_left = function()
   {
     current.move(-20,0);
     create_xy_message();
