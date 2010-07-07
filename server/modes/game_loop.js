@@ -50,11 +50,11 @@ function EventManager(id)
     self.current.move(-20,0);
     self.create_xy_message();
   };
-  exports.move_down = function()
-{
-  current.move(0,20);
-  create_xy_message();
-}
+  self.move_down = function()
+  {
+    self.current.move(0,20);
+    self.create_xy_message();
+  };
 }
 
 exports.initialize = function(id)
