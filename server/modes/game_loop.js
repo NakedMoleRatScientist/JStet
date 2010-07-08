@@ -76,7 +76,7 @@ function EventManager(id)
   }
 }
 
-exports.create = function()
+exports.create_new = function()
 {
   return new EventManager();
 }
