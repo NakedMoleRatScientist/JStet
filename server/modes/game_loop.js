@@ -23,6 +23,7 @@ function EventManager(id)
   self.cycle = function()
   {
     self.current.change_shape(self.future.get_shape());
+    self.future.change_shape(generator.getShape());
   };
   //Send data about current's movement.
   self.create_xy_message = function()
