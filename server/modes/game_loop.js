@@ -64,6 +64,10 @@ function EventManager(id)
     self.current.rotate();
     self.create_xy_message();
   };
+  self.run_game = function()
+  {
+    setInterval(function() {},10)
+  }
 }
 
 exports.initialize = function(id)
@@ -72,12 +76,6 @@ exports.initialize = function(id)
   game.initialize();
   sessions.push(game);
   
-}
-
-
-exports.run_game = function()
-{
-  setInterval(function() { }, 10);
 }
 
 
