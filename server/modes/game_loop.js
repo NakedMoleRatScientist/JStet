@@ -55,7 +55,10 @@ function EventManager(id)
   //move down
   self.move_down = function()
   {
-    self.current.move(0,20);
+    if (self.current.move(0,20) == 2)
+    {
+      sys.log("Y reached!");
+    }
     self.create_xy_message();
   };
   //rotate shape
