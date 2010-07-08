@@ -68,9 +68,9 @@ function EventManager(id)
   self.run_game = function()
   {
     setInterval(function() {
-      if (timer.react() == true)
+      if (self.timer.react() == true)
       {
-	current.move_down();
+	self.current.move_down();
       }
     },10);
   }
