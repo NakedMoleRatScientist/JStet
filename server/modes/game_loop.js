@@ -2,7 +2,6 @@ var sys = require('sys');
 var tetro = require('../models/tetromino');
 var generator = require ('../models/shape_generator');
 
-var sessions = new Array();
 
 function EventManager(id)
 {
