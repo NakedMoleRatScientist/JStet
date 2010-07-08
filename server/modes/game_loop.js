@@ -1,7 +1,7 @@
 var sys = require('sys');
 var tetro = require('../models/tetromino');
 var generator = require ('../models/shape_generator');
-
+var timer = require('../models/timer')
 
 function EventManager(id)
 {
