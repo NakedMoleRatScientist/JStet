@@ -1,4 +1,4 @@
-function TimerAction()
+function Timer()
 {
   var self = this;
   self.eclipsed = 0;
