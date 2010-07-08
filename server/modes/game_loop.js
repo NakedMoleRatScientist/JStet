@@ -43,8 +43,8 @@ function EventManager(id)
   //move right
   self.move_right = function()
   {
-    current.move(20,0);
-    create_xy_message();
+    self.current.move(20,0);
+    self.create_xy_message();
   };
   //move left
   self.move_left = function()
@@ -70,6 +70,7 @@ function EventManager(id)
     setInterval(function() {
       if (self.timer.react() == true)
       {
+	sys.log("Move down.");
 	self.move_down();
       }
     },10);
