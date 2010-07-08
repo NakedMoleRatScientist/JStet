@@ -61,8 +61,8 @@ function EventManager(id)
   //rotate shape
   self.rotate = function()
   {
-    current.rotate();
-    create_xy_message();
+    self.current.rotate();
+    self.create_xy_message();
   };
 }
 
