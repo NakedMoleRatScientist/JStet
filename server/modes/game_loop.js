@@ -11,13 +11,13 @@ function EventManager(id)
   self.timer = timer.create_new();
   self.current = tetro.get_tetromino();
   self.future = tetro.get_tetromino();
-  self.create_shape_message = function (shape,type)
+  self.create_shape_message = function (shape,type,choice)
   {
     //1 in the first element denotates incoming new shape
     //The second element indicate the which type of shape
     //The third element contains the shape's rotation
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
-    var message = [1,shape.name,shape.get_choice(),type];
+    var message = [1,shape.name,shape.get_data(choice),type];
     self.events.push(message);
   };
   //Send data about current's movement.
