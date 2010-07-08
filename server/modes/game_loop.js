@@ -20,6 +20,7 @@ function EventManager(id)
     var message = [1,shape.name,shape.get_data(choice),type];
     self.events.push(message);
   };
+  //Current shape just ended. Time to time cycle through
   self.cycle = function()
   {
     self.current.change_shape(self.future.get_shape());
