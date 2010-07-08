@@ -63,6 +63,7 @@ function EventManager(id)
     self.current.rotate();
     self.create_xy_message();
   };
+  //run a game loop
   self.run_game = function()
   {
     setInterval(function() {},10)
