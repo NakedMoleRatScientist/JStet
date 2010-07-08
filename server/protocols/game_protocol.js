@@ -23,7 +23,7 @@ function Session()
   };
   self.update_events = function()
   {
-    self.add_events(self.game_data());
+    self.add_events(self.game.get_data());
   };
   self.clear = function()
   {
@@ -71,6 +71,7 @@ exports.get_data = function(id)
   {
     return false;
   }
+  sessions[location].update_events();
   return sessions[location].get_data();
 }
 
