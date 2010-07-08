@@ -31,8 +31,8 @@ function EventManager(id)
   {
     self.current.change_shape(generator.getShape());
     self.future.change_shape(generator.getShape());
-    self.create_shape_message(current.get_shape(),0); //0 is current
-    self.create_shape_message(future.get_shape(),1);  //1 is the future
+    self.create_shape_message(self.current.get_shape(),0); //0 is current
+    self.create_shape_message(self.future.get_shape(),1);  //1 is the future
   };
   self.get_data = function()
   {
