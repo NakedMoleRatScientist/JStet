@@ -70,7 +70,7 @@ function EventManager(id)
     setInterval(function() {
       if (self.timer.react() == true)
       {
-	self.current.move_down();
+	self.move_down();
       }
     },10);
   }
