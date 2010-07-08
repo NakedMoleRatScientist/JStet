@@ -51,3 +51,9 @@ function TimerAction()
     return self.eclipsed;
   };
 }
+
+
+exports.create_new = function()
+{
+  return new Timer();
+}
