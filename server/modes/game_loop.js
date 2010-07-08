@@ -37,6 +37,7 @@ function EventManager(id)
   self.get_data = function()
   {
     var message = events;
+    events = [];
     return message;
   };
   //move right
