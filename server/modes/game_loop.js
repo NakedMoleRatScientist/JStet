@@ -10,7 +10,7 @@ function EventManager(id)
   self.id = id;
   self.timer = timer.create_new();
   self.current = tetro.get_tetromino();
-  self.future = tetro.get_current();
+  self.future = tetro.get_tetromino();
   self.create_shape_message = function (shape,type)
   {
     //1 in the first element denotates incoming new shape
