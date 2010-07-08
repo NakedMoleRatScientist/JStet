@@ -21,6 +21,10 @@ function Session()
       self.events.push([2,loop_events[i]]);
     }
   };
+  self.update_events = function()
+  {
+    self.add_events(self.game_data());
+  };
   self.clear = function()
   {
     self.events.shift();
