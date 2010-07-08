@@ -67,7 +67,8 @@ function EventManager(id)
   //run a game loop
   self.run_game = function()
   {
-    setInterval(function() {},10)
+    setInterval(function() {
+    },10);
   }
 }
 
