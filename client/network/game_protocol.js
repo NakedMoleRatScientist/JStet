@@ -47,7 +47,7 @@ function GameProtocol(net)
     case 2:
       if (self.checkIdentical(data))
       {
-	console.log("Reaction sent.");
+	console.log("Movement detected.");
 	engine.move(data[1],data[2]);
 	self.net.send([2,1]);
       }
