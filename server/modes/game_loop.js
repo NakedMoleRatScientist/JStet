@@ -68,6 +68,7 @@ function EventManager(id)
   self.run_game = function()
   {
     setInterval(function() {
+      timer.react();
     },10);
   }
 }
