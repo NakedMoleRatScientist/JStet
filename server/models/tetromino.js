@@ -110,7 +110,7 @@ function Tetromino()
   //detect if it is too far to the right
   self.rotation_collision_x = function()
   {
-    if (self.x > 180 - (find_max_x() * 20))
+    if (self.x > 180 - (self.find_max_x() * 20))
     {
       return true;
     }
