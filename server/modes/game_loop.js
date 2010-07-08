@@ -69,12 +69,9 @@ function EventManager(id)
   }
 }
 
-exports.initialize = function(id)
+exports.initialize = function()
 {
-  var game = new EventManager(id);
-  game.initialize();
-  sessions.push(game);
-  
+  return new EventManager();
 }
 
 
