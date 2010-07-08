@@ -146,7 +146,7 @@ function Tetromino()
       self.x -= x_move;
       return 1;
     }
-    if (rotation_collision_y() == true)
+    if (self.rotation_collision_y() == true)
     {
       self.y -= y_move;
       return 2;
