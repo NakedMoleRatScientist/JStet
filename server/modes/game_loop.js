@@ -20,6 +20,10 @@ function EventManager(id)
     var message = [1,shape.name,shape.get_data(choice),type];
     self.events.push(message);
   };
+  self.cycle = function()
+  {
+    self.current.change_shape(self.future.get_shape());
+  };
   //Send data about current's movement.
   self.create_xy_message = function()
   {
