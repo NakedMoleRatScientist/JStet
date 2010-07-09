@@ -41,6 +41,7 @@ server.addListener("connection",function(conn){
   sendData();
   conn.addListener("close",function(){
     db.save();
+    game.destroy(conn._id);
     sys.log("<"+conn._id+"> onClose");
   });
   
