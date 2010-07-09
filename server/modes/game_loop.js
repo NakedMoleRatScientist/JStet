@@ -26,6 +26,11 @@ function EventManager(id)
     self.current.change_shape(self.future.get_shape());
     self.future.change_shape(generator.getShape());
   };
+  self.cycle_message = function()
+  {
+    self.create_shape_message(self.current.get_shape(),0,self.current.get_choice()); //0 is current
+    self.create_shape_message(self.future.get_shape(),1,self.future.get_choice());  //1 is the future
+  };
   //Send data about current's movement.
   self.create_xy_message = function()
   {
@@ -37,8 +42,7 @@ function EventManager(id)
   {
     self.current.change_shape(generator.getShape());
     self.future.change_shape(generator.getShape());
-    self.create_shape_message(self.current.get_shape(),0,self.current.get_choice()); //0 is current
-    self.create_shape_message(self.future.get_shape(),1,self.future.get_choice());  //1 is the future
+    
   };
   self.get_data = function()
   {
