@@ -42,7 +42,7 @@ function EventManager(id)
   {
     self.current.change_shape(generator.getShape());
     self.future.change_shape(generator.getShape());
-    
+    self.cycle_message();
   };
   self.get_data = function()
   {
