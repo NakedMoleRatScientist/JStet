@@ -15,6 +15,7 @@ function Engine(protocol)
   {
     if (type == 0)
     {
+      self.insert_current();
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
