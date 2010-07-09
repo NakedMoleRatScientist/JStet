@@ -67,7 +67,8 @@ function EventManager(id)
   {
     if (self.current.move(0,20) == 2)
     {
-      sys.log("Y reached!");
+      self.cycle();
+      self.cycle_message();
     }
     self.create_xy_message();
   };
