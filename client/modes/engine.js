@@ -7,15 +7,11 @@ function Engine(protocol)
   self.current = new Tetromino();
   self.future = new Tetromino();
   self.field = new Playfield();
-  self.insert_current = function()
-  {
-    self.field.insert_blocks(self.current.get_blocks());
-  };
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
     {
-      self.insert_current();
+      self.field.insert_blocks(self.current.get_blocks());
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
