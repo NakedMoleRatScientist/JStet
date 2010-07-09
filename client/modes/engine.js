@@ -6,7 +6,7 @@ function Engine(protocol)
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
-  self.field = new Playfield();
+  self.field = new PlayField();
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
