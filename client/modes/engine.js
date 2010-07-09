@@ -11,7 +11,7 @@ function Engine(protocol)
   {
     if (type == 0)
     {
-      self.field.insert_blocks(self.current.get_blocks());
+      self.field.insert_blocks(self.current.get_list());
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
