@@ -112,7 +112,7 @@ void gameDisplay()
   }
   text(score.toString(),300,50);
   drawInstruction();
-  drawShape.draw_field(field.field);
+  drawShape.draw_field(engine.field.field);
 }
 
 void sendAlive()
