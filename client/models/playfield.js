@@ -50,7 +50,7 @@ function PlayField()
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
-    for (int i = 0; i < 4; i ++)
+    for (var i = 0; i < 4; i ++)
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
     }
