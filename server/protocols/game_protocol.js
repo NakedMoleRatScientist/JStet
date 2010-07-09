@@ -79,5 +79,9 @@ exports.get_data = function(id)
 exports.destroy = function(id)
 {
   location = find_by_id(id);
+  if (location == false)
+  {
+    return false;
+  }
   sessions.splice(location,1); 
 }
