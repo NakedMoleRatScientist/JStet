@@ -76,7 +76,7 @@ exports.get_data = function(id)
 }
 
 
-exports.destory = function(id)
+exports.destroy = function(id)
 {
   location = find_by_id(id);
   sessions.splice(location,1); 
