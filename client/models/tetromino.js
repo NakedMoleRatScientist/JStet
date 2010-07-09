@@ -33,6 +33,7 @@ function Tetromino ()
    
     self.blocks[x][y] = i;
   },
+  //get list of actual, suitable blocks
   self.get_list = function()
   {
     var suitable = new Array();
