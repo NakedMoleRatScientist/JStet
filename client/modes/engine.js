@@ -7,6 +7,10 @@ function Engine(protocol)
   self.current = new Tetromino();
   self.future = new Tetromino();
   self.field = new Playfield();
+  self.insert_current = function()
+  {
+    self.field.insert_blocks(self.current.get_blocks());
+  };
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
