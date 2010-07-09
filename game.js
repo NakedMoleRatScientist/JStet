@@ -645,7 +645,7 @@ function PlayField()
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
-    for (int i = 0; i < 4; i ++)
+    for (var i = 0; i < 4; i ++)
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
     }
@@ -747,6 +747,7 @@ function Tetromino ()
    
     self.blocks[x][y] = i;
   },
+  //get list of actual, suitable blocks
   self.get_list = function()
   {
     var suitable = new Array();
@@ -1105,10 +1106,12 @@ function Engine(protocol)
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
+  self.field = new PlayField();
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
     {
+      self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
       self.current.update_shape();
@@ -1209,7 +1212,7 @@ void gameDisplay()
   }
   text(score.toString(),300,50);
   drawInstruction();
-  drawShape.draw_field(field.field);
+  drawShape.draw_field(engine.field.field);
 }
 
 void sendAlive()
