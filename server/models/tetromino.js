@@ -91,6 +91,8 @@ function Tetromino()
   {
     self.choice = 0;
     self.modify_bulk(self.shape.get_data(self.choice));
+    self.x = 0;
+    self.y = 0;
   };
   //rotate forward
   self.rotate = function()
