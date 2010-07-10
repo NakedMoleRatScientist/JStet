@@ -82,7 +82,7 @@ function PlayField()
     {
       return false;
     }
-    for (x = 0; x < 10; x++)
+    for (var x = 0; x < 10; x++)
     {
       self.field[x][line] = 0;
     }
