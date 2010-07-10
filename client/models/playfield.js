@@ -89,7 +89,7 @@ function PlayField()
     for (int y = 0; y < 20; y++)
     {
       score = 0;
-      for (int x = 0; x < 10; x++)
+      for (var x = 0; x < 10; x++)
       {
         if (this.field[x][y] != 0)
         {
