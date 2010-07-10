@@ -1,8 +1,8 @@
 var sys = require('sys');
 var tetro = require('../models/tetromino');
 var generator = require ('../models/shape_generator');
-var timer = require('../models/timer')
-
+var timer = require('../models/timer');
+var field = require('../models/playfield');
 function EventManager(id)
 {
   var self = this;
