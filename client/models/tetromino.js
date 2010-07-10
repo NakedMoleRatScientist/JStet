@@ -7,14 +7,6 @@ function Tetromino ()
   self.draw = false;
   self.x = 0;
   self.y = 0;
-  self.blocks = self.create_blocks();
-  self.change_shape = function(new_shape)
-  {
-    self.shape = new_shape;
-    self.blocks = self.create_blocks();
-    self.choice = 0;
-    self.modify_bulk(self.shape.get_data(self.choice));
-  },
   self.create_blocks = function()
   {
     var blocks = new Array(4);
@@ -24,6 +16,15 @@ function Tetromino ()
     }
     return blocks;
   },
+  self.blocks = self.create_blocks();
+  self.change_shape = function(new_shape)
+  {
+    self.shape = new_shape;
+    self.blocks = self.create_blocks();
+    self.choice = 0;
+    self.modify_bulk(self.shape.get_data(self.choice));
+  },
+ 
   self.modify_bulk = function(shape)
   {
     for (int i = 0; i < shape.length; i++)
