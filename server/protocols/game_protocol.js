@@ -67,12 +67,17 @@ function find_by_id(id)
   return -1;
 }
 
-function move(id)
+function move(id,type)
 {
   location = find_by_id(id);
   if (location == -1)
   {
     return false;
+  }
+  switch(type)
+  {
+  case 1:
+    sessions[location].move_right();
   }
 }
 
