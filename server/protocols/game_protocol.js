@@ -49,6 +49,9 @@ exports.process = function(data,id)
     sys.log("Reaction clear.");
     sessions[find_by_id(id)].clear();
     break;
+  case 2:
+    sys.log("Movement instruction received");
+    break;
   }
 };
 
