@@ -52,11 +52,6 @@ function Tetromino ()
       }
     }
     return suitable;
-  },
-  self.return_to_zero = function ()
-  {
-    self.choice = 0;
-    self.modify_bulk(self.shape.get_data(self.choice));
   }
   self.update_shape = function()
   {
