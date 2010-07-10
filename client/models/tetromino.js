@@ -41,9 +41,9 @@ function Tetromino ()
   self.get_list = function()
   {
     var suitable = new Array();
-    for (r = 0; r < 4; r++)
+    for (var r = 0; r < 4; r++)
     {
-      for (c = 0; c < 4; c++)
+      for (var c = 0; c < 4; c++)
       {
         if (self.blocks[r][c] == 1)
 	{
