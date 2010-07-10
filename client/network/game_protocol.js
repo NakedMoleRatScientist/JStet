@@ -14,7 +14,7 @@ function GameProtocol(net)
   };
   self.moveRight = function()
   {
-    data = [2,2];
+    data = [2,2,1];
     self.net.send(data);
   };
   self.moveLeft = function()
