@@ -67,6 +67,15 @@ function find_by_id(id)
   return -1;
 }
 
+function move(id)
+{
+  location = find_by_id(id);
+  if (location == -1)
+  {
+    return false;
+  }
+}
+
 exports.get_data = function(id)
 {
   location = find_by_id(id);
