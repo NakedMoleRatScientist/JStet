@@ -37,7 +37,7 @@ function PlayField()
   }
   this.check = function(blocks,x_offset,y_offset)
   {
-    for (int i = 0; i < 4; i++)
+    for (var i = 0; i < 4; i++)
     {
       if (this.field[blocks[i][0] + x_offset][blocks[i][1] + y_offset] != 0)
       {
