@@ -79,6 +79,7 @@ function move(id,type)
   {
   case 1:
     sessions[location].move_right();
+    break;
   }
 }
 
