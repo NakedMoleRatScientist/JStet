@@ -61,10 +61,5 @@ function Tetromino ()
   self.update_shape = function()
   {
     self.modify_bulk(self.shape.get_data(self.choice));
-  },
-  self.return_to_normal = function()
-  {
-    self.x = 0;
-    self.y = 0;
   }
 }
