@@ -76,7 +76,7 @@ function PlayField()
     {
       return false;
     }
-    for (int x = 0; x < 10; x++)
+    for (var x = 0; x < 10; x++)
     {
       this.field[x][line] = 0;
     }
