@@ -59,7 +59,7 @@ server.addListener("connection",function(conn){
       db.save();
       break;
     case 2:
-      game.process(data[1],conn._id);
+      game.process(data,conn._id);
       break;
     }
   });
