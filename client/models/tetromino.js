@@ -7,6 +7,7 @@ function Tetromino ()
   self.draw = false;
   self.x = 0;
   self.y = 0;
+  self.blocks = self.create_blocks();
   self.change_shape = function(new_shape)
   {
     self.shape = new_shape;
@@ -65,5 +66,4 @@ function Tetromino ()
     self.x = 0;
     self.y = 0;
   }
-  self.blocks = self.create_blocks();
 }
