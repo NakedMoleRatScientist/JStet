@@ -1,7 +1,7 @@
 
 function PlayField()
 {
-  self = this;
+  var self = this;
   self.create_field = function()
   {
     var field = new Array(10);
