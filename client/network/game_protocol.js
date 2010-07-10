@@ -19,17 +19,17 @@ function GameProtocol(net)
   };
   self.moveLeft = function()
   {
-    data = [2,3];
+    data = [2,2,2];
     self.net.send(data);
   };
   self.moveDown = function()
   {
-    data = [2,4];
+    data = [2,2,3];
     self.net.send(data);
   };
   self.rotate = function()
   {
-    data = [2,5];
+    data = [2,2,4];
     self.net.send(data);
   };
   self.processData = function(data)
