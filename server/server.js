@@ -12,7 +12,7 @@ server.listen(7000);
 
 function destroy(id)
 {
-  for (i = 0;i < players.length;i++)
+  for (var i = 0;i < players.length;i++)
   {
     if (players[i] == id)
     {
