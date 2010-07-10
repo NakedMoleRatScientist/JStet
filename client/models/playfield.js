@@ -4,10 +4,10 @@ function PlayField()
   this.create_field = function()
   {
     var field = new Array(10);
-    for (x = 0; x < 10; x++)
+    for (var x = 0; x < 10; x++)
     {
       field[x] = new Array(20);
-      for (z = 0; z < 20; z++)
+      for (var z = 0; z < 20; z++)
       {
         field[x][z] = 0;
       }
