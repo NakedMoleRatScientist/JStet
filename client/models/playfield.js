@@ -25,7 +25,7 @@ function PlayField()
     var coord = new Array();
     for (var x = 0; x < 4; x++)
     {
-      for (int y = 0; y < 4; y++)
+      for (var y = 0; y < 4; y++)
       {
         if(blocks[x][y] == 1)
         {
@@ -46,7 +46,7 @@ function PlayField()
     }
     return true;
   },
- this.insert_blocks = function(blocks,c,r,color)
+  this.insert_blocks = function(blocks,c,r,color)
   {
     var offset = this.calculate_positions(c,r);
     var list = this.get_list(blocks);
