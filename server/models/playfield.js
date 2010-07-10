@@ -66,9 +66,9 @@ function PlayField()
     {
       return false;
     }
-    for (y = line; y > 1; y--)
+    for (var y = line; y > 1; y--)
     {
-      for (x = 0; x < 10; x++)
+      for (var x = 0; x < 10; x++)
       {
         self.field[x][y] = self.field[x][y - 1]
       }
