@@ -37,7 +37,7 @@ function Session()
 
 exports.process = function(data,id)
 {
-  switch(data)
+  switch(data[1])
   {
   case 0:
     sys.log("Game created.");
