@@ -116,3 +116,8 @@ function PlayField()
   };
   self.field = self.create_field();
 }
+
+exports.get_field = function()
+{
+  return new PlayField();
+}
