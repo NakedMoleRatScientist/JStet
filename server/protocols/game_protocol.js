@@ -63,7 +63,6 @@ exports.process = function(data,id)
     break;
   case 1:
     sys.log("Reaction clear.");
-    sessions[find_by_id(id)].clear();
     break;
   case 2:
     sys.log("Movement instruction received");
