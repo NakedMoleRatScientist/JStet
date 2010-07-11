@@ -49,14 +49,14 @@ function PlayField()
     }
     return true;
   };
-  //Add blocks to the field and encode color information
-  self.insert_blocks = function(blocks,c,r,color)
+  //Add blocks to the field.
+  self.insert_blocks = function(blocks,c,r)
   {
     var offset = self.calculate_positions(c,r);
     var list = self.get_list(blocks);
     for (var i = 0; i < 4; i++)
     {
-      self.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
+      self.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = 1;
     }
   };
   //move line down
