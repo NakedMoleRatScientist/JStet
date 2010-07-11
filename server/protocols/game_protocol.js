@@ -18,6 +18,10 @@ function Session()
   {
     self.game.move_right();
   };
+  self.move_left = function()
+  {
+    self.game.move_left();
+  };
   self.add_events = function(loop_events)
   {
     for (i = 0; i < loop_events.length; i++)
