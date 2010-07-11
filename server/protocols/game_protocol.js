@@ -43,7 +43,7 @@ function Session()
   };
   self.clear = function()
   {
-    self.events.shift();
+    self.events = new Array();
   };
   self.get_data = function()
   {
