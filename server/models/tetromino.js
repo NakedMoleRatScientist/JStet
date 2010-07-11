@@ -97,7 +97,7 @@ function Tetromino()
   //rotate forward
   self.rotate = function()
   {
-    self.blocks = self.create_block();
+    self.blocks = self.create_blocks();
     self.choice += 1;
     if (self.choice == self.shape.length)
     {
