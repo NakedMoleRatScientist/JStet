@@ -22,22 +22,22 @@ function GameProtocol(net)
   };
   self.moveRight = function()
   {
-    data = [2,2];
+    data = [2,2,1];
     self.net.send(data);
   };
   self.moveLeft = function()
   {
-    data = [2,3];
+    data = [2,2,2];
     self.net.send(data);
   };
   self.moveDown = function()
   {
-    data = [2,4];
+    data = [2,2,3];
     self.net.send(data);
   };
   self.rotate = function()
   {
-    data = [2,5];
+    data = [2,2,4];
     self.net.send(data);
   };
   self.processData = function(data)
@@ -644,7 +644,7 @@ function PlayField()
   this.insert_blocks = function(blocks,c,r,color)
   {
     var offset = this.calculate_positions(c,r);
-    var list = this.get_list(blocks);
+    var list = blocks;
     for (var i = 0; i < 4; i ++)
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
@@ -741,7 +741,7 @@ function Tetromino ()
  
   self.modify_bulk = function(shape)
   {
-    for (int i = 0; i < shape.length; i++)
+    for (var i = 0; i < shape.length; i++)
     {
       self.modify_block(shape[i][0],shape[i][1],1);
     }
@@ -1054,7 +1054,7 @@ function TetrominoDraw()
 {
   this.create_blocks = function(pos,x,y,color)
   {
-    for (i = 0; i < pos.length; i++)
+    for (var i = 0; i < pos.length; i++)
     {
       stroke(color);
       fill(color);
@@ -1065,9 +1065,9 @@ function TetrominoDraw()
   }
   this.draw_field = function(field)
   {
-    for (x = 0; x < 10; x++)
+    for (var x = 0; x < 10; x++)
     {
-      for (y = 0; y < 20; y++)
+      for (var y = 0; y < 20; y++)
       {
         if (field[x][y] != 0)
         {
@@ -1122,7 +1122,6 @@ function Engine(protocol)
   self.move = function(x,y)
   {
     self.current.x = x;
-    console.log(self.current.x / 20);
     self.current.y = y;
   };
 };
@@ -1138,10 +1137,6 @@ void setup()
 }
 var mode = new Mode();
 var score = new Score();
-var shape = new Tetromino();
-var current = new Tetromino();
-var future = new Tetromino();
-var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
