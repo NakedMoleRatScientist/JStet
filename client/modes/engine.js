@@ -46,7 +46,6 @@ void setup()
 }
 var mode = new Mode();
 var score = new Score();
-var field = new PlayField();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
