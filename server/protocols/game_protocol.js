@@ -14,6 +14,10 @@ function Session()
     self.add_events(self.game.get_data());
     self.game.run_game();
   };
+  self.move_right = function()
+  {
+    self.game.move_right();
+  };
   self.add_events = function(loop_events)
   {
     for (i = 0; i < loop_events.length; i++)
