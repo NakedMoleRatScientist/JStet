@@ -51,7 +51,7 @@ exports.process = function(data,id)
     break;
   case 2:
     sys.log("Movement instruction received");
-    move(data[2]);
+    move(id,data[2]);
     break;
   }
 };
