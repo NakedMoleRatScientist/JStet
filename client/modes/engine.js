@@ -33,6 +33,11 @@ function Engine(protocol)
     self.current.x = x;
     self.current.y = y;
   };
+  self.rotate = function(choice)
+  {
+    self.current.choice = choice;
+    self.current.update_shape();
+  };
 };
 
 
