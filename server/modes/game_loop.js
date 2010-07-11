@@ -24,7 +24,7 @@ function EventManager(id)
   //Current shape just ended. Time to time cycle through
   self.cycle = function()
   {
-    self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
+    self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y);
     self.current.return_to_zero();
     self.current.change_shape(self.future.get_shape());
     self.future.change_shape(generator.getShape());
