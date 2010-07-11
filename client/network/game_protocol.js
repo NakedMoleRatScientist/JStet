@@ -52,6 +52,13 @@ function GameProtocol(net)
 	self.net.send([2,1]);
       }
       break;
+    case 3
+      if (self.checkIdentical(data))
+      {
+	console.log("Rotation detected.");
+	self.net.send([2,1]);
+      }
+      break;
     }
   };
   self.pushMessage = function(data)
