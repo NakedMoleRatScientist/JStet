@@ -22,6 +22,10 @@ function Session()
   {
     self.game.move_left();
   };
+  self.move_down = function()
+  {
+    self.game.move_down();
+  };
   self.add_events = function(loop_events)
   {
     for (i = 0; i < loop_events.length; i++)
