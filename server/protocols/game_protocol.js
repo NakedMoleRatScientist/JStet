@@ -115,7 +115,9 @@ exports.get_data = function(id)
     return false;
   }
   sessions[location].update_events();
-  return sessions[location].get_data();
+  var data = sessions[location].get_data();
+  sessions[location].clear();
+  return data;
 }
 
 
