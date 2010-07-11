@@ -103,7 +103,7 @@ function Tetromino()
     {
       self.choice = 0;
     }
-    self.modify_bulk(shape.get_data(choice));
+    self.modify_bulk(self.shape.get_data(choice));
     if (self.rotation_collision_x() == true || self.rotation_collision_y() == true)
     {
       self.rotate_backward();
