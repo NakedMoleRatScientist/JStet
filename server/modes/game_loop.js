@@ -40,6 +40,12 @@ function EventManager(id)
     var message = [2,self.current.x,self.current.y];
     self.events.push(message);
   };
+  self.create_rotate_message = function()
+  {
+    var message = [3,self.current.choice];
+    self.events.push(message);
+  };
+  
   //get the initial shapes for current and future.
   self.initialize = function()
   {
