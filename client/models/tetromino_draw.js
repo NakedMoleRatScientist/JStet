@@ -3,7 +3,7 @@ function TetrominoDraw()
 {
   this.create_blocks = function(pos,x,y,color)
   {
-    for (i = 0; i < pos.length; i++)
+    for (var i = 0; i < pos.length; i++)
     {
       stroke(color);
       fill(color);
@@ -14,9 +14,9 @@ function TetrominoDraw()
   }
   this.draw_field = function(field)
   {
-    for (x = 0; x < 10; x++)
+    for (var x = 0; x < 10; x++)
     {
-      for (y = 0; y < 20; y++)
+      for (var y = 0; y < 20; y++)
       {
         if (field[x][y] != 0)
         {
