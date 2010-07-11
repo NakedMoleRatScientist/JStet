@@ -49,7 +49,7 @@ function PlayField()
   this.insert_blocks = function(blocks,c,r,color)
   {
     var offset = this.calculate_positions(c,r);
-    var list = this.get_list(blocks);
+    var list = blocks;
     for (var i = 0; i < 4; i ++)
     {
       this.field[list[i][0] + offset[0]][list[i][1] + offset[1]] = color;
