@@ -85,7 +85,7 @@ function EventManager(id)
   self.rotate = function()
   {
     self.current.rotate();
-    self.create_xy_message();
+    self.create_rotate_message();
   };
   //run a game loop
   self.run_game = function()
