@@ -81,6 +81,14 @@ function EventManager(id)
     }
     return false;
   };
+  self.down_event = function()
+  {
+    if (check_event(0,-20))
+    {
+      self.cycle();
+      self.cycle_message();
+    }
+  };
   //move down
   self.move_down = function()
   {
