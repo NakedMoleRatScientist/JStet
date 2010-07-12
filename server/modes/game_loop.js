@@ -82,6 +82,7 @@ function EventManager(id)
     if (self.field.check(self.current.get_list(),offset[0],offset[y]) == false)
     {
       self.current.move(x,y);
+      self.create_xy_message();
       return true;
     }
     return false;
