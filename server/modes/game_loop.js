@@ -82,7 +82,6 @@ function EventManager(id)
     if (self.field.check(self.current.get_list(),offset[0],offset[y]) == false)
     {
       self.current.move(x,y);
-      self.create_xy_message();
       return true;
     }
     return false;
@@ -108,7 +107,6 @@ function EventManager(id)
       self.cycle();
       self.cycle_message();
     }
-    self.create_xy_message();
   };
   //rotate shape
   self.rotate = function()
@@ -124,6 +122,7 @@ function EventManager(id)
       {
 	sys.log("Move down.");
 	self.move_down();
+	self.create_xy_message();
       }
     },10);
   }
