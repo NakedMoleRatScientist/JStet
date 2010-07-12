@@ -60,6 +60,12 @@ function GameProtocol(net)
 	self.net.send([2,1]);
       }
       break;
+    case 4:
+      if (self.checkIdentical(data))
+      {
+	console.log("Line destroyed.");
+      }
+      break;
     }
   };
   self.pushMessage = function(data)
