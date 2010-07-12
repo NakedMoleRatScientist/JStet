@@ -120,6 +120,17 @@ exports.get_data = function(id)
   return data;
 }
 
+exports.get_score = function(id)
+{
+  location = find_by_id(id)
+  if (location == -1)
+  {
+    return false;
+  }
+  var score = sessions[location].get_score();
+  return score;
+}
+
 
 exports.destroy = function(id)
 {
