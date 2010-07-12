@@ -54,7 +54,7 @@ server.addListener("connection",function(conn){
     switch(data[0])
     {
     case 0:
-      db.add_to_list(data[1],data[2]);
+      db.add_to_list(data[1],game.get_score());
       sendData();
       db.save();
       break;
