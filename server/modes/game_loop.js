@@ -32,7 +32,7 @@ function EventManager(id)
     var status = true;
     while(status)
     {
-      var clean = self.field.clear_line(self.field.check_field);
+      var clean = self.field.clear_line(self.field.check_field());
       status = self.field.move_lines(clean);
       self.create_field_message(clean);
     }
