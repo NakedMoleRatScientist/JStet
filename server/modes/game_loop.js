@@ -52,7 +52,11 @@ function EventManager(id)
     var message = [3,self.current.choice];
     self.events.push(message);
   };
-  
+  self.create_field_message = function(line)
+  {
+    var message = [4,line];
+    self.events.push(message);
+  };
   //get the initial shapes for current and future.
   self.initialize = function()
   {
