@@ -63,7 +63,7 @@ function GameProtocol(net)
     case 4:
       if (self.checkIdentical(data))
       {
-	console.log("Line destroyed.");
+	self.engine.line_action(data[1]);
       }
       break;
     }
