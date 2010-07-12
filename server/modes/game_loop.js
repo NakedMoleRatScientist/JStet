@@ -88,6 +88,10 @@ function EventManager(id)
   {
     if (self.collision(0,-20))
     {
+      if (self.current.y == 0)
+      {
+	self.over = false;
+      }
       self.cycle();
       self.cycle_message();
     }
