@@ -122,6 +122,7 @@ function EventManager(id)
       {
 	sys.log("Move down.");
 	self.move_down();
+	self.collision_effect();
 	self.create_xy_message();
       }
     },10);
