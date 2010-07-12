@@ -86,7 +86,7 @@ function EventManager(id)
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.down_event = function()
   {
-    if (collision(0,-20))
+    if (self.collision(0,-20))
     {
       self.cycle();
       self.cycle_message();
