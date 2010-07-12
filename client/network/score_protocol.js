@@ -23,11 +23,6 @@ function ScoreProtocol(score)
     }
     return false;
   };
-  self.toJSON = function(identifer)
-  {
-    var message = [0,identifer,self.score.points];
-    return data;
-  };
   self.getData = function()
   {
     return self.data;
