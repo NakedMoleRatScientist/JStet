@@ -71,7 +71,7 @@ function EventManager(id)
     self.current.move(-20,0);
     self.create_xy_message();
   };
-  self.check_event = function(x,y)
+  self.collision = function(x,y)
   {
     var offset = self.field.calculate_positions(current.x,current.y);
     if (self.field.check(self.current.get_list(),offset[0],offset[y]) == false)
