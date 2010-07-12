@@ -33,7 +33,7 @@ function Engine(protocol)
   };
   self.rotate = function(choice)
   {
-    self.current.rotate();
+    self.current.rotate(choice);
   };
 };
 
