@@ -60,6 +60,11 @@ function EventManager(id)
     var message = [4,line];
     self.events.push(message);
   };
+  self.create_score_message = function()
+  {
+    var score = [5,self.score];
+    self.events.push(message);
+  };
   //get the initial shapes for current and future.
   self.initialize = function()
   {
