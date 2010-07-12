@@ -94,7 +94,7 @@ function EventManager(id)
   //move down
   self.move_down = function()
   {
-    if (self.current.move(0,20) == 2)
+    if (self.current.move(0,20) == 2) //2 indicate that it reached rock bottom.
     {
       self.cycle();
       self.cycle_message();
