@@ -87,7 +87,7 @@ function EventManager(id)
     return false;
   };
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
-  self.down_event = function()
+  self.collision_effect = function()
   {
     if (self.collision(0,-20))
     {
@@ -107,7 +107,6 @@ function EventManager(id)
       self.cycle();
       self.cycle_message();
     }
-    self.down_event();
     self.create_xy_message();
   };
   //rotate shape
