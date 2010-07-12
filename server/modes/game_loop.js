@@ -12,6 +12,7 @@ function EventManager(id)
   self.current = tetro.get_tetromino();
   self.future = tetro.get_tetromino();
   self.field = field.get_field();
+  self.over = false;
   self.create_shape_message = function (shape,type,choice)
   {
     //1 in the first element denotates incoming new shape
