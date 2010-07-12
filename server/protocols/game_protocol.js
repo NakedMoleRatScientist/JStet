@@ -51,7 +51,7 @@ function Session()
   };
   self.get_score = function()
   {
-    return self.game.get_score();
+    return self.game.score;
   };
 }
 
