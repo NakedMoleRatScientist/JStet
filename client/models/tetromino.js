@@ -22,13 +22,13 @@ function Tetromino ()
     self.shape = new_shape;
     self.blocks = self.create_blocks();
     self.choice = 0;
-    self.modify_bulk(self.shape.get_data(self.choice));
+    self.update_shape();
   };
   self.rotate = function(choice)
   {
     self.blocks = self.create_blocks()
     self.choice = choice
-    self.modify_bulk(self.shape.get_data(self.choice));
+    self.update_shape();
   };
   self.modify_bulk = function(shape)
   {
