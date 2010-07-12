@@ -35,6 +35,10 @@ function Engine(protocol)
   {
     self.current.rotate(choice);
   };
+  self.line_action = function(line)
+  {
+    self.field.move_line(self.clear_line(line));
+  };
 };
 
 
