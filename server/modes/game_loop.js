@@ -107,6 +107,7 @@ function EventManager(id)
       self.cycle();
       self.cycle_message();
     }
+    self.down_event();
     self.create_xy_message();
   };
   //rotate shape
