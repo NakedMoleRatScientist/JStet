@@ -71,6 +71,7 @@ function EventManager(id)
     self.current.move(-20,0);
     self.create_xy_message();
   };
+  //check for collision
   self.collision = function(x,y)
   {
     var offset = self.field.calculate_positions(current.x,current.y);
@@ -81,9 +82,10 @@ function EventManager(id)
     }
     return false;
   };
+  //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.down_event = function()
   {
-    if (check_event(0,-20))
+    if (collision(0,-20))
     {
       self.cycle();
       self.cycle_message();
