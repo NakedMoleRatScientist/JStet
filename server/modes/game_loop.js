@@ -75,7 +75,7 @@ function EventManager(id)
   //check for collision
   self.collision = function(x,y)
   {
-    var offset = self.field.calculate_positions(current.x,current.y);
+    var offset = self.field.calculate_positions(self.current.x,self.current.y);
     if (self.field.check(self.current.get_list(),offset[0],offset[y]) == false)
     {
       self.current.move(x,y);
