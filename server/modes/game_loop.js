@@ -33,7 +33,8 @@ function EventManager(id)
     while(status)
     {
       var clean = self.field.clear_line(self.field.check_field);
-      status = self.field.move_lines(clean); 
+      status = self.field.move_lines(clean);
+      self.create_field_message(clean);
     }
   };
   self.cycle_message = function()
