@@ -49,6 +49,10 @@ function Session()
   {
     return self.events;
   };
+  self.get_score = function()
+  {
+    return self.game.get_score();
+  };
 }
 
 exports.process = function(data,id)
