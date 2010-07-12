@@ -47,7 +47,7 @@ function GameProtocol(net)
     case 1:
       if (self.checkIdentical(data))
       {
-        console.log("Reaction sent.");
+        console.log("New shape, ordered.");
 	engine.write_shape(data[1],data[2],data[3]);
         self.net.send([2,1]);
       }
@@ -66,6 +66,12 @@ function GameProtocol(net)
 	console.log("Rotation detected.");
 	engine.rotate(data[1]);
 	self.net.send([2,1]);
+      }
+      break;
+    case 4:
+      if (self.checkIdentical(data))
+      {
+	self.engine.line_action(data[1]);
       }
       break;
     }
@@ -1138,6 +1144,10 @@ function Engine(protocol)
   self.rotate = function(choice)
   {
     self.current.rotate(choice);
+  };
+  self.line_action = function(line)
+  {
+    self.field.move_line(self.clear_line(line));
   };
 };
 
