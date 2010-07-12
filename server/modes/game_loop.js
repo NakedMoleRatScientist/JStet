@@ -29,8 +29,10 @@ function EventManager(id)
     self.current.return_to_zero();
     self.current.change_shape(self.future.get_shape());
     self.future.change_shape(generator.getShape());
-    while(self.field.move_lines(self.field.clear_line(self.field.check_field())))
+    var status = true;
+    while(status)
     {
+      status = self.field.move_lines(self.field.clear_line(self.field.check_field())); 
     }
   };
   self.cycle_message = function()
