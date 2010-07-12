@@ -17,7 +17,6 @@ function Engine(protocol)
       }
       self.current.change_shape(getShape(name));
       self.current.choice = choice;
-      self.current.update_shape();
       self.current.draw = true;
     }
     else if (type == 1)
