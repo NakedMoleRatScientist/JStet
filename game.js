@@ -744,9 +744,14 @@ function Tetromino ()
     self.shape = new_shape;
     self.blocks = self.create_blocks();
     self.choice = 0;
-    self.modify_bulk(self.shape.get_data(self.choice));
-  },
- 
+    self.update_shape();
+  };
+  self.rotate = function(choice)
+  {
+    self.blocks = self.create_blocks();
+    self.choice = choice;
+    self.update_shape();
+  };
   self.modify_bulk = function(shape)
   {
     for (var i = 0; i < shape.length; i++)
@@ -1115,8 +1120,6 @@ function Engine(protocol)
         self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);	
       }
       self.current.change_shape(getShape(name));
-      self.current.choice = choice;
-      self.current.update_shape();
       self.current.draw = true;
     }
     else if (type == 1)
@@ -1134,8 +1137,7 @@ function Engine(protocol)
   };
   self.rotate = function(choice)
   {
-    self.current.choice = choice;
-    self.current.update_shape();
+    self.current.rotate();
   };
 };
 
