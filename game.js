@@ -60,6 +60,14 @@ function GameProtocol(net)
 	self.net.send([2,1]);
       }
       break;
+    case 3:
+      if (self.checkIdentical(data))
+      {
+	console.log("Rotation detected.");
+	engine.rotate(data[1]);
+	self.net.send([2,1]);
+      }
+      break;
     }
   };
   self.pushMessage = function(data)
@@ -1123,6 +1131,11 @@ function Engine(protocol)
   {
     self.current.x = x;
     self.current.y = y;
+  };
+  self.rotate = function(choice)
+  {
+    self.current.choice = choice;
+    self.current.update_shape();
   };
 };
 
