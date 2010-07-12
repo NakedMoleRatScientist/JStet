@@ -26,8 +26,8 @@ function Tetromino ()
   };
   self.rotate = function(choice)
   {
-    self.blocks = self.create_blocks()
-    self.choice = choice
+    self.blocks = self.create_blocks();
+    self.choice = choice;
     self.update_shape();
   };
   self.modify_bulk = function(shape)
