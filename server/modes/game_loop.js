@@ -126,6 +126,7 @@ function EventManager(id)
     {
       self.cycle();
       self.cycle_message();
+      self.final_dest_message();
     }
   };
   //rotate shape
