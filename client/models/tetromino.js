@@ -61,5 +61,21 @@ function Tetromino ()
   self.update_shape = function()
   {
     self.modify_bulk(self.shape.get_data(self.choice));
-  }
+  };
+  self.move = function(x,y)
+  {
+    self.x += x_move;
+    self.y += y_move;
+    if (self.x < 0 || self.rotation_collision_x() == true)
+    {
+      self.x -= x_move;
+      return 1;
+    }
+    if (self.rotation_collision_y() == true)
+    {
+      self.y -= y_move;
+      return 2;
+    }
+    return 0;
+  };
 }
