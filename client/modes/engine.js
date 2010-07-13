@@ -15,7 +15,7 @@ function Engine(protocol)
       if (self.current.shape != null)
       {
         self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
-	
+	self.change = true;
       }
       self.current.return_to_zero();
       self.current.change_shape(getShape(name));
