@@ -66,16 +66,6 @@ var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol);
 
-function insertEvent()
-{
-  field.insert_blocks(shape.blocks,shape.x,shape.y,shape.shape.color);
-  cleanEvent();
-  while (field.move_lines(field.clear_line(field.check_field())))
-  {
-    score.increase();
-  }
-}
-
 void drawInstruction()
 {
   text("Instruction: ",450,50);
