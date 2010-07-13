@@ -77,6 +77,11 @@ function GameProtocol(net)
 	self.engine.line_action(data[1]);
       }
       break;
+    case 5:
+      if (self.checkIdentical(data))
+      {
+	self.engine.score = data[1];
+      }
     }
   };
   self.pushMessage = function(data)
@@ -558,52 +563,6 @@ function TimerAction()
   self.getSeconds = function()
   {
     return self.eclipsed;
-  };
-}
-
-//Deal with score keeping.
-function Score()
-{
-  var self = this;
-  self.net = null;
-  self.points = 0;
-  self.minimum = 0;
-  self.protocol = new ScoreProtocol(self);
-  self.enableNetwork = function(net)
-  {
-    self.net = net;
-  };
-  self.increase = function()
-  {
-    self.points ++;
-  };
-  self.changeMinimum = function(min)
-  {
-    if (min == false)
-    {
-      return false;
-    }
-    self.minimum = min;
-  };
-  self.toString = function()
-  {
-    return "Score: " + self.points;
-  };
-  self.reset = function()
-  {
-    self.points = 0;
-  };
-  self.check = function()
-  {
-    if (self.minimum == false & self.points != 0)
-    {
-      return true;
-    }
-    else if (self.minimum < self.points && self.points != 0)
-    {
-      return true;
-    }
-    return false;
   };
 }
 function PlayField()
@@ -1188,13 +1147,16 @@ function Engine(protocol)
   self.current = new Tetromino();
   self.future = new Tetromino();
   self.field = new PlayField();
+  self.change = false;
+  self.reserve = null;
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
     {
       if (self.current.shape != null)
       {
-        self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);	
+        self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
+	self.change = true;
       }
       self.current.return_to_zero();
       self.current.change_shape(getShape(name));
@@ -1233,7 +1195,6 @@ void setup()
   frameRate(24);
 }
 var mode = new Mode();
-var score = new Score();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
@@ -1279,7 +1240,7 @@ void gameDisplay()
   {
     drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
   }
-  text(score.toString(),300,50);
+  text("Score " + engine.score,300,50);
   drawInstruction();
   drawShape.draw_field(engine.field.field);
 }
