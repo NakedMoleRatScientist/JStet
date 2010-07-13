@@ -9,7 +9,7 @@ void gameKey()
   {
   //move right, d
   case 100:
-    game_protocol.moveRight();
+    game_protocol.move_right();
     break;
   //move down, s
   case 115:
