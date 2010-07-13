@@ -100,7 +100,7 @@ void gameDisplay()
   {
     drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
   }
-  text(score.toString(),300,50);
+  text("Score " + engine.score,300,50);
   drawInstruction();
   drawShape.draw_field(engine.field.field);
 }
