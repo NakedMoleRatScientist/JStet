@@ -17,7 +17,7 @@ void gameKey()
     break;
   //move left, a
   case 97:
-    game_protocol.moveLeft();
+    game_protocol.move_left();
     break;
   //rotate, w
   case 119:
