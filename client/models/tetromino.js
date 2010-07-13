@@ -62,7 +62,7 @@ function Tetromino ()
   {
     self.modify_bulk(self.shape.get_data(self.choice));
   };
-  self.move = function(x,y)
+  self.move = function(x_move,y_move)
   {
     self.x += x_move;
     self.y += y_move;
