@@ -12,9 +12,10 @@ function GameProtocol(net)
     data = [2,0];
     self.net.send(data);
   };
-  self.moveRight = function()
+  self.move_right = function()
   {
     data = [2,2,1];
+    self.engine.move_right(20,0);
     self.net.send(data);
   };
   self.moveLeft = function()
