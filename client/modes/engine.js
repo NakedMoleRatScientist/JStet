@@ -37,7 +37,7 @@ function Engine(protocol)
   };
   self.line_action = function(line)
   {
-    self.field.move_line(self.field.clear_line(line));
+    self.field.move_lines(self.field.clear_line(line));
   };
 };
 
