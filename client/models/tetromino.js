@@ -30,6 +30,11 @@ function Tetromino ()
     self.choice = choice;
     self.update_shape();
   };
+  self.return_to_zero = function()
+  {
+    self.x = 0;
+    self.y = 0;
+  };
   self.modify_bulk = function(shape)
   {
     for (var i = 0; i < shape.length; i++)
