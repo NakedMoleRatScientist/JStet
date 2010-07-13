@@ -15,6 +15,7 @@ function Engine(protocol)
       {
         self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);	
       }
+      self.current.return_to_zero();
       self.current.change_shape(getShape(name));
       self.current.draw = true;
     }
