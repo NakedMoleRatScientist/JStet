@@ -69,6 +69,11 @@ function GameProtocol(net)
 	self.engine.line_action(data[1]);
       }
       break;
+    case 5:
+      if (self.checkIdentical(data))
+      {
+	self.engine.score = data[1];
+      }
     }
   };
   self.pushMessage = function(data)
