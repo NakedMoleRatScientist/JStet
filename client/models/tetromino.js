@@ -86,4 +86,12 @@ function Tetromino ()
     }
     return false;
   };
+  self.rotation_collision_x = function()
+  {
+    if (self.x > 180 - (self.find_max_x() * 20))
+    {
+      return true;
+    }
+    return false;
+  };
 }
