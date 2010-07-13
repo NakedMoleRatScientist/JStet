@@ -18,9 +18,10 @@ function GameProtocol(net)
     self.engine.move(20,0);
     self.net.send(data);
   };
-  self.moveLeft = function()
+  self.move_left = function()
   {
     data = [2,2,2];
+    self.engine.move(-20,0);
     self.net.send(data);
   };
   self.moveDown = function()
