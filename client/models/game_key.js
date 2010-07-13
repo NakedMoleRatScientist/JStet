@@ -13,7 +13,7 @@ void gameKey()
     break;
   //move down, s
   case 115:
-    game_protocol.moveDown();
+    game_protocol.move_down();
     break;
   //move left, a
   case 97:
