@@ -86,7 +86,7 @@ function Tetromino()
     }
     return suitable;
   };
-  //return every block to zero
+  //return position to zero
   self.return_to_zero = function()
   {
     self.choice = 0;
