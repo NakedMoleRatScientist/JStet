@@ -62,6 +62,24 @@ function Tetromino ()
   {
     self.modify_bulk(self.shape.get_data(self.choice));
   };
+  self.find_max_x = function()
+  {
+    var max = 0;
+    for (var x = 0; x < 4; x++)
+    {
+      for (var y = 0; y <4; y++)
+      {
+        if (self.blocks[x][y] == 1)
+        {
+	  if(x > max)
+	  {
+	    max = x;
+	  }
+        }
+      }
+    }
+    return max;
+  };
   self.move = function(x_move,y_move)
   {
     self.x += x_move;
