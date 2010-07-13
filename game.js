@@ -20,19 +20,22 @@ function GameProtocol(net)
     data = [2,0];
     self.net.send(data);
   };
-  self.moveRight = function()
+  self.move_right = function()
   {
     data = [2,2,1];
+    self.engine.current.move(20,0);
     self.net.send(data);
   };
-  self.moveLeft = function()
+  self.move_left = function()
   {
     data = [2,2,2];
+    self.engine.current.move(-20,0);
     self.net.send(data);
   };
-  self.moveDown = function()
+  self.move_down = function()
   {
     data = [2,2,3];
+    self.engine.current.move(0,20);
     self.net.send(data);
   };
   self.rotate = function()
@@ -215,11 +218,6 @@ function ScoreProtocol(score)
       return self.data.scores[99];
     }
     return false;
-  };
-  self.toJSON = function(identifer)
-  {
-    var message = [0,identifer,self.score.points];
-    return data;
   };
   self.getData = function()
   {
@@ -490,15 +488,15 @@ void gameKey()
   {
   //move right, d
   case 100:
-    game_protocol.moveRight();
+    game_protocol.move_right();
     break;
   //move down, s
   case 115:
-    game_protocol.moveDown();
+    game_protocol.move_down();
     break;
   //move left, a
   case 97:
-    game_protocol.moveLeft();
+    game_protocol.move_left();
     break;
   //rotate, w
   case 119:
@@ -758,6 +756,11 @@ function Tetromino ()
     self.choice = choice;
     self.update_shape();
   };
+  self.return_to_zero = function()
+  {
+    self.x = 0;
+    self.y = 0;
+  };
   self.modify_bulk = function(shape)
   {
     for (var i = 0; i < shape.length; i++)
@@ -789,7 +792,75 @@ function Tetromino ()
   self.update_shape = function()
   {
     self.modify_bulk(self.shape.get_data(self.choice));
-  }
+  };
+  self.find_max_x = function()
+  {
+    var max = 0;
+    for (var x = 0; x < 4; x++)
+    {
+      for (var y = 0; y <4; y++)
+      {
+        if (self.blocks[x][y] == 1)
+        {
+	  if(x > max)
+	  {
+	    max = x;
+	  }
+        }
+      }
+    }
+    return max;
+  };
+  self.find_max_y = function()
+  {
+    var max = 0;
+    for (var x = 0; x < 4; x++)
+    {
+      for(var y = 0; y < 4; y++)
+      {
+	if (self.blocks[x][y] == 1)
+	{
+          if (y > max)
+          {
+	    max = y;
+          }
+	}
+      }
+    }
+    return max;
+  };
+  self.move = function(x_move,y_move)
+  {
+    self.x += x_move;
+    self.y += y_move;
+    if (self.x < 0 || self.rotation_collision_x() == true)
+    {
+      self.x -= x_move;
+      return 1;
+    }
+    if (self.rotation_collision_y() == true)
+    {
+      self.y -= y_move;
+      return 2;
+    }
+    return 0;
+  };
+  self.rotation_collision_y = function()
+  {
+    if (self.y > 380 - self.find_max_y() * 20)
+    {
+      return true;
+    }
+    return false;
+  };
+  self.rotation_collision_x = function()
+  {
+    if (self.x > 180 - (self.find_max_x() * 20))
+    {
+      return true;
+    }
+    return false;
+  };
 }
 
 function JShape()
@@ -1125,6 +1196,7 @@ function Engine(protocol)
       {
         self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);	
       }
+      self.current.return_to_zero();
       self.current.change_shape(getShape(name));
       self.current.draw = true;
     }
@@ -1147,7 +1219,7 @@ function Engine(protocol)
   };
   self.line_action = function(line)
   {
-    self.field.move_line(self.clear_line(line));
+    self.field.move_lines(self.field.clear_line(line));
   };
 };
 
@@ -1175,24 +1247,6 @@ score.enableNetwork(network);
 var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol);
-
-function cleanEvent()
-{
-  shape.return_to_normal();
-  shape.change_shape(generator.current);
-  generator.current = generator.getShape();
-  future.change_shape(generator.current);
-}
-
-function insertEvent()
-{
-  field.insert_blocks(shape.blocks,shape.x,shape.y,shape.shape.color);
-  cleanEvent();
-  while (field.move_lines(field.clear_line(field.check_field())))
-  {
-    score.increase();
-  }
-}
 
 void drawInstruction()
 {
