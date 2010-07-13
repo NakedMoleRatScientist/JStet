@@ -55,7 +55,6 @@ void setup()
   frameRate(24);
 }
 var mode = new Mode();
-var score = new Score();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
