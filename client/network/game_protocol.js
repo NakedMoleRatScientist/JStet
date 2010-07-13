@@ -15,19 +15,19 @@ function GameProtocol(net)
   self.move_right = function()
   {
     data = [2,2,1];
-    self.engine.move(20,0);
+    self.engine.current.move(20,0);
     self.net.send(data);
   };
   self.move_left = function()
   {
     data = [2,2,2];
-    self.engine.move(-20,0);
+    self.engine.current.move(-20,0);
     self.net.send(data);
   };
   self.move_down = function()
   {
     data = [2,2,3];
-    self.engine.move(0,20);
+    self.engine.current.move(0,20);
     self.net.send(data);
   };
   self.rotate = function()
