@@ -87,12 +87,14 @@ function EventManager(id)
   self.move_right = function()
   {
     self.current.move(20,0);
+    self.collision_effect(20,0);
     self.create_xy_message();
   };
   //move left
   self.move_left = function()
   {
     self.current.move(-20,0);
+    self.collision_effect(-20,0);
     self.create_xy_message();
   };
   //check for collision
@@ -127,7 +129,9 @@ function EventManager(id)
       self.cycle();
       self.cycle_message();
       self.final_dest_message();
+      return;
     }
+    self.collision_effect(0,20);
   };
   //rotate shape
   self.rotate = function()
