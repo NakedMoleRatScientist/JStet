@@ -31,6 +31,7 @@ function EventManager(id)
     self.current.change_shape(self.future.get_shape());
     self.future.change_shape(generator.getShape());
     var status = true;
+    self.cycle_message();
     while(status)
     {
       var clean = self.field.clear_line(self.field.check_field());
