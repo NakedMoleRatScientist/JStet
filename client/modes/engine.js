@@ -38,8 +38,8 @@ function Engine(protocol)
   };
   self.move = function(x,y)
   {
-    self.engine.current.move(x,y)
-    var offset = self.field.calculate_positions(self.current.x.self.current.y);
+    self.current.move(x,y)
+    var offset = self.field.calculate_positions(self.current.x,self.current.y);
     if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
     {
       self.current.move(-x,-y);
