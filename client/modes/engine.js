@@ -58,7 +58,6 @@ var mode = new Mode();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-var board = new ScoreBoard(score);
 var score_data = new HighScore();
 var network = new Net(score);
 var over = new GameOver();
