@@ -75,12 +75,6 @@ function GameProtocol(net)
 	self.engine.score = data[1];
       }
       break;
-    case 6:
-      if (self.checkIdentical(data))
-      {
-	engine.update_location(data[1],data[2]);
-	self.net.send([2,1]);
-      }
     }
   };
   self.pushMessage = function(data)
