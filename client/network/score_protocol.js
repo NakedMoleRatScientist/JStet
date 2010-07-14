@@ -1,15 +1,11 @@
 
 
-function ScoreProtocol(score)
+function ScoreProtocol(net)
 {
   var self = this;
   self.score = score;
   self.data = null;
-  self.net = null;
-  self.enable_network = function(net)
-  {
-    self.net = net;
-  };
+  self.net = net;
   self.changeData = function(data)
   {
     self.data = data;
