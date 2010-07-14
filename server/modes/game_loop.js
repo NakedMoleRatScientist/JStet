@@ -101,7 +101,7 @@ function EventManager(id)
     var offset = self.field.calculate_positions(self.current.x,self.current.y);
     if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
     {
-      self.current.move(x,y);
+      self.current.move(-x,-y);
       return true;
     }
     return false;
