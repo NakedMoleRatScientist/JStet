@@ -201,28 +201,15 @@ function ScoreBoard(score)
 
 
 
-function ScoreProtocol(score)
+function ScoreProtocol(net)
 {
   var self = this;
   self.score = score;
   self.data = null;
-  self.net = null;
-  self.enable_network = function(net)
-  {
-    self.net = net;
-  };
+  self.net = net;
   self.changeData = function(data)
   {
     self.data = data;
-    self.score.changeMinimum(self.getLimit());
-  };
-  self.getLimit = function()
-  {
-    if (self.data.status == true)
-    {
-      return self.data.scores[99];
-    }
-    return false;
   };
   self.getData = function()
   {
@@ -231,11 +218,10 @@ function ScoreProtocol(score)
 }
 
 
-function Net(score)
+function Net()
 {
   var self = this;
   self.ws = null;
-  self.score = score;
   self.game = null;
   self.initialize = function()
   {
@@ -264,10 +250,6 @@ function Net(score)
   {
     var message = [1];
     self.ws.send(message);
-  };
-  self.transmitScore = function()
-  {
-    self.ws.send(self.score.protocol.toJSON());
   };
   self.send = function(data)
   {
@@ -1198,14 +1180,13 @@ var mode = new Mode();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-var board = new ScoreBoard(score);
 var score_data = new HighScore();
-var network = new Net(score);
+var network = new Net();
 var over = new GameOver();
 var title = new TitleScreen();
 network.initialize();
-score.enableNetwork(network);
 var game_protocol = new GameProtocol(network);
+var score_protocol = new ScoreProtocol(network);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol);
 
