@@ -51,7 +51,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
 	console.log("Movement detected.");
-	engine.move(data[1],data[2]);
+	engine.update_location(data[1],data[2]);
 	self.net.send([2,1]);
       }
       break;
