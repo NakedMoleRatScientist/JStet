@@ -3,7 +3,6 @@
 function ScoreProtocol(net)
 {
   var self = this;
-  self.score = score;
   self.data = null;
   self.net = net;
   self.changeData = function(data)
