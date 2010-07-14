@@ -33,10 +33,6 @@ function Net()
     var message = [1];
     self.ws.send(message);
   };
-  self.transmitScore = function()
-  {
-    self.ws.send(self.score.protocol.toJSON());
-  };
   self.send = function(data)
   {
     data = JSON.stringify(data);
