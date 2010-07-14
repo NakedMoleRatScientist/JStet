@@ -64,6 +64,7 @@ var over = new GameOver();
 var title = new TitleScreen();
 network.initialize();
 var game_protocol = new GameProtocol(network);
+var score_protocol = new ScoreProtocol(network);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol);
 
