@@ -15,7 +15,7 @@ function Net()
       switch (data[0])
       {
       case 0:
-        self.score.protocol.changeData(data[1]);
+        //nothingness...
 	break;
       case 2:
 	self.game.processData(data[1]);
