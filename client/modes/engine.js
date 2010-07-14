@@ -30,7 +30,8 @@ function Engine(protocol)
       self.future.draw = true;
     }
   };
-  self.move = function(x,y)
+  //Update location.
+  self.update_location = function(x,y)
   {
     self.current.x = x;
     self.current.y = y;
