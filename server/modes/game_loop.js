@@ -146,8 +146,7 @@ function EventManager(id)
       if (self.timer.react() == true)
       {
 	sys.log("Move down.");
-	self.move_down();
-	self.collision_effect(0,20);
+	self.move_down()
 	self.create_xy_message();
       }
     },10);
