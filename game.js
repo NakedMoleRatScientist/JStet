@@ -204,7 +204,6 @@ function ScoreBoard(score)
 function ScoreProtocol(net)
 {
   var self = this;
-  self.score = score;
   self.data = null;
   self.net = net;
   self.changeData = function(data)
@@ -233,7 +232,7 @@ function Net()
       switch (data[0])
       {
       case 0:
-        self.score.protocol.changeData(data[1]);
+        //nothing.
 	break;
       case 2:
 	self.game.processData(data[1]);
