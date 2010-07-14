@@ -11,14 +11,6 @@ function ScoreProtocol(net)
     self.data = data;
     self.score.changeMinimum(self.getLimit());
   };
-  self.getLimit = function()
-  {
-    if (self.data.status == true)
-    {
-      return self.data.scores[99];
-    }
-    return false;
-  };
   self.getData = function()
   {
     return self.data;
