@@ -9,7 +9,6 @@ function ScoreProtocol(net)
   self.changeData = function(data)
   {
     self.data = data;
-    self.score.changeMinimum(self.getLimit());
   };
   self.getData = function()
   {
