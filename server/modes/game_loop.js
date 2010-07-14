@@ -129,7 +129,6 @@ function EventManager(id)
       self.cycle();
       self.cycle_message();
       self.final_dest_message();
-      return;
     }
     self.collision_effect(0,20);
   };
