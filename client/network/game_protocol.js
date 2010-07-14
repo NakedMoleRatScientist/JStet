@@ -40,6 +40,7 @@ function GameProtocol(net)
     switch(data[0])
     {
     case 1:
+      //Get new shape.
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
@@ -48,6 +49,7 @@ function GameProtocol(net)
       }
       break;
     case 2:
+      //Get movement update for current.
       if (self.checkIdentical(data))
       {
 	console.log("Movement detected.");
@@ -56,6 +58,7 @@ function GameProtocol(net)
       }
       break;
     case 3:
+      //Rotation.
       if (self.checkIdentical(data))
       {
 	console.log("Rotation detected.");
@@ -64,12 +67,14 @@ function GameProtocol(net)
       }
       break;
     case 4:
+      //Kill some lines.
       if (self.checkIdentical(data))
       {
 	self.engine.line_action(data[1]);
       }
       break;
     case 5:
+      //Get score data.
       if (self.checkIdentical(data))
       {
 	self.engine.score = data[1];
