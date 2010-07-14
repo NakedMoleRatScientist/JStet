@@ -48,6 +48,7 @@ function GameProtocol(net)
     switch(data[0])
     {
     case 1:
+      //Get new shape.
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
@@ -56,6 +57,7 @@ function GameProtocol(net)
       }
       break;
     case 2:
+      //Get movement update for current.
       if (self.checkIdentical(data))
       {
 	console.log("Movement detected.");
@@ -64,6 +66,7 @@ function GameProtocol(net)
       }
       break;
     case 3:
+      //Rotation.
       if (self.checkIdentical(data))
       {
 	console.log("Rotation detected.");
@@ -72,12 +75,14 @@ function GameProtocol(net)
       }
       break;
     case 4:
+      //Kill some lines.
       if (self.checkIdentical(data))
       {
 	self.engine.line_action(data[1]);
       }
       break;
     case 5:
+      //Get score data.
       if (self.checkIdentical(data))
       {
 	self.engine.score = data[1];
@@ -1129,31 +1134,28 @@ function Engine(protocol)
   self.current = new Tetromino();
   self.future = new Tetromino();
   self.field = new PlayField();
-  self.change = false;
+  self.score = 0;
   self.write_shape = function(name,choice,type)
   {
-    if (self.change == true)
+    if (type == 0)
     {
-      if (type == 0)
+      if (self.current.shape != null)
       {
-        if (self.current.shape != null)
-        {
-          self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
-        }
-        self.current.return_to_zero();
-        self.current.change_shape(getShape(name));
-        self.current.draw = true;
-	self.change = false;
+        self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
       }
-      else if (type == 1)
-      {
-        self.future.change_shape(getShape(name));
-        self.future.choice = choice;
-        self.future.update_shape();
-        self.future.draw = true;
-	self.change == false;
-      }
+      self.current.return_to_zero();
+      self.current.change_shape(getShape(name));
+      self.current.draw = true;
     }
+    else if (type == 1)
+    {
+      self.future.change_shape(getShape(name));
+      self.future.choice = choice;
+      self.future.update_shape();
+      self.future.draw = true;
+      self.change == false;
+    }
+    
   };
   //Update location.
   self.update_location = function(x,y)
