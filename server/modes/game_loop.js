@@ -36,7 +36,10 @@ function EventManager(id)
     {
       var clean = self.field.clear_line(self.field.check_field());
       status = self.field.move_lines(clean);
-      self.score += 1;
+      if (clean != false)
+      {
+	self.score += 1;
+      }
       self.create_field_message(clean);
     }
     self.create_score_message();
