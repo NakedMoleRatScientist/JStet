@@ -7,6 +7,7 @@ function Engine(protocol)
   self.current = new Tetromino();
   self.future = new Tetromino();
   self.field = new PlayField();
+  self.score = 0;
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
