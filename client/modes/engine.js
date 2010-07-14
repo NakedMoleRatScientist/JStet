@@ -8,26 +8,29 @@ function Engine(protocol)
   self.future = new Tetromino();
   self.field = new PlayField();
   self.change = false;
-  self.reserve = null;
   self.write_shape = function(name,choice,type)
   {
-    if (type == 0)
+    if (self.change == true)
     {
-      if (self.current.shape != null)
+      if (type == 0)
       {
-        self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
-	self.change = true;
+        if (self.current.shape != null)
+        {
+          self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
+        }
+        self.current.return_to_zero();
+        self.current.change_shape(getShape(name));
+        self.current.draw = true;
+	self.change = false;
       }
-      self.current.return_to_zero();
-      self.current.change_shape(getShape(name));
-      self.current.draw = true;
-    }
-    else if (type == 1)
-    {
-      self.future.change_shape(getShape(name));
-      self.future.choice = choice;
-      self.future.update_shape();
-      self.future.draw = true;
+      else if (type == 1)
+      {
+        self.future.change_shape(getShape(name));
+        self.future.choice = choice;
+        self.future.update_shape();
+        self.future.draw = true;
+	self.change == false;
+      }
     }
   };
   //Update location.
