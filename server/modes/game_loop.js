@@ -39,8 +39,8 @@ function EventManager(id)
       if (clean != false)
       {
 	self.score += 1;
+	self.create_field_message(clean);
       }
-      self.create_field_message(clean);
     }
     self.create_score_message();
   };
