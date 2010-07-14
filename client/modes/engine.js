@@ -63,7 +63,6 @@ var network = new Net(score);
 var over = new GameOver();
 var title = new TitleScreen();
 network.initialize();
-score.enableNetwork(network);
 var game_protocol = new GameProtocol(network);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol);
