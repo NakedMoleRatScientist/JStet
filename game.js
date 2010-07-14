@@ -23,19 +23,19 @@ function GameProtocol(net)
   self.move_right = function()
   {
     data = [2,2,1];
-    self.engine.current.move(20,0);
+    self.engine.move(20,0);
     self.net.send(data);
   };
   self.move_left = function()
   {
     data = [2,2,2];
-    self.engine.current.move(-20,0);
+    self.engine.move(-20,0);
     self.net.send(data);
   };
   self.move_down = function()
   {
     data = [2,2,3];
-    self.engine.current.move(0,20);
+    self.engine.move(0,20);
     self.net.send(data);
   };
   self.rotate = function()
@@ -59,7 +59,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
 	console.log("Movement detected.");
-	engine.move(data[1],data[2]);
+	engine.update_location(data[1],data[2]);
 	self.net.send([2,1]);
       }
       break;
@@ -82,6 +82,7 @@ function GameProtocol(net)
       {
 	self.engine.score = data[1];
       }
+      break;
     }
   };
   self.pushMessage = function(data)
@@ -232,7 +233,7 @@ function Net()
       switch (data[0])
       {
       case 0:
-        //nothing.
+        //nothingness...
 	break;
       case 2:
 	self.game.processData(data[1]);
@@ -1129,32 +1130,45 @@ function Engine(protocol)
   self.future = new Tetromino();
   self.field = new PlayField();
   self.change = false;
-  self.reserve = null;
   self.write_shape = function(name,choice,type)
   {
-    if (type == 0)
+    if (self.change == true)
     {
-      if (self.current.shape != null)
+      if (type == 0)
       {
-        self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
-	self.change = true;
+        if (self.current.shape != null)
+        {
+          self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
+        }
+        self.current.return_to_zero();
+        self.current.change_shape(getShape(name));
+        self.current.draw = true;
+	self.change = false;
       }
-      self.current.return_to_zero();
-      self.current.change_shape(getShape(name));
-      self.current.draw = true;
-    }
-    else if (type == 1)
-    {
-      self.future.change_shape(getShape(name));
-      self.future.choice = choice;
-      self.future.update_shape();
-      self.future.draw = true;
+      else if (type == 1)
+      {
+        self.future.change_shape(getShape(name));
+        self.future.choice = choice;
+        self.future.update_shape();
+        self.future.draw = true;
+	self.change == false;
+      }
     }
   };
-  self.move = function(x,y)
+  //Update location.
+  self.update_location = function(x,y)
   {
     self.current.x = x;
     self.current.y = y;
+  };
+  self.move = function(x,y)
+  {
+    self.current.move(x,y)
+    var offset = self.field.calculate_positions(self.current.x,self.current.y);
+    if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
+    {
+      self.current.move(-x,-y);
+    }
   };
   self.rotate = function(choice)
   {
