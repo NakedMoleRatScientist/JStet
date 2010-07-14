@@ -74,6 +74,7 @@ function GameProtocol(net)
       {
 	self.engine.score = data[1];
       }
+      break;
     }
   };
   self.pushMessage = function(data)
