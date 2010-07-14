@@ -114,7 +114,6 @@ function EventManager(id)
 	self.over = false;
       }
       self.cycle();
-      self.cycle_message();
     }
   };
   //move down
@@ -123,7 +122,6 @@ function EventManager(id)
     if (self.current.move(0,20) == 2) //2 indicate that it reached rock bottom.
     {
       self.cycle();
-      self.cycle_message();
     }
     self.collision_effect(0,20);
   };
