@@ -1,10 +1,9 @@
 
 
-function Net(score)
+function Net()
 {
   var self = this;
   self.ws = null;
-  self.score = score;
   self.game = null;
   self.initialize = function()
   {
