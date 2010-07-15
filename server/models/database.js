@@ -58,7 +58,7 @@ exports.get_lowest = function()
 {
   for (var i = 0;i < 100;i++)
   {
-    if document.names[i] == "nothing"
+    if (document.names[i] == "nothing")
     {
       return document.score[i];
     }
