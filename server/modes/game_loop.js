@@ -121,6 +121,7 @@ function EventManager(id)
       if (self.current.y == 0)
       {
 	self.over = true;
+	sys.log("Game over.");
       }
       self.cycle();
     }
