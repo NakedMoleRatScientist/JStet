@@ -84,6 +84,9 @@ function GameProtocol(net)
     case 6:
       self.engine.stop();
       break;
+    case 7:
+      self.engine.high_score();
+      break;
     }
   };
   self.pushMessage = function(data)
