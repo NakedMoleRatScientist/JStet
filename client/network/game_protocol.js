@@ -80,6 +80,9 @@ function GameProtocol(net)
 	self.engine.score = data[1];
       }
       break;
+    case 6:
+      self.engine.stop();
+      break;
     }
   };
   self.pushMessage = function(data)
