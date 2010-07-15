@@ -3,7 +3,7 @@ var tetro = require('../models/tetromino');
 var generator = require ('../models/shape_generator');
 var timer = require('../models/timer');
 var field = require('../models/playfield');
-var db = require('.models/database');
+var db = require('../models/database');
 function EventManager(id)
 {
   var self = this;
