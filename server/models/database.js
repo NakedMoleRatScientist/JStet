@@ -53,6 +53,23 @@ exports.add_to_list = function(name,points)
   } 
 }
 
+
+exports.get_lowest = function()
+{
+  for (var i = 0;i < 100;i++)
+  {
+    if document.names[i] == "nothing"
+    {
+      return document.score[i];
+    }
+    else if(document.score[i] < points)
+    {
+      return document.score[i];
+    }
+  }
+  return document.score[i];
+}
+
 exports.create = function()
 {
   db.saveDoc('score', document,function(er,ok) {
