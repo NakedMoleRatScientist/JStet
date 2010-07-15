@@ -5,6 +5,7 @@ function Net()
   var self = this;
   self.ws = null;
   self.game = null;
+  self.score = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -15,7 +16,7 @@ function Net()
       switch (data[0])
       {
       case 0:
-        //nothingness...
+        //Score data...
 	break;
       case 2:
 	self.game.processData(data[1]);
