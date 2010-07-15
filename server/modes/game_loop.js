@@ -120,7 +120,7 @@ function EventManager(id)
     {
       if (self.current.y == 0)
       {
-	self.over = false;
+	self.over = true;
       }
       self.cycle();
     }
