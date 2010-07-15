@@ -59,6 +59,11 @@ function Engine(protocol,mode)
     console.log("Game over");
     self.mode.change(1);
   };
+  self.high_score = function()
+  {
+    console.log("High score, detected!");
+    self.mode.change(3);
+  };
 };
 
 
