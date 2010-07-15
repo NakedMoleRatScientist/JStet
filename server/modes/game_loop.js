@@ -149,6 +149,10 @@ function EventManager(id)
 	sys.log("Move down.");
 	self.move_down()
 	self.create_xy_message();
+	if (self.over == true)
+	{
+	  clearInterval();
+	}
       }
     },10);
   }
