@@ -86,7 +86,7 @@ void enterScoreKey()
     score_data.destroy();
     break;
   case 13:
-    network.transmitScore(score_data.getName());
+    score_protocol.transmit_score(score_data.getName(),engine.score);
     score_data.clean();
     mode.change(2);
     break;
