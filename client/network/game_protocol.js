@@ -1,3 +1,4 @@
+var db = require('.models/database');
 
 //Data type is 2 for gameplay commands.
 function GameProtocol(net)
