@@ -7,6 +7,7 @@ void restartGame()
   timer.reset();
 }
 
+
 //Data type is 2 for gameplay commands.
 function GameProtocol(net)
 {
@@ -88,6 +89,12 @@ function GameProtocol(net)
 	self.engine.score = data[1];
       }
       break;
+    case 6:
+      self.engine.stop();
+      break;
+    case 7:
+      self.engine.high_score();
+      break;
     }
   };
   self.pushMessage = function(data)
@@ -97,7 +104,6 @@ function GameProtocol(net)
     {
       self.lastMessage.push(data[i]);
     }
-    console.log(self.lastMessage);
   };
   self.checkIdentical = function(data)
   {
@@ -1127,10 +1133,11 @@ function Mode()
     this.status = n;
   }
 }
-function Engine(protocol)
+function Engine(protocol,mode)
 {
   var self = this;
-  var protocol = protocol;
+  self.protocol = protocol;
+  self.mode = mode;
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
@@ -1181,6 +1188,16 @@ function Engine(protocol)
   {
     self.field.move_lines(self.field.clear_line(line));
   };
+  self.stop = function()
+  {
+    console.log("Game over");
+    self.mode.change(1);
+  };
+  self.high_score = function()
+  {
+    console.log("High score, detected!");
+    self.mode.change(3);
+  };
 };
 
 
@@ -1204,7 +1221,7 @@ network.initialize();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 timer.addAction("network",60);
-var engine = new Engine(game_protocol);
+var engine = new Engine(game_protocol,mode);
 
 void drawInstruction()
 {
