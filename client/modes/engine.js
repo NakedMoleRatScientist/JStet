@@ -2,8 +2,8 @@
 function Engine(protocol,mode)
 {
   var self = this;
-  var protocol = protocol;
-  var mode = mode;
+  self.protocol = protocol;
+  self.mode = mode;
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
