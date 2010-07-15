@@ -4,7 +4,7 @@ var game = require('./protocols/game_protocol')
 
 
 //server stuff
-var db = require('./models/database')
+var db = require('./models/database');
 //start of actual server code.
 var server = ws.createServer();
 var players = new Array();
