@@ -60,14 +60,14 @@ exports.get_lowest = function()
   {
     if (document.names[i] == "nothing")
     {
-      return document.score[i];
+      return document.scores[i];
     }
-    else if(document.score[i] < points)
+    else if(document.scores[i] < points)
     {
-      return document.score[i];
+      return document.scores[i];
     }
   }
-  return document.score[i];
+  return document.scores[i];
 }
 
 exports.create = function()
