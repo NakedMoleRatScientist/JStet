@@ -35,7 +35,7 @@ function moveList(n)
 
 exports.add_to_list = function(name,points)
 {
-  for (n = 0; n < 100; n++)
+  for (var n = 0; n < 100; n++)
   {
     if (document.names[n] == "nothing")
     {
