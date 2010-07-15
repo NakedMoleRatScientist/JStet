@@ -10,7 +10,7 @@ var document =
     status: false
   }
 
-for (i = 0; i < 100; i++)
+for (var i = 0; i < 100; i++)
 {
   document.names[i] = "nothing";
   document.scores[i] = 0;
