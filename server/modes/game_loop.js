@@ -144,7 +144,7 @@ function EventManager(id)
   //run a game loop
   self.run_game = function()
   {
-    setInterval(function() {
+    var game = setInterval(function() {
       if (self.timer.react() == true)
       {
 	sys.log("Move down.");
@@ -152,7 +152,7 @@ function EventManager(id)
 	self.create_xy_message();
 	if (self.over == true)
 	{
-	  clearInterval();
+	  clearInterval(game);
 	}
       }
     },10);
