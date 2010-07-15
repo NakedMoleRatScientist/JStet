@@ -49,10 +49,10 @@ function GameProtocol(net)
       }
       break;
     case 2:
+      console.log("Movement detected.");
       //Get movement update for current.
       if (self.checkIdentical(data))
       {
-	console.log("Movement detected.");
 	engine.update_location(data[1],data[2]);
 	self.net.send([2,1]);
       }
@@ -85,10 +85,11 @@ function GameProtocol(net)
   self.pushMessage = function(data)
   {
     self.lastMessage = new Array();
-    for (i = 1;i < data.length;i++)
+    for (var i = 1;i < data.length;i++)
     {
       self.lastMessage.push(data[i]);
     }
+    console.log(self.lastMessage);
   };
   self.checkIdentical = function(data)
   {
