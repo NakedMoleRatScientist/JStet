@@ -1,8 +1,8 @@
 
-function ScoreBoard(score)
+function ScoreBoard(protocol)
 {
   var self = this;
-  self.score = score;
+  self.score = protocol;
   self.start = 0;
   self.turn = false;
   self.title = function()
