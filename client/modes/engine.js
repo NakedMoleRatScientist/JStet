@@ -1,5 +1,5 @@
 
-function Engine(protocol)
+function Engine(protocol,mode)
 {
   var self = this;
   var protocol = protocol;
@@ -76,7 +76,7 @@ network.initialize();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 timer.addAction("network",60);
-var engine = new Engine(game_protocol);
+var engine = new Engine(game_protocol,mode);
 
 void drawInstruction()
 {
