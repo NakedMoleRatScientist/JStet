@@ -147,6 +147,15 @@ function EventManager(id)
     self.current.rotate();
     self.create_rotate_message();
   };
+  //Check if score beat the lowest high score on the chart.
+  self.check_score = function()
+  {
+    if (db.get_lowest(self.score) < self.score)
+    {
+      return true;
+    }
+    return false;
+  };
   //run a game loop
   self.run_game = function()
   {
