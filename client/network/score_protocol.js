@@ -16,6 +16,8 @@ function ScoreProtocol(net)
   };
   self.transmit_score = function(name,points)
   {
-    var message = [name,points];
+    //0 indicating score
+    var message = [0,name,points];
+    self.net.transmit(message);
   };
 }
