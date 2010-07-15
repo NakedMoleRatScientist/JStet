@@ -167,7 +167,14 @@ function EventManager(id)
 	self.create_xy_message();
 	if (self.over == true)
 	{
-	  self.create_over_message();
+	  if (self.check_score() == true)
+	  {
+	    self.create_success_message();
+	  }
+	  else
+	  {
+	    self.create_over_message();
+	  }
 	  clearInterval(game);
 	}
       }
