@@ -54,6 +54,10 @@ function Engine(protocol,mode)
   {
     self.field.move_lines(self.field.clear_line(line));
   };
+  self.stop = function()
+  {
+    self.mode.change(1);
+  };
 };
 
 
