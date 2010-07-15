@@ -93,7 +93,7 @@ function GameProtocol(net)
   };
   self.checkIdentical = function(data)
   {
-    if (self.lastMessage == null)
+    if (self.lastMessage == null || self.lastMessage != data.length - 1)
     {
       self.pushMessage(data);
       return true;
