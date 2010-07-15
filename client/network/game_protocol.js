@@ -85,11 +85,10 @@ function GameProtocol(net)
   self.pushMessage = function(data)
   {
     self.lastMessage = new Array();
-    for (var i = 1;i < data.length;i++)
+    for (var i = 0;i < data.length;i++)
     {
       self.lastMessage.push(data[i]);
     }
-    console.log(self.lastMessage);
   };
   self.checkIdentical = function(data)
   {
