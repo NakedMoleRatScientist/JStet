@@ -152,6 +152,7 @@ function EventManager(id)
 	self.create_xy_message();
 	if (self.over == true)
 	{
+	  self.create_over_message();
 	  clearInterval(game);
 	}
       }
