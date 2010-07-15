@@ -76,6 +76,11 @@ function EventManager(id)
     var message = [6,1];
     self.events.push(message);
   };
+  self.create_success_message = function()
+  {
+    var message = [7,1]
+    self.events.push(message);
+  };
   //get the initial shapes for current and future.
   self.initialize = function()
   {
