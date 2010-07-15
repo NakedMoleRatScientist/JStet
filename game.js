@@ -142,10 +142,10 @@ function TitleScreen()
   };
 }
 
-function ScoreBoard(score)
+function ScoreBoard(protocol)
 {
   var self = this;
-  self.score = score;
+  self.score = protocol;
   self.start = 0;
   self.turn = false;
   self.title = function()
@@ -168,7 +168,7 @@ function ScoreBoard(score)
   };
   self.list = function()
   {
-    data = score.protocol.getData();
+    var data = self.protocol.getData();
     y = 70;
     limit = self.start + 20;
     self.turn = true;
@@ -219,6 +219,7 @@ function ScoreProtocol(net)
   var self = this;
   self.data = null;
   self.net = net;
+  self.net.score = self;
   self.changeData = function(data)
   {
     self.data = data;
@@ -226,6 +227,12 @@ function ScoreProtocol(net)
   self.getData = function()
   {
     return self.data;
+  };
+  self.transmit_score = function(name,points)
+  {
+    //0 indicating score
+    var message = [0,name,points];
+    self.net.transmit(message);
   };
 }
 
@@ -235,6 +242,7 @@ function Net()
   var self = this;
   self.ws = null;
   self.game = null;
+  self.score = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -245,7 +253,7 @@ function Net()
       switch (data[0])
       {
       case 0:
-        //nothingness...
+        //Score data...
 	break;
       case 2:
 	self.game.processData(data[1]);
@@ -404,7 +412,7 @@ void enterScoreKey()
     score_data.destroy();
     break;
   case 13:
-    network.transmitScore(score_data.getName());
+    score_protocol.transmit_score(score_data.getName(),engine.score);
     score_data.clean();
     mode.change(2);
     break;
@@ -1220,6 +1228,7 @@ var title = new TitleScreen();
 network.initialize();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
+var board = new ScoreBoard(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
 
