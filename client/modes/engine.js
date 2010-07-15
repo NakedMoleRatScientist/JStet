@@ -56,6 +56,7 @@ function Engine(protocol,mode)
   };
   self.stop = function()
   {
+    console.log("Game over");
     self.mode.change(1);
   };
 };
