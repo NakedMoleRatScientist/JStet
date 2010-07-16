@@ -108,5 +108,8 @@ function PlayField()
     }
     return false;
   }
-  this.field = this.create_field();
+  this.start = function()
+  {
+    this.field = this.create_field();
+  }
 }
