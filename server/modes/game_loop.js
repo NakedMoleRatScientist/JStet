@@ -156,7 +156,10 @@ function EventManager(id)
   };
   self.collision_rotate_effect = function()
   {
-    
+    if (self.collision(x,y))
+    {
+      self.current.rotate_backward();
+    }
   };
   //Check if score beat the lowest high score on the chart.
   self.check_score = function()
