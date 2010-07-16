@@ -152,6 +152,7 @@ function EventManager(id)
   self.rotate = function()
   {
     self.current.rotate();
+    self.collision_rotate_effect();
     self.create_rotate_message();
   };
   self.collision_rotate_effect = function()
