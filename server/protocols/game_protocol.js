@@ -143,5 +143,6 @@ exports.destroy = function(id)
   {
     return false;
   }
+  sys.log("Destroyed game: " + id);
   sessions.splice(location,1); 
 }
