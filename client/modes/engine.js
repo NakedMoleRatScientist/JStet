@@ -66,6 +66,8 @@ function Engine(protocol,mode)
   };
   self.start = function()
   {
+    self.current = new Tetromino();
+    self.future = new Tetromino();
     self.field.start();
   };
 };
