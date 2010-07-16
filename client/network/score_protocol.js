@@ -18,6 +18,6 @@ function ScoreProtocol(net)
   {
     //0 indicating score
     var message = [0,name,points];
-    self.net.transmit(message);
+    self.net.send(message);
   };
 }
