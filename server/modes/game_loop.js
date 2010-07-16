@@ -98,14 +98,14 @@ function EventManager(id)
   self.move_right = function()
   {
     self.current.move(20,0);
-    self.collision_effect(20,0);
+    self.collision(20,0);
     self.create_xy_message();
   };
   //move left
   self.move_left = function()
   {
     self.current.move(-20,0);
-    self.collision_effect(-20,0);
+    self.collision(-20,0);
     self.create_xy_message();
   };
   //check for collision
