@@ -139,7 +139,7 @@ function EventManager(id)
     {
       self.cycle();
     }
-    self.collision_effect(0,20);
+    self.collision_effect_down(0,20);
   };
   //rotate shape
   self.rotate = function()
