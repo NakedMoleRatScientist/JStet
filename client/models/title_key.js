@@ -4,8 +4,7 @@ void titleKey()
   switch(key)
   {
   case 110:
-    mode.change(4);
-    game_protocol.requestGame();
+    request_game();
     break;
   }
 }
