@@ -157,7 +157,7 @@ function EventManager(id)
   };
   self.collision_rotate_effect = function()
   {
-    if (self.collision(x,y))
+    if (self.collision(0,0))
     {
       self.current.rotate_backward();
     }
