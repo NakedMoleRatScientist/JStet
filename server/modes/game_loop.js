@@ -154,7 +154,7 @@ function EventManager(id)
     self.current.rotate();
     self.create_rotate_message();
   };
-  self.rotate_collision = function()
+  self.collision_rotate_effect = function()
   {
     
   };
