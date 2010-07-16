@@ -54,7 +54,7 @@ exports.add_to_list = function(name,points)
 }
 
 
-exports.get_lowest = function()
+exports.get_lowest = function(points)
 {
   for (var i = 0;i < 100;i++)
   {
