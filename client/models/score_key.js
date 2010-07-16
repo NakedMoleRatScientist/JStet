@@ -5,7 +5,8 @@ void scoreKey()
   {
   //n is restart the game
   case 110:
-    restartGame();
+    mode.change(4);
+    game_protocol.requestGame();
     break;
   //j, view previous page
   case 106:
