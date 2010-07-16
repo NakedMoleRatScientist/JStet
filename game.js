@@ -16,7 +16,7 @@ function GameProtocol(net)
   self.net.game = self;
   self.engine = null;
   self.lastMessage = null;
-  self.requestGame = function()
+  self.request_game = function()
   {
     data = [2,0];
     self.net.send(data);
@@ -91,6 +91,7 @@ function GameProtocol(net)
       break;
     case 6:
       self.engine.stop();
+      self.net.send([3]);
       break;
     case 7:
       self.engine.high_score();
@@ -438,7 +439,8 @@ void gameOverKey()
 {
   if (key == 110)
   {
-    restartGame();
+    mode.change(4);
+    game_protocol.requestGame();
   }
   else if(key == 100)
   {
@@ -473,7 +475,8 @@ void scoreKey()
   {
   //n is restart the game
   case 110:
-    restartGame();
+    mode.change(4);
+    game_protocol.requestGame();
     break;
   //j, view previous page
   case 106:
@@ -676,7 +679,10 @@ function PlayField()
     }
     return false;
   }
-  this.field = this.create_field();
+  this.start = function()
+  {
+    this.field = this.create_field();
+  }
 }
 
 function PlayFieldDraw()
@@ -1206,8 +1212,18 @@ function Engine(protocol,mode)
     console.log("High score, detected!");
     self.mode.change(3);
   };
+  self.start = function()
+  {
+    self.field.start();
+  };
 };
 
+void request_game()
+{
+  mode.change(4);
+  engine.start();
+  game_protocol.request_game();
+}
 
 void setup()
 {
