@@ -98,14 +98,14 @@ function EventManager(id)
   self.move_right = function()
   {
     self.current.move(20,0);
-    self.collision(20,0);
+    self.collision_effect_sideway(20,0);
     self.create_xy_message();
   };
   //move left
   self.move_left = function()
   {
     self.current.move(-20,0);
-    self.collision(-20,0);
+    self.collision_effect_sideway(-20,0);
     self.create_xy_message();
   };
   //check for collision
@@ -124,7 +124,7 @@ function EventManager(id)
     {
       self.current.move(-x,-y);
     }
-  }
+  };
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.collision_effect_down = function(x,y)
   {
