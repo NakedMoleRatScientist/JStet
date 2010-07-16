@@ -8,7 +8,7 @@ function GameProtocol(net)
   self.net.game = self;
   self.engine = null;
   self.lastMessage = null;
-  self.requestGame = function()
+  self.request_game = function()
   {
     data = [2,0];
     self.net.send(data);
