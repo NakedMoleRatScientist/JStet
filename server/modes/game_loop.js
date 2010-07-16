@@ -123,6 +123,7 @@ function EventManager(id)
   {
     if (self.collision(x,y))
     {
+      self.current.move(-x,-y);
       if (self.current.y == 0)
       {
 	self.over = true;
@@ -134,7 +135,7 @@ function EventManager(id)
   //move down
   self.move_down = function()
   {
-    if (self.current.move(0,20) == 2) //2 indicate that it reached rock bottom.
+    if (self.current.move(0,20) == 2) //2 indicate that it reached rock 
     {
       self.cycle();
     }
