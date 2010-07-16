@@ -64,6 +64,10 @@ function Engine(protocol,mode)
     console.log("High score, detected!");
     self.mode.change(3);
   };
+  self.start = function()
+  {
+    self.field.start();
+  };
 };
 
 
