@@ -83,6 +83,7 @@ function GameProtocol(net)
       break;
     case 6:
       self.engine.stop();
+      self.net.send([3]);
       break;
     case 7:
       self.engine.high_score();
