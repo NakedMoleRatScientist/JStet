@@ -119,7 +119,7 @@ function EventManager(id)
     return false;
   };
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
-  self.collision_effect = function(x,y)
+  self.collision_effect_down = function(x,y)
   {
     if (self.collision(x,y))
     {
