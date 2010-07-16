@@ -144,5 +144,6 @@ exports.destroy = function(id)
     return false;
   }
   sys.log("Destroyed game: " + id);
+  sessions[location].over = true;
   sessions.splice(location,1); 
 }
