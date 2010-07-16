@@ -118,6 +118,13 @@ function EventManager(id)
     }
     return false;
   };
+  self.collision_effect_left_right = function(x,y)
+  {
+    if (self.collision(x,y))
+    {
+      self.current.move(-x,-y);
+    }
+  }
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.collision_effect_down = function(x,y)
   {
