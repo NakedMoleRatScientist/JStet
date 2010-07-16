@@ -138,7 +138,7 @@ exports.get_score = function(id)
 
 exports.destroy = function(id)
 {
-  location = find_by_id(id);
+  var location = find_by_id(id);
   if (location == -1)
   {
     return false;
