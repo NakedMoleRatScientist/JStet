@@ -6,7 +6,7 @@ function ScoreProtocol(net)
   self.data = null;
   self.net = net;
   self.net.score = self;
-  self.changeData = function(data)
+  self.change_data = function(data)
   {
     self.data = data;
   };
