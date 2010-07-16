@@ -3,8 +3,7 @@ void gameOverKey()
 {
   if (key == 110)
   {
-    mode.change(4);
-    game_protocol.requestGame();
+    request_game();
   }
   else if(key == 100)
   {
