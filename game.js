@@ -145,7 +145,7 @@ function TitleScreen()
 function ScoreBoard(protocol)
 {
   var self = this;
-  self.score = protocol;
+  self.protocol = protocol;
   self.start = 0;
   self.turn = false;
   self.title = function()
@@ -220,7 +220,7 @@ function ScoreProtocol(net)
   self.data = null;
   self.net = net;
   self.net.score = self;
-  self.changeData = function(data)
+  self.change_data = function(data)
   {
     self.data = data;
   };
@@ -231,8 +231,8 @@ function ScoreProtocol(net)
   self.transmit_score = function(name,points)
   {
     //0 indicating score
-    var message = [0,name,points];
-    self.net.transmit(message);
+    var message = [0,name];
+    self.net.send(message);
   };
 }
 
@@ -253,7 +253,7 @@ function Net()
       switch (data[0])
       {
       case 0:
-        //Score data...
+        self.score.change_data(data[1]);
 	break;
       case 2:
 	self.game.processData(data[1]);
