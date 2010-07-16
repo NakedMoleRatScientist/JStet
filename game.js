@@ -1,12 +1,4 @@
 
-void restartGame()
-{
-  field.field = field.create_field();
-  mode.change(4);
-  score.reset();
-  timer.reset();
-}
-
 
 //Data type is 2 for gameplay commands.
 function GameProtocol(net)
@@ -321,8 +313,7 @@ void titleKey()
   switch(key)
   {
   case 110:
-    mode.change(4);
-    game_protocol.requestGame();
+    request_game();
     break;
   }
 }
@@ -439,8 +430,7 @@ void gameOverKey()
 {
   if (key == 110)
   {
-    mode.change(4);
-    game_protocol.requestGame();
+    request_game();
   }
   else if(key == 100)
   {
@@ -475,8 +465,7 @@ void scoreKey()
   {
   //n is restart the game
   case 110:
-    mode.change(4);
-    game_protocol.requestGame();
+    request_game();
     break;
   //j, view previous page
   case 106:
@@ -1214,6 +1203,8 @@ function Engine(protocol,mode)
   };
   self.start = function()
   {
+    self.current = new Tetromino();
+    self.future = new Tetromino();
     self.field.start();
   };
 };
