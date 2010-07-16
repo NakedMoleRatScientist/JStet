@@ -2,7 +2,7 @@
 function ScoreBoard(protocol)
 {
   var self = this;
-  self.score = protocol;
+  self.protocol = protocol;
   self.start = 0;
   self.turn = false;
   self.title = function()
