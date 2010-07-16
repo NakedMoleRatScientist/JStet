@@ -118,7 +118,7 @@ function EventManager(id)
     }
     return false;
   };
-  self.collision_effect_left_right = function(x,y)
+  self.collision_effect_sideway = function(x,y)
   {
     if (self.collision(x,y))
     {
