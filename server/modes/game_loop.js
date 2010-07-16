@@ -147,6 +147,10 @@ function EventManager(id)
     self.current.rotate();
     self.create_rotate_message();
   };
+  self.rotate_collision = function()
+  {
+    
+  };
   //Check if score beat the lowest high score on the chart.
   self.check_score = function()
   {
