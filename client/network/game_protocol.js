@@ -36,7 +36,7 @@ function GameProtocol(net)
     data = [2,2,4];
     self.net.send(data);
   };
-  self.processData = function(data)
+  self.process_data = function(data)
   {
     switch(data[0])
     {
