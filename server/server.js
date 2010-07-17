@@ -47,6 +47,9 @@ server.addListener("connection",function(conn){
       sendData();
       db.save();
       break;
+    case 1:
+      lobby.process(data,player.find_by(id));
+      break;
     case 2:
       game.process(data,conn._id);
       break;
