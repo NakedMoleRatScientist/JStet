@@ -21,6 +21,7 @@ function Net()
 	break;
       case 1:
 	self.lobby.process_data(data[1]);
+	break;
       case 2:
 	self.game.process_data(data[1]);
 	break;
