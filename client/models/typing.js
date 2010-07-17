@@ -83,7 +83,7 @@ void Typing()
     break;
   //backspace
   case 8:
-    score_data.destroy();
+    return -1;
     break;
   }
 }
