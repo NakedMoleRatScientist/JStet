@@ -71,7 +71,7 @@ server.addListener("connection",function(conn){
 	  for (var a = 0;a < events.length;a++)
 	  {
 	    var message = JSON.stringify(events[a]);
-	    server.send(players[i],message);
+	    server.send(players[i].id,message);
 	  }
 	}
       }
