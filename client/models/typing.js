@@ -85,5 +85,6 @@ void Typing()
   case 8:
     return -1;
     break;
+  default: return false;
   }
 }
