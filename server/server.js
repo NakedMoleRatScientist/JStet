@@ -10,6 +10,17 @@ var server = ws.createServer();
 var players = new Array();
 server.listen(7000);
 
+function find_id(id)
+{
+  for (var i = 0;i < players.length;i++)
+  {
+    if (player[i].id == id)
+    {
+      return i;
+    }
+  }
+}
+
 function sendData()
 {
   data = [0,db.getDoc()];
