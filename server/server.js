@@ -10,18 +10,6 @@ var server = ws.createServer();
 var players = new Array();
 server.listen(7000);
 
-function destroy(id)
-{
-  for (var i = 0;i < players.length;i++)
-  {
-    if (players[i] == id)
-    {
-      players.splice(i,1);
-    }
-  }
-  game.destroy(id);
-}
-
 function sendData()
 {
   data = [0,db.getDoc()];
