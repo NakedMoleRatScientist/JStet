@@ -59,7 +59,7 @@ server.addListener("connection",function(conn){
       db.save();
       break;
     case 1:
-      lobby.process(data,players[find_by(id)]);
+      lobby.process(data,players[find_by(conn._id)]);
       break;
     case 2:
       game.process(data,conn._id);
