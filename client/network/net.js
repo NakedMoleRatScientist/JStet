@@ -19,6 +19,8 @@ function Net()
       case 0:
         self.score.change_data(data[1]);
 	break;
+      case 1:
+	self.lobby.process_data(data[1]);
       case 2:
 	self.game.process_data(data[1]);
 	break;
