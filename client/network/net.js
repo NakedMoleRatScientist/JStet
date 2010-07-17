@@ -20,7 +20,7 @@ function Net()
         self.score.change_data(data[1]);
 	break;
       case 2:
-	self.game.processData(data[1]);
+	self.game.process_data(data[1]);
 	break;
       }
     };
