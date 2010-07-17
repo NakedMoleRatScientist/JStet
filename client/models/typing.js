@@ -4,82 +4,82 @@ void Typing()
   switch(key)
   {
   case 97:
-    score_data.addLetter("a");
+    return("a");
     break;
   case 98:
-    score_data.addLetter("b");
+    return("b");
     break;
   case 99:
-    score_data.addLetter("c");
+    return("c");
     break;
   case 100:
-    score_data.addLetter("d");
+    return("d");
     break;
   case 101:
-    score_data.addLetter("e");
+    return("e");
     break;
   case 102:
-    score_data.addLetter("f");
+    return("f");
     break;
   case 103:
-    score_data.addLetter("g");
+    return("g");
     break;
   case 104:
-    score_data.addLetter("h");
+    return("h");
     break;
   case 105:
-    score_data.addLetter("i");
+    return("i");
     break;
   case 106:
-    score_data.addLetter("j");
+    return("j");
     break;
   case 107:
-    score_data.addLetter("k");
+    return("k");
     break;
   case 108:
-    score_data.addLetter("l");
+    return("l");
     break;
   case 109:
-    score_data.addLetter("m");
+    return("m");
     break;
   case 110:
-    score_data.addLetter("n");
+    return("n");
     break;
   case 111:
-    score_data.addLetter("o");
+    return("o");
     break;
   case 112:
-    score_data.addLetter("p");
+    return("p");
     break;
   case 113:
-    score_data.addLetter("q");
+    return("q");
     break;
   case 114:
-    score_data.addLetter("r");
+    return("r");
     break;
   case 115:
-    score_data.addLetter("s");
+    return("s");
     break;
   case 116:
-    score_data.addLetter("t");
+    return("t");
     break;
   case 117:
-    score_data.addLetter("u");
+    return("u");
     break;
   case 118:
-    score_data.addLetter("v");
+    return("v");
     break;
   case 119:
-    score_data.addLetter("w");
+    return("w");
     break;
   case 120:
-    score_data.addLetter("x");
+    return("x");
     break;
   case 121:
-    score_data.addLetter("y");
+    return("y");
     break;
   case 122:
-    score_data.addLetter("z");
+    return("z");
     break;
   //backspace
   case 8:
