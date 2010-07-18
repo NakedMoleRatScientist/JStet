@@ -8,12 +8,10 @@ void enterScoreKey()
     break;
   case -1:
     score_data.destroy();
+    break;
   }
   switch(key)
   {
-  case 8:
-    score_data.destroy();
-    break;
   case 13:
     score_protocol.transmit_score(score_data.getName(),engine.score);
     score_data.clean();
