@@ -15,10 +15,4 @@ void enterScoreKey()
     mode.change(2);
     break;
   }
-  switch(key)
-  {
-  case 13:
-   
-    break;
-  }
 }
