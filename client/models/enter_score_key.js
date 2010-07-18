@@ -6,7 +6,7 @@ void enterScoreKey()
   {
   case false:
     break;
-  case -1:
+  case -8:
     score_data.destroy();
     break;
   }
