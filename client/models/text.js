@@ -21,4 +21,8 @@ function Text()
       self.string = self.string.substring(0,self.name.length - 1);
     }
   };
+  self.get_text = function()
+  {
+    return self.string;
+  };
 }
