@@ -1,4 +1,24 @@
 
+function LobbyProtocol(net)
+{
+  var self = this;
+  self.net = net;
+  self.net.lobby = self;
+  self.process_data = function(data)
+  {
+    
+  };
+}
+function Chat()
+{
+  var self = this;
+  self.messages = new Array();
+  self.message = new Text();
+  self.enter = function()
+  {
+    self.messages.push(self.message.get_text());
+  };
+}
 
 //Data type is 2 for gameplay commands.
 function GameProtocol(net)
@@ -36,7 +56,7 @@ function GameProtocol(net)
     data = [2,2,4];
     self.net.send(data);
   };
-  self.processData = function(data)
+  self.process_data = function(data)
   {
     switch(data[0])
     {
@@ -236,6 +256,7 @@ function Net()
   self.ws = null;
   self.game = null;
   self.score = null;
+  self.lobby = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -248,8 +269,11 @@ function Net()
       case 0:
         self.score.change_data(data[1]);
 	break;
+      case 1:
+	self.lobby.process_data(data[1]);
+	break;
       case 2:
-	self.game.processData(data[1]);
+	self.game.process_data(data[1]);
 	break;
       }
     };
@@ -274,7 +298,7 @@ function Net()
 function HighScore()
 {
   var self = this;
-  self.name = "";
+  self.name = new Text();
   self.display = function()
   {
     background(0,0,0);
@@ -285,28 +309,37 @@ function HighScore()
     text("Your identifer: ",250,300);
     text(self.name,300,325);
   };
-  self.clean = function()
-  {
-    self.name = "";
-  }
-  self.addLetter = function(letter)
-  {
-    if (self.name.length != 5)
-    {
-      self.name += letter;
-    }
-  };
-  self.destroy = function()
-  {
-    if (self.name.length != 0)
-    {
-      self.name = self.name.substring(0,self.name.length - 1);
-    };
-  };
   self.getName = function()
   {
     return self.name;
   }
+}
+function Text()
+{
+  var self = this;
+  self.string = "";
+  self.clean = function()
+  {
+    self.string = "";
+  };
+  self.addLetter = function(letter,limit)
+  {
+    if (self.string.length != limit)
+    {
+      self.string += letter;
+    }
+  };
+  self.destroy = function()
+  {
+    if (self.string.length != 0)
+    {
+      self.string = self.string.substring(0,self.name.length - 1);
+    }
+  };
+  self.get_text = function()
+  {
+    return self.string;
+  };
 }
 void titleKey()
 {
@@ -319,95 +352,114 @@ void titleKey()
 }
 void enterScoreKey()
 {
-  switch(key)
+  var info = typing()
+  switch (info)
   {
-  case 97:
-    score_data.addLetter("a");
+  case false:
     break;
-  case 98:
-    score_data.addLetter("b");
+  case -8:
+    score_data.name.destroy();
     break;
-  case 99:
-    score_data.addLetter("c");
-    break;
-  case 100:
-    score_data.addLetter("d");
-    break;
-  case 101:
-    score_data.addLetter("e");
-    break;
-  case 102:
-    score_data.addLetter("f");
-    break;
-  case 103:
-    score_data.addLetter("g");
-    break;
-  case 104:
-    score_data.addLetter("h");
-    break;
-  case 105:
-    score_data.addLetter("i");
-    break;
-  case 106:
-    score_data.addLetter("j");
-    break;
-  case 107:
-    score_data.addLetter("k");
-    break;
-  case 108:
-    score_data.addLetter("l");
-    break;
-  case 109:
-    score_data.addLetter("m");
-    break;
-  case 110:
-    score_data.addLetter("n");
-    break;
-  case 111:
-    score_data.addLetter("o");
-    break;
-  case 112:
-    score_data.addLetter("p");
-    break;
-  case 113:
-    score_data.addLetter("q");
-    break;
-  case 114:
-    score_data.addLetter("r");
-    break;
-  case 115:
-    score_data.addLetter("s");
-    break;
-  case 116:
-    score_data.addLetter("t");
-    break;
-  case 117:
-    score_data.addLetter("u");
-    break;
-  case 118:
-    score_data.addLetter("v");
-    break;
-  case 119:
-    score_data.addLetter("w");
-    break;
-  case 120:
-    score_data.addLetter("x");
-    break;
-  case 121:
-    score_data.addLetter("y");
-    break;
-  case 122:
-    score_data.addLetter("z");
-    break;
-  //backspace
-  case 8:
-    score_data.destroy();
-    break;
-  case 13:
+  case -13:
     score_protocol.transmit_score(score_data.getName(),engine.score);
     score_data.clean();
     mode.change(2);
     break;
+  default:
+    score_data.name.addLetter(info);
+    break;
+  }
+}
+void typing()
+{
+  switch(key)
+  {
+  case 97:
+    return("a");
+    break;
+  case 98:
+    return("b");
+    break;
+  case 99:
+    return("c");
+    break;
+  case 100:
+    return("d");
+    break;
+  case 101:
+    return("e");
+    break;
+  case 102:
+    return("f");
+    break;
+  case 103:
+    return("g");
+    break;
+  case 104:
+    return("h");
+    break;
+  case 105:
+    return("i");
+    break;
+  case 106:
+    return("j");
+    break;
+  case 107:
+    return("k");
+    break;
+  case 108:
+    return("l");
+    break;
+  case 109:
+    return("m");
+    break;
+  case 110:
+    return("n");
+    break;
+  case 111:
+    return("o");
+    break;
+  case 112:
+    return("p");
+    break;
+  case 113:
+    return("q");
+    break;
+  case 114:
+    return("r");
+    break;
+  case 115:
+    return("s");
+    break;
+  case 116:
+    return("t");
+    break;
+  case 117:
+    return("u");
+    break;
+  case 118:
+    return("v");
+    break;
+  case 119:
+    return("w");
+    break;
+  case 120:
+    return("x");
+    break;
+  case 121:
+    return("y");
+    break;
+  case 122:
+    return("z");
+    break;
+  //backspace
+  case 8:
+    return -8;
+    break;
+  case 13:
+    return -13;
+    break;
+  default: return false;
   }
 }
 
@@ -1235,6 +1287,7 @@ var title = new TitleScreen();
 network.initialize();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
+var lobby_protocol = new LobbyProtocol(network);
 var board = new ScoreBoard(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
@@ -1303,6 +1356,8 @@ void draw()
     break;
   case 3:
     score_data.display();
+    break;
+  case 5:
     break;
   }
 }
