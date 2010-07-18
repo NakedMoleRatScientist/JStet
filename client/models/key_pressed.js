@@ -21,5 +21,8 @@ void keyPressed()
   case 5:
     lobby_key();
     break;
+  case 6:
+    chat_key();
+    break;
   }
 }
