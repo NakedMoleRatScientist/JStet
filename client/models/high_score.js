@@ -13,7 +13,7 @@ function HighScore()
     text("Your identifer: ",250,300);
     text(self.name,300,325);
   };
-  self.getName = function()
+  self.get_name = function()
   {
     return self.name;
   }
