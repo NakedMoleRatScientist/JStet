@@ -14,5 +14,8 @@ void enterScoreKey()
     score_data.clean();
     mode.change(2);
     break;
+  default:
+    score_data.name.addLetter(info);
+    break;
   }
 }
