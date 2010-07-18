@@ -9,13 +9,16 @@ void enterScoreKey()
   case -8:
     score_data.destroy();
     break;
+  case -13:
+    score_protocol.transmit_score(score_data.getName(),engine.score);
+    score_data.clean();
+    mode.change(2);
+    break;
   }
   switch(key)
   {
   case 13:
-    score_protocol.transmit_score(score_data.getName(),engine.score);
-    score_data.clean();
-    mode.change(2);
+   
     break;
   }
 }
