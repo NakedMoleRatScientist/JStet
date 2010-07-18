@@ -1,6 +1,7 @@
 
 void enterScoreKey()
 {
+  var info = typing()
   switch(key)
   {
   case 8:
