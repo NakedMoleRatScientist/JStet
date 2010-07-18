@@ -1,5 +1,5 @@
 
-void Typing()
+void typing()
 {
   switch(key)
   {
