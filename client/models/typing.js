@@ -83,7 +83,10 @@ void typing()
     break;
   //backspace
   case 8:
-    return -1;
+    return -8;
+    break;
+  case 13:
+    return -13;
     break;
   default: return false;
   }
