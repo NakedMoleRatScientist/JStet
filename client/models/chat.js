@@ -2,6 +2,7 @@
 function Chat()
 {
   var self = this;
-  var messages = new Array();
-  var message = new Text();
+  self.messages = new Array();
+  self.message = new Text();
+  
 }
