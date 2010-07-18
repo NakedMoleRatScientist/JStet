@@ -26,7 +26,7 @@ function ScoreBoard(protocol)
   self.list = function()
   {
     var data = self.protocol.getData();
-    y = 70;
+    var y = 70;
     limit = self.start + 20;
     self.turn = true;
     for (var i = self.start;i < limit;i++)
