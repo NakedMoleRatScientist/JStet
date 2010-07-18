@@ -168,5 +168,7 @@ void draw()
   case 3:
     score_data.display();
     break;
+  case 5:
+    break;
   }
 }
