@@ -14,6 +14,15 @@ function Chat()
   var self = this;
   self.messages = new Array();
   self.message = new Text();
+  self.display = function()
+  {
+    var y = 20;
+    for (var i = 0;i < self.messages.length;i++)
+    {
+      text(self.messages[i],250,y+= 20);
+    }
+
+  };
   self.enter = function()
   {
     self.messages.push(self.message.get_text());
@@ -182,8 +191,8 @@ function ScoreBoard(protocol)
   self.list = function()
   {
     var data = self.protocol.getData();
-    y = 70;
-    limit = self.start + 20;
+    var y = 70;
+    var limit = self.start + 20;
     self.turn = true;
     for (var i = self.start;i < limit;i++)
     {
@@ -309,7 +318,7 @@ function HighScore()
     text("Your identifer: ",250,300);
     text(self.name,300,325);
   };
-  self.getName = function()
+  self.get_name = function()
   {
     return self.name;
   }
@@ -361,7 +370,7 @@ void enterScoreKey()
     score_data.name.destroy();
     break;
   case -13:
-    score_protocol.transmit_score(score_data.getName(),engine.score);
+    score_protocol.transmit_score(score_data.get_name(),engine.score);
     score_data.clean();
     mode.change(2);
     break;
@@ -507,6 +516,12 @@ void keyPressed()
     break;
   case 3:
     enterScoreKey();
+    break;
+  case 5:
+    lobby_key();
+    break;
+  case 6:
+    chat_key();
     break;
   }
 }
@@ -1281,6 +1296,7 @@ var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var score_data = new HighScore();
+var chat = new Chat();
 var network = new Net();
 var over = new GameOver();
 var title = new TitleScreen();
