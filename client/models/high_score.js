@@ -13,24 +13,6 @@ function HighScore()
     text("Your identifer: ",250,300);
     text(self.name,300,325);
   };
-  self.clean = function()
-  {
-    self.name = "";
-  }
-  self.addLetter = function(letter)
-  {
-    if (self.name.length != 5)
-    {
-      self.name += letter;
-    }
-  };
-  self.destroy = function()
-  {
-    if (self.name.length != 0)
-    {
-      self.name = self.name.substring(0,self.name.length - 1);
-    };
-  };
   self.getName = function()
   {
     return self.name;
