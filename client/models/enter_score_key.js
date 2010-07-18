@@ -7,7 +7,7 @@ void enterScoreKey()
   case false:
     break;
   case -8:
-    score_data.destroy();
+    score_data.name.destroy();
     break;
   case -13:
     score_protocol.transmit_score(score_data.getName(),engine.score);
