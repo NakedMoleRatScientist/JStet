@@ -2,7 +2,7 @@
 function HighScore()
 {
   var self = this;
-  self.name = "";
+  self.name = new Text();
   self.display = function()
   {
     background(0,0,0);
