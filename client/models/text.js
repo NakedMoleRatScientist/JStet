@@ -7,4 +7,11 @@ function Text()
   {
     self.string = "";
   };
+  self.addLetter = function(letter,limit)
+  {
+    if (self.string.length != limit)
+    {
+      self.string += letter;
+    }
+  };
 }
