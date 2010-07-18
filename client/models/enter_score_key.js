@@ -2,6 +2,11 @@
 void enterScoreKey()
 {
   var info = typing()
+  switch (info)
+  {
+  case false:
+    break;
+  }
   switch(key)
   {
   case 8:
