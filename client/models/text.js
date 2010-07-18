@@ -14,4 +14,11 @@ function Text()
       self.string += letter;
     }
   };
+  self.destroy = function()
+  {
+    if (self.string.length != 0)
+    {
+      self.string = self.string.substring(0,self.name.length - 1);
+    }
+  };
 }
