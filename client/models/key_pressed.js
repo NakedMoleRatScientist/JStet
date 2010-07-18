@@ -18,5 +18,8 @@ void keyPressed()
   case 3:
     enterScoreKey();
     break;
+  case 5:
+    lobby_key();
+    break;
   }
 }
