@@ -1,5 +1,5 @@
 
-function HighScore()
+function HighScoreMode()
 {
   var self = this;
   self.name = new Text();
