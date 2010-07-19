@@ -155,6 +155,7 @@ void draw()
   {
   case 0:
     title.display();
+    title.switch_mode();
     break;
   case 4:
     gameDisplay();
