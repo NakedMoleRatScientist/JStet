@@ -25,6 +25,9 @@ function Net()
       case 2:
 	self.game.process_data(data[1]);
 	break;
+      case 4:
+	sys.log("Acknowledged.");
+	break;
       }
     };
     self.ws.onclose = function()
