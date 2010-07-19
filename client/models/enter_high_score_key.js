@@ -1,5 +1,5 @@
 
-void enterScoreKey()
+void enterHighScoreKey()
 {
   var info = typing()
   switch (info)
