@@ -21,7 +21,7 @@ function find_id(id)
   }
 }
 
-function sendData()
+function send_score()
 {
   data = [0,db.getDoc()];
   server.broadcast(JSON.stringify(data));
