@@ -3,8 +3,8 @@ void titleKey()
 {
   switch(key)
   {
-  case 110:
-    request_game();
+  case 13:
+    mode.change(5);
     break;
   }
 }
