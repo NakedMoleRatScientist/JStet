@@ -1,5 +1,5 @@
 
-function ScoreBoard(protocol)
+function ScoreBoardMode(protocol)
 {
   var self = this;
   self.protocol = protocol;
