@@ -96,7 +96,6 @@ var chat = new Chat();
 var network = new Net();
 var over = new GameOver();
 var title = new TitleScreen();
-network.initialize();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network);
