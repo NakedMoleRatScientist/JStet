@@ -27,6 +27,7 @@ function Net()
 	break;
       case 4:
 	sys.log("Acknowledged.");
+	title.connected = true;
 	break;
       }
     };
