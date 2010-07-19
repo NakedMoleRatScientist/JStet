@@ -3,6 +3,7 @@
 function TitleScreen()
 {
   var self = this;
+  self.connected = false;
   self.display = function()
   {
     background(0,0,0);
