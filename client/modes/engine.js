@@ -167,7 +167,7 @@ void draw()
     board.display();
     break;
   case 3:
-    score_data.display();
+    high_score.display();
     break;
   case 5:
     break;
