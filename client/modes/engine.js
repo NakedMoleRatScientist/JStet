@@ -92,7 +92,6 @@ var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var score_data = new HighScore();
-var chat = new Chat();
 var network = new Net();
 var over = new GameOver();
 var title = new TitleScreen();
