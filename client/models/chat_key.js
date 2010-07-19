@@ -5,7 +5,7 @@ void chat_key()
   switch(info)
   {
   default:
-    chat.message.addLetter(info);
+    lobby.chat.message.addLetter(info);
     break;
   }
 }
