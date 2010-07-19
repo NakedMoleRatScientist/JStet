@@ -85,6 +85,7 @@ void typing()
   case 8:
     return -8;
     break;
+  //enter
   case 13:
     return -13;
     break;
