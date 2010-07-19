@@ -1,6 +1,6 @@
 
 
-function GameOver()
+function GameOverMode()
 {
   var self = this;
   self.display = function()
