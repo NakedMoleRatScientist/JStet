@@ -1,6 +1,6 @@
 
 
-function TitleScreen()
+function TitleMode()
 {
   var self = this;
   self.connected = false;
