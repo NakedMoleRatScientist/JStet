@@ -37,7 +37,7 @@ server.addListener("listening",function(){
 server.addListener("connection",function(conn){
   sys.log("<"+conn._id+"> connected");
   players.push(player.get_player(conn._id));
-  sendData();
+  send_score();
   conn.addListener("close",function(){
     db.save();
     game.destroy(conn._id);
