@@ -13,7 +13,11 @@ function Net()
     self.ws.onmessage = function(event)
     {
       data = JSON.parse(event.data);
-      
+      //data[0] notates data types so we know how to process the data.
+      //0 - Score
+      //1 - Lobby
+      //2 - Game
+      //4 - Acknowledge
       switch (data[0])
       {
       case 0:
