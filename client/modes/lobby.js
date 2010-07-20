@@ -5,6 +5,6 @@ function LobbyMode()
   self.chat = new Chat();
   self.display = function()
   {
-    
+    self.chat.display();
   };
 }
