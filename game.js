@@ -150,9 +150,10 @@ function GameProtocol(net)
 }
 
 
-function TitleScreen()
+function TitleMode()
 {
   var self = this;
+  self.connected = false;
   self.display = function()
   {
     background(0,0,0);
@@ -160,11 +161,18 @@ function TitleScreen()
     textFont(font,50);
     text("JStet",300,300);
     textFont(font,18);
-    text("Press n for a new game.",260,325);
+    text("Press Enter to Connect.",260,325);
+  };
+  self.switch_mode = function()
+  {
+    if (self.connected == true)
+    {
+      mode.change(5);
+    }
   };
 }
 
-function ScoreBoard(protocol)
+function ScoreBoardMode(protocol)
 {
   var self = this;
   self.protocol = protocol;
@@ -284,6 +292,10 @@ function Net()
       case 2:
 	self.game.process_data(data[1]);
 	break;
+      case 4:
+	sys.log("Acknowledged.");
+	title.connected = true;
+	break;
       }
     };
     self.ws.onclose = function()
@@ -304,7 +316,7 @@ function Net()
   };
 }
 
-function HighScore()
+function HighScoreMode()
 {
   var self = this;
   self.name = new Text();
@@ -354,12 +366,12 @@ void titleKey()
 {
   switch(key)
   {
-  case 110:
-    request_game();
+  case 13:
+    network.initialize();
     break;
   }
 }
-void enterScoreKey()
+void enterHighScoreKey()
 {
   var info = typing()
   switch (info)
@@ -465,6 +477,7 @@ void typing()
   case 8:
     return -8;
     break;
+  //enter
   case 13:
     return -13;
     break;
@@ -472,7 +485,7 @@ void typing()
   }
 }
 
-function GameOver()
+function GameOverMode()
 {
   var self = this;
   self.display = function()
@@ -1195,6 +1208,11 @@ function TetrominoDraw()
   }
 }
 
+function LobbyMode()
+{
+  var self = this;
+  self.chat = new Chat();
+}
 function Mode()
 {
   this.status = 0;
@@ -1295,16 +1313,15 @@ var mode = new Mode();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
-var score_data = new HighScore();
-var chat = new Chat();
+var high_score = new HighScoreMode();
+var lobby = new LobbyMode();
 var network = new Net();
 var over = new GameOver();
-var title = new TitleScreen();
-network.initialize();
+var title = new TitleMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network);
-var board = new ScoreBoard(score_protocol)
+var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
 
@@ -1360,6 +1377,7 @@ void draw()
   {
   case 0:
     title.display();
+    title.switch_mode();
     break;
   case 4:
     gameDisplay();
@@ -1371,7 +1389,7 @@ void draw()
     board.display();
     break;
   case 3:
-    score_data.display();
+    high_score.display();
     break;
   case 5:
     break;
