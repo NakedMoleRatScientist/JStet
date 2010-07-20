@@ -1,5 +1,5 @@
 
-void chat_key()
+void chatKey()
 {
   var info = typing();
   switch(info)
