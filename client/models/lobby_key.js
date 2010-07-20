@@ -4,7 +4,7 @@ void lobbyKey()
   switch(key)
   {
   case 13:
-    lobby.chat.enter();
+    lobby.switch_mode();
     break;
   }
 }
