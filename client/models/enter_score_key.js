@@ -15,7 +15,7 @@ void enterHighScoreKey()
     mode.change(2);
     break;
   default:
-    score_data.name.addLetter(info);
+    high_score.name.addLetter(info);
     break;
   }
 }
