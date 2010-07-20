@@ -4,6 +4,7 @@ function Chat()
   var self = this;
   self.messages = new Array();
   self.message = new Text();
+  self.protocol = null;
   self.display = function()
   {
     var y = 20;
