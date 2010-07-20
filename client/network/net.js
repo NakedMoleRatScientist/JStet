@@ -26,7 +26,7 @@ function Net()
 	self.game.process_data(data[1]);
 	break;
       case 4:
-	sys.log("Acknowledged.");
+	console.log("Acknowledged.");
 	title.connected = true;
 	break;
       }
