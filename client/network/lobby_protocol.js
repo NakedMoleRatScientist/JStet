@@ -11,5 +11,6 @@ function LobbyProtocol(net)
   self.send = function(message)
   {
     var data = [1,1,message]
+    self.net.send(data);
   };
 }
