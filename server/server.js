@@ -2,6 +2,7 @@ var sys = require('sys');
 var ws = require('../vendor/ws/ws');
 var game = require('./protocols/game_protocol')
 var player = require('./models/player')
+var lobby = require('./protocol/lobby_protocol')
 
 //server stuff
 var db = require('./models/database');
