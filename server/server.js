@@ -48,8 +48,9 @@ server.addListener("connection",function(conn){
   conn.addListener("message",function(event){
     //data[0] notates data types so we know how to process the data.
     //0 - Score
-    //1 - Client status
+    //1 - Lobby
     //2 - Game
+    //3 - End Game
     data = JSON.parse(event);
     switch(data[0])
     {
