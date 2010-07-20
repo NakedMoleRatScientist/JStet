@@ -16,6 +16,6 @@ function Chat()
   };
   self.enter = function()
   {
-    self.messages.push(self.message.get_text());
+    self.protocol.send(self.message.get_text());
   };
 }
