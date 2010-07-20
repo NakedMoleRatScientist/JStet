@@ -170,6 +170,7 @@ void draw()
     high_score.display();
     break;
   case 5:
+    lobby.display();
     break;
   }
 }
