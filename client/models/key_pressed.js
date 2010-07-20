@@ -19,7 +19,7 @@ void keyPressed()
     enterScoreKey();
     break;
   case 5:
-    lobby_key();
+    lobbyKey();
     break;
   case 6:
     chat_key();
