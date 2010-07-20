@@ -8,12 +8,18 @@ function LobbyProtocol(net)
   {
     
   };
+  self.send = function(message)
+  {
+    var data = [1,1,message]
+    self.net.send(data);
+  };
 }
 function Chat()
 {
   var self = this;
   self.messages = new Array();
   self.message = new Text();
+  self.protocol = null;
   self.display = function()
   {
     var y = 20;
@@ -25,7 +31,7 @@ function Chat()
   };
   self.enter = function()
   {
-    self.messages.push(self.message.get_text());
+    self.protocol.send(self.message.get_text());
   };
 }
 
@@ -280,7 +286,11 @@ function Net()
     self.ws.onmessage = function(event)
     {
       data = JSON.parse(event.data);
-      
+      //data[0] notates data types so we know how to process the data.
+      //0 - Score
+      //1 - Lobby
+      //2 - Game
+      //4 - Acknowledge
       switch (data[0])
       {
       case 0:
@@ -293,7 +303,7 @@ function Net()
 	self.game.process_data(data[1]);
 	break;
       case 4:
-	sys.log("Acknowledged.");
+	console.log("Acknowledged.");
 	title.connected = true;
 	break;
       }
@@ -367,7 +377,17 @@ void titleKey()
   switch(key)
   {
   case 13:
+    title.connected = true;
     network.initialize();
+    break;
+  }
+}
+void lobbyKey()
+{
+  switch(key)
+  {
+  case 13:
+    lobby.chat.enter();
     break;
   }
 }
@@ -531,7 +551,7 @@ void keyPressed()
     enterScoreKey();
     break;
   case 5:
-    lobby_key();
+    lobbyKey();
     break;
   case 6:
     chat_key();
@@ -1212,6 +1232,11 @@ function LobbyMode()
 {
   var self = this;
   self.chat = new Chat();
+  self.display = function()
+  {
+    background(0,0,0);
+    self.chat.display();
+  };
 }
 function Mode()
 {
@@ -1316,11 +1341,12 @@ var timer = new TimerAction();
 var high_score = new HighScoreMode();
 var lobby = new LobbyMode();
 var network = new Net();
-var over = new GameOver();
+var over = new GameOverMode();
 var title = new TitleMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network);
+lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
@@ -1392,6 +1418,7 @@ void draw()
     high_score.display();
     break;
   case 5:
+    lobby.display();
     break;
   }
 }
