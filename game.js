@@ -387,7 +387,7 @@ void lobbyKey()
   switch(key)
   {
   case 13:
-    lobby.chat.enter();
+    lobby.switch_mode();
     break;
   }
 }
@@ -1237,6 +1237,10 @@ function LobbyMode()
     background(0,0,0);
     self.chat.display();
   };
+  self.switch_mode = function()
+  {
+    mode.change(6);
+  };
 }
 function Mode()
 {
@@ -1418,6 +1422,9 @@ void draw()
     high_score.display();
     break;
   case 5:
+    lobby.display();
+    break;
+  case 6:
     lobby.display();
     break;
   }
