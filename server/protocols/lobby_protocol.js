@@ -1,5 +1,5 @@
 var sys = require('sys');
-var lobby = require('../models/lobby');
+var lobby = require('../modes/lobby');
 
 
 exports.process = function(data,player)
