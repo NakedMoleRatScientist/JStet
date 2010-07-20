@@ -10,7 +10,7 @@ void enterHighScoreKey()
     score_data.name.destroy();
     break;
   case -13:
-    score_protocol.transmit_score(score_data.get_name(),engine.score);
+    score_protocol.transmit_score(high_score.get_name(),engine.score);
     high_score.clean();
     mode.change(2);
     break;
