@@ -2,7 +2,7 @@
 function LobbyProtocol(net,lobby)
 {
   var self = this;
-  self.lobby = lobby
+  self.mode = lobby
   self.net = net;
   self.net.lobby = self;
   self.process_data = function(data)
