@@ -1,12 +1,18 @@
 
-function LobbyProtocol(net)
+function LobbyProtocol(net,lobby)
 {
   var self = this;
   self.net = net;
-  self.net.lobby = self;
+  self.net.lobby = lobby;
   self.process_data = function(data)
   {
-    console.log(data);
+    switch(data[0])
+    {
+    case 1:
+      console.log("Chat detected.");
+      self.lobby.chat.add_message(data[2]);
+      break;
+    }
   };
   self.send = function(message)
   {
@@ -33,6 +39,10 @@ function Chat()
   {
     self.protocol.send(self.message.get_text());
     self.message = new Text();
+  };
+  self.add_message = function(msg)
+  {
+    self.messages.push(msg);
   };
 }
 
@@ -1366,7 +1376,7 @@ var over = new GameOverMode();
 var title = new TitleMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
-var lobby_protocol = new LobbyProtocol(network);
+var lobby_protocol = new LobbyProtocol(network,lobby);
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
