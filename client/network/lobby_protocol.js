@@ -6,7 +6,12 @@ function LobbyProtocol(net)
   self.net.lobby = self;
   self.process_data = function(data)
   {
-    console.log(data);
+    switch(data[1])
+    {
+    case 1:
+      self.lobby.chat.add_message(data[2]);
+      break;
+    }
   };
   self.send = function(message)
   {
