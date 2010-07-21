@@ -15,7 +15,7 @@ function find_id(id)
 {
   for (var i = 0;i < players.length;i++)
   {
-    if (player[i].id == id)
+    if (players[i].id == id)
     {
       return i;
     }
