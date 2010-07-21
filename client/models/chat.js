@@ -12,7 +12,7 @@ function Chat()
     {
       text(self.messages[i],250,y+= 20);
     }
-    text(self.message.get_text(),500,500);
+    text(self.message.get_text(),5,600);
   };
   self.enter = function()
   {
