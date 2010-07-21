@@ -6,11 +6,11 @@ function LobbyProtocol(net)
   self.net.lobby = self;
   self.process_data = function(data)
   {
-    
+    console.log(data);
   };
   self.send = function(message)
   {
-    var data = [1,1,message]
+    var data = [1,1,message];
     self.net.send(data);
   };
 }
@@ -32,6 +32,7 @@ function Chat()
   self.enter = function()
   {
     self.protocol.send(self.message.get_text());
+    self.message = new Text();
   };
 }
 
@@ -382,6 +383,9 @@ void chatKey()
     break;
   case -8:
     lobby.chat.message.destroy();
+    break;
+  case -13:
+    lobby.chat.enter();
     break;
   }
 }
