@@ -19,4 +19,8 @@ function Chat()
     self.protocol.send(self.message.get_text());
     self.message = new Text();
   };
+  self.add_message = function(msg)
+  {
+    self.messages.push(msg);
+  };
 }
