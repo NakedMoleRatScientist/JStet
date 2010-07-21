@@ -6,9 +6,10 @@ function LobbyProtocol(net)
   self.net.lobby = self;
   self.process_data = function(data)
   {
-    switch(data[1])
+    switch(data[0])
     {
     case 1:
+      console.log("Chat detected.");
       self.lobby.chat.add_message(data[2]);
       break;
     }
