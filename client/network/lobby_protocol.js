@@ -2,8 +2,9 @@
 function LobbyProtocol(net,lobby)
 {
   var self = this;
+  self.lobby = lobby
   self.net = net;
-  self.net.lobby = lobby;
+  self.net.lobby = self;
   self.process_data = function(data)
   {
     switch(data[0])
