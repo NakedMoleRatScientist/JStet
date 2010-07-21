@@ -22,7 +22,7 @@ void keyPressed()
     lobbyKey();
     break;
   case 6:
-    chat_key();
+    chatKey();
     break;
   }
 }
