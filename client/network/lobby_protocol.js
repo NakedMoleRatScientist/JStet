@@ -11,7 +11,7 @@ function LobbyProtocol(net,lobby)
     {
     case 1:
       console.log("Chat detected.");
-      self.lobby.chat.add_message(data[2]);
+      self.mode.chat.add_message(data[2]);
       break;
     }
   };
