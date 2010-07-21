@@ -63,6 +63,7 @@ server.addListener("connection",function(conn){
       break;
     case 1:
       var stuff = lobby.process(data,players[find_id(conn._id)]);
+      sys.log(stuff);
       server.broadcast(stuff);
       break;
     case 2:
