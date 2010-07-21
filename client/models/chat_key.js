@@ -7,7 +7,7 @@ void chatKey()
   default:
     lobby.chat.message.addLetter(info);
     break;
-  case -13:
+  case -8:
     lobby.chat.message.destroy();
     break;
   }
