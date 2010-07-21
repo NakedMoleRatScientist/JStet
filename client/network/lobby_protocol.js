@@ -6,11 +6,11 @@ function LobbyProtocol(net)
   self.net.lobby = self;
   self.process_data = function(data)
   {
-    
+    console.log(data);
   };
   self.send = function(message)
   {
-    var data = [1,1,message]
+    var data = [1,1,message];
     self.net.send(data);
   };
 }
