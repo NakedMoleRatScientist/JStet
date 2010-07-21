@@ -27,7 +27,7 @@ function Chat()
     {
       text(self.messages[i],250,y+= 20);
     }
-
+    text(self.message.get_text(),5,600);
   };
   self.enter = function()
   {
@@ -364,13 +364,26 @@ function Text()
   {
     if (self.string.length != 0)
     {
-      self.string = self.string.substring(0,self.name.length - 1);
+      self.string = self.string.substring(0,self.string.length - 1);
     }
   };
   self.get_text = function()
   {
     return self.string;
   };
+}
+void chatKey()
+{
+  var info = typing();
+  switch(info)
+  {
+  default:
+    lobby.chat.message.addLetter(info);
+    break;
+  case -8:
+    lobby.chat.message.destroy();
+    break;
+  }
 }
 void titleKey()
 {
@@ -554,7 +567,7 @@ void keyPressed()
     lobbyKey();
     break;
   case 6:
-    chat_key();
+    chatKey();
     break;
   }
 }
