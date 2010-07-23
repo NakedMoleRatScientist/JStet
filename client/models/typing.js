@@ -82,7 +82,10 @@ void typing()
     return("z");
     break;
   case 48:
-    return ("0");
+    return("0");
+    break;
+  case 49:
+    return("1");
     break;
   //backspace
   case 8:
