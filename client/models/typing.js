@@ -3,6 +3,10 @@ var type_status = false;
 
 void typing()
 {
+  if (key == 65535)
+  {
+    console.log("beep");
+  }
   switch(key)
   {
   case 97:
