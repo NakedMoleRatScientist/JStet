@@ -87,6 +87,9 @@ void typing()
   case 44:
     return(",");
     break;
+  case 46:
+    return(".");
+    break;
   case 48:
     return("0");
     break;
