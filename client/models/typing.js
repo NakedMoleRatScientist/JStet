@@ -81,6 +81,9 @@ void typing()
   case 122:
     return("z");
     break;
+  case 48:
+    return ("0");
+    break;
   //backspace
   case 8:
     return -8;
