@@ -111,7 +111,7 @@ void typing()
   case 57:
     return("9");
     break;
-  case 58:
+  case 186:
     return(":");
     break;
   case 59:
@@ -137,6 +137,6 @@ void typing()
   case 13:
     return -13;
     break;
-  default: return false;
+  default: return key;
   }
 }
