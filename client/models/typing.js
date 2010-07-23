@@ -1,4 +1,6 @@
 
+var type_status = false;
+
 void typing()
 {
   switch(key)
