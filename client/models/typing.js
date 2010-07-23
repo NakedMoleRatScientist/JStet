@@ -81,6 +81,9 @@ void typing()
   case 122:
     return("z");
     break;
+  case 32:
+    return(" ");
+    break;
   case 44:
     return(",");
     break;
