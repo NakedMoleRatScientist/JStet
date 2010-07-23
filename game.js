@@ -2,15 +2,16 @@
 function LobbyProtocol(net,lobby)
 {
   var self = this;
+  self.mode = lobby
   self.net = net;
-  self.net.lobby = lobby;
+  self.net.lobby = self;
   self.process_data = function(data)
   {
     switch(data[0])
     {
     case 1:
       console.log("Chat detected.");
-      self.lobby.chat.add_message(data[2]);
+      self.mode.chat.add_message(data[1]);
       break;
     }
   };
@@ -31,7 +32,7 @@ function Chat()
     var y = 20;
     for (var i = 0;i < self.messages.length;i++)
     {
-      text(self.messages[i],250,y+= 20);
+      text(self.messages[i],20,y+= 20);
     }
     text(self.message.get_text(),5,600);
   };
@@ -519,6 +520,48 @@ void typing()
     break;
   case 122:
     return("z");
+    break;
+  case 48:
+    return("0");
+    break;
+  case 49:
+    return("1");
+    break;
+  case 50:
+    return("2");
+    break;
+  case 51:
+    return("3");
+    break;
+  case 52:
+    return("4");
+    break;
+  case 53:
+    return("5");
+    break;
+  case 54:
+    return("6");
+    break;
+  case 55:
+    return("7");
+    break;
+  case 56:
+    return("8");
+    break;
+  case 57:
+    return("9");
+    break;
+  case 58:
+    return(":");
+    break;
+  case 59:
+    return(";");
+    break;
+  case 60:
+    return("<");
+    break;
+  case 61:
+    return("=");
     break;
   //backspace
   case 8:
