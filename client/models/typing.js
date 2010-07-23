@@ -99,20 +99,20 @@ void typing()
   case 53:
     return("5");
     break;
-  //backspace
   case 54:
     return("6");
     break;
   case 55:
     return("7");
     break;
+  //backspace
   case 8:
     return -8;
     break;
   //enter
   case 13:
     return -13;
-    break;
+ p   break;
   default: return false;
   }
 }
