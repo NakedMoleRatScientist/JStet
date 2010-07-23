@@ -93,6 +93,9 @@ void typing()
   case 51:
     return("3");
     break;
+  case 52:
+    return("4");
+    break;
   //backspace
   case 8:
     return -8;
