@@ -560,7 +560,7 @@ void typing()
   case 60:
     return("<");
     break;
-  case 61:
+  case 61;
     return("=");
     break;
   //backspace
