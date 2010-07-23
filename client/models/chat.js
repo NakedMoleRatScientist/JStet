@@ -10,7 +10,7 @@ function Chat()
     var y = 20;
     for (var i = 0;i < self.messages.length;i++)
     {
-      text(self.messages[i],250,y+= 20);
+      text(self.messages[i],20,y+= 20);
     }
     text(self.message.get_text(),5,600);
   };
