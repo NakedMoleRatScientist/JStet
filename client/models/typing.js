@@ -130,7 +130,7 @@ void typing()
   //enter
   case 13:
     return -13;
- p   break;
+    break;
   default: return false;
   }
 }
