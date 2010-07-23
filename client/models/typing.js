@@ -103,6 +103,9 @@ void typing()
   case 54:
     return("6");
     break;
+  case 55:
+    return("7");
+    break;
   case 8:
     return -8;
     break;
