@@ -135,6 +135,9 @@ void typing()
   case 189:
     return("-");
     break;
+  case 191:
+    return("[");
+    break;
   //backspace
   case 8:
     return -8;
