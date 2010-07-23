@@ -93,6 +93,9 @@ void typing()
   case 46:
     return(".");
     break;
+  case 47:
+    return("/");
+    break;
   case 48:
     return("0");
     break;
