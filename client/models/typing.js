@@ -120,8 +120,11 @@ void typing()
   case 60:
     return("<");
     break;
-  case 61;
+  case 61:
     return("=");
+    break;
+  case 62:
+    return(">");
     break;
   //backspace
   case 8:
