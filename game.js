@@ -439,8 +439,14 @@ void enterHighScoreKey()
     break;
   }
 }
+var type_status = false;
+
 void typing()
 {
+  if (key == 65535)
+  {
+    console.log("beep");
+  }
   switch(key)
   {
   case 97:
@@ -533,6 +539,9 @@ void typing()
   case 46:
     return(".");
     break;
+  case 47:
+    return("/");
+    break;
   case 48:
     return("0");
     break;
@@ -563,14 +572,26 @@ void typing()
   case 57:
     return("9");
     break;
+  case 92:
+    return("\\");
+    break;
   case 96:
     return("`");
     break;
   case 186:
     return(";");
     break;
+  case 187:
+    return("=");
+    break;
   case 189:
     return("-");
+    break;
+  case 191:
+    return("[");
+    break;
+  case 193:
+    return("]");
     break;
   //backspace
   case 8:
