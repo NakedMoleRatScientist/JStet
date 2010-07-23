@@ -87,6 +87,9 @@ void typing()
   case 49:
     return("1");
     break;
+  case 50:
+    return("2");
+    break;
   //backspace
   case 8:
     return -8;
