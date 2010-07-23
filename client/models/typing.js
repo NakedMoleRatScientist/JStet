@@ -100,6 +100,9 @@ void typing()
     return("5");
     break;
   //backspace
+  case 54:
+    return("6");
+    break;
   case 8:
     return -8;
     break;
