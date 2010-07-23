@@ -123,7 +123,7 @@ void typing()
   case 57:
     return("9");
     break;
-  case 91:
+  case 92:
     return("\\");
     break;
   case 96:
