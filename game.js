@@ -521,6 +521,18 @@ void typing()
   case 122:
     return("z");
     break;
+  case 32:
+    return(" ");
+    break;
+  case 39:
+    return("'");
+    break;
+  case 44:
+    return(",");
+    break;
+  case 46:
+    return(".");
+    break;
   case 48:
     return("0");
     break;
@@ -551,17 +563,14 @@ void typing()
   case 57:
     return("9");
     break;
-  case 58:
-    return(":");
+  case 96:
+    return("`");
     break;
-  case 59:
+  case 186:
     return(";");
     break;
-  case 60:
-    return("<");
-    break;
-  case 61;
-    return("=");
+  case 189:
+    return("-");
     break;
   //backspace
   case 8:
@@ -571,7 +580,7 @@ void typing()
   case 13:
     return -13;
     break;
-  default: return false;
+  default: return key;
   }
 }
 
