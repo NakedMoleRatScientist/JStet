@@ -112,22 +112,7 @@ void typing()
     return("9");
     break;
   case 186:
-    return(":");
-    break;
-  case 59:
     return(";");
-    break;
-  case 60:
-    return("<");
-    break;
-  case 61:
-    return("=");
-    break;
-  case 62:
-    return(">");
-    break;
-  case 63:
-    return("?");
     break;
   //backspace
   case 8:
