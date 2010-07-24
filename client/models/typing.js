@@ -160,7 +160,7 @@ void typing()
   case 13:
     return -13;
     break;
-  //shift
+  //shift, ctrl, etc
   case 65535:
     return false;
     break;
