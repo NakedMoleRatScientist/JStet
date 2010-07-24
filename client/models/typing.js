@@ -5,7 +5,16 @@ void typing()
 {
   if (key == 65535)
   {
-    console.log("beep");
+    type_status = true;
+  }
+  if (type_status == true)
+  {
+    switch(key)
+    {
+    case 123:
+      return("{");
+      break;
+    }
   }
   switch(key)
   {
