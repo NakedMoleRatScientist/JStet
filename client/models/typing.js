@@ -196,6 +196,9 @@ void typing()
   case 191:
     return("?");
     break;
+  case 192:
+    return("~");
+    break;
   //backspace
   case 8:
     return -8;
