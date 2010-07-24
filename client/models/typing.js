@@ -160,6 +160,9 @@ void typing()
   case 13:
     return -13;
     break;
+  case 65535:
+    return false;
+    break;
   default: return key;
   }
 }
