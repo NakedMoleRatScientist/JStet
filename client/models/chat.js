@@ -21,6 +21,10 @@ function Chat()
   };
   self.add_message = function(msg)
   {
+    if (msg == false)
+    {
+      return;
+    }
     self.messages.push(msg);
   };
 }
