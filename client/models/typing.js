@@ -3,20 +3,6 @@ var type_status = false;
 
 void typing()
 {
-  if (key == 65535)
-  {
-    type_status = true;
-    return false;
-  }
-  if (type_status == true)
-  {
-    switch(key)
-    {
-    case 123:
-      return("{");
-      break;
-    }
-  }
   switch(key)
   {
   case 97:
