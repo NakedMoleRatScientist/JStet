@@ -150,7 +150,7 @@ void typing()
     return("-");
     break;
   case 191:
-    return("[");
+    return("?");
     break;
   case 193:
     return("]");
