@@ -148,6 +148,9 @@ void typing()
   case 96:
     return("`");
     break;
+  case 123:
+    return ("{");
+    break;
   case 186:
     return(";");
     break;
