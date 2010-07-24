@@ -137,6 +137,9 @@ void typing()
   case 123:
     return ("{");
     break;
+  case 125:
+    return ("}");
+    break;
   case 186:
     return(";");
     break;
