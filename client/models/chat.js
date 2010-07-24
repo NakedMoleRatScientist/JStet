@@ -15,6 +15,10 @@ function Chat()
     }
     text(self.message.get_text(),5,600);
   };
+  self.down = function()
+  {
+    self.scroll += 1;
+  };
   self.enter = function()
   {
     self.protocol.send(self.message.get_text());
