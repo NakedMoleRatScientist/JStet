@@ -16,6 +16,7 @@ function Chat()
       if (y >= 550)
       {
 	y -= 20;
+	return;
       }
     }
     text(self.message.get_text(),5,600);
