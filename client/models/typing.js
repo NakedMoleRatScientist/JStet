@@ -89,6 +89,9 @@ void typing()
   case 34:
     return("\"");
     break;
+  case 38:
+    return("&");
+    break;
   case 39:
     return("'");
     break;
