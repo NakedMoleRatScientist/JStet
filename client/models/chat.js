@@ -9,7 +9,7 @@ function Chat()
   self.display = function()
   {
     var y = 20;
-    for (var i = 0;i < self.messages.length;i++)
+    for (var i = self.scroll;i < self.messages.length;i++)
     {
       text(self.messages[i],20,y+= 20);
     }
