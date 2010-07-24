@@ -398,6 +398,9 @@ void chatKey()
   case -13:
     lobby.chat.enter();
     break;
+  case false:
+    return;
+    break;
   }
 }
 void titleKey()
@@ -443,10 +446,6 @@ var type_status = false;
 
 void typing()
 {
-  if (key == 65535)
-  {
-    console.log("beep");
-  }
   switch(key)
   {
   case 97:
@@ -530,6 +529,9 @@ void typing()
   case 32:
     return(" ");
     break;
+  case 34:
+    return("\"");
+    break;
   case 39:
     return("'");
     break;
@@ -572,11 +574,23 @@ void typing()
   case 57:
     return("9");
     break;
+  case 91:
+    return("[");
+    break;
   case 92:
     return("\\");
     break;
+  case 93:
+    return("]");
+    break;
   case 96:
     return("`");
+    break;
+  case 123:
+    return ("{");
+    break;
+  case 125:
+    return ("}");
     break;
   case 186:
     return(";");
@@ -584,14 +598,16 @@ void typing()
   case 187:
     return("=");
     break;
+  case 188:
+    return ("<");
+    break;
   case 189:
     return("-");
     break;
+  case 190:
+    return(">");
   case 191:
-    return("[");
-    break;
-  case 193:
-    return("]");
+    return("?");
     break;
   //backspace
   case 8:
@@ -600,6 +616,10 @@ void typing()
   //enter
   case 13:
     return -13;
+    break;
+  //shift, ctrl, etc
+  case 65535:
+    return false;
     break;
   default: return key;
   }
