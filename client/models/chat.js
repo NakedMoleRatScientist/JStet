@@ -5,6 +5,7 @@ function Chat()
   self.messages = new Array();
   self.message = new Text();
   self.protocol = null;
+  self.scroll = 0;
   self.display = function()
   {
     var y = 20;
