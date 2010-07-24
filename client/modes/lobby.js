@@ -7,6 +7,7 @@ function LobbyMode()
   {
     background(0,0,0);
     self.chat.display();
+    rect(0,550,800,50);
   };
   self.switch_mode = function()
   {
