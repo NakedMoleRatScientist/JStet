@@ -6,6 +6,7 @@ void typing()
   if (key == 65535)
   {
     type_status = true;
+    return;
   }
   if (type_status == true)
   {
