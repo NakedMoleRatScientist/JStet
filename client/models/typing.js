@@ -152,6 +152,9 @@ void typing()
   case 57:
     return("9");
     break;
+  case 64:
+    return("@");
+    break;
   case 91:
     return("[");
     break;
