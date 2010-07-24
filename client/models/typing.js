@@ -89,6 +89,9 @@ void typing()
   case 34:
     return("\"");
     break;
+  case 35:
+    return("#");
+    break;
   case 36:
     return("$");
     break;
