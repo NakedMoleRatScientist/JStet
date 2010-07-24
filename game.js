@@ -27,14 +27,29 @@ function Chat()
   self.messages = new Array();
   self.message = new Text();
   self.protocol = null;
+  self.scroll = 0;
+  self.limit = 550;
   self.display = function()
   {
     var y = 20;
-    for (var i = 0;i < self.messages.length;i++)
+    for (var i = self.scroll;i < self.messages.length;i++)
     {
       text(self.messages[i],20,y+= 20);
+      if (y >= 550)
+      {
+	y -= 20;
+	return;
+      }
     }
     text(self.message.get_text(),5,600);
+  };
+  self.down = function()
+  {
+    self.scroll += 1;
+  };
+  self.up = function()
+  {
+    self.scroll -= 1;
   };
   self.enter = function()
   {
@@ -529,11 +544,35 @@ void typing()
   case 32:
     return(" ");
     break;
+  case 33:
+    return("!");
+    break;
   case 34:
     return("\"");
     break;
+  case 35:
+    return("#");
+    break;
+  case 36:
+    return("$");
+    break;
+  case 37:
+    return("%");
+    break;
+  case 38:
+    return("&");
+    break;
   case 39:
     return("'");
+    break;
+  case 40:
+    return("(");
+    break;
+  case 41:
+    return(")");
+    break;
+  case 42:
+    return("*");
     break;
   case 44:
     return(",");
@@ -574,6 +613,9 @@ void typing()
   case 57:
     return("9");
     break;
+  case 64:
+    return("@");
+    break;
   case 91:
     return("[");
     break;
@@ -582,6 +624,9 @@ void typing()
     break;
   case 93:
     return("]");
+    break;
+  case 94:
+    return("^");
     break;
   case 96:
     return("`");
@@ -608,6 +653,9 @@ void typing()
     return(">");
   case 191:
     return("?");
+    break;
+  case 192:
+    return("~");
     break;
   //backspace
   case 8:
@@ -1356,6 +1404,7 @@ function LobbyMode()
   {
     background(0,0,0);
     self.chat.display();
+    rect(0,550,800,50);
   };
   self.switch_mode = function()
   {
