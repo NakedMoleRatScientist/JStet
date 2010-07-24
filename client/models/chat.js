@@ -13,6 +13,10 @@ function Chat()
     for (var i = self.scroll;i < self.messages.length;i++)
     {
       text(self.messages[i],20,y+= 20);
+      if (y >= 550)
+      {
+	y -= 20;
+      }
     }
     text(self.message.get_text(),5,600);
   };
