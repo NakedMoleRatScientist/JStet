@@ -13,5 +13,8 @@ void chatKey()
   case -13:
     lobby.chat.enter();
     break;
+  case false:
+    return;
+    break;
   }
 }
