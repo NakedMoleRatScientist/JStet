@@ -95,6 +95,9 @@ void typing()
   case 40:
     return("(");
     break;
+  case 41:
+    return(")");
+    break;
   case 44:
     return(",");
     break;
