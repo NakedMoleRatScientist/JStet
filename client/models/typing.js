@@ -146,6 +146,9 @@ void typing()
   case 187:
     return("=");
     break;
+  case 188:
+    return ("<");
+    break;
   case 189:
     return("-");
     break;
