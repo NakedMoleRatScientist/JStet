@@ -23,7 +23,7 @@ function Chat()
     text(self.message.get_text(),self.horizontal,600);
     //pointer
     fill()
-    rect(self.message.get_text().length,555,10,10)
+    rect(self.message.get_text().length,580,10,10)
   };
   self.down = function()
   {
