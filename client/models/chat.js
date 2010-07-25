@@ -43,6 +43,7 @@ function Chat()
       msg = msg.substring(34);
       spilts.push(next_part);
     }
+    spilts.push(msg);
     return spilts;
   };
   self.add_message = function(msg)
