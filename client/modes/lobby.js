@@ -13,6 +13,6 @@ function LobbyMode()
   };
   self.switch_mode = function()
   {
-    mode.change(6);
+    mode.change(4);
   };
 }
