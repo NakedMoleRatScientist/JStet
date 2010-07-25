@@ -10,7 +10,7 @@ function LobbyProtocol(net,lobby)
     switch(data[0])
     {
     case 1:
-      console.log("Chat detected.");
+      console.log("Typing detected.");
       self.mode.chat.add_message(data[1]);
       break;
     }
