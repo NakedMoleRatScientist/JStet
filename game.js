@@ -10,7 +10,7 @@ function LobbyProtocol(net,lobby)
     switch(data[0])
     {
     case 1:
-      console.log("Chat detected.");
+      console.log("Typing detected.");
       self.mode.chat.add_message(data[1]);
       break;
     }
@@ -42,10 +42,10 @@ function Chat()
 	return;
       }
     }
-    var width = text(self.message.get_text(),self.horizontal,600);
+    text(self.message.get_text(),self.horizontal,600);
     //pointer
-    fill()
-    rect(self.message.get_text().length * 18,580,10,20)
+    //fill()
+    //rect(self.message.get_text().length * 10,580,10,20)
   };
   self.down = function()
   {
@@ -55,6 +55,7 @@ function Chat()
   {
     self.scroll -= 1;
   };
+  //left and right cannot be used since we can't know how long our texts are when draw, at least for the time being.
   self.left = function()
   {
     self.horizontal -= 1;
@@ -63,6 +64,14 @@ function Chat()
   {
     self.horizontal += 1;
   };
+  self.parse = function(msg)
+  {
+    var request = new RegExp("/\/request/");
+    if (request.length != 0)
+    {
+      console.log("Success");
+    }
+  }
   self.enter = function()
   {
     self.protocol.send(self.message.get_text());
@@ -464,9 +473,6 @@ void lobbyKey()
 {
   switch(key)
   {
-  case 13:
-    lobby.switch_mode();
-    break;
   }
 }
 void enterHighScoreKey()
@@ -752,8 +758,6 @@ void keyPressed()
     break;
   case 5:
     lobbyKey();
-    break;
-  case 6:
     chatKey();
     break;
   }
@@ -1442,7 +1446,7 @@ function LobbyMode()
   };
   self.switch_mode = function()
   {
-    mode.change(6);
+    mode.change(4);
   };
 }
 function Mode()
@@ -1625,9 +1629,6 @@ void draw()
     high_score.display();
     break;
   case 5:
-    lobby.display();
-    break;
-  case 6:
     lobby.display();
     break;
   }
