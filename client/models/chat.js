@@ -39,8 +39,9 @@ function Chat()
     var spilts = [];
     while(msg.length > 35)
     {
-      msg = msg.substring(0,35);
-      spilts.push(msg);
+      var next_part = msg.substring(0,35);
+      msg = msg.substring(34);
+      spilts.push(next_part);
     }
     return spilts;
   };
