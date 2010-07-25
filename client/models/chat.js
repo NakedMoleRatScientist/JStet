@@ -49,6 +49,9 @@ function Chat()
   self.add_message = function(msg)
   {
     var msgs = self.divide(msg);
-    self.messages.push(msg);
+    for (var i = 0;i < msgs.length;i++)
+    {
+      self.messages.push(msgs[i]);
+    }
   };
 }
