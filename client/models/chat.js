@@ -61,7 +61,8 @@ function Chat()
     for (var i = 0;i < msgs.length;i++)
     {
       self.messages.push(msgs[i]);
-      if (self.messages.length > 25)
+      console.log(self.messages.length);
+      if (self.messages.length > 28)
       {
 	self.down();
       }
