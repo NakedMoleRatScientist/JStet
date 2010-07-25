@@ -34,9 +34,18 @@ function Chat()
     self.protocol.send(self.message.get_text());
     self.message = new Text();
   };
-  self.add_message = function(msg)
+  self.divide = function(msg)
   {
     var spilts = [];
+    while(msg.length > 35)
+    {
+      msg = msg.substring(0,35);
+      spilts.push(msg);
+    }
+    return spilts;
+  };
+  self.add_message = function(msg)
+  {
     if (msg.length > 35)
     {
       console.log("too long");
