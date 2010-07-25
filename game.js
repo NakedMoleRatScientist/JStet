@@ -42,7 +42,10 @@ function Chat()
 	return;
       }
     }
-    text(self.message.get_text(),self.horizontal,600);
+    var width = text(self.message.get_text(),self.horizontal,600);
+    //pointer
+    fill()
+    rect(self.message.get_text().length * 18,580,10,20)
   };
   self.down = function()
   {
@@ -83,7 +86,7 @@ function Chat()
     for (var i = 0;i < msgs.length;i++)
     {
       self.messages.push(msgs[i]);
-      if (self.messages.length > 34)
+      if (self.messages.length > 27)
       {
 	self.down();
       }
