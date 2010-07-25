@@ -42,6 +42,10 @@ function Chat()
   {
     self.horizontal += 1;
   };
+  self.parse = function(msg)
+  {
+    var request = new RegExp("/\/request/");
+  }
   self.enter = function()
   {
     self.protocol.send(self.message.get_text());
