@@ -20,7 +20,7 @@ function Chat()
 	return;
       }
     }
-    text(self.message.get_text(),5,600);
+    text(self.message.get_text(),self.horizontal,600);
   };
   self.down = function()
   {
