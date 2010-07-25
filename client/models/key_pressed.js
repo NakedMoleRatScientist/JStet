@@ -20,6 +20,7 @@ void keyPressed()
     break;
   case 5:
     lobbyKey();
+    chatKey();
     break;
   }
 }
