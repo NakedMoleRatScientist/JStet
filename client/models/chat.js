@@ -36,6 +36,10 @@ function Chat()
   };
   self.add_message = function(msg)
   {
+    if (msg.length > 35)
+    {
+      console.log("too long");
+    }
     self.messages.push(msg);
   };
 }
