@@ -45,6 +45,10 @@ function Chat()
   self.parse = function(msg)
   {
     var request = new RegExp("/\/request/");
+    if (request.length != 0)
+    {
+      console.log("Success");
+    }
   }
   self.enter = function()
   {
