@@ -34,6 +34,10 @@ function Chat()
   {
     self.horizontal -= 1;
   }
+  self.right = function()
+  {
+    self.horizontal += 1;
+  };
   self.enter = function()
   {
     self.protocol.send(self.message.get_text());
