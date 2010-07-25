@@ -36,6 +36,7 @@ function Chat()
   };
   self.add_message = function(msg)
   {
+    var spilts = [];
     if (msg.length > 35)
     {
       console.log("too long");
