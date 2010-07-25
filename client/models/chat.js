@@ -33,6 +33,7 @@ function Chat()
   {
     self.scroll -= 1;
   };
+  //left and right cannot be used since we can't know how long our texts are when draw, at least for the time being.
   self.left = function()
   {
     self.horizontal -= 1;
