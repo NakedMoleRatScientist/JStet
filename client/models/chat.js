@@ -30,6 +30,10 @@ function Chat()
   {
     self.scroll -= 1;
   };
+  self.left = function()
+  {
+    self.horizontal -= 1;
+  }
   self.enter = function()
   {
     self.protocol.send(self.message.get_text());
