@@ -72,13 +72,6 @@ function Engine(protocol,mode)
   };
 };
 
-void request_game()
-{
-  mode.change(4);
-  engine.start();
-  game_protocol.request_game();
-}
-
 void setup()
 {
   size(800,600);
