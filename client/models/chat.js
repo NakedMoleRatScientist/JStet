@@ -57,7 +57,10 @@ function Chat()
     var request = /^\/request /;
     if (msg.match(request) != null)
     {
-      self.listen_game(msg);
+      if (self.listen_game(msg))
+      {
+	return -2;
+      }
       return -1;
     }
     return false;
