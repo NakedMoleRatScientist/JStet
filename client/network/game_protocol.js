@@ -40,6 +40,10 @@ function GameProtocol(net)
   {
     switch(data[0])
     {
+    case 0:
+      mode.change(4);
+      engine.start();
+      break;
     case 1:
       //Get new shape.
       if (self.checkIdentical(data))
