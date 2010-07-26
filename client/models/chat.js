@@ -48,7 +48,7 @@ function Chat()
     if (msg.match(request) != null)
     {
       var choice = / game/;
-      if(choice.length != 0)
+      if(msg.match(choice) != null)
       {
 	game_protocol.request_game();
       }
