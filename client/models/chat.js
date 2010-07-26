@@ -57,12 +57,7 @@ function Chat()
     var request = /^\/request /;
     if (msg.match(request) != null)
     {
-      var choice = / game /;
-      if(msg.match(choice) != null)
-      {
-	game_protocol.request_game();
-	return -2;
-      }
+      self.listen_game(msg);
       return -1;
     }
     return false;
