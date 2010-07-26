@@ -55,10 +55,9 @@ server.addListener("connection",function(conn){
     data = JSON.parse(event);
     switch(data[0])
     {
-    //Send score and destroy game.
+    //Score data processing.
     case 0:
       db.add_to_list(data[1],game.get_score(conn._id));
-      game.destroy(conn._id);
       send_score();
       db.save();
       break;
