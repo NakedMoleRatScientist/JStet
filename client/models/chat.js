@@ -57,6 +57,7 @@ function Chat()
     var request = /^\/request /;
     if (msg.match(request) != null)
     {
+      console.log("beep");
       if (self.listen_game(msg))
       {
 	return true;
@@ -77,11 +78,6 @@ function Chat()
     {
       self.protocol.send(self.message.get_text());
     }
-    else if(verify == -1)
-    {
-    
-    }
-    
     self.message = new Text();
   };
   self.divide = function(msg)
