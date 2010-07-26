@@ -59,7 +59,7 @@ function Chat()
     {
       if (self.listen_game(msg))
       {
-	return -2;
+	return true;
       }
       return -1;
     }
