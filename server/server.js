@@ -62,14 +62,17 @@ server.addListener("connection",function(conn){
       send_score();
       db.save();
       break;
+    //Deal with lobby functions.
     case 1:
       var stuff = lobby.process(data,players[find_id(conn._id)]);
       sys.log(stuff);
       server.broadcast(stuff);
       break;
+    //Deal with game functions.
     case 2:
       game.process(data,conn._id);
       break;
+    //Destroy game.
     case 3:
       game.destroy(conn._id);
       break;
