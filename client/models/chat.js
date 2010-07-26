@@ -51,9 +51,9 @@ function Chat()
       if(msg.match(choice) != null)
       {
 	game_protocol.request_game();
-	return true;
+	return -2;
       }
-      return true;
+      return -1;
     }
     return false;
   }
@@ -63,6 +63,10 @@ function Chat()
     if (verify == false)
     {
       self.protocol.send(self.message.get_text());
+    }
+    else if(verify == -1)
+    {
+      console.log("Request identified. Unclear argument.");
     }
     self.message = new Text();
   };
