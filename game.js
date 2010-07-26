@@ -69,11 +69,16 @@ function Chat()
     var request = new RegExp("/\/request/");
     if (request.length != 0)
     {
-      console.log("Success");
+      var choice = new RegExp("\/ game");
+      if(choice.length != 0)
+      {
+	game_protocol.request_game();
+      }
     }
   }
   self.enter = function()
   {
+    self.parse(self.message.get_text());
     self.protocol.send(self.message.get_text());
     self.message = new Text();
   };
@@ -769,7 +774,7 @@ void scoreKey()
   {
   //n is restart the game
   case 110:
-    request_game();
+    game_protocol.request_game();
     break;
   //j, view previous page
   case 106:
@@ -1529,13 +1534,6 @@ function Engine(protocol,mode)
     self.field.start();
   };
 };
-
-void request_game()
-{
-  mode.change(4);
-  engine.start();
-  game_protocol.request_game();
-}
 
 void setup()
 {
