@@ -42,6 +42,16 @@ function Chat()
   {
     self.horizontal += 1;
   };
+  self.listen_game = function(msg)
+  {
+    var regex = / game /;
+    if(msg.match(regex))
+    {
+      game_protocol.request_game();
+      return true;
+    }
+    return false
+  };
   self.parse = function(msg)
   {
     var request = /^\/request /;
