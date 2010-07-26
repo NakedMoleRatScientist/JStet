@@ -66,20 +66,30 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = /\/request/;
-    if (request.length != 0)
+    var request = /^\/request /;
+    if (msg.match(request) != null)
     {
       var choice = / game/;
-      if(choice.length != 0)
+      if(msg.match(choice) != null)
       {
 	game_protocol.request_game();
+	return -2;
       }
+      return -1;
     }
+    return false;
   }
   self.enter = function()
   {
-    self.parse(self.message.get_text());
-    self.protocol.send(self.message.get_text());
+    var verify = self.parse(self.message.get_text())
+    if (verify == false)
+    {
+      self.protocol.send(self.message.get_text());
+    }
+    else if(verify == -1)
+    {
+      console.log("Request identified. Unclear argument.");
+    }
     self.message = new Text();
   };
   self.divide = function(msg)
