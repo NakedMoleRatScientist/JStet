@@ -61,7 +61,7 @@ function Chat()
       {
 	return true;
       }
-      return -1;
+      console.log("Request identified. Unclear argument.");;
     }
     var nick = /^\/nick /;
     if (msg.match(nick) != null)
@@ -79,8 +79,9 @@ function Chat()
     }
     else if(verify == -1)
     {
-      console.log("Request identified. Unclear argument.");
+    
     }
+    
     self.message = new Text();
   };
   self.divide = function(msg)
