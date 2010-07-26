@@ -44,8 +44,8 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = /\/request/;
-    if (request.length != 0)
+    var request = /^\/request/;
+    if (request != -1)
     {
       var choice = / game/;
       if(choice.length != 0)
