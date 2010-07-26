@@ -51,8 +51,11 @@ function Chat()
       if(msg.match(choice) != null)
       {
 	game_protocol.request_game();
+	return 2;
       }
+      return 1;
     }
+    return 0;
   }
   self.enter = function()
   {
