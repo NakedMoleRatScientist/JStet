@@ -63,6 +63,7 @@ function Chat()
       }
       return -1;
     }
+    var nick = /^\/nick /;
     return false;
   }
   self.enter = function()
