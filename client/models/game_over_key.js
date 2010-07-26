@@ -3,7 +3,7 @@ void gameOverKey()
 {
   if (key == 110)
   {
-    request_game();
+    game_protocol.request_game();
   }
   else if(key == 100)
   {
