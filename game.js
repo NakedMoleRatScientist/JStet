@@ -64,18 +64,35 @@ function Chat()
   {
     self.horizontal += 1;
   };
+  self.listen_game = function(msg)
+  {
+    var regex = / game$/;
+    if(msg.match(regex))
+    {
+      game_protocol.request_game();
+      return true;
+    }
+    return false
+  };
   self.parse = function(msg)
   {
-    var request = /^\/request /;
+    var request = /^\/request/;
+    console.log(msg.match(request));
     if (msg.match(request) != null)
     {
-      var choice = / game/;
-      if(msg.match(choice) != null)
+      console.log("beep");
+      if (self.listen_game(msg))
       {
-	game_protocol.request_game();
-	return -2;
+	return true;
       }
-      return -1;
+      console.log("Request identified. Unclear argument.");;
+      return true;
+    }
+    var nick = /^\/nick /;
+    if (msg.match(nick) != null)
+    {
+      console.log("Nick command with unclear argument.");
+      return true;
     }
     return false;
   }
@@ -85,10 +102,6 @@ function Chat()
     if (verify == false)
     {
       self.protocol.send(self.message.get_text());
-    }
-    else if(verify == -1)
-    {
-      console.log("Request identified. Unclear argument.");
     }
     self.message = new Text();
   };
