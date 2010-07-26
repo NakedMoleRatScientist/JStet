@@ -64,6 +64,10 @@ function Chat()
       return -1;
     }
     var nick = /^\/nick /;
+    if (msg.match(nick) != null)
+    {
+      return -3;
+    }
     return false;
   }
   self.enter = function()
