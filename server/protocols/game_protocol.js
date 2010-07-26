@@ -10,10 +10,10 @@ function Session()
   self.initialize = function(id)
   {
     self.id = id;
+    self.events.push([0]); //0 tell the client to initialize game mode.
     self.game.initialize();
     self.add_events(self.game.get_data());
     self.game.run_game();
-    self.events.push([0]); //0 tell the client to initialize game mode.
   };
   self.move_right = function()
   {
