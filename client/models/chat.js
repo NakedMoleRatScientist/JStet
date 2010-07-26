@@ -47,7 +47,7 @@ function Chat()
     var request = new RegExp("/\/request/");
     if (request.length != 0)
     {
-      var choice = new RegExp("\/ game");
+      var choice = new RegExp("\/ game/");
       if(choice.length != 0)
       {
 	game_protocol.request_game();
