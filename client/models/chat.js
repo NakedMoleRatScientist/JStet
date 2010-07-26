@@ -44,10 +44,10 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = /^\/request/;
+    var request = /^\/request /;
     if (msg.match(request) != null)
     {
-      var choice = / game/;
+      var choice = / game /;
       if(msg.match(choice) != null)
       {
 	game_protocol.request_game();
