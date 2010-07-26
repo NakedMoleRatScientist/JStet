@@ -52,7 +52,7 @@ function Chat()
   }
   self.enter = function()
   {
-    self.parse(msg);
+    self.parse(self.message.get_text());
     self.protocol.send(self.message.get_text());
     self.message = new Text();
   };
