@@ -66,10 +66,10 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = new RegExp("/\/request/");
+    var request = /\/request/;
     if (request.length != 0)
     {
-      var choice = new RegExp("\/ game");
+      var choice = / game/;
       if(choice.length != 0)
       {
 	game_protocol.request_game();
@@ -148,6 +148,10 @@ function GameProtocol(net)
   {
     switch(data[0])
     {
+    case 0:
+      mode.change(4);
+      engine.start();
+      break;
     case 1:
       //Get new shape.
       if (self.checkIdentical(data))
@@ -774,7 +778,7 @@ void scoreKey()
   {
   //n is restart the game
   case 110:
-    request_game();
+    game_protocol.request_game();
     break;
   //j, view previous page
   case 106:
