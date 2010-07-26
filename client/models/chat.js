@@ -54,7 +54,8 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = /^\/request /;
+    var request = /^\/request/;
+    console.log(msg.match(request));
     if (msg.match(request) != null)
     {
       console.log("beep");
@@ -63,6 +64,7 @@ function Chat()
 	return true;
       }
       console.log("Request identified. Unclear argument.");;
+      return true;
     }
     var nick = /^\/nick /;
     if (msg.match(nick) != null)
