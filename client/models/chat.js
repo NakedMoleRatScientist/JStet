@@ -69,7 +69,8 @@ function Chat()
     var nick = /^\/nick /;
     if (msg.match(nick) != null)
     {
-      return -3;
+      console.log("Nick command with unclear argument.");
+      return true;
     }
     return false;
   }
