@@ -47,7 +47,11 @@ function Chat()
     var request = new RegExp("/\/request/");
     if (request.length != 0)
     {
-      console.log("Success");
+      var choice = new RegExp("\/ game");
+      if(choice.length != 0)
+      {
+	game_protocol.request_game();
+      }
     }
   }
   self.enter = function()
