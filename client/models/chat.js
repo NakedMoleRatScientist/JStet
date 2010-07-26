@@ -59,8 +59,10 @@ function Chat()
   }
   self.enter = function()
   {
-    self.parse(self.message.get_text());
-    self.protocol.send(self.message.get_text());
+    if (self.parse(self.message.get_text()) == 0);
+    {
+      self.protocol.send(self.message.get_text());
+    }
     self.message = new Text();
   };
   self.divide = function(msg)
