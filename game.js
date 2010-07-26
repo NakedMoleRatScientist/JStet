@@ -735,7 +735,7 @@ void gameOverKey()
 {
   if (key == 110)
   {
-    request_game();
+    game_protocol.request_game();
   }
   else if(key == 100)
   {
@@ -774,7 +774,7 @@ void scoreKey()
   {
   //n is restart the game
   case 110:
-    game_protocol.request_game();
+    request_game();
     break;
   //j, view previous page
   case 106:
