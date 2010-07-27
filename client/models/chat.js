@@ -58,7 +58,6 @@ function Chat()
     console.log(msg.match(request));
     if (msg.match(request) != null)
     {
-      console.log("beep");
       if (self.listen_game(msg))
       {
 	return true;
@@ -69,6 +68,10 @@ function Chat()
     var nick = /^\/nick /;
     if (msg.match(nick) != null)
     {
+      if (msg.match(/ [a-za-zA-Z]$/))
+      {
+	return true;
+      }
       console.log("Nick command with unclear argument.");
       return true;
     }
