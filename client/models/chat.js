@@ -59,7 +59,7 @@ function Chat()
       {
 	return true;
       }
-      console.log("Request identified. Unclear argument.");;
+      console.log("Request identified. Unclear argument.");
       return true;
     }
     if (msg.match(/^\/nick/) != null)
