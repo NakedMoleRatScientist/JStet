@@ -66,8 +66,7 @@ function Chat()
   };
   self.listen_game = function(msg)
   {
-    var regex = / game$/;
-    if(msg.match(regex))
+    if(msg.match(/ game$/))
     {
       game_protocol.request_game();
       return true;
@@ -76,21 +75,21 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = /^\/request/;
-    console.log(msg.match(request));
-    if (msg.match(request) != null)
+    if (msg.match(/^\/request/) != null)
     {
-      console.log("beep");
       if (self.listen_game(msg))
       {
 	return true;
       }
-      console.log("Request identified. Unclear argument.");;
+      console.log("Request identified. Unclear argument.");
       return true;
     }
-    var nick = /^\/nick /;
-    if (msg.match(nick) != null)
+    if (msg.match(/^\/nick/) != null)
     {
+      if (msg.match(/ [0-9a-zA-Z]$/) != null)
+      {
+	return true;
+      }
       console.log("Nick command with unclear argument.");
       return true;
     }
