@@ -54,8 +54,7 @@ function Chat()
   };
   self.parse = function(msg)
   {
-    var request = /^\/request/;
-    if (msg.match(request) != null)
+    if (msg.match(/^\/request/) != null)
     {
       if (self.listen_game(msg))
       {
