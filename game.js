@@ -33,7 +33,9 @@ function PlayButton()
   self.display = function()
   {
     noFill();
-    rect(450,20,50,50);
+    textFont(font,25);
+    rect(450,20,100,50);
+    text("Play",475,55);
   };
 }
 function Chat()
@@ -1492,10 +1494,12 @@ function LobbyMode()
 {
   var self = this;
   self.chat = new Chat();
+  self.play = new PlayButton();
   self.display = function()
   {
     background(0,0,0);
     self.chat.display();
+    self.play.display();
     noFill();
     rect(0,580,800,20);
     rect(0,0,400,580);
@@ -1585,12 +1589,11 @@ function Engine(protocol,mode)
     self.field.start();
   };
 };
-
+PFont font = loadFont("monospace")
 void setup()
 {
   size(800,600);
   stroke(255);
-  PFont font= loadFont("monospace");
   textFont(font,18);
   frameRate(24);
 }
