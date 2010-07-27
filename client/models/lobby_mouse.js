@@ -1,5 +1,5 @@
 
-void lobbyKey()
+void lobbyMouse()
 {
   switch(key)
   {
