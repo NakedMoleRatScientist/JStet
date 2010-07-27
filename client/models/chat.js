@@ -64,8 +64,7 @@ function Chat()
       console.log("Request identified. Unclear argument.");;
       return true;
     }
-    var nick = /^\/nick/;
-    if (msg.match(nick) != null)
+    if (msg.match(/^\/nick/) != null)
     {
       if (msg.match(/ [a-za-zA-Z]$/))
       {
