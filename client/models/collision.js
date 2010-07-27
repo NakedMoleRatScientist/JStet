@@ -3,7 +3,7 @@ function Collision()
 {
   var self = this;
   self.rect = [];
-  self.check = function()
+  self.check = function(x,y)
   {
     
   };
