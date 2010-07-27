@@ -20,4 +20,9 @@ function LobbyProtocol(net,lobby)
     var data = [1,1,message];
     self.net.send(data);
   };
+
+  self.nick = function(nick)
+  {
+    var data[1,2,nick]
+  };
 }
