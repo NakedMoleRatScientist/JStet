@@ -19,7 +19,6 @@ void keyPressed()
     enterScoreKey();
     break;
   case 5:
-    lobbyKey();
     chatKey();
     break;
   }
