@@ -6,5 +6,6 @@ function PlayButton()
   {
     noFill();
     rect(450,20,100,50);
+    text("Play",475,55);
   };
 }
