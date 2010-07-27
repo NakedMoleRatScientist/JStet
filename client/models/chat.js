@@ -71,7 +71,8 @@ function Chat()
 	var nick = msg.substring(6);
 	if (nick.match(/\s/) == null)
 	{
-	  console.log("success");
+	  console.log("Nick is being changed to " + nick);
+	  self.protocol.nick(nick);
 	  return true;
 	}
 	console.log("Invalid nick.");
