@@ -69,7 +69,12 @@ function Chat()
       {
 	// /nick is 6 characters long if you count the space. Therefore, index value of 6 is used for .substring
 	var nick = msg.substring(6);
-	console.log(nick);
+	if (nick.match(/\s/) == null)
+	{
+	  console.log("success");
+	  return true;
+	}
+	console.log("Invalid nick.");
 	return true;
       }
       console.log("Nick command with unclear argument.");
