@@ -9,5 +9,8 @@ exports.process = function(data,player)
   case 1:
     return JSON.stringify([1,[1,player.nick + ": " + data[2]]]);
     break;
+  case 2:
+    player.nick = data[2];
+    break;
   }
 }
