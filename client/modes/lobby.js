@@ -8,6 +8,7 @@ function LobbyMode()
   {
     background(0,0,0);
     self.chat.display();
+    self.play.display();
     noFill();
     rect(0,580,800,20);
     rect(0,0,400,580);
