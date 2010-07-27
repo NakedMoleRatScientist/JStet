@@ -20,6 +20,21 @@ function LobbyProtocol(net,lobby)
     var data = [1,1,message];
     self.net.send(data);
   };
+
+  self.nick = function(nick)
+  {
+    var data = [1,2,nick];
+    self.net.send(data);
+  };
+}
+function PlayButton()
+{
+  var self = this;
+  self.display = function()
+  {
+    noFill();
+    rect(450,20,50,50);
+  };
 }
 function Chat()
 {
@@ -86,8 +101,18 @@ function Chat()
     }
     if (msg.match(/^\/nick/) != null)
     {
-      if (msg.match(/ [0-9a-zA-Z]$/) != null)
+      //if there is a space after the nick..then we will presume that the next will be the string.
+      if (msg.match(/^\/nick /) != null)
       {
+	// /nick is 6 characters long if you count the space. Therefore, index value of 6 is used for .substring
+	var nick = msg.substring(6);
+	if (nick.match(/\s/) == null)
+	{
+	  console.log("Nick is being changed to " + nick);
+	  self.protocol.nick(nick);
+	  return true;
+	}
+	console.log("Invalid nick.");
 	return true;
       }
       console.log("Nick command with unclear argument.");
