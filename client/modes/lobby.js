@@ -3,6 +3,7 @@ function LobbyMode()
 {
   var self = this;
   self.chat = new Chat();
+  self.play = new PlayButton();
   self.display = function()
   {
     background(0,0,0);
