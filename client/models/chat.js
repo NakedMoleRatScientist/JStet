@@ -64,8 +64,12 @@ function Chat()
     }
     if (msg.match(/^\/nick/) != null)
     {
-      if (msg.match(/ [0-9a-zA-Z]$/) != null)
+      //if there is a space after the nick..then we will presume that the next will be the string.
+      if (msg.match(/^\/nick /) != null)
       {
+	// /nick is 6 characters long if you count the space. Therefore, index value of 6 is used for .substring
+	var nick = msg.substring(6);
+	console.log(nick);
 	return true;
       }
       console.log("Nick command with unclear argument.");
