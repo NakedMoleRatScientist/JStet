@@ -23,6 +23,7 @@ function LobbyProtocol(net,lobby)
 
   self.nick = function(nick)
   {
-    var data[1,2,nick]
+    var data = [1,2,nick];
+    self.net.send(data);
   };
 }
