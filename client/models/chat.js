@@ -55,7 +55,6 @@ function Chat()
   self.parse = function(msg)
   {
     var request = /^\/request/;
-    console.log(msg.match(request));
     if (msg.match(request) != null)
     {
       if (self.listen_game(msg))
