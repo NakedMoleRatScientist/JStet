@@ -64,7 +64,7 @@ function Chat()
     }
     if (msg.match(/^\/nick/) != null)
     {
-      if (msg.match(/ [a-za-zA-Z]$/))
+      if (msg.match(/ [0-9a-zA-Z]$/))
       {
 	return true;
       }
