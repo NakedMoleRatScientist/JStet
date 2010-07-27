@@ -71,12 +71,11 @@ function Engine(protocol,mode)
     self.field.start();
   };
 };
-
+PFont font = loadFont("monospace")
 void setup()
 {
   size(800,600);
   stroke(255);
-  PFont font= loadFont("monospace");
   textFont(font,18);
   frameRate(24);
 }
