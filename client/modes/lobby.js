@@ -4,6 +4,7 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new PlayButton();
+  self.collision = new Collision();
   self.display = function()
   {
     background(0,0,0);
