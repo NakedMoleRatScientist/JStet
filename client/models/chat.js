@@ -44,8 +44,7 @@ function Chat()
   };
   self.listen_game = function(msg)
   {
-    var regex = / game$/;
-    if(msg.match(regex))
+    if(msg.match(/ game$/))
     {
       game_protocol.request_game();
       return true;
