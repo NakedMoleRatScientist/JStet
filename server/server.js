@@ -31,6 +31,7 @@ server.addListener("connection",function(conn){
   server.send(conn._id,JSON.stringify([4])); //acknowledgement protocol.
   conn.addListener("close",function(){
     db.save();
+    players.destroy(conn._id);
     game.destroy(conn._id);
     sys.log("<"+conn._id+"> onClose");
   });
