@@ -16,11 +16,11 @@ exports.process = function(data,id)
     {
       if(list[i].nick == data[2])
       {
-	return JSON.stringify([1,[3]]);
+	return JSON.stringify([1,[2]]);
       }
     }
     player.nick = data[2];
-    return JSON.stringify([1,[2,player.nick]]);
+    return JSON.stringify([1,[3]]);
     break;
   }
 }
