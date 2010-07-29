@@ -26,7 +26,7 @@ server.addListener("listening",function(){
 
 server.addListener("connection",function(conn){
   sys.log("<"+conn._id+"> connected");
-  players.create(conn._id));
+  players.create(conn._id);
   send_score();
   server.send(conn._id,JSON.stringify([4])); //acknowledgement protocol.
   conn.addListener("close",function(){
