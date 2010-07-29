@@ -44,6 +44,18 @@ function PlayButton()
     text("Play",475,55);
   };
 }
+function RectObject(x,y,width,height)
+{
+  var self = this;
+  self.x = x;
+  self.y = y;
+  self.width = width;
+  self.height = height;
+  self.draw = function()
+  {
+    rect(self.x,self.y,self.width,self.height)
+  };
+}
 function Chat()
 {
   var self = this;
@@ -540,6 +552,7 @@ void lobbyMouse()
   {
   }
 }
+
 function Collision()
 {
   var self = this;
@@ -547,6 +560,10 @@ function Collision()
   self.check = function(x,y)
   {
     
+  };
+  self.add_rect = function(rect)
+  {
+    self.rect.push(rect);
   };
 }
 void enterHighScoreKey()
