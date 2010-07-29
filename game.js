@@ -527,11 +527,20 @@ void titleKey()
     break;
   }
 }
-void lobbyKey()
+void lobbyMouse()
 {
   switch(key)
   {
   }
+}
+function Collision()
+{
+  var self = this;
+  self.rect = [];
+  self.check = function(x,y)
+  {
+    
+  };
 }
 void enterHighScoreKey()
 {
@@ -795,6 +804,15 @@ void gameOverKey()
     mode.change(2);
   }
 }
+void MouseClicked()
+{
+  switch(mode.status)
+  {
+  case 5:
+    lobbyMouse();
+    break;
+  }
+}
 void keyPressed()
 {
   switch(mode.status)
@@ -815,7 +833,6 @@ void keyPressed()
     enterScoreKey();
     break;
   case 5:
-    lobbyKey();
     chatKey();
     break;
   }
@@ -1495,6 +1512,7 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new PlayButton();
+  self.collision = new Collision();
   self.display = function()
   {
     background(0,0,0);
