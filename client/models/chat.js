@@ -11,6 +11,7 @@ function Chat()
   self.display = function()
   {
     var y = 20;
+    textFont(font,18);
     for (var i = self.scroll;i < self.messages.length;i++)
     {
       text(self.messages[i],5,y+= 20);
