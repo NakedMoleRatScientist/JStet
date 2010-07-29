@@ -6,4 +6,8 @@ function RectObject(x,y,width,height)
   self.y = y;
   self.width = width;
   self.height = height;
+  self.draw = function()
+  {
+    rect(self.x,self.y,self.width,self.height)
+  };
 }
