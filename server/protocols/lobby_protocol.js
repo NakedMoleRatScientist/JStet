@@ -11,6 +11,7 @@ exports.process = function(data,player)
     break;
   case 2:
     player.nick = data[2];
+    return -1;
     break;
   }
 }
