@@ -74,9 +74,10 @@ server.addListener("connection",function(conn){
   });
 
   setInterval(function() {
-    for (var i = 0; i < players.length; i++)
+    var all_players = players.get();
+    for (var i = 0; i < all_players.length; i++)
     {
-      events = game.get_data(players[i].id);
+      events = game.get_data(all_players[i].id);
       if (events != false)
       {
 	if (events.length != 0)
@@ -84,7 +85,7 @@ server.addListener("connection",function(conn){
 	  for (var a = 0;a < events.length;a++)
 	  {
 	    var message = JSON.stringify(events[a]);
-	    server.send(players[i].id,message);
+	    server.send(all_players[i].id,message);
 	  }
 	}
       }
