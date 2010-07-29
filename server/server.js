@@ -8,7 +8,6 @@ var lobby = require('./protocols/lobby_protocol');
 var db = require('./models/database');
 //start of actual server code.
 var server = ws.createServer();
-var players = new Array();
 server.listen(7000);
 
 function send_score()
