@@ -52,7 +52,7 @@ server.addListener("connection",function(conn){
       break;
     //Deal with lobby functions.
     case 1:
-      var response = lobby.process(data,players);
+      var response = lobby.process(data,conn._id);
       if (response != -1)
       {
 	server.broadcast(response);
