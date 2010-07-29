@@ -63,9 +63,11 @@ server.addListener("connection",function(conn){
       break;
     //Deal with lobby functions.
     case 1:
-      var stuff = lobby.process(data,players[find_id(conn._id)]);
-      sys.log(stuff);
-      server.broadcast(stuff);
+      var response = lobby.process(data,players[find_id(conn._id)]);
+      if (response != -1)
+      {
+	server.broadcast(response);
+      }
       break;
     //Deal with game functions.
     case 2:
