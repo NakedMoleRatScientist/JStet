@@ -6,4 +6,16 @@ var players = new Array();
 exports.create = function(id)
 {
   players.push(player.get_player(id));
-}
+};
+
+
+exports.find_by_id = function(id)
+{
+  for (var i = 0;i < players.length;i++)
+  {
+    if (players[i].id == id)
+    {
+      return i;
+    }
+  }
+};
