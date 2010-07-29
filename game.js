@@ -13,6 +13,12 @@ function LobbyProtocol(net,lobby)
       console.log("Typing detected.");
       self.mode.chat.add_message(data[1]);
       break;
+    case 2:
+      self.mode.chat.add_message("Nick change unsuccessful.");
+      break;
+    case 3:
+      self.mode.chat.add_message("Nick change successful.");
+      break;
     }
   };
   self.send = function(message)
@@ -50,6 +56,7 @@ function Chat()
   self.display = function()
   {
     var y = 20;
+    textFont(font,18);
     for (var i = self.scroll;i < self.messages.length;i++)
     {
       text(self.messages[i],5,y+= 20);
