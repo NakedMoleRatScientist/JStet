@@ -4,6 +4,7 @@ var players = require('../models/players_manager');
 
 exports.process = function(data,id)
 {
+  var player = players.get_player(id);
   switch(data[1])
   {
   case 1:
