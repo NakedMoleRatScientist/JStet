@@ -14,10 +14,10 @@ function LobbyProtocol(net,lobby)
       self.mode.chat.add_message(data[1]);
       break;
     case 2:
-      console.log("Nick change unsuccessful.");
+      self.mode.chat.add_message("Nick change unsuccessful.");
       break;
     case 3:
-      console.log("Nick change successful.");
+      self.mode.chat.add_message("Nick change successful.");
       break;
     }
   };
