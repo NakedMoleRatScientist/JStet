@@ -19,3 +19,9 @@ exports.find_by_id = function(id)
     }
   }
 };
+
+
+exports.get = function()
+{
+  return players;
+}
