@@ -7,4 +7,8 @@ function Collision()
   {
     
   };
+  self.add_rect = function(rect)
+  {
+    self.rect.push(rect);
+  };
 }
