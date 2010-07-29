@@ -2,7 +2,7 @@ var sys = require('sys');
 var lobby = require('../modes/lobby');
 
 
-exports.process = function(data,player)
+exports.process = function(data,id)
 {
   switch(data[1])
   {
