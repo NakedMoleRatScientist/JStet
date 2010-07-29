@@ -13,6 +13,9 @@ function LobbyProtocol(net,lobby)
       console.log("Typing detected.");
       self.mode.chat.add_message(data[1]);
       break;
+    case 2:
+      console.log("Nick change success.");
+      break;
     }
   };
   self.send = function(message)
