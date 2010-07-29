@@ -1,7 +1,7 @@
 var sys = require('sys');
 var ws = require('../vendor/ws/ws');
 var game = require('./protocols/game_protocol')
-var player = require('./models/player')
+var players = require('./models/players_manager')
 var lobby = require('./protocols/lobby_protocol')
 
 //server stuff
@@ -63,7 +63,7 @@ server.addListener("connection",function(conn){
       break;
     //Deal with lobby functions.
     case 1:
-      var response = lobby.process(data,players[find_id(conn._id)]);
+      var response = lobby.process(data,players);
       if (response != -1)
       {
 	server.broadcast(response);
