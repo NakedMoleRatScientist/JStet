@@ -25,7 +25,11 @@ exports.find_by_id = function(id)
   }
 };
 
-
+exports.get_player = function(id)
+{
+  var find = exports.find_by_id(id);
+  return players[find];
+}
 exports.get = function()
 {
   return players;
