@@ -1,4 +1,7 @@
 
+
+
+
 function Collision()
 {
   var self = this;
@@ -7,7 +10,7 @@ function Collision()
   {
     
   };
-  self.add_rect = function(rect)
+  self.add_rect = function(x,y,width,height)
   {
     self.rect.push(rect);
   };
