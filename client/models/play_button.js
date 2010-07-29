@@ -2,6 +2,7 @@
 function PlayButton()
 {
   var self = this;
+  self.play = new RectObject(450,20,100,50);
   self.display = function()
   {
     noFill();
