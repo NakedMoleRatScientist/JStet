@@ -1,6 +1,6 @@
 var sys = require('sys');
 var lobby = require('../modes/lobby');
-
+var players = require('../models/players_manager');
 
 exports.process = function(data,id)
 {
