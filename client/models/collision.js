@@ -8,11 +8,11 @@ function Collision()
   {
     for (var i = 0;i < self.rect.length;i++)
     {
-      if (x >= self.rect.x && x <= self.rect.x + self.rect.width)
+      if (x >= self.rect[i].x && x <= self.rect[i].x + self.rect[i].width)
       {
 	return true;
       }
-      if (y >= self.rect.y && y <= self.rect.y + self.rect.height)
+      if (y >= self.rect[i].y && y <= self.rect[i].y + self.rect[i].height)
       {
 	return true;
       }
