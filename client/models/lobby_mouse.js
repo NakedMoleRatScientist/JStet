@@ -1,5 +1,8 @@
 
 void lobbyMouse()
 {
-  lobby.collision.check(mouseX,mouseY);
+  if (lobby.collision.check(mouseX,mouseY))
+  {
+    console.log("success");
+  }
 }
