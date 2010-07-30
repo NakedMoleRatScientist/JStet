@@ -9,7 +9,6 @@ function Collision()
     var conditions = [false,false];
     for (var i = 0;i < self.rect.length;i++)
     {
-      console.log("beep");
       if (x >= self.rect[i].x && x <= self.rect[i].x + self.rect[i].width)
       {
 	conditions[0] = true;
@@ -19,7 +18,14 @@ function Collision()
 	conditions[1] = true;
       }
     }
-    return false;
+    if (condition[0] == true && condition[1] == true)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   };
   self.add_rect = function(rect)
   {
