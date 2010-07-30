@@ -18,7 +18,7 @@ function Collision()
 	conditions[1] = true;
       }
     }
-    if (condition[0] == true && condition[1] == true)
+    if (conditions[0] == true && conditions[1] == true)
     {
       return true;
     }
