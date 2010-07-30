@@ -36,11 +36,12 @@ function LobbyProtocol(net,lobby)
 function PlayButton()
 {
   var self = this;
+  self.play = new RectObject(450,20,100,50);
   self.display = function()
   {
     noFill();
     textFont(font,25);
-    rect(450,20,100,50);
+    self.play.draw();
     text("Play",475,55);
   };
 }
@@ -548,8 +549,9 @@ void titleKey()
 }
 void lobbyMouse()
 {
-  switch(key)
+  if (lobby.collision.check(mouseX,mouseY) == true)
   {
+    console.log("success");
   }
 }
 
@@ -559,7 +561,18 @@ function Collision()
   self.rect = [];
   self.check = function(x,y)
   {
-    
+    for (var i = 0;i < self.rect.length;i++)
+    {
+      if (x >= self.rect.x && x <= self.rect.x + self.rect.width)
+      {
+	return true;
+      }
+      if (y >= self.rect.y && y <= self.rect.y + self.rect.height)
+      {
+	return true;
+      }
+    }
+    return false;
   };
   self.add_rect = function(rect)
   {
@@ -828,7 +841,7 @@ void gameOverKey()
     mode.change(2);
   }
 }
-void MouseClicked()
+void mouseClicked()
 {
   switch(mode.status)
   {
@@ -1537,6 +1550,7 @@ function LobbyMode()
   self.chat = new Chat();
   self.play = new PlayButton();
   self.collision = new Collision();
+  self.collision.add_rect(self.play.play)
   self.display = function()
   {
     background(0,0,0);
