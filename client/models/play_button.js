@@ -7,7 +7,7 @@ function PlayButton()
   {
     noFill();
     textFont(font,25);
-    rect(450,20,100,50);
+    self.play.draw();
     text("Play",475,55);
   };
 }
