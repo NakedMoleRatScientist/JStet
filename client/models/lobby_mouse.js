@@ -1,7 +1,5 @@
 
 void lobbyMouse()
 {
-  switch(key)
-  {
-  }
+  lobby.collision.check(mouseX,mouseY);
 }
