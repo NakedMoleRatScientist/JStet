@@ -95,7 +95,7 @@ lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
-var drawEngine = new DrawEngine();
+var EngineDraw = new EngineDraw();
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
 function EngineDraw()
