@@ -32,6 +32,17 @@ function LobbyProtocol(net,lobby)
     var data = [1,2,nick];
     self.net.send(data);
   };
+}function Instruction()
+{
+  var self = this;
+  self.display = function()
+  {
+    text("Instruction: ",450,50);
+    text("a - left",450,80);
+    text("s - down",450,100);
+    text("d - right",450,120);
+    text("w - rotate",450,140);
+  };
 }
 function PlayButton()
 {
@@ -551,7 +562,7 @@ void lobbyMouse()
 {
   if (lobby.collision.check(mouseX,mouseY))
   {
-    console.log("success");
+    game_protocol.request_game();
   }
 }
 
@@ -567,12 +578,10 @@ function Collision()
       if (x >= self.rect[i].x && x <= self.rect[i].x + self.rect[i].width)
       {
 	conditions[0] = true;
-	console.log("1");
       }
       if (y >= self.rect[i].y && y <= self.rect[i].y + self.rect[i].height)
       {
 	conditions[1] = true;
-	console.log("2");
       }
     }
     if (conditions[0] == true && conditions[1] == true)
@@ -1680,20 +1689,14 @@ var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
 
-void drawInstruction()
-{
-  text("Instruction: ",450,50);
-  text("a - left",450,80);
-  text("s - down",450,100);
-  text("d - right",450,120);
-  text("w - rotate",450,140);
-}
+
 
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
 
 void gameDisplay()
 {
+  textFont(font,18);
   background(0,0,0);
   stroke(205,201,201);
   fill(0,0,0);
@@ -1711,8 +1714,9 @@ void gameDisplay()
   {
     drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
   }
-  text("Score " + engine.score,300,50);
+  text("Score: " + engine.score,300,50);
   drawInstruction();
+  text("Player One",75,50);
   drawShape.draw_field(engine.field.field);
 }
 
