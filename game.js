@@ -1672,6 +1672,44 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
+
+function EngineDraw()
+{
+  var self = this;
+  self.instruction = new Instruction();
+  self.display = function()
+  {
+    textFont(font,18);
+    background(0,0,0);
+    stroke(205,201,201);
+    fill(0,0,0);
+    //player one...
+    text("Player One",75,50);
+    rect(drawField.x,drawField.y,drawField.width,drawField.height); //playfield
+    rect(drawField.x + drawField.width,drawField.y,100,drawField.height); //Info display field
+    //player two
+    text("Player Two",75,450);
+    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height); //playfield
+    rect(drawField.x + 400 + drawField.width,drawField.y,100,drawField.height); //Info display field
+    self.instruction.display();
+    self.player_one();
+  };
+  self.player_one = function()
+  {
+    if (engine.current.draw == true)
+    {
+      drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+      text("Current: ",250,135);
+      drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
+  }
+    text("Next: ", 250,250);
+    if (engine.future.draw == true)
+    {
+      drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
+    }    
+  };
+}
+
 var mode = new Mode();
 var drawShape = new TetrominoDraw();
 var drawField = new PlayFieldDraw();
@@ -1688,53 +1726,14 @@ lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
-var EngineDraw = new EngineDraw();
+var engineDraw = new EngineDraw();
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
-function EngineDraw()
-{
-  var self = this;
-  self.instruction = new Instruction();
-  self.display = function()
-  {
-    textFont(font,18);
-    background(0,0,0);
-    stroke(205,201,201);
-    fill(0,0,0);
-    //player one...
-    rect(drawField.x,drawField.y,drawField.width,drawField.height); //playfield
-    rect(drawField.x + drawField.width,drawField.y,50,drawField.height); //Info display field
-    //player two
-    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height); //playfield
-    rect(drawField.x + 400 + drawField.width,drawField.y,50,,drawField.height); //Info display field
-    self.instruction.display();
-  };
-  self.player_one = function()
-  {
-    
-  };
-}
+
 
 void gameDisplay()
 {
-  textFont(font,18);
-  background(0,0,0);
-  stroke(205,201,201);
-  fill(0,0,0);
-  rect(drawField.x,drawField.y,drawField.width,drawField.height)
-  stroke(255,255,255);
-  fill(255,255,255);
-  if (engine.current.draw == true)
-  {
-    drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
-    text("Current: ",300,135);
-    drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
-  }
-  text("Next: ", 300,250);
-  if (engine.future.draw == true)
-  {
-    drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
-  }
+
   text("Score", 350,18);
   text("P1: " + engine.score,350,35);
   text("Player One",75,50);
