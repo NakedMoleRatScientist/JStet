@@ -109,9 +109,11 @@ function EngineDraw()
     stroke(205,201,201);
     fill(0,0,0);
     //player one...
-    rect(drawField.x,drawField.y,drawField.width,drawField.height);
+    rect(drawField.x,drawField.y,drawField.width,drawField.height); //playfield
+    rect(drawField.x + drawField.width,drawField.y,50,drawField.height); //Info display field
     //player two
-    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height);
+    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height); //playfield
+    rect(drawField.x + 400 + drawField.width,drawField.y,50,,drawField.height); //Info display field
     self.instruction.display();
   };
   self.player_one = function()
