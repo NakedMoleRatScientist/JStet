@@ -106,13 +106,13 @@ function EngineDraw()
     if (engine.current.draw == true)
     {
       drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
-      text("Current: ",300,135);
-      drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
+      text("Current: ",250,135);
+      drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
   }
-    text("Next: ", 300,250);
+    text("Next: ", 250,250);
     if (engine.future.draw == true)
     {
-      drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
+      drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
     }    
   };
 }
