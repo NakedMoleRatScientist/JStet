@@ -168,7 +168,7 @@ void draw()
     title.switch_mode();
     break;
   case 4:
-    gameDisplay();
+    engineDraw.display();
     break;
   case 1:
     over.display();
