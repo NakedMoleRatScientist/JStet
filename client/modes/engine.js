@@ -127,13 +127,6 @@ var engineDraw = new EngineDraw();
 
 void gameDisplay()
 {
-  textFont(font,18);
-  background(0,0,0);
-  stroke(205,201,201);
-  fill(0,0,0);
-  rect(drawField.x,drawField.y,drawField.width,drawField.height)
-  stroke(255,255,255);
-  fill(255,255,255);
   if (engine.current.draw == true)
   {
     drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
