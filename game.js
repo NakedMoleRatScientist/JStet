@@ -549,7 +549,7 @@ void titleKey()
 }
 void lobbyMouse()
 {
-  if (lobby.collision.check(mouseX,mouseY) == true)
+  if (lobby.collision.check(mouseX,mouseY))
   {
     console.log("success");
   }
@@ -561,18 +561,28 @@ function Collision()
   self.rect = [];
   self.check = function(x,y)
   {
+    var conditions = [false,false];
     for (var i = 0;i < self.rect.length;i++)
     {
-      if (x >= self.rect.x && x <= self.rect.x + self.rect.width)
+      if (x >= self.rect[i].x && x <= self.rect[i].x + self.rect[i].width)
       {
-	return true;
+	conditions[0] = true;
+	console.log("1");
       }
-      if (y >= self.rect.y && y <= self.rect.y + self.rect.height)
+      if (y >= self.rect[i].y && y <= self.rect[i].y + self.rect[i].height)
       {
-	return true;
+	conditions[1] = true;
+	console.log("2");
       }
     }
-    return false;
+    if (conditions[0] == true && conditions[1] == true)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   };
   self.add_rect = function(rect)
   {
