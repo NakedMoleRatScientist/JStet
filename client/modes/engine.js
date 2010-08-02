@@ -119,8 +119,8 @@ void gameDisplay()
   {
     drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
   }
-  text("Score", 350,0);
-  text("P1: " + engine.score,350,25);
+  text("Score", 350,18);
+  text("P1: " + engine.score,350,35);
   text("Player One",75,50);
   drawShape.draw_field(engine.field.field);
   instruction.display();
