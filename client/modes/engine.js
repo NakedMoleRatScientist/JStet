@@ -102,7 +102,17 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    
+    if (engine.current.draw == true)
+    {
+      drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+      text("Current: ",300,135);
+      drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
+  }
+    text("Next: ", 300,250);
+    if (engine.future.draw == true)
+    {
+      drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
+    }    
   };
 }
 
@@ -129,17 +139,7 @@ var engineDraw = new EngineDraw();
 
 void gameDisplay()
 {
-  if (engine.current.draw == true)
-  {
-    drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
-    text("Current: ",300,135);
-    drawShape.create_blocks(engine.current.get_list(),250,100,engine.current.shape.color);
-  }
-  text("Next: ", 300,250);
-  if (engine.future.draw == true)
-  {
-    drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
-  }
+
   text("Score", 350,18);
   text("P1: " + engine.score,350,35);
   text("Player One",75,50);
