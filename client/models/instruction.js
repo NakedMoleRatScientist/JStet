@@ -1,4 +1,4 @@
-void drawInstruction()
+function Instruction()
 {
   text("Instruction: ",450,50);
   text("a - left",450,80);
