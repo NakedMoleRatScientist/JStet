@@ -37,11 +37,11 @@ function LobbyProtocol(net,lobby)
   var self = this;
   self.display = function()
   {
-    text("Instruction: ",450,50);
-    text("a - left",450,80);
-    text("s - down",450,100);
-    text("d - right",450,120);
-    text("w - rotate",450,140);
+    text("Instruction: ",50,500);
+    text("a - left",50,530);
+    text("s - down",50,550);
+    text("d - right",50,570);
+    text("w - rotate",50,590);
   };
 }
 function PlayButton()
@@ -1688,11 +1688,32 @@ lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol)
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
-
-
-
+var EngineDraw = new EngineDraw();
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
+function EngineDraw()
+{
+  var self = this;
+  self.instruction = new Instruction();
+  self.display = function()
+  {
+    textFont(font,18);
+    background(0,0,0);
+    stroke(205,201,201);
+    fill(0,0,0);
+    //player one...
+    rect(drawField.x,drawField.y,drawField.width,drawField.height); //playfield
+    rect(drawField.x + drawField.width,drawField.y,50,drawField.height); //Info display field
+    //player two
+    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height); //playfield
+    rect(drawField.x + 400 + drawField.width,drawField.y,50,drawField.height); //Info display field
+    self.instruction.display();
+  };
+  self.player_one = function()
+  {
+    
+  };
+}
 
 void gameDisplay()
 {
@@ -1714,10 +1735,11 @@ void gameDisplay()
   {
     drawShape.create_blocks(engine.future.get_list(),250,210,engine.future.shape.color);
   }
-  text("Score: " + engine.score,300,50);
-  drawInstruction();
+  text("Score", 350,18);
+  text("P1: " + engine.score,350,35);
   text("Player One",75,50);
   drawShape.draw_field(engine.field.field);
+
 }
 
 void sendAlive()
@@ -1739,7 +1761,7 @@ void draw()
     title.switch_mode();
     break;
   case 4:
-    gameDisplay();
+    engineDraw.display();
     break;
   case 1:
     over.display();
