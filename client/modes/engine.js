@@ -91,9 +91,11 @@ function EngineDraw()
     stroke(205,201,201);
     fill(0,0,0);
     //player one...
+    text("Player One",75,50);
     rect(drawField.x,drawField.y,drawField.width,drawField.height); //playfield
     rect(drawField.x + drawField.width,drawField.y,100,drawField.height); //Info display field
     //player two
+    text("Player Two",75,450);
     rect(drawField.x + 400,drawField.y,drawField.width,drawField.height); //playfield
     rect(drawField.x + 400 + drawField.width,drawField.y,100,drawField.height); //Info display field
     self.instruction.display();
