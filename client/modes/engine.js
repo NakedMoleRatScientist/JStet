@@ -122,6 +122,7 @@ void gameDisplay()
   text("Score: " + engine.score,300,50);
   text("Player One",75,50);
   drawShape.draw_field(engine.field.field);
+  instruction.display();
 }
 
 void sendAlive()
