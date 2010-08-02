@@ -111,6 +111,7 @@ function EngineDraw()
     rect(drawField.x,drawField.y,drawField.width,drawField.height);
     //player two
     rect(drawField.x + 400,drawField.y,drawField.width,drawField.height);
+    instruction.display();
   };
 }
 
@@ -138,7 +139,7 @@ void gameDisplay()
   text("P1: " + engine.score,350,35);
   text("Player One",75,50);
   drawShape.draw_field(engine.field.field);
-  instruction.display();
+
 }
 
 void sendAlive()
