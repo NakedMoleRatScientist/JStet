@@ -98,9 +98,16 @@ var engine = new Engine(game_protocol,mode);
 var instruction = new Instruction();
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
-function EngienDraw()
+function EngineDraw()
 {
   var self = this;
+  self.display = function()
+  {
+    textFont(font,18);
+    background(0,0,0);
+    stroke(205,201,201);
+    fill(0,0,0);
+  };
 }
 
 void gameDisplay()
