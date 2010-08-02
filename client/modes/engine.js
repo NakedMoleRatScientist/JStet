@@ -79,24 +79,6 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
-var mode = new Mode();
-var drawShape = new TetrominoDraw();
-var drawField = new PlayFieldDraw();
-var timer = new TimerAction();
-var high_score = new HighScoreMode();
-var lobby = new LobbyMode();
-var network = new Net();
-var over = new GameOverMode();
-var title = new TitleMode();
-var game_protocol = new GameProtocol(network);
-var score_protocol = new ScoreProtocol(network);
-var lobby_protocol = new LobbyProtocol(network,lobby);
-lobby.chat.protocol = lobby_protocol;
-var board = new ScoreBoardMode(score_protocol)
-timer.addAction("network",60);
-var engine = new Engine(game_protocol,mode);
-var EngineDraw = new EngineDraw();
-//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
 
 function EngineDraw()
 {
@@ -121,6 +103,27 @@ function EngineDraw()
     
   };
 }
+
+var mode = new Mode();
+var drawShape = new TetrominoDraw();
+var drawField = new PlayFieldDraw();
+var timer = new TimerAction();
+var high_score = new HighScoreMode();
+var lobby = new LobbyMode();
+var network = new Net();
+var over = new GameOverMode();
+var title = new TitleMode();
+var game_protocol = new GameProtocol(network);
+var score_protocol = new ScoreProtocol(network);
+var lobby_protocol = new LobbyProtocol(network,lobby);
+lobby.chat.protocol = lobby_protocol;
+var board = new ScoreBoardMode(score_protocol)
+timer.addAction("network",60);
+var engine = new Engine(game_protocol,mode);
+var EngineDraw = new EngineDraw();
+//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
+
+
 
 void gameDisplay()
 {
