@@ -107,6 +107,8 @@ function EngineDraw()
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
+    //rect regions...
+    rect(drawField.x,drawField.y,drawField.width,drawField.height);
   };
 }
 
