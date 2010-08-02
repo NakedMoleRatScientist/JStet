@@ -114,6 +114,10 @@ function EngineDraw()
     rect(drawField.x + 400,drawField.y,drawField.width,drawField.height);
     self.instruction.display();
   };
+  self.player_one = function()
+  {
+    
+  };
 }
 
 void gameDisplay()
