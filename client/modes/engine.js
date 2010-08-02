@@ -107,8 +107,10 @@ function EngineDraw()
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
-    //rect regions...
+    //player one...
     rect(drawField.x,drawField.y,drawField.width,drawField.height);
+    //player two
+    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height);
   };
 }
 
