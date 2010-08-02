@@ -110,6 +110,7 @@ void drawInstruction()
 
 void gameDisplay()
 {
+  textFont(font,18);
   background(0,0,0);
   stroke(205,201,201);
   fill(0,0,0);
