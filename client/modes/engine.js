@@ -14,6 +14,7 @@ function Engine(protocol,mode)
   self.protocol = protocol;
   self.mode = mode;
   self.players = [];
+  self.you = 0;
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
