@@ -19,24 +19,7 @@ function Engine(protocol,mode)
   self.score = 0;
   self.write_shape = function(player,name,choice,type)
   {
-    if (type == 0)
-    {
-      if (self.current.shape != null)
-      {
-        self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y,self.current.shape.color);
-      }
-      self.current.return_to_zero();
-      self.current.change_shape(getShape(name));
-      self.current.draw = true;
-    }
-    else if (type == 1)
-    {
-      self.future.change_shape(getShape(name));
-      self.future.choice = choice;
-      self.future.update_shape();
-      self.future.draw = true;
-      self.change == false;
-    }
+    
     
   };
   //Update location.
