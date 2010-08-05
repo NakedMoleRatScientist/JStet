@@ -1592,25 +1592,12 @@ function Mode()
     this.status = n;
   }
 }
-PFont font = loadFont("monospace")
-void setup()
-{
-  size(800,600);
-  stroke(255);
-  textFont(font,18);
-  frameRate(24);
-}
-
-function Engine(protocol,mode)
+function Player()
 {
   var self = this;
-  self.protocol = protocol;
-  self.mode = mode;
-  protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
   self.field = new PlayField();
-  self.score = 0;
   self.write_shape = function(name,choice,type)
   {
     if (type == 0)
@@ -1631,6 +1618,35 @@ function Engine(protocol,mode)
       self.future.draw = true;
       self.change == false;
     }
+  };
+  self.start = function()
+  {
+    self.current = new Tetromino();
+    self.future = new Tetromino();
+    self.field.start();
+  };
+}
+PFont font = loadFont("monospace")
+void setup()
+{
+  size(800,600);
+  stroke(255);
+  textFont(font,18);
+  frameRate(24);
+}
+
+function Engine(protocol,mode)
+{
+  var self = this;
+  self.protocol = protocol;
+  self.mode = mode;
+  self.players = [];
+  self.you = 0;
+  protocol.engine = self;
+  self.score = 0;
+  self.write_shape = function(player,name,choice,type)
+  {
+    
     
   };
   //Update location.
@@ -1668,9 +1684,9 @@ function Engine(protocol,mode)
   };
   self.start = function()
   {
-    self.current = new Tetromino();
-    self.future = new Tetromino();
-    self.field.start();
+    new_player = new Player();
+    new_player.start();
+    self.players.push(new_player);
   };
 };
 
@@ -1696,6 +1712,7 @@ function EngineDraw()
     rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
     self.instruction.display();
     self.player_one();
+    self.score();
   };
   self.player_one = function()
   {
@@ -1712,9 +1729,8 @@ function EngineDraw()
     }
     self.drawShape.draw_field(engine.field.field);
   };
-  self.gameDisplay = function()
+  self.score = function()
   {
-
     text("Score", 350,18);
     text("P1: " + engine.score,350,35);
     text("Player One",75,50);
