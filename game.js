@@ -1592,6 +1592,15 @@ function Mode()
     this.status = n;
   }
 }
+PFont font = loadFont("monospace")
+void setup()
+{
+  size(800,600);
+  stroke(255);
+  textFont(font,18);
+  frameRate(24);
+}
+
 function Engine(protocol,mode)
 {
   var self = this;
@@ -1664,19 +1673,13 @@ function Engine(protocol,mode)
     self.field.start();
   };
 };
-PFont font = loadFont("monospace")
-void setup()
-{
-  size(800,600);
-  stroke(255);
-  textFont(font,18);
-  frameRate(24);
-}
 
 function EngineDraw()
 {
   var self = this;
   self.instruction = new Instruction();
+  self.drawField = new PlayFieldDraw();
+  self.drawShape = new TetrominoDraw();
   self.display = function()
   {
     textFont(font,18);
@@ -1685,12 +1688,12 @@ function EngineDraw()
     fill(0,0,0);
     //player one...
     text("Player One",75,50);
-    rect(drawField.x,drawField.y,drawField.width,drawField.height); //playfield
-    rect(drawField.x + drawField.width,drawField.y,100,drawField.height); //Info display field
+    rect(self.drawField.x,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
+    rect(self.drawField.x + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
     //player two
     text("Player Two",75,450);
-    rect(drawField.x + 400,drawField.y,drawField.width,drawField.height); //playfield
-    rect(drawField.x + 400 + drawField.width,drawField.y,100,drawField.height); //Info display field
+    rect(self.drawField.x + 400,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
+    rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
     self.instruction.display();
     self.player_one();
   };
@@ -1698,21 +1701,27 @@ function EngineDraw()
   {
     if (engine.current.draw == true)
     {
-      drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+      self.drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
       text("Current: ",250,135);
-      drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
-  }
+      self.drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
+    }
     text("Next: ", 250,250);
     if (engine.future.draw == true)
     {
-      drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
-    }    
+      self.drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
+    }
+    self.drawShape.draw_field(engine.field.field);
+  };
+  self.gameDisplay = function()
+  {
+
+    text("Score", 350,18);
+    text("P1: " + engine.score,350,35);
+    text("Player One",75,50);
   };
 }
 
 var mode = new Mode();
-var drawShape = new TetrominoDraw();
-var drawField = new PlayFieldDraw();
 var timer = new TimerAction();
 var high_score = new HighScoreMode();
 var lobby = new LobbyMode();
@@ -1731,15 +1740,7 @@ var engineDraw = new EngineDraw();
 
 
 
-void gameDisplay()
-{
 
-  text("Score", 350,18);
-  text("P1: " + engine.score,350,35);
-  text("Player One",75,50);
-  drawShape.draw_field(engine.field.field);
-
-}
 
 void sendAlive()
 {
