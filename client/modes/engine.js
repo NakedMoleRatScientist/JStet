@@ -13,6 +13,7 @@ function Engine(protocol,mode)
   var self = this;
   self.protocol = protocol;
   self.mode = mode;
+  self.players = [];
   protocol.engine = self;
   self.current = new Tetromino();
   self.future = new Tetromino();
