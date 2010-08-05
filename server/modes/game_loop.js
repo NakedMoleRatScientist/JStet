@@ -4,6 +4,7 @@ var generator = require ('../models/shape_generator');
 var timer = require('../models/timer');
 var field = require('../models/playfield');
 var db = require('../models/database');
+var player = require('../models/player')
 function EventManager(id)
 {
   var self = this;
