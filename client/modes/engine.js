@@ -85,6 +85,7 @@ function EngineDraw()
   var self = this;
   self.instruction = new Instruction();
   self.drawField = new PlayFieldDraw();
+  self.drawShape = new TetrominoDraw();
   self.display = function()
   {
     textFont(font,18);
@@ -106,21 +107,20 @@ function EngineDraw()
   {
     if (engine.current.draw == true)
     {
-      drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+      self.drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
       text("Current: ",250,135);
-      drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
+      self.drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
     }
     text("Next: ", 250,250);
     if (engine.future.draw == true)
     {
-      drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
+      self.drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
     }
     
   };
 }
 
 var mode = new Mode();
-var drawShape = new TetrominoDraw();
 var timer = new TimerAction();
 var high_score = new HighScoreMode();
 var lobby = new LobbyMode();
@@ -145,7 +145,7 @@ void gameDisplay()
   text("Score", 350,18);
   text("P1: " + engine.score,350,35);
   text("Player One",75,50);
-  drawShape.draw_field(engine.field.field);
+  self.drawShape.draw_field(engine.field.field);
 
 }
 
