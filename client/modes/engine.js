@@ -103,6 +103,7 @@ function EngineDraw()
     rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
     self.instruction.display();
     self.player_one();
+    self.score();
   };
   self.player_one = function()
   {
