@@ -17,3 +17,8 @@ exports.get_player = function(id)
 {
   return new Player(id);
 }
+
+exports.get_game = function(player)
+{
+  return new PlayerGameMode(player);
+}
