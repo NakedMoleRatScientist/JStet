@@ -115,7 +115,8 @@ function EngineDraw()
     if (engine.future.draw == true)
     {
       self.drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
-    }    
+    }
+    self.drawShape.draw_field(engine.field.field);
   };
   self.gameDisplay function()
   {
@@ -123,7 +124,6 @@ function EngineDraw()
     text("Score", 350,18);
     text("P1: " + engine.score,350,35);
     text("Player One",75,50);
-    self.drawShape.draw_field(engine.field.field);
   };
 }
 
