@@ -886,7 +886,7 @@ void keyPressed()
     scoreKey();
     break;
   case 3:
-    enterScoreKey();
+    enterHighScoreKey();
     break;
   case 5:
     chatKey();
