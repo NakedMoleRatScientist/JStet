@@ -57,9 +57,9 @@ function Engine(protocol,mode)
   };
   self.start = function()
   {
-    self.current = new Tetromino();
-    self.future = new Tetromino();
-    self.field.start();
+    new_player = new Player();
+    new_player.start();
+    self.players.push(new_player);
   };
 };
 
