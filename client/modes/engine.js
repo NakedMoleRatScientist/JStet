@@ -1,4 +1,13 @@
 
+PFont font = loadFont("monospace")
+void setup()
+{
+  size(800,600);
+  stroke(255);
+  textFont(font,18);
+  frameRate(24);
+}
+
 function Engine(protocol,mode)
 {
   var self = this;
@@ -71,14 +80,6 @@ function Engine(protocol,mode)
     self.field.start();
   };
 };
-PFont font = loadFont("monospace")
-void setup()
-{
-  size(800,600);
-  stroke(255);
-  textFont(font,18);
-  frameRate(24);
-}
 
 function EngineDraw()
 {
