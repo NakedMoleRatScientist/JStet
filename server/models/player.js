@@ -7,10 +7,11 @@ function Player(id)
   self.nick = id;
 }
 
-function PlayerGameMode(player)
+function PlayerGameMode(player,manager)
 {
   var self = this;
   self.player = player;
+  self.manager = manager;
   self.current = tetro.get_tetromino();
   self.future = tetro.get_tetromino();
   self.field = field.get_field();
