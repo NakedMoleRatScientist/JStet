@@ -16,11 +16,8 @@ function Engine(protocol,mode)
   self.players = [];
   self.you = 0;
   protocol.engine = self;
-  self.current = new Tetromino();
-  self.future = new Tetromino();
-  self.field = new PlayField();
   self.score = 0;
-  self.write_shape = function(name,choice,type)
+  self.write_shape = function(player,name,choice,type)
   {
     if (type == 0)
     {
