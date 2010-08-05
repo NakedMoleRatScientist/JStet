@@ -119,7 +119,7 @@ function EngineDraw()
     }
     self.drawShape.draw_field(engine.field.field);
   };
-  self.gameDisplay function()
+  self.gameDisplay = function()
   {
 
     text("Score", 350,18);
