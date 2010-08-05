@@ -11,6 +11,7 @@ function EventManager(id)
   self.events = new Array();
   self.id = id;
   self.players = new Array();
+  self.timer = timer.create_new();
   self.create_shape_message = function (shape,type,choice)
   {
     //1 in the first element denotates incoming new shape
