@@ -26,4 +26,10 @@ function Player()
       self.change == false;
     }
   };
+  self.start = function()
+  {
+    self.current = new Tetromino();
+    self.future = new Tetromino();
+    self.field.start();
+  };
 }
