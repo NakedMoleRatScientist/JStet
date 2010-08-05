@@ -9,6 +9,7 @@ function EventManager(id)
   var self = this;
   self.events = new Array();
   self.id = id;
+  self.players = [];
   self.create_shape_message = function (shape,type,choice)
   {
     //1 in the first element denotates incoming new shape
