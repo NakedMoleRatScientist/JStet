@@ -1,5 +1,6 @@
 var tetro = require('../models/tetromino');
 var field = require('../models/playfield');
+var generator = require ('../models/shape_generator');
 var sys = require('sys');
 function Player(id)
 {
