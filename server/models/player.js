@@ -30,6 +30,15 @@ function PlayerGameMode(player,manager)
     var messsage = [self.player.id,5,self.score];
     self.manager.send(message);
   };
+  self.create_shape_message = function()
+  {
+    //first element denotate the information we sending the player...
+    //1 in the second element denotates incoming new shape
+    //The third element indicate the which type of shape
+    //The fourt element contains the shape's rotation
+    //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
+    var message = [1,shape.name,shape.get_data(choice),type,id];]
+  };
   self.cycle_message = function()
   {
     self.create_shape_message(self.current.get_shape(),0,self.current.get_choice(),id); //0 is current
