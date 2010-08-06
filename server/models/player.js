@@ -113,6 +113,12 @@ function PlayerGameMode(player,manager)
     }
     return false;
   };
+  self.initialize = function()
+  {
+    self.current.change_shape(generator.get_shape());
+    self.future.change_shape(generator.get_shape());
+    self.yccle_message();
+  };
 }
 
 exports.get_player = function(id)
