@@ -37,6 +37,20 @@ function PlayerGameMode(player,manager)
     }
     self.create_score_message();
   };
+  self.move = function()
+  {
+    if (self.move == true)
+    {
+      if (self.check_score() == true)
+      {
+	self.create_success_message();
+      }
+      else
+      {
+	self.create_over_message();
+      }
+    }
+  };
 }
 
 exports.get_player = function(id)
