@@ -23,6 +23,11 @@ function PlayerGameMode(player,manager)
     var message = [self.player.id,4,line];
     self.manager.events.push(message);
   };
+  self.create_score_message = function()
+  {
+    var messsage = [self.player.id,5,self.score];
+    self.manager.events.push(message);
+  };
   self.cycle = function()
   {
     self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y);
