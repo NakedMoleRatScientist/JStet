@@ -39,6 +39,16 @@ function PlayerGameMode(player,manager)
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
     var message = [self.player.id,1,shape.name,shape.get_data(choice),type];
   };
+  //check for collision
+  self.collision = function(x,y)
+  {
+    var offset = self.field.calculate_positions(self.current.x,self.current.y);
+    if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
+    {
+      return true;
+    }
+    return false;
+  };
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.collision_effect_down = function(x,y)
   {
