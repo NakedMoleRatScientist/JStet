@@ -14,11 +14,7 @@ function EventManager(id)
   self.timer = timer.create_new();
   self.create_shape_message = function (shape,type,choice)
   {
-    //1 in the first element denotates incoming new shape
-    //The second element indicate the which type of shape
-    //The third element contains the shape's rotation
-    //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
-    var message = [1,shape.name,shape.get_data(choice),type,id];
+
     self.events.push(message);
   };
   self.send = function(message)
@@ -29,8 +25,7 @@ function EventManager(id)
   
   self.cycle_message = function(id)
   {
-    self.create_shape_message(self.current.get_shape(),0,self.current.get_choice(),id); //0 is current
-    self.create_shape_message(self.future.get_shape(),1,self.future.get_choice(),id);  //1 is the future
+
   };
   //Send data about current's movement.
   self.create_xy_message = function()
@@ -94,20 +89,6 @@ function EventManager(id)
     if (self.collision(x,y))
     {
       self.current.move(-x,-y);
-    }
-  };
-  //If collision, then revert position. It can also declare game over if self.current.y is 0.
-  self.collision_effect_down = function(x,y)
-  {
-    if (self.collision(x,y))
-    {
-      self.current.move(-x,-y);
-      if (self.current.y == 0)
-      {
-	self.over = true;
-	sys.log("Game over.");
-      }
-      self.cycle();
     }
   };
   //move down
