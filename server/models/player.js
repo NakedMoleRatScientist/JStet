@@ -49,7 +49,9 @@ function PlayerGameMode(player,manager)
       {
 	self.create_over_message();
       }
+      return true;
     }
+    return false;
   };
 }
 
