@@ -126,6 +126,12 @@ exports.get_data = function(id)
   return data;
 }
 
+
+exports.get_sessions = function()
+{
+  return sessions;
+}
+
 exports.get_score = function(id)
 {
   var location = find_by_id(id)
