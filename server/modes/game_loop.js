@@ -39,16 +39,6 @@ function EventManager(id)
     var message = [3,self.current.choice];
     self.events.push(message);
   };
-  self.create_field_message = function(line)
-  {
-    var message = [4,line];
-    self.events.push(message);
-  };
-  self.create_score_message = function()
-  {
-    var message = [5,self.score];
-    self.events.push(message);
-  };
   self.create_over_message = function()
   {
     var message = [6,1];
@@ -117,14 +107,7 @@ function EventManager(id)
     }
   };
   //move down
-  self.move_down = function()
-  {
-    if (self.current.move(0,20) == 2) //2 indicate that it reached rock 
-    {
-      self.cycle();
-    }
-    self.collision_effect_down(0,20);
-  };
+  
   //rotate shape
   self.rotate = function()
   {
@@ -157,7 +140,7 @@ function EventManager(id)
 	var game_over = 0;
 	for (var i = 0;i < self.players.length;i++)
 	{
-	  if (self.players[i].move == true)
+	  if (self.players[i].move() == true)
 	  {
 	    game_over += 1;
 	  }
