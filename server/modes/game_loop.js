@@ -1,6 +1,6 @@
 var sys = require('sys');
 var tetro = require('../models/tetromino');
-var generator = require ('../models/shape_generator');
+
 var timer = require('../models/timer');
 var field = require('../models/playfield');
 var db = require('../models/database');
@@ -52,6 +52,7 @@ function EventManager(id)
   self.initialize = function(play)
   {
     var new_player = player.get_game(play,self);
+    new_player.initialize();
     self.players.push(new_player);
   };
   self.get_data = function()
@@ -74,16 +75,7 @@ function EventManager(id)
     self.collision_effect_sideway(-20,0);
     self.create_xy_message();
   };
-  //check for collision
-  self.collision = function(x,y)
-  {
-    var offset = self.field.calculate_positions(self.current.x,self.current.y);
-    if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
-    {
-      return true;
-    }
-    return false;
-  };
+ 
   self.collision_effect_sideway = function(x,y)
   {
     if (self.collision(x,y))
