@@ -60,7 +60,7 @@ exports.get_player = function(id)
   return new Player(id);
 }
 
-exports.get_game = function(player)
+exports.get_game = function(player,manager)
 {
-  return new PlayerGameMode(player);
+  return new PlayerGameMode(player,manager);
 }
