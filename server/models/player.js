@@ -38,8 +38,17 @@ function PlayerGameMode(player,manager)
     }
     self.create_score_message();
   };
+  self.move_down = function()
+  {
+    if (self.current.move(0,20) == 2) //2 indicate that it reached rock 
+    {
+      self.cycle();
+    }
+    self.collision_effect_down(0,20);
+  };
   self.move = function()
   {
+    self.move_down()
     if (self.over == true)
     {
       if (self.check_score() == true)
