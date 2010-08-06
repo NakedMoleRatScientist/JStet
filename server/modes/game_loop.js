@@ -155,9 +155,9 @@ function EventManager(id)
       if (self.timer.react() == true)
       {
 	var game_over = 0;
-	for (var i = 0;i < players.length;i++)
+	for (var i = 0;i < self.players.length;i++)
 	{
-	  if (players[i].move == true)
+	  if (self.players[i].move == true)
 	  {
 	    game_over += 1;
 	  }
