@@ -154,21 +154,19 @@ function EventManager(id)
     var game = setInterval(function() {
       if (self.timer.react() == true)
       {
-	sys.log("Move down.");
-	self.move_down()
-	self.create_xy_message();
-	if (self.over == true)
+	var game_over = false;
+	for (var i = 0;i < players.length;i++)
 	{
-	  if (self.check_score() == true)
+	  if (players[i].move == true)
 	  {
-	    self.create_success_message();
+	    game_over = true;
 	  }
 	  else
 	  {
-	    self.create_over_message();
+	    game_over = false;
 	  }
-	  clearInterval(game);
 	}
+	
       }
     },10);
   }
