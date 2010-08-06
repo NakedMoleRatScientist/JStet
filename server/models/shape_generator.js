@@ -11,7 +11,7 @@ function randomChoice()
 }
 
 
-exports.getShape = function()
+exports.get_shape = function()
 {
   switch(randomChoice())
   {
