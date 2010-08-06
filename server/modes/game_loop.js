@@ -4,7 +4,8 @@ var tetro = require('../models/tetromino');
 var timer = require('../models/timer');
 var field = require('../models/playfield');
 var db = require('../models/database');
-var player = require('../models/player')
+var player = require('../models/player');
+var players = require('../models/players_manager');
 function EventManager(id)
 {
   var self = this;
