@@ -21,6 +21,10 @@ function EventManager(id)
     var message = [1,shape.name,shape.get_data(choice),type,id];
     self.events.push(message);
   };
+  self.send = function(message)
+  {
+    self.events.push(message);
+  };
   //Current shape just ended. Time to time cycle through
   
   self.cycle_message = function(id)
