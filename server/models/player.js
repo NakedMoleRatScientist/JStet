@@ -31,7 +31,7 @@ function PlayerGameMode(player,manager)
     var messsage = [self.player.id,5,self.score];
     self.manager.send(message);
   };
-  self.create_shape_message = function()
+  self.create_shape_message = function(shape,type,choice)
   {
     //first element denotate the information we sending the player...
     //1 in the second element denotates incoming new shape
