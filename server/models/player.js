@@ -37,7 +37,7 @@ function PlayerGameMode(player,manager)
     //The third element indicate the which type of shape
     //The fourt element contains the shape's rotation
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
-    var message = [self.player.id,1,shape.name,shape.get_data(choice),type,id];]
+    var message = [self.player.id,1,shape.name,shape.get_data(choice),type];
   };
   self.cycle_message = function()
   {
