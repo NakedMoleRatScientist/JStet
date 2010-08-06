@@ -154,19 +154,18 @@ function EventManager(id)
     var game = setInterval(function() {
       if (self.timer.react() == true)
       {
-	var game_over = false;
+	var game_over = 0;
 	for (var i = 0;i < players.length;i++)
 	{
 	  if (players[i].move == true)
 	  {
-	    game_over = true;
-	  }
-	  else
-	  {
-	    game_over = false;
+	    game_over += 1;
 	  }
 	}
-	
+	if (game_over == 2)
+	{
+	  clearInterval(game);
+	}
       }
     },10);
   }
