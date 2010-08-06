@@ -118,7 +118,7 @@ function PlayerGameMode(player,manager)
   {
     self.current.change_shape(generator.get_shape());
     self.future.change_shape(generator.get_shape());
-    self.yccle_message();
+    self.cycle_message();
   };
 }
 
