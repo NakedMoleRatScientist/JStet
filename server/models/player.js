@@ -30,6 +30,11 @@ function PlayerGameMode(player,manager)
     var messsage = [self.player.id,5,self.score];
     self.manager.send(message);
   };
+  self.cycle_message = function()
+  {
+    self.create_shape_message(self.current.get_shape(),0,self.current.get_choice(),id); //0 is current
+    self.create_shape_message(self.future.get_shape(),1,self.future.get_choice(),id);  //1 is the future
+  };
   self.cycle = function()
   {
     self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y);
