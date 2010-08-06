@@ -21,12 +21,12 @@ function PlayerGameMode(player,manager)
   self.create_field_message = function(clean)
   {
     var message = [self.player.id,4,line];
-    self.manager.events.push(message);
+    self.manager.send(message);
   };
   self.create_score_message = function()
   {
     var messsage = [self.player.id,5,self.score];
-    self.manager.events.push(message);
+    self.manager.send(message);
   };
   self.cycle = function()
   {
