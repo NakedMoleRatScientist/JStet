@@ -18,6 +18,11 @@ function PlayerGameMode(player,manager)
   self.field = field.get_field();
   self.over = false;
   self.score = 0;
+  self.create_field_message = function(clean)
+  {
+    var message = [self.player.id,4,line];
+    self.manager.events.push(message);
+  };
   self.cycle = function()
   {
     self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y);
