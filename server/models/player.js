@@ -18,11 +18,13 @@ function PlayerGameMode(player,manager)
   self.field = field.get_field();
   self.over = false;
   self.score = 0;
+  //kill some line.
   self.create_field_message = function(clean)
   {
     var message = [self.player.id,4,line];
     self.manager.send(message);
   };
+  //give us idea of what the score is.
   self.create_score_message = function()
   {
     var messsage = [self.player.id,5,self.score];
