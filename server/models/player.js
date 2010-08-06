@@ -1,5 +1,6 @@
 var tetro = require('../models/tetromino');
 var field = require('../models/playfield');
+var sys = require('sys');
 function Player(id)
 {
   var self = this;
@@ -39,7 +40,7 @@ function PlayerGameMode(player,manager)
   };
   self.move = function()
   {
-    if (self.move == true)
+    if (self.over == true)
     {
       if (self.check_score() == true)
       {
