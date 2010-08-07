@@ -40,6 +40,7 @@ function GameProtocol(net)
   {
     switch(data[0])
     {
+    //initialize game mode.
     case 0:
       mode.change(4);
       engine.start();
