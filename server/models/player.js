@@ -74,7 +74,7 @@ function PlayerGameMode(player,manager)
     self.field.insert_blocks(self.current.get_list(),self.current.x,self.current.y);
     self.current.return_to_zero();
     self.current.change_shape(self.future.get_shape());
-    self.future.change_shape(generator.getShape());
+    self.future.change_shape(generator.get_shape());
     var status = true;
     self.cycle_message();
     while(status)
