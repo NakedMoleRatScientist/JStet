@@ -50,9 +50,10 @@ function EventManager(id)
     self.events.push(message);
   };
   //get the initial shapes for current and future.
-  self.initialize = function(play)
+  self.initialize = function(id)
   {
-    var new_player = player.get_game(play,self);
+    var identity = players.get_player(id);
+    var new_player = player.get_game(identity,self);
     new_player.initialize();
     self.players.push(new_player);
   };
