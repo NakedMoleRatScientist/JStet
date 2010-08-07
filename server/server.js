@@ -94,7 +94,7 @@ server.addListener("connection",function(conn){
     var sessions = game.get_sessions();
     for (var i = 0; i < sessions.length; i++)
     {
-      sessions[i].update_event()
+      sessions[i].update_events()
       var events = sessions[i].get_data()
       sessions[location].clear();
       if (events != false && events.length != 0)
