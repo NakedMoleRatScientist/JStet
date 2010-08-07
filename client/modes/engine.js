@@ -55,11 +55,12 @@ function Engine(protocol,mode)
     console.log("High score, detected!");
     self.mode.change(3);
   };
-  self.start = function()
+  self.start = function(id)
   {
     new_player = new Player();
     new_player.start();
     self.players.push(new_player);
+    self.you = id;
   };
 };
 
