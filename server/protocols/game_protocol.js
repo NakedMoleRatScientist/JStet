@@ -11,7 +11,7 @@ function Session()
   self.initialize = function(id)
   {
     self.id = id;
-    self.add_events([[0]]); //0 tell the client to initialize game mode.
+    self.add_events([[0,self.id]]); //0 tell the client to initialize game mode.
     self.game.initialize(id);
     self.add_events(self.game.get_data());
     self.game.run_game();
