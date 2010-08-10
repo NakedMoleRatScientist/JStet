@@ -101,7 +101,7 @@ server.addListener("connection",function(conn){
       {
 	for (var n = 0;i < events.length;i ++)
 	{
-	  sys.log(events[i]);
+	  server.send(events[i][2],events[i]);
 	}
       }
     }
