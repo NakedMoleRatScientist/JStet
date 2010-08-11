@@ -28,7 +28,7 @@ function PlayerGameMode(player,manager)
   //give us idea of what the score is.
   self.create_score_message = function()
   {
-    var messsage = [self.player.id,5,self.score];
+    var message = [self.player.id,5,self.score];
     self.manager.send(message);
   };
   self.create_shape_message = function(shape,type,choice)
