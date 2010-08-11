@@ -33,8 +33,8 @@ function PlayerGameMode(player,manager)
   };
   self.create_shape_message = function(shape,type,choice)
   {
-    //first element denotate the information we sending the player...
-    //1 in the second element denotates incoming new shape
+    //first element denotate what player should recevie the information...
+    //In the second element denotates incoming new shape
     //The third element indicate the which type of shape
     //The fourt element contains the shape's rotation
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
