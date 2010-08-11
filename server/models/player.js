@@ -40,6 +40,15 @@ function PlayerGameMode(player,manager)
     //The last element contain an integer variable called type, which indicate if the shape is a current or a future.
     var message = [self.player.id,1,shape.name,shape.get_data(choice),type];
   };
+  //Check if score beat the lowest high score on the chart.
+  self.check_score = function()
+  {
+    if (db.get_lowest(self.score) < self.score)
+    {
+      return true;
+    }
+    return false;
+  };
   //check for collision
   self.collision = function(x,y)
   {
