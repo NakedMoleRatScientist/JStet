@@ -23,7 +23,7 @@ function PlayerGameMode(player,manager)
   self.create_over_message = function()
   {
     var message = [self.player.id,6,1];
-    self.events.push(message);
+    self.manager.send(message);
   };
   //kill some line.
   self.create_field_message = function(clean)
