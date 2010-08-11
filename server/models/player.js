@@ -20,6 +20,11 @@ function PlayerGameMode(player,manager)
   self.field = field.get_field();
   self.over = false;
   self.score = 0;
+  self.create_over_message = function()
+  {
+    var message = [self.player.id,6,1];
+    self.events.push(message);
+  };
   //kill some line.
   self.create_field_message = function(clean)
   {
