@@ -101,7 +101,7 @@ server.addListener("connection",function(conn){
       {
 	for (var n = 0;i < events.length;i ++)
 	{
-	  server.send(events[i][2],events[i]);
+	  server.send(events[i][1][1],JSON.stringify(events[i]))
 	}
       }
     }
