@@ -226,18 +226,20 @@ function GameProtocol(net)
   };
   self.process_data = function(data)
   {
-    switch(data[0])
+    switch(data[1])
     {
+    //initialize game mode.
     case 0:
+      console.log("Game initialized.");
       mode.change(4);
-      engine.start();
+      engine.start(data[0]);
       break;
     case 1:
       //Get new shape.
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
-	engine.write_shape(data[1],data[2],data[3]);
+	engine.write_shape(data[0],data[1],data[2],data[3]);
         self.net.send([2,1]);
       }
       break;
@@ -1682,11 +1684,16 @@ function Engine(protocol,mode)
     console.log("High score, detected!");
     self.mode.change(3);
   };
-  self.start = function()
+  self.start = function(id)
   {
     new_player = new Player();
     new_player.start();
     self.players.push(new_player);
+    self.you = id;
+  };
+  self.get_player = function(n)
+  {
+    return self.players[n];
   };
 };
 
