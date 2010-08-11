@@ -2,7 +2,7 @@ var tetro = require('../models/tetromino');
 var field = require('../models/playfield');
 var generator = require ('../models/shape_generator');
 var sys = require('sys');
-var db = require('db');
+var db = require('../models/database');
 function Player(id)
 {
   var self = this;
