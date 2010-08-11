@@ -51,7 +51,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
-	engine.write_shape(data[1],data[2],data[3]);
+	engine.write_shape(data[0],data[1],data[2],data[3]);
         self.net.send([2,1]);
       }
       break;
