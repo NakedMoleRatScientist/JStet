@@ -62,6 +62,10 @@ function Engine(protocol,mode)
     self.players.push(new_player);
     self.you = id;
   };
+  self.get_player = function(n)
+  {
+    return self.players[n];
+  };
 };
 
 function EngineDraw()
