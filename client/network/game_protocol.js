@@ -38,7 +38,7 @@ function GameProtocol(net)
   };
   self.process_data = function(data)
   {
-    switch(data[0])
+    switch(data[1])
     {
     //initialize game mode.
     case 0:
