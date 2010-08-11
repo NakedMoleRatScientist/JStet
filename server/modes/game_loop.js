@@ -39,11 +39,6 @@ function EventManager(id)
     var message = [3,self.current.choice];
     self.events.push(message);
   };
-  self.create_over_message = function()
-  {
-    var message = [6,1];
-    self.events.push(message);
-  };
   self.create_success_message = function()
   {
     var message = [7,1]
@@ -101,15 +96,7 @@ function EventManager(id)
       self.current.rotate_backward();
     }
   };
-  //Check if score beat the lowest high score on the chart.
-  self.check_score = function()
-  {
-    if (db.get_lowest(self.score) < self.score)
-    {
-      return true;
-    }
-    return false;
-  };
+  
   //run a game loop
   self.run_game = function()
   {
