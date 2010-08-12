@@ -1647,7 +1647,7 @@ function Engine(protocol,mode)
   self.you = 0;
   protocol.engine = self;
   self.score = 0;
-  self.find_player = function()
+  self.find_player = function(id)
   {
     for (var i = 0;i < self.players.length;i++)
     {
