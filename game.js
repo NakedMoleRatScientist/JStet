@@ -1647,6 +1647,17 @@ function Engine(protocol,mode)
   self.you = 0;
   protocol.engine = self;
   self.score = 0;
+  self.find_player = function()
+  {
+    for (var i = 0;i < self.players.length;i++)
+    {
+      if (self.players[i].id == player)
+      {
+	return self.players[i];
+      }
+    }
+
+  };
   self.write_shape = function(player,name,choice,type)
   {
     for (var i = 0;i < self.players.length;i++)
