@@ -125,6 +125,7 @@ function PlayerGameMode(player,manager)
       self.cycle();
     }
     self.collision_effect_down(0,20);
+    self.create_xy_message();
   };
   self.move = function()
   {
