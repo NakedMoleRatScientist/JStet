@@ -19,8 +19,14 @@ function Engine(protocol,mode)
   self.score = 0;
   self.write_shape = function(player,name,choice,type)
   {
-    
-    
+    for (var i = 0;i < self.players.size();i++)
+    {
+      if (self.players[i].id == player)
+      {
+	self.players[i].write_shape(name,choice,type);
+      }
+    }
+
   };
   //Update location.
   self.update_location = function(x,y)
