@@ -65,6 +65,7 @@ function Engine(protocol,mode)
   {
     new_player = new Player();
     new_player.start();
+    new_player.id = id;
     self.players.push(new_player);
     self.you = id;
   };
