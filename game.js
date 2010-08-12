@@ -1648,8 +1648,15 @@ function Engine(protocol,mode)
   self.score = 0;
   self.write_shape = function(player,name,choice,type)
   {
-    
-    
+    for (var i = 0;i < self.players.length;i++)
+    {
+      if (self.players[i].id == player)
+      {
+	console.log("ding");
+	self.players[i].write_shape(name,choice,type);
+      }
+    }
+
   };
   //Update location.
   self.update_location = function(x,y)
@@ -1723,18 +1730,19 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    if (engine.current.draw == true)
+    var one = engine.get_player(0);
+    if (one.current.draw == true)
     {
-      self.drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
+      self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
       text("Current: ",250,135);
-      self.drawShape.create_blocks(engine.current.get_list(),225,100,engine.current.shape.color);
+      self.drawShape.create_blocks(one.current.get_list(),225,100,one.current.shape.color);
     }
     text("Next: ", 250,250);
-    if (engine.future.draw == true)
+    if (one.future.draw == true)
     {
-      self.drawShape.create_blocks(engine.future.get_list(),225,210,engine.future.shape.color);
+      self.drawShape.create_blocks(one.future.get_list(),225,210,one.future.shape.color);
     }
-    self.drawShape.draw_field(engine.field.field);
+    self.drawShape.draw_field(one.field.field);
   };
   self.score = function()
   {
