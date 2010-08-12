@@ -19,7 +19,7 @@ function Engine(protocol,mode)
   self.score = 0;
   self.write_shape = function(player,name,choice,type)
   {
-    for (var i = 0;i < self.players.size();i++)
+    for (var i = 0;i < self.players.length;i++)
     {
       if (self.players[i].id == player)
       {
