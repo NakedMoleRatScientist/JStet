@@ -68,7 +68,7 @@ function PlayerGameMode(player,manager)
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.collision_effect_down = function(x,y)
   {
-      if (self.collision(x,y))
+    if (self.collision(x,y))
     {
       self.current.move(-x,-y);
       if (self.current.y == 0)
