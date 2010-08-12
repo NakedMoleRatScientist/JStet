@@ -94,6 +94,7 @@ function EngineDraw()
   };
   self.player_one = function()
   {
+    var one = engine.get_player(0);
     if (engine.current.draw == true)
     {
       self.drawShape.create_blocks(engine.current.get_list(),engine.current.x,engine.current.y,engine.current.shape.color);
