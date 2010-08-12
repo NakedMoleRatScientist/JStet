@@ -3,6 +3,7 @@ function Player()
 {
   var self = this;
   self.current = new Tetromino();
+  self.id = 0;
   self.future = new Tetromino();
   self.field = new PlayField();
   self.write_shape = function(name,choice,type)
