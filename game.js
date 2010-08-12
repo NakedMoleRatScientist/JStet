@@ -1661,7 +1661,7 @@ function Engine(protocol,mode)
   self.write_shape = function(id,name,choice,type)
   {
     var player = self.find_player(id);
-    player..write_shape(name,choice,type);
+    player.write_shape(name,choice,type);
   };
   //Update location.
   self.update_location = function(x,y)
