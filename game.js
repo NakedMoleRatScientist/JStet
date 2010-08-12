@@ -239,7 +239,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
-	engine.write_shape(data[0],data[1],data[2],data[3]);
+	engine.write_shape(data[0],data[2],data[3],data[4]);
         self.net.send([2,1]);
       }
       break;
@@ -1598,6 +1598,7 @@ function Player()
 {
   var self = this;
   self.current = new Tetromino();
+  self.id = 0;
   self.future = new Tetromino();
   self.field = new PlayField();
   self.write_shape = function(name,choice,type)
@@ -1652,17 +1653,23 @@ function Engine(protocol,mode)
     {
       if (self.players[i].id == player)
       {
-	console.log("ding");
 	self.players[i].write_shape(name,choice,type);
       }
     }
 
   };
   //Update location.
-  self.update_location = function(x,y)
+  self.update_location = function(id,x,y)
   {
-    self.current.x = x;
-    self.current.y = y;
+    for (var i = 0;;i < self.players.length; i++;)
+    {
+      if (self.players[i].id == player)
+      {
+	self.players[i].current.x = x;
+	self.players[i].current.y = y;
+      }
+    }
+
   };
   self.move = function(x,y)
   {
@@ -1695,6 +1702,7 @@ function Engine(protocol,mode)
   {
     new_player = new Player();
     new_player.start();
+    new_player.id = id;
     self.players.push(new_player);
     self.you = id;
   };
