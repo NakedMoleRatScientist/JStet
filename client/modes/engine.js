@@ -28,16 +28,10 @@ function Engine(protocol,mode)
     }
 
   };
-  self.write_shape = function(player,name,choice,type)
+  self.write_shape = function(id,name,choice,type)
   {
-    for (var i = 0;i < self.players.length;i++)
-    {
-      if (self.players[i].id == player)
-      {
-	self.players[i].write_shape(name,choice,type);
-      }
-    }
-
+    var player = self.find_player(id);
+    player..write_shape(name,choice,type);
   };
   //Update location.
   self.update_location = function(x,y)
