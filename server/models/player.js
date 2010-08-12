@@ -104,6 +104,13 @@ function PlayerGameMode(player,manager)
     }
     self.create_score_message();
   };
+  //move right
+  self.move_right = function()
+  {
+    self.current.move(20,0);
+    self.collision_effect_sideway(20,0);
+    self.create_xy_message();
+  };
   self.move_down = function()
   {
     if (self.current.move(0,20) == 2) //2 indicate that it reached rock 
