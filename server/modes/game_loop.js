@@ -74,6 +74,11 @@ function EventManager(id)
     var player = self.find_by_id(id);
     player.move_left();
   };
+  self.move_down = function(id)
+  {
+    var player = self.find_by_id(id);
+    player.move_down();
+  };
   //rotate shape
   self.rotate = function()
   {
