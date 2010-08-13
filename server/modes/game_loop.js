@@ -28,12 +28,6 @@ function EventManager(id)
   {
 
   };
-  //Send data about current's movement.
-  self.create_xy_message = function()
-  {
-    var message = [2,self.current.x,self.current.y];
-    self.events.push(message);
-  };
   self.create_rotate_message = function()
   {
     var message = [3,self.current.choice];
