@@ -248,7 +248,7 @@ function GameProtocol(net)
       //Get movement update for current.
       if (self.checkIdentical(data))
       {
-	engine.update_location(data[1],data[2]);
+	engine.update_location(data[0],data[2],data[3]);
 	self.net.send([2,1]);
       }
       break;
@@ -1651,7 +1651,7 @@ function Engine(protocol,mode)
   {
     for (var i = 0;i < self.players.length;i++)
     {
-      if (self.players[i].id == player)
+      if (self.players[i].id == id)
       {
 	return self.players[i];
       }
@@ -1664,18 +1664,20 @@ function Engine(protocol,mode)
     player.write_shape(name,choice,type);
   };
   //Update location.
-  self.update_location = function(x,y)
+  self.update_location = function(id,x,y)
   {
-    self.current.x = x;
-    self.current.y = y;
+    var player = self.find_player(id);
+    player.current.x = x;
+    player.current.y = y;
   };
   self.move = function(x,y)
   {
-    self.current.move(x,y)
-    var offset = self.field.calculate_positions(self.current.x,self.current.y);
-    if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
+    var player = self.find_player(self.you);
+    self.player.current.move(x,y);
+    var offset = self.player.field.calculate_positions(self.player.current.x,self.player.current.y);
+    if (self.player.field.check(self.player.current.get_list(),offset[0],offset[1]) == false)
     {
-      self.current.move(-x,-y);
+      self.player.current.move(-x,-y);
     }
   };
   self.rotate = function(choice)
