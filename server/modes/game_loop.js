@@ -74,6 +74,7 @@ function EventManager(id)
     var player = self.find_by_id(id);
     player.move_left();
   };
+  //move down command to player
   self.move_down = function(id)
   {
     var player = self.find_by_id(id);
