@@ -113,13 +113,13 @@ function PlayerGameMode(player,manager)
     }
     self.create_score_message();
   };
-  //move right
   //Send data about current's movement.
   self.create_xy_message = function()
   {
     var message = [self.player.id,2,self.current.x,self.current.y];
     self.manager.send(message);
   };
+  //move right
   self.move_right = function()
   {
     self.current.move(20,0);
