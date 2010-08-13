@@ -42,7 +42,8 @@ function Engine(protocol,mode)
   };
   self.move = function(x,y)
   {
-    self.current.move(x,y)
+    var player = self.find_player(self.you);
+    self.player.current.move(x,y);
     var offset = self.field.calculate_positions(self.current.x,self.current.y);
     if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
     {
