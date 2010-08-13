@@ -76,13 +76,7 @@ function EventManager(id)
     self.create_xy_message();
   };
  
-  self.collision_effect_sideway = function(x,y)
-  {
-    if (self.collision(x,y))
-    {
-      self.current.move(-x,-y);
-    }
-  };
+ 
   //move down
   
   //rotate shape
