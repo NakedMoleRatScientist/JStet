@@ -133,6 +133,13 @@ function PlayerGameMode(player,manager)
     self.collision_effect_sideway(-20,0);
     self.create_xy_message();
   };
+  //rotate shape
+  self.rotate = function()
+  {
+    self.current.rotate();
+    self.collision_rotate_effect();
+    self.create_rotate_message();
+  };
   self.move_down = function()
   {
     if (self.current.move(0,20) == 2) //2 indicate that it reached rock 
