@@ -102,7 +102,7 @@ function move(id,type)
     sessions[location].move_right(id);
     break;
   case 2:
-    sessions[location].move_left();
+    sessions[location].move_left(id);
     break;
   case 3:
     sessions[location].move_down();
