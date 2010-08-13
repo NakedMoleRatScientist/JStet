@@ -21,7 +21,7 @@ function Engine(protocol,mode)
   {
     for (var i = 0;i < self.players.length;i++)
     {
-      if (self.players[i].id == player)
+      if (self.players[i].id == id)
       {
 	return self.players[i];
       }
