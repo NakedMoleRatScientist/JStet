@@ -86,13 +86,7 @@ function EventManager(id)
     var player = self.find_by_id(id);
     player.rotate();
   };
-  self.collision_rotate_effect = function()
-  {
-    if (self.collision(0,0))
-    {
-      self.current.rotate_backward();
-    }
-  };
+ 
   
   //run a game loop
   self.run_game = function()
