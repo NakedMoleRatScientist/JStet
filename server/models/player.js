@@ -47,6 +47,14 @@ function PlayerGameMode(player,manager)
     var message = [self.player.id,1,shape.name,choice,type];
     self.manager.send(message);
   };
+  //check collision sideway
+  self.collision_effect_sideway = function(x,y)
+  {
+    if (self.collision(x,y))
+    {
+      self.current.move(-x,-y);
+    }
+  };
   //Check if score beat the lowest high score on the chart.
   self.check_score = function()
   {
