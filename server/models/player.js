@@ -144,6 +144,13 @@ function PlayerGameMode(player,manager)
     }
     return false;
   };
+  //move right
+  self.move_right = function()
+  {
+    self.current.move(20,0);
+    self.collision_effect_sideway(20,0);
+    self.create_xy_message();
+  };
   self.initialize = function()
   {
     self.current.change_shape(generator.get_shape());
