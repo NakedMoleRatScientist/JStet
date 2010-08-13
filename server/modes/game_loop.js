@@ -65,7 +65,8 @@ function EventManager(id)
   //move right command to player
   self.move_right = function(id)
   {
-    
+    var player = self.find_by_id(id);
+    player.move_right();
   };
   //move left
   self.move_left = function()
