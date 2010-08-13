@@ -36,8 +36,9 @@ function Engine(protocol,mode)
   //Update location.
   self.update_location = function(id,x,y)
   {
-    self.current.x = x;
-    self.current.y = y;
+    var player = self.find_player(id);
+    player.current.x = x;
+    player.current.y = y;
   };
   self.move = function(x,y)
   {
