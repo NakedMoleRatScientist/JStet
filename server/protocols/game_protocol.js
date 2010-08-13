@@ -99,7 +99,7 @@ function move(id,type)
   switch(type)
   {
   case 1:
-    sessions[location].move_right();
+    sessions[location].move_right(id);
     break;
   case 2:
     sessions[location].move_left();
