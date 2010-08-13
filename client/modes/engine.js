@@ -43,11 +43,11 @@ function Engine(protocol,mode)
   self.move = function(x,y)
   {
     var player = self.find_player(self.you);
-    self.player.current.move(x,y);
-    var offset = self.player.field.calculate_positions(self.player.current.x,self.player.current.y);
-    if (self.player.field.check(self.player.current.get_list(),offset[0],offset[1]) == false)
+    player.current.move(x,y);
+    var offset = player.field.calculate_positions(player.current.x,player.current.y);
+    if (player.field.check(player.current.get_list(),offset[0],offset[1]) == false)
     {
-      self.player.current.move(-x,-y);
+      player.current.move(-x,-y);
     }
   };
   self.rotate = function(choice)
