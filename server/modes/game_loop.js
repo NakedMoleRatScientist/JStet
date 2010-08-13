@@ -68,17 +68,12 @@ function EventManager(id)
     var player = self.find_by_id(id);
     player.move_right();
   };
-  //move left
+  //move left command to player
   self.move_left = function()
   {
-    self.current.move(-20,0);
-    self.collision_effect_sideway(-20,0);
-    self.create_xy_message();
+    var player = self.find_by_id(id);
+    player.move_left();
   };
- 
- 
-  //move down
-  
   //rotate shape
   self.rotate = function()
   {
