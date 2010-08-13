@@ -69,7 +69,7 @@ function EventManager(id)
     player.move_right();
   };
   //move left command to player
-  self.move_left = function()
+  self.move_left = function(id)
   {
     var player = self.find_by_id(id);
     player.move_left();
