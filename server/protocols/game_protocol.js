@@ -28,9 +28,9 @@ function Session()
   {
     self.game.move_down(id);
   };
-  self.rotate = function()
+  self.rotate = function(id)
   {
-    self.game.rotate();
+    self.game.rotate(id);
   };
   self.add_events = function(loop_events)
   {
