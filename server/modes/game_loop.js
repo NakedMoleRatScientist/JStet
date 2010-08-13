@@ -56,7 +56,7 @@ function EventManager(id)
   {
     for (var i = 0; i < self.players.length;i++)
     {
-      if (self.players[i].id == id)
+      if (self.players[i].player.id == id)
       {
 	return self.players[i];
       }
