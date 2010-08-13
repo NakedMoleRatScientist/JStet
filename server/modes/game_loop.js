@@ -52,6 +52,11 @@ function EventManager(id)
     self.events = [];
     return message;
   };
+  //move right command to player
+  self.move_right = function(id)
+  {
+    
+  };
   //move left
   self.move_left = function()
   {
