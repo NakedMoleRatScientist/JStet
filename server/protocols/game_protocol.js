@@ -108,7 +108,7 @@ function move(id,type)
     sessions[location].move_down(id);
     break;
   case 4:
-    sessions[location].rotate();
+    sessions[location].rotate(id);
     break;
   }
 }
