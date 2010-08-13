@@ -133,6 +133,14 @@ function PlayerGameMode(player,manager)
     self.collision_effect_sideway(-20,0);
     self.create_xy_message();
   };
+  //check for rotation collision
+   self.collision_rotate_effect = function()
+  {
+    if (self.collision(0,0))
+    {
+      self.current.rotate_backward();
+    }
+  };
   //rotate shape
   self.rotate = function()
   {
