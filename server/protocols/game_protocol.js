@@ -24,9 +24,9 @@ function Session()
   {
     self.game.move_left(id);
   };
-  self.move_down = function()
+  self.move_down = function(id)
   {
-    self.game.move_down();
+    self.game.move_down(id);
   };
   self.rotate = function()
   {
