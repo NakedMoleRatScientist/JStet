@@ -44,10 +44,10 @@ function Engine(protocol,mode)
   {
     var player = self.find_player(self.you);
     self.player.current.move(x,y);
-    var offset = self.field.calculate_positions(self.current.x,self.current.y);
-    if (self.field.check(self.current.get_list(),offset[0],offset[1]) == false)
+    var offset = self.player.field.calculate_positions(self.player.current.x,self.player.current.y);
+    if (self.player.field.check(self.player.current.get_list(),offset[0],offset[1]) == false)
     {
-      self.current.move(-x,-y);
+      self.player.current.move(-x,-y);
     }
   };
   self.rotate = function(choice)
