@@ -20,9 +20,9 @@ function Session()
   {
     self.game.move_right(id);
   };
-  self.move_left = function()
+  self.move_left = function(id)
   {
-    self.game.move_left();
+    self.game.move_left(id);
   };
   self.move_down = function()
   {
