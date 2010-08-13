@@ -54,11 +54,6 @@ function EventManager(id)
   };
   self.find_by_id = function(id)
   {
-    
-  };
-  //move right command to player
-  self.move_right = function(id)
-  {
     for (var i = 0; i < self.players.length;i++)
     {
       if (self.players[i].id == id)
@@ -66,6 +61,11 @@ function EventManager(id)
 	return self.players[i];
       }
     }
+  };
+  //move right command to player
+  self.move_right = function(id)
+  {
+    
   };
   //move left
   self.move_left = function()
