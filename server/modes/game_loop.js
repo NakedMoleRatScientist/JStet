@@ -81,11 +81,10 @@ function EventManager(id)
     player.move_down();
   };
   //rotate shape
-  self.rotate = function()
+  self.rotate = function(id)
   {
-    self.current.rotate();
-    self.collision_rotate_effect();
-    self.create_rotate_message();
+    var player = self.find_by_id(id);
+    player.rotate();
   };
   self.collision_rotate_effect = function()
   {
