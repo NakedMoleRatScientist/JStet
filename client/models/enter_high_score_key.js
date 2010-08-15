@@ -1,7 +1,7 @@
 
 void enterHighScoreKey()
 {
-  var info = typing()
+  var info = typing();
   switch (info)
   {
   case false:
