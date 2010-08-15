@@ -86,7 +86,7 @@ function Chat()
   }
   self.enter = function()
   {
-    var verify = self.parse(self.message.get_text())
+    var verify = self.parse(self.message.get_text());
     if (verify == false)
     {
       self.protocol.send(self.message.get_text());
