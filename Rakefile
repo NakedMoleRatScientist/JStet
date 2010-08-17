@@ -2,6 +2,7 @@ require 'net/ftp'
 if File.exist?("secret.rb")
   require 'secret.rb'
 end
+os = RUBY_PLATFORM
 
 task :db => [:delete,:create]
 task :deploy => [:concat]
@@ -12,9 +13,11 @@ task :concat do
 end
 
 task :copy do
-  sh "cp jstet.html /srv/http"
-  sh "cp game.js /srv/http"
-  sh "cp -r vendor /srv/http"
+  if os == "i486-linux"
+    sh "cp jstet.html /var/www/"
+    sh "cp game.js /var/www/"
+    sh "cp -r vendor /var/www/"
+  end
 end
 
 task :test do
