@@ -1,6 +1,6 @@
 /*
 
-    P R O C E S S I N G . J S - 0.9.4
+    P R O C E S S I N G . J S - 0.9.6
     a port of the Processing visualization language
 
     License       : MIT
@@ -18,32 +18,314 @@
 
 (function() {
 
-  // IE Unfriendly AJAX Method
-  var ajax = function(url) {
-    var AJAX = new window.XMLHttpRequest();
-    if (AJAX) {
-      AJAX.open("GET", url + "?t=" + new Date().getTime(), false);
-      AJAX.send(null);
-      return AJAX.responseText;
-    } else {
-      return false;
-    }
+  var undef; // intentionally left undefined
+
+  var ajax = function ajax(url) {
+    var xhr = new XMLHttpRequest(); 
+    xhr.open("GET", url, false);
+    xhr.setRequestHeader("If-Modified-Since", "Fri, 1 Jan 1960 00:00:00 GMT");
+    xhr.send(null);
+    // failed request?
+    if (xhr.status !== 200 && xhr.status !== 0) { throw ("XMLHttpRequest failed, status code " + xhr.status); }
+    return xhr.responseText; 
+  };
+
+  var PConstants = {
+    X: 0, 
+    Y: 1,
+    Z: 2,
+
+    R: 3,
+    G: 4,
+    B: 5,
+    A: 6,
+
+    U: 7,
+    V: 8,
+
+    NX: 9,
+    NY: 10,
+    NZ: 11,
+
+    EDGE: 12,
+
+    // Stroke
+    SR: 13,
+    SG: 14,
+    SB: 15,
+    SA: 16,
+
+    SW: 17,
+
+    // Transformations (2D and 3D)
+    TX: 18,
+    TY: 19,
+    TZ: 20,
+
+    VX: 21,
+    VY: 22,
+    VZ: 23,
+    VW: 24,
+
+    // Material properties
+    AR: 25,
+    AG: 26,
+    AB: 27,
+
+    DR: 3,
+    DG: 4,
+    DB: 5,
+    DA: 6,
+
+    SPR: 28,
+    SPG: 29,
+    SPB: 30,
+    
+    SHINE: 31,
+
+    ER: 32,
+    EG: 33,
+    EB: 34,
+
+    BEEN_LIT: 35,
+
+    VERTEX_FIELD_COUNT: 36,
+
+    // Renderers
+    P2D:    1,
+    JAVA2D: 1,
+    WEBGL:  2,
+    P3D:    2,
+    OPENGL: 2,
+    PDF:    0,
+    DXF:    0,
+
+    // Platform IDs
+    OTHER:   0,
+    WINDOWS: 1,
+    MAXOSX:  2,
+    LINUX:   3,
+
+    EPSILON: 0.0001,
+
+    MAX_FLOAT:  3.4028235e+38,
+    MIN_FLOAT: -3.4028235e+38,
+    MAX_INT:    2147483647,
+    MIN_INT:   -2147483648,
+
+    PI:         Math.PI,
+    TWO_PI:     2 * Math.PI,
+    HALF_PI:    Math.PI / 2,
+    THIRD_PI:   Math.PI / 3,
+    QUARTER_PI: Math.PI / 4,
+
+    DEG_TO_RAD: Math.PI / 180,
+    RAD_TO_DEG: 180 / Math.PI,
+
+    WHITESPACE: " \t\n\r\f\u00A0",
+
+    // Color modes
+    RGB:   1,
+    ARGB:  2,
+    HSB:   3,
+    ALPHA: 4,
+    CMYK:  5,
+    
+    // Image file types
+    TIFF:  0,
+    TARGA: 1,
+    JPEG:  2,
+    GIF:   3,
+
+    // Filter/convert types
+    BLUR:      11,
+    GRAY:      12,
+    INVERT:    13,
+    OPAQUE:    14,
+    POSTERIZE: 15,
+    THRESHOLD: 16,
+    ERODE:     17,
+    DILATE:    18,
+
+    // Blend modes
+    REPLACE:    0,
+    BLEND:      1 << 0,
+    ADD:        1 << 1,
+    SUBTRACT:   1 << 2,
+    LIGHTEST:   1 << 3,
+    DARKEST:    1 << 4,
+    DIFFERENCE: 1 << 5,
+    EXCLUSION:  1 << 6,
+    MULTIPLY:   1 << 7,
+    SCREEN:     1 << 8,
+    OVERLAY:    1 << 9,
+    HARD_LIGHT: 1 << 10,
+    SOFT_LIGHT: 1 << 11,
+    DODGE:      1 << 12,
+    BURN:       1 << 13,
+
+    // Color component bit masks
+    ALPHA_MASK: 0xff000000,
+    RED_MASK:   0x00ff0000,
+    GREEN_MASK: 0x0000ff00,
+    BLUE_MASK:  0x000000ff,
+
+    // Projection matrices
+    CUSTOM:       0,
+    ORTHOGRAPHIC: 2,
+    PERSPECTIVE:  3,
+
+    // Shapes
+    POINT:          2,
+    POINTS:         2,
+    LINE:           4,
+    LINES:          4,
+    TRIANGLE:       8,
+    TRIANGLES:      9,
+    TRIANGLE_STRIP: 10,
+    TRIANGLE_FAN:   11,
+    QUAD:           16,
+    QUADS:          16,
+    QUAD_STRIP:     17,
+    POLYGON:        20,
+    PATH:           21,
+    RECT:           30,
+    ELLIPSE:        31,
+    ARC:            32,
+    SPHERE:         40,
+    BOX:            41,
+
+    GROUP:          0,
+    PRIMITIVE:      1, 
+    //PATH:         21, // shared with Shape PATH
+    GEOMETRY:       3,
+   
+    // Shape Vertex
+    VERTEX:        0,
+    BEZIER_VERTEX: 1,
+    CURVE_VERTEX:  2,
+    BREAK:         3,
+    CLOSESHAPE:    4,
+    
+    // Shape closing modes
+    OPEN:  1,
+    CLOSE: 2,
+    
+    // Shape drawing modes
+    CORNER:          0, // Draw mode convention to use (x, y) to (width, height)
+    CORNERS:         1, // Draw mode convention to use (x1, y1) to (x2, y2) coordinates
+    RADIUS:          2, // Draw mode from the center, and using the radius
+    CENTER_RADIUS:   2, // Deprecated! Use RADIUS instead
+    CENTER:          3, // Draw from the center, using second pair of values as the diameter
+    DIAMETER:        3, // Synonym for the CENTER constant. Draw from the center
+    CENTER_DIAMETER: 3, // Deprecated! Use DIAMETER instead
+
+    // Text vertical alignment modes
+    BASELINE: 0,   // Default vertical alignment for text placement
+    TOP:      101, // Align text to the top
+    BOTTOM:   102, // Align text from the bottom, using the baseline
+
+    // UV Texture coordinate modes
+    NORMAL:     1,
+    NORMALIZED: 1,
+    IMAGE:      2,
+
+    // Text placement modes
+    MODEL: 4,
+    SHAPE: 5,
+
+    // Stroke modes
+    SQUARE:  'butt',
+    ROUND:   'round',
+    PROJECT: 'square',
+    MITER:   'miter',
+    BEVEL:   'bevel',
+
+    // Lighting modes
+    AMBIENT:     0,
+    DIRECTIONAL: 1,
+    //POINT:     2, Shared with Shape constant
+    SPOT:        3,
+
+    // Key constants
+
+    // Both key and keyCode will be equal to these values
+    BACKSPACE: 8,
+    TAB:       9,
+    ENTER:     10,
+    RETURN:    13,
+    ESC:       27,
+    DELETE:    127,
+    CODED:     0xffff,
+
+    // p.key will be CODED and p.keyCode will be this value
+    SHIFT:     16,
+    CONTROL:   17,
+    ALT:       18,
+    UP:        38,
+    RIGHT:     39,
+    DOWN:      40,
+    LEFT:      37,
+
+    // Cursor types
+    ARROW:    'default',
+    CROSS:    'crosshair',
+    HAND:     'pointer',
+    MOVE:     'move',
+    TEXT:     'text',
+    WAIT:     'wait',
+    NOCURSOR: "url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='), auto",
+
+    // Hints
+    DISABLE_OPENGL_2X_SMOOTH:     1,
+    ENABLE_OPENGL_2X_SMOOTH:     -1,
+    ENABLE_OPENGL_4X_SMOOTH:      2,
+    ENABLE_NATIVE_FONTS:          3,
+    DISABLE_DEPTH_TEST:           4,
+    ENABLE_DEPTH_TEST:           -4,
+    ENABLE_DEPTH_SORT:            5,
+    DISABLE_DEPTH_SORT:          -5,
+    DISABLE_OPENGL_ERROR_REPORT:  6,
+    ENABLE_OPENGL_ERROR_REPORT:  -6,
+    ENABLE_ACCURATE_TEXTURES:     7,
+    DISABLE_ACCURATE_TEXTURES:   -7,
+    HINT_COUNT:                  10,
+
+    // PJS defined constants
+    SINCOS_LENGTH:      parseInt(360 / 0.5, 10),
+    PRECISIONB:         15, // fixed point precision is limited to 15 bits!!
+    PRECISIONF:         1 << 15,
+    PREC_MAXVAL:        (1 << 15) - 1,
+    PREC_ALPHA_SHIFT:   24 - 15,
+    PREC_RED_SHIFT:     16 - 15,
+    NORMAL_MODE_AUTO:   0,
+    NORMAL_MODE_SHAPE:  1,
+    NORMAL_MODE_VERTEX: 2,
+    MAX_LIGHTS:         8
   };
 
   var Processing = this.Processing = function Processing(curElement, aCode) {
 
     var p = this;
 
-    p.pjs = {
-       imageCache: { // by default we have an empty imageCache
-         pending: 0 
-       },
-       crispLines: false
+    // Include PConstants
+    for (var constant in PConstants) {
+      if (PConstants.hasOwnProperty(constant)) {
+        p[constant] = PConstants[constant];
+      }
+    }
+
+    // PJS specific (non-p5) methods and properties to externalize
+    p.externals = {
+      canvas:  curElement,
+      context: undef,
+      sketch:  undef,
+      onblur:  function() {},
+      onfocus: function() {}
     };
 
     p.name = 'Processing.js Instance'; // Set Processing defaults / environment variables
     p.use3DContext = false; // default '2d' canvas context
-    p.canvas = curElement;
 
     // Glyph path storage for textFonts
     p.glyphTable = {};
@@ -57,219 +339,39 @@
     p.mouseScroll     = 0;
 
     // Undefined event handlers to be replaced by user when needed
-    p.mouseClicked    = undefined;
-    p.mouseDragged    = undefined;
-    p.mouseMoved      = undefined;
-    p.mousePressed    = undefined;
-    p.mouseReleased   = undefined;
-    p.mouseScrolled   = undefined;
-    p.key             = undefined;
-    p.keyCode         = undefined;
-    p.keyPressed      = undefined;
-    p.keyReleased     = undefined;
-    p.keyTyped        = undefined;
-    p.draw            = undefined;
-    p.setup           = undefined;
+    p.mouseClicked    = undef;
+    p.mouseDragged    = undef;
+    p.mouseMoved      = undef;
+    p.mousePressed    = undef;
+    p.mouseReleased   = undef;
+    p.mouseScrolled   = undef;
+    p.key             = undef;
+    p.keyCode         = undef;
+    p.keyPressed      = undef;
+    p.keyReleased     = undef;
+    p.keyTyped        = undef;
+    p.draw            = undef;
+    p.setup           = undef;
 
-    // Remapped vars 
+    // Remapped vars
     p.__mousePressed  = false;
     p.__keyPressed    = false;
     p.__frameRate     = 0;
 
     // The current animation frame
-    p.frameCount = 0;
+    p.frameCount      = 0;
+
+    p.focused         = true;
+
+    p.breakShape      = false;
 
     // The height/width of the canvas
     p.width = curElement.width - 0;
     p.height = curElement.height - 0;
 
-    // Color modes
-    p.RGB   = 1;
-    p.ARGB  = 2;
-    p.HSB   = 3;
-    p.ALPHA = 4;
-    p.CMYK  = 5;
-
-    // Renderers
-    p.P2D    = 1;
-    p.JAVA2D = 1;
-    p.WEBGL  = 2;
-    p.P3D    = 2;
-    p.OPENGL = 2;
-    p.EPSILON = 0.0001;
-    p.MAX_FLOAT   = 3.4028235e+38;
-    p.MIN_FLOAT   = -3.4028235e+38;
-    p.MAX_INT     = 2147483647;
-    p.MIN_INT     = -2147483648;
-    p.PI          = Math.PI;
-    p.TWO_PI      = 2 * p.PI;
-    p.HALF_PI     = p.PI / 2;
-    p.THIRD_PI    = p.PI / 3;
-    p.QUARTER_PI  = p.PI / 4;
-    p.DEG_TO_RAD  = p.PI / 180;
-    p.RAD_TO_DEG  = 180 / p.PI;
-    p.WHITESPACE  = " \t\n\r\f\u00A0";
-
-    // Filter/convert types
-    p.BLUR      = 11;
-    p.GRAY      = 12;
-    p.INVERT    = 13;
-    p.OPAQUE    = 14;
-    p.POSTERIZE = 15;
-    p.THRESHOLD = 16;
-    p.ERODE     = 17;
-    p.DILATE    = 18;
-
-    // Blend modes
-    p.REPLACE    = 0;
-    p.BLEND      = 1 << 0;
-    p.ADD        = 1 << 1;
-    p.SUBTRACT   = 1 << 2;
-    p.LIGHTEST   = 1 << 3;
-    p.DARKEST    = 1 << 4;
-    p.DIFFERENCE = 1 << 5;
-    p.EXCLUSION  = 1 << 6;
-    p.MULTIPLY   = 1 << 7;
-    p.SCREEN     = 1 << 8;
-    p.OVERLAY    = 1 << 9;
-    p.HARD_LIGHT = 1 << 10;
-    p.SOFT_LIGHT = 1 << 11;
-    p.DODGE      = 1 << 12;
-    p.BURN       = 1 << 13;
-
-    // Color component bit masks
-    p.ALPHA_MASK = 0xff000000;
-    p.RED_MASK   = 0x00ff0000;
-    p.GREEN_MASK = 0x0000ff00;
-    p.BLUE_MASK  = 0x000000ff;
-
-    // Projection matrices
-    p.CUSTOM       = 0;
-    p.ORTHOGRAPHIC = 2;
-    p.PERSPECTIVE  = 3;
-
-    // Shapes
-    p.POINT          = 2;
-    p.POINTS         = 2;
-    p.LINE           = 4;
-    p.LINES          = 4;
-    p.TRIANGLE       = 8;
-    p.TRIANGLES      = 9;
-    p.TRIANGLE_STRIP = 10;
-    p.TRIANGLE_FAN   = 11;
-    p.QUAD           = 16;
-    p.QUADS          = 16;
-    p.QUAD_STRIP     = 17;
-    p.POLYGON        = 20;
-    p.PATH           = 21;
-    p.RECT           = 30;
-    p.ELLIPSE        = 31;
-    p.ARC            = 32;
-    p.SPHERE         = 40;
-    p.BOX            = 41;
-
-    // Shape closing modes
-    p.OPEN  = 1;
-    p.CLOSE = 2;
-
-    // Shape drawing modes
-    p.CORNER          = 0; // Draw mode convention to use (x, y) to (width, height)
-    p.CORNERS         = 1; // Draw mode convention to use (x1, y1) to (x2, y2) coordinates
-    p.RADIUS          = 2; // Draw mode from the center, and using the radius
-    p.CENTER_RADIUS   = 2; // Deprecated! Use RADIUS instead
-    p.CENTER          = 3; // Draw from the center, using second pair of values as the diameter
-    p.DIAMETER        = 3; // Synonym for the CENTER constant. Draw from the center
-    p.CENTER_DIAMETER = 3; // Deprecated! Use DIAMETER instead
-
-    // Text vertical alignment modes
-    p.BASELINE = 0;   // Default vertical alignment for text placement
-    p.TOP      = 101; // Align text to the top
-    p.BOTTOM   = 102; // Align text from the bottom, using the baseline
-
-    // UV Texture coordinate modes
-    p.NORMAL     = 1;
-    p.NORMALIZED = 1;
-    p.IMAGE      = 2;
-
-    // Text placement modes
-    p.MODEL = 4;
-    p.SHAPE = 5;
-
-    // Stroke modes
-    p.SQUARE  = 'butt';
-    p.ROUND   = 'round';
-    p.PROJECT = 'square';
-    p.MITER   = 'miter';
-    p.BEVEL   = 'bevel';
-
-    // Lighting modes
-    p.AMBIENT     = 0;
-    p.DIRECTIONAL = 1;
-    //POINT       = 2; Shared with Shape constant
-    p.SPOT        = 3;
-
-    // Key constants
-
-    // Both key and keyCode will be equal to these values
-    p.BACKSPACE = 8;
-    p.TAB       = 9;
-    p.ENTER     = 10;
-    p.RETURN    = 13;
-    p.ESC       = 27;
-    p.DELETE    = 127;
-    p.CODED     = 0xffff;
-
-    // p.key will be CODED and p.keyCode will be this value
-    p.SHIFT     = 16;
-    p.CONTROL   = 17;
-    p.ALT       = 18;
-    p.UP        = 38;
-    p.RIGHT     = 39;
-    p.DOWN      = 40;
-    p.LEFT      = 37;
-
-    var codedKeys = [p.SHIFT, p.CONTROL, p.ALT, p.UP, p.RIGHT, p.DOWN, p.LEFT];
-
-    // Cursor types
-    p.ARROW    = 'default';
-    p.CROSS    = 'crosshair';
-    p.HAND     = 'pointer';
-    p.MOVE     = 'move';
-    p.TEXT     = 'text';
-    p.WAIT     = 'wait';
-    p.NOCURSOR = "url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='), auto";
-
-    // Hints
-    p.DISABLE_OPENGL_2X_SMOOTH    =  1;
-    p.ENABLE_OPENGL_2X_SMOOTH     = -1;
-    p.ENABLE_OPENGL_4X_SMOOTH     =  2;
-    p.ENABLE_NATIVE_FONTS         =  3;
-    p.DISABLE_DEPTH_TEST          =  4;
-    p.ENABLE_DEPTH_TEST           = -4;
-    p.ENABLE_DEPTH_SORT           =  5;
-    p.DISABLE_DEPTH_SORT          = -5;
-    p.DISABLE_OPENGL_ERROR_REPORT =  6;
-    p.ENABLE_OPENGL_ERROR_REPORT  = -6;
-    p.ENABLE_ACCURATE_TEXTURES    =  7;
-    p.DISABLE_ACCURATE_TEXTURES   = -7;
-    p.HINT_COUNT                  = 10;
-
-    // PJS defined constants
-    p.SINCOS_LENGTH      = parseInt(360 / 0.5, 10);
-    p.PRECISIONB         = 15; // fixed point precision is limited to 15 bits!!
-    p.PRECISIONF         = 1 << p.PRECISIONB;
-    p.PREC_MAXVAL        = p.PRECISIONF - 1;
-    p.PREC_ALPHA_SHIFT   = 24 - p.PRECISIONB;
-    p.PREC_RED_SHIFT     = 16 - p.PRECISIONB;
-    p.NORMAL_MODE_AUTO   = 0;
-    p.NORMAL_MODE_SHAPE  = 1;
-    p.NORMAL_MODE_VERTEX = 2;
-    p.MAX_LIGHTS         = 8;
-
-    p.focused            = true;
-
     // "Private" variables used to maintain state
     var curContext,
+        curSketch,
         online = true,
         doFill = true,
         fillStyle = [1.0, 1.0, 1.0, 1.0],
@@ -281,7 +383,6 @@
         isStrokeDirty = true,
         lineWidth = 1,
         loopStarted = false,
-        refreshBackground = function() {},
         doLoop = true,
         looping = 0,
         curRectMode = p.CORNER,
@@ -345,12 +446,17 @@
         textBuffer,
         textureBuffer,
         indexBuffer,
+        // Text alignment
+        horizontalTextAlignment = p.LEFT,
+        verticalTextAlignment = p.BASELINE,
+        baselineOffset = 0.2, // percent 
         // Pixels cache
-        originalContext, 
-        proxyContext = null, 
+        originalContext,
+        proxyContext = null,
         isContextReplaced = false,
-        setPixelsCached, 
-        maxPixelsCached = 1000;
+        setPixelsCached,
+        maxPixelsCached = 1000,
+        codedKeys = [p.SHIFT, p.CONTROL, p.ALT, p.UP, p.RIGHT, p.DOWN, p.LEFT];
 
     // Work-around for Minefield. using ctx.VERTEX_PROGRAM_POINT_SIZE
     // in Minefield does nothing and does not report any errors.
@@ -359,7 +465,7 @@
 
     // Get padding and border style widths for mouse offsets
     var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
-    
+
     if (document.defaultView && document.defaultView.getComputedStyle) {
       stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(curElement, null)['paddingLeft'], 10)      || 0;
       stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(curElement, null)['paddingTop'], 10)       || 0;
@@ -408,6 +514,149 @@
         isBezier = false,
         firstVert = true;
 
+    //PShape stuff
+    var curShapeMode = p.CORNER;
+    var colors = {}; 
+        colors.aliceblue = "#f0f8ff";
+        colors.antiquewhite = "#faebd7";
+        colors.aqua = "#00ffff";
+        colors.aquamarine = "#7fffd4";
+        colors.azure = "#f0ffff";
+        colors.beige = "#f5f5dc";
+        colors.bisque = "#ffe4c4";
+        colors.black = "#000000";
+        colors.blanchedalmond = "#ffebcd";
+        colors.blue = "#0000ff";
+        colors.blueviolet = "#8a2be2";
+        colors.brown = "#a52a2a";
+        colors.burlywood = "#deb887";
+        colors.cadetblue = "#5f9ea0";
+        colors.chartreuse = "#7fff00";
+        colors.chocolate = "#d2691e";
+        colors.coral = "#ff7f50";
+        colors.cornflowerblue = "#6495ed";
+        colors.cornsilk = "#fff8dc";
+        colors.crimson = "#dc143c";
+        colors.cyan = "#00ffff";
+        colors.darkblue = "#00008b";
+        colors.darkcyan = "#008b8b";
+        colors.darkgoldenrod = "#b8860b";
+        colors.darkgray = "#a9a9a9";
+        colors.darkgreen = "#006400";
+        colors.darkkhaki = "#bdb76b";
+        colors.darkmagenta = "#8b008b";
+        colors.darkolivegreen = "#556b2f";
+        colors.darkorange = "#ff8c00";
+        colors.darkorchid = "#9932cc";
+        colors.darkred = "#8b0000";
+        colors.darksalmon = "#e9967a";
+        colors.darkseagreen = "#8fbc8f";
+        colors.darkslateblue = "#483d8b";
+        colors.darkslategray = "#2f4f4f";
+        colors.darkturquoise = "#00ced1";
+        colors.darkviolet = "#9400d3";
+        colors.deeppink = "#ff1493";
+        colors.deepskyblue = "#00bfff";
+        colors.dimgray = "#696969";
+        colors.dodgerblue = "#1e90ff";
+        colors.firebrick = "#b22222";
+        colors.floralwhite = "#fffaf0";
+        colors.forestgreen = "#228b22";
+        colors.fuchsia = "#ff00ff";
+        colors.gainsboro = "#dcdcdc";
+        colors.ghostwhite = "#f8f8ff";
+        colors.gold = "#ffd700";
+        colors.goldenrod = "#daa520";
+        colors.gray = "#808080";
+        colors.green = "#008000";
+        colors.greenyellow = "#adff2f";
+        colors.honeydew = "#f0fff0";
+        colors.hotpink = "#ff69b4";
+        colors.indianred = "#cd5c5c";
+        colors.indigo = "#4b0082";
+        colors.ivory = "#fffff0";
+        colors.khaki = "#f0e68c";
+        colors.lavender = "#e6e6fa";
+        colors.lavenderblush = "#fff0f5";
+        colors.lawngreen = "#7cfc00";
+        colors.lemonchiffon = "#fffacd";
+        colors.lightblue = "#add8e6";
+        colors.lightcoral = "#f08080";
+        colors.lightcyan = "#e0ffff";
+        colors.lightgoldenrodyellow = "#fafad2";
+        colors.lightgrey = "#d3d3d3";
+        colors.lightgreen = "#90ee90";
+        colors.lightpink = "#ffb6c1";
+        colors.lightsalmon = "#ffa07a";
+        colors.lightseagreen = "#20b2aa";
+        colors.lightskyblue = "#87cefa";
+        colors.lightslategray = "#778899";
+        colors.lightsteelblue = "#b0c4de";
+        colors.lightyellow = "#ffffe0";
+        colors.lime = "#00ff00";
+        colors.limegreen = "#32cd32";
+        colors.linen = "#faf0e6";
+        colors.magenta = "#ff00ff";
+        colors.maroon = "#800000";
+        colors.mediumaquamarine = "#66cdaa";
+        colors.mediumblue = "#0000cd";
+        colors.mediumorchid = "#ba55d3";
+        colors.mediumpurple = "#9370d8";
+        colors.mediumseagreen = "#3cb371";
+        colors.mediumslateblue = "#7b68ee";
+        colors.mediumspringgreen = "#00fa9a";
+        colors.mediumturquoise = "#48d1cc";
+        colors.mediumvioletred = "#c71585";
+        colors.midnightblue = "#191970";
+        colors.mintcream = "#f5fffa";
+        colors.mistyrose = "#ffe4e1";
+        colors.moccasin = "#ffe4b5";
+        colors.navajowhite = "#ffdead";
+        colors.navy = "#000080";
+        colors.oldlace = "#fdf5e6";
+        colors.olive = "#808000";
+        colors.olivedrab = "#6b8e23";
+        colors.orange = "#ffa500";
+        colors.orangered = "#ff4500";
+        colors.orchid = "#da70d6";
+        colors.palegoldenrod = "#eee8aa";
+        colors.palegreen = "#98fb98";
+        colors.paleturquoise = "#afeeee";
+        colors.palevioletred = "#d87093";
+        colors.papayawhip = "#ffefd5";
+        colors.peachpuff = "#ffdab9";
+        colors.peru = "#cd853f";
+        colors.pink = "#ffc0cb";
+        colors.plum = "#dda0dd";
+        colors.powderblue = "#b0e0e6";
+        colors.purple = "#800080";
+        colors.red = "#ff0000";
+        colors.rosybrown = "#bc8f8f";
+        colors.royalblue = "#4169e1";
+        colors.saddlebrown = "#8b4513";
+        colors.salmon = "#fa8072";
+        colors.sandybrown = "#f4a460";
+        colors.seagreen = "#2e8b57";
+        colors.seashell = "#fff5ee";
+        colors.sienna = "#a0522d";
+        colors.silver = "#c0c0c0";
+        colors.skyblue = "#87ceeb";
+        colors.slateblue = "#6a5acd";
+        colors.slategray = "#708090";
+        colors.snow = "#fffafa";
+        colors.springgreen = "#00ff7f";
+        colors.steelblue = "#4682b4";
+        colors.tan = "#d2b48c";
+        colors.teal = "#008080";
+        colors.thistle = "#d8bfd8";
+        colors.tomato = "#ff6347";
+        colors.turquoise = "#40e0d0";
+        colors.violet = "#ee82ee";
+        colors.wheat = "#f5deb3";
+        colors.white = "#ffffff";
+        colors.whitesmoke = "#f5f5f5";
+        colors.yellow = "#ffff00";
+        colors.yellowgreen = "#9acd32";
     // Stores states for pushStyle() and popStyle().
     var styleArray = new Array(0);
 
@@ -439,9 +688,9 @@
 
     // These verts are used for the fill and stroke using TRIANGLE_FAN and LINE_LOOP
     var rectVerts = [0,0,0, 0,1,0, 1,1,0, 1,0,0];
-    
+
     var rectNorms = [0,0,-1, 0,0,-1, 0,0,-1, 0,0,-1];
-    
+
     // Vertex shader for points and lines
     var vShaderSrcUnlitShape =
       "attribute vec3 aVertex;" +
@@ -484,7 +733,7 @@
       "uniform vec4 color;"+
       "uniform sampler2D uSampler;"+
       "uniform int picktype;"+
-      
+
       "void main(void){" +
       "  if(picktype==0){"+
       "    gl_FragColor = color;" +
@@ -501,7 +750,7 @@
       "attribute vec4 aColor;" +
       "attribute vec2 aTexture;" +
       "varying   vec2 vTexture;" +
-      
+
       "uniform vec4 color;" +
 
       "uniform bool usingMat;" +
@@ -627,7 +876,7 @@
       "  vec3 finalAmbient = vec3( 0.0, 0.0, 0.0 );" +
       "  vec3 finalDiffuse = vec3( 0.0, 0.0, 0.0 );" +
       "  vec3 finalSpecular = vec3( 0.0, 0.0, 0.0 );" +
-      
+
       "  vec4 col = color;" +
       "  if(color[0] == -1.0){" +
       "    col = aColor;" +
@@ -684,13 +933,13 @@
       "uniform sampler2D sampler;" +
       "uniform bool usingTexture;" +
       "varying vec2 vTexture;" +
-      
+
       // In Processing, when a texture is used, the fill color is ignored
       "void main(void){" +
       "  if(usingTexture){" +
       "    gl_FragColor =  vec4(texture2D(sampler, vTexture.xy));" +
       "  }"+
-      "  else{" + 
+      "  else{" +
       "    gl_FragColor = vec4(gl_Color);" +
       "  }" +
       "}";
@@ -768,7 +1017,7 @@
         }
       }
     }
-    
+
     // Wrapper to easily deal with array names changes. TODO: Don't think we need this wrapper anymore consensus has been reached.
     var newWebGLArray = function(data) {
       return new WebGLFloatArray(data);
@@ -833,14 +1082,14 @@
     ////////////////////////////////////////////////////////////////////////////
     var charMap = {};
 
-    var Char = function Char(chr) {
+    var Char = p.Character = function Char(chr) {
       if (typeof chr === 'string' && chr.length === 1) {
         this.code = chr.charCodeAt(0);
       } else {
         this.code = NaN;
       }
 
-      return (typeof charMap[this.code] === 'undefined') ? charMap[this.code] = this : charMap[this.code];
+      return (charMap[this.code] === undef) ? charMap[this.code] = this : charMap[this.code];
     };
 
     Char.prototype.toString = function() {
@@ -852,9 +1101,1185 @@
     };
     
     ////////////////////////////////////////////////////////////////////////////
+    // PShape
+    ////////////////////////////////////////////////////////////////////////////
+    var PShape = p.PShape = function(family) {
+      this.family    = family || p.GROUP;
+      this.visible   = true;
+      this.style     = true;
+      this.children  = [];
+      this.nameTable = [];
+      this.params    = [];
+      this.name      = "";
+      this.image     = null;  //type PImage
+      this.matrix    = null; 
+      this.kind      = null;
+      this.close     = null;
+      this.width     = null;
+      this.height    = null;
+      this.parent    = null;
+      /* methods */
+      this.isVisible = function(){
+        return this.visible;
+      };
+      this.setVisible = function (visible){
+        this.visible = visible;
+      };
+      this.disableStyle = function(){
+        this.style = false;
+        for(var i = 0; i < this.children.length; i++)
+        {
+          this.children[i].disableStyle();
+        }
+      };
+      this.enableStyle = function(){
+        this.style = true;
+        for(var i = 0; i < this.children.length; i++)
+        {
+          this.children[i].enableStyle();
+        }
+      };
+      this.getFamily = function(){
+        return this.family;
+      };
+      this.getWidth = function(){
+        return this.width;
+      };
+      this.getHeight = function(){
+        return this.height;
+      };
+      this.setName = function(name){
+        this.name = name;
+      };
+      this.getName = function(){
+        return this.name;
+      };
+      this.draw = function(){
+        if (this.visible) {
+          this.pre();
+          this.drawImpl();
+          this.post();
+        }
+      };
+      this.drawImpl = function(){
+        if (this.family === p.GROUP) {
+          this.drawGroup();
+        } else if (this.family === p.PRIMITIVE) {
+          this.drawPrimitive();
+        } else if (this.family === p.GEOMETRY) {
+          this.drawGeometry();
+        } else if (this.family === p.PATH) {
+          this.drawPath();
+        }
+      };
+      this.drawPath = function(){
+        if (this.vertices.length === 0) { return; }
+
+        p.beginShape();
+        var i;
+        if (this.vertexCodes.length === 0) {  // each point is a simple vertex
+          if (this.vertices[0].length === 2) {  // drawing 2D vertices
+            for (i = 0; i < this.vertices.length; i++) {
+              p.vertex(this.vertices[i][0], this.vertices[i][1]);
+            }
+          } else {  // drawing 3D vertices
+            for (i = 0; i < this.vertices.length; i++) {
+              p.vertex(this.vertices[i][0], this.vertices[i][1], this.vertices[i][2]);
+            }
+          }
+        } else {  // coded set of vertices
+          var index = 0;
+          var j;
+          if (this.vertices[0].length === 2) {  // drawing a 2D path
+            for (j = 0; j < this.vertexCodes.length; j++) {
+              switch (this.vertexCodes[j]) {
+              case p.VERTEX:
+                p.vertex(this.vertices[index][0], this.vertices[index][1]);
+                if ( this.vertices[index]["moveTo"] === true) {
+                  vertArray[vertArray.length-1]["moveTo"] = true;
+                } else if ( this.vertices[index]["moveTo"] === false) {
+                  vertArray[vertArray.length-1]["moveTo"] = false;
+                }
+                p.breakShape = false;
+                index++;
+                break;
+              case p.BEZIER_VERTEX:
+                p.bezierVertex(this.vertices[index+0][0], this.vertices[index+0][1],
+                               this.vertices[index+1][0], this.vertices[index+1][1],
+                               this.vertices[index+2][0], this.vertices[index+2][1]);
+                index += 3;
+                break;
+              case p.CURVE_VERTEX:
+                p.curveVertex(this.vertices[index][0], this.vertices[index][1]);
+                index++;
+                break;
+              case p.BREAK:
+                p.breakShape = true;
+                break;                  
+              }
+            }
+          } else {  // drawing a 3D path
+            for (j = 0; j < this.vertexCodes.length; j++) {
+              switch (this.vertexCodes[j]) {
+                case p.VERTEX:
+                  p.vertex(this.vertices[index][0], this.vertices[index][1], this.vertices[index][2]);
+                  if (this.vertices[index]["moveTo"] === true) {
+                    vertArray[vertArray.length-1]["moveTo"] = true;
+                  } else if (this.vertices[index]["moveTo"] === false) {
+                    vertArray[vertArray.length-1]["moveTo"] = false;
+                  }
+                  p.breakShape = false;
+                  break;
+                case p.BEZIER_VERTEX:
+                  p.bezierVertex(this.vertices[index+0][0], this.vertices[index+0][1], this.vertices[index+0][2],
+                                 this.vertices[index+1][0], this.vertices[index+1][1], this.vertices[index+1][2],
+                                 this.vertices[index+2][0], this.vertices[index+2][1], this.vertices[index+2][2]);
+                  index += 3;
+                  break;
+                case p.CURVE_VERTEX:
+                  p.curveVertex(this.vertices[index][0], this.vertices[index][1], this.vertices[index][2]);
+                  index++;
+                  break;
+                case p.BREAK:
+                  p.breakShape = true;
+                  break;
+              }
+            }
+          }
+        }
+        p.endShape(this.close ? p.CLOSE : p.OPEN);
+      };
+      this.drawGeometry = function() {
+        p.beginShape(this.kind);
+        var i;
+        if (this.style) {
+          for (i = 0; i < this.vertices.length; i++) {
+            p.vertex(this.vertices[i]);
+          }
+        } else {
+          for (i = 0; i < this.vertices.length; i++) {
+            var vert = this.vertices[i];
+            if (vert[2] === 0) {
+              p.vertex(vert[0], vert[1]);
+            } else {
+              p.vertex(vert[0], vert[1], vert[2]);
+            }
+          }
+        }
+        p.endShape();
+      };
+      this.drawGroup = function() {
+        for (var i = 0; i < this.children.length; i++) {
+          this.children[i].draw();
+        }
+      };
+      this.drawPrimitive = function() {
+        switch (this.kind) {        
+          case p.POINT:
+            p.point(this.params[0], this.params[1]);
+            break;
+          case p.LINE: 
+            if (this.params.length === 4) {  // 2D
+              p.line(this.params[0], this.params[1],
+                     this.params[2], this.params[3]);
+            } else {  // 3D
+              p.line(this.params[0], this.params[1], this.params[2],
+                     this.params[3], this.params[4], this.params[5]);
+            }
+            break;
+          case p.TRIANGLE:
+            p.triangle(this.params[0], this.params[1],
+                       this.params[2], this.params[3],
+                       this.params[4], this.params[5]);
+            break;
+          case p.QUAD:
+            p.quad(this.params[0], this.params[1],
+                   this.params[2], this.params[3],
+                   this.params[4], this.params[5],
+                   this.params[6], this.params[7]);
+            break;
+          case p.RECT:
+            if (this.image !== null) {
+              p.imageMode(p.CORNER);
+              p.image(this.image, this.params[0], this.params[1], this.params[2], this.params[3]);
+            } else {
+              p.rectMode(p.CORNER);
+              p.rect(this.params[0], this.params[1], this.params[2], this.params[3]);
+            }
+            break;
+          case p.ELLIPSE:
+            p.ellipseMode(p.CORNER);
+            p.ellipse(this.params[0], this.params[1], this.params[2], this.params[3]);
+            break;
+          case p.ARC:
+            p.ellipseMode(p.CORNER);
+            p.arc(this.params[0], this.params[1], this.params[2], this.params[3], this.params[4], this.params[5]);
+            break;
+          case p.BOX:
+            if (this.params.length === 1) {
+              p.box(this.params[0]);
+            } else {
+              p.box(this.params[0], this.params[1], this.params[2]);
+            }
+            break;
+          case p.SPHERE:
+            p.sphere(this.params[0]);
+            break;
+        }
+      };
+      this.pre = function() {
+        if (this.matrix) {
+          p.pushMatrix();
+          //this.applyMatrix( this.matrix ); //applyMatrix missing
+        }
+        if (this.style) {
+          p.pushStyle();
+          this.styles();
+        }
+      };
+      this.post = function() {
+        if (this.matrix) {
+          p.popMatrix();
+        }
+        if (this.style) {
+          p.popStyle();
+        }
+      };
+      this.styles = function() {
+        if (this.stroke) {
+          p.stroke(this.strokeColor);
+          p.strokeWeight(this.strokeWeight);
+          p.strokeCap(this.strokeCap);
+          p.strokeJoin(this.strokeJoin);
+        } else {
+          p.noStroke();
+        }
+
+        if (this.fill) {
+          p.fill(this.fillColor);
+        } else {
+          p.noFill();
+        }
+      };
+      
+      // return the PShape at the specific index from the children array or
+      // return the Phape from a parent shape specified by its name
+      this.getChild = function(child) {
+        if (typeof child === 'number') {
+          return this.children[child];
+        } else {
+          var found,
+              i;
+          if(child === "" || this.name === child){
+            return this;
+          } else {
+            if(this.nameTable.length > 0)
+            {
+              for(i = 0; i < this.nameTable.length || found; i++)
+              {
+                if(this.nameTable[i].getName === child) {
+                  found = this.nameTable[i];
+                }
+              }
+              if (found) { return found; }
+            }
+            for(i = 0; i < this.children.lenth; i++)
+            {
+              found = this.children[i].getChild(child);
+              if(found) { return found; }
+            }
+          }
+          return null;
+        }              
+      };
+      this.getChildCount = function () {
+        return this.children.length;
+      };
+      this.addChild = function( child ) {
+        this.children.push(child);
+        child.parent = this;
+        if (child.getName() !== null) {
+          this.addName(child.getName(), child);
+        }
+      };
+      this.addName = function(name,  shape) {
+        if (this.parent !== null) {
+          this.parent.addName( name, shape );
+        } else {
+          this.nameTable.push( [name, shape] );
+        }
+      };
+      // findChild not in yet
+      this.translate = function() {
+        if(arguments.length === 2)
+        {
+          this.checkMatrix(2);
+          this.matrix.translate(arguments[0], arguments[1]);
+        } else {
+          this.checkMatrix(3);
+          this.matrix.translate(arguments[0], arguments[1], 0);
+        }
+      };
+      this.checkMatrix = function(dimensions) {
+        if(this.matrix === null) {
+          if(dimensions === 2) {
+            this.matrix = new p.PMatrix2D();
+          } else {
+            this.matrix = new p.PMatrix3D();
+          }
+        }else if(dimensions === 3 && this.matrix instanceof p.PMatrix2D) {
+          this.matrix = new p.PMatrix3D();
+        }
+      };
+      this.rotateX = function(angle) {
+        this.rotate(angle, 1, 0, 0);
+      };
+      this.rotateY = function(angle) {
+        this.rotate(angle, 0, 1, 0);
+      };
+      this.rotateZ = function(angle) {
+        this.rotate(angle, 0, 0, 1);
+      };
+      this.rotate = function() {
+        if(arguments.length === 1){
+          this.checkMatrix(2);
+          this.matrix.rotate(arguments[0]);
+        } else {
+          this.checkMatrix(3);
+          this.matrix.rotate(arguments[0], arguments[1], arguments[2] ,arguments[3]);
+        }
+      };
+      this.scale = function() {
+        if(arguments.length === 2) {
+          this.checkMatrix(2);
+          this.matrix.scale(arguments[0], arguments[1]);
+        } else if (arguments.length === 3) {
+          this.checkMatrix(2);
+          this.matrix.scale(arguments[0], arguments[1], arguments[2]);
+        } else {
+          this.checkMatrix(2);
+          this.matrix.scale(arguments[0]);
+        }
+      };
+      this.resetMatrix = function() {
+        this.checkMatrix(2);
+        this.matrix.reset();
+      };
+      // applyMatrix missing
+      // apply missing
+      // contains missing
+      // find child missing
+      // getPrimitive missing
+      // getVertex , getVertexCount missing
+      // getVertexCode , getVertexCodes , getVertexCodeCount missing
+      // getVertexX, getVertexY, getVertexZ missing
+      
+    };
+    
+    p.shape = function(shape, x, y, width, height) {
+      if (arguments.length >= 1 && arguments[0] !== null) {
+        if (shape.isVisible()) {
+          p.pushMatrix();
+          if (curShapeMode === p.CENTER) {
+            if (arguments.length === 5) {
+              p.translate(x - width/2, y - height/2);
+              p.scale(width / shape.getWidth(), height / shape.getHeight());
+            } else if (arguments.length === 3) {
+              p.translate(x - shape.getWidth()/2, - shape.getHeight()/2);
+            } else {
+              p.translate(-shape.getWidth()/2, -shape.getHeight()/2);
+            }
+          } else if (curShapeMode === p.CORNER) {
+            if (arguments.length === 5) {
+              p.translate(x, y);
+              p.scale(width / shape.getWidth(), height / shape.getHeight());
+            } else if (arguments.length === 3) {
+              p.translate(x, y);
+            }
+          } else if (curShapeMode === p.CORNERS) {
+            if (arguments.length === 5) {
+              width  -= x;
+              height -= y;
+              p.translate(x, y);
+              p.scale(width / shape.getWidth(), height / shape.getHeight());
+            } else if (arguments.length === 3) {
+              p.translate(x, y);
+            }
+          }
+          shape.draw();
+          if ((arguments.length === 1 && curShapeMode === p.CENTER ) || arguments.length > 1) {
+            p.popMatrix();
+          }
+        }
+      }
+    }; 
+    p.shapeMode = function (mode) {
+      curShapeMode = mode;
+    };
+    p.loadShape = function (filename) {
+      if (arguments.length === 1) {
+        if (filename.indexOf(".svg") > -1) {
+          return new p.PShapeSVG(null, filename);
+        }
+      }
+      return null;
+    };
+    
+    var PShapeSVG = p.PShapeSVG = function() {
+      p.PShape.call( this ); // PShape is the base class.
+      if (arguments.length === 1) {
+        this.element  = new p.XMLElement(arguments[0]);
+        // set values to their defaults according to the SVG spec
+        this.vertexCodes         = [];
+        this.vertices            = [];
+        this.opacity             = 1;
+        
+        this.stroke              = false;
+        this.strokeColor         = p.ALPHA_MASK;
+        this.strokeWeight        = 1;
+        this.strokeCap           = p.SQUARE;  // equivalent to BUTT in svg spec
+        this.strokeJoin          = p.MITER;
+        this.strokeGradient      = null;
+        this.strokeGradientPaint = null;
+        this.strokeName          = null;
+        this.strokeOpacity       = 1;
+
+        this.fill                = true;
+        this.fillColor           = p.ALPHA_MASK;
+        this.fillGradient        = null;
+        this.fillGradientPaint   = null;
+        this.fillName            = null;
+        this.fillOpacity         = 1;
+
+        if (this.element.getName() !== "svg") {
+          throw("root is not <svg>, it's <" + this.element.getName() + ">");
+        }
+      }
+      else if (arguments.length === 2) {
+        if (typeof arguments[1] === 'string') {
+          if (arguments[1].indexOf(".svg") > -1) { //its a filename
+            this.element = new p.XMLElement(arguments[1]);
+            // set values to their defaults according to the SVG spec
+            this.vertexCodes         = [];
+            this.vertices            = [];
+            this.opacity             = 1;
+             
+            this.stroke              = false;
+            this.strokeColor         = p.ALPHA_MASK;
+            this.strokeWeight        = 1;
+            this.strokeCap           = p.SQUARE;  // equivalent to BUTT in svg spec
+            this.strokeJoin          = p.MITER;
+            this.strokeGradient      = "";
+            this.strokeGradientPaint = "";
+            this.strokeName          = "";
+            this.strokeOpacity       = 1;
+            
+            this.fill                = true;
+            this.fillColor           = p.ALPHA_MASK;        
+            this.fillGradient        = null;
+            this.fillGradientPaint   = null;
+            this.fillOpacity         = 1;
+           
+          }
+        } else { // XMLElement
+          if (arguments[0]) { // PShapeSVG 
+            this.element             = arguments[1];
+            this.vertexCodes         = arguments[0].vertexCodes.slice();
+            this.vertices            = arguments[0].vertices.slice();
+            
+            this.stroke              = arguments[0].stroke;
+            this.strokeColor         = arguments[0].strokeColor;
+            this.strokeWeight        = arguments[0].strokeWeight;
+            this.strokeCap           = arguments[0].strokeCap;
+            this.strokeJoin          = arguments[0].strokeJoin;
+            this.strokeGradient      = arguments[0].strokeGradient;
+            this.strokeGradientPaint = arguments[0].strokeGradientPaint;
+            this.strokeName          = arguments[0].strokeName;
+
+            this.fill                = arguments[0].fill;
+            this.fillColor           = arguments[0].fillColor;
+            this.fillGradient        = arguments[0].fillGradient;
+            this.fillGradientPaint   = arguments[0].fillGradientPaint;
+            this.fillName            = arguments[0].fillName;
+            this.strokeOpacity       = arguments[0].strokeOpacity;
+            this.fillOpacity         = arguments[0].fillOpacity;
+            this.opacity             = arguments[0].opacity;
+          }       
+        }     
+      }
+      
+      this.name      = this.element.getStringAttribute("id");
+      var displayStr = this.element.getStringAttribute("display", "inline");
+      this.visible   = displayStr !== "none";
+      var str = this.element.getAttribute("transform");
+      if (str) {
+        this.matrix = this.parseMatrix(str);
+      }
+      // not proper parsing of the viewBox, but will cover us for cases where
+      // the width and height of the object is not specified
+      var viewBoxStr = this.element.getStringAttribute("viewBox");
+      if ( viewBoxStr !== null ) {
+        var viewBox = viewBoxStr.split(" ");
+        this.width  = viewBox[2];
+        this.height = viewBox[3];
+      }
+
+      // TODO if viewbox is not same as width/height, then use it to scale
+      // the original objects. for now, viewbox only used when width/height
+      // are empty values (which by the spec means w/h of "100%"
+      var unitWidth  = this.element.getStringAttribute("width");
+      var unitHeight = this.element.getStringAttribute("height");
+      if (unitWidth !== null) {
+        this.width  = this.parseUnitSize(unitWidth);
+        this.height = this.parseUnitSize(unitHeight);
+      } else {
+        if ((this.width === 0) || (this.height === 0)) {
+          // For the spec, the default is 100% and 100%. For purposes
+          // here, insert a dummy value because this is prolly just a
+          // font or something for which the w/h doesn't matter.
+          this.width  = 1;
+          this.height = 1;
+          
+          //show warning
+          throw("The width and/or height is not " +
+                                "readable in the <svg> tag of this file.");
+        }
+      }
+      this.parseColors(this.element); 
+      this.parseChildren(this.element);
+
+    };
+        
+    PShapeSVG.prototype = {
+      // parseMatrix missing
+      // getChild missing
+      // print missing
+      parseMatrix: function(str) { },
+      parseChildren:function(element) {
+        var newelement = element.getChildren();
+        var children   = new p.PShape();
+        for (var i = 0; i < newelement.length; i++) {
+          var kid = this.parseChild(newelement[i]);
+          if (kid) {
+            children.addChild(kid);
+          }
+        }
+        this.children.push(children);
+      },
+      getName: function() {
+        return this.name;
+      },
+      parseChild: function( elem ) {
+        var name = elem.getName();
+        var shape;
+        switch (name) {
+          case "g":
+            shape = new PShapeSVG(this, elem);
+            break;
+          case "defs":
+            // generally this will contain gradient info, so may
+            // as well just throw it into a group element for parsing
+            shape = new PShapeSVG(this, elem);
+            break;
+          case "line":
+            shape = new PShapeSVG(this, elem);
+            shape.parseLine();
+            break;
+          case "circle":
+            shape = new PShapeSVG(this, elem);
+            shape.parseEllipse(true);
+            break;
+          case "ellipse":
+            shape = new PShapeSVG(this, elem);
+            shape.parseEllipse(false);
+            break;
+          case "rect":
+            shape = new PShapeSVG(this, elem);
+            shape.parseRect();
+            break;
+          case "polygon":
+            shape = new PShapeSVG(this, elem);
+            shape.parsePoly(true);
+            break;
+          case "polyline":
+            shape = new PShapeSVG(this, elem);
+            shape.parsePoly(false);
+            break;
+          case "path":
+            shape = new PShapeSVG(this, elem);
+            shape.parsePath();
+            break;
+          case "radialGradient":
+            //return new RadialGradient(this, elem);
+            break;
+          case "linearGradient":
+            //return new LinearGradient(this, elem);
+            break;
+          case "text":
+            p.println("Text in SVG files is not currently supported, convert text to outlines instead." );
+            break;
+          case "filter":
+            p.println("Filters are not supported.");
+            break;
+          case "mask":
+            p.println("Masks are not supported.");
+            break;
+          default:
+            p.println("Ignoring  <" + name + "> tag.");
+            break;
+        }
+        return shape;
+      },
+      parsePath: function(){
+        this.family = p.PATH;
+        this.kind = 0;
+         
+        var c;
+        var pathData = p.trim(this.element.getStringAttribute("d").replace(/\s+/g,' '));
+        if (pathData === null) { return; }
+        var pathDataChars = pathData.toCharArray();
+
+        var pathBuffer = "";
+        var lastSeparate = false;
+
+        for (var i = 0; i < pathDataChars.length; i++) {
+          c = pathDataChars[i].toString();
+          var separate = false;
+
+          if (c === "M" || c === 'm' ||
+              c === 'L' || c === 'l' ||
+              c === 'H' || c === 'h' ||
+              c === 'V' || c === 'v' ||
+              c === 'C' || c === 'c' ||  // beziers
+              c === 'S' || c === 's' ||
+              c === 'Q' || c === 'q' ||  // quadratic beziers
+              c === 'T' || c === 't' ||
+              c === 'Z' || c === 'z' ||  // closepath
+              c === ',') {
+            separate = true;
+            if (i !== 0 ) {
+              pathBuffer +="|";
+            }
+          }
+          if (c === 'Z' || c === 'z') {
+            separate = false;
+          }
+          if (c === '-' && !lastSeparate) {
+            // allow for 'e' notation in numbers, e.g. 2.10e-9 
+            // http://dev.processing.org/bugs/show_bug.cgi?id=1408
+            if (i === 0 || pathDataChars[i-1] !== 'e') {
+              pathBuffer +="|";
+            }
+          }
+          if (c !== ',') {
+            pathBuffer += c; //"" + pathDataBuffer.charAt(i));
+          }
+          if (separate && c !== ',' && c !== '-') {
+            pathBuffer +="|";
+          }
+          lastSeparate = separate;
+        }
+        // split into array
+        var pathDataKeys = pathBuffer.toString().split(/[|\s+]/g);
+        // loop through the array and remove spaces
+        for(i =0; i < pathDataKeys.length; i++){
+          if (pathDataKeys[i] === ""){
+            pathDataKeys.splice(i, 1);
+          }
+        }  
+        var cx     = 0,
+            cy     = 0,
+            ctrlX  = 0,
+            ctrlY  = 0,
+            ctrlX1 = 0,
+            ctrlX2 = 0,
+            ctrlY1 = 0,
+            ctrlY2 = 0,
+            endX   = 0,
+            endY   = 0,
+            ppx    = 0,
+            ppy    = 0,
+            px     = 0,
+            py     = 0;  
+
+        i = 0;
+        while (i < pathDataKeys.length) {
+          c = p.trim(pathDataKeys[i].charAt(0 ));
+          switch (c) {
+
+            case 'M':  // M - move to (absolute)
+              cx = parseFloat(pathDataKeys[i + 1]);
+              cy = parseFloat(pathDataKeys[i + 2]);
+              this.parsePathMoveto(cx, cy);
+              i += 3;
+              break;
+
+            case 'm':  // m - move to (relative)
+              cx = parseFloat(cx)+ parseFloat(pathDataKeys[i + 1]);
+              cy = parseFloat(cy)+ parseFloat(pathDataKeys[i + 2]);
+              this.parsePathMoveto(cx, cy);
+              i += 3;
+              break;
+
+            case 'L':
+              cx = parseFloat(pathDataKeys[i + 1]);
+              cy = parseFloat(pathDataKeys[i + 2]);
+              this.parsePathLineto(cx, cy);
+              i += 3;
+              break;
+
+            case 'l':
+              cx = parseFloat(cx) + parseFloat(pathDataKeys[i + 1]);
+              cy = parseFloat(cy) + parseFloat(pathDataKeys[i + 2]);
+              this.parsePathLineto(cx, cy);
+              i += 3;
+              break;
+
+              // horizontal lineto absolute
+            case 'H':
+              cx = parseFloat(pathDataKeys[i + 1]);
+              this.parsePathLineto(cx, cy);
+              i += 2;
+              break;
+
+              // horizontal lineto relative
+            case 'h':
+              cx = parseFloat(cx) + parseFloat(pathDataKeys[i + 1]);
+              this.parsePathLineto(cx, cy);
+              i += 2;
+              break;
+
+            case 'V':
+              cy = parseFloat(pathDataKeys[i + 1]);
+              this.parsePathLineto(cx, cy);
+              i += 2;
+              break;
+
+            case 'v':
+              cy = parseFloat(cy) + parseFloat(pathDataKeys[i + 1]);
+              this.parsePathLineto(cx, cy);
+              i += 2;
+              break;
+
+              // C - curve to (absolute)
+            case 'C': 
+              ctrlX1 = parseFloat(pathDataKeys[i + 1]);
+              ctrlY1 = parseFloat(pathDataKeys[i + 2]);
+              ctrlX2 = parseFloat(pathDataKeys[i + 3]);
+              ctrlY2 = parseFloat(pathDataKeys[i + 4]);
+              endX   = parseFloat(pathDataKeys[i + 5]);
+              endY   = parseFloat(pathDataKeys[i + 6]);
+              this.parsePathCurveto(ctrlX1, ctrlY1, ctrlX2, ctrlY2, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 7;
+              break;
+
+            // c - curve to (relative)
+            case 'c': 
+              ctrlX1 = parseFloat(cx) + parseFloat(pathDataKeys[i + 1]);
+              ctrlY1 = parseFloat(cy) + parseFloat(pathDataKeys[i + 2]);
+              ctrlX2 = parseFloat(cx) + parseFloat(pathDataKeys[i + 3]);
+              ctrlY2 = parseFloat(cy) + parseFloat(pathDataKeys[i + 4]);
+              endX   = parseFloat(cx) + parseFloat(pathDataKeys[i + 5]);
+              endY   = parseFloat(cy) + parseFloat(pathDataKeys[i + 6]);
+              this.parsePathCurveto(ctrlX1, ctrlY1, ctrlX2, ctrlY2, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 7;
+              break;
+
+              // S - curve to shorthand (absolute)
+            case 'S': 
+              ppx    = parseFloat(this.vertices[ this.vertices.length-2 ][0]);
+              ppy    = parseFloat(this.vertices[ this.vertices.length-2 ][1]);
+              px     = parseFloat(this.vertices[ this.vertices.length-1 ][0]);
+              py     = parseFloat(this.vertices[ this.vertices.length-1 ][1]);
+              ctrlX1 = px + (px - ppx);
+              ctrlY1 = py + (py - ppy);
+              ctrlX2 = parseFloat(pathDataKeys[i + 1]);
+              ctrlY2 = parseFloat(pathDataKeys[i + 2]);
+              endX   = parseFloat(pathDataKeys[i + 3]);
+              endY   = parseFloat(pathDataKeys[i + 4]);
+              this.parsePathCurveto(ctrlX1, ctrlY1, ctrlX2, ctrlY2, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 5;
+              break;
+
+              // s - curve to shorthand (relative)
+            case 's': 
+              ppx    = parseFloat(this.vertices[this.vertices.length-2][0]);
+              ppy    = parseFloat(this.vertices[this.vertices.length-2][1]);
+              px     = parseFloat(this.vertices[this.vertices.length-1][0]);
+              py     = parseFloat(this.vertices[this.vertices.length-1][1]);
+              ctrlX1 = px + (px - ppx);
+              ctrlY1 = py + (py - ppy);
+              ctrlX2 = parseFloat(cx) + parseFloat(pathDataKeys[i + 1]);
+              ctrlY2 = parseFloat(cy) + parseFloat(pathDataKeys[i + 2]);
+              endX   = parseFloat(cx) + parseFloat(pathDataKeys[i + 3]);
+              endY   = parseFloat(cy) + parseFloat(pathDataKeys[i + 4]);
+              this.parsePathCurveto(ctrlX1, ctrlY1, ctrlX2, ctrlY2, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 5;
+              break;
+
+              // Q - quadratic curve to (absolute)
+            case 'Q': 
+              ctrlX = parseFloat(pathDataKeys[i + 1]);
+              ctrlY = parseFloat(pathDataKeys[i + 2]);
+              endX  = parseFloat(pathDataKeys[i + 3]);
+              endY  = parseFloat(pathDataKeys[i + 4]);
+              this.parsePathQuadto(cx, cy, ctrlX, ctrlY, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 5;
+              break;
+
+              // q - quadratic curve to (relative)
+            case 'q': 
+              ctrlX = parseFloat(cx) + parseFloat(pathDataKeys[i + 1]);
+              ctrlY = parseFloat(cy) + parseFloat(pathDataKeys[i + 2]);
+              endX  = parseFloat(cx) + parseFloat(pathDataKeys[i + 3]);
+              endY  = parseFloat(cy) + parseFloat(pathDataKeys[i + 4]);
+              this.parsePathQuadto(cx, cy, ctrlX, ctrlY, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 5;
+              break;
+
+              // T - quadratic curve to shorthand (absolute)
+              // The control point is assumed to be the reflection of the
+              // control point on the previous command relative to the
+              // current point. (If there is no previous command or if the
+              // previous command was not a Q, q, T or t, assume the control
+              // point is coincident with the current point.)
+            case 'T': 
+              ppx   = this.vertices[this.vertices.length-2][0];
+              ppy   = this.vertices[this.vertices.length-2][1];
+              px    = this.vertices[this.vertices.length-1][0];
+              py    = this.vertices[this.vertices.length-1][1];
+              ctrlX = px + (px - ppx);
+              ctrlY = py + (py - ppy);
+              endX  = parseFloat(pathDataKeys[i + 1]);
+              endY  = parseFloat(pathDataKeys[i + 2]);
+              this.parsePathQuadto(cx, cy, ctrlX, ctrlY, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 3;
+              break;
+
+              // t - quadratic curve to shorthand (relative)
+            case 't': 
+              ppx   = this.vertices[this.vertices.length-2][0];
+              ppy   = this.vertices[this.vertices.length-2][1];
+              px    = this.vertices[this.vertices.length-1][0];
+              py    = this.vertices[this.vertices.length-1][1];
+              ctrlX = px + (px - ppx);
+              ctrlY = py + (py - ppy);
+              endX  = parseFloat(cx) + parseFloat(pathDataKeys[i + 1]);
+              endY  = parseFloat(cy) + parseFloat(pathDataKeys[i + 2]);
+              this.parsePathQuadto(cx, cy, ctrlX, ctrlY, endX, endY);
+              cx = endX;
+              cy = endY;
+              i += 3;
+              break;
+
+            case 'Z':
+            case 'z':
+              this.close = true;
+              i++;
+              break;
+
+            default:
+              i++;
+              /*String parsed =
+                PApplet.join(PApplet.subset(pathDataKeys, 0, i), ",");
+              String unparsed =
+                PApplet.join(PApplet.subset(pathDataKeys, i), ",");
+              System.err.println("parsed: " + parsed);
+              System.err.println("unparsed: " + unparsed);
+              if (pathDataKeys[i].equals("a") || pathDataKeys[i].equals("A")) {
+                String msg = "Sorry, elliptical arc support for SVG files " +
+                  "is not yet implemented (See bug #996 for details)";
+                throw new RuntimeException(msg);
+              }
+              throw new RuntimeException("shape command not handled: " + pathDataKeys[i]);
+            }*/
+          }
+        }
+      },
+      parsePathQuadto: function(x1, y1, cx, cy, x2, y2) {
+        this.parsePathCode(p.BEZIER_VERTEX);
+        // x1/y1 already covered by last moveto, lineto, or curveto
+        this.parsePathVertex(x1 + ((cx-x1)*2/3), y1 + ((cy-y1)*2/3));
+        this.parsePathVertex(x2 + ((cx-x2)*2/3), y2 + ((cy-y2)*2/3));
+        this.parsePathVertex(x2, y2);
+      },
+      parsePathCurveto : function(x1,  y1, x2, y2, x3, y3) {
+        this.parsePathCode(p.BEZIER_VERTEX );
+        this.parsePathVertex(x1, y1);
+        this.parsePathVertex(x2, y2);
+        this.parsePathVertex(x3, y3);
+      },
+      parsePathLineto: function(px, py) {
+        this.parsePathCode(p.VERTEX);
+        this.parsePathVertex(px, py);
+        // add property to distinguish between curContext.moveTo or curContext.lineTo
+        this.vertices[this.vertices.length-1]["moveTo"] = false;
+      },
+      parsePathMoveto: function(px, py) {
+        if (this.vertices.length > 0) {
+          this.parsePathCode(p.BREAK);
+        }
+        this.parsePathCode(p.VERTEX);
+        this.parsePathVertex(px, py);
+        // add property to distinguish between curContext.moveTo or curContext.lineTo
+        this.vertices[this.vertices.length-1]["moveTo"] = true;
+      },
+      parsePathVertex: function(x,  y) {
+        var verts = [];
+        verts[0]  = x;
+        verts[1]  = y;
+        this.vertices.push(verts);
+      },
+      parsePathCode: function(what) {
+        this.vertexCodes.push(what);
+      },
+      parsePoly: function(val) {
+        this.family    = p.PATH;
+        this.close     = val;
+        var pointsAttr = p.trim(this.element.getStringAttribute("points").replace(/\s+/g,' '));
+        if (pointsAttr !== null) {
+          var pointsBuffer = pointsAttr.split(" ");
+          for (var i = 0; i < pointsBuffer.length; i++) {
+            var verts = [];
+            var pb    = pointsBuffer[i].split(',');
+            verts[0]  = pb[0];
+            verts[1]  = pb[1];
+            this.vertices.push(verts);
+          }       
+        }
+      },
+      parseRect: function() {
+        this.kind      = p.RECT;
+        this.family    = p.PRIMITIVE;
+        this.params    = [];
+        this.params[0] = this.element.getFloatAttribute("x");
+        this.params[1] = this.element.getFloatAttribute("y");
+        this.params[2] = this.element.getFloatAttribute("width");
+        this.params[3] = this.element.getFloatAttribute("height");
+    
+      },
+      parseEllipse: function(val) {
+        this.kind   = p.ELLIPSE;
+        this.family = p.PRIMITIVE;
+        this.params = [];
+
+        this.params[0] = this.element.getFloatAttribute("cx");
+        this.params[1] = this.element.getFloatAttribute("cy");
+
+        var rx, ry;
+        if (val) {
+          rx = ry = this.element.getFloatAttribute("r");
+        } else {
+          rx = this.element.getFloatAttribute("rx");
+          ry = this.element.getFloatAttribute("ry");
+        }
+        this.params[0] -= rx;
+        this.params[1] -= ry;
+
+        this.params[2] = rx*2;
+        this.params[3] = ry*2;
+      },
+      parseLine: function() {
+        this.kind = p.LINE;
+        this.family = p.PRIMITIVE;
+        this.params = [];
+        this.params[0] = this.element.getFloatAttribute("x1");
+        this.params[1] = this.element.getFloatAttribute("y1");
+        this.params[2] = this.element.getFloatAttribute("x2");
+        this.params[3] = this.element.getFloatAttribute("y2");
+      },
+      parseColors: function(element) {
+        if (element.hasAttribute("opacity")) {
+          this.setOpacity(element.getAttribute("opacity"));
+        }
+        if (element.hasAttribute("stroke")) {
+          this.setStroke(element.getAttribute("stroke"));
+        }
+        if (element.hasAttribute("stroke-width")) {
+          // if NaN (i.e. if it's 'inherit') then default back to the inherit setting
+          this.setStrokeWeight(element.getAttribute("stroke-width"));
+        }
+        if (element.hasAttribute("stroke-linejoin") ) {
+          this.setStrokeJoin(element.getAttribute("stroke-linejoin"));
+        }
+        if (element.hasAttribute("stroke-linecap")) {
+          this.setStrokeCap(element.getStringAttribute("stroke-linecap"));
+        }
+        // fill defaults to black (though stroke defaults to "none")
+        // http://www.w3.org/TR/SVG/painting.html#FillProperties
+        if (element.hasAttribute("fill")) {
+          this.setFill(element.getStringAttribute("fill"));
+        }
+        if (element.hasAttribute("style")) {
+          var styleText   = element.getStringAttribute("style");
+          var styleTokens = styleText.toString().split( ";" );
+
+          for (var i = 0; i < styleTokens.length; i++) {
+            var tokens = p.trim(styleTokens[i].split( ":" ));
+            switch(tokens[0]){
+              case "fill":
+                this.setFill(tokens[1]);
+                break;
+              case "fill-opacity":
+                this.setFillOpacity(tokens[1]);
+                break;
+              case "stroke":
+                this.setStroke(tokens[1]);
+                break;
+              case "stroke-width":
+                this.setStrokeWeight(tokens[1]);
+                break;
+              case "stroke-linecap":
+                this.setStrokeCap(tokens[1]);
+                break;
+              case "stroke-linejoin":
+                this.setStrokeJoin(tokens[1]);
+                break;
+              case "stroke-opacity":
+                this.setStrokeOpacity(tokens[1]);
+                break;
+              case "opacity":
+                this.setOpacity(tokens[1]);
+                break;
+              // Other attributes are not yet implemented
+            }     
+          }
+        }
+      },
+      setFillOpacity: function(opacityText) {
+        this.fillOpacity = parseFloat(opacityText);
+        this.fillColor   = (parseInt(this.fillOpacity * 255, 16))  << 24 | this.fillColor & 0xFFFFFF;
+      },
+      setFill: function (fillText) {
+        var opacityMask = this.fillColor & 0xFF000000;
+        if (fillText === "none") {
+          this.fill = false;
+        } else if (fillText.indexOf("#") === 0) {
+          this.fill      = true;
+          this.fillColor = opacityMask | (parseInt(fillText.substring(1), 16 )) & 0xFFFFFF;
+        } else if (fillText.indexOf("rgb") === 0) {
+          this.fill      = true;
+          this.fillColor = opacityMask | this.parseRGB(fillText);
+        } else if (fillText.indexOf("url(#") === 0) {
+          this.fillName = fillText.substring(5, fillText.length - 1 );
+          /*Object fillObject = findChild(fillName);
+          if (fillObject instanceof Gradient) {
+            fill = true;
+            fillGradient = (Gradient) fillObject;
+            fillGradientPaint = calcGradientPaint(fillGradient); //, opacity);
+          } else {
+            System.err.println("url " + fillName + " refers to unexpected data");
+          }*/
+        } else {
+          if (colors[fillText]) {
+            this.fill      = true;
+            this.fillColor = opacityMask | (parseInt(colors[fillText].substring(1), 16)) & 0xFFFFFF;
+          }
+        }
+      },
+      setOpacity: function(opacity) { 
+        this.strokeColor = (parseInt(opacity * 255, 16)) << 24 | this.strokeColor & 0xFFFFFF;
+        this.fillColor   = (parseInt(opacity * 255, 16)) << 24 | this.fillColor & 0xFFFFFF;
+      },
+      setStroke: function(strokeText) {
+        var opacityMask = this.strokeColor & 0xFF000000;
+        if (strokeText === "none") {
+          this.stroke = false;
+        } else if (strokeText.charAt( 0 ) === "#") {
+          this.stroke      = true;
+          this.strokeColor = opacityMask | (parseInt( strokeText.substring( 1 ), 16 )) & 0xFFFFFF;
+        } else if (strokeText.indexOf( "rgb" ) === 0 ) {
+          this.stroke = true;
+          this.strokeColor = opacityMask | this.parseRGB(strokeText);
+        } else if (strokeText.indexOf( "url(#" ) === 0) {
+          this.strokeName = strokeText.substring(5, strokeText.length - 1);
+            //this.strokeObject = findChild(strokeName);
+          /*if (strokeObject instanceof Gradient) {
+            strokeGradient = (Gradient) strokeObject;
+            strokeGradientPaint = calcGradientPaint(strokeGradient); //, opacity);
+          } else {
+            System.err.println("url " + strokeName + " refers to unexpected data");
+          }*/
+        } else {
+          if (colors[strokeText]){
+            this.stroke      = true;
+            this.strokeColor = opacityMask | (parseInt(colors[strokeText].substring(1), 16)) & 0xFFFFFF;
+          }
+        }
+      },
+      setStrokeWeight: function(weight) {
+        this.strokeWeight = this.parseUnitSize(weight);
+      },
+      setStrokeJoin: function(linejoin) {
+        if (linejoin === "miter") {
+          this.strokeJoin = p.MITER;
+
+        } else if (linejoin === "round") {
+          this.strokeJoin = p.ROUND;
+
+        } else if (linejoin === "bevel") {
+          this.strokeJoin = p.BEVEL;
+        }
+      },
+      setStrokeCap: function (linecap) {
+        if (linecap === "butt") {
+          this.strokeCap = p.SQUARE;
+
+        } else if (linecap === "round") {
+          this.strokeCap = p.ROUND;
+
+        } else if (linecap === "square") {
+          this.strokeCap = p.PROJECT;
+        }
+      },
+      setStrokeOpacity: function (opacityText) {
+        this.strokeOpacity = parseFloat(opacityText);
+        this.strokeColor   = (parseInt(this.strokeOpacity * 255, 16)) << 24 | this.strokeColor & 0xFFFFFF;
+      },
+      parseRGB: function(color) {
+        var sub    = color.substring(color.indexOf('(') + 1, color.indexOf(')'));
+        var values = sub.split(", ");
+        return (values[0] << 16) | (values[1] << 8) | (values[2]);
+      },
+      parseUnitSize: function (text) {
+        var len = text.length - 2;
+        if (len < 0) { return text; }
+        if (text.indexOf("pt") === len) {
+          return parseFloat(text.substring(0, len)) * 1.25;
+        } else if (text.indexOf("pc") === len) {
+          return parseFloat( text.substring( 0, len)) * 15;
+        } else if (text.indexOf("mm") === len) {
+          return parseFloat( text.substring(0, len)) * 3.543307;
+        } else if (text.indexOf("cm") === len) {
+          return parseFloat(text.substring(0, len)) * 35.43307;
+        } else if (text.indexOf("in") === len) {
+          return parseFloat(text.substring(0, len)) * 90;
+        } else if (text.indexOf("px") === len) {
+          return parseFloat(text.substring(0, len));
+        } else {
+          return parseFloat(text);
+        }
+      }      
+    };
+ 
+    ////////////////////////////////////////////////////////////////////////////
     // XMLAttribute
     ////////////////////////////////////////////////////////////////////////////
-    var XMLAttribute = function ( fname, n, nameSpace, v, t){
+    var XMLAttribute = p.XMLAttribute = function (fname, n, nameSpace, v, t){
       this.fullName = fname || "";
       this.name = n || "";
       this.namespace = nameSpace || "";
@@ -862,7 +2287,7 @@
       this.type = t;
     };
     XMLAttribute.prototype = {
-      getName: function(){ 
+      getName: function() {
         return this.name;
       },
       getFullName: function() {
@@ -870,14 +2295,14 @@
       },
       getNamespace: function() {
         return this.namespace;
-      }, 
+      },
       getValue: function() {
         return this.value;
       },
       getType: function() {
         return this.type;
       },
-      setValue: function( newval ){
+      setValue: function(newval) {
         this.value = newval;
       }
     };
@@ -885,17 +2310,16 @@
     ////////////////////////////////////////////////////////////////////////////
     // XMLElement
     ////////////////////////////////////////////////////////////////////////////
-
-    var XMLElement = function( ){
-      if( arguments.length === 4 ){
+    var XMLElement = p.XMLElement = function() {
+      if (arguments.length === 4) {
         this.attributes = [];
         this.children   = [];
         this.fullName   = arguments[0] || "";
-        if ( arguments[1] ) {
+        if (arguments[1]) {
             this.name = arguments[1];
         } else {
             var index = this.fullName.indexOf(':');
-            if( index >= 0 ) {
+            if (index >= 0) {
                 this.name = this.fullName.substring(index + 1);
             } else {
                 this.name = this.fullName;
@@ -907,8 +2331,8 @@
         this.systemID  = arguments[2];
         this.parent    = null;
       }
-      else if( ( arguments.length === 1 && arguments[0].indexOf(".") > -1 ) || arguments.length === 2 ){ // filename or svg xml element
-        if( arguments[arguments.length -1].indexOf(".") > -1 ){ //its a filename
+      else if ((arguments.length === 1 && arguments[0].indexOf(".") > -1) || arguments.length === 2) { // filename or svg xml element
+        if (arguments[arguments.length -1].indexOf(".") > -1) { //its a filename
           this.attributes = [];
           this.children   = [];
           this.fullName   = "";
@@ -918,12 +2342,12 @@
           this.systemID   = "";
           this.lineNr     = "";
           this.parent     = null;
-          this.parse(  arguments[arguments.length -1] );
+          this.parse(arguments[arguments.length -1]);
         } else { //xml string
-          this.parse(  arguments[arguments.length -1] );
+          this.parse(arguments[arguments.length -1]);
         }
       }
-      else{ //empty ctor
+      else { //empty ctor
         this.attributes = [];
         this.children   = [];
         this.fullName   = "";
@@ -932,66 +2356,65 @@
         this.content    = "";
         this.systemID   = "";
         this.lineNr     = "";
-        this.parent     = null;    
+        this.parent     = null;
       }
       return this;
     };
     /*XMLElement methods
       missing: enumerateAttributeNames(), enumerateChildren(),
-      NOTE: parse does not work when a url is passed in  
+      NOTE: parse does not work when a url is passed in
     */
     XMLElement.prototype = {
-      parse: function( filename ){
+      parse: function(filename) {
         var xmlDoc;
         try {
           xmlDoc = new DOMParser().parseFromString(ajax(filename), "text/xml");
-          
+
           var elements = xmlDoc.documentElement;
           if (elements) {
-            this.parseChildrenRecursive( null, elements );
+            this.parseChildrenRecursive(null, elements);
           } else {
-            throw("Error loading document");
-          }          
-          return this;        
+            throw ("Error loading document");
+          }
+          return this;
         } catch(e) {
           throw(e);
         }
-        
       },
-      createElement: function( ){
-        if( arguments.length === 2 ){
-          return new XMLElement( arguments[0], arguments[1], null, null );
+      createElement: function () {
+        if (arguments.length === 2) {
+          return new XMLElement(arguments[0], arguments[1], null, null);
         } else {
-          return new XMLElement( arguments[0], arguments[1], arguments[2], arguments[3] );
+          return new XMLElement(arguments[0], arguments[1], arguments[2], arguments[3]);
         }
       },
-      hasAttribute: function ( name ){
-        return this.getAttribute( name ) !== null;
+      hasAttribute: function (name) {
+        return this.getAttribute(name) !== null;
         //2 parameter call missing
       },
-      createPCDataElement: function (){
+      createPCDataElement: function () {
         return new XMLElement();
       },
-      equals: function( object ){
-        if( typeof object === "Object"){
-          return this.equalsXMLElement( object );
+      equals: function(object){
+        if (typeof object === "Object") {
+          return this.equalsXMLElement(object);
         }
       },
-      equalsXMLElement: function ( object ){
-        if( object instanceof XMLElement ){
-          if( this.name !== object.getLocalName ){ return false; }
-          if( this.attributes.length !== object.getAttributeCount() ) { return false; }
-          for( var i = 0; i < this.attributes.length; i++ ){
+      equalsXMLElement: function (object) {
+        if (object instanceof XMLElement) {
+          if (this.name !== object.getLocalName) { return false; }
+          if (this.attributes.length !== object.getAttributeCount()) { return false; }
+          for (var i = 0; i < this.attributes.length; i++){
             if (! object.hasAttribute(this.attributes[i].getName(), this.attributes[i].getNamespace())) { return false; }
-            if( this.attributes[i].getValue() !== object.attributes[i].getValue() ) { return false; }
-            if( this.attributes[i].getType()  !== object.attributes[i].getType() ) { return false; }
+            if (this.attributes[i].getValue() !== object.attributes[i].getValue()) { return false; }
+            if (this.attributes[i].getType()  !== object.attributes[i].getType()) { return false; }
           }
           if (this.children.length !== object.getChildCount()) { return false; }
           var child1, child2;
-          for ( i = 0; i < this.children.length; i++) {
-            child1 = this.getChildAtIndex( i );
-            child2 = object.getChildAtIndex( i );
-            if (! child1.equalsXMLElement( child2 )) { return false; }
+          for (i = 0; i < this.children.length; i++) {
+            child1 = this.getChildAtIndex(i);
+            child2 = object.getChildAtIndex(i);
+            if (! child1.equalsXMLElement(child2)) { return false; }
           }
           return true;
         }
@@ -1002,82 +2425,82 @@
       getAttribute: function (){
         var attribute;
         if( arguments.length === 2 ){
-          attribute = this.findAttribute( arguments[0] );
-          if( attribute ){
+          attribute = this.findAttribute(arguments[0]);
+          if (attribute) {
             return attribute.getValue();
           } else {
             return arguments[1];
           }
-        }else if( arguments.length === 1 ){
-          attribute = this.findAttribute( arguments[0] );
-          if( attribute ){
+        } else if (arguments.length === 1) {
+          attribute = this.findAttribute(arguments[0]);
+          if (attribute) {
             return attribute.getValue();
           } else {
             return null;
           }
         }
       },
-      getStringAttribute: function(){
-        if( arguments.length === 1 ){
-          return this.getAttribute( arguments[0] );
-        } else if( arguments.length === 2 ){
-          return this.getAttribute( arguments[0], arguments[1] );
+      getStringAttribute: function() {
+        if (arguments.length === 1) {
+          return this.getAttribute(arguments[0]);
+        } else if (arguments.length === 2){
+          return this.getAttribute(arguments[0], arguments[1]);
         } else {
-          return this.getAttribute( arguments[0], arguments[1],arguments[2] );
+          return this.getAttribute(arguments[0], arguments[1],arguments[2]);
         }
       },
-      getFloatAttribute: function(){
-        if( arguments.length === 1 ){
+      getFloatAttribute: function() {
+        if (arguments.length === 1 ) {
+          return this.getAttribute(arguments[0], 0);
+        } else if (arguments.length === 2 ){
+          return this.getAttribute(arguments[0], arguments[1]);
+        } else {
+          return this.getAttribute(arguments[0], arguments[1],arguments[2]);
+        }
+      },
+      getIntAttribute: function () {
+        if (arguments.length === 1) {
           return this.getAttribute( arguments[0], 0 );
-        } else if( arguments.length === 2 ){
-          return this.getAttribute( arguments[0], arguments[1] );
+        } else if (arguments.length === 2) {
+          return this.getAttribute(arguments[0], arguments[1]);
         } else {
-          return this.getAttribute( arguments[0], arguments[1],arguments[2] );
+          return this.getAttribute(arguments[0], arguments[1],arguments[2]);
         }
       },
-      getIntAttribute: function(){
-        if( arguments.length === 1 ){
-          return this.getAttribute( arguments[0], 0 );
-        } else if( arguments.length === 2 ){
-          return this.getAttribute( arguments[0], arguments[1] );
-        } else {
-          return this.getAttribute( arguments[0], arguments[1],arguments[2] );
-        }
-      },
-      hasChildren: function(){
+      hasChildren: function () {
         return this.children.length > 0 ;
       },
-      addChild: function( child ){
+      addChild: function (child) {
         if (child !== null) {
           child.parent = this;
-          this.children.push( child );
+          this.children.push(child);
         }
       },
-      insertChild: function( child, index ){
-        if( child ){
+      insertChild: function (child, index) {
+        if (child) {
           if ((child.getLocalName() === null) && (! this.hasChildren())) {
             var lastChild = this.children[this.children.length -1];
-            if ( lastChild.getLocalName() === null ) {
-                lastChild.setContent( lastChild.getContent() + child.getContent() );
+            if (lastChild.getLocalName() === null) {
+                lastChild.setContent(lastChild.getContent() + child.getContent());
                 return;
             }
           }
           child.parent = this;
-          this.children.splice( index,0,child ); 
+          this.children.splice(index,0,child);
         }
       },
-      getChild: function( index ){
-        if( typeof index  === "number" ){
-          return this.children[ index ];
+      getChild: function (index){
+        if (typeof index  === "number") {
+          return this.children[index];
         }
-        else if( index.indexOf('/') !== -1) { // path was given
-          this.getChildRecursive( index.split("/"), 0 );
+        else if (index.indexOf('/') !== -1) { // path was given
+          this.getChildRecursive(index.split("/"), 0);
         } else {
           var kid, kidName;
-          for ( var i = 0; i < this.getChildCount(); i++ ) {
+          for (var i = 0; i < this.getChildCount(); i++) {
             kid = this.getChild(i);
             kidName = kid.getName();
-            if ( kidName !== null && kidName === index ) {
+            if (kidName !== null && kidName === index) {
                 return kid;
             }
           }
@@ -1085,24 +2508,23 @@
         }
       },
       getChildren: function(){
-        if ( arguments.length === 1 ){
-          if( typeof arguments[0]  === "number" ){
-            return this.getChild( arguments[0] );
-          }
-          else if( arguments[0].indexOf('/') !== -1) { // path was given
-            return this.getChildrenRecursive( arguments[0].split("/"), 0 );
-          }else {
+        if (arguments.length === 1) {
+          if (typeof arguments[0]  === "number") {
+            return this.getChild( arguments[0]);
+          } else if (arguments[0].indexOf('/') !== -1) { // path was given
+            return this.getChildrenRecursive( arguments[0].split("/"), 0);
+          } else {
             var matches = [];
             var kid, kidName;
-            for ( var i = 0; i < this.getChildCount(); i++ ) {
-              kid = this.getChild( i );
+            for (var i = 0; i < this.getChildCount(); i++) {
+              kid = this.getChild(i);
               kidName = kid.getName();
-              if ( kidName !== null && kidName === arguments[0] ) {
-                matches.push( kid );
+              if (kidName !== null && kidName === arguments[0]) {
+                matches.push(kid);
               }
             }
             return matches;
-          } 
+          }
         }else {
           return this.children;
         }
@@ -1110,150 +2532,155 @@
       getChildCount: function(){
         return this.children.length;
       },
-      getChildRecursive: function ( items, offset ){
+      getChildRecursive: function (items, offset) {
         var kid, kidName;
-        for( var i = 0; i < this.getChildCount(); i++ ) {
+        for(var i = 0; i < this.getChildCount(); i++) {
             kid = this.getChild(i);
             kidName = kid.getName();
-            if( kidName !== null && kidName === items[offset] ) {
-              if ( offset === items.length-1 ) {
+            if (kidName !== null && kidName === items[offset]) {
+              if (offset === items.length-1) {
                 return kid;
               } else {
                 offset += 1;
-                return kid.getChildRecursive( items, offset );
+                return kid.getChildRecursive(items, offset);
               }
             }
         }
         return null;
       },
-      getChildrenRecursive: function ( items, offset ){
-        if ( offset === items.length-1 ) {
-          return this.getChildren( items[offset] );
+      getChildrenRecursive: function (items, offset) {
+        if (offset === items.length-1) {
+          return this.getChildren(items[offset]);
         }
-        var matches = this.getChildren( items[offset] );
+        var matches = this.getChildren(items[offset]);
         var kidMatches;
-        for ( var i = 0; i < matches.length; i++ ) {
-          kidMatches = matches[i].getChildrenRecursive( items, offset+1 );
+        for (var i = 0; i < matches.length; i++) {
+          kidMatches = matches[i].getChildrenRecursive(items, offset+1);
         }
         return kidMatches;
       },
-      parseChildrenRecursive: function ( parent , elementpath ){
-         var xmlelement,
-             xmlattribute,
-             tmpattrib;
-         if( !parent ) {
-           this.fullName = elementpath.localName;
-           this.name     = elementpath.nodeName;
-           this.content  = elementpath.textContent || "";
-           xmlelement    = this;
-         } else { // a parent
-           xmlelement         = new XMLElement( elementpath.localName, elementpath.nodeName, "", "" );
-           xmlelement.content = elementpath.textContent || "";
-           xmlelement.parent  = parent;
-         }
+      parseChildrenRecursive: function (parent , elementpath){
+        var xmlelement,
+          xmlattribute,
+          tmpattrib;
+        if (!parent) {
+          this.fullName = elementpath.localName;
+          this.name     = elementpath.nodeName;
+          this.content  = elementpath.textContent || "";
+          xmlelement    = this;
+        } else { // a parent
+          xmlelement         = new XMLElement(elementpath.localName, elementpath.nodeName, "", "");
+          xmlelement.content = elementpath.textContent || "";
+          xmlelement.parent  = parent;
+        }
 
-         for( var l = 0; l < elementpath.attributes.length; l++ ) {
-           tmpattrib    = elementpath.attributes[l];
-           xmlattribute = new XMLAttribute( tmpattrib.getname , tmpattrib.nodeName, tmpattrib.namespaceURI , tmpattrib.nodeValue , tmpattrib.nodeType );
-           xmlelement.attributes.push( xmlattribute );
-         }
-
-         for( var m = 0; m < elementpath.childElementCount; m++ ) {
-           xmlelement.children.push( xmlelement.parseChildrenRecursive(xmlelement, elementpath.children[m]) );
-         }
-         return xmlelement;
+        for (var l = 0; l < elementpath.attributes.length; l++) {
+          tmpattrib    = elementpath.attributes[l];
+          xmlattribute = new XMLAttribute(tmpattrib.getname , tmpattrib.nodeName, tmpattrib.namespaceURI , tmpattrib.nodeValue , tmpattrib.nodeType);
+          xmlelement.attributes.push(xmlattribute);
+        }
+        
+        for (var node in elementpath.childNodes){
+          if(elementpath.childNodes[node].nodeType === 1) { //ELEMENT_NODE type
+            xmlelement.children.push( xmlelement.parseChildrenRecursive(xmlelement, elementpath.childNodes[node]));
+          }
+        }
+        /*
+        for( var m = 0; m < elementpath.childElementCount; m++ ) {
+         xmlelement.children.push( xmlelement.parseChildrenRecursive(xmlelement, elementpath.childNodes[m]) );
+        }*/
+        return xmlelement;
       },
       isLeaf: function(){
         return this.hasChildren();
       },
-      listChildren: function(){
+      listChildren: function() {
         var arr = [];
-        for( var i = 0; i < this.children.length; i++ ){
-          arr.push( this.getChild(i).getName() );
+        for (var i = 0; i < this.children.length; i++) {
+          arr.push( this.getChild(i).getName());
         }
         return arr;
       },
-      removeAttribute: function ( name , namespace ){
-        namespace = namespace || "";
-        for( var i = 0; i < this.attributes.length; i++ ){
-          if( this.attributes[i].getName() === name && this.attributes[i].getNamespace() === namespace ){
-            this.attributes.splice( i, 0 );
-          } 
+      removeAttribute: function (name , namespace) {
+        this.namespace = namespace || "";
+        for (var i = 0; i < this.attributes.length; i++){
+          if (this.attributes[i].getName() === name && this.attributes[i].getNamespace() === this.namespace) {
+            this.attributes.splice(i, 0);
+          }
         }
       },
-      removeChild: function( child ){
-        if( child ){ 
-          for( var i = 0; i< this.children.length; i++ ){
-            if (this.children[i].equalsXMLElement( child )){
-              this.children.splice( i, 0 );
+      removeChild: function(child) {
+        if (child) {
+          for (var i = 0; i < this.children.length; i++) {
+            if (this.children[i].equalsXMLElement(child)) {
+              this.children.splice(i, 0);
             }
-          }  
+          }
         }
       },
-      removeChildAtIndex: function( index ){
-        if( this.children.length > index ) {//make sure its not outofbounds
-          this.children.splice( index, 0 );
+      removeChildAtIndex: function(index) {
+        if (this.children.length > index) { //make sure its not outofbounds
+          this.children.splice(index, 0);
         }
       },
-      findAttribute: function ( name, namespace ){
-        namespace = namespace || "";
-        for( var i = 0; i < this.attributes.length; i++ ){
-          if( this.attributes[i].getName() === name && this.attributes[i].getNamespace() === namespace ){
+      findAttribute: function (name, namespace) {
+        this.namespace = namespace || "";
+        for (var i = 0; i < this.attributes.length; i++ ) {
+          if (this.attributes[i].getName() === name && this.attributes[i].getNamespace() === this.namespace) {
              return this.attributes[i];
-          } 
+          }
         }
-      },      
-      setAttribute: function(){
+      },
+      setAttribute: function() {
         var attr;
-        if( arguments.length === 3){
+        if (arguments.length === 3) {
           var index = arguments[0].indexOf(':');
           var name  = arguments[0].substring(index + 1);
           attr      = this.findAttribute( name, arguments[1] );
-          if( attr ){
-            attr.setValue( arguments[2] );
+          if (attr) {
+            attr.setValue(arguments[2]);
           } else {
             attr = new XMLAttribute(arguments[0], name, arguments[1], arguments[2], "CDATA");
-            this.attributes.addElement( attr );
+            this.attributes.addElement(attr);
           }
         } else {
-          attr = this.findAttribute( arguments[0] );
-          if( attr ){
-            attr.setValue( arguments[1] );
+          attr = this.findAttribute(arguments[0]);
+          if (attr) {
+            attr.setValue(arguments[1]);
           } else {
-            attr = new XMLAttribute( arguments[0], arguments[0], null, arguments[1], "CDATA" );
-              this.attributes.addElement( attr );
+            attr = new XMLAttribute(arguments[0], arguments[0], null, arguments[1], "CDATA");
+            this.attributes.addElement(attr);
           }
-        }     
+        }
       },
-      setContent: function( content ){
+      setContent: function(content) {
         this.content = content;
       },
-      setName: function(){
-        if( arguments.length === 1 ){
+      setName: function() {
+        if (arguments.length === 1) {
           this.name      = arguments[0];
           this.fullName  = arguments[0];
           this.namespace = arguments[0];
         } else {
           var index = arguments[0].indexOf(':');
-          if (( arguments[1] === null ) || ( index < 0 )) {
+          if ((arguments[1] === null) || (index < 0)) {
               this.name = arguments[0];
           } else {
-              this.name = arguments[0].substring( index + 1 );
+              this.name = arguments[0].substring(index + 1);
           }
           this.fullName  = arguments[0];
           this.namespace = arguments[1];
         }
       },
-      getName: function(){
+      getName: function() {
         return this.fullName;
       }
     };
-    p.XMLElement = XMLElement;
-
+   
     ////////////////////////////////////////////////////////////////////////////
     // PVector
     ////////////////////////////////////////////////////////////////////////////
-    var PVector = function(x, y, z) {
+    var PVector = p.PVector = function(x, y, z) {
       this.x = x || 0;
       this.y = y || 0;
       this.z = z || 0;
@@ -1340,25 +2767,21 @@
       },
       dist: function(v) {
         var dx = this.x - v.x,
-          dy = this.y - v.y,
-          dz = this.z - v.z;
+            dy = this.y - v.y,
+            dz = this.z - v.z;
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
       },
       dot: function(v, y, z) {
-        var num;
         if (arguments.length === 3) {
-          num = this.x * v + this.y * y + this.z * z;
+          return (this.x * v + this.y * y + this.z * z);
         } else if (arguments.length === 1) {
-          num = this.x * v.x + this.y * v.y + this.z * v.z;
+          return (this.x * v.x + this.y * v.y + this.z * v.z);
         }
-        return num;
       },
       cross: function(v) {
-        var
-        crossX = this.y * v.z - v.y * this.z,
-          crossY = this.z * v.x - v.z * this.x,
-          crossZ = this.x * v.y - v.x * this.y;
-        return new PVector(crossX, crossY, crossZ);
+        return new PVector(this.y * v.z - v.y * this.z,
+                           this.z * v.x - v.z * this.x,
+                           this.x * v.y - v.x * this.y);
       },
       normalize: function() {
         var m = this.mag();
@@ -1373,8 +2796,7 @@
         }
       },
       heading2D: function() {
-        var angle = Math.atan2(-this.y, this.x);
-        return -angle;
+        return (-Math.atan2(-this.y, this.x));
       },
       toString: function() {
         return "[" + this.x + ", " + this.y + ", " + this.z + "]";
@@ -1408,7 +2830,6 @@
     var printMatrixHelper = function printMatrixHelper(elements) {
       var big = 0;
       for (var i = 0; i < elements.length; i++) {
-
         if (i !== 0) {
           big = Math.max(big, Math.abs(elements[i]));
         } else {
@@ -1426,7 +2847,7 @@
       return digits;
     };
 
-    var PMatrix2D = function() {
+    var PMatrix2D = p.PMatrix2D = function() {
       if (arguments.length === 0) {
         this.reset();
       } else if (arguments.length === 1 && arguments[0] instanceof PMatrix2D) {
@@ -1464,8 +2885,8 @@
         this.elements[2] = tx * this.elements[0] + ty * this.elements[1] + this.elements[2];
         this.elements[5] = tx * this.elements[3] + ty * this.elements[4] + this.elements[5];
       },
-      // Does nothing in Processing.
       transpose: function() {
+        // Does nothing in Processing.
       },
       mult: function(source, target) {
         var x, y;
@@ -1493,10 +2914,10 @@
         return target;
       },
       multX: function(x, y) {
-        return x * this.elements[0] + y * this.elements[1] + this.elements[2];
+        return (x * this.elements[0] + y * this.elements[1] + this.elements[2]);
       },
       multY: function(x, y) {
-        return x * this.elements[3] + y * this.elements[4] + this.elements[5];
+        return (x * this.elements[3] + y * this.elements[4] + this.elements[5]);
       },
       skewX: function(angle) {
         this.apply(1, 0, 1, angle, 0, 0);
@@ -1505,7 +2926,7 @@
         this.apply(1, 0, 1, 0, angle, 0);
       },
       determinant: function() {
-        return this.elements[0] * this.elements[4] - this.elements[1] * this.elements[3];
+        return (this.elements[0] * this.elements[4] - this.elements[1] * this.elements[3]);
       },
       invert: function() {
         var d = this.determinant();
@@ -1538,44 +2959,44 @@
         }
       },
       apply: function() {
+        var source;
         if (arguments.length === 1 && arguments[0] instanceof PMatrix2D) {
-          this.apply(arguments[0].array());
+          source = arguments[0].array();
         } else if (arguments.length === 6) {
-          var a = arguments;
-          this.apply([a[0], a[1], a[2],
-                      a[3], a[4], a[5]]);
+          source = Array.prototype.slice.call(arguments);
         } else if (arguments.length === 1 && arguments[0] instanceof Array) {
-          var source = arguments[0];
-          var result = [0, 0, this.elements[2],
-                        0, 0, this.elements[5]];
-          var e = 0;
-          for (var row = 0; row < 2; row++) {
-            for (var col = 0; col < 3; col++, e++) {
-              result[e] += this.elements[row * 3 + 0] * source[col + 0] + this.elements[row * 3 + 1] * source[col + 3];
-            }
-          }
-          this.elements = result.slice();
+          source = arguments[0];
         }
+
+        var result = [0, 0, this.elements[2],
+                      0, 0, this.elements[5]];
+        var e = 0;
+        for (var row = 0; row < 2; row++) {
+          for (var col = 0; col < 3; col++, e++) {
+            result[e] += this.elements[row * 3 + 0] * source[col + 0] +
+                         this.elements[row * 3 + 1] * source[col + 3];
+          }
+        }
+        this.elements = result.slice();
       },
       preApply: function() {
+        var source;
         if (arguments.length === 1 && arguments[0] instanceof PMatrix2D) {
-          this.preApply(arguments[0].array());
+          source = arguments[0].array();
         } else if (arguments.length === 6) {
-          var a = arguments;
-          this.preApply([a[0], a[1], a[2],
-                         a[3], a[4], a[5]]);
+          source = Array.prototype.slice.call(arguments);
         } else if (arguments.length === 1 && arguments[0] instanceof Array) {
-          var source = arguments[0];
-          var result = [0, 0, source[2],
-                        0, 0, source[5]];
-          result[2]= source[2] + this.elements[2] * source[0] + this.elements[5] * source[1];
-          result[5]= source[5] + this.elements[2] * source[3] + this.elements[5] * source[4];
-          result[0] = this.elements[0] * source[0] + this.elements[3] * source[1];
-          result[3] = this.elements[0] * source[3] + this.elements[3] * source[4];
-          result[1] = this.elements[1] * source[0] + this.elements[4] * source[1];
-          result[4] = this.elements[1] * source[3] + this.elements[4] * source[4];
-          this.elements = result.slice();
+          source = arguments[0];
         }
+        var result = [0, 0, source[2],
+                      0, 0, source[5]];
+        result[2] = source[2] + this.elements[2] * source[0] + this.elements[5] * source[1];
+        result[5] = source[5] + this.elements[2] * source[3] + this.elements[5] * source[4];
+        result[0] = this.elements[0] * source[0] + this.elements[3] * source[1];
+        result[3] = this.elements[0] * source[3] + this.elements[3] * source[4];
+        result[1] = this.elements[1] * source[0] + this.elements[4] * source[1];
+        result[4] = this.elements[1] * source[3] + this.elements[4] * source[4];
+        this.elements = result.slice();
       },
       rotate: function(angle) {
         var c = Math.cos(angle);
@@ -1594,9 +3015,12 @@
       },
       print: function() {
         var digits = printMatrixHelper(this.elements);
-        var output = "";
-        output += p.nfs(this.elements[0], digits, 4) + " " + p.nfs(this.elements[1], digits, 4) + " " + p.nfs(this.elements[2], digits, 4) + "\n";
-        output += p.nfs(this.elements[3], digits, 4) + " " + p.nfs(this.elements[4], digits, 4) + " " + p.nfs(this.elements[5], digits, 4) + "\n\n";
+        var output = "" + p.nfs(this.elements[0], digits, 4) + " " +
+                     p.nfs(this.elements[1], digits, 4) + " " +
+                     p.nfs(this.elements[2], digits, 4) + "\n" +
+                     p.nfs(this.elements[3], digits, 4) + " " +
+                     p.nfs(this.elements[4], digits, 4) + " " +
+                     p.nfs(this.elements[5], digits, 4) + "\n\n";
         p.println(output);
       }
     };
@@ -1604,19 +3028,16 @@
     ////////////////////////////////////////////////////////////////////////////
     // PMatrix3D
     ////////////////////////////////////////////////////////////////////////////
-    var PMatrix3D = function PMatrix3D() {
-      //When a matrix is created, it is set to an identity matrix
+
+    var PMatrix3D = p.PMatrix3D = function PMatrix3D() {
+      // When a matrix is created, it is set to an identity matrix
       this.reset();
     };
 
     PMatrix3D.prototype = {
       set: function() {
         if (arguments.length === 16) {
-          var a = arguments;
-          this.set([a[0], a[1], a[2], a[3],
-                    a[4], a[5], a[6], a[7],
-                    a[8], a[9], a[10], a[11],
-                    a[12], a[13], a[14], a[15]]);
+          this.elements = Array.prototype.slice.call(arguments);
         } else if (arguments.length === 1 && arguments[0] instanceof PMatrix3D) {
           this.elements = arguments[0].array();
         } else if (arguments.length === 1 && arguments[0] instanceof Array) {
@@ -1636,27 +3057,27 @@
         return this.elements.slice();
       },
       translate: function(tx, ty, tz) {
-        if (typeof tz === 'undefined') {
+        if (tz === undef) {
           tz = 0;
         }
 
-        this.elements[3] += tx * this.elements[0] + ty * this.elements[1] + tz * this.elements[2];
-        this.elements[7] += tx * this.elements[4] + ty * this.elements[5] + tz * this.elements[6];
-        this.elements[11] += tx * this.elements[8] + ty * this.elements[9] + tz * this.elements[10];
+        this.elements[3]  += tx * this.elements[0]  + ty * this.elements[1]  + tz * this.elements[2];
+        this.elements[7]  += tx * this.elements[4]  + ty * this.elements[5]  + tz * this.elements[6];
+        this.elements[11] += tx * this.elements[8]  + ty * this.elements[9]  + tz * this.elements[10];
         this.elements[15] += tx * this.elements[12] + ty * this.elements[13] + tz * this.elements[14];
       },
       transpose: function() {
         var temp = this.elements.slice();
-        this.elements[0] = temp[0];
-        this.elements[1] = temp[4];
-        this.elements[2] = temp[8];
-        this.elements[3] = temp[12];
-        this.elements[4] = temp[1];
-        this.elements[5] = temp[5];
-        this.elements[6] = temp[9];
-        this.elements[7] = temp[13];
-        this.elements[8] = temp[2];
-        this.elements[9] = temp[6];
+        this.elements[0]  = temp[0];
+        this.elements[1]  = temp[4];
+        this.elements[2]  = temp[8];
+        this.elements[3]  = temp[12];
+        this.elements[4]  = temp[1];
+        this.elements[5]  = temp[5];
+        this.elements[6]  = temp[9];
+        this.elements[7]  = temp[13];
+        this.elements[8]  = temp[2];
+        this.elements[9]  = temp[6];
         this.elements[10] = temp[10];
         this.elements[11] = temp[14];
         this.elements[12] = temp[3];
@@ -1710,54 +3131,52 @@
         return target;
       },
       preApply: function() {
+        var source;
         if (arguments.length === 1 && arguments[0] instanceof PMatrix3D) {
-          this.preApply(arguments[0].array());
+          source = arguments[0].array();
         } else if (arguments.length === 16) {
-          var a = arguments;
-          this.preApply([a[0], a[1], a[2], a[3],
-                         a[4], a[5], a[6], a[7],
-                         a[8], a[9], a[10], a[11],
-                         a[12], a[13], a[14], a[15]]);
+          source = Array.prototype.slice.call(arguments);
         } else if (arguments.length === 1 && arguments[0] instanceof Array) {
-          var source = arguments[0];
-
-          var result = [0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0];
-          var e = 0;
-          for (var row = 0; row < 4; row++) {
-            for (var col = 0; col < 4; col++, e++) {
-              result[e] += this.elements[col + 0] * source[row * 4 + 0] + this.elements[col + 4] * source[row * 4 + 1] + this.elements[col + 8] * source[row * 4 + 2] + this.elements[col + 12] * source[row * 4 + 3];
-            }
-          }
-          this.elements = result.slice();
+          source = arguments[0];
         }
+
+        var result = [0, 0, 0, 0,
+                      0, 0, 0, 0,
+                      0, 0, 0, 0,
+                      0, 0, 0, 0];
+        var e = 0;
+        for (var row = 0; row < 4; row++) {
+          for (var col = 0; col < 4; col++, e++) {
+            result[e] += this.elements[col + 0] * source[row * 4 + 0] + this.elements[col + 4] *
+                         source[row * 4 + 1] + this.elements[col + 8] * source[row * 4 + 2] +
+                         this.elements[col + 12] * source[row * 4 + 3];
+          }
+        }
+        this.elements = result.slice();
       },
       apply: function() {
+        var source;
         if (arguments.length === 1 && arguments[0] instanceof PMatrix3D) {
-          this.apply(arguments[0].array());
+          source = arguments[0].array();
         } else if (arguments.length === 16) {
-          var a = arguments;
-          this.apply([a[0], a[1], a[2], a[3],
-                      a[4], a[5], a[6], a[7],
-                      a[8], a[9], a[10], a[11],
-                      a[12], a[13], a[14], a[15]]);
+          source = Array.prototype.slice.call(arguments);
         } else if (arguments.length === 1 && arguments[0] instanceof Array) {
-          var source = arguments[0];
-
-          var result = [0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0,
-                        0, 0, 0, 0];
-          var e = 0;
-          for (var row = 0; row < 4; row++) {
-            for (var col = 0; col < 4; col++, e++) {
-              result[e] += this.elements[row * 4 + 0] * source[col + 0] + this.elements[row * 4 + 1] * source[col + 4] + this.elements[row * 4 + 2] * source[col + 8] + this.elements[row * 4 + 3] * source[col + 12];
-            }
-          }
-          this.elements = result.slice();
+          source = arguments[0];
         }
+
+        var result = [0, 0, 0, 0,
+                      0, 0, 0, 0,
+                      0, 0, 0, 0,
+                      0, 0, 0, 0];
+        var e = 0;
+        for (var row = 0; row < 4; row++) {
+          for (var col = 0; col < 4; col++, e++) {
+            result[e] += this.elements[row * 4 + 0] * source[col + 0] + this.elements[row * 4 + 1] *
+                         source[col + 4] + this.elements[row * 4 + 2] * source[col + 8] +
+                         this.elements[row * 4 + 3] * source[col + 12];
+          }
+        }
+        this.elements = result.slice();
       },
       rotate: function(angle, v0, v1, v2) {
         if (!v1) {
@@ -1768,15 +3187,27 @@
           var s = p.sin(angle);
           var t = 1.0 - c;
 
-          this.apply((t * v0 * v0) + c, (t * v0 * v1) - (s * v2), (t * v0 * v2) + (s * v1), 0, (t * v0 * v1) + (s * v2), (t * v1 * v1) + c, (t * v1 * v2) - (s * v0), 0, (t * v0 * v2) - (s * v1), (t * v1 * v2) + (s * v0), (t * v2 * v2) + c, 0, 0, 0, 0, 1);
+          this.apply((t * v0 * v0) + c,
+                     (t * v0 * v1) - (s * v2),
+                     (t * v0 * v2) + (s * v1),
+                     0,
+                     (t * v0 * v1) + (s * v2),
+                     (t * v1 * v1) + c,
+                     (t * v1 * v2) - (s * v0),
+                     0,
+                     (t * v0 * v2) - (s * v1),
+                     (t * v1 * v2) + (s * v0),
+                     (t * v2 * v2) + c,
+                     0, 0, 0, 0, 1);
         }
       },
       invApply: function() {
-        if (typeof inverseCopy === "undefined") {
+        if (inverseCopy === undef) {
           inverseCopy = new PMatrix3D();
         }
         var a = arguments;
-        inverseCopy.set(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[12], a[13], a[14], a[15]);
+        inverseCopy.set(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8],
+                        a[9], a[10], a[11], a[12], a[13], a[14], a[15]);
 
         if (!inverseCopy.invert()) {
           return false;
@@ -1809,14 +3240,14 @@
         }
 
         if (sx && sy && sz) {
-          this.elements[0] *= sx;
-          this.elements[1] *= sy;
-          this.elements[2] *= sz;
-          this.elements[4] *= sx;
-          this.elements[5] *= sy;
-          this.elements[6] *= sz;
-          this.elements[8] *= sx;
-          this.elements[9] *= sy;
+          this.elements[0]  *= sx;
+          this.elements[1]  *= sy;
+          this.elements[2]  *= sz;
+          this.elements[4]  *= sx;
+          this.elements[5]  *= sy;
+          this.elements[6]  *= sz;
+          this.elements[8]  *= sx;
+          this.elements[9]  *= sy;
           this.elements[10] *= sz;
           this.elements[12] *= sx;
           this.elements[13] *= sy;
@@ -1824,7 +3255,7 @@
         }
       },
       skewX: function(angle) {
-        var t = p.tan(angle);
+        var t = Math.tan(angle);
         this.apply(1, t, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
       },
       skewY: function(angle) {
@@ -1864,7 +3295,6 @@
         }
       },
       invert: function() {
-        var kInv = [];
         var fA0 = this.elements[0] * this.elements[5] - this.elements[1] * this.elements[4];
         var fA1 = this.elements[0] * this.elements[6] - this.elements[2] * this.elements[4];
         var fA2 = this.elements[0] * this.elements[7] - this.elements[3] * this.elements[4];
@@ -1887,35 +3317,36 @@
           return false;
         }
 
-        kInv[0] = +this.elements[5] * fB5 - this.elements[6] * fB4 + this.elements[7] * fB3;
-        kInv[4] = -this.elements[4] * fB5 + this.elements[6] * fB2 - this.elements[7] * fB1;
-        kInv[8] = +this.elements[4] * fB4 - this.elements[5] * fB2 + this.elements[7] * fB0;
+        var kInv = [];
+        kInv[0]  = +this.elements[5] * fB5 - this.elements[6] * fB4 + this.elements[7] * fB3;
+        kInv[4]  = -this.elements[4] * fB5 + this.elements[6] * fB2 - this.elements[7] * fB1;
+        kInv[8]  = +this.elements[4] * fB4 - this.elements[5] * fB2 + this.elements[7] * fB0;
         kInv[12] = -this.elements[4] * fB3 + this.elements[5] * fB1 - this.elements[6] * fB0;
-        kInv[1] = -this.elements[1] * fB5 + this.elements[2] * fB4 - this.elements[3] * fB3;
-        kInv[5] = +this.elements[0] * fB5 - this.elements[2] * fB2 + this.elements[3] * fB1;
-        kInv[9] = -this.elements[0] * fB4 + this.elements[1] * fB2 - this.elements[3] * fB0;
+        kInv[1]  = -this.elements[1] * fB5 + this.elements[2] * fB4 - this.elements[3] * fB3;
+        kInv[5]  = +this.elements[0] * fB5 - this.elements[2] * fB2 + this.elements[3] * fB1;
+        kInv[9]  = -this.elements[0] * fB4 + this.elements[1] * fB2 - this.elements[3] * fB0;
         kInv[13] = +this.elements[0] * fB3 - this.elements[1] * fB1 + this.elements[2] * fB0;
-        kInv[2] = +this.elements[13] * fA5 - this.elements[14] * fA4 + this.elements[15] * fA3;
-        kInv[6] = -this.elements[12] * fA5 + this.elements[14] * fA2 - this.elements[15] * fA1;
+        kInv[2]  = +this.elements[13] * fA5 - this.elements[14] * fA4 + this.elements[15] * fA3;
+        kInv[6]  = -this.elements[12] * fA5 + this.elements[14] * fA2 - this.elements[15] * fA1;
         kInv[10] = +this.elements[12] * fA4 - this.elements[13] * fA2 + this.elements[15] * fA0;
         kInv[14] = -this.elements[12] * fA3 + this.elements[13] * fA1 - this.elements[14] * fA0;
-        kInv[3] = -this.elements[9] * fA5 + this.elements[10] * fA4 - this.elements[11] * fA3;
-        kInv[7] = +this.elements[8] * fA5 - this.elements[10] * fA2 + this.elements[11] * fA1;
+        kInv[3]  = -this.elements[9] * fA5 + this.elements[10] * fA4 - this.elements[11] * fA3;
+        kInv[7]  = +this.elements[8] * fA5 - this.elements[10] * fA2 + this.elements[11] * fA1;
         kInv[11] = -this.elements[8] * fA4 + this.elements[9] * fA2 - this.elements[11] * fA0;
         kInv[15] = +this.elements[8] * fA3 - this.elements[9] * fA1 + this.elements[10] * fA0;
 
         // Inverse using Determinant
         var fInvDet = 1.0 / fDet;
-        kInv[0] *= fInvDet;
-        kInv[1] *= fInvDet;
-        kInv[2] *= fInvDet;
-        kInv[3] *= fInvDet;
-        kInv[4] *= fInvDet;
-        kInv[5] *= fInvDet;
-        kInv[6] *= fInvDet;
-        kInv[7] *= fInvDet;
-        kInv[8] *= fInvDet;
-        kInv[9] *= fInvDet;
+        kInv[0]  *= fInvDet;
+        kInv[1]  *= fInvDet;
+        kInv[2]  *= fInvDet;
+        kInv[3]  *= fInvDet;
+        kInv[4]  *= fInvDet;
+        kInv[5]  *= fInvDet;
+        kInv[6]  *= fInvDet;
+        kInv[7]  *= fInvDet;
+        kInv[8]  *= fInvDet;
+        kInv[9]  *= fInvDet;
         kInv[10] *= fInvDet;
         kInv[11] *= fInvDet;
         kInv[12] *= fInvDet;
@@ -1937,30 +3368,32 @@
       print: function() {
         var digits = printMatrixHelper(this.elements);
 
-        var output = "";
-        output += p.nfs(this.elements[0], digits, 4) + " " + p.nfs(this.elements[1], digits, 4) + " " + p.nfs(this.elements[2], digits, 4) + " " + p.nfs(this.elements[3], digits, 4) + "\n";
-        output += p.nfs(this.elements[4], digits, 4) + " " + p.nfs(this.elements[5], digits, 4) + " " + p.nfs(this.elements[6], digits, 4) + " " + p.nfs(this.elements[7], digits, 4) + "\n";
-        output += p.nfs(this.elements[8], digits, 4) + " " + p.nfs(this.elements[9], digits, 4) + " " + p.nfs(this.elements[10], digits, 4) + " " + p.nfs(this.elements[11], digits, 4) + "\n";
-        output += p.nfs(this.elements[12], digits, 4) + " " + p.nfs(this.elements[13], digits, 4) + " " + p.nfs(this.elements[14], digits, 4) + " " + p.nfs(this.elements[15], digits, 4) + "\n\n";
-
+        var output = "" + p.nfs(this.elements[0], digits, 4) + " " + p.nfs(this.elements[1], digits, 4) +
+                     " " + p.nfs(this.elements[2], digits, 4) + " " + p.nfs(this.elements[3], digits, 4) +
+                     "\n" + p.nfs(this.elements[4], digits, 4) + " " + p.nfs(this.elements[5], digits, 4) +
+                     " " + p.nfs(this.elements[6], digits, 4) + " " + p.nfs(this.elements[7], digits, 4) +
+                     "\n" + p.nfs(this.elements[8], digits, 4) + " " + p.nfs(this.elements[9], digits, 4) +
+                     " " + p.nfs(this.elements[10], digits, 4) + " " + p.nfs(this.elements[11], digits, 4) +
+                     "\n" + p.nfs(this.elements[12], digits, 4) + " " + p.nfs(this.elements[13], digits, 4) +
+                     " " + p.nfs(this.elements[14], digits, 4) + " " + p.nfs(this.elements[15], digits, 4) + "\n\n";
         p.println(output);
       },
       invTranslate: function(tx, ty, tz) {
         this.preApply(1, 0, 0, -tx, 0, 1, 0, -ty, 0, 0, 1, -tz, 0, 0, 0, 1);
       },
       invRotateX: function(angle) {
-        var c = p.cos(-angle);
-        var s = p.sin(-angle);
+        var c = Math.cos(-angle);
+        var s = Math.sin(-angle);
         this.preApply([1, 0, 0, 0, 0, c, -s, 0, 0, s, c, 0, 0, 0, 0, 1]);
       },
       invRotateY: function(angle) {
-        var c = p.cos(-angle);
-        var s = p.sin(-angle);
+        var c = Math.cos(-angle);
+        var s = Math.sin(-angle);
         this.preApply([c, 0, s, 0, 0, 1, 0, 0, -s, 0, c, 0, 0, 0, 0, 1]);
       },
       invRotateZ: function(angle) {
-        var c = p.cos(-angle);
-        var s = p.sin(-angle);
+        var c = Math.cos(-angle);
+        var s = Math.sin(-angle);
         this.preApply([c, -s, 0, 0, s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
       },
       invScale: function(x, y, z) {
@@ -1972,7 +3405,7 @@
     // Matrix Stack
     ////////////////////////////////////////////////////////////////////////////
 
-    var PMatrixStack = function PMatrixStack() {
+    var PMatrixStack = p.PMatrixStack = function PMatrixStack() {
       this.matrixStack = [];
     };
 
@@ -2031,7 +3464,7 @@
 
       tokens = "[" + tokens + "]";
 
-      var ary = new Array(0);
+      var ary = [];
       var index = 0;
       var pos = str.search(tokens);
 
@@ -2051,7 +3484,7 @@
       }
 
       if (ary.length === 0) {
-        ary = undefined;
+        ary = undef;
       }
 
       return ary;
@@ -2098,13 +3531,25 @@
       return ret;
     };
 
+    /**
+      splice inserts "value" which can be either a scalar or an array 
+      into "array" at position "index". 
+    */
     p.splice = function(array, value, index) {
-      if (array.length === 0 && value.length === 0) {
+
+      // Trying to splice an empty array into "array" in P5 won't do 
+      // anything, just return the original.
+      if(value.length === 0)
+      {
         return array;
       }
-
-      if (value instanceof Array) {
-        for (var i = 0, j = index; i < value.length; j++, i++) {
+ 
+      // If the second argument was an array, we'll need to iterate over all
+      // the "value" elements and add one by one because
+      // array.splice(index, 0, value);
+      // would create a multi-dimensional array which isn't what we want.
+      if(value instanceof Array) {
+        for(var i = 0, j = index; i < value.length; j++,i++) {
           array.splice(j, 0, value[i]);
         }
       } else {
@@ -2116,7 +3561,7 @@
 
     p.subset = function(array, offset, length) {
       if (arguments.length === 2) {
-        return p.subset(array, offset, array.length - offset);
+        return array.slice(offset, array.length - offset);
       } else if (arguments.length === 3) {
         return array.slice(offset, offset + length);
       }
@@ -2127,7 +3572,7 @@
     };
 
     p.shorten = function(ary) {
-      var newary = new Array(0);
+      var newary = [];
 
       // copy array into new array
       var len = ary.length;
@@ -2140,41 +3585,45 @@
     };
 
     p.expand = function(ary, newSize) {
-      var newary = new Array(0);
-
-      var len = ary.length;
-      for (var i = 0; i < len; i++) {
-        newary[i] = ary[i];
-      }
-
+      var temp = ary.slice(0);
       if (arguments.length === 1) {
         // double size of array
-        newary.length *= 2;
+        temp.length = ary.length * 2;
+        return temp;
       } else if (arguments.length === 2) {
         // size is newSize
-        newary.length = newSize;
+        temp.length = newSize;
+        return temp;
       }
-
-      return newary;
     };
 
-    p.arrayCopy = function(src, srcPos, dest, destPos, length) {
+    p.arrayCopy = function() { // src, srcPos, dest, destPos, length) {
+      var src, srcPos = 0, dest, destPos = 0, length;
+
       if (arguments.length === 2) {
         // recall itself and copy src to dest from start index 0 to 0 of src.length
-        p.arrayCopy(src, 0, srcPos, 0, src.length);
+        src = arguments[0];
+        dest = arguments[1];
+        length = src.length;
       } else if (arguments.length === 3) {
         // recall itself and copy src to dest from start index 0 to 0 of length
-        p.arrayCopy(src, 0, srcPos, 0, dest);
+        src = arguments[0];
+        dest = arguments[1];
+        length = arguments[2];
       } else if (arguments.length === 5) {
-        // copy src to dest from index srcPos to index destPos of length recursivly on objects
-        for (var i = srcPos, j = destPos; i < length + srcPos; i++, j++) {
-          if (src[i] && typeof src[i] === "object") {
-            // src[i] is not null and is another object or array. go recursive
-            p.arrayCopy(src[i], 0, dest[j], 0, src[i].length);
-          } else {
-            // standard type, just copy
-            dest[j] = src[i];
-          }
+        src = arguments[0];
+        srcPos = arguments[1];
+        dest = arguments[2];
+        destPos = arguments[3];
+        length = arguments[4];
+      }
+
+      // copy src to dest from index srcPos to index destPos of length recursivly on objects
+      for (var i = srcPos, j = destPos; i < length + srcPos; i++, j++) {
+        if (dest[j] !== undef) {
+          dest[j] = src[i];
+        } else {
+          throw "array index out of bounds exception";
         }
       }
     };
@@ -2192,8 +3641,37 @@
         array.contains = function(item) {
           return this.indexOf(item) !== -1;
         };
-        array.add = function(item) {
-          return this.push(item);
+        array.add = function() {
+          if(arguments.length === 1) {
+            this.push(arguments[0]); // for add(Object)
+          } else if(arguments.length === 2) {
+            if (typeof arguments[0] === 'number') {
+              if (arguments[0] >= 0 && arguments[0] <= this.length) { 
+                this.splice(arguments[0], 0, arguments[1]); // for add(i, Object)
+              } else {
+                throw(arguments[0] + " is not a valid index");
+              }
+            } else {
+              throw(typeof arguments[0] + " is not a number");
+            }
+          } else {
+            throw("Please use the proper number of parameters.");
+          }
+        };
+        array.set = function() {
+          if(arguments.length === 2) {
+            if (typeof arguments[0] === 'number') {
+              if (arguments[0] >= 0 && arguments[0] < this.length) {
+                this.splice(arguments[0], 1, arguments[1]);
+              } else {
+                throw(arguments[0] + " is not a valid index.");
+              }
+            } else {
+              throw(typeof arguments[0] + " is not a number");
+            }
+          } else {
+            throw("Please use the proper number of parameters.");
+          }
         };
         array.size = function() {
           return this.length;
@@ -2239,7 +3717,7 @@
       } else if ("hashCode" in obj) {
         return obj.hashCode.call(obj);
       } else {
-        if (obj.$id === undefined) {
+        if (obj.$id === undef) {
           obj.$id = ((Math.floor(Math.random() * 0x10000) - 0x8000) << 16) | Math.floor(Math.random() * 0x10000);
         }
         return obj.$id;
@@ -2278,7 +3756,7 @@
         }
         var allEntries = [];
         for (var i = 0; i < buckets.length; ++i) {
-          if (buckets[i] !== undefined) {
+          if (buckets[i] !== undef) {
             allEntries = allEntries.concat(buckets[i]);
           }
         }
@@ -2286,7 +3764,7 @@
         for (var j = 0; j < allEntries.length; ++j) {
           var index = virtHashCode(allEntries[j].key) % buckets.length;
           var bucket = buckets[index];
-          if (bucket === undefined) {
+          if (bucket === undef) {
             buckets[index] = bucket = [];
           }
           bucket.push(allEntries[j]);
@@ -2303,7 +3781,7 @@
             ++itemIndex;
             if (bucketIndex >= buckets.length) {
               endOfBuckets = true;
-            } else if (typeof(buckets[bucketIndex]) === 'undefined' || itemIndex >= buckets[bucketIndex].length) {
+            } else if (buckets[bucketIndex] === undef || itemIndex >= buckets[bucketIndex].length) {
               itemIndex = -1;
               ++bucketIndex;
             } else {
@@ -2398,7 +3876,7 @@
 
       function Entry(pair) {
         this._isIn = function(map) {
-          return map === hashMap && (typeof(pair.removed) === 'undefined');
+          return map === hashMap && (pair.removed === undef);
         };
         this.equals = function(o) {
           return virtEquals(pair.key, o.getKey());
@@ -2431,7 +3909,7 @@
       this.containsKey = function(key) {
         var index = virtHashCode(key) % buckets.length;
         var bucket = buckets[index];
-        if (bucket === undefined) {
+        if (bucket === undef) {
           return false;
         }
         for (var i = 0; i < bucket.length; ++i) {
@@ -2444,7 +3922,7 @@
       this.containsValue = function(value) {
         for (var i = 0; i < buckets.length; ++i) {
           var bucket = buckets[i];
-          if (bucket === undefined) {
+          if (bucket === undef) {
             continue;
           }
           for (var j = 0; j < bucket.length; ++j) {
@@ -2473,7 +3951,7 @@
       this.get = function(key) {
         var index = virtHashCode(key) % buckets.length;
         var bucket = buckets[index];
-        if (bucket === undefined) {
+        if (bucket === undef) {
           return null;
         }
         for (var i = 0; i < bucket.length; ++i) {
@@ -2504,7 +3982,7 @@
       this.put = function(key, value) {
         var index = virtHashCode(key) % buckets.length;
         var bucket = buckets[index];
-        if (bucket === undefined) {
+        if (bucket === undef) {
           ++count;
           buckets[index] = [{
             key: key,
@@ -2519,7 +3997,8 @@
             bucket[i].value = value;
             return previous;
           }
-        }++count;
+        }
+        ++count;
         bucket.push({
           key: key,
           value: value
@@ -2537,7 +4016,7 @@
       this.remove = function(key) {
         var index = virtHashCode(key) % buckets.length;
         var bucket = buckets[index];
-        if (bucket === undefined) {
+        if (bucket === undef) {
           return null;
         }
         for (var i = 0; i < bucket.length; ++i) {
@@ -2548,7 +4027,7 @@
             if (bucket.length > 1) {
               bucket.splice(i, 1);
             } else {
-              buckets[index] = undefined;
+              buckets[index] = undef;
             }
             return previous;
           }
@@ -2589,26 +4068,41 @@
       },
       blend: function(c1, c2) {
         var f = (c2 & p.ALPHA_MASK) >>> 24;
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | p.mix(c1 & p.RED_MASK, c2 & p.RED_MASK, f) & p.RED_MASK | p.mix(c1 & p.GREEN_MASK, c2 & p.GREEN_MASK, f) & p.GREEN_MASK | p.mix(c1 & p.BLUE_MASK, c2 & p.BLUE_MASK, f));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                p.mix(c1 & p.RED_MASK, c2 & p.RED_MASK, f) & p.RED_MASK |
+                p.mix(c1 & p.GREEN_MASK, c2 & p.GREEN_MASK, f) & p.GREEN_MASK |
+                p.mix(c1 & p.BLUE_MASK, c2 & p.BLUE_MASK, f));
       },
       add: function(c1, c2) {
         var f = (c2 & p.ALPHA_MASK) >>> 24;
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | Math.min(((c1 & p.RED_MASK) + ((c2 & p.RED_MASK) >> 8) * f), p.RED_MASK) & p.RED_MASK | Math.min(((c1 & p.GREEN_MASK) + ((c2 & p.GREEN_MASK) >> 8) * f), p.GREEN_MASK) & p.GREEN_MASK | Math.min((c1 & p.BLUE_MASK) + (((c2 & p.BLUE_MASK) * f) >> 8), p.BLUE_MASK));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                Math.min(((c1 & p.RED_MASK) + ((c2 & p.RED_MASK) >> 8) * f), p.RED_MASK) & p.RED_MASK |
+                Math.min(((c1 & p.GREEN_MASK) + ((c2 & p.GREEN_MASK) >> 8) * f), p.GREEN_MASK) & p.GREEN_MASK |
+                Math.min((c1 & p.BLUE_MASK) + (((c2 & p.BLUE_MASK) * f) >> 8), p.BLUE_MASK));
       },
       subtract: function(c1, c2) {
         var f = (c2 & p.ALPHA_MASK) >>> 24;
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | Math.max(((c1 & p.RED_MASK) - ((c2 & p.RED_MASK) >> 8) * f), p.GREEN_MASK) & p.RED_MASK | Math.max(((c1 & p.GREEN_MASK) - ((c2 & p.GREEN_MASK) >> 8) * f), p.BLUE_MASK) & p.GREEN_MASK | Math.max((c1 & p.BLUE_MASK) - (((c2 & p.BLUE_MASK) * f) >> 8), 0));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                Math.max(((c1 & p.RED_MASK) - ((c2 & p.RED_MASK) >> 8) * f), p.GREEN_MASK) & p.RED_MASK |
+                Math.max(((c1 & p.GREEN_MASK) - ((c2 & p.GREEN_MASK) >> 8) * f), p.BLUE_MASK) & p.GREEN_MASK |
+                Math.max((c1 & p.BLUE_MASK) - (((c2 & p.BLUE_MASK) * f) >> 8), 0));
       },
       lightest: function(c1, c2) {
         var f = (c2 & p.ALPHA_MASK) >>> 24;
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | Math.max(c1 & p.RED_MASK, ((c2 & p.RED_MASK) >> 8) * f) & p.RED_MASK | Math.max(c1 & p.GREEN_MASK, ((c2 & p.GREEN_MASK) >> 8) * f) & p.GREEN_MASK | Math.max(c1 & p.BLUE_MASK, ((c2 & p.BLUE_MASK) * f) >> 8));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                Math.max(c1 & p.RED_MASK, ((c2 & p.RED_MASK) >> 8) * f) & p.RED_MASK |
+                Math.max(c1 & p.GREEN_MASK, ((c2 & p.GREEN_MASK) >> 8) * f) & p.GREEN_MASK |
+                Math.max(c1 & p.BLUE_MASK, ((c2 & p.BLUE_MASK) * f) >> 8));
       },
       darkest: function(c1, c2) {
         var f = (c2 & p.ALPHA_MASK) >>> 24;
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | p.mix(c1 & p.RED_MASK, Math.min(c1 & p.RED_MASK, ((c2 & p.RED_MASK) >> 8) * f), f) & p.RED_MASK | p.mix(c1 & p.GREEN_MASK, Math.min(c1 & p.GREEN_MASK, ((c2 & p.GREEN_MASK) >> 8) * f), f) & p.GREEN_MASK | p.mix(c1 & p.BLUE_MASK, Math.min(c1 & p.BLUE_MASK, ((c2 & p.BLUE_MASK) * f) >> 8), f));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                p.mix(c1 & p.RED_MASK, Math.min(c1 & p.RED_MASK, ((c2 & p.RED_MASK) >> 8) * f), f) & p.RED_MASK |
+                p.mix(c1 & p.GREEN_MASK, Math.min(c1 & p.GREEN_MASK, ((c2 & p.GREEN_MASK) >> 8) * f), f) & p.GREEN_MASK |
+                p.mix(c1 & p.BLUE_MASK, Math.min(c1 & p.BLUE_MASK, ((c2 & p.BLUE_MASK) * f) >> 8), f));
       },
       difference: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2620,10 +4114,13 @@
         var cg = (ag > bg) ? (ag - bg) : (bg - ag);
         var cb = (ab > bb) ? (ab - bb) : (bb - ab);
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       exclusion: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2635,10 +4132,13 @@
         var cg = ag + bg - ((ag * bg) >> 7);
         var cb = ab + bb - ((ab * bb) >> 7);
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       multiply: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2650,10 +4150,13 @@
         var cg = (ag * bg) >> 8;
         var cb = (ab * bb) >> 8;
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       screen: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2665,10 +4168,13 @@
         var cg = 255 - (((255 - ag) * (255 - bg)) >> 8);
         var cb = 255 - (((255 - ab) * (255 - bb)) >> 8);
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       hard_light: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2680,10 +4186,13 @@
         var cg = (bg < 128) ? ((ag * bg) >> 7) : (255 - (((255 - ag) * (255 - bg)) >> 7));
         var cb = (bb < 128) ? ((ab * bb) >> 7) : (255 - (((255 - ab) * (255 - bb)) >> 7));
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       soft_light: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2695,10 +4204,13 @@
         var cg = ((ag * bg) >> 7) + ((ag * ag) >> 8) - ((ag * ag * bg) >> 15);
         var cb = ((ab * bb) >> 7) + ((ab * ab) >> 8) - ((ab * ab * bb) >> 15);
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       overlay: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2710,10 +4222,13 @@
         var cg = (ag < 128) ? ((ag * bg) >> 7) : (255 - (((255 - ag) * (255 - bg)) >> 7));
         var cb = (ab < 128) ? ((ab * bb) >> 7) : (255 - (((255 - ab) * (255 - bb)) >> 7));
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       dodge: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2725,10 +4240,13 @@
         var cg = (bg === 255) ? 255 : p.peg((ag << 8) / (255 - bg)); // "
         var cb = (bb === 255) ? 255 : p.peg((ab << 8) / (255 - bb)); // "
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       },
       burn: function(c1, c2) {
-        var f = (c2 & p.ALPHA_MASK) >>> 24;
+        var f  = (c2 & p.ALPHA_MASK) >>> 24;
         var ar = (c1 & p.RED_MASK) >> 16;
         var ag = (c1 & p.GREEN_MASK) >> 8;
         var ab = (c1 & p.BLUE_MASK);
@@ -2740,15 +4258,18 @@
         var cg = (bg === 0) ? 0 : 255 - p.peg(((255 - ag) << 8) / bg); // "
         var cb = (bb === 0) ? 0 : 255 - p.peg(((255 - ab) << 8) / bb); // "
         // alpha blend (this portion will always be the same)
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) | (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) | (p.peg(ab + (((cb - ab) * f) >> 8))));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                (p.peg(ar + (((cr - ar) * f) >> 8)) << 16) |
+                (p.peg(ag + (((cg - ag) * f) >> 8)) << 8) |
+                (p.peg(ab + (((cb - ab) * f) >> 8))));
       }
     };
 
     function color$4(aValue1, aValue2, aValue3, aValue4) {
-      var r, g, b, a, rgb;
+      var r, g, b, a;
 
       if (curColorMode === p.HSB) {
-        rgb = p.color.toRGB(aValue1, aValue2, aValue3);
+        var rgb = p.color.toRGB(aValue1, aValue2, aValue3);
         r = rgb[0];
         g = rgb[1];
         b = rgb[2];
@@ -2806,8 +4327,6 @@
     }
 
     p.color = function color(aValue1, aValue2, aValue3, aValue4) {
-      var undef;
-
       // 4 arguments: (R, G, B, A) or (H, S, B, A)
       if (aValue1 !== undef && aValue2 !== undef && aValue3 !== undef && aValue4 !== undef) {
         return color$4(aValue1, aValue2, aValue3, aValue4);
@@ -2836,7 +4355,8 @@
 
     // Ease of use function to extract the colour bits into a string
     p.color.toString = function(colorInt) {
-      return "rgba(" + ((colorInt & p.RED_MASK) >>> 16) + "," + ((colorInt & p.GREEN_MASK) >>> 8) + "," + ((colorInt & p.BLUE_MASK)) + "," + ((colorInt & p.ALPHA_MASK) >>> 24) / 255 + ")";
+      return "rgba(" + ((colorInt & p.RED_MASK) >>> 16) + "," + ((colorInt & p.GREEN_MASK) >>> 8) +
+             "," + ((colorInt & p.BLUE_MASK)) + "," + ((colorInt & p.ALPHA_MASK) >>> 24) / 255 + ")";
     };
 
     // Easy of use function to pack rgba values into a single bit-shifted color int.
@@ -2846,20 +4366,22 @@
 
     // Creates a simple array in [R, G, B, A] format, [255, 255, 255, 255]
     p.color.toArray = function(colorInt) {
-      return [(colorInt & p.RED_MASK) >>> 16, (colorInt & p.GREEN_MASK) >>> 8, colorInt & p.BLUE_MASK, (colorInt & p.ALPHA_MASK) >>> 24];
+      return [(colorInt & p.RED_MASK) >>> 16, (colorInt & p.GREEN_MASK) >>> 8,
+              colorInt & p.BLUE_MASK, (colorInt & p.ALPHA_MASK) >>> 24];
     };
 
     // Creates a WebGL color array in [R, G, B, A] format. WebGL wants the color ranges between 0 and 1, [1, 1, 1, 1]
     p.color.toGLArray = function(colorInt) {
-      return [((colorInt & p.RED_MASK) >>> 16) / 255, ((colorInt & p.GREEN_MASK) >>> 8) / 255, (colorInt & p.BLUE_MASK) / 255, ((colorInt & p.ALPHA_MASK) >>> 24) / 255];
+      return [((colorInt & p.RED_MASK) >>> 16) / 255, ((colorInt & p.GREEN_MASK) >>> 8) / 255,
+              (colorInt & p.BLUE_MASK) / 255, ((colorInt & p.ALPHA_MASK) >>> 24) / 255];
     };
 
     // HSB conversion function from Mootools, MIT Licensed
     p.color.toRGB = function(h, s, b) {
       // Limit values greater than range
-      h = (h > colorModeX)   ? colorModeX   : h;
+      h = (h > colorModeX) ? colorModeX : h;
       s = (s > colorModeY) ? colorModeY : s;
-      b = (b > colorModeZ)  ? colorModeZ  : b;
+      b = (b > colorModeZ) ? colorModeZ : b;
 
       h = (h / colorModeX) * 360;
       s = (s / colorModeY) * 100;
@@ -2895,9 +4417,9 @@
     p.color.toHSB = function( colorInt ) {
       var red, green, blue;
 
-      red = ((colorInt & p.RED_MASK) >>> 16) / 255;
+      red   = ((colorInt & p.RED_MASK) >>> 16) / 255;
       green = ((colorInt & p.GREEN_MASK) >>> 8) / 255;
-      blue = (colorInt & p.BLUE_MASK) / 255;
+      blue  = (colorInt & p.BLUE_MASK) / 255;
 
       var max = p.max(p.max(red,green), blue),
           min = p.min(p.min(red,green), blue),
@@ -2982,7 +4504,7 @@
       var r = parseInt(p.lerp(r1, r2, amt), 10);
       var g = parseInt(p.lerp(g1, g2, amt), 10);
       var b = parseInt(p.lerp(b1, b2, amt), 10);
-      var a = parseFloat(p.lerp(a1, a2, amt) * colorModeA, 10);
+      var a = parseFloat(p.lerp(a1, a2, amt) * colorModeA);
 
       return p.color.toInt(r, g, b, a);
     };
@@ -2996,18 +4518,13 @@
       return c;
     };
 
-    p.colorMode = function colorMode(mode, range1, range2, range3, range4) {
-      curColorMode = mode;
-      if (arguments.length >= 4) {
-        colorModeX = range1;
-        colorModeY = range2;
-        colorModeZ = range3;
-      }
-      if (arguments.length === 5) {
-        colorModeA = range4;
-      }
-      if (arguments.length === 2) {
-        p.colorMode(mode, range1, range1, range1, range1);
+    p.colorMode = function colorMode() { // mode, range1, range2, range3, range4
+      curColorMode = arguments[0];
+      if (arguments.length > 1) {
+        colorModeX   = arguments[1];
+        colorModeY   = arguments[2] || arguments[1];
+        colorModeZ   = arguments[3] || arguments[1];
+        colorModeA   = arguments[4] || arguments[1];
       }
     };
 
@@ -3234,12 +4751,6 @@
       return new Date().getTime() - start;
     };
 
-    p.noLoop = function noLoop() {
-      doLoop = false;
-      loopStarted = false;
-      clearInterval(looping);
-    };
-
     p.redraw = function redraw() {
       var sec = (new Date().getTime() - timeSinceLastFPS) / 1000;
       framesSinceLastFPS++;
@@ -3275,6 +4786,12 @@
       inDraw = false;
     };
 
+    p.noLoop = function noLoop() {
+      doLoop = false;
+      loopStarted = false;
+      clearInterval(looping);
+    };
+
     p.loop = function loop() {
       if (loopStarted) {
         return;
@@ -3301,13 +4818,17 @@
       curMsPerFrame = 1000 / curFrameRate;
     };
 
+    var eventHandlers = [];
+
     p.exit = function exit() {
       window.clearInterval(looping);
 
-      for (var i=0, ehl=p.pjs.eventHandlers.length; i<ehl; i++) {
-        var elem = p.pjs.eventHandlers[i][0],
-            type = p.pjs.eventHandlers[i][1],
-            fn   = p.pjs.eventHandlers[i][2];
+      Processing.removeInstance(p.externals.canvas.id);
+
+      for (var i=0, ehl=eventHandlers.length; i<ehl; i++) {
+        var elem = eventHandlers[i][0],
+            type = eventHandlers[i][1],
+            fn   = eventHandlers[i][2];
 
         if (elem.removeEventListener) {
           elem.removeEventListener(type, fn, false);
@@ -3353,7 +4874,7 @@
     };
 
     p.link = function(href, target) {
-      if (typeof target !== 'undefined') {
+      if (target !== undef) {
         window.open(href, target);
       } else {
         window.location = href;
@@ -3421,7 +4942,7 @@
         }
         return decToBin(num, numBitsInValue);
       }
-      
+
       // char
       if (num instanceof Char) {
         num = num.toString().charCodeAt(0);
@@ -3453,7 +4974,7 @@
         }
         return values;
       } else {
-        if (isNaN(binaryString)) { 
+        if (isNaN(binaryString)) {
           throw "NaN_Err";
         } else {
           if (arguments.length === 1 || binaryString.length === 8) {
@@ -3472,209 +4993,69 @@
       }
     };
 
-    p.nfs = function(num, left, right) {
-      var str, len, formatLength, rounded;
+    function nfCoreScalar(value, plus, minus, leftDigits, rightDigits, group) {
+      var sign = (value < 0) ? minus : plus;
+      var autoDetectDecimals = rightDigits === 0;
+      var rightDigitsOfDefault = (rightDigits === undef || rightDigits < 0) ? 0 : rightDigits;
 
-      // array handling
-      if (typeof num === "object" && num.constructor === Array) {
-        str = new Array(0);
-        len = num.length;
-        for (var i = 0; i < len; i++) {
-          str[i] = p.nfs(num[i], left, right);
+
+      // Change the way the number is 'floored' based on whether it is odd or even.
+      if (rightDigits < 0 && Math.floor(value) % 2 === 1) {
+        // Make sure 1.49 rounds to 1, but 1.5 rounds to 2.
+        if ((value - Math.floor(value)) >= 0.5) {
+          value += 1;
         }
-      } else if (arguments.length === 3) {
-        var negative = num < 0 ? true : false;
-
-        // Make it work exactly like p5 for right = 0
-        if (right === 0) {
-          right = 1;
-        }
-
-        if (right < 0) {
-          rounded = Math.round(num);
-        } else {
-          // round to 'right' decimal places
-          rounded = Math.round(num * Math.pow(10, right)) / Math.pow(10, right);
-        }
-
-        // split number into whole and fractional components
-        var splitNum = Math.abs(rounded).toString().split("."); // [0] whole number, [1] fractional number
-        // format whole part
-        formatLength = left - splitNum[0].length;
-        for (; formatLength > 0; formatLength--) {
-          splitNum[0] = "0" + splitNum[0];
-        }
-
-        // format fractional part
-        if (splitNum.length === 2 || right > 0) {
-          splitNum[1] = splitNum.length === 2 ? splitNum[1] : "";
-          formatLength = right - splitNum[1].length;
-          for (; formatLength > 0; formatLength--) {
-            splitNum[1] += "0";
-          }
-          str = splitNum.join(".");
-        } else {
-          str = splitNum[0];
-        }
-
-        str = (negative ? "-" : " ") + str;
-      } else if (arguments.length === 2) {
-        str = p.nfs(num, left, -1);
       }
-      return str;
-    };
 
-    p.nfp = function(num, left, right) {
-      var str, len, formatLength, rounded;
 
-      // array handling
-      if (typeof num === "object" && num.constructor === Array) {
-        str = new Array(0);
-        len = num.length;
-        for (var i = 0; i < len; i++) {
-          str[i] = p.nfp(num[i], left, right);
+      var absValue = Math.abs(value);
+      if(autoDetectDecimals) {
+        rightDigitsOfDefault = 1;
+        absValue *= 10;
+        while(Math.abs(Math.round(absValue) - absValue) > 1e-6 && rightDigitsOfDefault < 7) {
+          ++rightDigitsOfDefault;
+          absValue *= 10;
         }
-      } else if (arguments.length === 3) {
-        var negative = num < 0 ? true : false;
-
-        // Make it work exactly like p5 for right = 0
-        if (right === 0) {
-          right = 1;
-        }
-
-        if (right < 0) {
-          rounded = Math.round(num);
-        } else {
-          // round to 'right' decimal places
-          rounded = Math.round(num * Math.pow(10, right)) / Math.pow(10, right);
-        }
-
-        // split number into whole and fractional components
-        var splitNum = Math.abs(rounded).toString().split("."); // [0] whole number, [1] fractional number
-        // format whole part
-        formatLength = left - splitNum[0].length;
-        for (; formatLength > 0; formatLength--) {
-          splitNum[0] = "0" + splitNum[0];
-        }
-
-        // format fractional part
-        if (splitNum.length === 2 || right > 0) {
-          splitNum[1] = splitNum.length === 2 ? splitNum[1] : "";
-          formatLength = right - splitNum[1].length;
-          for (; formatLength > 0; formatLength--) {
-            splitNum[1] += "0";
-          }
-          str = splitNum.join(".");
-        } else {
-          str = splitNum[0];
-        }
-
-        str = (negative ? "-" : "+") + str;
-      } else if (arguments.length === 2) {
-        str = p.nfp(num, left, -1);
+      } else if (rightDigitsOfDefault !== 0) {
+        absValue *= Math.pow(10, rightDigitsOfDefault);
       }
-      return str;
-    };
 
-    p.nfc = function(num, right) {
-      var str;
-      var decimals = right >= 0 ? right : 0;
-      if (typeof num === "object") {
-        str = new Array(0);
-        for (var i = 0; i < num.length; i++) {
-          str[i] = p.nfc(num[i], decimals);
+      var number = Math.round(absValue);
+      var buffer = "";
+      var totalDigits = leftDigits + rightDigitsOfDefault;
+      while (totalDigits > 0 || number > 0) {
+        totalDigits--;
+        buffer = "" + (number % 10) + buffer;
+        number = Math.floor(number / 10);
+      }
+      if (group !== undef) {
+        var i = buffer.length - 3 - rightDigitsOfDefault;
+        while(i > 0) {
+          buffer = buffer.substring(0,i) + group + buffer.substring(i);
+          i-=3;
         }
-      } else if (arguments.length === 2) {
-        var rawStr = p.nfs(num, 0, decimals);
-        var ary = new Array(0);
-        ary = rawStr.split('.');
-        // ary[0] contains left of decimal, ary[1] contains decimal places if they exist
-        // insert commas now, then append ary[1] if it exists
-        var leftStr = ary[0];
-        var rightStr = ary.length > 1 ? '.' + ary[1] : '';
-        var commas = /(\d+)(\d{3})/;
-        while (commas.test(leftStr)) {
-          leftStr = leftStr.replace(commas, '$1' + ',' + '$2');
-        }
-        str = leftStr + rightStr;
-      } else if (arguments.length === 1) {
-        str = p.nfc(num, 0);
       }
-      return str;
-    };
-
-    var decimalToHex = function decimalToHex(d, padding) {
-      //if there is no padding value added, default padding to 8 else go into while statement.
-      padding = typeof(padding) === "undefined" || padding === null ? padding = 8 : padding;
-      if (d < 0) {
-        d = 0xFFFFFFFF + d + 1;
-      }
-      var hex = Number(d).toString(16).toUpperCase();
-      while (hex.length < padding) {
-        hex = "0" + hex;
-      }
-      if (hex.length >= padding) {
-        hex = hex.substring(hex.length - padding, hex.length);
-      }
-      return hex;
-    };
-
-    // note: since we cannot keep track of byte, int types by default the returned string is 8 chars long
-    // if no 2nd argument is passed.  closest compromise we can use to match java implementation Feb 5 2010
-    // also the char parser has issues with chars that are not digits or letters IE: !@#$%^&*
-    p.hex = function hex(value, len) {
-      var hexstring = "";
-      if (arguments.length === 1) {
-        if (value instanceof Char) {
-          hexstring = hex(value, 4);
-        } else { // int or byte, indistinguishable at the moment, default to 8
-          hexstring = hex(value, 8);
-        }
-      } else { // pad to specified length
-        hexstring = decimalToHex(value, len);
-      }
-      return hexstring;
-    };
-
-    p.unhex = function(hex) {
-      var value;
-
-      if (hex instanceof Array) {
-        value = [];
-
-        for (var i = 0; i < hex.length; i++) {
-          value[i] = p.unhex(hex[i]);
-        }
+      if (rightDigitsOfDefault > 0) {
+        return sign + buffer.substring(0, buffer.length - rightDigitsOfDefault) +
+               "." + buffer.substring(buffer.length - rightDigitsOfDefault, buffer.length);
       } else {
-        value = parseInt("0x" + hex, 16); 
+         return sign + buffer;
+      }
+    }
 
-        // correct for int overflow java expectation
-        if (value > 2147483647) {
-          value -= 4294967296;
+    function nfCore(value, plus, minus, leftDigits, rightDigits, group) {
+      if (value instanceof Array) {
+        var arr = [];
+        for (var i = 0, len = value.length; i < len; i++) {
+          arr.push(nfCoreScalar(value[i], plus, minus, leftDigits, rightDigits, group));
         }
+        return arr;
+      } else {
+        return nfCoreScalar(value, plus, minus, leftDigits, rightDigits, group);
       }
+    }
 
-      return value;
-    };
-
-    // Load a file or URL into strings
-    p.loadStrings = function loadStrings(url) {
-      return ajax(url).split("\n");
-    };
-
-    p.loadBytes = function loadBytes(url) {
-      var string = ajax(url);
-      var ret = new Array(string.length);
-
-      for (var i = 0; i < string.length; i++) {
-        ret[i] = string.charCodeAt(i);
-      }
-
-      return ret;
-    };
-
-    // nf() should return an array when being called on an array, at the moment it only returns strings. -F1LT3R
-    // This breaks the join() ref-test. The Processing.org documentation says String or String[]. SHOULD BE FIXED NOW
+    // TODO: drop this and use nfCore (see below) code when we've fixed the rounding bug in nfCore
     p.nf = function() {
       var str, num, pad, arr, left, right, isNegative, test, i;
 
@@ -3702,10 +5083,10 @@
 
         str = new Array(arr.length);
 
-        for (i = 0; i < arr.length && str !== undefined; i++) {
+        for (i = 0; i < arr.length && str !== undef; i++) {
           test = p.nf(arr[i], pad);
-          if (test === undefined) {
-            str = undefined;
+          if (test === undef) {
+            str = undef;
           } else {
             str[i] = test;
           }
@@ -3757,10 +5138,10 @@
 
         str = new Array(arr.length);
 
-        for (i = 0; i < arr.length && str !== undefined; i++) {
+        for (i = 0; i < arr.length && str !== undef; i++) {
           test = p.nf(arr[i], left, right);
-          if (test === undefined) {
-            str = undefined;
+          if (test === undef) {
+            str = undef;
           } else {
             str[i] = test;
           }
@@ -3770,13 +5151,87 @@
       return str;
     };
 
+// TODO: need to switch nf over to using nfCore...
+//    p.nf  = function(value, leftDigits, rightDigits) { return nfCore(value, "", "-", leftDigits, rightDigits); };
+    p.nfs = function(value, leftDigits, rightDigits) { return nfCore(value, " ", "-", leftDigits, rightDigits); };
+    p.nfp = function(value, leftDigits, rightDigits) { return nfCore(value, "+", "-", leftDigits, rightDigits); };
+    p.nfc = function(value, leftDigits, rightDigits) { return nfCore(value, "", "-", leftDigits, rightDigits, ","); };
+
+    var decimalToHex = function decimalToHex(d, padding) {
+      //if there is no padding value added, default padding to 8 else go into while statement.
+      padding = (padding === undef || padding === null) ? padding = 8 : padding;
+      if (d < 0) {
+        d = 0xFFFFFFFF + d + 1;
+      }
+      var hex = Number(d).toString(16).toUpperCase();
+      while (hex.length < padding) {
+        hex = "0" + hex;
+      }
+      if (hex.length >= padding) {
+        hex = hex.substring(hex.length - padding, hex.length);
+      }
+      return hex;
+    };
+
+    // note: since we cannot keep track of byte, int types by default the returned string is 8 chars long
+    // if no 2nd argument is passed.  closest compromise we can use to match java implementation Feb 5 2010
+    // also the char parser has issues with chars that are not digits or letters IE: !@#$%^&*
+    p.hex = function hex(value, len) {
+      if (arguments.length === 1) {
+        if (value instanceof Char) {
+          len = 4;
+        } else { // int or byte, indistinguishable at the moment, default to 8
+          len = 8;
+        }
+      }
+      return decimalToHex(value, len);
+    };
+
+    function unhexScalar(hex) {
+      var value = parseInt("0x" + hex, 16);
+
+      // correct for int overflow java expectation
+      if (value > 2147483647) {
+        value -= 4294967296;
+      }
+      return value;
+    }
+
+    p.unhex = function(hex) {
+      if (hex instanceof Array) {
+        var arr = [];
+        for (var i = 0; i < hex.length; i++) {
+          arr.push(unhexScalar(hex[i]));
+        }
+        return arr;
+      } else {
+        return unhexScalar(hex);
+      }
+    };
+
+    // Load a file or URL into strings
+    p.loadStrings = function loadStrings(url) {
+      return ajax(url).split("\n");
+    };
+
+    p.loadBytes = function loadBytes(url) {
+      var string = ajax(url);
+      var ret = [];
+
+      for (var i = 0; i < string.length; i++) {
+        ret.push(string.charCodeAt(i));
+      }
+
+      return ret;
+    };
+
     ////////////////////////////////////////////////////////////////////////////
     // String Functions
     ////////////////////////////////////////////////////////////////////////////
 
     p.matchAll = function matchAll(aString, aRegExp) {
       var results = [],
-        latest;
+          latest;
       var regexp = new RegExp(aRegExp, "g");
       while ((latest = regexp.exec(aString)) !== null) {
         results.push(latest);
@@ -3808,6 +5263,7 @@
     };
 
     // tinylog lite JavaScript library
+    // http://purl.eligrey.com/tinylog/lite
     /*global tinylog,print*/
     var tinylogLite = (function() {
       "use strict";
@@ -3817,6 +5273,7 @@
         func = "function",
         False = !1,
         True = !0,
+        logLimit = 512,
         log = "log";
 
       if (typeof tinylog !== undef && typeof tinylog[log] === func) {
@@ -3946,6 +5403,7 @@
               resizingLog = False,
               previousHeight = False,
               previousScrollTop = False,
+              messages = 0,
 
               updateSafetyMargin = function() {
                 // have a blank space large enough to fit the output box at the page bottom
@@ -4036,6 +5494,12 @@
             docElem.insertBefore(container, docElem.firstChild);
 
             tinylogLite[log] = function(message) {
+              if (messages === logLimit) {
+                output.removeChild(output.firstChild);
+              } else {
+                messages++;
+              }
+              
               var entry = append(output, createElement($div)),
                 entryText = append(entry, createElement($div));
 
@@ -4083,42 +5547,31 @@
     // Alphanumeric chars arguments automatically converted to numbers when
     // passed in, and will come out as numbers.
     p.str = function str(val) {
-      var ret;
-
-      if (arguments.length === 1) {
-        if (typeof val === "string" && val.length === 1) {
-          // No strings allowed.
-          ret = val;
-        } else if (typeof val === "object" && val.constructor === Array) {
-          ret = new Array(0);
-
-          for (var i = 0; i < val.length; i++) {
-            ret[i] = str(val[i]);
-          }
-        } else {
-          ret = val + "";
+      if (val instanceof Array) {
+        var arr = [];
+        for (var i = 0; i < val.length; i++) {
+          arr.push(val[i] + "");
         }
+        return arr;
+      } else {
+        return (val + "");
       }
-
-      return ret;
     };
 
     p.trim = function(str) {
-      var newstr;
-      if (typeof str === "object" && str.constructor === Array) {
-        newstr = new Array(0);
+      if (str instanceof Array) {
+        var arr = [];
         for (var i = 0; i < str.length; i++) {
-          newstr[i] = p.trim(str[i]);
+          arr.push(str[i].replace(/^\s*/, '').replace(/\s*$/, '').replace(/\r*$/, ''));
         }
+        return arr;
       } else {
-        // if str is not an array then remove all whitespace, tabs, and returns
-        newstr = str.replace(/^\s*/, '').replace(/\s*$/, '').replace(/\r*$/, '');
+        return str.replace(/^\s*/, '').replace(/\s*$/, '').replace(/\r*$/, '');
       }
-      return newstr;
     };
 
     // Conversion
-    p['boolean'] = function(val) {
+    function booleanScalar(val) {
       if (typeof val === 'number') {
         return val !== 0;
       } else if (typeof val === 'boolean') {
@@ -4128,21 +5581,27 @@
       } else if (val instanceof Char) {
         // 1, T or t
         return val.code === 49 || val.code === 84 || val.code === 116;
-      } else if (typeof val === 'object' && val.constructor === Array) {
-        var ret = new Array(val.length);
+      }
+    }
+
+    p['boolean'] = function(val) {
+      if (val instanceof Array) {
+        var ret = [];
         for (var i = 0; i < val.length; i++) {
-          ret[i] = p['boolean'](val[i]);
+          ret.push(booleanScalar(val[i]));
         }
         return ret;
+      } else {
+        return booleanScalar(val);
       }
     };
 
     // a byte is a number between -128 and 127
     p['byte'] = function(aNumber) {
-      if (typeof aNumber === 'object' && aNumber.constructor === Array) {
+      if (aNumber instanceof Array) {
         var bytes = [];
         for (var i = 0; i < aNumber.length; i++) {
-          bytes[i] = p['byte'](aNumber[i]);
+          bytes.push((0 - (aNumber[i] & 0x80)) | (aNumber[i] & 0x7F));
         }
         return bytes;
       } else {
@@ -4151,12 +5610,12 @@
     };
 
     p['char'] = function(key) {
-      if (arguments.length === 1 && typeof key === "number") {
+      if (typeof key === "number") {
         return new Char(String.fromCharCode(key & 0xFFFF));
-      } else if (arguments.length === 1 && typeof key === "object" && key.constructor === Array) {
-        var ret = new Array(key.length);
+      } else if (key instanceof Array) {
+        var ret = [];
         for (var i = 0; i < key.length; i++) {
-          ret[i] = p['char'](key[i]);
+          ret.push(new Char(String.fromCharCode(key[i] & 0xFFFF)));
         }
         return ret;
       } else {
@@ -4168,27 +5627,31 @@
     // String, int[], char[], byte[], boolean[], String[].
     // floats should not work. However, floats with only zeroes right of the
     // decimal will work because JS converts those to int.
+    function floatScalar(val) {
+      if (typeof val === 'number') {
+        return val;
+      } else if (typeof val === 'boolean') {
+        return val ? 1 : 0;
+      } else if (typeof val === 'string') {
+        return parseFloat(val);
+      } else if (val instanceof Char) {
+        return val.code;
+      }
+    }
+
     p['float'] = function(val) {
-      if (arguments.length === 1) {
-        if (typeof val === 'number') {
-          return val;
-        } else if (typeof val === 'boolean') {
-          return val ? 1 : 0;
-        } else if (typeof val === 'string') {
-          return parseFloat(val);
-        } else if (val instanceof Char) {
-          return val.code;
-        } else if (typeof val === 'object' && val.constructor === Array) {
-          var ret = new Array(val.length);
-          for (var i = 0; i < val.length; i++) {
-            ret[i] = p['float'](val[i]);
-          }
-          return ret;
+      if (val instanceof Array) {
+        var ret = [];
+        for (var i = 0; i < val.length; i++) {
+          ret.push(floatScalar(val[i]));
         }
+        return ret;
+      } else {
+        return floatScalar(val);
       }
     };
 
-    p['int'] = function(val) {
+    function intScalar(val) {
       if (typeof val === 'number') {
         return val & 0xFFFFFFFF;
       } else if (typeof val === 'boolean') {
@@ -4198,16 +5661,22 @@
         return number & 0xFFFFFFFF;
       } else if (val instanceof Char) {
         return val.code;
-      } else if (typeof val === 'object' && val.constructor === Array) {
-        var ret = new Array(val.length);
+      }
+    }
+
+    p['int'] = function(val) {
+      if (val instanceof Array) {
+        var ret = [];
         for (var i = 0; i < val.length; i++) {
           if (typeof val[i] === 'string' && !/^\s*[+\-]?\d+\s*$/.test(val[i])) {
-            ret[i] = 0;
+            ret.push(0);
           } else {
-            ret[i] = p['int'](val[i]);
+            ret.push(intScalar(val[i]));
           }
         }
         return ret;
+      } else {
+        return intScalar(val);
       }
     };
 
@@ -4399,21 +5868,21 @@
       };
 
       // by default use standard random, otherwise seeded
-      random = seed === undefined ? Math.random : (new Marsaglia(seed)).nextDouble;
+      random = (seed === undef) ? Math.random : (new Marsaglia(seed)).nextDouble;
     };
 
     // Noise functions and helpers
     function PerlinNoise(seed) {
-      var rnd = seed !== undefined ? new Marsaglia(seed) : Marsaglia.createRandomized();
+      var rnd = seed !== undef ? new Marsaglia(seed) : Marsaglia.createRandomized();
       var i, j;
       // http://www.noisemachine.com/talk1/17b.html
       // http://mrl.nyu.edu/~perlin/noise/
       // generate permutation
-      var p = new Array(512);
-      for(i=0;i<256;++i) { p[i] = i; }
-      for(i=0;i<256;++i) { var t = p[j = rnd.nextInt() & 0xFF]; p[j] = p[i]; p[i] = t; }
-      // copy to avoid taking mod in p[0];
-      for(i=0;i<256;++i) { p[i + 256] = p[i]; }
+      var perm = new Array(512);
+      for(i=0;i<256;++i) { perm[i] = i; }
+      for(i=0;i<256;++i) { var t = perm[j = rnd.nextInt() & 0xFF]; perm[j] = perm[i]; perm[i] = t; }
+      // copy to avoid taking mod in perm[0];
+      for(i=0;i<256;++i) { perm[i + 256] = perm[i]; }
 
       function grad3d(i,x,y,z) {
         var h = i & 15; // convert into 12 gradient directions
@@ -4437,37 +5906,38 @@
         var X = Math.floor(x)&255, Y = Math.floor(y)&255, Z = Math.floor(z)&255;
         x -= Math.floor(x); y -= Math.floor(y); z -= Math.floor(z);
         var fx = (3-2*x)*x*x, fy = (3-2*y)*y*y, fz = (3-2*z)*z*z;
-        var p0 = p[X]+Y, p00 = p[p0] + Z, p01 = p[p0 + 1] + Z, p1  = p[X + 1] + Y, p10 = p[p1] + Z, p11 = p[p1 + 1] + Z;
+        var p0 = perm[X]+Y, p00 = perm[p0] + Z, p01 = perm[p0 + 1] + Z,
+            p1 = perm[X + 1] + Y, p10 = perm[p1] + Z, p11 = perm[p1 + 1] + Z;
         return lerp(fz,
-          lerp(fy, lerp(fx, grad3d(p[p00], x, y, z), grad3d(p[p10], x-1, y, z)),
-                   lerp(fx, grad3d(p[p01], x, y-1, z), grad3d(p[p11], x-1, y-1,z))),
-          lerp(fy, lerp(fx, grad3d(p[p00 + 1], x, y, z-1), grad3d(p[p10 + 1], x-1, y, z-1)),
-                   lerp(fx, grad3d(p[p01 + 1], x, y-1, z-1), grad3d(p[p11 + 1], x-1, y-1,z-1))));
+          lerp(fy, lerp(fx, grad3d(perm[p00], x, y, z), grad3d(perm[p10], x-1, y, z)),
+                   lerp(fx, grad3d(perm[p01], x, y-1, z), grad3d(perm[p11], x-1, y-1,z))),
+          lerp(fy, lerp(fx, grad3d(perm[p00 + 1], x, y, z-1), grad3d(perm[p10 + 1], x-1, y, z-1)),
+                   lerp(fx, grad3d(perm[p01 + 1], x, y-1, z-1), grad3d(perm[p11 + 1], x-1, y-1,z-1))));
       };
 
       this.noise2d = function(x, y) {
         var X = Math.floor(x)&255, Y = Math.floor(y)&255;
         x -= Math.floor(x); y -= Math.floor(y);
         var fx = (3-2*x)*x*x, fy = (3-2*y)*y*y;
-        var p0 = p[X]+Y, p1  = p[X + 1] + Y;
+        var p0 = perm[X]+Y, p1 = perm[X + 1] + Y;
         return lerp(fy,
-          lerp(fx, grad2d(p[p0], x, y), grad2d(p[p1], x-1, y)),
-          lerp(fx, grad2d(p[p0 + 1], x, y-1), grad2d(p[p1 + 1], x-1, y-1)));
+          lerp(fx, grad2d(perm[p0], x, y), grad2d(perm[p1], x-1, y)),
+          lerp(fx, grad2d(perm[p0 + 1], x, y-1), grad2d(perm[p1 + 1], x-1, y-1)));
       };
 
       this.noise1d = function(x) {
         var X = Math.floor(x)&255;
         x -= Math.floor(x);
         var fx = (3-2*x)*x*x;
-        return lerp(fx, grad1d(p[X], x), grad1d(p[X+1], x-1));
+        return lerp(fx, grad1d(perm[X], x), grad1d(perm[X+1], x-1));
       };
     }
 
     // processing defaults
-    var noiseProfile = { generator: undefined, octaves: 4, fallout: 0.5, seed: undefined};
+    var noiseProfile = { generator: undef, octaves: 4, fallout: 0.5, seed: undef};
 
     p.noise = function(x, y, z) {
-      if(noiseProfile.generator === undefined) {
+      if(noiseProfile.generator === undef) {
         // caching
         noiseProfile.generator = new PerlinNoise(noiseProfile.seed);
       }
@@ -4490,18 +5960,35 @@
 
     p.noiseDetail = function(octaves, fallout) {
       noiseProfile.octaves = octaves;
-      if(fallout !== undefined) {
+      if(fallout !== undef) {
         noiseProfile.fallout = fallout;
       }
     };
 
     p.noiseSeed = function(seed) {
       noiseProfile.seed = seed;
-      noiseProfile.generator = undefined;
+      noiseProfile.generator = undef;
+    };
+
+    // Set default background behavior for 2D and 3D contexts
+    var refreshBackground = function() {
+      if (curSketch.options.isOpaque) {
+        if (p.use3DContext) {
+          // fill background default opaque gray
+          curContext.clearColor(204 / 255, 204 / 255, 204 / 255, 1.0);
+          curContext.clear(curContext.COLOR_BUFFER_BIT | curContext.DEPTH_BUFFER_BIT);
+        } else {
+          // fill background default opaque gray
+          curContext.fillStyle = "rgb(204, 204, 204)";
+          curContext.fillRect(0, 0, p.width, p.height);
+          isFillDirty = true;
+        }
+      }
     };
 
     // Changes the size of the Canvas ( this resets context properties like 'lineCap', etc.
     p.size = function size(aWidth, aHeight, aMode) {
+
       if (aMode && (aMode === p.WEBGL)) {
         // get the 3D rendering context
         try {
@@ -4515,6 +6002,7 @@
             curElement.setAttribute("height", aHeight);
           }
           curContext = curElement.getContext("experimental-webgl");
+          p.use3DContext = true;
         } catch(e_size) {
           Processing.debug(e_size);
         }
@@ -4528,13 +6016,12 @@
           }
           // Set defaults
           curContext.viewport(0, 0, curElement.width, curElement.height);
-          curContext.clearColor(204 / 255, 204 / 255, 204 / 255, 1.0);
-          curContext.clear(curContext.COLOR_BUFFER_BIT);
           curContext.enable(curContext.DEPTH_TEST);
           curContext.enable(curContext.BLEND);
           curContext.blendFunc(curContext.SRC_ALPHA, curContext.ONE_MINUS_SRC_ALPHA);
+          refreshBackground(); // sets clearColor default;
 
-          // We declare our own constants since Minefield doesn't 
+          // We declare our own constants since Minefield doesn't
           // do anything when curContext.VERTEX_PROGRAM_POINT_SIZE is used.
           curContext.enable(VERTEX_PROGRAM_POINT_SIZE);
           curContext.enable(POINT_SMOOTH);
@@ -4554,7 +6041,7 @@
           // Now that the programs have been compiled, we can set the default
           // states for the lights.
           curContext.useProgram(programObject3D);
-          
+
           // assume we aren't using textures by default
           uniformi(programObject3D, "usingTexture", usingTexture);
           p.lightFalloff(1, 0, 0);
@@ -4638,9 +6125,10 @@
         p.stroke(0);
         p.fill(255);
       } else {
-        if (typeof curContext === "undefined") {
+        if (curContext === undef) {
           // size() was called without p.init() default context, ie. p.createGraphics()
           curContext = curElement.getContext("2d");
+          p.use3DContext = false;
           userMatrixStack = new PMatrixStack();
           modelView = new PMatrix2D();
         }
@@ -4655,8 +6143,8 @@
         lineCap: curContext.lineCap,
         lineJoin: curContext.lineJoin
       };
-      curElement.width = p.width = aWidth;
-      curElement.height = p.height = aHeight;
+      curElement.width = p.width = aWidth || 100;
+      curElement.height = p.height = aHeight || 100;
 
       for (var j in props) {
         if (props) {
@@ -4670,9 +6158,27 @@
       // set 5% for pixels to cache (or 1000)
       maxPixelsCached = Math.max(1000, aWidth * aHeight * 0.05);
 
-      p.context = curContext; // added for createGraphics
+      // Externalize the context
+      p.externals.context = curContext;
+
       p.toImageData = function() {
-        return curContext.getImageData(0, 0, this.width, this.height);
+        if(!p.use3DContext){
+          return curContext.getImageData(0, 0, this.width, this.height);
+        } else {
+          var c = document.createElement("canvas");
+          var ctx = c.getContext("2d");          
+          var obj = ctx.createImageData(this.width, this.height);
+          var uBuff = curContext.readPixels(0,0,this.width,this.height,curContext.RGBA,curContext.UNSIGNED_BYTE);
+          if(!uBuff){
+            uBuff = new WebGLUnsignedByteArray(this.width * this.height * 4);
+            curContext.readPixels(0,0,this.width,this.height,curContext.RGBA,curContext.UNSIGNED_BYTE, uBuff);
+          }
+          for(var i =0; i < uBuff.length; i++){
+            obj.data[i] = uBuff[(this.height - 1 - Math.floor(i / 4 / this.width)) * this.width * 4 + (i % (this.width * 4))];
+          }
+
+          return obj;
+        }
       };
     };
 
@@ -4857,29 +6363,37 @@
         cameraX = curElement.width / 2;
         cameraY = curElement.height / 2;
         cameraZ = cameraY / Math.tan(cameraFOV / 2);
-        p.camera(cameraX, cameraY, cameraZ, cameraX, cameraY, 0, 0, 1, 0);
-      } else {
-        var z = new p.PVector(eyeX - centerX, eyeY - centerY, eyeZ - centerZ);
-        var y = new p.PVector(upX, upY, upZ);
-        var transX, transY, transZ;
-        z.normalize();
-        var x = p.PVector.cross(y, z);
-        y = p.PVector.cross(z, x);
-        x.normalize();
-        y.normalize();
-
-        cam.set(x.x, x.y, x.z, 0, y.x, y.y, y.z, 0, z.x, z.y, z.z, 0, 0, 0, 0, 1);
-
-        cam.translate(-eyeX, -eyeY, -eyeZ);
-
-        cameraInv.reset();
-        cameraInv.invApply(x.x, x.y, x.z, 0, y.x, y.y, y.z, 0, z.x, z.y, z.z, 0, 0, 0, 0, 1);
-
-        cameraInv.translate(eyeX, eyeY, eyeZ);
-
-        modelView.set(cam);
-        modelViewInv.set(cameraInv);
+        eyeX = cameraX;
+        eyeY = cameraY;
+        eyeZ = cameraZ;
+        centerX = cameraX;
+        centerY = cameraY;
+        centerZ = 0;
+        upX = 0;
+        upY = 1;
+        upZ = 0;
       }
+
+      var z = new p.PVector(eyeX - centerX, eyeY - centerY, eyeZ - centerZ);
+      var y = new p.PVector(upX, upY, upZ);
+      var transX, transY, transZ;
+      z.normalize();
+      var x = p.PVector.cross(y, z);
+      y = p.PVector.cross(z, x);
+      x.normalize();
+      y.normalize();
+
+      cam.set(x.x, x.y, x.z, 0, y.x, y.y, y.z, 0, z.x, z.y, z.z, 0, 0, 0, 0, 1);
+
+      cam.translate(-eyeX, -eyeY, -eyeZ);
+
+      cameraInv.reset();
+      cameraInv.invApply(x.x, x.y, x.z, 0, y.x, y.y, y.z, 0, z.x, z.y, z.z, 0, 0, 0, 0, 1);
+
+      cameraInv.translate(eyeX, eyeY, eyeZ);
+
+      modelView.set(cam);
+      modelViewInv.set(cameraInv);
     };
 
     p.perspective = function perspective(fov, aspect, near, far) {
@@ -4890,41 +6404,51 @@
         cameraNear = cameraZ / 10;
         cameraFar = cameraZ * 10;
         cameraAspect = curElement.width / curElement.height;
-        p.perspective(cameraFOV, cameraAspect, cameraNear, cameraFar);
-      } else {
-        var a = arguments;
-        var yMax, yMin, xMax, xMin;
-        yMax = near * Math.tan(fov / 2);
-        yMin = -yMax;
-        xMax = yMax * aspect;
-        xMin = yMin * aspect;
-        p.frustum(xMin, xMax, yMin, yMax, near, far);
+        fov = cameraFOV;
+        aspect = cameraAspect;
+        near = cameraNear;
+        far = cameraFar;
       }
+
+      var yMax, yMin, xMax, xMin;
+      yMax = near * Math.tan(fov / 2);
+      yMin = -yMax;
+      xMax = yMax * aspect;
+      xMin = yMin * aspect;
+      p.frustum(xMin, xMax, yMin, yMax, near, far);
     };
 
     p.frustum = function frustum(left, right, bottom, top, near, far) {
       frustumMode = true;
       projection = new PMatrix3D();
-      projection.set((2 * near) / (right - left), 0, (right + left) / (right - left), 0, 0, (2 * near) / (top - bottom), (top + bottom) / (top - bottom), 0, 0, 0, -(far + near) / (far - near), -(2 * far * near) / (far - near), 0, 0, -1, 0);
+      projection.set((2 * near) / (right - left), 0, (right + left) / (right - left),
+                     0, 0, (2 * near) / (top - bottom), (top + bottom) / (top - bottom),
+                     0, 0, 0, -(far + near) / (far - near), -(2 * far * near) / (far - near),
+                     0, 0, -1, 0);
     };
 
     p.ortho = function ortho(left, right, bottom, top, near, far) {
       if (arguments.length === 0) {
-        p.ortho(0, p.width, 0, p.height, -10, 10);
-      } else {
-        var x = 2 / (right - left);
-        var y = 2 / (top - bottom);
-        var z = -2 / (far - near);
-
-        var tx = -(right + left) / (right - left);
-        var ty = -(top + bottom) / (top - bottom);
-        var tz = -(far + near) / (far - near);
-
-        projection = new PMatrix3D();
-        projection.set(x, 0, 0, tx, 0, y, 0, ty, 0, 0, z, tz, 0, 0, 0, 1);
-
-        frustumMode = false;
+        left = 0;
+        right = p.width;
+        bottom = 0;
+        top = p.height;
+        near = -10;
+        far = 10;
       }
+
+      var x = 2 / (right - left);
+      var y = 2 / (top - bottom);
+      var z = -2 / (far - near);
+
+      var tx = -(right + left) / (right - left);
+      var ty = -(top + bottom) / (top - bottom);
+      var tz = -(far + near) / (far - near);
+
+      projection = new PMatrix3D();
+      projection.set(x, 0, 0, tx, 0, y, 0, ty, 0, 0, z, tz, 0, 0, 0, 1);
+
+      frustumMode = false;
     };
 
     p.printProjection = function() {
@@ -4946,25 +6470,24 @@
         if (!h || !d) {
           h = d = w;
         }
-    
+
         // Modeling transformation
         var model = new PMatrix3D();
         model.scale(w, h, d);
         model.transpose();
-        
+
         // viewing transformation needs to have Y flipped
         // becuase that's what Processing does.
         var view = new PMatrix3D();
         view.scale(1, -1, 1);
         view.apply(modelView.array());
         view.transpose();
-        
+
         var proj = new PMatrix3D();
         proj.set(projection);
         proj.transpose();
 
         if (doFill === true) {
-        
           curContext.useProgram(programObject3D);
 
           disableVertexAttribPointer(programObject3D, "aTexture");
@@ -4972,7 +6495,7 @@
           uniformMatrix(programObject3D, "model", false, model.array());
           uniformMatrix(programObject3D, "view", false, view.array());
           uniformMatrix(programObject3D, "projection", false, proj.array());
-        
+
           // fix stitching problems. (lines get occluded by triangles
           // since they share the same depth values). This is not entirely
           // working, but it's a start for drawing the outline. So
@@ -5002,7 +6525,7 @@
           // Ugly hack. Can't simply disable the vertex attribute
           // array. No idea why, so I'm passing in dummy data.
           vertexAttribPointer(programObject3D, "aColor", 3, boxNormBuffer);
-        
+
           curContext.drawArrays(curContext.TRIANGLES, 0, boxVerts.length / 3);
           curContext.disable(curContext.POLYGON_OFFSET_FILL);
         }
@@ -5014,8 +6537,12 @@
           uniformMatrix(programObject2D, "projection", false, proj.array());
 
           uniformf(programObject2D, "color", strokeStyle);
-          curContext.lineWidth(lineWidth);
+          uniformi(programObject2D, "picktype", 0);
+          
           vertexAttribPointer(programObject2D, "Vertex", 3, boxOutlineBuffer);
+          disableVertexAttribPointer(programObject2D, "aTextureCoord");
+          
+          curContext.lineWidth(lineWidth);
           curContext.drawArrays(curContext.LINES, 0, boxOutlineVerts.length / 3);
         }
       }
@@ -5162,7 +6689,7 @@
         // Modeling transformation
         var model = new PMatrix3D();
         model.scale(sRad, sRad, sRad);
-          
+
         // viewing transformation needs to have Y flipped
         // becuase that's what Processing does.
         var view = new PMatrix3D();
@@ -5173,13 +6700,12 @@
         var proj = new PMatrix3D();
         proj.set(projection);
         proj.transpose();
- 
-        if (doFill === true) {
 
+        if (doFill === true) {
           // Create a normal transformation matrix
           var v = new PMatrix3D();
           v.set(view);
-          
+
           var m = new PMatrix3D();
           m.set(model);
 
@@ -5188,10 +6714,10 @@
           var normalMatrix = new PMatrix3D();
           normalMatrix.set(v);
           normalMatrix.invert();
-                    
+
           curContext.useProgram(programObject3D);
           disableVertexAttribPointer(programObject3D, "aTexture");
-          
+
           uniformMatrix(programObject3D, "model", false, model.array());
           uniformMatrix(programObject3D, "view", false, view.array());
           uniformMatrix(programObject3D, "projection", false, proj.array());
@@ -5199,7 +6725,7 @@
 
           vertexAttribPointer(programObject3D, "Vertex", 3, sphereBuffer);
           vertexAttribPointer(programObject3D, "Normal", 3, sphereBuffer);
-        
+
           // Ugly hack. Can't simply disable the vertex attribute
           // array. No idea why, so I'm passing in dummy data.
           vertexAttribPointer(programObject3D, "aColor", 3, sphereBuffer);
@@ -5222,9 +6748,12 @@
           uniformMatrix(programObject2D, "model", false, model.array());
           uniformMatrix(programObject2D, "view", false, view.array());
           uniformMatrix(programObject2D, "projection", false, proj.array());
-
+          
           vertexAttribPointer(programObject2D, "Vertex", 3, sphereBuffer);
+          disableVertexAttribPointer(programObject2D, "aTextureCoord");
+          
           uniformf(programObject2D, "color", strokeStyle);
+          uniformi(programObject2D, "picktype", 0);
 
           curContext.lineWidth(lineWidth);
           curContext.drawArrays(curContext.LINE_STRIP, 0, sphereVerts.length / 3);
@@ -5489,7 +7018,7 @@
       lineWidth = w;
 
       if (p.use3DContext) {
-        curContext.useProgram(programObject2D);  
+        curContext.useProgram(programObject2D);
         uniformf(programObject2D, "pointSize", w);
       } else {
         curContext.lineWidth = w;
@@ -5505,15 +7034,15 @@
     };
 
     p.smooth = function() {
-      if (!p.use3DContext) {
-        curElement.style.setProperty("image-rendering", "optimizeQuality", "important");
+      curElement.style.setProperty("image-rendering", "optimizeQuality", "important");
+      if (!p.use3DContext && "mozImageSmoothingEnabled" in curContext) {
         curContext.mozImageSmoothingEnabled = true;
       }
     };
 
     p.noSmooth = function() {
-      if (!p.use3DContext) {
-        curElement.style.setProperty("image-rendering", "optimizeSpeed", "important");
+      curElement.style.setProperty("image-rendering", "optimizeSpeed", "important");
+      if (!p.use3DContext && "mozImageSmoothingEnabled" in curContext) {
         curContext.mozImageSmoothingEnabled = false;
       }
     };
@@ -5524,7 +7053,10 @@
 
     function colorBlendWithAlpha(c1, c2, k) {
         var f = 0|(k * ((c2 & p.ALPHA_MASK) >>> 24));
-        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 | p.mix(c1 & p.RED_MASK, c2 & p.RED_MASK, f) & p.RED_MASK | p.mix(c1 & p.GREEN_MASK, c2 & p.GREEN_MASK, f) & p.GREEN_MASK | p.mix(c1 & p.BLUE_MASK, c2 & p.BLUE_MASK, f));
+        return (Math.min(((c1 & p.ALPHA_MASK) >>> 24) + f, 0xff) << 24 |
+                p.mix(c1 & p.RED_MASK, c2 & p.RED_MASK, f) & p.RED_MASK |
+                p.mix(c1 & p.GREEN_MASK, c2 & p.GREEN_MASK, f) & p.GREEN_MASK |
+                p.mix(c1 & p.BLUE_MASK, c2 & p.BLUE_MASK, f));
     }
 
     p.point = function point(x, y, z) {
@@ -5539,35 +7071,47 @@
         view.scale(1, -1, 1);
         view.apply(modelView.array());
         view.transpose();
-        
+
         var proj = new PMatrix3D();
         proj.set(projection);
         proj.transpose();
 
         curContext.useProgram(programObject2D);
         uniformMatrix(programObject2D, "model", false, model.array());
-        uniformMatrix(programObject2D, "view", false, view.array());        
+        uniformMatrix(programObject2D, "view", false, view.array());
         uniformMatrix(programObject2D, "projection", false, proj.array());
 
         if (lineWidth > 0 && doStroke) {
           // this will be replaced with the new bit shifting color code
           uniformf(programObject2D, "color", strokeStyle);
-
+          uniformi(programObject2D, "picktype", 0);
+          
           vertexAttribPointer(programObject2D, "Vertex", 3, pointBuffer);
+          disableVertexAttribPointer(programObject2D, "aTextureCoord");
+          
           curContext.drawArrays(curContext.POINTS, 0, 1);
         }
       } else {
         if (doStroke) {
           // TODO if strokeWeight > 1, do circle
-
-          if(p.pjs.crispLines) {
-            var alphaOfPointWeight = Math.PI / 4;  // TODO dependency of strokeWeight 
+          
+          if (curSketch.options.crispLines) {
+            var alphaOfPointWeight = Math.PI / 4;  // TODO dependency of strokeWeight
             var c = p.get(x, y);
             p.set(x, y, colorBlendWithAlpha(c, currentStrokeColor, alphaOfPointWeight));
           } else {
-            curContext.fillStyle = p.color.toString(currentStrokeColor);
-            curContext.fillRect(Math.round(x), Math.round(y), 1, 1);
-            isFillDirty = true;
+            if (lineWidth > 1){
+              curContext.fillStyle = p.color.toString(currentStrokeColor);
+              isFillDirty = true;
+              curContext.beginPath();
+              curContext.arc(x, y, lineWidth / 2, 0, p.TWO_PI, false);
+              curContext.fill();
+              curContext.closePath();
+            } else {
+              curContext.fillStyle = p.color.toString(currentStrokeColor);
+              curContext.fillRect(Math.round(x), Math.round(y), 1, 1);
+              isFillDirty = true;
+            }
           }
         }
       }
@@ -5616,13 +7160,15 @@
       vert[13] = normalX;
       vert[14] = normalY;
       vert[15] = normalZ;
-
+      
+      vert["isVert"] =  true;
       vertArray.push(vert);
+      
     };
 
     /*
       Draw 3D points created from calls to vertex:
-      
+
       beginShape(POINT);
       vertex(x, y, 0);
       ...
@@ -5633,7 +7179,7 @@
       view.scale(1, -1, 1);
       view.apply(modelView.array());
       view.transpose();
-      
+
       var proj = new PMatrix3D();
       proj.set(projection);
       proj.transpose();
@@ -5671,15 +7217,15 @@
       view.scale(1, -1, 1);
       view.apply(modelView.array());
       view.transpose();
-            
+
       var proj = new PMatrix3D();
       proj.set(projection);
       proj.transpose();
-      
+
       curContext.useProgram(programObjectUnlitShape);
       uniformMatrix(programObjectUnlitShape, "uView", false, view.array());
       uniformMatrix(programObjectUnlitShape, "uProjection", false, proj.array());
-      
+
       vertexAttribPointer(programObjectUnlitShape, "aVertex", 3, lineBuffer);
       curContext.bufferData(curContext.ARRAY_BUFFER, newWebGLArray(vArray), curContext.STREAM_DRAW);
 
@@ -5687,7 +7233,7 @@
       curContext.bufferData(curContext.ARRAY_BUFFER, newWebGLArray(cArray), curContext.STREAM_DRAW);
 
       curContext.lineWidth(lineWidth);
-      
+
       curContext.drawArrays(ctxMode, 0, vArray.length/3);
     };
 
@@ -5702,16 +7248,16 @@
       else{
         ctxMode = curContext.TRIANGLE_STRIP;
       }
-      
+
       var view = new PMatrix3D();
       view.scale(1, -1, 1);
       view.apply(modelView.array());
       view.transpose();
-      
+
       var proj = new PMatrix3D();
       proj.set(projection);
       proj.transpose();
-      
+
       curContext.useProgram( programObject3D );
       uniformMatrix( programObject3D, "model", false,  [1,0,0,0,  0,1,0,0,   0,0,1,0,   0,0,0,1] );
       uniformMatrix( programObject3D, "view", false, view.array() );
@@ -5719,7 +7265,7 @@
 
       curContext.enable( curContext.POLYGON_OFFSET_FILL );
       curContext.polygonOffset( 1, 1 );
-      
+
       uniformf(programObject3D, "color", [-1,0,0,0]);
 
       vertexAttribPointer(programObject3D, "Vertex", 3, fillBuffer);
@@ -5732,7 +7278,7 @@
       disableVertexAttribPointer(programObject3D, "Normal");
 
       var i;
-      
+
       if(usingTexture){
         if(curTextureMode === p.IMAGE){
           for(i = 0; i < tArray.length; i += 2){
@@ -5741,18 +7287,18 @@
           }
         }
 
-        // hack to handle when users specifies values 
+        // hack to handle when users specifies values
         // greater than 1.0 for texture coords.
         for(i = 0; i < tArray.length; i += 2){
           if( tArray[i+0] > 1.0 ){ tArray[i+0] -= (tArray[i+0] - 1.0);}
           if( tArray[i+1] > 1.0 ){ tArray[i+1] -= (tArray[i+1] - 1.0);}
         }
-                          
+
         uniformi(programObject3D, "usingTexture", usingTexture);
         vertexAttribPointer(programObject3D, "aTexture", 2, shapeTexVBO);
         curContext.bufferData(curContext.ARRAY_BUFFER, newWebGLArray(tArray), curContext.STREAM_DRAW);
       }
-      
+
       curContext.drawArrays( ctxMode, 0, vArray.length/3 );
       curContext.disable( curContext.POLYGON_OFFSET_FILL );
     };
@@ -5781,7 +7327,7 @@
           colorVertArray.push(vertArray[i][j]);
         }
       }
-      
+
       // 9,10,11,12
       // R, G, B, A
       for(i = 0; i < vertArray.length; i++){
@@ -5789,7 +7335,7 @@
           strokeVertArray.push(vertArray[i][j]);
         }
       }
-      
+
       for(i = 0; i < vertArray.length; i++){
         texVertArray.push(vertArray[i][3]);
         texVertArray.push(vertArray[i][4]);
@@ -5800,7 +7346,7 @@
       }
       else{
         p.CLOSE = true;
-        
+
         fillVertArray.push(vertArray[0][0]);
         fillVertArray.push(vertArray[0][1]);
         fillVertArray.push(vertArray[0][2]);
@@ -5808,16 +7354,16 @@
         for(i = 5; i < 9; i++){
           colorVertArray.push(vertArray[0][i]);
         }
-        
+
        for(i = 9; i < 13; i++){
           strokeVertArray.push(vertArray[0][i]);
         }
-        
+
         texVertArray.push(vertArray[0][3]);
         texVertArray.push(vertArray[0][4]);
       }
 
-      if(isCurve && curShape === p.POLYGON || isCurve && curShape === undefined){
+      if(isCurve && curShape === p.POLYGON || isCurve && curShape === undef){
 
         if(p.use3DContext){
           lineVertArray = fillVertArray;
@@ -5844,8 +7390,10 @@
               */
             for(i = 1; (i+2) < vertArray.length; i++){
               b[0] = [vertArray[i][0], vertArray[i][1]];
-              b[1] = [vertArray[i][0] + (s * vertArray[i+1][0] - s * vertArray[i-1][0]) / 6, vertArray[i][1] + (s * vertArray[i+1][1] - s * vertArray[i-1][1]) / 6];
-              b[2] = [vertArray[i+1][0] + (s * vertArray[i][0] - s * vertArray[i+2][0]) / 6, vertArray[i+1][1] + (s * vertArray[i][1] - s * vertArray[i+2][1]) / 6];
+              b[1] = [vertArray[i][0] + (s * vertArray[i+1][0] - s * vertArray[i-1][0]) / 6,
+                     vertArray[i][1] + (s * vertArray[i+1][1] - s * vertArray[i-1][1]) / 6];
+              b[2] = [vertArray[i+1][0] + (s * vertArray[i][0] - s * vertArray[i+2][0]) / 6,
+                     vertArray[i+1][1] + (s * vertArray[i][1] - s * vertArray[i+2][1]) / 6];
               b[3] = [vertArray[i+1][0], vertArray[i+1][1]];
               curContext.bezierCurveTo(b[1][0], b[1][1], b[2][0], b[2][1], b[3][0], b[3][1]);
             }
@@ -5855,7 +7403,7 @@
           }
         }
       }
-      else if(isBezier && curShape === p.POLYGON || isBezier && curShape === undefined){
+      else if(isBezier && curShape === p.POLYGON || isBezier && curShape === undef){
         if(p.use3DContext){
           lineVertArray = fillVertArray;
           lineVertArray.splice(lineVertArray.length - 3);
@@ -5866,9 +7414,9 @@
           if(doFill){
             fill3D(fillVertArray, "TRIANGLES", colorVertArray);
           }
-          
+
           // TODO: Fill not properly working yet, will fix later
-          /*fillVertArray = [];  
+          /*fillVertArray = [];
           colorVertArray = [];
           tempArray.reverse();
           for(i = 0; (i+1) < 10; i++){
@@ -5891,7 +7439,7 @@
               colorVertArray.push(vertArray[i][j]);
             }
           }
-          
+
           strokeVertArray = [];
           for(i = 0; i < tempArray.length/3; i++){
             strokeVertArray.push(255);
@@ -5903,9 +7451,18 @@
         }
         else{
           curContext.beginPath();
-          curContext.moveTo(vertArray[0][0], vertArray[0][1]);
-          for(i = 1; i < vertArray.length; i++){
-            curContext.bezierCurveTo(vertArray[i][0], vertArray[i][1], vertArray[i][2], vertArray[i][3], vertArray[i][4], vertArray[i][5]);
+          for(i = 0; i < vertArray.length; i++){
+            if( vertArray[i]["isVert"] === true ){ //if it is a vertex move to the position
+              if ( vertArray[i]["moveTo"] === true) {
+                curContext.moveTo(vertArray[i][0], vertArray[i][1]);
+              } else if (vertArray[i]["moveTo"] === false){
+                curContext.lineTo(vertArray[i][0], vertArray[i][1]);
+              } else {
+                curContext.moveTo(vertArray[i][0], vertArray[i][1]);
+              } 
+            } else { //otherwise continue drawing bezier
+              curContext.bezierCurveTo(vertArray[i][0], vertArray[i][1], vertArray[i][2], vertArray[i][3], vertArray[i][4], vertArray[i][5]);
+            }
           }
           executeContextFill();
           executeContextStroke();
@@ -5913,7 +7470,7 @@
         }
       }
       else{
-        if(p.use3DContext){ // 3D context                   
+        if(p.use3DContext){ // 3D context
           if (curShape === p.POINTS){
             for(i = 0; i < vertArray.length; i++){
               for(j = 0; j < 3; j++){
@@ -5994,7 +7551,7 @@
                     colorVertArray.push(vertArray[i+j][k]);
                   }
                 }
-                
+
                 if(doFill || usingTexture){
                   fill3D(fillVertArray, "TRIANGLE_STRIP", colorVertArray, texVertArray);
                 }
@@ -6019,14 +7576,14 @@
               if(doStroke){
                 line3D(lineVertArray, "LINE_LOOP", strokeVertArray);
               }
-              
+
               for(i = 2; (i+1) < vertArray.length; i++){
                 lineVertArray = [];
                 strokeVertArray = [];
                 lineVertArray.push(vertArray[0][0]);
                 lineVertArray.push(vertArray[0][1]);
                 lineVertArray.push(vertArray[0][2]);
-                
+
                 strokeVertArray.push(vertArray[0][9]);
                 strokeVertArray.push(vertArray[0][10]);
                 strokeVertArray.push(vertArray[0][11]);
@@ -6073,28 +7630,28 @@
                 for(j = 5; j < 9; j++){
                   colorVertArray.push(vertArray[i][j]);
                 }
-                
+
                 for(j = 0; j < 3; j++){
                   fillVertArray.push(vertArray[i+1][j]);
                 }
                 for(j = 5; j < 9; j++){
                   colorVertArray.push(vertArray[i+1][j]);
                 }
-                
+
                 for(j = 0; j < 3; j++){
                   fillVertArray.push(vertArray[i+3][j]);
                 }
                 for(j = 5; j < 9; j++){
                   colorVertArray.push(vertArray[i+3][j]);
                 }
-                
+
                 for(j = 0; j < 3; j++){
                   fillVertArray.push(vertArray[i+2][j]);
                 }
                 for(j = 5; j < 9; j++){
                   colorVertArray.push(vertArray[i+2][j]);
                 }
-                
+
                 if(usingTexture){
                   texVertArray.push(vertArray[i+0][3]);
                   texVertArray.push(vertArray[i+0][4]);
@@ -6105,7 +7662,7 @@
                   texVertArray.push(vertArray[i+2][3]);
                   texVertArray.push(vertArray[i+2][4]);
                 }
-                
+
                 fill3D(fillVertArray, "TRIANGLE_STRIP", colorVertArray, texVertArray);
               }
             }
@@ -6124,7 +7681,7 @@
                   strokeVertArray.push(vertArray[i][j]);
                 }
               }
-              
+
               line3D(lineVertArray, "LINE_STRIP", strokeVertArray);
               if(vertArray.length > 4 && vertArray.length % 2 > 0){
                 tempArray = fillVertArray.splice(fillVertArray.length - 3);
@@ -6194,7 +7751,7 @@
               else{
                 line3D(lineVertArray, "LINE_STRIP", strokeVertArray);
               }
-              
+
               // fill is ignored if textures are used
               if(doFill || usingTexture){
                 fill3D(fillVertArray, "TRIANGLE_FAN", colorVertArray, texVertArray);
@@ -6338,7 +7895,10 @@
       }
 
       var s = curTightness;
-      curveBasisMatrix.set(((s - 1) / 2).toFixed(2), ((s + 3) / 2).toFixed(2), ((-3 - s) / 2).toFixed(2), ((1 - s) / 2).toFixed(2), (1 - s), ((-5 - s) / 2).toFixed(2), (s + 2), ((s - 1) / 2).toFixed(2), ((s - 1) / 2).toFixed(2), 0, ((1 - s) / 2).toFixed(2), 0, 0, 1, 0, 0);
+      curveBasisMatrix.set(((s - 1) / 2).toFixed(2), ((s + 3) / 2).toFixed(2),
+                           ((-3 - s) / 2).toFixed(2), ((1 - s) / 2).toFixed(2),
+                           (1 - s), ((-5 - s) / 2).toFixed(2), (s + 2), ((s - 1) / 2).toFixed(2),
+                           ((s - 1) / 2).toFixed(2), 0, ((1 - s) / 2).toFixed(2), 0, 0, 1, 0, 0);
 
       splineForward(curveDet, curveDrawMatrix);
 
@@ -6362,20 +7922,19 @@
     p.bezierVertex = function bezierVertex() {
       isBezier = true;
       var vert = [];
-      if(firstVert){
+      if (firstVert) {
         throw ("vertex() must be used at least once before calling bezierVertex()");
-      }
-      else{
-        if(arguments.length === 9){
-          if(p.use3DContext){
-            if ( typeof bezierDrawMatrix === 'undefined' ) {
+      } else {
+        if (arguments.length === 9) {
+          if (p.use3DContext) {
+            if (bezierDrawMatrix === undef) {
               bezierDrawMatrix = new PMatrix3D();
             }
             // setup matrix for forward differencing to speed up drawing
             var lastPoint = vertArray.length - 1;
             splineForward( bezDetail, bezierDrawMatrix );
             bezierDrawMatrix.apply( bezierBasisMatrix );
-            var draw = bezierDrawMatrix.array(); 
+            var draw = bezierDrawMatrix.array();
             var x1 = vertArray[lastPoint][0],
                 y1 = vertArray[lastPoint][1],
                 z1 = vertArray[lastPoint][2];
@@ -6390,7 +7949,7 @@
             var zplot1 = draw[4] * z1 + draw[5] * arguments[2] + draw[6] * arguments[5] + draw[7] * arguments[8];
             var zplot2 = draw[8] * z1 + draw[9] * arguments[2] + draw[10]* arguments[5] + draw[11]* arguments[8];
             var zplot3 = draw[12]* z1 + draw[13]* arguments[2] + draw[14]* arguments[5] + draw[15]* arguments[8];
-            for (var j = 0; j < bezDetail; j++) {          
+            for (var j = 0; j < bezDetail; j++) {
               x1 += xplot1; xplot1 += xplot2; xplot2 += xplot3;
               y1 += yplot1; yplot1 += yplot2; yplot2 += yplot3;
               z1 += zplot1; zplot1 += zplot2; zplot2 += zplot3;
@@ -6398,20 +7957,22 @@
             }
             p.vertex(arguments[6], arguments[7], arguments[8]);
           }
-        }
-        else{
-          for(var i = 0; i < arguments.length; i++){ vert[i] = arguments[i]; }
+        } else {
+          for (var i = 0; i < arguments.length; i++) {
+            vert[i] = arguments[i];
+          }
           vertArray.push(vert);
+          vertArray[vertArray.length -1]["isVert"] = false;
         }
       }
-    }; 
+    };
 
     p.texture = function(pimage){
       if(!pimage.__texture)
       {
         var texture = curContext.createTexture();
         pimage.__texture = texture;
-        
+
         var cvs = document.createElement('canvas');
         cvs.width = pimage.width;
         cvs.height = pimage.height;
@@ -6432,7 +7993,7 @@
         ctx.putImageData(textureImage, 0, 0);
         pimage.__cvs = cvs;
 
-        curContext.bindTexture(curContext.TEXTURE_2D, pimage.__texture);        
+        curContext.bindTexture(curContext.TEXTURE_2D, pimage.__texture);
         curContext.texParameteri(curContext.TEXTURE_2D, curContext.TEXTURE_MIN_FILTER, curContext.LINEAR_MIPMAP_LINEAR);
         curContext.texParameteri(curContext.TEXTURE_2D, curContext.TEXTURE_MAG_FILTER, curContext.LINEAR);
         curContext.texParameteri(curContext.TEXTURE_2D, curContext.TEXTURE_WRAP_T, curContext.CLAMP_TO_EDGE);
@@ -6443,14 +8004,14 @@
       else{
         curContext.bindTexture(curContext.TEXTURE_2D, pimage.__texture);
       }
-      
+
       curTexture.width = pimage.width;
       curTexture.height = pimage.height;
       usingTexture = true;
       curContext.useProgram(programObject3D);
       uniformi(programObject3D, "usingTexture", usingTexture);
     };
-    
+
     p.textureMode = function(mode){
       curTextureMode = mode;
     };
@@ -6495,7 +8056,7 @@
         vert[2] = z;
         curveVertArray.push(vert);
         curveVertCount++;
-        
+
         if (curveVertCount > 3){
           curveVertexSegment( curveVertArray[curveVertCount-4][0],
                               curveVertArray[curveVertCount-4][1],
@@ -6621,19 +8182,22 @@
         var proj = new PMatrix3D();
         proj.set(projection);
         proj.transpose();
-        
+
         if (lineWidth > 0 && doStroke) {
           curContext.useProgram(programObject2D);
-          uniformi(programObject2D, "picktype", 0);
+
           uniformMatrix(programObject2D, "model", false, [1,0,0,0,  0,1,0,0,  0,0,1,0,  0,0,0,1]);
           uniformMatrix(programObject2D, "view", false, view.array());
           uniformMatrix(programObject2D, "projection", false, proj.array());
-
+          
           uniformf(programObject2D, "color", strokeStyle);
-
+          uniformi(programObject2D, "picktype", 0);
+          
           curContext.lineWidth(lineWidth);
-
+          
           vertexAttribPointer(programObject2D, "Vertex", 3, lineBuffer);
+          disableVertexAttribPointer(programObject2D, "aTextureCoord");
+          
           curContext.bufferData(curContext.ARRAY_BUFFER, newWebGLArray(lineVerts), curContext.STREAM_DRAW);
           curContext.drawArrays(curContext.LINES, 0, 2);
         }
@@ -6644,9 +8208,8 @@
         y2 = arguments[3];
 
         // if line is parallel to axis and lineWidth is less than 1px, trying to do it "crisp"
-        if((x1 === x2 || y1 === y2) && lineWidth <= 1.0 && 
-           doStroke && p.pjs.crispLines) {
-          var temp; 
+        if ((x1 === x2 || y1 === y2) && lineWidth <= 1.0 && doStroke && curSketch.options.crispLines) {
+          var temp;
           if(x1 === x2) {
             if(y1 > y2) { temp = y1; y1 = y2; y2 = temp; }
             for(var y=y1;y<=y2;++y) {
@@ -6675,7 +8238,7 @@
       if( arguments.length === 8 && !p.use3DContext ){
           p.beginShape();
           p.vertex( arguments[0], arguments[1] );
-          p.bezierVertex( arguments[2], arguments[3], 
+          p.bezierVertex( arguments[2], arguments[3],
                           arguments[4], arguments[5],
                           arguments[6], arguments[7] );
           p.endShape();
@@ -6695,7 +8258,7 @@
     p.bezierDetail = function bezierDetail( detail ){
       bezDetail = detail;
     };
-    
+
     p.bezierPoint = function bezierPoint(a, b, c, d, t) {
       return (1 - t) * (1 - t) * (1 - t) * a + 3 * (1 - t) * (1 - t) * t * b + 3 * (1 - t) * t * t * c + t * t * t * d;
     };
@@ -6731,7 +8294,6 @@
 
     p.rect = function rect(x, y, width, height) {
       if (p.use3DContext) {
-      
         // Modeling transformation
         var model = new PMatrix3D();
         model.translate(x, y, 0);
@@ -6742,19 +8304,23 @@
         var view = new PMatrix3D();
         view.scale(1, -1, 1);
         view.apply(modelView.array());
-        
+
         if (lineWidth > 0 && doStroke) {
           curContext.useProgram(programObject2D);
           uniformMatrix(programObject2D, "model", true, model.array());
           uniformMatrix(programObject2D, "view", true, view.array());
           uniformMatrix(programObject2D, "projection", true, projection.array());
-
+          
           uniformf(programObject2D, "color", strokeStyle);
-          curContext.lineWidth(lineWidth);
+          uniformi(programObject2D, "picktype", 0);
+          
           vertexAttribPointer(programObject2D, "Vertex", 3, rectBuffer);
+          disableVertexAttribPointer(programObject2D, "aTextureCoord");
+          
+          curContext.lineWidth(lineWidth);
           curContext.drawArrays(curContext.LINE_LOOP, 0, rectVerts.length / 3);
         }
-        
+
         if (doFill) {
           curContext.useProgram(programObject3D);
           uniformMatrix(programObject3D, "model", true, model.array());
@@ -6764,12 +8330,12 @@
           // fix stitching problems. (lines get occluded by triangles
           // since they share the same depth values). This is not entirely
           // working, but it's a start for drawing the outline. So
-          // developers can start playing around with styles. 
+          // developers can start playing around with styles.
           curContext.enable(curContext.POLYGON_OFFSET_FILL);
           curContext.polygonOffset(1, 1);
 
           uniformf(programObject3D, "color", fillStyle);
-          
+
           var v = new PMatrix3D();
           v.set(view);
 
@@ -6797,7 +8363,7 @@
         }
 
         // if only stroke is enabled, do it "crisp"
-        if(doStroke && !doFill && lineWidth <= 1.0 && p.pjs.crispLines) {
+        if (doStroke && !doFill && lineWidth <= 1.0 && curSketch.options.crispLines) {
           var i, x2 = x + width - 1, y2 = y + height - 1;
           for(i=0;i<width;++i) {
             p.set(x + i, y, currentStrokeColor);
@@ -6870,9 +8436,9 @@
         curContext.beginPath();
         curContext.arc(x - offsetStart, y - offsetStart, width / 2, 0, p.TWO_PI, false);
         executeContextFill();
-        executeContextStroke();        
+        executeContextStroke();
         curContext.closePath();
-      } 
+      }
       else {
         var w = width / 2,
           h = height / 2,
@@ -6965,17 +8531,18 @@
     p.save = function save(file, img) {
       // file is unused at the moment
       // may implement this differently in later release
-      if (typeof img !== "undefined") {
+      if (img !== undef) {
         return window.open(img.toDataURL(),"_blank");
       } else {
-        return window.open(p.canvas.toDataURL(),"_blank");
+        return window.open(p.externals.canvas.toDataURL(),"_blank");
       }
     };
 
-    var canvasDataCache = [undefined, undefined, undefined]; // we need three for now
+    var canvasDataCache = [undef, undef, undef]; // we need three for now
     function getCanvasData(obj, w, h) {
       var canvasData = canvasDataCache.shift();
-      if(canvasData === undefined) {
+
+      if(canvasData === undef) {
         canvasData = {};
         canvasData.canvas = document.createElement("canvas");
         canvasData.context = canvasData.canvas.getContext('2d');
@@ -7038,7 +8605,7 @@
       this.save = function(file){
         p.save(file,this);
       };
-      
+
       this.resize = function(w, h) {
         if (this.width !== 0 || this.height !== 0) {
           // make aspect ratio if w or h is 0
@@ -7057,7 +8624,7 @@
       };
 
       this.mask = function(mask) {
-        this._mask = undefined;
+        this._mask = undef;
 
         if (mask instanceof PImage) {
           if (mask.width === this.width && mask.height === this.height) {
@@ -7115,9 +8682,12 @@
       this.updatePixels = function() {};
 
       this.toImageData = function() {
-        // changed for 0.9
-        var canvasData = getCanvasData(this.imageData);
-        return canvasData.context.getImageData(0, 0, this.width, this.height);
+        if (this.isRemote) { // Remote images cannot access imageData, send source image instead
+          return this.sourceImg;
+        } else {
+          var canvasData = getCanvasData(this.imageData);
+          return canvasData.context.getImageData(0, 0, this.width, this.height);
+        }
       };
 
       this.toDataURL = function() {
@@ -7136,8 +8706,17 @@
       this.fromHTMLImageData = function(htmlImg) {
         // convert an <img> to a PImage
         var canvasData = getCanvasData(htmlImg);
-        var imageData = canvasData.context.getImageData(0, 0, htmlImg.width, htmlImg.height);
-        this.fromImageData(imageData);
+        try {
+          var imageData = canvasData.context.getImageData(0, 0, htmlImg.width, htmlImg.height);
+          this.fromImageData(imageData);
+        } catch(e) {
+          if (htmlImg.width && htmlImg.height) {
+            this.isRemote = true;
+            this.width = htmlImg.width;
+            this.height = htmlImg.height;
+          }
+        }
+        this.sourceImg = htmlImg;
       };
 
       if (arguments.length === 1) {
@@ -7180,8 +8759,8 @@
         file = file + "." + type;
       }
       // if image is in the preloader cache return a new PImage
-      if (p.pjs.imageCache[file]) {
-        return new PImage(p.pjs.imageCache[file]);
+      if (curSketch.imageCache.images[file]) {
+        return new PImage(curSketch.imageCache.images[file]);
       }
       // else aysnc load it
       else {
@@ -7290,10 +8869,10 @@
     };
 
     // Creates a new Processing instance and passes it back for... processing
-    p.createGraphics = function createGraphics(w, h) {
+    p.createGraphics = function createGraphics(w, h, render) {
       var canvas = document.createElement("canvas");
       var pg = new Processing(canvas);
-      pg.size(w, h);
+      pg.size(w, h, render);
       pg.canvas = canvas;
       //Processing.addInstance(pg); // TODO: this function does not exist in this scope
       return pg;
@@ -7318,11 +8897,11 @@
       }
       function wrapProperty(newContext, name) {
         function getter() {
-          resetContext(); 
+          resetContext();
           return curContext[name];
         }
         function setter(value) {
-          resetContext(); 
+          resetContext();
           curContext[name] = value;
         }
         newContext.__defineGetter__(name, getter);
@@ -7338,7 +8917,7 @@
     }
     function replaceContext() {
       if(isContextReplaced) {
-        return; 
+        return;
       }
       p.loadPixels();
       if(proxyContext === null) {
@@ -7381,7 +8960,7 @@
       } else if (arguments.length === 4) {
         // PImage.set(x,y,c) was called, set coordinate x,y color to c of img
         set$4(x, y, obj, img);
-      } 
+      }
     };
     p.imageData = {};
 
@@ -7392,7 +8971,10 @@
       getLength: function() { return p.imageData.data.length ? p.imageData.data.length/4 : 0; },
       getPixel: function(i) {
         var offset = i*4;
-        return (p.imageData.data[offset+3] << 24) & 0xff000000 | (p.imageData.data[offset+0] << 16) & 0x00ff0000 | (p.imageData.data[offset+1] << 8) & 0x0000ff00 | p.imageData.data[offset+2] & 0x000000ff;
+        return (p.imageData.data[offset+3] << 24) & 0xff000000 |
+               (p.imageData.data[offset+0] << 16) & 0x00ff0000 |
+               (p.imageData.data[offset+1] << 8) & 0x0000ff00 |
+               p.imageData.data[offset+2] & 0x000000ff;
       },
       setPixel: function(i,c) {
         var offset = i*4;
@@ -7421,16 +9003,30 @@
         curContext.putImageData(p.imageData, 0, 0);
       }
     };
+  
+    p.hint = function hint(which) {
+      if (which === p.DISABLE_DEPTH_TEST) {
+         curContext.disable(curContext.DEPTH_TEST);
+         curContext.depthMask(false);
+         curContext.clear(curContext.DEPTH_BUFFER_BIT);
+      }
+      else if (which === p.ENABLE_DEPTH_TEST) {
+         curContext.enable(curContext.DEPTH_TEST);
+         curContext.depthMask(true);
+      }
+    };
 
     // Draw an image or a color to the background
     p.background = function background() {
       var color, a, img;
-
       // background params are either a color or a PImage
       if (typeof arguments[0] === 'number') {
         color = p.color.apply(this, arguments);
+
         // override alpha value, processing ignores the alpha for background color
-        color = color | p.ALPHA_MASK;
+        if (curSketch.options.isOpaque) {
+          color = color | p.ALPHA_MASK;
+        }
       } else if (arguments.length === 1 && arguments[0] instanceof PImage) {
         img = arguments[0];
 
@@ -7442,7 +9038,7 @@
       }
 
       if (p.use3DContext) {
-        if (typeof color !== 'undefined') {
+        if (color !== undef) {
           var c = p.color.toGLArray(color);
           refreshBackground = function() {
             curContext.clearColor(c[0], c[1], c[2], c[3]);
@@ -7453,7 +9049,7 @@
           refreshBackground = function() {};
         }
       } else { // 2d context
-        if (typeof color !== 'undefined') {
+        if (color !== undef) {
           refreshBackground = function() {
             curContext.fillStyle = p.color.toString(color);
             curContext.fillRect(0, 0, p.width, p.height);
@@ -7493,7 +9089,7 @@
         // draw the image
         curTint(obj);
 
-        curContext.drawImage(getCanvasData(obj).canvas, 0, 0, img.width, img.height, 
+        curContext.drawImage(getCanvasData(obj).canvas, 0, 0, img.width, img.height,
           bounds.x, bounds.y, bounds.w, bounds.h);
       }
     };
@@ -7516,7 +9112,7 @@
 
       curTint = function(obj) {
         var data = obj.data,
-          length = 4 * obj.width * obj.height;
+            length = 4 * obj.width * obj.height;
         for (var i = 0; i < length;) {
           data[i++] *= r;
           data[i++] *= g;
@@ -7532,43 +9128,61 @@
 
     p.copy = function copy(src, sx, sy, sw, sh, dx, dy, dw, dh) {
       if (arguments.length === 8) {
-        p.copy(p, src, sx, sy, sw, sh, dx, dy, dw);
-        return;
+        // shift everything, and introduce p
+        dh = dw;
+        dw = dy;
+        dy = dx;
+        dx = sh;
+        sh = sw;
+        sw = sy;
+        sy = sx;
+        sx = src;
+        src = p;
       }
       p.blend(src, sx, sy, sw, sh, dx, dy, dw, dh, p.REPLACE);
     };
- 
 
     p.blend = function blend(src, sx, sy, sw, sh, dx, dy, dw, dh, mode, pimgdest) {
       if (arguments.length === 9) {
-        p.blend(p, src, sx, sy, sw, sh, dx, dy, dw, dh);
-      } else if (arguments.length === 10 || arguments.length === 11) {
-        var sx2 = sx + sw;
-        var sy2 = sy + sh;
-        var dx2 = dx + dw;
-        var dy2 = dy + dh;
-        var dest;
-        // check if pimgdest is there and pixels, if so this was a call from pimg.blend
-        if (arguments.length === 10) {
-          p.loadPixels();
-          dest = p;
-        } else if (arguments.length === 11 && pimgdest && pimgdest.imageData) {
-          dest = pimgdest;
-        }
-        if (src === p) {
-          if (p.intersect(sx, sy, sx2, sy2, dx, dy, dx2, dy2)) {
-            p.blit_resize(p.get(sx, sy, sx2 - sx, sy2 - sy), 0, 0, sx2 - sx - 1, sy2 - sy - 1, dest.imageData.data, dest.width, dest.height, dx, dy, dx2, dy2, mode);
-          } else {
-            // same as below, except skip the loadPixels() because it'd be redundant
-            p.blit_resize(src, sx, sy, sx2, sy2, dest.imageData.data, dest.width, dest.height, dx, dy, dx2, dy2, mode);
-          }
+        // shift everything, and introduce p
+        mode = dh;
+        dh = dw;
+        dw = dy;
+        dy = dx;
+        dx = sh;
+        sh = sw;
+        sw = sy;
+        sy = sx;
+        sx = src;
+        src = p;
+      }
+
+      var sx2 = sx + sw;
+      var sy2 = sy + sh;
+      var dx2 = dx + dw;
+      var dy2 = dy + dh;
+      var dest;
+      // check if pimgdest is there and pixels, if so this was a call from pimg.blend
+      if (arguments.length === 10 || arguments.length === 9) {
+        p.loadPixels();
+        dest = p;
+      } else if (arguments.length === 11 && pimgdest && pimgdest.imageData) {
+        dest = pimgdest;
+      }
+      if (src === p) {
+        if (p.intersect(sx, sy, sx2, sy2, dx, dy, dx2, dy2)) {
+          p.blit_resize(p.get(sx, sy, sx2 - sx, sy2 - sy), 0, 0, sx2 - sx - 1, sy2 - sy - 1,
+                        dest.imageData.data, dest.width, dest.height, dx, dy, dx2, dy2, mode);
         } else {
-          src.loadPixels();
+          // same as below, except skip the loadPixels() because it'd be redundant
           p.blit_resize(src, sx, sy, sx2, sy2, dest.imageData.data, dest.width, dest.height, dx, dy, dx2, dy2, mode);
         }
-        if (arguments.length === 10) {
-          p.updatePixels();
-        }
+      } else {
+        src.loadPixels();
+        p.blit_resize(src, sx, sy, sx2, sy2, dest.imageData.data, dest.width, dest.height, dx, dy, dx2, dy2, mode);
+      }
+      if (arguments.length === 10) {
+        p.updatePixels();
       }
     };
 
@@ -7581,7 +9195,7 @@
         p.shared.blurKernelSize = 1 + (p.shared.blurRadius<<1);
         p.shared.blurKernel = new Array(p.shared.blurKernelSize);
         // init blurKernel
-        for (i = 0; i < p.shared.blurKernelSize; i++) {          
+        for (i = 0; i < p.shared.blurKernelSize; i++) {
           p.shared.blurKernel[i] = 0;
         }
 
@@ -7678,14 +9292,14 @@
         ym++;
       }
     };
-    
+
     // helper funtion for ERODE and DILATE modes of filter()
     var dilate = function dilate(isInverted, aImg) {
       var currIdx = 0;
       var maxIdx = aImg.pixels.getLength();
       var out = new Array(maxIdx);
-      var currRowIdx, maxRowIdx, colOrig, colOut, currLum; 
-      var idxRight, idxLeft, idxUp, idxDown, 
+      var currRowIdx, maxRowIdx, colOrig, colOut, currLum;
+      var idxRight, idxLeft, idxUp, idxDown,
           colRight, colLeft, colUp, colDown,
           lumRight, lumLeft, lumUp, lumDown;
 
@@ -7804,18 +9418,19 @@
 
     p.filter = function filter(kind, param, aImg){
       var img, col, lum, i;
-      if(arguments.length === 3) {
+
+      if (arguments.length === 3) {
         aImg.loadPixels();
         img = aImg;
       } else {
         p.loadPixels();
         img = p;
       }
-      
-      if (typeof param === 'undefined') {
+
+      if (param === undef) {
         param = null;
       }
-      
+
       var imglen = img.pixels.getLength();
       switch (kind) {
         case p.BLUR:
@@ -7826,7 +9441,7 @@
           if (img.format === p.ALPHA) { //trouble
             // for an alpha image, convert it to an opaque grayscale
             for (i = 0; i < imglen; i++) {
-              col = 255 - img.pixels.getPixel(i); 
+              col = 255 - img.pixels.getPixel(i);
               img.pixels.setPixel(i,(0xff000000 | (col << 16) | (col << 8) | col));
             }
             img.format = p.RGB; //trouble
@@ -7860,10 +9475,9 @@
             rlevel = (((rlevel * levels) >> 8) * 255) / levels1;
             glevel = (((glevel * levels) >> 8) * 255) / levels1;
             blevel = (((blevel * levels) >> 8) * 255) / levels1;
-            img.pixels.setPixel(i, ((0xff000000 & img.pixels.getPixel(i)) | 
-              (rlevel << 16) | (glevel << 8) | blevel));
+            img.pixels.setPixel(i, ((0xff000000 & img.pixels.getPixel(i)) | (rlevel << 16) | (glevel << 8) | blevel));
           }
-          break;          
+          break;
         case p.OPAQUE:
           for (i = 0; i < imglen; i++) {
             img.pixels.setPixel(i, (img.pixels.getPixel(i) | 0xff000000));
@@ -7876,13 +9490,13 @@
           }
           if ((param < 0) || (param > 1)) {
             throw "Level must be between 0 and 1 for filter(THRESHOLD, level)";
-          }         
+          }
           var thresh = p.floor(param * 255);
           for (i = 0; i < imglen; i++) {
             var max = p.max((img.pixels.getPixel(i) & p.RED_MASK) >> 16,
                              p.max((img.pixels.getPixel(i) & p.GREEN_MASK) >> 8,
-                                      (img.pixels.getPixel(i) & p.BLUE_MASK)));
-            img.pixels.setPixel(i, ((img.pixels.getPixel(i) & p.ALPHA_MASK) | 
+                             (img.pixels.getPixel(i) & p.BLUE_MASK)));
+            img.pixels.setPixel(i, ((img.pixels.getPixel(i) & p.ALPHA_MASK) |
               ((max < thresh) ? 0x000000 : 0xffffff)));
           }
           break;
@@ -7986,18 +9600,30 @@
       var cURoffset = (p.shared.v1 + p.shared.u2) * 4;
       var cLLoffset = (p.shared.v2 + p.shared.u1) * 4;
       var cLRoffset = (p.shared.v2 + p.shared.u2) * 4;
-      p.shared.cUL = p.color.toInt(p.shared.srcBuffer[cULoffset], p.shared.srcBuffer[cULoffset+1], p.shared.srcBuffer[cULoffset+2], p.shared.srcBuffer[cULoffset+3]);
-      p.shared.cUR = p.color.toInt(p.shared.srcBuffer[cURoffset], p.shared.srcBuffer[cURoffset+1], p.shared.srcBuffer[cURoffset+2], p.shared.srcBuffer[cURoffset+3]);
-      p.shared.cLL = p.color.toInt(p.shared.srcBuffer[cLLoffset], p.shared.srcBuffer[cLLoffset+1], p.shared.srcBuffer[cLLoffset+2], p.shared.srcBuffer[cLLoffset+3]);
-      p.shared.cLR = p.color.toInt(p.shared.srcBuffer[cLRoffset], p.shared.srcBuffer[cLRoffset+1], p.shared.srcBuffer[cLRoffset+2], p.shared.srcBuffer[cLRoffset+3]);
-      p.shared.r = ((p.shared.ul * ((p.shared.cUL & p.RED_MASK) >> 16) + p.shared.ll * ((p.shared.cLL & p.RED_MASK) >> 16) + p.shared.ur * ((p.shared.cUR & p.RED_MASK) >> 16) + p.shared.lr * ((p.shared.cLR & p.RED_MASK) >> 16)) << p.PREC_RED_SHIFT) & p.RED_MASK;
-      p.shared.g = ((p.shared.ul * (p.shared.cUL & p.GREEN_MASK) + p.shared.ll * (p.shared.cLL & p.GREEN_MASK) + p.shared.ur * (p.shared.cUR & p.GREEN_MASK) + p.shared.lr * (p.shared.cLR & p.GREEN_MASK)) >>> p.PRECISIONB) & p.GREEN_MASK;
-      p.shared.b = (p.shared.ul * (p.shared.cUL & p.BLUE_MASK) + p.shared.ll * (p.shared.cLL & p.BLUE_MASK) + p.shared.ur * (p.shared.cUR & p.BLUE_MASK) + p.shared.lr * (p.shared.cLR & p.BLUE_MASK)) >>> p.PRECISIONB;
-      p.shared.a = ((p.shared.ul * ((p.shared.cUL & p.ALPHA_MASK) >>> 24) + p.shared.ll * ((p.shared.cLL & p.ALPHA_MASK) >>> 24) + p.shared.ur * ((p.shared.cUR & p.ALPHA_MASK) >>> 24) + p.shared.lr * ((p.shared.cLR & p.ALPHA_MASK) >>> 24)) << p.PREC_ALPHA_SHIFT) & p.ALPHA_MASK;
+      p.shared.cUL = p.color.toInt(p.shared.srcBuffer[cULoffset], p.shared.srcBuffer[cULoffset+1],
+                     p.shared.srcBuffer[cULoffset+2], p.shared.srcBuffer[cULoffset+3]);
+      p.shared.cUR = p.color.toInt(p.shared.srcBuffer[cURoffset], p.shared.srcBuffer[cURoffset+1],
+                     p.shared.srcBuffer[cURoffset+2], p.shared.srcBuffer[cURoffset+3]);
+      p.shared.cLL = p.color.toInt(p.shared.srcBuffer[cLLoffset], p.shared.srcBuffer[cLLoffset+1],
+                     p.shared.srcBuffer[cLLoffset+2], p.shared.srcBuffer[cLLoffset+3]);
+      p.shared.cLR = p.color.toInt(p.shared.srcBuffer[cLRoffset], p.shared.srcBuffer[cLRoffset+1],
+                     p.shared.srcBuffer[cLRoffset+2], p.shared.srcBuffer[cLRoffset+3]);
+      p.shared.r = ((p.shared.ul * ((p.shared.cUL & p.RED_MASK) >> 16) + p.shared.ll *
+                   ((p.shared.cLL & p.RED_MASK) >> 16) + p.shared.ur * ((p.shared.cUR & p.RED_MASK) >> 16) +
+                   p.shared.lr * ((p.shared.cLR & p.RED_MASK) >> 16)) << p.PREC_RED_SHIFT) & p.RED_MASK;
+      p.shared.g = ((p.shared.ul * (p.shared.cUL & p.GREEN_MASK) + p.shared.ll * (p.shared.cLL & p.GREEN_MASK) +
+                   p.shared.ur * (p.shared.cUR & p.GREEN_MASK) + p.shared.lr *
+                   (p.shared.cLR & p.GREEN_MASK)) >>> p.PRECISIONB) & p.GREEN_MASK;
+      p.shared.b = (p.shared.ul * (p.shared.cUL & p.BLUE_MASK) + p.shared.ll * (p.shared.cLL & p.BLUE_MASK) +
+                   p.shared.ur * (p.shared.cUR & p.BLUE_MASK) + p.shared.lr * (p.shared.cLR & p.BLUE_MASK)) >>> p.PRECISIONB;
+      p.shared.a = ((p.shared.ul * ((p.shared.cUL & p.ALPHA_MASK) >>> 24) + p.shared.ll *
+                   ((p.shared.cLL & p.ALPHA_MASK) >>> 24) + p.shared.ur * ((p.shared.cUR & p.ALPHA_MASK) >>> 24) +
+                   p.shared.lr * ((p.shared.cLR & p.ALPHA_MASK) >>> 24)) << p.PREC_ALPHA_SHIFT) & p.ALPHA_MASK;
       return p.shared.a | p.shared.r | p.shared.g | p.shared.b;
     };
 
-    p.blit_resize = function blit_resize(img, srcX1, srcY1, srcX2, srcY2, destPixels, screenW, screenH, destX1, destY1, destX2, destY2, mode) {
+    p.blit_resize = function blit_resize(img, srcX1, srcY1, srcX2, srcY2, destPixels,
+                                         screenW, screenH, destX1, destY1, destX2, destY2, mode) {
       var x, y; // iterator vars
       if (srcX1 < 0) {
         srcX1 = 0;
@@ -8020,7 +9646,8 @@
         srcW++;
         srcH++;
       }
-      if (destW <= 0 || destH <= 0 || srcW <= 0 || srcH <= 0 || destX1 >= screenW || destY1 >= screenH || srcX1 >= img.width || srcY1 >= img.height) {
+      if (destW <= 0 || destH <= 0 || srcW <= 0 || srcH <= 0 || destX1 >= screenW ||
+          destY1 >= screenH || srcX1 >= img.width || srcY1 >= img.height) {
         return;
       }
       var dx = Math.floor(srcW / destW * p.PRECISIONF);
@@ -8052,7 +9679,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.blend(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.blend(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8070,7 +9700,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.add(destColor, p.filter_bilinear()));
               destColor = p.color.toArray(p.modes.add(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.add(destPixels[destOffset + x], p.filter_bilinear());
@@ -8089,7 +9722,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.subtract(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.subtract(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8107,7 +9743,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.lightest(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.lightest(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8125,7 +9764,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.darkest(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.darkest(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8143,7 +9785,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.filter_bilinear());
               //destPixels[destOffset + x] = p.filter_bilinear();
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8161,7 +9806,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.difference(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.difference(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8179,7 +9827,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.exclusion(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.exclusion(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8197,7 +9848,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.multiply(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.multiply(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8215,7 +9869,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.screen(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.screen(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8233,7 +9890,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.overlay(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.overlay(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8251,7 +9911,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.hard_light(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.hard_light(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8269,7 +9932,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.soft_light(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.soft_light(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8287,7 +9953,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.dodge(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.dodge(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8305,7 +9974,10 @@
             p.filter_new_scanline();
             for (x = 0; x < destW; x++) {
               // changed for 0.9
-              destColor = p.color.toInt(destPixels[(destOffset + x) * 4], destPixels[((destOffset + x) * 4) + 1], destPixels[((destOffset + x) * 4) + 2], destPixels[((destOffset + x) * 4) + 3]);
+              destColor = p.color.toInt(destPixels[(destOffset + x) * 4],
+                                        destPixels[((destOffset + x) * 4) + 1],
+                                        destPixels[((destOffset + x) * 4) + 2],
+                                        destPixels[((destOffset + x) * 4) + 3]);
               destColor = p.color.toArray(p.modes.burn(destColor, p.filter_bilinear()));
               //destPixels[destOffset + x] = p.modes.burn(destPixels[destOffset + x], p.filter_bilinear());
               destPixels[(destOffset + x) * 4] = destColor[0];
@@ -8332,9 +10004,10 @@
         return {
           name: "\"" + name + "\", sans-serif",
           width: function(str) {
-            if (curContext.mozMeasureText) {
-              return curContext.mozMeasureText(
-              typeof str === "number" ? String.fromCharCode(str) : str) / curTextSize;
+            if ("measureText" in curContext) {
+              return curContext.measureText(typeof str === "number" ? String.fromCharCode(str) : str).width / curTextSize;
+            } else if ("mozMeasureText" in curContext) {
+              return curContext.mozMeasureText(typeof str === "number" ? String.fromCharCode(str) : str) / curTextSize;
             } else {
               return 0;
             }
@@ -8383,14 +10056,38 @@
       }
     };
 
-    p.textAlign = function textAlign() {};
+    p.textAlign = function textAlign() {
+      if(arguments.length === 1) {
+        horizontalTextAlignment = arguments[0];
+      } else if(arguments.length === 2) {
+        horizontalTextAlignment = arguments[0];
+        verticalTextAlignment = arguments[1];
+      }
+    };
 
     p.textWidth = function textWidth(str) {
-      curContext.font = curTextSize + "px " + curTextFont.name;
-      if (curContext.fillText) {
-        return curContext.measureText(str).width;
-      } else if (curContext.mozDrawText) {
-        return curContext.mozMeasureText(str);
+      if(p.use3DContext){
+        if(textcanvas === undef){
+          textcanvas = document.createElement("canvas");
+        }
+        var oldContext = curContext;
+        curContext = textcanvas.getContext("2d");
+        curContext.font = curContext.mozTextStyle = curTextSize + "px " + curTextFont.name;
+        if ("fillText" in curContext) {
+          textcanvas.width = curContext.measureText(str).width;
+        } else if ("mozDrawText" in curContext) {
+          textcanvas.width = curContext.mozMeasureText(str);
+        }
+        curContext = oldContext;
+        return textcanvas.width;
+      }
+      else{
+        curContext.font = curTextSize + "px " + curTextFont.name;
+        if ("fillText" in curContext) {
+          return curContext.measureText(str).width;
+        } else if ("mozDrawText" in curContext) {
+          return curContext.mozMeasureText(str);
+        }
       }
     };
 
@@ -8494,7 +10191,6 @@
     };
 
     function toP5String(obj) {
-      var undef;
       if(obj instanceof String) {
         return obj;
       } else if(typeof obj === 'number') {
@@ -8512,31 +10208,58 @@
     }
 
     // Print some text to the Canvas
-    function text$line(str, x, y, z) {
+    function text$line(str, x, y, z, align) {
+      var textWidth = 0, xOffset = 0;
       // If the font is a standard Canvas font...
       if (!curTextFont.glyph) {
-        if (str && (curContext.fillText || curContext.mozDrawText)) {
-          saveContext();
+        if (str && ("fillText" in curContext || "mozDrawText" in curContext)) {
           curContext.font = curContext.mozTextStyle = curTextSize + "px " + curTextFont.name;
 
           if (isFillDirty) {
             curContext.fillStyle = p.color.toString(currentFillColor);
             isFillDirty = false;
           }
-          
-          if (curContext.fillText) {
-            curContext.fillText(str, x, y);
-          } else if (curContext.mozDrawText) {
-            curContext.translate(x, y);
-            curContext.mozDrawText(str);
+
+          // horizontal offset/alignment
+          if(align === p.RIGHT || align === p.CENTER) {
+            if ("fillText" in curContext) {
+              textWidth = curContext.measureText(str).width;
+            } else if ("mozDrawText" in curContext) {
+              textWidth = curContext.mozMeasureText(str);
+            }
+            
+            if(align === p.RIGHT) {
+              xOffset = -textWidth;
+            } else { // if(align === p.CENTER)
+              xOffset = -textWidth/2;
+            }
           }
-          restoreContext();
+
+          if ("fillText" in curContext) {
+            curContext.fillText(str, x+xOffset, y);
+          } else if ("mozDrawText" in curContext) {
+            saveContext();
+            curContext.translate(x+xOffset, y);
+            curContext.mozDrawText(str);
+            restoreContext();
+          }
         }
       } else {
         // If the font is a Batik SVG font...
         var font = p.glyphTable[curTextFont.name];
         saveContext();
         curContext.translate(x, y + curTextSize);
+
+        // horizontal offset/alignment
+        if(align === p.RIGHT || align === p.CENTER) {
+          textWidth = font.width(str);
+          
+          if(align === p.RIGHT) {
+            xOffset = -textWidth;
+          } else { // if(align === p.CENTER)
+            xOffset = -textWidth/2;
+          }
+        }
 
         var upem   = font.units_per_em,
           newScale = 1 / upem * curTextSize;
@@ -8555,26 +10278,28 @@
       }
     }
 
-    function text$line$3d(str, x, y, z) {
+    function text$line$3d(str, x, y, z, align) {
       // handle case for 3d text
-      if(typeof textcanvas === 'undefined'){
-        textcanvas = document.createElement("canvas");        
+      if (textcanvas === undef) {
+        textcanvas = document.createElement("canvas");
       }
       var oldContext = curContext;
       curContext = textcanvas.getContext("2d");
       curContext.font = curContext.mozTextStyle = curTextSize + "px " + curTextFont.name;
-      if (curContext.fillText) {
-        textcanvas.width = curContext.measureText( str ).width;
-      } else if (curContext.mozDrawText) {
-        textcanvas.width = curContext.mozMeasureText( str );
+      var textWidth = 0;
+      if ("fillText" in curContext) {
+        textWidth = curContext.measureText(str).width;
+      } else if ("mozDrawText" in curContext) {
+        textWidth = curContext.mozMeasureText(str);
       }
+      textcanvas.width = textWidth;
       textcanvas.height = curTextSize;
       curContext = textcanvas.getContext("2d"); // refreshes curContext
       curContext.font = curContext.mozTextStyle = curTextSize + "px " + curTextFont.name;
       curContext.textBaseline="top";
 
       // paint on 2D canvas
-      text$line(str,0,0,0);
+      text$line(str,0,0,0,p.LEFT);
 
       // use it as a texture
       var aspect = textcanvas.width/textcanvas.height;
@@ -8585,9 +10310,16 @@
       curContext.texParameteri(curContext.TEXTURE_2D, curContext.TEXTURE_MIN_FILTER, curContext.LINEAR_MIPMAP_LINEAR);
       curContext.generateMipmap(curContext.TEXTURE_2D);
 
+      // horizontal offset/alignment
+      var xOffset = 0;
+      if(align === p.RIGHT) {
+        xOffset = -textWidth;
+      } else if(align === p.CENTER) {
+        xOffset = -textWidth/2;
+      }
       var model = new PMatrix3D();
       var scalefactor = curTextSize * 0.5;
-      model.translate(x-scalefactor/2, y-scalefactor, z);
+      model.translate(x+xOffset-scalefactor/2, y-scalefactor, z);
       model.scale(-aspect*scalefactor, -scalefactor, scalefactor);
       model.translate(-1, -1, -1);
 
@@ -8610,14 +10342,30 @@
 
     function text$4(str, x, y, z) {
       var lineFunction = p.use3DContext ?  text$line$3d : text$line;
+      var lines, linesCount;
       if(str.indexOf('\n') < 0) {
-        lineFunction(str, x, y, z);
+        lines = [str];
+        linesCount = 1;
       } else {
-        // handle text line-by-line
-        var lines = str.split('\n');
-        for(var il=0, ll=lines.length;il<ll;++il) {
-          lineFunction(lines[il], x, y + il * curTextSize, z);
-        }
+        lines = str.split(/\r?\n/g);
+        linesCount = lines.length;
+      }
+      // handle text line-by-line
+      
+      var yOffset;
+      if(verticalTextAlignment === p.TOP) {
+        yOffset = (1-baselineOffset) * curTextSize;
+      } else if(verticalTextAlignment === p.CENTER) {
+        yOffset = (1-baselineOffset - linesCount/2) * curTextSize;
+      } else if(verticalTextAlignment === p.BOTTOM) {
+        yOffset = (1-baselineOffset - linesCount) * curTextSize;
+      } else { //  if(verticalTextAlignment === p.BASELINE) {
+        yOffset = (1 - linesCount) * curTextSize;
+      }
+      for(var i=0;i<linesCount;++i) {
+        var line = lines[i];        
+        lineFunction(line, x, y + yOffset, z, horizontalTextAlignment);
+        yOffset += curTextSize;
       }
     }
 
@@ -8634,8 +10382,7 @@
       var lineWidth = 0;
       var textboxWidth = width;
 
-      var baselineOffset = 0.2; // per cent
-      var yOffset = (1-baselineOffset) * curTextSize;
+      var yOffset = 0;
 
       curContext.font = curTextSize + "px " + curTextFont.name;
 
@@ -8645,9 +10392,9 @@
         var currentChar = str[j];
         var letterWidth;
 
-        if (curContext.fillText) {
+        if ("fillText" in curContext) {
           letterWidth = curContext.measureText(currentChar).width;
-        } else if (curContext.mozDrawText) {
+        } else if ("mozDrawText" in curContext) {
           letterWidth = curContext.mozMeasureText(currentChar);
         }
 
@@ -8682,16 +10429,33 @@
         yOffset += curTextSize;
       }
 
-      // TODO box alignment
-
       // actual draw
       var lineFunction = p.use3DContext ?  text$line$3d : text$line;
+      var xOffset = 0;
+      if(horizontalTextAlignment === p.CENTER) {
+        xOffset = width / 2;
+      } else if(horizontalTextAlignment === p.RIGHT) {
+        xOffset = width;
+      }
+
+      // offsets for alignment
+      var boxYOffset1 = (1-baselineOffset) * curTextSize, boxYOffset2 = 0;
+      if(verticalTextAlignment === p.BOTTOM) {
+        boxYOffset2 = height-yOffset;
+      } else if(verticalTextAlignment === p.CENTER) {
+        boxYOffset2 = (height-yOffset) / 2;
+      }
+
       for(var il=0,ll=drawCommands.length; il<ll; ++il) {
         var command = drawCommands[il];
-        if(command.offset + curTextSize > height + baselineOffset * curTextSize) {            
+        if(command.offset + boxYOffset2 < 0) {
+          continue; // skip if not inside box yet
+        }
+        if(command.offset + boxYOffset2 + curTextSize > height) {
           break; // stop if no enough space for one more line draw
         }
-        lineFunction(command.text, x, y + command.offset, z);
+        lineFunction(command.text, x + xOffset, y + command.offset + boxYOffset1 + boxYOffset2, 
+                     z, horizontalTextAlignment);
       }
     }
 
@@ -8845,7 +10609,7 @@
           }
           d = glyph[i].getAttribute("d");
           // Split path commands in glpyh
-          if (d !== undefined) {
+          if (d !== undef) {
             path = buildPath(d);
             eval(path);
             // Store glyph data to table object
@@ -8914,8 +10678,7 @@
           baseClass[propertyName]=v;
         });
       }
-      var undef;
-      
+
       for (var propertyName in baseClass) {
         if (subClass[propertyName] === undef) {
           if (typeof baseClass[propertyName] === 'function') {
@@ -8948,15 +10711,13 @@
     // Event handling
     //////////////////////////////////////////////////////////////////////////
 
-    p.pjs.eventHandlers = [];
-
     function attach(elem, type, fn) {
       if (elem.addEventListener) {
         elem.addEventListener(type, fn, false);
       } else {
         elem.attachEvent("on" + type, fn);
       }
-      p.pjs.eventHandlers.push([elem, type, fn]);
+      eventHandlers.push([elem, type, fn]);
     }
 
     attach(curElement, "mousemove", function(e) {
@@ -9054,7 +10815,7 @@
     //////////////////////////////////////////////////////////////////////////
     // Keyboard Events
     //////////////////////////////////////////////////////////////////////////
-    
+
     function keyCodeMap(code, shift) {
       // Letters
       if (code >= 65 && code <= 90) { // A-Z
@@ -9148,7 +10909,7 @@
 
       if (typeof p.keyPressed === "function") {
         p.keyPressed();
-      } 
+      }
     });
 
     attach(document, "keyup", function(e) {
@@ -9170,7 +10931,7 @@
       // should remain correct. Some browsers (chrome) refire keydown when
       // key repeats happen, others (firefox) don't. Either way keyCode and
       // key should remain correct.
-      
+
       if (p.keyTyped) {
         p.keyTyped();
       }
@@ -9186,18 +10947,48 @@
 
     // Send aCode Processing syntax to be converted to JavaScript
     if (aCode) {
-      // Compile the code
-      var compiledSketchFunction;
-      if(typeof aCode === "function") {
-        compiledSketchFunction = aCode;
+      if(aCode instanceof Processing.Sketch) {
+        // Use sketch as is
+        curSketch = aCode;
+      } else if(typeof aCode === "function") {
+        // Wrap function with default sketch parameters
+        curSketch = new Processing.Sketch(aCode);
       } else {
-        var parsedCode = Processing.parse(aCode, p);
-        compiledSketchFunction = eval(parsedCode);
+        // Compile the code
+        curSketch = Processing.compile(aCode);
       }
 
-      if (!p.use3DContext) {
+      // Expose internal field for diagnostics and testing
+      p.externals.sketch = curSketch;
+
+      p.use3DContext = curSketch.use3DContext;
+
+      if ("mozOpaque" in curElement) {
+        curElement.mozOpaque = curSketch.options.isOpaque;
+      }
+
+      // Initialize the onfocus and onblur event handler externals
+      if (curSketch.options.pauseOnBlur) {
+        p.externals.onfocus = function() {
+          if (doLoop) {
+            p.loop();
+          }
+        };
+
+        p.externals.onblur = function() {
+          if (doLoop && loopStarted) {
+            p.noLoop();
+            doLoop = true; // make sure to keep this true after the noLoop call
+          }
+        };
+      }
+
+      if (!curSketch.use3DContext) {
         // Setup default 2d canvas context.
         curContext = curElement.getContext('2d');
+
+        // Externalize the default context
+        p.externals.context = curContext;
 
         modelView = new PMatrix2D();
 
@@ -9224,8 +11015,8 @@
 
       var executeSketch = function(processing) {
         // Don't start until all specified images in the cache are preloaded
-        if (!p.pjs.imageCache.pending) {
-          compiledSketchFunction(processing);
+        if (!curSketch.imageCache.pending) {
+          curSketch.attach(processing);
 
           // Run void setup()
           if (processing.setup) {
@@ -9250,10 +11041,16 @@
       // The parser adds custom methods to the processing context
       // this renames p to processing so these methods will run
       executeSketch(p);
+    } else {
+      // No executable sketch was specified
+      // or called via createGraphics
+      curSketch = new Processing.Sketch();
+      curSketch.options.isOpaque = false;
     }
+
   };
 
-  Processing.version = "0.9.4";
+  Processing.version = "0.9.6";
 
   // Share lib space
   Processing.lib = {};
@@ -9264,38 +11061,39 @@
   ["abs","acos","ADD","alpha","ALPHA","ALT","ambient","ambientLight","append","applyMatrix","arc",
   "ARGB","arrayCopy","ArrayList","ARROW","asin","atan","atan2","background","BACKSPACE","beginCamera",
   "beginDraw","beginShape","BEVEL","bezier","bezierDetail","bezierPoint","bezierTangent","bezierVertex","binary",
-  "blend","BLEND","blendColor","blue","BLUE_MASK","BLUR","boolean","box","brightness","BURN","byte","camera","ceil",
-  "CENTER","CENTER_RADIUS","char","clear","CLOSE","CMYK","CODED","color","colorMode","concat",
+  "blend","BLEND","blendColor","blue","BLUE_MASK","BLUR","boolean", "BOTTOM", "box","brightness","BURN","byte","camera","ceil",
+  "CENTER","CENTER_RADIUS","char","Character","clear","CLOSE","CMYK","CODED","color","colorMode","concat",
   "console","constrain","CONTROL","copy","CORNER","CORNERS","cos","createFont","createGraphics",
   "createImage","CROSS","cursor","curve","curveDetail","curvePoint","curveTangent","curveTightness",
   "curveVertex","curveVertexSegment","DARKEST","day","defaultColor","degrees","DELETE","DIFFERENCE",
-  "DILATE","directionalLight","disableContextMenu","dist","DODGE","DOWN","draw","ellipse","ellipseMode",
-  "emissive","enableContextMenu","endCamera","endDraw","endShape","ENTER","ERODE","ESC","EXCLUSION",
+  "DILATE","directionalLight","disableContextMenu","DISABLE_DEPTH_TEST","dist","DODGE","DOWN","draw","ellipse","ellipseMode",
+  "emissive","enableContextMenu","ENABLE_DEPTH_TEST","endCamera","endDraw","endShape","ENTER","ERODE","ESC","EXCLUSION","externals",
   "exit","exp","expand","fill","filter","filter_bilinear","filter_new_scanline","float","floor","focused",
   "frameCount","frameRate","frustum","get","glyphLook","glyphTable","GRAY","green","GREEN_MASK",
-  "HALF_PI","HAND","HARD_LIGHT","HashMap","height","hex","hour","HSB","hue","image","imageMode",
+  "HALF_PI","HAND","HARD_LIGHT","HashMap","height","hex","hint","hour","HSB","hue","image","IMAGE","imageMode",
   "Import","int","intersect","INVERT","JAVA2D","join","key","keyPressed","keyReleased","LEFT","lerp",
   "lerpColor","LIGHTEST","lightFalloff","lights","lightSpecular","line","LINES","link","loadBytes",
-  "loadFont","loadGlyphs","loadImage","loadPixels","loadStrings","log","loop","mag","map","match",
+  "loadFont","loadGlyphs","loadImage","loadPixels","loadShape","loadStrings","log","loop","mag","map","match",
   "matchAll","max","MAX_FLOAT","MAX_INT","MAX_LIGHTS","millis","min","MIN_FLOAT","MIN_INT","minute",
   "MITER","mix","modelX","modelY","modelZ","modes","month","mouseButton","mouseClicked","mouseDown",
   "mouseDragged","mouseMoved","mousePressed","mouseReleased","mouseScroll","mouseScrolled","mouseX",
   "mouseY","MOVE","MULTIPLY","nf","nfc","nfp","nfs","noCursor","NOCURSOR","noFill","noise","noiseDetail","noiseSeed",
   "noLights","noLoop","norm","normal","NORMAL_MODE_AUTO","NORMALIZED","NORMAL_MODE_SHAPE","NORMAL_MODE_VERTEX",
-  "noSmooth","noStroke","noTint","OPAQUE","OPENGL","OVERLAY","P3D","peg","perspective","PI","PImage","pixels",
+  "noSmooth","noStroke","noTint","OPAQUE","OPENGL","ortho","OVERLAY","P3D","peg","perspective","PI","PImage","pixels",
+  "PMatrix2D", "PMatrix3D", "PMatrixStack",
   "pmouseX","pmouseY","point","Point","pointLight","POINTS","POLYGON","popMatrix","popStyle","POSTERIZE",
   "pow","PREC_ALPHA_SHIFT","PRECISIONB","PRECISIONF","PREC_MAXVAL","PREC_RED_SHIFT","print",
   "printCamera","println","printMatrix","printProjection","PROJECT","pushMatrix","pushStyle",
   "PVector","quad","QUADS","QUAD_STRIP","radians","RADIUS","random","Random","randomSeed", "rect",
   "rectMode","red","RED_MASK","redraw","REPLACE","requestImage","resetMatrix","RETURN","reverse","RGB",
-  "RIGHT","rotate","rotateX","rotateY","rotateZ","round","ROUND","saturation","save","scale","SCREEN",
-  "second","set","setup","shared","SHIFT","shininess","shorten","sin","SINCOS_LENGTH","size",
+  "RIGHT","rotate","rotateX","rotateY","rotateZ","round","ROUND","saturation","save","scale","SCREEN","screenX","screenY","screenZ",
+  "second","set","setup","shape", "shapeMode","shared","SHIFT","shininess","shorten","sin","SINCOS_LENGTH","size",
   "smooth","SOFT_LIGHT","sort","specular","sphere","sphereDetail","splice","split","splitTokens",
   "spotLight","sq","sqrt","SQUARE","status","str","stroke","strokeCap","strokeJoin","strokeWeight",
   "subset","SUBTRACT","TAB","tan","text","TEXT","textAlign","textAscent","textDescent","textFont",
-  "textSize","textureMode","texture","textWidth","THRESHOLD","tint",
+  "textSize","textureMode","texture","textWidth","THRESHOLD","tint", "TOP",
   "translate","triangle","TRIANGLE_FAN","TRIANGLES","TRIANGLE_STRIP","trim","TWO_PI","unbinary",
-  "unhex","UP","updatePixels","use3DContext","vertex","WAIT","width","year",
+  "unhex","UP","updatePixels","use3DContext","vertex","WAIT","width","XMLAttrbute","XMLElement","year",
   "__frameRate","__mousePressed","__keyPressed"];
     var members = {};
     var i, l;
@@ -9344,7 +11142,7 @@
         if(val.charAt(0) === "/") {
           return val;
         } else {
-          return (/^'((?:[^'\\\n])|(?:\\.[0-9A-Fa-f]*))'$/).test(val) ? "(new Char(" + val + "))" : val;
+          return (/^'((?:[^'\\\n])|(?:\\.[0-9A-Fa-f]*))'$/).test(val) ? "(new processing.Character(" + val + "))" : val;
         }
       });
     }
@@ -9360,11 +11158,11 @@
       result.untrim = function(t) { return this.left + t + this.right; };
       return result;
     }
-    
+
     function trim(string) {
       return string.replace(/^\s+/,'').replace(/\s+$/,'');
     }
-    
+
     function appendToLookupTable(table, array) {
       for(var i=0,l=array.length;i<l;++i) {
         table[array[i]] = null;
@@ -9524,7 +11322,7 @@
         return digits.length < 6 ? "0x" + digits : "0xFF000000".substring(0, 10 - digits.length) + digits;
       });
       // delete (type)???, (int)??? -> 0|???
-      s = s.replace(/"B(\d+)"(\s*[\w$']|"B)/g, function(all, index, next) {
+      s = s.replace(/"B(\d+)"(\s*(?:[\w$']|"B))/g, function(all, index, next) {
         var atom = atoms[index];
         if(!/^\(\s*[A-Za-z_$][\w$]*\b(?:\s*\.\s*[A-Za-z_$][\w$]*\b)*\s*(?:"C\d+"\s*)*\)$/.test(atom)) {
           return all;
@@ -9552,16 +11350,16 @@
       // the Processing.js source, replace frameRate so it isn't
       // confused with frameRate(), as well as keyPressed and mousePressed
       s = s.replace(/\b(frameRate|keyPressed|mousePressed)\b(?!\s*"B)/g, "__$1");
-      // "pixels" replacements: 
+      // "pixels" replacements:
       //   pixels[i] = c => pixels.setPixel(i,c) | pixels[i] => pixels.getPixel(i)
       //   pixels.length => pixels.getLength()
       //   pixels = ar => pixels.set(ar) | pixels => pixels.toArray()
-      s = s.replace(/\bpixels\s*(("C(\d+)")|\.length)?(\s*=(?!=)([^,\]\)\}\?\:]+))?/g, 
+      s = s.replace(/\bpixels\s*(("C(\d+)")|\.length)?(\s*=(?!=)([^,\]\)\}\?\:]+))?/g,
         function(all, indexOrLength, index, atomIndex, equalsPart, rightSide) {
           if(index) {
             var atom = atoms[atomIndex];
             if(equalsPart) {
-              return "pixels.setPixel" + addAtom("(" +atom.substring(1, atom.length - 1) + 
+              return "pixels.setPixel" + addAtom("(" +atom.substring(1, atom.length - 1) +
                 "," + rightSide + ")", 'B');
             } else {
               return "pixels.getPixel" + addAtom("(" + atom.substring(1, atom.length - 1) +
@@ -9615,7 +11413,7 @@
       this.body = body;
     }
     AstFunction.prototype.toString = function() {
-      var oldContext = replaceContext; 
+      var oldContext = replaceContext;
       // saving "this." and parameters
       var names = appendToLookupTable({"this":null}, this.params.getNames());
       replaceContext = function(name) {
@@ -9640,7 +11438,7 @@
       this.members = members;
     }
     AstInlineObject.prototype.toString = function() {
-      var oldContext = replaceContext; 
+      var oldContext = replaceContext;
       replaceContext = function(name) {
           return name === "this"? name : oldContext(name); // saving "this."
       };
@@ -9920,7 +11718,7 @@
             thisPrefix + "__defineSetter__('" + name + "',function(val){" + staticName + " = val;});\n";
           staticDeclarations.push(declaration);
         }
-        return staticDeclarations.join("");        
+        return staticDeclarations.join("");
       } else {
         return thisPrefix + this.definitions.join("; " + thisPrefix);
       }
@@ -9980,7 +11778,7 @@
     AstClassBody.prototype.getMembers = function() {
       var members;
       if(this.owner.base) {
-        members = this.owner.base.body.getMembers();     
+        members = this.owner.base.body.getMembers();
       } else {
         members = { fields: [], methods: [], innerClasses: [] };
       }
@@ -10007,9 +11805,9 @@
         }
         return i;
       }
-      
+
       var scopeLevel = getScopeLevel(this.owner);
-      
+
       var selfId = "$this_" + scopeLevel;
       var result = "var " + selfId + " = this;\n";
 
@@ -10017,7 +11815,7 @@
       var thisClassFields = appendToLookupTable({}, members.fields),
         thisClassMethods = appendToLookupTable({}, members.methods),
         thisClassInners = appendToLookupTable({}, members.innerClasses);
-      
+
       var oldContext = replaceContext;
       replaceContext = function(name) {
         if(name === "this") {
@@ -10032,8 +11830,8 @@
 
       if(this.baseClassName) {
         result += "var $super = {};\n";
-        result += "function $superCstr(){\n" + 
-                        this.baseClassName + ".prototype.constructor.apply($super, arguments);\n" + 
+        result += "function $superCstr(){\n" +
+                        this.baseClassName + ".prototype.constructor.apply($super, arguments);\n" +
                         "processing.extendClass(" + selfId + ", $super); }\n";
       } else {
         result += "function $superCstr() { }\n";
@@ -10067,7 +11865,6 @@
     };
 
     transformClassBody = function(body, name, baseName, impls) {
-      var undef;
       var declarations = body.substring(1, body.length - 1);
       declarations = extractClassesAndMethods(declarations);
       declarations = extractConstructors(declarations, name);
@@ -10131,7 +11928,7 @@
         }
       }
       return "function " + this.name + "() {\n" + this.body + "}\n" +
-        staticVars + "\n" + 
+        staticVars + "\n" +
         "processing." + this.name + " = " + this.name + ";";
     };
 
@@ -10204,7 +12001,6 @@
       this.misc = misc;
     }
     AstPrefixStatement.prototype.toString = function() {
-      var undef;
       var result = this.misc.prefix;
       if(this.argument !== undef) {
         result += this.argument.toString();
@@ -10219,7 +12015,6 @@
     };
 
     transformStatements = function(statements, transformMethod, transformClass) {
-      var undef;
       var nextStatement = new RegExp(/\b(catch|for|if|switch|while|with)\s*"B(\d+)"|\b(do|else|finally|return|throw|try|break|continue)\b|("[ADEH](\d+)")|\b((?:case\s[^:]+|[A-Za-z_$][\w$]*\s*):)|(;)/g);
       var res = [];
       statements = preStatementsTransform(statements);
@@ -10267,7 +12062,12 @@
         }
         lastIndex = nextStatement.lastIndex;
       }
-      res.push(statements.substring(lastIndex));
+      var statementsTail = trimSpaces(statements.substring(lastIndex));
+      res.push(statementsTail.left);
+      if(statementsTail.middle !== "") {
+        res.push(transformStatement(statementsTail.middle));
+        res.push(";" + statementsTail.right);
+      }
       return res;
     };
 
@@ -10279,26 +12079,26 @@
           localNames = localNames.concat(statement.getNames());
         } else if(statement instanceof AstForStatement &&
           statement.argument.initStatement instanceof AstVar) {
-          localNames = localNames.concat(statement.argument.initStatement.getNames());        
+          localNames = localNames.concat(statement.argument.initStatement.getNames());
         }
       }
       return appendToLookupTable({}, localNames);
     }
-    
+
     function AstStatementsBlock(statements) {
       this.statements = statements;
     }
-    AstStatementsBlock.prototype.toString = function() {      
+    AstStatementsBlock.prototype.toString = function() {
       var localNames = getLocalNames(this.statements);
       var oldContext = replaceContext;
-      
+
       // replacing context only when necessary
       if(!isLookupTableEmpty(localNames)) {
         replaceContext = function(name) {
           return name in localNames ? name : oldContext(name);
         };
       }
-      
+
       var result = "{\n" + this.statements.join('') + "\n}";
       replaceContext = oldContext;
       return result;
@@ -10333,9 +12133,8 @@
       return new AstRoot( transformStatements(statements,
         transformGlobalMethod, transformGlobalClass) );
     };
-    
+
     function generateMetadata(ast) {
-      var undef;
       var globalScope = {};
       var id, class_;
       for(id in declaredClasses) {
@@ -10354,7 +12153,7 @@
           }
         }
       }
-      
+
       function findInScopes(class_, name) {
         var parts = name.split('.');
         var currentScope = class_.scope, found;
@@ -10372,7 +12171,7 @@
         }
         return found;
       }
-      
+
       for(id in declaredClasses) {
         if(declaredClasses.hasOwnProperty(id)) {
           class_ = declaredClasses[id];
@@ -10394,8 +12193,7 @@
     return injectStrings(redendered, strings);
   }// Parser ends
 
-  // Parse Processing (Java-like) syntax to JavaScript syntax with Regex
-  Processing.parse = function parse(aCode, p) {
+  function preprocessCode(aCode, sketch) {
     // Parse out @pjs directive, if any.
     var dm = /\/\*\s*@pjs\s+((?:[^\*]|\*+[^\*\/])*)\*\//g.exec(aCode);
     if (dm && dm.length === 2) {
@@ -10411,67 +12209,115 @@
         if (pair && pair.length === 2) {
           var key = clean(pair[0]);
           var value = clean(pair[1]);
-
           // A few directives require work beyond storying key/value pairings
           if (key === "preload") {
             var list = value.split(',');
             // All pre-loaded images will get put in imageCache, keyed on filename
             for (var j = 0, ll = list.length; j < ll; j++) {
               var imageName = clean(list[j]);
-              var img = new Image();
-              img.onload = (function() {
-                return function() {
-                  p.pjs.imageCache.pending--;
-                };
-              }());
-              p.pjs.imageCache.pending++;
-              p.pjs.imageCache[imageName] = img;
-              img.src = imageName;
+              sketch.imageCache.add(imageName);
             }
           } else if (key === "opaque") {
-            p.canvas.mozOpaque = value === "true";
+            sketch.options.isOpaque = value === "true";
           } else if (key === "crisp") {
-            p.pjs.crispLines = value === "true";
+            sketch.options.crispLines = value === "true";
+          } else if (key === "pauseOnBlur") {
+            sketch.options.pauseOnBlur = value === "true";
           } else {
-            p.pjs[key] = value;
+            sketch.options[key] = value;
           }
         }
       }
-      aCode = aCode.replace(dm[0], '');
     }
 
-    Error.prototype.printStackTrace = function() {
-       this.toString();
-    };
-    
-    aCode = parseProcessing(aCode);
-    
     // Check if 3D context is invoked -- this is not the best way to do this.
-    if (aCode.match(/\bsize\((?:.+),(?:.+),\s*processing.(OPENGL|P3D)\s*\);/)) {
-      p.use3DContext = true;
+    var codeWoStrings = aCode.replace(/("(?:[^"\\\n]|\\.)*")|('(?:[^'\\\n]|\\.)*')|(([\[\(=|&!\^:?]\s*)(\/(?![*\/])(?:[^\/\\\n]|\\.)*\/[gim]*)\b)|(\/\/[^\n]*\n)|(\/\*(?:(?!\*\/)(?:.|\n))*\*\/)/g, "");
+    if (codeWoStrings.match(/\bsize\((?:.+),(?:.+),\s*(OPENGL|P3D)\s*\);/)) {
+      sketch.use3DContext = true;
     }
     return aCode;
+  }
+
+  // Parse/compiles Processing (Java-like) syntax to JavaScript syntax
+  Processing.compile = function(pdeCode) {
+    var sketch = new Processing.Sketch();
+    var code = preprocessCode(pdeCode, sketch);
+    var compiledPde = parseProcessing(code);
+    sketch.sourceCode = compiledPde;
+    return sketch;
   };
 
-  Processing.version = "0.9.4";
+  Error.prototype.printStackTrace = function() {
+     return this.toString();
+  };
+
+  Processing.version = "0.9.6";
 
   // Share lib space
   Processing.lib = {};
 
-  // Store Processing instances 
+  // Store Processing instances
   Processing.instances = [];
   Processing.instanceIds = {};
 
+  Processing.removeInstance = function(id) {
+    Processing.instances.splice(Processing.instanceIds[id], 1);
+    delete Processing.instanceIds[id];
+  };
+
   Processing.addInstance = function(processing) {
-    if (typeof processing.canvas.id === 'undefined' || !processing.canvas.id.length) {
-      processing.canvas.id = "__processing" + Processing.instances.length;
+    if (processing.externals.canvas.id === undef || !processing.externals.canvas.id.length) {
+      processing.externals.canvas.id = "__processing" + Processing.instances.length;
     }
-    Processing.instanceIds[processing.canvas.id] = Processing.instances.length;
+    Processing.instanceIds[processing.externals.canvas.id] = Processing.instances.length;
     Processing.instances.push(processing);
   };
 
   Processing.getInstanceById = function(name) {
     return Processing.instances[Processing.instanceIds[name]];
+  };
+
+  Processing.Sketch = function(attachFunction) {
+    this.attachFunction = attachFunction; // can be optional
+    this.use3DContext = false;
+    this.options = {
+      isOpaque: true,
+      crispLines: false,
+      pauseOnBlur: false
+    };
+    this.imageCache = {
+      pending: 0,
+      images: {},
+      add: function(href) {
+        var img = new Image();
+        img.onload = (function(owner) {
+          return function() {
+            owner.pending--;
+          };
+        }(this));
+        this.pending++;
+        this.images[href] = img;
+        img.src = href;
+      }
+    };
+    this.sourceCode = undefined;
+    this.attach = function(processing) {
+      // either attachFunction or sourceCode must be present on attach
+      if(typeof this.attachFunction === "function") {
+        this.attachFunction(processing);
+      } else if(this.sourceCode) {
+        var func = eval(this.sourceCode);
+        func(processing);
+        this.attachFunction = func;
+      } else {
+        throw "Unable to attach sketch to the processing instance";
+      }
+    };
+    this.toString = function() {
+      return this.sourceCode || "[attach: " + this.attachFunction + "]";
+    };
+    this.onblur = function() {};
+    this.onfocus = function() {};
   };
 
   // Automatic Initialization Method
@@ -10497,9 +12343,12 @@
         // Get the source, we'll need to find what the user has used in size()
         var filenames = processingSources.split(' ');
         var code = "";
-        for (var j=0, fl=filenames.length; j<fl; j++) {
+        for (var j = 0, fl = filenames.length; j < fl; j++) {
           if (filenames[j]) {
-            code += ajax(filenames[j]) + ";\n"; // deal with files that don't end with newline
+            var block = ajax(filenames[j]);
+            if (block !== false) {
+              code += ";\n" + block; 
+            }
           }
         }
         Processing.addInstance(new Processing(canvas[i], code));
@@ -10511,5 +12360,17 @@
     init();
   }, false);
 
-}());
+  // pauseOnBlur handling
+  window.addEventListener('blur', function() {
+    for (var i = 0; i < Processing.instances.length; i++) {
+      Processing.instances[i].externals.onblur();
+    }
+  }, false);
 
+  window.addEventListener('focus', function() {
+    for (var i = 0; i < Processing.instances.length; i++) {
+      Processing.instances[i].externals.onfocus();
+    }
+  }, false);
+
+}());
