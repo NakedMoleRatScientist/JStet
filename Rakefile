@@ -19,7 +19,7 @@ task :copy do
     sh "cp -r vendor /var/www/"
   else
     sh "cp jstet.html /srv/http"
-    sh "c p game.js /srv/http"
+    sh "cp game.js /srv/http"
     sh "cp -r vendor /srv/http"
   end
 end
