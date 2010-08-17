@@ -155,7 +155,7 @@ function Chat()
   }
   self.enter = function()
   {
-    var verify = self.parse(self.message.get_text())
+    var verify = self.parse(self.message.get_text());
     if (verify == false)
     {
       self.protocol.send(self.message.get_text());
@@ -187,6 +187,7 @@ function Chat()
     }
   };
 }
+
 
 //Data type is 2 for gameplay commands.
 function GameProtocol(net)
@@ -602,7 +603,7 @@ function Collision()
 }
 void enterHighScoreKey()
 {
-  var info = typing()
+  var info = typing();
   switch (info)
   {
   case false:
@@ -620,6 +621,7 @@ void enterHighScoreKey()
     break;
   }
 }
+
 var type_status = false;
 
 void typing()
@@ -1700,6 +1702,7 @@ function Engine(protocol,mode)
   };
   self.start = function(id)
   {
+    console.log("beep2");
     new_player = new Player();
     new_player.start();
     new_player.id = id;
@@ -1720,6 +1723,7 @@ function EngineDraw()
   self.drawShape = new TetrominoDraw();
   self.display = function()
   {
+    console.log("beep");
     textFont(font,18);
     background(0,0,0);
     stroke(205,201,201);
