@@ -1,5 +1,5 @@
 
-void mouseClicked()
+void mousePressed()
 {
   switch(mode.status)
   {
