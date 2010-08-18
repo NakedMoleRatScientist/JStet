@@ -864,7 +864,7 @@ void gameOverKey()
     mode.change(2);
   }
 }
-void mouseClicked()
+void mousePressed()
 {
   switch(mode.status)
   {
@@ -1573,13 +1573,14 @@ function LobbyMode()
   self.chat = new Chat();
   self.play = new PlayButton();
   self.collision = new Collision();
-  self.collision.add_rect(self.play.play)
+  self.collision.add_rect(self.play.play);
   self.display = function()
   {
     background(0,0,0);
     self.chat.display();
     self.play.display();
     noFill();
+    stroke(255);
     rect(0,580,800,20);
     rect(0,0,400,580);
   };
@@ -1702,7 +1703,6 @@ function Engine(protocol,mode)
   };
   self.start = function(id)
   {
-    console.log("beep2");
     new_player = new Player();
     new_player.start();
     new_player.id = id;
@@ -1723,7 +1723,6 @@ function EngineDraw()
   self.drawShape = new TetrominoDraw();
   self.display = function()
   {
-    console.log("beep");
     textFont(font,18);
     background(0,0,0);
     stroke(205,201,201);
