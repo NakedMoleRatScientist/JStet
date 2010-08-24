@@ -80,7 +80,7 @@ function EventManager(id)
 	    game_over += 1;
 	  }
 	}
-	if (game_over == 2)
+	if (game_over == self.players.length)
 	{
 	  clearInterval(game);
 	}
