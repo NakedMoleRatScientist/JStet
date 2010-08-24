@@ -92,7 +92,6 @@ function GameProtocol(net)
       self.net.send([3]);
       break;
     case 7:
-      console.log("blah");
       self.engine.high_score();
       break;
     }
