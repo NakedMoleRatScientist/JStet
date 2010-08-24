@@ -11,7 +11,7 @@ void enterHighScoreKey()
     break;
   case -13:
     score_protocol.transmit_score(high_score.get_name(),engine.score);
-    high_score.clean();
+    high_score.name.clean();
     mode.change(2);
     break;
   default:
