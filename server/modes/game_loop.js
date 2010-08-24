@@ -28,11 +28,6 @@ function EventManager(id)
   {
 
   };
-  self.create_rotate_message = function()
-  {
-    var message = [3,self.current.choice];
-    self.events.push(message);
-  };
   self.create_success_message = function()
   {
     var message = [7,1]
