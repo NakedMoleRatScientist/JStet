@@ -13,11 +13,6 @@ function EventManager(id)
   self.id = id;
   self.players = new Array();
   self.timer = timer.create_new();
-  self.create_shape_message = function (shape,type,choice)
-  {
-
-    self.events.push(message);
-  };
   self.send = function(message)
   {
     self.events.push(message);
