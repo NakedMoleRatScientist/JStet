@@ -94,6 +94,7 @@ function PlayerGameMode(player,manager)
       self.cycle();
     }
   };
+  //new shape
   self.cycle_message = function()
   {
     self.create_shape_message(self.current.get_shape(),0,self.current.get_choice()); //0 is current
