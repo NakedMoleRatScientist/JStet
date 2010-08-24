@@ -93,6 +93,7 @@ function GameProtocol(net)
       break;
     case 7:
       self.engine.high_score();
+      self.net.send([3]);
       break;
     }
   };
