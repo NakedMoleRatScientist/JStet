@@ -10,7 +10,7 @@ function ScoreProtocol(net)
   {
     self.data = data;
   };
-  self.getData = function()
+  self.get_data = function()
   {
     return self.data;
   };
