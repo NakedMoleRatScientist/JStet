@@ -124,7 +124,7 @@ function PlayerGameMode(player,manager)
   self.create_success_message = function()
   {
     var message = [7,1]
-    self.events.push(message);
+    self.mangers.push(message);
   };
   //Send data about current's movement.
   self.create_xy_message = function()
