@@ -77,7 +77,7 @@ function GameProtocol(net)
       //Kill some lines.
       if (self.checkIdentical(data))
       {
-	self.engine.line_action(data[1]);
+	self.engine.line_action(data[0],data[2]);
       }
       break;
     case 5:
