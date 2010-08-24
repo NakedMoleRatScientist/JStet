@@ -28,7 +28,7 @@ function PlayerGameMode(player,manager)
   //rotate.
   self.create_rotate_message = function()
   {
-    var message = [3,self.current.choice];
+    var message = [self.player.id,3,self.current.choice];
     self.manager.send(message);
   };
   //kill some line.
