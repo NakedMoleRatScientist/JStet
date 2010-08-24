@@ -119,6 +119,12 @@ function PlayerGameMode(player,manager)
     }
     self.create_score_message();
   };
+  //a high score is detected.
+  self.create_success_message = function()
+  {
+    var message = [7,1]
+    self.events.push(message);
+  };
   //Send data about current's movement.
   self.create_xy_message = function()
   {
