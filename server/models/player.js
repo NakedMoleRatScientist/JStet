@@ -123,8 +123,9 @@ function PlayerGameMode(player,manager)
   //a high score is detected.
   self.create_success_message = function()
   {
+    sys.log("wtf");
     var message = [7,1]
-    self.manager.push(message);
+    self.manager.send(message);
   };
   //Send data about current's movement.
   self.create_xy_message = function()
