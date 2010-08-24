@@ -25,7 +25,7 @@ function ScoreBoardMode(protocol)
   };
   self.list = function()
   {
-    var data = self.protocol.getData();
+    var data = self.protocol.get_data();
     var y = 70;
     var limit = self.start + 20;
     self.turn = true;
