@@ -84,7 +84,7 @@ function GameProtocol(net)
       //Get score data.
       if (self.checkIdentical(data))
       {
-	self.engine.score = data[1];
+	self.engine.score = data[2];
       }
       break;
     case 6:
@@ -92,6 +92,7 @@ function GameProtocol(net)
       self.net.send([3]);
       break;
     case 7:
+      console.log("blah");
       self.engine.high_score();
       break;
     }
