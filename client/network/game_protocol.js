@@ -44,14 +44,14 @@ function GameProtocol(net)
     case 0:
       console.log("Game initialized.");
       mode.change(4);
-      engine.start(data[0]);
+      self.engine.start(data[0]);
       break;
     case 1:
       //Get new shape.
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
-	engine.write_shape(data[0],data[2],data[3],data[4]);
+	self.engine.write_shape(data[0],data[2],data[3],data[4]);
         self.net.send([2,1]);
       }
       break;
@@ -60,7 +60,7 @@ function GameProtocol(net)
       //Get movement update for current.
       if (self.checkIdentical(data))
       {
-	engine.update_location(data[0],data[2],data[3]);
+	self.engine.update_location(data[0],data[2],data[3]);
 	self.net.send([2,1]);
       }
       break;
@@ -69,7 +69,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
 	console.log("Rotation detected.");
-	engine.rotate(data[1]);
+	self.engine.rotate(data[1]);
 	self.net.send([2,1]);
       }
       break;
