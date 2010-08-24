@@ -7,15 +7,15 @@ void enterHighScoreKey()
   case false:
     break;
   case -8:
-    score_data.name.destroy();
+    high_score.name.destroy();
     break;
   case -13:
-    score_protocol.transmit_score(score_data.get_name(),engine.score);
-    score_data.clean();
+    score_protocol.transmit_score(high_score.get_name(),engine.score);
+    high_score.clean();
     mode.change(2);
     break;
   default:
-    score_data.name.addLetter(info);
+    high_score.name.addLetter(info);
     break;
   }
 }
