@@ -11,7 +11,7 @@ function HighScoreMode()
     text("You have beaten a score in the worldwide top 100 ranking.",100,250);
     text("Please enter your 5 letters identifer.",200,275);
     text("Your identifer: ",250,300);
-    text(self.name,300,325);
+    text(self.name.string,300,325);
   };
   self.get_name = function()
   {
