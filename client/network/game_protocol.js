@@ -69,7 +69,7 @@ function GameProtocol(net)
       if (self.checkIdentical(data))
       {
 	console.log("Rotation detected.");
-	self.engine.rotate(data[1]);
+	self.engine.rotate(data[0],data[1]);
 	self.net.send([2,1]);
       }
       break;
