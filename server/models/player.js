@@ -34,7 +34,7 @@ function PlayerGameMode(player,manager)
   //kill some line.
   self.create_field_message = function(clean)
   {
-    var message = [self.player.id,4,line];
+    var message = [self.player.id,4,clean];
     self.manager.send(message);
   };
   //give us idea of what the score is.
