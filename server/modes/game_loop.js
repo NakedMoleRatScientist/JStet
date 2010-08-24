@@ -82,6 +82,7 @@ function EventManager(id)
 	}
 	if (game_over == self.players.length)
 	{
+	  sys.log("session destroyed.");
 	  clearInterval(game);
 	}
       }
