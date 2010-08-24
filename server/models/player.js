@@ -29,7 +29,7 @@ function PlayerGameMode(player,manager)
   self.create_rotate_message = function()
   {
     var message = [3,self.current.choice];
-    self.events.push(message);
+    self.manager.send(message);
   };
   //kill some line.
   self.create_field_message = function(clean)
