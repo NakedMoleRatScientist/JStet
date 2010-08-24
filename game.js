@@ -266,7 +266,7 @@ function GameProtocol(net)
       //Kill some lines.
       if (self.checkIdentical(data))
       {
-	self.engine.line_action(data[1]);
+	self.engine.line_action(data[0],data[2]);
       }
       break;
     case 5:
@@ -1685,7 +1685,6 @@ function Engine(protocol,mode)
   };
   self.rotate = function(id,choice)
   {
-    console.log(choice);
     var player = self.find_player(id);
     player.current.rotate(choice);
   };
