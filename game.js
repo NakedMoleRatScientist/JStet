@@ -273,7 +273,7 @@ function GameProtocol(net)
       //Get score data.
       if (self.checkIdentical(data))
       {
-	self.engine.score = data[1];
+	self.engine.score = data[2];
       }
       break;
     case 6:
@@ -282,6 +282,7 @@ function GameProtocol(net)
       break;
     case 7:
       self.engine.high_score();
+      self.net.send([3]);
       break;
     }
   };
@@ -364,7 +365,7 @@ function ScoreBoardMode(protocol)
   };
   self.list = function()
   {
-    var data = self.protocol.getData();
+    var data = self.protocol.get_data();
     var y = 70;
     var limit = self.start + 20;
     self.turn = true;
@@ -420,7 +421,7 @@ function ScoreProtocol(net)
   {
     self.data = data;
   };
-  self.getData = function()
+  self.get_data = function()
   {
     return self.data;
   };
@@ -498,7 +499,7 @@ function HighScoreMode()
     text("You have beaten a score in the worldwide top 100 ranking.",100,250);
     text("Please enter your 5 letters identifer.",200,275);
     text("Your identifer: ",250,300);
-    text(self.name,300,325);
+    text(self.name.string,300,325);
   };
   self.get_name = function()
   {
@@ -609,15 +610,15 @@ void enterHighScoreKey()
   case false:
     break;
   case -8:
-    score_data.name.destroy();
+    high_score.name.destroy();
     break;
   case -13:
-    score_protocol.transmit_score(score_data.get_name(),engine.score);
-    score_data.clean();
+    score_protocol.transmit_score(high_score.get_name(),engine.score);
+    high_score.name.clean();
     mode.change(2);
     break;
   default:
-    score_data.name.addLetter(info);
+    high_score.name.addLetter(info);
     break;
   }
 }
@@ -1776,7 +1777,7 @@ var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network,lobby);
 lobby.chat.protocol = lobby_protocol;
-var board = new ScoreBoardMode(score_protocol)
+var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
 var engineDraw = new EngineDraw();
