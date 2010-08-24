@@ -22,15 +22,6 @@ function EventManager(id)
   {
     self.events.push(message);
   };
-  //Current shape just ended. Time to time cycle through
-  
-  self.cycle_message = function(id)
-  {
-
-  };
-  
-
-  //get the initial shapes for current and future.
   self.initialize = function(id)
   {
     var identity = players.get_player(id);
