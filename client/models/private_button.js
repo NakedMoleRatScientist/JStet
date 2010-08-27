@@ -8,6 +8,6 @@ function PrivateButton()
     noFill();
     textFont(font,25);
     self.private_session.draw();
-    text("Private Game",475,80);
+    text("Private Game",450,110);
   };
 }
