@@ -11,5 +11,6 @@ function CreateGameMode()
   self.display = function()
   {
     background(0,0,0);
+    stroke(255);
   };
 }
