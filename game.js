@@ -323,9 +323,9 @@ function PrivateButton()
   self.display = function()
   {
     noFill();
-    textFont(font,25);
+    textFont(font,15);
     self.private_session.draw();
-    text("Private Game",450,110);
+    text("Create Game",450,110);
   };
 }
 function CreateGameMode()
@@ -335,11 +335,13 @@ function CreateGameMode()
   self.players = function()
   {
     textFont(font,18);
-    text("Single or two players?",0,0);
+    text("Single or two players?",0,18);
   };
   self.display = function()
   {
     background(0,0,0);
+    stroke(255);
+    self.players();
   };
 }
 
@@ -595,10 +597,12 @@ void lobbyMouse()
   case 0:
     {
       game_protocol.request_game();
+      break;
     }
   case 1:
     {
       mode.change(6);
+      break;
     }
   }
 }
@@ -624,12 +628,8 @@ function Collision()
       {
 	return i;
       }
-      else
-      {
-	return -1;
-      }
     }
-    
+    return -1;
   };
   self.add_rect = function(rect)
   {
@@ -1810,6 +1810,7 @@ var lobby = new LobbyMode();
 var network = new Net();
 var over = new GameOverMode();
 var title = new TitleMode();
+var create = new CreateGameMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network,lobby);
@@ -1856,6 +1857,9 @@ void draw()
     break;
   case 5:
     lobby.display();
+    break;
+  case 6:
+    create.display();
     break;
   }
 }
