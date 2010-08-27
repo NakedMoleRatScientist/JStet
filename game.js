@@ -325,13 +325,22 @@ function PrivateButton()
     noFill();
     textFont(font,25);
     self.private_session.draw();
-    text("Private Game",475,80);
+    text("Private Game",450,110);
   };
 }
 function CreateGameMode()
 {
   var self = this;
   self.others = false;
+  self.players = function()
+  {
+    textFont(font,18);
+    text("Single or two players?",0,0);
+  };
+  self.display = function()
+  {
+    background(0,0,0);
+  };
 }
 
 function TitleMode()
@@ -581,9 +590,16 @@ void titleKey()
 }
 void lobbyMouse()
 {
-  if (lobby.collision.check(mouseX,mouseY))
+  switch(lobby.collision.check(mouseX,mouseY))
   {
-    game_protocol.request_game();
+  case 0:
+    {
+      game_protocol.request_game();
+    }
+  case 1:
+    {
+      mode.change(6);
+    }
   }
 }
 
@@ -1600,6 +1616,7 @@ function LobbyMode()
     background(0,0,0);
     self.chat.display();
     self.play.display();
+    self.private_session.display();
     noFill();
     stroke(255);
     rect(0,580,800,20);
