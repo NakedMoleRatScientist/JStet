@@ -21,12 +21,8 @@ function Collision()
       {
 	return i;
       }
-      else
-      {
-	return -1;
-      }
     }
-    
+    return -1;
   };
   self.add_rect = function(rect)
   {
