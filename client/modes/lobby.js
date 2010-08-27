@@ -4,6 +4,7 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new PlayButton();
+  self.private_session = new PrivateButton();
   self.collision = new Collision();
   self.collision.add_rect(self.play.play);
   self.display = function()
