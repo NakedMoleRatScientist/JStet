@@ -6,7 +6,7 @@ function CreateGameMode()
   self.players = function()
   {
     textFont(font,18);
-    text("Single or multiplayer?",0,0);
+    text("Single or two players?",0,0);
   };
   self.display = function()
   {
