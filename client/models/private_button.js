@@ -6,8 +6,8 @@ function PrivateButton()
   self.display = function()
   {
     noFill();
-    textFont(font,25);
+    textFont(font,15);
     self.private_session.draw();
-    text("Private Game",450,110);
+    text("Create Game",450,110);
   };
 }
