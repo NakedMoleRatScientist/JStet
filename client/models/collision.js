@@ -19,11 +19,11 @@ function Collision()
       }
       if (conditions[0] == true && conditions[1] == true)
       {
-	return true;
+	return i;
       }
       else
       {
-	return false;
+	return -1;
       }
     }
     
