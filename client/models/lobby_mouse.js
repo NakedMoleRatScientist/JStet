@@ -7,5 +7,9 @@ void lobbyMouse()
     {
       game_protocol.request_game();
     }
+  case 1:
+    {
+      mode.change(6);
+    }
   }
 }
