@@ -139,6 +139,7 @@ var lobby = new LobbyMode();
 var network = new Net();
 var over = new GameOverMode();
 var title = new TitleMode();
+var create = new CreateGameMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network,lobby);
