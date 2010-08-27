@@ -8,6 +8,7 @@ function CreateGameMode()
   {
     textFont(font,18);
     text("Single or two players?",0,18);
+    radio.display(20,20);
   };
   self.display = function()
   {
