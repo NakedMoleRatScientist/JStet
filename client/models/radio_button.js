@@ -9,5 +9,10 @@ function RadioButton()
   {
     stroke(255);
     ellipse(x,y,self.width,self.height);
+    if (self.state == true)
+    {
+      stroke(0);
+      ellipse(x,y,self.width / 2, self.height / 2);
+    }
   };
 }
