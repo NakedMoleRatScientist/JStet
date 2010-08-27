@@ -13,6 +13,7 @@ function LobbyMode()
     background(0,0,0);
     self.chat.display();
     self.play.display();
+    self.private_session.draw();
     noFill();
     stroke(255);
     rect(0,580,800,20);
