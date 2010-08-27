@@ -3,6 +3,7 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
+  self.radio = new RadioButton();
   self.players = function()
   {
     textFont(font,18);
