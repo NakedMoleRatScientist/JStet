@@ -12,5 +12,6 @@ function CreateGameMode()
   {
     background(0,0,0);
     stroke(255);
+    self.players();
   };
 }
