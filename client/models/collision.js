@@ -17,15 +17,16 @@ function Collision()
       {
 	conditions[1] = true;
       }
+      if (conditions[0] == true && conditions[1] == true)
+      {
+	return true;
+      }
+      else
+      {
+	return false;
+      }
     }
-    if (conditions[0] == true && conditions[1] == true)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    
   };
   self.add_rect = function(rect)
   {
