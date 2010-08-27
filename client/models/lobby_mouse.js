@@ -1,8 +1,11 @@
 
 void lobbyMouse()
 {
-  if (lobby.collision.check(mouseX,mouseY) == 0)
+  switch(lobby.collision.check(mouseX,mouseY))
   {
-    game_protocol.request_game();
+  case 0:
+    {
+      game_protocol.request_game();
+    }
   }
 }
