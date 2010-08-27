@@ -187,5 +187,8 @@ void draw()
   case 5:
     lobby.display();
     break;
+  case 6:
+    create.display();
+    break;
   }
 }
