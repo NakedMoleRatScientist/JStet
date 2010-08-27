@@ -316,6 +316,23 @@ function GameProtocol(net)
   };
 }
 
+function PrivateButton()
+{
+  var self = this;
+  self.private_session = new RectObject(450,75,100,50);
+  self.display = function()
+  {
+    noFill();
+    textFont(font,25);
+    self.private_session.draw();
+    text("Private Game",475,80);
+  };
+}
+function CreateGameMode()
+{
+  var self = this;
+  self.others = false;
+}
 
 function TitleMode()
 {
@@ -587,15 +604,16 @@ function Collision()
       {
 	conditions[1] = true;
       }
+      if (conditions[0] == true && conditions[1] == true)
+      {
+	return i;
+      }
+      else
+      {
+	return -1;
+      }
     }
-    if (conditions[0] == true && conditions[1] == true)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    
   };
   self.add_rect = function(rect)
   {
@@ -1573,8 +1591,10 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new PlayButton();
+  self.private_session = new PrivateButton();
   self.collision = new Collision();
   self.collision.add_rect(self.play.play);
+  self.collision.add_rect(self.private_session.private_session);
   self.display = function()
   {
     background(0,0,0);
