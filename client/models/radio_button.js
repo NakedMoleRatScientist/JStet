@@ -15,4 +15,8 @@ function RadioButton()
       ellipse(x,y,self.width / 2, self.height / 2);
     }
   };
+  self.text = function(var message)
+  {
+    text(message,self.width + 15,self.height);
+  };
 }
