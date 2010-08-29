@@ -15,7 +15,7 @@ function RadioButton()
   self.display = function()
   {
     stroke(255);
-    ellipse(x,y,self.width,self.height);
+    ellipse(self.x,self.y,self.width,self.height);
     if (self.state == true)
     {
       stroke(0);
