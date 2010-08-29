@@ -190,7 +190,7 @@ function Chat()
 
 
 //Data type is 2 for gameplay commands.
-function GameProtocol(net)
+function GameProtocol(var net)
 {
   var self = this;
   self.net = net;
@@ -199,33 +199,33 @@ function GameProtocol(net)
   self.lastMessage = null;
   self.request_game = function()
   {
-    data = [2,0];
+    var data = [2,0];
     self.net.send(data);
   };
   self.move_right = function()
   {
-    data = [2,2,1];
+    var data = [2,2,1];
     self.engine.move(20,0);
     self.net.send(data);
   };
   self.move_left = function()
   {
-    data = [2,2,2];
+    var data = [2,2,2];
     self.engine.move(-20,0);
     self.net.send(data);
   };
   self.move_down = function()
   {
-    data = [2,2,3];
+    var data = [2,2,3];
     self.engine.move(0,20);
     self.net.send(data);
   };
   self.rotate = function()
   {
-    data = [2,2,4];
+    var data = [2,2,4];
     self.net.send(data);
   };
-  self.process_data = function(data)
+  self.process_data = function(var data)
   {
     switch(data[1])
     {
@@ -286,15 +286,15 @@ function GameProtocol(net)
       break;
     }
   };
-  self.pushMessage = function(data)
+  self.pushMessage = function(var data)
   {
     self.lastMessage = new Array();
     for (var i = 0;i < data.length;i++)
     {
       self.lastMessage.push(data[i]);
-    }
+    };
   };
-  self.checkIdentical = function(data)
+  self.checkIdentical = function(var data)
   {
     if (self.lastMessage == null || self.lastMessage != data.length - 1)
     {
@@ -303,7 +303,7 @@ function GameProtocol(net)
     }
     else
     {
-      for (i = 0;i < self.lastMessage.length;i++)
+      for (var i = 0;i < self.lastMessage.length;i++)
       {
 	if (self.lastMessage[i] != data[i + 1])
 	{
@@ -334,10 +334,17 @@ function RadioButton()
   self.state = false;
   self.height = 10;
   self.width = 10;
-  self.display = function(var x, var y)
+  self.x = 0;
+  self.y = 0;
+  self.set = function(var x, var y)
+  {
+    self.x = x;
+    self.y = y;
+  };
+  self.display = function()
   {
     stroke(255);
-    ellipse(x,y,self.width,self.height);
+    ellipse(self.x,self.y,self.width,self.height);
     if (self.state == true)
     {
       stroke(0);
@@ -346,7 +353,7 @@ function RadioButton()
   };
   self.text = function(var message)
   {
-    text(message,self.width + 15,self.height);
+    text(message,self.x + 15,self.y + 5);
   };
 }
 function CreateGameMode()
@@ -354,11 +361,12 @@ function CreateGameMode()
   var self = this;
   self.others = false;
   self.radio = new RadioButton();
+  self.radio.set(20,40);
   self.players = function()
   {
     textFont(font,18);
     text("Single or two players?",0,18);
-    self.radio.display(20,40);
+    self.radio.display();
     self.radio.text("Yes");
   };
   self.display = function()
