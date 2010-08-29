@@ -5,7 +5,7 @@ function Collision()
   var self = this;
   self.rects = [];
   self.circles = [];
-  self.check = function(x,y)
+  self.check = function(var x,var y)
   {
     var conditions = [false,false];
     for (var i = 0;i < self.rects.length;i++)
@@ -25,7 +25,7 @@ function Collision()
     }
     return -1;
   };
-  self.add_rect = function(rect)
+  self.add_rect = function(var rect)
   {
     self.rect.push(rect);
   };
