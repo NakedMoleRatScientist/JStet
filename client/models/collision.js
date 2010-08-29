@@ -4,6 +4,7 @@ function Collision()
 {
   var self = this;
   self.rect = [];
+  self.circles = [];
   self.check = function(x,y)
   {
     var conditions = [false,false];
