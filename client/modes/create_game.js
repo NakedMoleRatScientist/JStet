@@ -7,6 +7,7 @@ function CreateGameMode()
   self.one.set(20,40);
   self.two = new RadioButton();
   self.two.set(90,40);
+  self.collision = new Collision();
   self.players = function()
   {
     textFont(font,18);
