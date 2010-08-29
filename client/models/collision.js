@@ -28,4 +28,8 @@ function Collision()
   {
     self.rect.push(rect);
   };
+  self.add_circle = function(var circle)
+  {
+    
+  };
 }
