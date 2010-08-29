@@ -3,18 +3,18 @@
 function Collision()
 {
   var self = this;
-  self.rect = [];
+  self.rects = [];
   self.circles = [];
   self.check = function(x,y)
   {
     var conditions = [false,false];
-    for (var i = 0;i < self.rect.length;i++)
+    for (var i = 0;i < self.rects.length;i++)
     {
-      if (x >= self.rect[i].x && x <= self.rect[i].x + self.rect[i].width)
+      if (x >= self.rects[i].x && x <= self.rects[i].x + self.rects[i].width)
       {
 	conditions[0] = true;
       }
-      if (y >= self.rect[i].y && y <= self.rect[i].y + self.rect[i].height)
+      if (y >= self.rects[i].y && y <= self.rects[i].y + self.rects[i].height)
       {
 	conditions[1] = true;
       }
