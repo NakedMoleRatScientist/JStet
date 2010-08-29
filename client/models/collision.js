@@ -31,6 +31,6 @@ function Collision()
   };
   self.add_circle = function(var circle)
   {
-    
+    self.circles.push(circle);
   };
 }
