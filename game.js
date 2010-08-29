@@ -328,14 +328,38 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
+function RadioButton()
+{
+  var self = this;
+  self.state = false;
+  self.height = 10;
+  self.width = 10;
+  self.display = function(var x, var y)
+  {
+    stroke(255);
+    ellipse(x,y,self.width,self.height);
+    if (self.state == true)
+    {
+      stroke(0);
+      ellipse(x,y,self.width / 2, self.height / 2);
+    }
+  };
+  self.text = function(var message)
+  {
+    text(message,self.width + 15,self.height);
+  };
+}
 function CreateGameMode()
 {
   var self = this;
   self.others = false;
+  self.radio = new RadioButton();
   self.players = function()
   {
     textFont(font,18);
     text("Single or two players?",0,18);
+    self.radio.display(20,40);
+    self.radio.text("Yes");
   };
   self.display = function()
   {
