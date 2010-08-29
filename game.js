@@ -360,14 +360,19 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.radio = new RadioButton();
-  self.radio.set(20,40);
+  self.one = new RadioButton();
+  self.one.set(20,40);
+  self.two = new RadioButton();
+  self.two.set(90,40);
+  self.collision = new Collision();
   self.players = function()
   {
     textFont(font,18);
     text("Single or two players?",0,18);
-    self.radio.display();
-    self.radio.text("Yes");
+    self.one.display();
+    self.one.text("One");
+    self.two.display();
+    self.two.text("Two");
   };
   self.display = function()
   {
@@ -642,17 +647,18 @@ void lobbyMouse()
 function Collision()
 {
   var self = this;
-  self.rect = [];
-  self.check = function(x,y)
+  self.rects = [];
+  self.circles = [];
+  self.check = function(var x,var y)
   {
     var conditions = [false,false];
-    for (var i = 0;i < self.rect.length;i++)
+    for (var i = 0;i < self.rects.length;i++)
     {
-      if (x >= self.rect[i].x && x <= self.rect[i].x + self.rect[i].width)
+      if (x >= self.rects[i].x && x <= self.rects[i].x + self.rects[i].width)
       {
 	conditions[0] = true;
       }
-      if (y >= self.rect[i].y && y <= self.rect[i].y + self.rect[i].height)
+      if (y >= self.rects[i].y && y <= self.rects[i].y + self.rects[i].height)
       {
 	conditions[1] = true;
       }
@@ -663,9 +669,13 @@ function Collision()
     }
     return -1;
   };
-  self.add_rect = function(rect)
+  self.add_rect = function(var rect)
   {
-    self.rect.push(rect);
+    self.rects.push(rect);
+  };
+  self.add_circle = function(var circle)
+  {
+    self.circles.push(circle);
   };
 }
 void enterHighScoreKey()
