@@ -103,7 +103,7 @@ function GameProtocol(net)
     for (var i = 0;i < data.length;i++)
     {
       self.lastMessage.push(data[i]);
-    }
+    };
   };
   self.checkIdentical = function(data)
   {
@@ -114,7 +114,7 @@ function GameProtocol(net)
     }
     else
     {
-      for (i = 0;i < self.lastMessage.length;i++)
+      for (var i = 0;i < self.lastMessage.length;i++)
       {
 	if (self.lastMessage[i] != data[i + 1])
 	{
