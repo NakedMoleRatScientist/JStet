@@ -27,7 +27,7 @@ function Collision()
   };
   self.add_rect = function(var rect)
   {
-    self.rect.push(rect);
+    self.rects.push(rect);
   };
   self.add_circle = function(var circle)
   {
