@@ -24,6 +24,6 @@ function RadioButton()
   };
   self.text = function(var message)
   {
-    text(message,self.x + 15,self.y);
+    text(message,self.x + 15,self.y + 5);
   };
 }
