@@ -7,6 +7,11 @@ function RadioButton()
   self.width = 10;
   self.x = 0;
   self.y = 0;
+  self.set(var x, var y)
+  {
+    self.x = x;
+    self.y = y;
+  }
   self.display = function(var x, var y)
   {
     stroke(255);
