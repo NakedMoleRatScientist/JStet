@@ -12,7 +12,7 @@ function RadioButton()
     self.x = x;
     self.y = y;
   }
-  self.display = function(var x, var y)
+  self.display = function()
   {
     stroke(255);
     ellipse(x,y,self.width,self.height);
