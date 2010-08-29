@@ -5,6 +5,8 @@ function RadioButton()
   self.state = false;
   self.height = 10;
   self.width = 10;
+  self.x = 0;
+  self.y = 0;
   self.display = function(var x, var y)
   {
     stroke(255);
