@@ -3,14 +3,14 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.radio = new RadioButton();
-  self.radio.set(20,40);
+  self.one = new OneButton();
+  self.one.set(20,40);
   self.players = function()
   {
     textFont(font,18);
     text("Single or two players?",0,18);
-    self.radio.display();
-    self.radio.text("One");
+    self.one.display();
+    self.one.text("One");
   };
   self.display = function()
   {
