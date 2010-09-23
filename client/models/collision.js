@@ -32,6 +32,7 @@ function Collision()
     {
       var dy = y - (circle[i].y + circle[i].diameter/2);
       var dx = x - (circle[i].x + circle[i].diameter/2);
+      var dm = Sqrt(dx * dx + dy * dy);
     }
   };
   self.add_rect = function(var rect)
