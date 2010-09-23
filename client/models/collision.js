@@ -31,6 +31,7 @@ function Collision()
     for (var i = 0; i < circles.length; i++)
     {
       var dy = x - (circle[i].y + circle[i].diameter/2);
+      var dx = x - (circle[i].x + circle[i].diameter/2);
     }
   };
   self.add_rect = function(var rect)
