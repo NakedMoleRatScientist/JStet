@@ -367,6 +367,8 @@ function CreateGameMode()
   self.two = new RadioButton();
   self.two.set(90,40);
   self.collision = new Collision();
+  self.collision.add_circle(self.one);
+  self.collision.add_circle(self.two);
   self.players = function()
   {
     textFont(font,18);
@@ -676,7 +678,13 @@ function Collision()
   {
     for (var i = 0; i < circles.length; i++)
     {
-      var dy = x - (circle[i].y + circle[i].diameter/2);
+      var dy = y - (circle[i].y + circle[i].diameter/2);
+      var dx = x - (circle[i].x + circle[i].diameter/2);
+      var dm = Math.Sqrt(dx * dx + dy * dy);
+      if (dm <= circle[i].diameter)
+      {
+	console.log("beep");
+      }
     }
   };
   self.add_rect = function(var rect)
