@@ -3,7 +3,7 @@ void titleKey()
 {
   switch(key)
   {
-  case 13:
+  case 10:
     title.connected = true;
     network.initialize();
     break;
