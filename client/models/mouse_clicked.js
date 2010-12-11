@@ -6,5 +6,8 @@ void mousePressed()
   case 5:
     lobbyMouse();
     break;
+  case 6:
+    createMouse();
+    break;
   }
 }
