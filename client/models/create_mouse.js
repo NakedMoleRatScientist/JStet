@@ -1,7 +1,7 @@
 
 void createMouse()
 {
-  switch(create.collision.check_circles())
+  switch(create.collision.check_circles(mouseX,mouseY))
   {
   case 1:
     {
