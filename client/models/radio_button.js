@@ -2,7 +2,7 @@
 function RadioButton()
 {
   var self = this;
-  self.state = -1;
+  self.state = false;
   self.choice = 0;
   self.height = 10;
   self.width = 10;
@@ -19,7 +19,7 @@ function RadioButton()
   {
     stroke(255);
     ellipse(self.x,self.y,self.width,self.height);
-    if (self.state == self.choice)
+    if (self.state == true)
     {
       stroke(0);
       ellipse(x,y,self.width / 2, self.height / 2);
