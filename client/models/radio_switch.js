@@ -1,5 +1,5 @@
 
 function RadioSwitch()
 {
-  
+  self.switches = [];
 }
