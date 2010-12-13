@@ -30,10 +30,10 @@ function Collision()
   {
     for (var i = 0; i < self.circles.length; i++)
     {
-      var dy = y - (self.circle[i].y + self.circle[i].diameter/2);
-      var dx = x - (self.circle[i].x + self.circle[i].diameter/2);
+      var dy = y - (self.circles[i].y + self.circles[i].diameter / 2);
+      var dx = x - (self.circles[i].x + self.circles[i].diameter / 2);
       var dm = Math.Sqrt(dx * dx + dy * dy);
-      if (dm <= self.circle[i].diameter)
+      if (dm <= self.circles[i].diameter)
       {
 	console.log("beep");
       }
