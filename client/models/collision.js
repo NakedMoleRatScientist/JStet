@@ -32,7 +32,7 @@ function Collision()
     {
       var dy = y - (self.circles[i].y + self.circles[i].diameter / 2);
       var dx = x - (self.circles[i].x + self.circles[i].diameter / 2);
-      var dm = Math.Sqrt(dx * dx + dy * dy);
+      var dm = Math.sqrt(dx * dx + dy * dy);
       if (dm <= self.circles[i].diameter)
       {
 	console.log("beep");
