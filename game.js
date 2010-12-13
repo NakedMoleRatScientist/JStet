@@ -332,6 +332,7 @@ function RadioButton()
 {
   var self = this;
   self.state = false;
+  self.choice = 0;
   self.height = 10;
   self.width = 10;
   self.radius = self.height / 2;
@@ -357,7 +358,12 @@ function RadioButton()
   {
     text(message,self.x + 15,self.y + 5);
   };
+  self.set_choice = function(var n)
+  {
+    self.choice = n;
+  };
 }
+
 function CreateGameMode()
 {
   var self = this;
@@ -690,10 +696,10 @@ function Collision()
   {
     for (var i = 0; i < self.circles.length; i++)
     {
-      var dy = y - (self.circle[i].y + self.circle[i].diameter/2);
-      var dx = x - (self.circle[i].x + self.circle[i].diameter/2);
-      var dm = Math.Sqrt(dx * dx + dy * dy);
-      if (dm <= self.circle[i].diameter)
+      var dy = y - (self.circles[i].y + self.circles[i].diameter / 2);
+      var dx = x - (self.circles[i].x + self.circles[i].diameter / 2);
+      var dm = Math.sqrt(dx * dx + dy * dy);
+      if (dm <= self.circles[i].diameter)
       {
 	console.log("beep");
       }
