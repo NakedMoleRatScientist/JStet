@@ -1,19 +1,19 @@
 
-function RadioSwitch()
+function RadioSwitch(var cicles)
 {
-  self.switches = [];
+  self.circles = circles;
   self.add_switch = function(var button)
   {
-    self.switches.push(button);
+    self.circles.push(button);
   };
   self.update = function(var n)
   {
-    self.switches[n].state = true;
-    for(var i = 0; i < self.switches.size; i++)
+    self.circles[n].state = true;
+    for(var i = 0; i < self.circles.size; i++)
     {
       if (i != n)
       {
-	self.switches[i].state = false;
+	self.circles[i].state = false;
       }
     }
   };
