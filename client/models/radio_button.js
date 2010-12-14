@@ -3,7 +3,6 @@ function RadioButton()
 {
   var self = this;
   self.state = false;
-  self.choice = 0;
   self.height = 10;
   self.width = 10;
   self.radius = self.height / 2;
