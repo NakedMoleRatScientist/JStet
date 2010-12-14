@@ -29,8 +29,4 @@ function RadioButton()
   {
     text(message,self.x + 15,self.y + 5);
   };
-  self.set_choice = function(var n)
-  {
-    self.choice = n;
-  };
 }
