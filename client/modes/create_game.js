@@ -18,6 +18,8 @@ function CreateGameMode()
     self.one.text("One");
     self.two.display();
     self.two.text("Two");
+
+    text("Passphrase or not?",24,18);
   };
   self.display = function()
   {
