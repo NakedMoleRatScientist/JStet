@@ -21,7 +21,7 @@ function RadioButton()
     if (self.state == true)
     {
       stroke(0);
-      ellipse(x,y,self.width / 2, self.height / 2);
+      ellipse(self.x,self.y,self.width / 2, self.height / 2);
     }
   };
   self.text = function(var message)
