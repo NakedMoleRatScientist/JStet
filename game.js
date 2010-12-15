@@ -330,6 +330,7 @@ function PrivateButton()
 }
 function RadioSwitch(var circles)
 {
+  var self = this;
   self.circles = circles;
   self.add_switch = function(var button)
   {
@@ -369,8 +370,8 @@ function RadioButton()
     ellipse(self.x,self.y,self.width,self.height);
     if (self.state == true)
     {
-      stroke(0);
-      ellipse(x,y,self.width / 2, self.height / 2);
+      stroke(255);
+      ellipse(self.x,self.y,self.width / 2, self.height / 2);
     }
   };
   self.text = function(var message)
@@ -398,6 +399,8 @@ function CreateGameMode()
     self.one.text("One");
     self.two.display();
     self.two.text("Two");
+
+    text("Passphrase or not?",24,18);
   };
   self.display = function()
   {
@@ -406,6 +409,7 @@ function CreateGameMode()
     self.players();
   };
 }
+
 
 function TitleMode()
 {
