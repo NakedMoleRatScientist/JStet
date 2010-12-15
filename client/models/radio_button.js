@@ -20,7 +20,7 @@ function RadioButton()
     ellipse(self.x,self.y,self.width,self.height);
     if (self.state == true)
     {
-      stroke(0);
+      stroke(255);
       ellipse(self.x,self.y,self.width / 2, self.height / 2);
     }
   };
