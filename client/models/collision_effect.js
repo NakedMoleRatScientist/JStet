@@ -1,0 +1,5 @@
+
+function CollisionEffect()
+{
+  self = this;
+}
