@@ -21,5 +21,6 @@ function RadioSwitch(var circles)
   self.use = function(var collision)
   {
     self.collision = collision;
+    self.collision.add_circle(self);
   };
 }
