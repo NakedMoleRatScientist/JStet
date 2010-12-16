@@ -1,8 +1,8 @@
 
-function RadioSwitch(var circles)
+function RadioSwitch()
 {
   var self = this;
-  self.circles = circles;
+  self.circles = [];
   self.add_switch = function(var button)
   {
     self.circles.push(button);
