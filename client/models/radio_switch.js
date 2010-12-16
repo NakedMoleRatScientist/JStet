@@ -18,4 +18,8 @@ function RadioSwitch(var circles)
       }
     }
   };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
+  };
 }
