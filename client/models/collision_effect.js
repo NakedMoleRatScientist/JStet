@@ -9,11 +9,11 @@ function CollisionEffect(var collision)
     object.use(self.collision);
     self.effects.push(object);
   }
-  self.check = function()
+  self.check = function(var n)
   {
     for (var i = 0; i < self.effects; i++)
     {
-      self.effects[i].check()
+      self.effects[i].check(n)
     }
   };
 }
