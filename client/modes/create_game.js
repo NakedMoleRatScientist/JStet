@@ -8,8 +8,7 @@ function CreateGameMode()
   self.two = new RadioButton();
   self.two.set(90,40);
   self.collision = new Collision();
-  self.collision.add_circle(self.one);
-  self.collision.add_circle(self.two);
+  self.effect = new CollisionEffect();
   self.players = function()
   {
     textFont(font,18);
