@@ -28,6 +28,6 @@ function RadioSwitch(var circles)
   };
   self.check = function(var n)
   {
-    self.radio_switch.update(i);
+    self.radio_switch.update(n);
   };
 }
