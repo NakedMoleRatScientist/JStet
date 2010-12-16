@@ -328,10 +328,10 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
-function RadioSwitch(var circles)
+function RadioSwitch()
 {
   var self = this;
-  self.circles = circles;
+  self.circles = [];
   self.add_switch = function(var button)
   {
     self.circles.push(button);
@@ -346,6 +346,18 @@ function RadioSwitch(var circles)
 	self.circles[i].state = false;
       }
     }
+  };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
+    for (var i = 0; i < self.circles.size; i++)
+    {
+      self.collision.add_circle(self.circles[i]);
+    }
+  };
+  self.check = function(var n)
+  {
+    self.radio_switch.update(n);
   };
 }
 
@@ -389,8 +401,7 @@ function CreateGameMode()
   self.two = new RadioButton();
   self.two.set(90,40);
   self.collision = new Collision();
-  self.collision.add_circle(self.one);
-  self.collision.add_circle(self.two);
+  self.effect = new CollisionEffect();
   self.players = function()
   {
     textFont(font,18);
