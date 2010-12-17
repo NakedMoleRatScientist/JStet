@@ -36,7 +36,7 @@ function Collision()
       var dm = Math.sqrt(dx * dx + dy * dy);
       if (dm <= self.circles[i].diameter)
       {
-	self.effect.check(i)
+	self.effect.check(i);
       }
     }
   };
