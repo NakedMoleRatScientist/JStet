@@ -401,7 +401,10 @@ function CreateGameMode()
   self.two = new RadioButton();
   self.two.set(90,40);
   self.collision = new Collision();
-  self.effect = new CollisionEffect();
+  self.radio_switch = new RadioSwitch();
+  self.radio_switch.add(self.one);
+  self.radio_switch.add(self.two);
+  self.collision.effect.add_effect(self.radio_switch);
   self.players = function()
   {
     textFont(font,18);
@@ -695,13 +698,32 @@ void lobbyMouse()
     }
   }
 }
+function CollisionEffect(var collision)
+{
+  self = this;
+  self.collision = collision;
+  self.effects = [];
+  self.add_effect = function(var object)
+  {
+    object.use(self.collision);
+    self.effects.push(object);
+  }
+  self.check = function(var n)
+  {
+    for (var i = 0; i < self.effects; i++)
+    {
+      self.effects[i].check(n)
+    }
+  };
+}
+
 
 function Collision()
 {
   var self = this;
   self.rects = [];
   self.circles = [];
-  self.radio_switch = new RadioSwitch(self.circles);
+  self.effect = new CollisionEffect(self);
   self.check = function(var x,var y)
   {
     var conditions = [false,false];
@@ -732,7 +754,7 @@ function Collision()
       var dm = Math.sqrt(dx * dx + dy * dy);
       if (dm <= self.circles[i].diameter)
       {
-	self.radio_switch.update(i);
+	self.effect.check(i);
       }
     }
   };
