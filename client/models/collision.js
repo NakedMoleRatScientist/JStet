@@ -5,7 +5,6 @@ function Collision()
   var self = this;
   self.rects = [];
   self.circles = [];
-  self.radio_switch = new RadioSwitch(self.circles);
   self.check = function(var x,var y)
   {
     var conditions = [false,false];
