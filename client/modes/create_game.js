@@ -8,11 +8,10 @@ function CreateGameMode()
   self.two = new RadioButton();
   self.two.set(90,40);
   self.collision = new Collision();
-  self.effect = new CollisionEffect(collision);
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
-  self.effect.add_effect(self.radio_switch);
+  self.collision.effect.add_effect(self.radio_switch);
   self.players = function()
   {
     textFont(font,18);
