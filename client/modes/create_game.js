@@ -12,6 +12,7 @@ function CreateGameMode()
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
+  self.effect.add_effect(self.radio_switch);
   self.players = function()
   {
     textFont(font,18);
