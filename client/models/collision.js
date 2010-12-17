@@ -36,7 +36,7 @@ function Collision()
       var dm = Math.sqrt(dx * dx + dy * dy);
       if (dm <= self.circles[i].diameter)
       {
-	self.radio_switch.update(i);
+	self.effect.check(i)
       }
     }
   };
