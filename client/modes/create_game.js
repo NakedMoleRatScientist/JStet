@@ -21,7 +21,7 @@ function CreateGameMode()
     self.two.display();
     self.two.text("Two");
 
-    text("Passphrase or not?",24,18);
+    text("Passphrase or not?",0,40);
   };
   self.display = function()
   {
