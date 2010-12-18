@@ -11,7 +11,7 @@ function CollisionEffect(var collision)
   }
   self.check = function(var n)
   {
-    for (var i = 0; i < self.effects.size; i++)
+    for (var i = 0; i < self.effects.length; i++)
     {
       self.effects[i].check(n);
     }
