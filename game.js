@@ -332,11 +332,11 @@ function RadioSwitch()
 {
   var self = this;
   self.circles = [];
-  self.add_switch = function(var button)
+  self.add = function(var button)
   {
     self.circles.push(button);
   };
-  self.update = function(var n)
+  self.check = function(var n)
   {
     self.circles[n].state = true;
     for(var i = 0; i < self.circles.size; i++)
@@ -354,10 +354,6 @@ function RadioSwitch()
     {
       self.collision.add_circle(self.circles[i]);
     }
-  };
-  self.check = function(var n)
-  {
-    self.radio_switch.update(n);
   };
 }
 
@@ -414,7 +410,7 @@ function CreateGameMode()
     self.two.display();
     self.two.text("Two");
 
-    text("Passphrase or not?",24,18);
+    text("Passphrase:",0,65);
   };
   self.display = function()
   {
@@ -700,7 +696,7 @@ void lobbyMouse()
 }
 function CollisionEffect(var collision)
 {
-  self = this;
+  var self = this;
   self.collision = collision;
   self.effects = [];
   self.add_effect = function(var object)
@@ -710,9 +706,9 @@ function CollisionEffect(var collision)
   }
   self.check = function(var n)
   {
-    for (var i = 0; i < self.effects; i++)
+    for (var i = 0; i < self.effects.size; i++)
     {
-      self.effects[i].check(n)
+      self.effects[i].check(n);
     }
   };
 }
