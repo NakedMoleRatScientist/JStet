@@ -26,8 +26,4 @@ function RadioSwitch()
       self.collision.add_circle(self.circles[i]);
     }
   };
-  self.check = function(var n)
-  {
-    self.radio_switch.update(n);
-  };
 }
