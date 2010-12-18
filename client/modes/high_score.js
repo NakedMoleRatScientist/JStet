@@ -2,7 +2,7 @@
 function HighScoreMode()
 {
   var self = this;
-  self.name = new Text();
+  self.name = new Input();
   self.display = function()
   {
     background(0,0,0);
