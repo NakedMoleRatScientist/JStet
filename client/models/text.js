@@ -1,5 +1,5 @@
 
-function Text()
+function Input()
 {
   var self = this;
   self.string = "";
