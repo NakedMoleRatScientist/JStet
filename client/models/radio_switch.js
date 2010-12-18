@@ -7,7 +7,7 @@ function RadioSwitch()
   {
     self.circles.push(button);
   };
-  self.update = function(var n)
+  self.check = function(var n)
   {
     self.circles[n].state = true;
     for(var i = 0; i < self.circles.size; i++)
