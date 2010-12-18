@@ -3,7 +3,7 @@ function Chat()
 {
   var self = this;
   self.messages = new Array();
-  self.message = new Text();
+  self.message = new Input();
   self.protocol = null;
   self.scroll = 0;
   self.limit = 550f;
@@ -91,7 +91,7 @@ function Chat()
     {
       self.protocol.send(self.message.get_text());
     }
-    self.message = new Text();
+    self.message = new Input();
   };
   self.divide = function(msg)
   {
