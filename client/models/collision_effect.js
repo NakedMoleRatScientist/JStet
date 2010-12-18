@@ -13,7 +13,7 @@ function CollisionEffect(var collision)
   {
     for (var i = 0; i < self.effects; i++)
     {
-      self.effects[i].check(n)
+      self.effects[i].check(n);
     }
   };
 }
