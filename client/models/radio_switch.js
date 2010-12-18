@@ -3,7 +3,7 @@ function RadioSwitch()
 {
   var self = this;
   self.circles = [];
-  self.add_switch = function(var button)
+  self.add = function(var button)
   {
     self.circles.push(button);
   };
