@@ -72,7 +72,7 @@ function Chat()
 {
   var self = this;
   self.messages = new Array();
-  self.message = new Text();
+  self.message = new Input();
   self.protocol = null;
   self.scroll = 0;
   self.limit = 550f;
@@ -160,7 +160,7 @@ function Chat()
     {
       self.protocol.send(self.message.get_text());
     }
-    self.message = new Text();
+    self.message = new Input();
   };
   self.divide = function(msg)
   {
@@ -350,7 +350,7 @@ function RadioSwitch()
   self.use = function(var collision)
   {
     self.collision = collision;
-    for (var i = 0; i < self.circles.size; i++)
+    for (var i = 0; i < self.circles.length; i++)
     {
       self.collision.add_circle(self.circles[i]);
     }
@@ -594,7 +594,7 @@ function Net()
 function HighScoreMode()
 {
   var self = this;
-  self.name = new Text();
+  self.name = new Input();
   self.display = function()
   {
     background(0,0,0);
@@ -610,7 +610,8 @@ function HighScoreMode()
     return self.name;
   }
 }
-function Text()
+
+function Input()
 {
   var self = this;
   self.string = "";
@@ -637,6 +638,7 @@ function Text()
     return self.string;
   };
 }
+
 void chatKey()
 {
   var info = typing();
@@ -706,7 +708,7 @@ function CollisionEffect(var collision)
   }
   self.check = function(var n)
   {
-    for (var i = 0; i < self.effects.size; i++)
+    for (var i = 0; i < self.effects.length; i++)
     {
       self.effects[i].check(n);
     }
