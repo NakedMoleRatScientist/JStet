@@ -328,6 +328,34 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
+
+function Pages()
+{
+  var self = this;
+  self.pages = [];
+  self.on = 0;
+  self.forward = function ()
+  {
+    self.on ++;
+    if (self.on > self.pages - 1)
+    {
+      self.on --;
+    }
+  }
+  self.backward = function ()
+  {
+    self.on --;
+    if (self.on < 0)
+    {
+      self.on ++;
+    }
+  }
+  self.run = function()
+  {
+    self.pages[self.on].call();
+  };
+}
+
 function RadioSwitch()
 {
   var self = this;
@@ -339,7 +367,7 @@ function RadioSwitch()
   self.check = function(var n)
   {
     self.circles[n].state = true;
-    for(var i = 0; i < self.circles.size; i++)
+    for(var i = 0; i < self.circles.length; i++)
     {
       if (i != n)
       {
