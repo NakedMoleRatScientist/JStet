@@ -10,7 +10,7 @@ function RadioSwitch()
   self.check = function(var n)
   {
     self.circles[n].state = true;
-    for(var i = 0; i < self.circles.size; i++)
+    for(var i = 0; i < self.circles.length; i++)
     {
       if (i != n)
       {
