@@ -21,4 +21,8 @@ function Pages()
       self.on ++;
     }
   }
+  self.run = function()
+  {
+    self.pages[self.on].call();
+  };
 }
