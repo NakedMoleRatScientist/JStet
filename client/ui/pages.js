@@ -3,7 +3,7 @@
 function Pages()
 {
   var self = this;
-  self.page = [];
+  self.pages = [];
   self.on = 0;
   self.forward = function ()
   {
