@@ -13,4 +13,12 @@ function Pages()
       self.on --;
     }
   }
+  self.backward = function ()
+  {
+    self.on --;
+    if (self.on < 0)
+    {
+      self.on ++;
+    }
+  }
 }
