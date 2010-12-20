@@ -9,6 +9,7 @@ function CreateGameMode()
   self.two.set(90,40);
   self.collision = new Collision();
   self.pages = new Pages();
+  self.pages.add(new PlayerPage(slef.collision));
   self.players = function()
   {
     textFont(font,18);
