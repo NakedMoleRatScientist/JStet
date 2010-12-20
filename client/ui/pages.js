@@ -25,4 +25,8 @@ function Pages()
   {
     self.pages[self.on].call();
   };
+  self.add = function(var object)
+  {
+    self.pages.push(object);
+  };
 }
