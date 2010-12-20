@@ -6,5 +6,5 @@ function PlayersPage(collision)
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
-  self.collision.effect.add_effect(self.radio_switch);
+  collision.effect.add_effect(self.radio_switch);
 }
