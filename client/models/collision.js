@@ -32,11 +32,11 @@ function Collision()
     var conditions = [false,false];
     if (x >= self.elements[i].x && x <= self.elements[i].x + self.elements[i].width)
     {
-      condition[0] = true;
+      conditions[0] = true;
     }
     if (y >= self.elements[i].y && y <= self.elements[i].y + self.elements[i].height)
     {
-      condition[1] = true;
+      conditions[1] = true;
     }
   };
   //Using the pythagorean theorm to do circle/mouse collision detection
