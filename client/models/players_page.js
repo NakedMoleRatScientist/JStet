@@ -3,6 +3,10 @@ function PlayersPage(collision)
 {
   var collision = collision;
   var self = this;
+  self.one = new RadioButton();
+  self.one.set(20,40);
+  self.two = new RadioButton();
+  self.two.set(90,40);
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
