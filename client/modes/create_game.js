@@ -3,10 +3,6 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.one = new RadioButton();
-  self.one.set(20,40);
-  self.two = new RadioButton();
-  self.two.set(90,40);
   self.collision = new Collision();
   self.pages = new Pages();
   self.pages.add(new PlayersPage(self.collision));
