@@ -53,6 +53,10 @@ function Collision()
   {
     self.circles.push(circle);
   };
+  self.add = function(var object)
+  {
+    self.elements.push(object);
+  };
   self.collision_check = function()
   {
     
