@@ -27,7 +27,7 @@ function Collision()
     }
     return -1;
   };
-  self.check_rects = function(var x, var y, vari)
+  self.check_rects = function(var x, var y, var i)
   {
     
   };
