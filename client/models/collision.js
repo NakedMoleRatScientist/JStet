@@ -5,6 +5,7 @@ function Collision()
   var self = this;
   self.rects = [];
   self.circles = [];
+  self.elements = [];
   self.effect = new CollisionEffect(self);
   self.check = function(var x,var y)
   {
