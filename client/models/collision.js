@@ -29,7 +29,11 @@ function Collision()
   };
   self.check_rects = function(var x, var y, var i)
   {
-    
+    var conditions = [false,false];
+    if (x >= self.elements[i].x && x <= self.elements[i].x + self.elements[i].width)
+    {
+      condition[0] = true;
+    }
   };
   //Using the pythagorean theorm to do circle/mouse collision detection
   self.check_circles = function(var x,var y)
