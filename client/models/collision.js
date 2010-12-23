@@ -48,4 +48,8 @@ function Collision()
   {
     self.circles.push(circle);
   };
+  self.collision_check = function()
+  {
+    
+  };
 }
