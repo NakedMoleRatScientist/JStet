@@ -27,7 +27,7 @@ function Collision()
     }
     return -1;
   };
-  self.check_rects = function(var x, var y, var i)
+  self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
     if (x >= self.elements[i].x && x <= self.elements[i].x + self.elements[i].width)
