@@ -48,7 +48,7 @@ function Collision()
     }
   };
   //Using the pythagorean theorm to do circle/mouse collision detection
-  self.check_circles = function(var x,var y)
+  self.check_circles = function(var x,var y, var i)
   {
     for (var i = 0; i < self.circles.length; i++)
     {
