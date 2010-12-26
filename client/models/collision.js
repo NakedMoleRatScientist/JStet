@@ -73,7 +73,7 @@ function Collision()
   {
     self.elements.push(object);
   };
-  self.collision_check = function()
+  self.collision_check = function(var x, var y)
   {
     for (var i = 0; i < self.elements.length; i++)
     {
