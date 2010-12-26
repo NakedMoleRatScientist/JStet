@@ -75,6 +75,9 @@ function Collision()
   };
   self.collision_check = function()
   {
-    self.effect.check(i);
+    for (var i = 0; i < self.elements.length; i++)
+    {
+      self.effect.check(i);
+    }
   };
 }
