@@ -62,14 +62,6 @@ function Collision()
       return false;
     }
   };
-  self.add_rect = function(var rect)
-  {
-    self.rects.push(rect);
-  };
-  self.add_circle = function(var circle)
-  {
-    self.circles.push(circle);
-  };
   self.add = function(var object)
   {
     self.elements.push(object);
