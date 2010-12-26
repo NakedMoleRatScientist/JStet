@@ -3,8 +3,6 @@
 function Collision()
 {
   var self = this;
-  self.rects = [];
-  self.circles = [];
   self.elements = [];
   self.effect = new CollisionEffect(self);
   self.check_rect = function(var x, var y, var i)
