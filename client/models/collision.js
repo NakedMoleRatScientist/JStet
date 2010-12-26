@@ -84,6 +84,13 @@ function Collision()
 	  self.effect.check(i)
 	}
       }
+      else if(self.elements[i].type == 1)
+      {
+	if (self.check_circle(x,y,i) == true)
+	{
+	  self.effect.check(i);
+	}
+      }
     }
   };
 }
