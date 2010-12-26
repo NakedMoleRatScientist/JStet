@@ -7,26 +7,6 @@ function Collision()
   self.circles = [];
   self.elements = [];
   self.effect = new CollisionEffect(self);
-  self.check = function(var x,var y)
-  {
-    var conditions = [false,false];
-    for (var i = 0;i < self.rects.length;i++)
-    {
-      if (x >= self.rects[i].x && x <= self.rects[i].x + self.rects[i].width)
-      {
-	conditions[0] = true;
-      }
-      if (y >= self.rects[i].y && y <= self.rects[i].y + self.rects[i].height)
-      {
-	conditions[1] = true;
-      }
-      if (conditions[0] == true && conditions[1] == true)
-      {
-	return i;
-      }
-    }
-    return -1;
-  };
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
