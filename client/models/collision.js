@@ -50,10 +50,8 @@ function Collision()
   //Using the pythagorean theorm to do circle/mouse collision detection
   self.check_circles = function(var x,var y, var i)
   {
-    
-    
-    var dy = y - (self.circles[i].y + self.circles[i].diameter / 2);
-    var dx = x - (self.circles[i].x + self.circles[i].diameter / 2);
+    var dy = y - (self.elements[i].y + self.elements[i].diameter / 2);
+    var dx = x - (self.elements[i].x + self.elements[i].diameter / 2);
     var dm = Math.sqrt(dx * dx + dy * dy);
     if (dm <= self.circles[i].diameter)
     {
