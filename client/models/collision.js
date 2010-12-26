@@ -38,6 +38,14 @@ function Collision()
     {
       conditions[1] = true;
     }
+    if (conditions[0] == true && conditions[1] == true)
+    {
+      return true; 
+    }
+    else
+    {
+      return false;
+    }
   };
   //Using the pythagorean theorm to do circle/mouse collision detection
   self.check_circles = function(var x,var y)
