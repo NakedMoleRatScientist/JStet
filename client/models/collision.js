@@ -77,6 +77,10 @@ function Collision()
   {
     for (var i = 0; i < self.elements.length; i++)
     {
+      if (self.elements[i].type == 0)
+      {
+	self.check_rect(x,y,i)
+      }
       self.effect.check(i);
     }
   };
