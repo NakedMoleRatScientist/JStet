@@ -409,7 +409,7 @@ function RadioSwitch()
     self.collision = collision;
     for (var i = 0; i < self.circles.length; i++)
     {
-      self.collision.add_circle(self.circles[i]);
+      self.collision.add(self.circles[i]);
     }
   };
 }
@@ -806,7 +806,7 @@ function Collision()
   {
     self.elements.push(object);
   };
-  self.collision_check = function(var x, var y)
+  self.check = function(var x, var y)
   {
     for (var i = 0; i < self.elements.length; i++)
     {
@@ -1805,8 +1805,8 @@ function LobbyMode()
   self.play = new PlayButton();
   self.private_session = new PrivateButton();
   self.collision = new Collision();
-  self.collision.add_rect(self.play.play);
-  self.collision.add_rect(self.private_session.private_session);
+  self.collision.add(self.play.play);
+  self.collision.add(self.private_session.private_session);
   self.display = function()
   {
     background(0,0,0);
@@ -1823,6 +1823,7 @@ function LobbyMode()
     mode.change(4);
   };
 }
+
 function Mode()
 {
   this.status = 0;
