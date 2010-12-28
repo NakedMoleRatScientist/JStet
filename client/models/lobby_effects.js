@@ -6,6 +6,7 @@ function LobbyEffects()
   {
     if (n == 0)
     {
+      game_protocol.request_game();
       mode.change(4);
     }
     else if (n == 1)
