@@ -4,7 +4,7 @@ function LobbyEffects()
   var self = this;
   self.check = function(var n)
   {
-    if (n == 1)
+    if (n == 0)
     {
       mode.change(4);
     }
