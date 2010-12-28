@@ -9,4 +9,8 @@ function LobbyEffects()
       mode.change(4);
     }
   };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
+  };
 }
