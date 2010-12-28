@@ -8,6 +8,10 @@ function LobbyEffects()
     {
       mode.change(4);
     }
+    else if (n == 1)
+    {
+      mode.change(6);
+    }
   };
   self.use = function(var collision)
   {
