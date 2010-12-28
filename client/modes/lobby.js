@@ -6,8 +6,8 @@ function LobbyMode()
   self.play = new PlayButton();
   self.private_session = new PrivateButton();
   self.collision = new Collision();
-  self.collision.add_rect(self.play.play);
-  self.collision.add_rect(self.private_session.private_session);
+  self.collision.add(self.play.play);
+  self.collision.add(self.private_session.private_session);
   self.display = function()
   {
     background(0,0,0);
