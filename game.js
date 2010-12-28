@@ -1798,6 +1798,27 @@ function TetrominoDraw()
   }
 }
 
+function LobbyEffects()
+{
+  var self = this;
+  self.check = function(var n)
+  {
+    if (n == 0)
+    {
+      game_protocol.request_game();
+      mode.change(4);
+    }
+    else if (n == 1)
+    {
+      mode.change(6);
+    }
+  };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
+  };
+}
+
 function LobbyMode()
 {
   var self = this;
@@ -1807,6 +1828,7 @@ function LobbyMode()
   self.collision = new Collision();
   self.collision.add(self.play.play);
   self.collision.add(self.private_session.private_session);
+  self.collision.effect.add_effect(new LobbyEffects());
   self.display = function()
   {
     background(0,0,0);
@@ -1817,10 +1839,6 @@ function LobbyMode()
     stroke(255);
     rect(0,580,800,20);
     rect(0,0,400,580);
-  };
-  self.switch_mode = function()
-  {
-    mode.change(4);
   };
 }
 
