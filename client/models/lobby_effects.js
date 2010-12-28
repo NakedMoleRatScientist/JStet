@@ -1,5 +1,5 @@
 
-function LobbyEffect()
+function LobbyEffects()
 {
   var self = this;
   self.check = function(var n)
