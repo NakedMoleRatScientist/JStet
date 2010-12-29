@@ -1,5 +1,5 @@
 
 void lobbyMouse()
 {
-  lobby.collision.check(mouseX,mouseY) 
+  lobby.collision.check(mouseX,mouseY); 
 }
