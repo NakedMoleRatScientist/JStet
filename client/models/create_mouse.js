@@ -1,5 +1,5 @@
 
 void createMouse()
 {
-  create.collision.check(mouseX,mouseY)  
+  create.collision.check(mouseX,mouseY);  
 }
