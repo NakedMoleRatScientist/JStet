@@ -31,7 +31,7 @@ function Collision()
     var dy = y - (self.elements[i].y + self.elements[i].diameter / 2);
     var dx = x - (self.elements[i].x + self.elements[i].diameter / 2);
     var dm = Math.sqrt(dx * dx + dy * dy);
-    if (dm <= self.circles[i].diameter)
+    if (dm <= self.elements[i].diameter)
     {
       return true;
     }
