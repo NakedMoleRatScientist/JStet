@@ -338,6 +338,7 @@ function PlayersPage(collision)
   self.one.set(20,40);
   self.two = new RadioButton();
   self.two.set(90,40);
+  self.turn = new RectObject(500,500,50,50);
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
@@ -717,31 +718,14 @@ void titleKey()
 
 void createMouse()
 {
-  switch(create.collision.check_circles(mouseX,mouseY))
-  {
-  case 1:
-    {
-      console.log("beep");
-    }
-  }
+  create.collision.check(mouseX,mouseY);  
 }
 
 void lobbyMouse()
 {
-  switch(lobby.collision.check(mouseX,mouseY))
-  {
-  case 0:
-    {
-      game_protocol.request_game();
-      break;
-    }
-  case 1:
-    {
-      mode.change(6);
-      break;
-    }
-  }
+  lobby.collision.check(mouseX,mouseY); 
 }
+
 function CollisionEffect(var collision)
 {
   var self = this;
@@ -793,7 +777,7 @@ function Collision()
     var dy = y - (self.elements[i].y + self.elements[i].diameter / 2);
     var dx = x - (self.elements[i].x + self.elements[i].diameter / 2);
     var dm = Math.sqrt(dx * dx + dy * dy);
-    if (dm <= self.circles[i].diameter)
+    if (dm <= self.elements[i].diameter)
     {
       return true;
     }
