@@ -9,5 +9,6 @@ function TextButton(var text,var size)
   {
     noFill();
     textFont(font,self.size / 2);
+    text(self.text,self.x + 25,self.y -25);
   };
 }
