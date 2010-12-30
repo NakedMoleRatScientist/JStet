@@ -1,5 +1,5 @@
 
-function TextButton(var text,var size)
+function TextButton(var text,var size,var x, var y)
 {
   var self = this;
   self.text = text;
