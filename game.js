@@ -56,6 +56,22 @@ function PlayButton()
     text("Play",475,55);
   };
 }
+function TextButton(var text,var size,var x, var y)
+{
+  var self = this;
+  self.text = text;
+  self.size = size;
+  self.x = x;
+  self.y = y;
+  self.button = new RectObject(x,y,size,size);
+  self.display = function()
+  {
+    noFill();
+    textFont(font,self.size / 2);
+    text(self.text,self.x + 25,self.y -25);
+  };
+}
+
 function RectObject(x,y,width,height)
 {
   var self = this;
@@ -352,6 +368,11 @@ function PlayersPage(collision)
     self.two.display();
     self.two.text("Two");
   };
+}
+
+function TurnPage()
+{
+  var self = this;
 }
 
 
