@@ -11,7 +11,7 @@ function TextButton(var string,var size,var x, var y)
   {
     noFill();
     textFont(font,self.size / 10);
-    text(self.string,self.x + (size / 4),self.y (size / 4));
+    text(self.string,self.x + (size / 4),self.y + (size / 4));
     self.rect.draw();
   };
 }
