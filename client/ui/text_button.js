@@ -1,8 +1,8 @@
 
-function TextButton(var text,var size,var x, var y)
+function TextButton(var string,var size,var x, var y)
 {
   var self = this;
-  self.text = text;
+  self.string = string;
   self.size = size;
   self.x = x;
   self.y = y;
@@ -11,6 +11,6 @@ function TextButton(var text,var size,var x, var y)
   {
     noFill();
     textFont(font,self.size / 2);
-    text(self.text,self.x + 25,self.y -25);
+    text(self.string,self.x + 25,self.y -25);
   };
 }
