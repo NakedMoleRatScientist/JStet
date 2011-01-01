@@ -56,19 +56,20 @@ function PlayButton()
     text("Play",475,55);
   };
 }
-function TextButton(var text,var size,var x, var y)
+function TextButton(var string,var size,var x, var y)
 {
   var self = this;
-  self.text = text;
+  self.string = string;
   self.size = size;
   self.x = x;
   self.y = y;
-  self.button = new RectObject(x,y,size,size);
+  self.rect = new RectObject(x,y,size,size);
   self.display = function()
   {
     noFill();
-    textFont(font,self.size / 2);
-    text(self.text,self.x + 25,self.y -25);
+    textFont(font,self.size / 10);
+    text(self.string,self.x + 25,self.y - 25);
+    self.rect.draw();
   };
 }
 
@@ -354,11 +355,12 @@ function PlayersPage(collision)
   self.one.set(20,40);
   self.two = new RadioButton();
   self.two.set(90,40);
-  self.turn = new RectObject(500,500,50,50);
+  self.turn = new TextButton("turn",100,500,500);
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
   collision.effect.add_effect(self.radio_switch);
+  collision.add(self.turn.rect);
   self.call = function()
   {
     textFont(font,18);
@@ -367,6 +369,7 @@ function PlayersPage(collision)
     self.one.text("One");
     self.two.display();
     self.two.text("Two");
+    self.turn.display();
   };
 }
 
