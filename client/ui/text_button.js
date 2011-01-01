@@ -6,7 +6,7 @@ function TextButton(var text,var size,var x, var y)
   self.size = size;
   self.x = x;
   self.y = y;
-  self.button = new RectObject(x,y,size,size);
+  self.rect = new RectObject(x,y,size,size);
   self.display = function()
   {
     noFill();
