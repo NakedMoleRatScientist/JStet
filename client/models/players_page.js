@@ -21,5 +21,6 @@ function PlayersPage(collision)
     self.one.text("One");
     self.two.display();
     self.two.text("Two");
+    self.turn.display();
   };
 }
