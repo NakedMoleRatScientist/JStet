@@ -13,6 +13,13 @@ function Pages()
       self.on --;
     }
   }
+  self.check = function(var n)
+  {
+    if (n == -1)
+    {
+      self.forward();
+    }
+  };
   self.backward = function ()
   {
     self.on --;
