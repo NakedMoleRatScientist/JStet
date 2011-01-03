@@ -16,6 +16,13 @@ function Pages()
   }
   self.search = function(var elements)
   {
+    for (var i = 0; i < elements.size; i++)
+    {
+      if (elements.type == 3)
+      {
+	self.turn = i;
+      }
+    }
   };
   self.check = function(var n)
   {
