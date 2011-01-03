@@ -14,6 +14,9 @@ function Pages()
       self.on --;
     }
   }
+  self.search = function(var elements)
+  {
+  };
   self.check = function(var n)
   {
     if (n == self.turn)
