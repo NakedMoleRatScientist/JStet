@@ -5,6 +5,7 @@ function Pages()
   var self = this;
   self.pages = [];
   self.on = 0;
+  self.turn = 0;
   self.forward = function ()
   {
     self.on ++;
