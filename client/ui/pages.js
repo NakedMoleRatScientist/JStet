@@ -16,7 +16,7 @@ function Pages()
   }
   self.check = function(var n)
   {
-    if (n == -1)
+    if (n == self.turn)
     {
       self.forward();
     }
