@@ -3,8 +3,8 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.collision = new Collision();
   self.pages = new Pages();
+  self.collision = new Collision(self.pages);
   self.pages.add(new PlayersPage(self.collision));
   self.players = function()
   {
