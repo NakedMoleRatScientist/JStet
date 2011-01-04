@@ -8,6 +8,7 @@ function PlayersPage(collision)
   self.two = new RadioButton();
   self.two.set(90,40);
   self.turn = new TextButton("turn",100,500,500);
+  self.turn.type = 3;
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
