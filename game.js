@@ -64,6 +64,7 @@ function TextButton(var string,var size,var x, var y)
   self.x = x;
   self.y = y;
   self.rect = new RectObject(x,y,size,size / 2);
+  self.rect.type = 0;
   self.display = function()
   {
     noFill();
@@ -356,6 +357,7 @@ function PlayersPage(collision)
   self.two = new RadioButton();
   self.two.set(90,40);
   self.turn = new TextButton("turn",100,500,500);
+  self.turn.rect.type = 3;
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
@@ -371,11 +373,6 @@ function PlayersPage(collision)
     self.two.text("Two");
     self.turn.display();
   };
-}
-
-function TurnPage()
-{
-  var self = this;
 }
 
 
@@ -394,7 +391,7 @@ function Pages()
   }
   self.check = function(var n)
   {
-    if (n == -1)
+    if (n == self.turn)
     {
       self.forward();
     }
@@ -482,8 +479,8 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.collision = new Collision();
   self.pages = new Pages();
+  self.collision = new Collision(self.pages);
   self.pages.add(new PlayersPage(self.collision));
   self.players = function()
   {
@@ -777,11 +774,12 @@ function CollisionEffect(var collision)
 }
 
 
-function Collision()
+function Collision(var pages)
 {
   var self = this;
   self.elements = [];
   self.effect = new CollisionEffect(self);
+  self.pages = pages;
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
@@ -838,6 +836,10 @@ function Collision()
 	{
 	  self.effect.check(i);
 	}
+      }
+      else if(self.elements[i].type == 3)
+      {
+	self.pages.forward();
       }
     }
   };
