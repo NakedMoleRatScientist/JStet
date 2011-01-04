@@ -63,6 +63,10 @@ function Collision(var page)
 	  self.effect.check(i);
 	}
       }
+      else if(self.elements[i].type == 3)
+      {
+	self.page.turn();
+      }
     }
   };
 }
