@@ -65,7 +65,7 @@ function Collision(var page)
       }
       else if(self.elements[i].type == 3)
       {
-	self.page.turn();
+	self.pages.forward();
       }
     }
   };
