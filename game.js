@@ -348,6 +348,13 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
+
+function PasswordPage(collision)
+{
+  var self = this;
+  var collision = collision;
+}
+
 function PlayersPage(page)
 {
   var page = page;
@@ -372,6 +379,24 @@ function PlayersPage(page)
     self.two.display();
     self.two.text("Two");
     self.turn.display();
+  };
+}
+
+function PageEffect(var pages)
+{
+  var self = this;  
+  self.pages = pages;
+  self.buttons = [];
+  self.add = function(var button)
+  {
+    self.buttons.push(button);
+  };
+  self.check = function(var n)
+  {
+    if (self.buttons[n].type == 3)
+    {
+      self.pages.forward();
+    }
   };
 }
 
@@ -482,6 +507,7 @@ function CreateGameMode()
   self.others = false;
   self.pages = new Pages();
   self.collision = new Collision(self.pages);
+  self.collision.effect.add_effect(new PageEffect(self.pages));
   self.pages.add(new PlayersPage(self.pages));
   self.players = function()
   {
