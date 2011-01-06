@@ -1,9 +1,6 @@
 
-function PageEffect()
+function PageEffect(var pages)
 {
-  var self = this;
-  self.get_pages = function(var pages)
-  {
-    self.pages = page;
-  };
+  var self = this;  
+  self.pages = pages;
 }
