@@ -1,11 +1,10 @@
 
 
-function Collision(var pages)
+function Collision()
 {
   var self = this;
   self.elements = [];
   self.effect = new CollisionEffect(self);
-  self.pages = pages;
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
