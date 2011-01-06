@@ -1,7 +1,7 @@
 
-function PlayersPage(collision)
+function PlayersPage(page)
 {
-  var collision = collision;
+  var page = page;
   var self = this;
   self.one = new RadioButton();
   self.one.set(20,40);
