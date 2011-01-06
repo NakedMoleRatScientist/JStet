@@ -8,4 +8,11 @@ function PageEffect(var pages)
   {
     self.buttons.push(button);
   };
+  self.check = function(var n)
+  {
+    if (self.buttons[n].type == 3)
+    {
+      self.pages.forward();
+    }
+  };
 }
