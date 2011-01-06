@@ -1,8 +1,9 @@
 
 
-function Pages()
+function Pages(var collision)
 {
   var self = this;
+  self.collision = collision;
   self.pages = [];
   self.on = 0;
   self.forward = function ()
