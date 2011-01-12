@@ -4,7 +4,7 @@ function Collision()
 {
   var self = this;
   self.elements = [];
-  self.effect = new CollisionEffect(self);
+  self.effects = new CollisionEffect(self);
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
@@ -52,14 +52,14 @@ function Collision()
       {
 	if (self.check_rect(x,y,i) == true)
 	{
-	  self.effect.check(i);
+	  self.effects.check(i);
 	}
       }
       else if(self.elements[i].type == 1)
       {
 	if (self.check_circle(x,y,i) == true)
 	{
-	  self.effect.check(i);
+	  self.effects.check(i);
 	}
       }
       else if(self.elements[i].type == 3)
