@@ -5,7 +5,7 @@ function CreateGameMode()
   self.others = false;
   self.pages = new Pages();
   self.collision = new Collision(self.pages);
-  self.collision.effect.add_effect(new PageEffect(self.pages));
+  self.collision.effects.add_effect(new PageEffect(self.pages));
   self.pages.add(new PlayersPage(self.pages));
   self.players = function()
   {
