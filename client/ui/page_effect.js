@@ -15,4 +15,8 @@ function PageEffect(var pages)
       self.pages.forward();
     }
   };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
+  };
 }
