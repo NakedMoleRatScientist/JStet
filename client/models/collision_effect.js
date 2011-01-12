@@ -1,5 +1,5 @@
 
-function CollisionEffect(var collision)
+function CollisionEffects(var collision)
 {
   var self = this;
   self.collision = collision;
