@@ -368,7 +368,7 @@ function PlayersPage(page)
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
-  self.page.collision.effect.add_effect(self.radio_switch);
+  self.page.collision.effects.add_effect(self.radio_switch);
   self.page.collision.add(self.turn.rect);
   self.call = function()
   {
@@ -397,6 +397,10 @@ function PageEffect(var pages)
     {
       self.pages.forward();
     }
+  };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
   };
 }
 
@@ -507,7 +511,7 @@ function CreateGameMode()
   self.others = false;
   self.pages = new Pages();
   self.collision = new Collision(self.pages);
-  self.collision.effect.add_effect(new PageEffect(self.pages));
+  self.collision.effects.add_effect(new PageEffect(self.pages));
   self.pages.add(new PlayersPage(self.pages));
   self.players = function()
   {
@@ -781,7 +785,7 @@ void lobbyMouse()
   lobby.collision.check(mouseX,mouseY); 
 }
 
-function CollisionEffect(var collision)
+function CollisionEffects(var collision)
 {
   var self = this;
   self.collision = collision;
@@ -805,7 +809,7 @@ function Collision()
 {
   var self = this;
   self.elements = [];
-  self.effect = new CollisionEffect(self);
+  self.effects = new CollisionEffects(self);
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
@@ -853,14 +857,14 @@ function Collision()
       {
 	if (self.check_rect(x,y,i) == true)
 	{
-	  self.effect.check(i);
+	  self.effects.check(i);
 	}
       }
       else if(self.elements[i].type == 1)
       {
 	if (self.check_circle(x,y,i) == true)
 	{
-	  self.effect.check(i);
+	  self.effects.check(i);
 	}
       }
       else if(self.elements[i].type == 3)
