@@ -12,7 +12,7 @@ function PlayersPage(page)
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
-  self.page.collision.effect.add_effect(self.radio_switch);
+  self.page.collision.effects.add_effect(self.radio_switch);
   self.page.collision.add(self.turn.rect);
   self.call = function()
   {
