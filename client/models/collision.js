@@ -62,10 +62,6 @@ function Collision()
 	  self.effects.check(i);
 	}
       }
-      else if(self.elements[i].type == 3)
-      {
-	self.pages.forward();
-      }
     }
   };
 }
