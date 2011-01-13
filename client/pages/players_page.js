@@ -1,8 +1,8 @@
 
 function PlayersPage(page)
 {
-  var page = page;
   var self = this;
+  self.page = page;
   self.one = new RadioButton();
   self.one.set(20,40);
   self.two = new RadioButton();
