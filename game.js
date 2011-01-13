@@ -357,8 +357,8 @@ function PasswordPage(collision)
 
 function PlayersPage(page)
 {
-  var page = page;
   var self = this;
+  self.page = page;
   self.one = new RadioButton();
   self.one.set(20,40);
   self.two = new RadioButton();
@@ -384,7 +384,7 @@ function PlayersPage(page)
 
 function PageEffect(var pages)
 {
-  var self = this;  
+  var self = this;
   self.pages = pages;
   self.buttons = [];
   self.add = function(var button)
@@ -509,15 +509,9 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.pages = new Pages();
-  self.collision = new Collision(self.pages);
-  self.collision.effects.add_effect(new PageEffect(self.pages));
+  self.pages = new Pages();  
+  self.pages.collision.effects.add_effect(new PageEffect(self.pages));
   self.pages.add(new PlayersPage(self.pages));
-  self.players = function()
-  {
-
-    text("Passphrase:",0,65);
-  };
   self.display = function()
   {
     background(0,0,0);
@@ -777,7 +771,7 @@ void titleKey()
 
 void createMouse()
 {
-  create.collision.check(mouseX,mouseY);  
+  create.pages.collision.check(mouseX,mouseY);  
 }
 
 void lobbyMouse()
@@ -853,7 +847,7 @@ function Collision()
   {
     for (var i = 0; i < self.elements.length; i++)
     {
-      if (self.elements[i].type == 0)
+      if (self.elements[i].type == 0 || 3)
       {
 	if (self.check_rect(x,y,i) == true)
 	{
@@ -866,10 +860,6 @@ function Collision()
 	{
 	  self.effects.check(i);
 	}
-      }
-      else if(self.elements[i].type == 3)
-      {
-	self.pages.forward();
       }
     }
   };
@@ -1875,7 +1865,7 @@ function LobbyMode()
   self.collision = new Collision();
   self.collision.add(self.play.play);
   self.collision.add(self.private_session.private_session);
-  self.collision.effect.add_effect(new LobbyEffects());
+  self.collision.effects.add_effect(new LobbyEffects());
   self.display = function()
   {
     background(0,0,0);
