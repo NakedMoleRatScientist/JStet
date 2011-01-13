@@ -7,11 +7,6 @@ function CreateGameMode()
   self.collision = new Collision(self.pages);
   self.collision.effects.add_effect(new PageEffect(self.pages));
   self.pages.add(new PlayersPage(self.pages));
-  self.players = function()
-  {
-
-    text("Passphrase:",0,65);
-  };
   self.display = function()
   {
     background(0,0,0);
