@@ -8,7 +8,7 @@ function LobbyMode()
   self.collision = new Collision();
   self.collision.add(self.play.play);
   self.collision.add(self.private_session.private_session);
-  self.collision.effect.add_effect(new LobbyEffects());
+  self.collision.effects.add_effect(new LobbyEffects());
   self.display = function()
   {
     background(0,0,0);
