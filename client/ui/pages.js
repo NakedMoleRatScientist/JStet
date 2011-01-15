@@ -6,6 +6,8 @@ function Pages()
   self.collision = new Collision();
   self.pages = [];
   self.on = 0;
+  self.turn = new TextButton("turn",100,500,500);
+  self.turn.rect.type = 3;
   self.effect = new PageEffect(self);
   self.forward = function ()
   {
