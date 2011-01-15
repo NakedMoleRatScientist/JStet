@@ -18,13 +18,6 @@ function Pages()
       self.on --;
     }
   }
-  self.check = function(var n)
-  {
-    if (n == self.turn)
-    {
-      self.forward();
-    }
-  };
   self.backward = function ()
   {
     self.on --;
