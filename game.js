@@ -355,10 +355,10 @@ function PasswordPage(collision)
   var collision = collision;
 }
 
-function PlayersPage(page)
+function PlayersPage(pages)
 {
   var self = this;
-  self.page = page;
+  self.pages = pages;
   self.one = new RadioButton();
   self.one.set(20,40);
   self.two = new RadioButton();
@@ -366,7 +366,7 @@ function PlayersPage(page)
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
-  self.page.collision.effects.add_effect(self.radio_switch);
+  self.pages.collision.effects.add_effect(self.radio_switch);
   self.call = function()
   {
     textFont(font,18);
@@ -375,7 +375,7 @@ function PlayersPage(page)
     self.one.text("One");
     self.two.display();
     self.two.text("Two");
-    self.turn.display();
+    self.pages.display();
   };
 }
 
@@ -411,6 +411,8 @@ function Pages()
   self.turn = new TextButton("turn",100,500,500);
   self.turn.rect.type = 3;
   self.effect = new PageEffect(self);
+  self.effect.add(self.turn.rect);
+  self.collision.effects.add_effect(self.effect);
   self.forward = function ()
   {
     self.on ++;
@@ -419,13 +421,6 @@ function Pages()
       self.on --;
     }
   }
-  self.check = function(var n)
-  {
-    if (n == self.turn)
-    {
-      self.forward();
-    }
-  };
   self.backward = function ()
   {
     self.on --;
@@ -434,6 +429,10 @@ function Pages()
       self.on ++;
     }
   }
+  self.display = function()
+  {
+    self.turn.display();
+  };
   self.run = function()
   {
     self.pages[self.on].call();
@@ -448,6 +447,7 @@ function RadioSwitch()
 {
   var self = this;
   self.circles = [];
+  self.member = 0;
   self.add = function(var button)
   {
     self.circles.push(button);
@@ -484,6 +484,7 @@ function RadioButton()
   self.diameter = self.radius * 2;
   self.x = 0;
   self.y = 0;
+  self.member = 0;
   self.set = function(var x, var y)
   {
     self.x = x;
