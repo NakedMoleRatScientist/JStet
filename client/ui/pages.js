@@ -32,6 +32,10 @@ function Pages()
       self.on ++;
     }
   }
+  self.display = function()
+  {
+    self.turn.display();
+  };
   self.run = function()
   {
     self.pages[self.on].call();
