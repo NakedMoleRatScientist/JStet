@@ -6,6 +6,7 @@ function Pages()
   self.collision = new Collision();
   self.pages = [];
   self.on = 0;
+  self.effect = new PageEffect(self);
   self.forward = function ()
   {
     self.on ++;
