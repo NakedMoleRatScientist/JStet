@@ -19,6 +19,5 @@ function PlayersPage(page)
     self.one.text("One");
     self.two.display();
     self.two.text("Two");
-    self.turn.display();
   };
 }
