@@ -363,13 +363,10 @@ function PlayersPage(page)
   self.one.set(20,40);
   self.two = new RadioButton();
   self.two.set(90,40);
-  self.turn = new TextButton("turn",100,500,500);
-  self.turn.rect.type = 3;
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
   self.page.collision.effects.add_effect(self.radio_switch);
-  self.page.collision.add(self.turn.rect);
   self.call = function()
   {
     textFont(font,18);
@@ -411,6 +408,9 @@ function Pages()
   self.collision = new Collision();
   self.pages = [];
   self.on = 0;
+  self.turn = new TextButton("turn",100,500,500);
+  self.turn.rect.type = 3;
+  self.effect = new PageEffect(self);
   self.forward = function ()
   {
     self.on ++;
@@ -509,8 +509,7 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
-  self.pages = new Pages();  
-  self.pages.collision.effects.add_effect(new PageEffect(self.pages));
+  self.pages = new Pages();
   self.pages.add(new PlayersPage(self.pages));
   self.display = function()
   {
