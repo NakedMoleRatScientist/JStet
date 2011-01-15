@@ -9,6 +9,7 @@ function Pages()
   self.turn = new TextButton("turn",100,500,500);
   self.turn.rect.type = 3;
   self.effect = new PageEffect(self);
+  self.effect.add(self.turn.rect);
   self.forward = function ()
   {
     self.on ++;
