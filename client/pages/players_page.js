@@ -7,8 +7,6 @@ function PlayersPage(page)
   self.one.set(20,40);
   self.two = new RadioButton();
   self.two.set(90,40);
-  self.turn = new TextButton("turn",100,500,500);
-  self.turn.rect.type = 3;
   self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
