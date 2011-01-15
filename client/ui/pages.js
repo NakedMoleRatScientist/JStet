@@ -10,6 +10,7 @@ function Pages()
   self.turn.rect.type = 3;
   self.effect = new PageEffect(self);
   self.effect.add(self.turn.rect);
+  self.collision.effects.add_effect(self.effect);
   self.forward = function ()
   {
     self.on ++;
