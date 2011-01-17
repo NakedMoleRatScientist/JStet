@@ -12,12 +12,14 @@ function RadioSwitch()
   };
   self.check = function(var object)
   {
-    self.circles[n].state = true;
-    for(var i = 0; i < self.circles.length; i++)
+    if (object.type == 1)
     {
-      if (i != n)
+      for(var i = 0; i < self.circles.length; i++)
       {
-	self.circles[i].state = false;
+	if (i != object.member)
+	{
+	  self.circles[i].state = false;
+	}
       }
     }
   };
