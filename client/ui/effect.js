@@ -10,4 +10,12 @@ function Effect(var effect)
     self.counter ++;
     self.elements.push(button);
   };
+  self.use = function(var collision)
+  {
+    self.collision = collision;
+    for (var i = 0; i < self.elements.length; i++)
+    {
+      self.collision.add(self.elements[i]);
+    }
+  };
 }
