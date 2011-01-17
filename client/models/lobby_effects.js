@@ -28,5 +28,9 @@ function LobbyEffects()
   self.use = function(var collision)
   {
     self.collision = collision;
+    for (var i = 0; i < self.rect.length; i++)
+    {
+      self.collision.add(self.rects[i]);
+    }
   };
 }
