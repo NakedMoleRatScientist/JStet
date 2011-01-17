@@ -384,13 +384,16 @@ function PageEffect(var pages)
   var self = this;
   self.pages = pages;
   self.buttons = [];
+  self.counter = 0;
   self.add = function(var button)
   {
+    button.member = self.counter;
+    self.counter ++;
     self.buttons.push(button);
   };
-  self.check = function(var n)
+  self.check = function(var object)
   {
-    if (self.buttons[n].type == 3)
+    if (object.type == 3)
     {
       self.pages.forward();
     }
@@ -398,6 +401,10 @@ function PageEffect(var pages)
   self.use = function(var collision)
   {
     self.collision = collision;
+    for (var i = 0; i < self.buttons.length; i++)
+    {
+      self.collision.add(self.buttons[i]);
+    }
   };
 }
 
@@ -447,19 +454,23 @@ function RadioSwitch()
 {
   var self = this;
   self.circles = [];
-  self.member = 0;
+  self.counter = 0;
   self.add = function(var button)
   {
+    button.member = self.counter;
+    self.counter ++;
     self.circles.push(button);
   };
-  self.check = function(var n)
+  self.check = function(var object)
   {
-    self.circles[n].state = true;
-    for(var i = 0; i < self.circles.length; i++)
+    if (object.type == 1)
     {
-      if (i != n)
+      for(var i = 0; i < self.circles.length; i++)
       {
-	self.circles[i].state = false;
+	if (i != object.member)
+	{
+	  self.circles[i].state = false;
+	}
       }
     }
   };
@@ -851,14 +862,14 @@ function Collision()
       {
 	if (self.check_rect(x,y,i) == true)
 	{
-	  self.effects.check(i);
+	  self.effects.check(self.elements[i]);
 	}
       }
       else if(self.elements[i].type == 1)
       {
 	if (self.check_circle(x,y,i) == true)
 	{
-	  self.effects.check(i);
+	  self.effects.check(self.elements[i]);
 	}
       }
     }
