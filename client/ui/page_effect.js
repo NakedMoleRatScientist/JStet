@@ -4,6 +4,7 @@ function PageEffect(var pages)
   var self = this;
   self.pages = pages;
   self.buttons = [];
+  self.target = [];
   self.add = function(var button)
   {
     self.buttons.push(button);
