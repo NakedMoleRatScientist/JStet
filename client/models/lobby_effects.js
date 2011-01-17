@@ -2,6 +2,7 @@
 function LobbyEffects()
 {
   var self = this;
+  self.counter = 0;
   self.check = function(var object)
   {
     if (object.type == 0)
