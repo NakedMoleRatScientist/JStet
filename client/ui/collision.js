@@ -52,14 +52,14 @@ function Collision()
       {
 	if (self.check_rect(x,y,i) == true)
 	{
-	  self.effects.check(i);
+	  self.effects.check(self.elements[i]);
 	}
       }
       else if(self.elements[i].type == 1)
       {
 	if (self.check_circle(x,y,i) == true)
 	{
-	  self.effects.check(i);
+	  self.effects.check(self.elements[i]);
 	}
       }
     }
