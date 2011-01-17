@@ -3,9 +3,11 @@ function RadioSwitch()
 {
   var self = this;
   self.circles = [];
-  self.member = 0;
+  self.counter = 0;
   self.add = function(var button)
   {
+    button.member = self.counter;
+    self.counter ++;
     self.circles.push(button);
   };
   self.check = function(var n)
