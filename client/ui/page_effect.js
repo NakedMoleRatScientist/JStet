@@ -11,9 +11,9 @@ function PageEffect(var pages)
     self.counter ++;
     self.buttons.push(button);
   };
-  self.check = function(var n)
+  self.check = function(var object)
   {
-    if (self.buttons[n].type == 3)
+    if (object.type == 3)
     {
       self.pages.forward();
     }
