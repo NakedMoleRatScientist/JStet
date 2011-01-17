@@ -1,7 +1,7 @@
 
 function PageEffect(var pages)
 {
-  var self = this;  
+  var self = this;
   self.pages = pages;
   self.buttons = [];
   self.add = function(var button)
@@ -18,5 +18,9 @@ function PageEffect(var pages)
   self.use = function(var collision)
   {
     self.collision = collision;
+    for (var i = 0; i < self.buttons.length; i++)
+    {
+      self.collision.add(self.button[i]);
+    }
   };
 }
