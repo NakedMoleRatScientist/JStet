@@ -20,7 +20,7 @@ function PageEffect(var pages)
     self.collision = collision;
     for (var i = 0; i < self.buttons.length; i++)
     {
-      self.collision.add(self.button[i]);
+      self.collision.add(self.buttons[i]);
     }
   };
 }
