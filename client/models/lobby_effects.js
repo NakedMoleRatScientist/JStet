@@ -4,6 +4,12 @@ function LobbyEffects()
   var self = this;
   self.counter = 0;
   self.rects = [];
+  self.add = function(var button)
+  {
+    button.member = self.counter;
+    self.counter ++;
+    self.rects.push(button);
+  };
   self.check = function(var object)
   {
     if (object.type == 0)
