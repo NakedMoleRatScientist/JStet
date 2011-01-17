@@ -10,7 +10,7 @@ function RadioSwitch()
     self.counter ++;
     self.circles.push(button);
   };
-  self.check = function(var n)
+  self.check = function(var object)
   {
     self.circles[n].state = true;
     for(var i = 0; i < self.circles.length; i++)
