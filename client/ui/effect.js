@@ -1,7 +1,7 @@
 
-function Effect(var effect)
+function Effect(var parent)
 {
-  var self = effect;
+  var self = parent;
   self.elements = [];
   self.counter = 0;
   self.add = function(var button)
