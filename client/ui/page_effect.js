@@ -3,6 +3,7 @@ function PageEffect(var pages)
 {
   var self = this;
   self.pages = pages;
+  self.effect = new Effect(self);
   self.add = function(var button)
   {
     button.member = self.counter;
