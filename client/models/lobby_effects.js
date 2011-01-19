@@ -25,4 +25,12 @@ function LobbyEffects()
       }
     }
   };
+  self.use = function(var collision)
+  {
+    self.collision = collison;
+    for (var i = 0; i < self.buttons.length; i++)
+    {
+      self.collision.add(self.buttons[i]);
+    }
+  };
 }
