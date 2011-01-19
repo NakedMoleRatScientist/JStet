@@ -4,6 +4,7 @@ function LobbyEffects()
   var self = this;
   self.counter = 0;
   self.rects = [];
+  self.effect = new Effect(self);
   self.add = function(var button)
   {
     button.member = self.counter;
