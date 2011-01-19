@@ -383,27 +383,12 @@ function PageEffect(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.buttons = [];
-  self.counter = 0;
-  self.add = function(var button)
-  {
-    button.member = self.counter;
-    self.counter ++;
-    self.buttons.push(button);
-  };
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
     if (object.type == 3)
     {
       self.pages.forward();
-    }
-  };
-  self.use = function(var collision)
-  {
-    self.collision = collision;
-    for (var i = 0; i < self.buttons.length; i++)
-    {
-      self.collision.add(self.buttons[i]);
     }
   };
 }
@@ -1849,21 +1834,42 @@ function TetrominoDraw()
 function LobbyEffects()
 {
   var self = this;
-  self.check = function(var n)
+  self.effect = new Effect(self);
+  self.check = function(var object)
   {
-    if (n == 0)
+    if (object.type == 0)
     {
-      game_protocol.request_game();
-      mode.change(4);
+      if (object.member == 0)
+      {
+	game_protocol.request_game();
+	mode.change(4);
+      }
+      else if (object.member == 1)
+      {
+	mode.change(6);
+      }
     }
-    else if (n == 1)
-    {
-      mode.change(6);
-    }
+  };
+}
+
+function Effect(var parent)
+{
+  var self = parent;
+  self.elements = [];
+  self.counter = 0;
+  self.add = function(var button)
+  {
+    button.member = self.counter;
+    self.counter ++;
+    self.elements.push(button);
   };
   self.use = function(var collision)
   {
     self.collision = collision;
+    for (var i = 0; i < self.elements.length; i++)
+    {
+      self.collision.add(self.elements[i]);
+    }
   };
 }
 
@@ -1871,10 +1877,10 @@ function LobbyMode()
 {
   var self = this;
   self.chat = new Chat();
-  self.play = new PlayButton();
+  self.play = new TextButton("Play",100,450,20);
   self.private_session = new PrivateButton();
   self.collision = new Collision();
-  self.collision.add(self.play.play);
+  self.collision.add(self.play.rect);
   self.collision.add(self.private_session.private_session);
   self.collision.effects.add_effect(new LobbyEffects());
   self.display = function()
