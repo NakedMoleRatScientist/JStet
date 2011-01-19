@@ -3,10 +3,10 @@ function LobbyMode()
 {
   var self = this;
   self.chat = new Chat();
-  self.play = new PlayButton();
+  self.play = new TextButton("Play",100,450,20);
   self.private_session = new PrivateButton();
   self.collision = new Collision();
-  self.collision.add(self.play.play);
+  self.collision.add(self.play.rect);
   self.collision.add(self.private_session.private_session);
   self.collision.effects.add_effect(new LobbyEffects());
   self.display = function()
