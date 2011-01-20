@@ -4,7 +4,7 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new TextButton("Play",100,450,20);
-  self.private_session = new PrivateButton();
+  self.private_session = new TextButton("Create Game",100,450,75);
   self.collision = new Collision();
   self.collision.add(self.play.rect);
   self.collision.add(self.private_session.private_session);
