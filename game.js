@@ -78,6 +78,7 @@ function RectObject(x,y,width,height)
 {
   var self = this;
   self.type = 0;
+  self.member = 0;
   self.x = x;
   self.y = y;
   self.width = width;
@@ -1839,6 +1840,7 @@ function LobbyEffects()
   {
     if (object.type == 0)
     {
+      console.log(object.member);
       if (object.member == 0)
       {
 	game_protocol.request_game();
@@ -1846,6 +1848,7 @@ function LobbyEffects()
       }
       else if (object.member == 1)
       {
+	console.log("beep");
 	mode.change(6);
       }
     }
@@ -1878,11 +1881,11 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new TextButton("Play",100,450,20);
-  self.private_session = new PrivateButton();
+  self.private_session = new TextButton("Create Game",100,450,75);
+  self.effect = new LobbyEffects();
   self.collision = new Collision();
-  self.collision.add(self.play.rect);
-  self.collision.add(self.private_session.private_session);
-  self.collision.effects.add_effect(new LobbyEffects());
+  self.effect.add(self.play.rect);
+  self.collision.effects.add_effect(self.effect);
   self.display = function()
   {
     background(0,0,0);
