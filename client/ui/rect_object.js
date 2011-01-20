@@ -3,6 +3,7 @@ function RectObject(x,y,width,height)
 {
   var self = this;
   self.type = 0;
+  self.member = 0;
   self.x = x;
   self.y = y;
   self.width = width;
