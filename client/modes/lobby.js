@@ -7,7 +7,7 @@ function LobbyMode()
   self.private_session = new TextButton("Create Game",100,450,75);
   self.effect = new LobbyEffect();
   self.collision = new Collision();
-  self.collision.effects.add_effect(new LobbyEffects());
+  self.collision.effects.add_effect(self.effect);
   self.display = function()
   {
     background(0,0,0);
