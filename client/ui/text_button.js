@@ -12,7 +12,7 @@ function TextButton(var string,var size,var x, var y)
   {
     noFill();
     textFont(font,self.size / 5);
-    text(self.string,self.x + (size / 4),self.y + (size / 4));
+    text(self.string,self.x + (self.size / 4),self.y + (self.size / 4));
     self.rect.draw();
   };
 }
