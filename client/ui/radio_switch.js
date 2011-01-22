@@ -7,7 +7,7 @@ function RadioSwitch()
   {
     if (object.type == 1)
     {
-      for(var i = 0; i < self.circles.length; i++)
+      for(var i = 0; i < self.elements.length; i++)
       {
 	if (i != object.member)
 	{
