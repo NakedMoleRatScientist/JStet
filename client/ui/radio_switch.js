@@ -2,6 +2,7 @@
 function RadioSwitch()
 {
   var self = this;
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
     if (object.type == 1)
