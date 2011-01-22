@@ -2,8 +2,6 @@
 function RadioSwitch()
 {
   var self = this;
-  self.circles = [];
-  self.counter = 0;
   self.check = function(var object)
   {
     if (object.type == 1)
