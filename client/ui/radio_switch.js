@@ -11,7 +11,7 @@ function RadioSwitch()
       {
 	if (i != object.member)
 	{
-	  self.circles[i].state = false;
+	  self.elements[i].state = false;
 	}
       }
     }
