@@ -69,7 +69,7 @@ function TextButton(var string,var size,var x, var y)
   {
     noFill();
     textFont(font,self.size / 5);
-    text(self.string,self.x + (size / 4),self.y + (size / 4));
+    text(self.string,self.x + (self.size / 4),self.y + (self.size / 4));
     self.rect.draw();
   };
 }
@@ -439,33 +439,18 @@ function Pages()
 function RadioSwitch()
 {
   var self = this;
-  self.circles = [];
-  self.counter = 0;
-  self.add = function(var button)
-  {
-    button.member = self.counter;
-    self.counter ++;
-    self.circles.push(button);
-  };
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
     if (object.type == 1)
     {
-      for(var i = 0; i < self.circles.length; i++)
+      for(var i = 0; i < self.elements.length; i++)
       {
 	if (i != object.member)
 	{
-	  self.circles[i].state = false;
+	  self.elements[i].state = false;
 	}
       }
-    }
-  };
-  self.use = function(var collision)
-  {
-    self.collision = collision;
-    for (var i = 0; i < self.circles.length; i++)
-    {
-      self.collision.add(self.circles[i]);
     }
   };
 }
@@ -1840,7 +1825,6 @@ function LobbyEffects()
   {
     if (object.type == 0)
     {
-      console.log(object.member);
       if (object.member == 0)
       {
 	game_protocol.request_game();
@@ -1848,7 +1832,6 @@ function LobbyEffects()
       }
       else if (object.member == 1)
       {
-	console.log("beep");
 	mode.change(6);
       }
     }
@@ -1881,17 +1864,18 @@ function LobbyMode()
   var self = this;
   self.chat = new Chat();
   self.play = new TextButton("Play",100,450,20);
-  self.private_session = new TextButton("Create Game",100,450,75);
+  self.session = new TextButton("Create Game",100,450,75);
   self.effect = new LobbyEffects();
   self.collision = new Collision();
   self.effect.add(self.play.rect);
+  self.effect.add(self.session.rect);
   self.collision.effects.add_effect(self.effect);
   self.display = function()
   {
     background(0,0,0);
     self.chat.display();
     self.play.display();
-    self.private_session.display();
+    self.session.display();
     noFill();
     stroke(255);
     rect(0,580,800,20);
