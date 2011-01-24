@@ -13,6 +13,10 @@ function RadioSwitch()
 	{
 	  self.elements[i].state = false;
 	}
+	else
+	{
+	  self.elements[i].state = true;
+	}
       }
     }
   };
