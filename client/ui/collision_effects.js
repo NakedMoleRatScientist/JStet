@@ -16,4 +16,8 @@ function CollisionEffects(var collision)
       self.effects[i].check(n);
     }
   };
+  self.clean = function()
+  {
+    self.effects = [];
+  };
 }
