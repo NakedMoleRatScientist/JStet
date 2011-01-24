@@ -39,4 +39,8 @@ function Pages()
   {
     self.pages.push(object);
   };
+  self.initialize = function()
+  {
+    self.collision.effects.add_effect(self.effect);
+  };
 }
