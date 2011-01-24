@@ -1,7 +1,7 @@
 
 
-function PasswordPage(collision)
+function PasswordPage(pages)
 {
   var self = this;
-  var collision = collision;
+  self.pages = pages;
 }
