@@ -350,16 +350,17 @@ function PrivateButton()
   };
 }
 
-function PasswordPage(collision)
+function PasswordPage(pages)
 {
   var self = this;
-  var collision = collision;
+  self.pages = pages;
 }
 
 function PlayersPage(pages)
 {
   var self = this;
   self.pages = pages;
+  self.pages.initialize();
   self.one = new RadioButton();
   self.one.set(20,40);
   self.two = new RadioButton();
@@ -378,6 +379,11 @@ function PlayersPage(pages)
     self.two.text("Two");
     self.pages.display();
   };
+}
+
+function DataCollect()
+{
+  var self = this;
 }
 
 function PageEffect(var pages)
@@ -405,7 +411,6 @@ function Pages()
   self.turn.rect.type = 3;
   self.effect = new PageEffect(self);
   self.effect.add(self.turn.rect);
-  self.collision.effects.add_effect(self.effect);
   self.forward = function ()
   {
     self.on ++;
@@ -434,6 +439,10 @@ function Pages()
   {
     self.pages.push(object);
   };
+  self.initialize = function()
+  {
+    self.collision.effects.add_effect(self.effect);
+  };
 }
 
 function RadioSwitch()
@@ -449,6 +458,10 @@ function RadioSwitch()
 	if (i != object.member)
 	{
 	  self.elements[i].state = false;
+	}
+	else
+	{
+	  self.elements[i].state = true;
 	}
       }
     }
@@ -778,6 +791,10 @@ function CollisionEffects(var collision)
       self.effects[i].check(n);
     }
   };
+  self.clean = function()
+  {
+    self.effects = [];
+  };
 }
 
 
@@ -786,6 +803,11 @@ function Collision()
   var self = this;
   self.elements = [];
   self.effects = new CollisionEffects(self);
+  self.clean = function()
+  {
+    self.elements = [];
+    self.effects.clean();
+  };
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
