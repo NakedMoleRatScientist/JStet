@@ -5,6 +5,11 @@ function Collision()
   var self = this;
   self.elements = [];
   self.effects = new CollisionEffects(self);
+  self.clean = function()
+  {
+    self.elements = [];
+    self.effects.clean();
+  };
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
