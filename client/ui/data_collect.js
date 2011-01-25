@@ -25,4 +25,8 @@ function DataCollect()
   {
     self.insert(self.find(name), info);
   };
+  self.get = function(var name)
+  {
+    return self.data[self.find(name)].value;
+  };
 }
