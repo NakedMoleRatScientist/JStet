@@ -11,7 +11,11 @@ function PlayersEffect(var pages)
       if (object.member == 0)
       {
 	self.page.data.update("players",1);
-      }	
+      }
+      else
+      {
+	self.page.data.update("players",2);
+      }
     }	
   };
 }
