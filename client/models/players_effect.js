@@ -6,6 +6,12 @@ function PlayersEffect(var pages)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
-    
+    if (object.type == 1)
+    {
+      if (object.member == 0)
+      {
+	self.page.data.update("players",1);
+      }	
+    }	
   };
 }
