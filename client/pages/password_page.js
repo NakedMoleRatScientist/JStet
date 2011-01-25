@@ -7,6 +7,6 @@ function PasswordPage(pages)
   self.pages.initialize();
   self.call = function()
   {
-    text("Since you choose two players...");
+    text("Since you choose two players...",0,18);
   };
 }
