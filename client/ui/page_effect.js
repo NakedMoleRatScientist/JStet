@@ -8,6 +8,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
+      self.collision.clean()
       self.pages.forward();
     }
   };
