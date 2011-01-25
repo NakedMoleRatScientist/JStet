@@ -17,4 +17,8 @@ function DataCollect()
       }
     }
   };
+  self.insert = function(var i, var info)
+  {
+    self.data[i].value = info;
+  };
 }
