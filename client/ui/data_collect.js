@@ -21,4 +21,8 @@ function DataCollect()
   {
     self.data[i].value = info;
   };
+  self.search = function(var name, var info)
+  {
+    self.insert(self.find(name), info);
+  };
 }
