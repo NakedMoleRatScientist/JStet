@@ -1,6 +1,6 @@
 
-function Info()
+function Info(var name)
 {
   var self = this;
-  self.name = "";
+  self.name = "name";
 }
