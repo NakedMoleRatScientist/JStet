@@ -7,4 +7,14 @@ function DataCollect()
   {
     self.data.push(new Info(name));
   };
+  self.find = function(var name)
+  {
+    for (var i = 0; i < self.data.size; i++)
+    {
+      if (self.data[i].name == name)
+      {
+	return i;
+      }
+    }
+  };
 }
