@@ -354,6 +354,7 @@ function PasswordPage(pages)
 {
   var self = this;
   self.pages = pages;
+  self.pages.initialize()
 }
 
 function PlayersPage(pages)
@@ -381,9 +382,20 @@ function PlayersPage(pages)
   };
 }
 
+function Info()
+{
+  var self = this;
+  self.name = "";
+}
+
 function DataCollect()
 {
   var self = this;
+  self.data = [];
+  self.create = function(var name)
+  {
+    self.data.push(new Info(name));
+  };
 }
 
 function PageEffect(var pages)
@@ -395,6 +407,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
+      self.collision.clean()
       self.pages.forward();
     }
   };
