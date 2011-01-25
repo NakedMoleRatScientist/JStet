@@ -12,6 +12,7 @@ function PlayersPage(pages)
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
   self.pages.collision.effects.add_effect(self.radio_switch);
+  self.pages.collision.effects.add_effect(new PlayersEffect());
   self.call = function()
   {
     textFont(font,18);
