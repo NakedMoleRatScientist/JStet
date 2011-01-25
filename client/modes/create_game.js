@@ -4,6 +4,7 @@ function CreateGameMode()
   var self = this;
   self.others = false;
   self.pages = new Pages();
+  self.pages.data.create("players");
   self.pages.add(new PlayersPage(self.pages));
   self.display = function()
   {
