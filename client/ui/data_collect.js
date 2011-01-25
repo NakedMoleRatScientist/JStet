@@ -5,6 +5,6 @@ function DataCollect()
   self.data = [];
   self.create = function(var name)
   {
-    self.data.push(new Info());
+    self.data.push(new Info(name));
   };
 }
