@@ -5,6 +5,7 @@ function PasswordPage(pages)
   var self = this;
   self.pages = pages;
   self.pages.initialize();
+  self.radio_switch = new RadioSwitch();
   self.call = function()
   {
     textFont(font,18);
