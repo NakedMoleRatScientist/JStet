@@ -20,5 +20,6 @@ function PasswordPage(pages)
     self.yes.text("Yes");
     self.no.text("No");
     self.no.display();
+    self.pages.display();
   };
 }
