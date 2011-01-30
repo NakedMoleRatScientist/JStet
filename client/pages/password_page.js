@@ -4,15 +4,17 @@ function PasswordPage(pages)
 {
   var self = this;
   self.pages = pages;
-  self.pages.initialize();
-  self.yes = new RadioButton();
-  self.no = new RadioButton();
-  self.yes.set(20,50);
-  self.no.set(80,50);
-  self.radio_switch = new RadioSwitch();
-  self.radio_switch.add(self.yes);
-  self.radio_switch.add(self.no);
-  self.pages.collision.effects.add_effect(self.radio_switch);
+  self.initialize = function()
+  {
+    self.yes = new RadioButton();
+    self.no = new RadioButton();
+    self.yes.set(20,50);
+    self.no.set(80,50);
+    self.radio_switch = new RadioSwitch();
+    self.radio_switch.add(self.yes);
+    self.radio_switch.add(self.no);
+    self.pages.collision.effects.add_effect(self.radio_switch);   
+  };
   self.call = function()
   {
     textFont(font,18);
