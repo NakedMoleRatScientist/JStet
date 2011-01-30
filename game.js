@@ -354,7 +354,32 @@ function PasswordPage(pages)
 {
   var self = this;
   self.pages = pages;
-  self.pages.initialize()
+  self.pages.initialize();
+  self.call = function()
+  {
+    text("Since you choose two players...",0,18);
+  };
+}
+
+function PlayersEffect(var pages)
+{
+  var self = this;
+  self.page = pages;
+  self.effect = new Effect(self);
+  self.check = function(var object)
+  {
+    if (object.type == 1)
+    {
+      if (object.member == 0)
+      {
+	self.page.data.update("players",1);
+      }
+      else
+      {
+	self.page.data.update("players",2);
+      }
+    }	
+  };
 }
 
 function PlayersPage(pages)
@@ -370,6 +395,7 @@ function PlayersPage(pages)
   self.radio_switch.add(self.one);
   self.radio_switch.add(self.two);
   self.pages.collision.effects.add_effect(self.radio_switch);
+  self.pages.collision.effects.add_effect(new PlayersEffect(self.pages));
   self.call = function()
   {
     textFont(font,18);
@@ -382,10 +408,11 @@ function PlayersPage(pages)
   };
 }
 
-function Info()
+function Info(var name)
 {
   var self = this;
-  self.name = "";
+  self.name = name;
+  self.value = "nothing";
 }
 
 function DataCollect()
@@ -395,6 +422,37 @@ function DataCollect()
   self.create = function(var name)
   {
     self.data.push(new Info(name));
+  };
+  self.find = function(var name)
+  {
+    for (var i = 0; i < self.data.length; i++)
+    {
+      if (self.data[i].name == name)
+      {
+	return i;
+      }
+      else
+      {
+	return -1;
+      }
+    }
+  };
+  self.insert = function(var i, var info)
+  {
+    if (i == -1)
+    {
+      console.log("name is false.");
+      return false;
+    }
+    self.data[i].value = info;
+  };
+  self.update = function(var name, var info)
+  {
+    self.insert(self.find(name), info);
+  };
+  self.get = function(var name)
+  {
+    return self.data[self.find(name)].value;
   };
 }
 
@@ -424,6 +482,7 @@ function Pages()
   self.turn.rect.type = 3;
   self.effect = new PageEffect(self);
   self.effect.add(self.turn.rect);
+  self.data = new DataCollect();
   self.forward = function ()
   {
     self.on ++;
@@ -519,6 +578,7 @@ function CreateGameMode()
   var self = this;
   self.others = false;
   self.pages = new Pages();
+  self.pages.data.create("players");
   self.pages.add(new PlayersPage(self.pages));
   self.display = function()
   {
@@ -864,8 +924,9 @@ function Collision()
   {
     for (var i = 0; i < self.elements.length; i++)
     {
-      if (self.elements[i].type == 0 || 3)
+      if (self.elements[i].type == 0 || self.elements[i].type == 3)
       {
+	console.log("beep2");
 	if (self.check_rect(x,y,i) == true)
 	{
 	  self.effects.check(self.elements[i]);
@@ -873,6 +934,7 @@ function Collision()
       }
       else if(self.elements[i].type == 1)
       {
+	console.log("beep");
 	if (self.check_circle(x,y,i) == true)
 	{
 	  self.effects.check(self.elements[i]);
