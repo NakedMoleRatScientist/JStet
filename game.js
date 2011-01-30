@@ -355,9 +355,18 @@ function PasswordPage(pages)
   var self = this;
   self.pages = pages;
   self.pages.initialize();
+  self.yes = new RadioButton();
+  self.no = new RadioButton();
+  self.yes.set(20,50);
+  self.no.set(70,50);
+  self.radio_switch = new RadioSwitch();
   self.call = function()
   {
+    textFont(font,18);
     text("Since you choose two players...",0,18);
+    text("Do you wish to password-protect for someone?",0,36);
+    self.yes.display();
+    self.no.display();
   };
 }
 
@@ -580,6 +589,7 @@ function CreateGameMode()
   self.pages = new Pages();
   self.pages.data.create("players");
   self.pages.add(new PlayersPage(self.pages));
+  self.pages.add(new PasswordPage(self.pages));
   self.display = function()
   {
     background(0,0,0);
@@ -926,7 +936,6 @@ function Collision()
     {
       if (self.elements[i].type == 0 || self.elements[i].type == 3)
       {
-	console.log("beep2");
 	if (self.check_rect(x,y,i) == true)
 	{
 	  self.effects.check(self.elements[i]);
@@ -934,7 +943,6 @@ function Collision()
       }
       else if(self.elements[i].type == 1)
       {
-	console.log("beep");
 	if (self.check_circle(x,y,i) == true)
 	{
 	  self.effects.check(self.elements[i]);
