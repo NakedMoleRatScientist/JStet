@@ -9,5 +9,6 @@ function PasswordPage(pages)
   {
     textFont(font,18);
     text("Since you choose two players...",0,18);
+    text("Do you wish to password-protect for someone?",0,26);
   };
 }
