@@ -5,6 +5,8 @@ function PasswordPage(pages)
   var self = this;
   self.pages = pages;
   self.pages.initialize();
+  self.yes = new RadioButton();
+  self.no = new RadioButton();
   self.radio_switch = new RadioSwitch();
   self.call = function()
   {
