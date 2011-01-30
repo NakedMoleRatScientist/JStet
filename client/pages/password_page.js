@@ -16,6 +16,8 @@ function PasswordPage(pages)
     text("Since you choose two players...",0,18);
     text("Do you wish to password-protect for someone?",0,36);
     self.yes.display();
+    self.yes.text("Yes");
+    self.no.text("No");
     self.no.display();
   };
 }
