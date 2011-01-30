@@ -11,6 +11,7 @@ function PassEntryPage(var pages)
   {
     text("Please type your password for the other player.", 100, 250);
     text(self.password.string,150,300);
+    text("After you're done, press enter.",200,360);
     var info = typing();
     switch(info)
     {
