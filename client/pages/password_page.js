@@ -8,7 +8,7 @@ function PasswordPage(pages)
   self.yes = new RadioButton();
   self.no = new RadioButton();
   self.yes.set(20,50);
-  self.no.set(70,50);
+  self.no.set(80,50);
   self.radio_switch = new RadioSwitch();
   self.call = function()
   {
