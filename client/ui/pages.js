@@ -41,7 +41,7 @@ function Pages()
   };
   self.initialize = function()
   {
-    self.pages[self.on].initialize();
     self.collision.effects.add_effect(self.effect);
+    self.pages[self.on].initialize();
   };
 }
