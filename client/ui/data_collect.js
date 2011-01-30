@@ -23,7 +23,10 @@ function DataCollect()
   };
   self.insert = function(var i, var info)
   {
-    console.log(i);
+    if (i == false)
+    {
+      console.log("i is false.");
+    }
     self.data[i].value = info;
   };
   self.update = function(var name, var info)
