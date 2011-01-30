@@ -17,13 +17,13 @@ function DataCollect()
       }
       else
       {
-	return false;
+	return -1;
       }
     }
   };
   self.insert = function(var i, var info)
   {
-    if (i == false)
+    if (i == -1)
     {
       console.log("name is false.");
       return false;
