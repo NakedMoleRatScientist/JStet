@@ -10,6 +10,7 @@ function PageEffect(var pages)
     {
       self.collision.clean()
       self.pages.forward();
+      self.pages.initialize();
     }
   };
 }
