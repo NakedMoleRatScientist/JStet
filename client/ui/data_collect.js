@@ -15,10 +15,15 @@ function DataCollect()
       {
 	return i;
       }
+      else
+      {
+	return false;
+      }
     }
   };
   self.insert = function(var i, var info)
   {
+    console.log(i);
     self.data[i].value = info;
   };
   self.update = function(var name, var info)
