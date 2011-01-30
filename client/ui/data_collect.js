@@ -9,7 +9,7 @@ function DataCollect()
   };
   self.find = function(var name)
   {
-    for (var i = 0; i < self.data.size; i++)
+    for (var i = 0; i < self.data.length; i++)
     {
       if (self.data[i].name == name)
       {
@@ -25,7 +25,8 @@ function DataCollect()
   {
     if (i == false)
     {
-      console.log("i is false.");
+      console.log("name is false.");
+      return false;
     }
     self.data[i].value = info;
   };
