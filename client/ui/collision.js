@@ -53,7 +53,7 @@ function Collision()
   {
     for (var i = 0; i < self.elements.length; i++)
     {
-      if (self.elements[i].type == 0 || 3)
+      if (self.elements[i].type == 0 || self.elements[i].type == 3)
       {
 	if (self.check_rect(x,y,i) == true)
 	{
