@@ -3,16 +3,19 @@ function PlayersPage(pages)
 {
   var self = this;
   self.pages = pages;
-  self.pages.initialize();
-  self.one = new RadioButton();
-  self.one.set(20,40);
-  self.two = new RadioButton();
-  self.two.set(90,40);
-  self.radio_switch = new RadioSwitch();
-  self.radio_switch.add(self.one);
-  self.radio_switch.add(self.two);
-  self.pages.collision.effects.add_effect(self.radio_switch);
-  self.pages.collision.effects.add_effect(new PlayersEffect(self.pages));
+  self.initialize = function()
+  {
+    self.pages.initialize();
+    self.one = new RadioButton();
+    self.one.set(20,40);
+    self.two = new RadioButton();
+    self.two.set(90,40);
+    self.radio_switch = new RadioSwitch();
+    self.radio_switch.add(self.one);
+    self.radio_switch.add(self.two);
+    self.pages.collision.effects.add_effect(self.radio_switch);
+    self.pages.collision.effects.add_effect(new PlayersEffect(self.pages));    
+  };
   self.call = function()
   {
     textFont(font,18);
