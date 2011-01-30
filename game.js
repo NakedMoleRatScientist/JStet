@@ -349,20 +349,27 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
+function PassEntryPage()
+{
+  var self = this;
+}
+
 
 function PasswordPage(pages)
 {
   var self = this;
   self.pages = pages;
-  self.pages.initialize();
-  self.yes = new RadioButton();
-  self.no = new RadioButton();
-  self.yes.set(20,50);
-  self.no.set(80,50);
-  self.radio_switch = new RadioSwitch();
-  self.radio_switch.add(self.yes);
-  self.radio_switch.add(self.no);
-  self.pages.collision.effects.add_effect(self.radio_switch);
+  self.initialize = function()
+  {
+    self.yes = new RadioButton();
+    self.no = new RadioButton();
+    self.yes.set(20,50);
+    self.no.set(80,50);
+    self.radio_switch = new RadioSwitch();
+    self.radio_switch.add(self.yes);
+    self.radio_switch.add(self.no);
+    self.pages.collision.effects.add_effect(self.radio_switch);   
+  };
   self.call = function()
   {
     textFont(font,18);
@@ -403,7 +410,6 @@ function PlayersPage(pages)
   self.pages = pages;
   self.initialize = function()
   {
-    self.pages.initialize();
     self.one = new RadioButton();
     self.one.set(20,40);
     self.two = new RadioButton();
@@ -485,6 +491,7 @@ function PageEffect(var pages)
     {
       self.collision.clean()
       self.pages.forward();
+      self.pages.initialize();
     }
   };
 }
@@ -531,8 +538,8 @@ function Pages()
   };
   self.initialize = function()
   {
-    self.pages[self.on].initialize();
     self.collision.effects.add_effect(self.effect);
+    self.pages[self.on].initialize();
   };
 }
 
@@ -598,8 +605,10 @@ function CreateGameMode()
   self.others = false;
   self.pages = new Pages();
   self.pages.data.create("players");
+  self.pages.data.create("password");
   self.pages.add(new PlayersPage(self.pages));
   self.pages.add(new PasswordPage(self.pages));
+  self.pages.initialize();
   self.display = function()
   {
     background(0,0,0);
