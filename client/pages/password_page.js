@@ -9,9 +9,9 @@ function PasswordPage(pages)
   self.no = new RadioButton();
   self.yes.set(20,50);
   self.no.set(80,50);
+  self.radio_switch = new RadioSwitch();
   self.radio_switch.add(self.yes);
   self.radio_switch.add(self.two);
-  self.radio_switch = new RadioSwitch();
   self.pages.collision.effects.add_effect(self.radio_switch);
   self.call = function()
   {
