@@ -5,6 +5,7 @@ void createKey()
   switch(info)
   {
   default:
-    create.pages.check_type(info);
+    create.pages.type_check(info);
+    break;
   }
 }
