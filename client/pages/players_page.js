@@ -3,6 +3,7 @@ function PlayersPage(pages)
 {
   var self = this;
   self.pages = pages;
+  self.typing = false;
   self.initialize = function()
   {
     self.one = new RadioButton();
