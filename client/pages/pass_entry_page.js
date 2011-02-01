@@ -3,7 +3,7 @@ function PassEntryPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = false;
+  self.typing = true;
   self.initialize = function()
   {
   };
