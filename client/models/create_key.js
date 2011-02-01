@@ -5,6 +5,6 @@ void createKey()
   switch(info)
   {
   default:
-    create.typing.message.AddLetter(info);
+    create.pages.typing.check(info);
   }
 }
