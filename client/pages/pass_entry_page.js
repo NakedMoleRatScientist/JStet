@@ -19,6 +19,8 @@ function PassEntryPage(var pages)
     case -13:
       console.log("turn page filler");
       break;
+    default:
+      self.password.addLetter(info);
     }
   };
 }
