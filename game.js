@@ -349,11 +349,22 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
+function PassEffect(var pages)
+{
+  var self = this;
+  self.pages = pages;
+  self.act = function()
+  {
+    self.page.data.update("password",self.pages.input.string);
+  };
+}
+
 function PassEntryPage(var pages)
 {
   var self = this;
   self.pages = pages;
   self.typing = true;
+  self.effect = new PassEffect(self.pages);
   self.initialize = function()
   {
   };
@@ -627,7 +638,11 @@ void createKey()
   switch(info)
   {
   default:
-    create.pages.check_type(info);
+    create.pages.type_check(info);
+    break;
+  case 10:
+    create.pages.type_enter(info);
+    break;
   }
 }
 
