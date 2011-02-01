@@ -21,5 +21,6 @@ function PassEntryPage(var pages)
       console.log("turn page filler");
       break;
     }
+    self.chat.display();
   };
 }
