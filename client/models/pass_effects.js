@@ -1,5 +1,5 @@
 
-function PassEffect(var pages)
+function PassEffects(var pages)
 {
   var self = this;
   self.pages = pages;
