@@ -359,6 +359,7 @@ function PassEntryPage(var pages)
   };
   self.call = function()
   {
+    textFont(font,18);
     text("Please type your password for the other player.", 100, 250);
     text(self.password.string,150,300);
     text("After you're done, press enter.",200,360);
@@ -367,6 +368,9 @@ function PassEntryPage(var pages)
     {
     case -13:
       console.log("turn page filler");
+      break;
+    default:
+      self.password.addLetter(info);
       break;
     }
   };
