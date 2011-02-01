@@ -353,26 +353,16 @@ function PassEntryPage(var pages)
 {
   var self = this;
   self.pages = pages;
+  self.typing = true;
   self.initialize = function()
   {
-    self.password = new Input();
   };
   self.call = function()
   {
     textFont(font,18);
     text("Please type your password for the other player.", 100, 250);
-    text(self.password.string,150,300);
+    text(self.pages.input.string,150,300);
     text("After you're done, press enter.",200,360);
-    var info = typing();
-    switch(info)
-    {
-    case -13:
-      console.log("turn page filler");
-      break;
-    default:
-      self.password.addLetter(info);
-      break;
-    }
   };
 }
 
@@ -381,6 +371,7 @@ function PasswordPage(pages)
 {
   var self = this;
   self.pages = pages;
+  self.typing = false;
   self.initialize = function()
   {
     self.yes = new RadioButton();
@@ -430,6 +421,7 @@ function PlayersPage(pages)
 {
   var self = this;
   self.pages = pages;
+  self.typing = false;
   self.initialize = function()
   {
     self.one = new RadioButton();
@@ -559,6 +551,13 @@ function Pages()
   {
     self.pages.push(object);
   };
+  self.type_check = function(var info)
+  {
+    if (self.pages[self.on].typing == true)
+    {
+      self.input.addLetter(info);
+    }
+  };
   self.initialize = function()
   {
     self.collision.effects.add_effect(self.effect);
@@ -639,6 +638,7 @@ function CreateGameMode()
   self.pages = new Pages();
   self.pages.data.create("players");
   self.pages.data.create("password");
+  self.pages.data.create("password_again");
   self.pages.add(new PlayersPage(self.pages));
   self.pages.add(new PasswordPage(self.pages));
   self.pages.add(new PassEntryPage(self.pages));
