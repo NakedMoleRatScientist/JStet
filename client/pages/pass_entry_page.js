@@ -4,7 +4,7 @@ function PassEntryPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = true;
-  self.effect = new PassEffect(self.pages);
+  self.effect = new PassEffects(self.pages);
   self.initialize = function()
   {
   };
