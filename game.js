@@ -349,7 +349,7 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
-function PassEffect(var pages)
+function PassEffects(var pages)
 {
   var self = this;
   self.pages = pages;
@@ -364,7 +364,7 @@ function PassEntryPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = true;
-  self.effect = new PassEffect(self.pages);
+  self.effect = new PassEffects(self.pages);
   self.initialize = function()
   {
   };
@@ -566,8 +566,19 @@ function Pages()
   {
     if (self.pages[self.on].typing == true)
     {
-      self.input.addLetter(info);
+      if (info == -8)
+      {
+	self.input.destroy();
+      }
+      else
+      {
+	self.input.addLetter(info);
+      }
     }
+  };
+  self.type_enter = function()
+  {
+    self.pages[self.on].effects.act(); 
   };
   self.initialize = function()
   {
