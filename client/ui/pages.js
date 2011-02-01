@@ -40,6 +40,13 @@ function Pages()
   {
     self.pages.push(object);
   };
+  self.type_check = function(var act)
+  {
+    if (act == self.pages[self.on].typing == true)
+    {
+      self.input.addLetter(info);
+    }
+  };
   self.initialize = function()
   {
     self.collision.effects.add_effect(self.effect);
