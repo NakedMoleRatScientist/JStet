@@ -44,6 +44,10 @@ function Pages()
   {
     if (self.pages[self.on].typing == true)
     {
+      if (info == -8)
+      {
+	self.input.destroy();
+      }
       self.input.addLetter(info);
     }
   };
