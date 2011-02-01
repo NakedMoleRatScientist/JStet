@@ -40,9 +40,9 @@ function Pages()
   {
     self.pages.push(object);
   };
-  self.type_check = function(var act,var info)
+  self.type_check = function(var info)
   {
-    if (act == self.pages[self.on].typing == true)
+    if (self.pages[self.on].typing == true)
     {
       self.input.addLetter(info);
     }
