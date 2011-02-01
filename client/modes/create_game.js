@@ -3,6 +3,7 @@ function CreateGameMode()
 {
   var self = this;
   self.others = false;
+  self.typing = new Input();
   self.pages = new Pages();
   self.pages.data.create("players");
   self.pages.data.create("password");
