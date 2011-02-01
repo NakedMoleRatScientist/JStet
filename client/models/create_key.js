@@ -5,6 +5,6 @@ void createKey()
   switch(info)
   {
   default:
-    create.type.message.AddLetter(info);
+    create.typing.message.AddLetter(info);
   }
 }
