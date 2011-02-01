@@ -5,6 +5,6 @@ void createKey()
   switch(info)
   {
   default:
-    create.pages.typing.check(info);
+    create.pages.check_type(info);
   }
 }
