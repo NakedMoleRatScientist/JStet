@@ -6,7 +6,6 @@ function PassEntryPage(var pages)
   self.initialize = function()
   {
     self.password = new Input();
-    self.chat = new Chat();
   };
   self.call = function()
   {
@@ -21,6 +20,5 @@ function PassEntryPage(var pages)
       console.log("turn page filler");
       break;
     }
-    self.chat.display();
   };
 }
