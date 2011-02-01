@@ -40,7 +40,7 @@ function Pages()
   {
     self.pages.push(object);
   };
-  self.type_check = function(var act)
+  self.type_check = function(var act,var info)
   {
     if (act == self.pages[self.on].typing == true)
     {
