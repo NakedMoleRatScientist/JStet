@@ -21,6 +21,7 @@ function PassEntryPage(var pages)
       break;
     default:
       self.password.addLetter(info);
+      break;
     }
   };
 }
