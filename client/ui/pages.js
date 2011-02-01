@@ -54,6 +54,10 @@ function Pages()
       }
     }
   };
+  self.type_enter = function()
+  {
+    
+  };
   self.initialize = function()
   {
     self.collision.effects.add_effect(self.effect);
