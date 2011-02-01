@@ -530,10 +530,11 @@ function Pages()
   self.effect = new PageEffect(self);
   self.effect.add(self.turn.rect);
   self.data = new DataCollect();
+  self.input = new Input();
   self.forward = function ()
   {
     self.on ++;
-    if (self.on > self.pages - 1)
+    if (self.on > self.pages.length - 1)
     {
       self.on --;
     }
@@ -619,6 +620,16 @@ function RadioButton()
   {
     text(message,self.x + 15,self.y + 5);
   };
+}
+
+void createKey()
+{
+  var info = typing();
+  switch(info)
+  {
+  default:
+    create.pages.check_type(info);
+  }
 }
 
 function CreateGameMode()
@@ -1292,6 +1303,8 @@ void keyPressed()
   case 5:
     chatKey();
     break;
+  case 6:
+    createKey();
   }
 }
 
