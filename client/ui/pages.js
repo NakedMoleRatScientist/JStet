@@ -48,7 +48,10 @@ function Pages()
       {
 	self.input.destroy();
       }
-      self.input.addLetter(info);
+      else
+      {
+	self.input.addLetter(info);
+      }
     }
   };
   self.initialize = function()
