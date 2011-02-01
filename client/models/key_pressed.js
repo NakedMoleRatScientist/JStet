@@ -21,5 +21,7 @@ void keyPressed()
   case 5:
     chatKey();
     break;
+  case 6:
+    createKey();
   }
 }
