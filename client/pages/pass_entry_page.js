@@ -5,7 +5,6 @@ function PassEntryPage(var pages)
   self.pages = pages;
   self.initialize = function()
   {
-    self.password = new Input();
   };
   self.call = function()
   {
