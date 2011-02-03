@@ -1,5 +1,5 @@
 
-function PlayersEffect(var pages)
+function PlayersEffects(var pages)
 {
   var self = this;
   self.page = pages;
