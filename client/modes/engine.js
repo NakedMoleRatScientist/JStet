@@ -18,8 +18,7 @@ function Engine(protocol,mode)
   protocol.engine = self;
   self.score = 0;
   self.find_player = function(id)
-  {
-    
+  { 
     for (var i = 0;i < self.players.length;i++)
     {
       if (self.players[i].id == id)
@@ -124,6 +123,10 @@ function EngineDraw()
       self.drawShape.create_blocks(one.future.get_list(),225,210,one.future.shape.color);
     }
     self.drawShape.draw_field(one.field.field);
+  };
+  self.instruct = function()
+  {
+     text("Instruction: ",50,500);
   };
   self.score = function()
   {
