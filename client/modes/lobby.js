@@ -10,6 +10,7 @@ function LobbyMode()
   self.collision = new Collision();
   self.effect.add(self.play.rect);
   self.effect.add(self.session.rect);
+  self.effect.add(self.find.rect);
   self.collision.effects.add_effect(self.effect);
   self.display = function()
   {
