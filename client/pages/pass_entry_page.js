@@ -12,7 +12,10 @@ function PassEntryPage(var pages)
   self.call = function()
   {
     textFont(font,18);
-    
+    if (self.state == 0)
+    {
+      self.first_stage();
+    }
     text(self.pages.input.string,150,300);
     
   };
