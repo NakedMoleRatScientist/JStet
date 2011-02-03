@@ -204,8 +204,8 @@ void typing()
     return -8;
     break;
   //enter
-  case 13:
-    return -13;
+  case 10:
+    return -10;
     break;
   //shift, ctrl, etc
   case 65535:
