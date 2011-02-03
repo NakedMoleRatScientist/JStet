@@ -355,7 +355,7 @@ function PassEffects(var pages)
   self.pages = pages;
   self.act = function()
   {
-    self.page.data.update("password",self.pages.input.string);
+    self.pages.data.update("password",self.pages.input.string);
   };
 }
 
@@ -364,16 +364,29 @@ function PassEntryPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = true;
-  self.effect = new PassEffects(self.pages);
+  self.effects = new PassEffects(self.pages);
+  self.state = 0;
   self.initialize = function()
   {
   };
   self.call = function()
   {
     textFont(font,18);
-    text("Please type your password for the other player.", 100, 250);
+    if (self.state == 0)
+    {
+      self.first_stage();
+    }
     text(self.pages.input.string,150,300);
+    
+  };
+  self.first_stage = function()
+  {
     text("After you're done, press enter.",200,360);
+    text("Please type your password for the other player.", 100, 250);
+  };
+  self.second_stage = function()
+  {
+    text("Please retype the password again. Press enter when you're done.",100,250);
   };
 }
 
@@ -480,11 +493,8 @@ function DataCollect()
       {
 	return i;
       }
-      else
-      {
-	return -1;
-      }
     }
+    return -1;
   };
   self.insert = function(var i, var info)
   {
@@ -576,9 +586,12 @@ function Pages()
       }
     }
   };
-  self.type_enter = function()
+  self.type_enter = function(var info)
   {
-    self.pages[self.on].effects.act(); 
+    if (self.pages[self.on].typing == true)
+    {
+      self.pages[self.on].effects.act();
+    }
   };
   self.initialize = function()
   {
@@ -664,7 +677,6 @@ function CreateGameMode()
   self.pages = new Pages();
   self.pages.data.create("players");
   self.pages.data.create("password");
-  self.pages.data.create("password_again");
   self.pages.add(new PlayersPage(self.pages));
   self.pages.add(new PasswordPage(self.pages));
   self.pages.add(new PassEntryPage(self.pages));
