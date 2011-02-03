@@ -26,6 +26,6 @@ function PassEntryPage(var pages)
   };
   self.second_stage = function()
   {
-    text("Please retype the password again.",100,250);
+    text("Please retype the password again. Press enter when you're done.",100,250);
   };
 }
