@@ -14,7 +14,7 @@ function PlayersPage(pages)
     self.radio_switch.add(self.one);
     self.radio_switch.add(self.two);
     self.pages.collision.effects.add_effect(self.radio_switch);
-    self.pages.collision.effects.add_effect(new PlayersEffect(self.pages));    
+    self.pages.collision.effects.add_effect(new PlayersEffects(self.pages));    
   };
   self.call = function()
   {
