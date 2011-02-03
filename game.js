@@ -2101,9 +2101,24 @@ function LobbyMode()
   };
 }
 
-function Waiting()
+function WaitingMode()
 {
   var self = this;
+  self.display = function()
+  {
+    textFont(font,18);
+    text("Waiting for another player to join...",250,350);
+  };
+}
+
+function SearchUi()
+{
+  var self = this;
+  self.animate = 0;
+  self.animate_one = function()
+  {
+    
+  };
 }
 
 function Mode()
@@ -2293,6 +2308,7 @@ var lobby = new LobbyMode();
 var network = new Net();
 var over = new GameOverMode();
 var title = new TitleMode();
+var waiting = new WaitingMode();
 var create = new CreateGameMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
@@ -2343,6 +2359,9 @@ void draw()
     break;
   case 6:
     create.display();
+    break;
+  case 7:
+    waiting.display();
     break;
   }
 }
