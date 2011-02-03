@@ -14,7 +14,8 @@ function PasswordPage(pages)
     self.radio_switch = new RadioSwitch();
     self.radio_switch.add(self.yes);
     self.radio_switch.add(self.no);
-    self.pages.collision.effects.add_effect(self.radio_switch);   
+    self.pages.collision.effects.add_effect(self.radio_switch);
+    self.pages.collision.effects.add_effect(new PasswordEffects(self.pages));
   };
   self.call = function()
   {
