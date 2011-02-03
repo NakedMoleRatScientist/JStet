@@ -6,7 +6,7 @@ function PasswordEffects(var pages)
   self.status = 0;
   self.check = function(var object)
   {
-    if (object.type == 3)
+    if (object.type == 3 && self.status == 1)
     {
       mode.change(7);
     }
