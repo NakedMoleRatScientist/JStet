@@ -2,6 +2,7 @@
 function NamePage(var pages)
 {
   var self = this;
+  self.pages = pages;
   self.typing = true;
   self.initialize = function()
   {
