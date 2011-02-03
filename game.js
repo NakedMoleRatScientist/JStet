@@ -44,6 +44,7 @@ function LobbyProtocol(net,lobby)
     text("w - rotate",50,590);
   };
 }
+
 function PlayButton()
 {
   var self = this;
@@ -456,7 +457,6 @@ function PlayersEffects(var pages)
     if (self.page.data.get("players") == 1)
     {
       game_protocol.request_game();
-      mode.change(4);
     }
   };
 }
@@ -886,6 +886,7 @@ function HighScoreMode()
   self.name = new Input();
   self.display = function()
   {
+    textFont(font,18);
     background(0,0,0);
     noFill();
     rect(300,305,55,30);
@@ -2046,7 +2047,6 @@ function LobbyEffects()
       if (object.member == 0)
       {
 	game_protocol.request_game();
-	mode.change(4);
       }
       else if (object.member == 1)
       {
@@ -2099,6 +2099,11 @@ function LobbyMode()
     rect(0,580,800,20);
     rect(0,0,400,580);
   };
+}
+
+function Waiting()
+{
+  var self = this;
 }
 
 function Mode()
@@ -2163,7 +2168,7 @@ function Engine(protocol,mode)
   protocol.engine = self;
   self.score = 0;
   self.find_player = function(id)
-  {
+  { 
     for (var i = 0;i < self.players.length;i++)
     {
       if (self.players[i].id == id)
@@ -2249,13 +2254,13 @@ function EngineDraw()
     text("Player Two",75,450);
     rect(self.drawField.x + 400,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
     rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
-    self.instruction.display();
+    self.instruct();
     self.player_one();
     self.score();
   };
   self.player_one = function()
   {
-    var one = engine.get_player(engine.you);
+    var one = engine.find_player(engine.you);
     if (one.current.draw == true)
     {
       self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
@@ -2268,6 +2273,10 @@ function EngineDraw()
       self.drawShape.create_blocks(one.future.get_list(),225,210,one.future.shape.color);
     }
     self.drawShape.draw_field(one.field.field);
+  };
+  self.instruct = function()
+  {
+    text("Instruction: ",50,450);
   };
   self.score = function()
   {
