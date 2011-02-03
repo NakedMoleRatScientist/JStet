@@ -354,9 +354,19 @@ function PassEffects(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.act = function()
+  self.check = function(var object)
   {
     self.pages.data.update("password",self.pages.input.string);
+  };
+}
+
+function PasswordEffects(var pages)
+{
+  var self = this;
+  self.pages = pages;
+  self.check = function()
+  {
+    
   };
 }
 
@@ -1074,7 +1084,7 @@ void enterHighScoreKey()
   case -8:
     high_score.name.destroy();
     break;
-  case -13:
+  case -10:
     score_protocol.transmit_score(high_score.get_name(),engine.score);
     high_score.name.clean();
     mode.change(2);
@@ -1290,8 +1300,8 @@ void typing()
     return -8;
     break;
   //enter
-  case 13:
-    return -13;
+  case 10:
+    return -10;
     break;
   //shift, ctrl, etc
   case 65535:
@@ -1300,6 +1310,7 @@ void typing()
   default: return key;
   }
 }
+
 
 function GameOverMode()
 {
@@ -2318,7 +2329,7 @@ var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
 var engine = new Engine(game_protocol,mode);
 var engineDraw = new EngineDraw();
-//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original's developer.
+//Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original developer's.
 
 
 
