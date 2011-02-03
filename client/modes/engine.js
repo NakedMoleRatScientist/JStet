@@ -110,7 +110,7 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    var one = engine.get_player(0);
+    var one = engine.get_player(engine.you);
     if (one.current.draw == true)
     {
       self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
