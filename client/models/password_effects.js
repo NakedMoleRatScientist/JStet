@@ -16,7 +16,7 @@ function PasswordEffects(var pages)
       {
 	self.status = 0;
       }
-      else (object.member == 1)
+      else if(object.member == 1)
       {
 	self.status = 1;
       }
