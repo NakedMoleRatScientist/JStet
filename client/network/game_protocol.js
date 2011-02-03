@@ -43,8 +43,8 @@ function GameProtocol(var net)
     //initialize game mode.
     case 0:
       console.log("Game initialized.");
-      mode.change(4);
       self.engine.start(data[0]);
+      mode.change(4);
       break;
     case 1:
       //Get new shape.
