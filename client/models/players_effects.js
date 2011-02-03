@@ -30,7 +30,8 @@ function PlayersEffects(var pages)
   {
     if (self.page.data.get("players") == 1)
     {
-      console.log("end mode");
+      game_protocol.request_game();
+      mode.change(4);
     }
   };
 }
