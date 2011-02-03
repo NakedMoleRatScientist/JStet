@@ -5,6 +5,7 @@ function LobbyMode()
   self.chat = new Chat();
   self.play = new TextButton("Play",100,450,20);
   self.session = new TextButton("Create Game",100,450,75);
+  self.find = new TextButton("Join",100,450,130);
   self.effect = new LobbyEffects();
   self.collision = new Collision();
   self.effect.add(self.play.rect);
