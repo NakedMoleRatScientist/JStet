@@ -9,6 +9,7 @@ function NamePage(var pages)
   };
   self.call = function()
   {
+    textFont(font,18);
     text("What do you wish the name to be?",250,210);
   };
 }
