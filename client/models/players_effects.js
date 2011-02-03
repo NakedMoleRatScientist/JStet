@@ -9,7 +9,11 @@ function PlayersEffects(var pages)
     if (object.type == 1)
     {
       self.update_players();
-    }	
+    }
+    else if (object.type == 3)
+    {
+      self.end();
+    }
   };
   self.update_players = function()
   {
