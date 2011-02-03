@@ -12,8 +12,13 @@ function PassEntryPage(var pages)
   self.call = function()
   {
     textFont(font,18);
-    text("Please type your password for the other player.", 100, 250);
+    
     text(self.pages.input.string,150,300);
+    
+  };
+  self.first_stage = function()
+  {
     text("After you're done, press enter.",200,360);
+    text("Please type your password for the other player.", 100, 250);
   };
 }
