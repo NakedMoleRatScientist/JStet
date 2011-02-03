@@ -104,7 +104,7 @@ function EngineDraw()
     text("Player Two",75,450);
     rect(self.drawField.x + 400,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
     rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
-    self.instruction.display();
+    self.instruct();
     self.player_one();
     self.score();
   };
@@ -126,7 +126,7 @@ function EngineDraw()
   };
   self.instruct = function()
   {
-     text("Instruction: ",50,500);
+    text("Instruction: ",50,450);
   };
   self.score = function()
   {
