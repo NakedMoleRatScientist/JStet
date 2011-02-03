@@ -28,12 +28,9 @@ function PlayersEffects(var pages)
   };
   self.end = function(var object)
   {
-    if (object.type == 3)
+    if (self.page.data.get("players") == 1)
     {
-      if (self.page.data.get("players") == 1)
-      {
-	console.log("end mode");
-      }
+      console.log("end mode");
     }
   };
 }
