@@ -5,6 +5,9 @@ function PasswordEffects(var pages)
   self.pages = pages;
   self.check = function(var object)
   {
-    
+    if (object.type == 3)
+    {
+      mode.change(7);
+    }
   };
 }
