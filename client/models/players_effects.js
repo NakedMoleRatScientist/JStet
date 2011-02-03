@@ -23,7 +23,7 @@ function PlayersEffects(var pages)
     }
     else
     {
-      self.page.data.update("players",2)
+      self.page.data.update("players",2);
     }
   };
   self.end = function(var object)
