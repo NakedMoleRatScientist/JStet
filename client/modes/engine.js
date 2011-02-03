@@ -19,6 +19,7 @@ function Engine(protocol,mode)
   self.score = 0;
   self.find_player = function(id)
   {
+    
     for (var i = 0;i < self.players.length;i++)
     {
       if (self.players[i].id == id)
@@ -110,7 +111,9 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    var one = engine.get_player(engine.you);
+    console.log(engine.you);
+    var one = engine.find_player(engine.you);
+    console.log(one);
     if (one.current.draw == true)
     {
       self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
