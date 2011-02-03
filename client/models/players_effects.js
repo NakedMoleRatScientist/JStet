@@ -31,7 +31,6 @@ function PlayersEffects(var pages)
     if (self.page.data.get("players") == 1)
     {
       game_protocol.request_game();
-      mode.change(4);
     }
   };
 }
