@@ -1,5 +1,5 @@
 
-function Waiting()
+function WaitingMode()
 {
   var self = this;
   self.display = function()
