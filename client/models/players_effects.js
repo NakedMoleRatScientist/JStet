@@ -8,15 +8,19 @@ function PlayersEffects(var pages)
   {
     if (object.type == 1)
     {
-      if (object.member == 0)
-      {
-	self.page.data.update("players",1);
-      }
-      else
-      {
-	self.page.data.update("players",2);
-      }
+      self.update_players();
     }	
+  };
+  self.update_players = function()
+  {
+    if (object.member == 0)
+    {
+      self.page.data.update("players",1);
+    }
+    else
+    {
+      self.page.data.update("players",2)
+    }
   };
   self.end = function(var object)
   {
