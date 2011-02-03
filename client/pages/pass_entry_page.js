@@ -5,6 +5,7 @@ function PassEntryPage(var pages)
   self.pages = pages;
   self.typing = true;
   self.effects = new PassEffects(self.pages);
+  self.state = 0;
   self.initialize = function()
   {
   };
