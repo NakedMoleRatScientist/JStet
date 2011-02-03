@@ -15,11 +15,8 @@ function DataCollect()
       {
 	return i;
       }
-      else
-      {
-	return -1;
-      }
     }
+    return -1;
   };
   self.insert = function(var i, var info)
   {
