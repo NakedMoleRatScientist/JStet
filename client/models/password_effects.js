@@ -9,5 +9,12 @@ function PasswordEffects(var pages)
     {
       mode.change(7);
     }
+    else if(object.type == 1)
+    {
+      if (object.member == 0)
+      {
+	self.status = 0;
+      }
+    }
   };
 }
