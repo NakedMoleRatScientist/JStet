@@ -4,6 +4,7 @@ function PasswordEffects(var pages)
   var self = this;
   self.pages = pages;
   self.status = 0;
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
     if (object.type == 3 && self.status == 1)
