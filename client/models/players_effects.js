@@ -30,7 +30,7 @@ function PlayersEffects(var pages)
   {
     if (object.type == 3)
     {
-      if (self.page.data.get("players") == 1
+      if (self.page.data.get("players") == 1)
       {
 	console.log("end mode");
       }
