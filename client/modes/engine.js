@@ -111,9 +111,7 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    console.log(engine.you);
     var one = engine.find_player(engine.you);
-    console.log(one);
     if (one.current.draw == true)
     {
       self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
