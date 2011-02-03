@@ -24,4 +24,8 @@ function PassEntryPage(var pages)
     text("After you're done, press enter.",200,360);
     text("Please type your password for the other player.", 100, 250);
   };
+  self.second_stage = function()
+  {
+    text("Please retype the password again.",100,250);
+  };
 }
