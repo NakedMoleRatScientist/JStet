@@ -1,6 +1,6 @@
 
 
-function PasswordPage(pages)
+function PasswordPage(var pages)
 {
   var self = this;
   self.pages = pages;
