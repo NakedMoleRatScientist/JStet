@@ -5,6 +5,6 @@ function PassEffects(var pages)
   self.pages = pages;
   self.act = function()
   {
-    self.page.data.update("password",self.pages.input.string);
+    self.pages.data.update("password",self.pages.input.string);
   };
 }
