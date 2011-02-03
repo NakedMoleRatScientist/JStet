@@ -199,5 +199,8 @@ void draw()
   case 7:
     waiting.display();
     break;
+  case 8:
+    list.display();
+    break;
   }
 }
