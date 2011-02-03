@@ -376,6 +376,10 @@ function PassEntryPage(var pages)
     {
       self.first_stage();
     }
+    else
+    {
+      self.second_stage();
+    }
     text(self.pages.input.string,150,300);
     
   };
@@ -420,7 +424,7 @@ function PasswordPage(pages)
   };
 }
 
-function PlayersEffect(var pages)
+function PlayersEffects(var pages)
 {
   var self = this;
   self.page = pages;
@@ -429,15 +433,29 @@ function PlayersEffect(var pages)
   {
     if (object.type == 1)
     {
-      if (object.member == 0)
-      {
-	self.page.data.update("players",1);
-      }
-      else
-      {
-	self.page.data.update("players",2);
-      }
+      self.update_players();
     }	
+  };
+  self.update_players = function()
+  {
+    if (object.member == 0)
+    {
+      self.page.data.update("players",1);
+    }
+    else
+    {
+      self.page.data.update("players",2)
+    }
+  };
+  self.end = function(var object)
+  {
+    if (object.type == 3)
+    {
+      if (self.page.data.get("players") == 1
+      {
+	console.log("end mode");
+      }
+    }
   };
 }
 
@@ -456,7 +474,7 @@ function PlayersPage(pages)
     self.radio_switch.add(self.one);
     self.radio_switch.add(self.two);
     self.pages.collision.effects.add_effect(self.radio_switch);
-    self.pages.collision.effects.add_effect(new PlayersEffect(self.pages));    
+    self.pages.collision.effects.add_effect(new PlayersEffects(self.pages));    
   };
   self.call = function()
   {
