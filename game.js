@@ -389,6 +389,7 @@ function PasswordEffects(var pages)
 function NamePage(var pages)
 {
   var self = this;
+  self.pages = pages;
   self.typing = true;
   self.initialize = function()
   {
@@ -396,7 +397,10 @@ function NamePage(var pages)
   };
   self.call = function()
   {
-    
+    textFont(font,18);
+    text("What do you wish the name to be?",150,210);
+    text(self.pages.input.string,170,240);
+    text("When you're done, presse enter",180,265);
   };
 }
 
@@ -738,7 +742,9 @@ function CreateGameMode()
   self.pages = new Pages();
   self.pages.data.create("players");
   self.pages.data.create("password");
+  self.pages.data.create("name");
   self.pages.add(new PlayersPage(self.pages));
+  self.pages.add(new NamePage(self.pages));
   self.pages.add(new PasswordPage(self.pages));
   self.pages.add(new PassEntryPage(self.pages));
   self.pages.initialize();
