@@ -6,6 +6,7 @@ function CreateGameMode()
   self.pages = new Pages();
   self.pages.data.create("players");
   self.pages.data.create("password");
+  self.pages.data.create("name");
   self.pages.add(new PlayersPage(self.pages));
   self.pages.add(new PasswordPage(self.pages));
   self.pages.add(new PassEntryPage(self.pages));
