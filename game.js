@@ -364,9 +364,25 @@ function PasswordEffects(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.check = function()
+  self.status = 0;
+  self.effect = new Effect(self);
+  self.check = function(var object)
   {
-    
+    if (object.type == 3 && self.status == 1)
+    {
+      mode.change(7);
+    }
+    else if(object.type == 1)
+    {
+      if (object.member == 0)
+      {
+	self.status = 0;
+      }
+      else if(object.member == 1)
+      {
+	self.status = 1;
+      }
+    }
   };
 }
 
@@ -420,7 +436,8 @@ function PasswordPage(pages)
     self.radio_switch = new RadioSwitch();
     self.radio_switch.add(self.yes);
     self.radio_switch.add(self.no);
-    self.pages.collision.effects.add_effect(self.radio_switch);   
+    self.pages.collision.effects.add_effect(self.radio_switch);
+    self.pages.collision.effects.add_effect(new PasswordEffects(self.pages));
   };
   self.call = function()
   {
