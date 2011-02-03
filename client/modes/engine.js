@@ -144,6 +144,7 @@ var network = new Net();
 var over = new GameOverMode();
 var title = new TitleMode();
 var waiting = new WaitingMode();
+var list = new ListGameMode();
 var create = new CreateGameMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
