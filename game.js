@@ -386,6 +386,20 @@ function PasswordEffects(var pages)
   };
 }
 
+function NamePage(var pages)
+{
+  var self = this;
+  self.typing = true;
+  self.initialize = function()
+  {
+    
+  };
+  self.call = function()
+  {
+    
+  };
+}
+
 function PassEntryPage(var pages)
 {
   var self = this;
@@ -422,7 +436,7 @@ function PassEntryPage(var pages)
 }
 
 
-function PasswordPage(pages)
+function PasswordPage(var pages)
 {
   var self = this;
   self.pages = pages;
@@ -829,6 +843,12 @@ function ScoreBoardMode(protocol)
   };
 }
 
+
+function SearchProtocol(var net)
+{
+  var self = this;
+  self.net = net;
+}
 
 
 function ScoreProtocol(net)
@@ -2134,6 +2154,7 @@ function WaitingMode()
   var self = this;
   self.display = function()
   {
+    background(0,0,0);
     textFont(font,18);
     text("Waiting for another player to join...",250,350);
   };
