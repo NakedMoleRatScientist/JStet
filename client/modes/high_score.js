@@ -5,6 +5,7 @@ function HighScoreMode()
   self.name = new Input();
   self.display = function()
   {
+    textFont(font,18);
     background(0,0,0);
     noFill();
     rect(300,305,55,30);
