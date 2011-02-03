@@ -253,8 +253,8 @@ function GameProtocol(var net)
     //initialize game mode.
     case 0:
       console.log("Game initialized.");
-      mode.change(4);
       self.engine.start(data[0]);
+      mode.change(4);
       break;
     case 1:
       //Get new shape.
@@ -433,10 +433,14 @@ function PlayersEffects(var pages)
   {
     if (object.type == 1)
     {
-      self.update_players();
-    }	
+      self.update_players(object);
+    }
+    else if (object.type == 3)
+    {
+      self.end();
+    }
   };
-  self.update_players = function()
+  self.update_players = function(var object)
   {
     if (object.member == 0)
     {
@@ -444,17 +448,15 @@ function PlayersEffects(var pages)
     }
     else
     {
-      self.page.data.update("players",2)
+      self.page.data.update("players",2);
     }
   };
   self.end = function(var object)
   {
-    if (object.type == 3)
+    if (self.page.data.get("players") == 1)
     {
-      if (self.page.data.get("players") == 1
-      {
-	console.log("end mode");
-      }
+      game_protocol.request_game();
+      mode.change(4);
     }
   };
 }
@@ -613,8 +615,8 @@ function Pages()
   };
   self.initialize = function()
   {
-    self.collision.effects.add_effect(self.effect);
     self.pages[self.on].initialize();
+    self.collision.effects.add_effect(self.effect);
   };
 }
 
@@ -2253,7 +2255,7 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    var one = engine.get_player(0);
+    var one = engine.get_player(engine.you);
     if (one.current.draw == true)
     {
       self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
