@@ -56,7 +56,10 @@ function Pages()
   };
   self.type_enter = function(var info)
   {
-    self.pages[self.on].effects.act(); 
+    if (self.pages[self.on].typing == true)
+    {
+      self.pages[self.on].effects.act();
+    }
   };
   self.initialize = function()
   {
