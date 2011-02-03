@@ -16,6 +16,10 @@ function PassEntryPage(var pages)
     {
       self.first_stage();
     }
+    else
+    {
+      self.second_stage();
+    }
     text(self.pages.input.string,150,300);
     
   };
