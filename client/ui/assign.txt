@@ -1,0 +1,3 @@
+ui object type assignment:
+
+radio button : 1
