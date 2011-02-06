@@ -48,6 +48,10 @@ function Pages()
       {
 	self.input.destroy();
       }
+      else if (info == -10)
+      {
+	self.pages[self.on].typing = false
+      }
       else
       {
 	self.input.addLetter(info);
