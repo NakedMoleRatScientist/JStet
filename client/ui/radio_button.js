@@ -10,7 +10,6 @@ function RadioButton()
   self.diameter = self.radius * 2;
   self.x = 0;
   self.y = 0;
-  self.member = 0;
   self.set = function(var x, var y)
   {
     self.x = x;
