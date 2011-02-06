@@ -15,7 +15,14 @@ function NamePage(var pages)
   self.call = function()
   {
     textFont(font,18);
-    self.type_text();
+    if (self.state == 0)
+    {
+      self.type_text();
+    }
+    else
+    {
+      self.confirm_text();
+    }
   };
   self.type_text = function()
   {
