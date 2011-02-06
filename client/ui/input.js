@@ -2,7 +2,7 @@
 function Input()
 {
   var self = this;
-  self.ui = new UiObject(self,3);
+  self.ui = new UiObject(self,2);
   self.string = "";
   self.clean = function()
   {
