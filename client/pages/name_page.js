@@ -19,4 +19,8 @@ function NamePage(var pages)
     text(self.pages.input.string,170,240);
     text("When you're done, presse enter",180,265); 
   };
+  self.confirm_text = function()
+  {
+    
+  };
 }
