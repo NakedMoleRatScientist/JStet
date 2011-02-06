@@ -8,6 +8,7 @@ function NamePage(var pages)
   self.initialize = function()
   {
     self.yes = new RadioButton();
+    self.yes.set(150,220);
     self.no = new RadioButton();
     self.radio_switch = new RadioSwitch();
     self.pages.collision.effects.add_effect(new NameEffects(self.pages));
