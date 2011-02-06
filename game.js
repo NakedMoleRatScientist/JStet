@@ -393,12 +393,12 @@ function NamePage(var pages)
   self.typing = true;
   self.initialize = function()
   {
-    
+    self.pages.collision.effects.add(new NameEffects(self.pages));
   };
   self.call = function()
   {
     textFont(font,18);
-    text("What do you wish the name to be?",150,210);
+    text("What do you wish the name of the game to be?",150,210);
     text(self.pages.input.string,170,240);
     text("When you're done, presse enter",180,265);
   };
@@ -645,18 +645,19 @@ function Pages()
       {
 	self.input.destroy();
       }
+      else if (info == -10)
+      {
+	self.type_enter();
+      }
       else
       {
 	self.input.addLetter(info);
       }
     }
   };
-  self.type_enter = function(var info)
+  self.type_enter = function()
   {
-    if (self.pages[self.on].typing == true)
-    {
-      self.pages[self.on].effects.act();
-    }
+    self.pages[self.on].effects.act();
   };
   self.initialize = function()
   {
@@ -724,15 +725,7 @@ function RadioButton()
 void createKey()
 {
   var info = typing();
-  switch(info)
-  {
-  default:
-    create.pages.type_check(info);
-    break;
-  case 10:
-    create.pages.type_enter(info);
-    break;
-  }
+  create.pages.type_check(info);
 }
 
 function CreateGameMode()
