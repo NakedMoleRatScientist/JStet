@@ -1,5 +1,5 @@
 
-function UiObject(var t)
+function UiObject(var parent, var t)
 {
   var self = this;
   self.member = 0;
