@@ -32,7 +32,7 @@ function NamePage(var pages)
   };
   self.confirm_text = function()
   {
-    text("Name of the game is.. " + self.pages.data.get("name"),120,210);
+    text("Name of the game is.. " + self.pages.data.get("name"),150,190);
     text("Is this the name of the game you wish it to be?",150,210); 
   };
   self.act = function()
