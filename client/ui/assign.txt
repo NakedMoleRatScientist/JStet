@@ -1,4 +1,5 @@
 ui object type assignment:
 
 radio button : 1
-rect object  : 0
+rect object : 0
+input : 2
