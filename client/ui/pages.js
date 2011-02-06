@@ -50,7 +50,7 @@ function Pages()
       }
       else if (info == -10)
       {
-	self.pages[self.on].typing = false
+	self.type_enter();
       }
       else
       {
