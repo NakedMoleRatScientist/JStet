@@ -6,6 +6,7 @@ function NamePage(var pages)
   self.typing = true;
   self.initialize = function()
   {
+    self.radio_switch = new RadioSwitch();
     self.pages.collision.effects.add(new NameEffects(self.pages));
   };
   self.call = function()
