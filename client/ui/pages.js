@@ -67,4 +67,8 @@ function Pages()
     self.pages[self.on].initialize();
     self.collision.effects.add_effect(self.effect);
   };
+  self.act = function()
+  {
+    self.pages[self.on].act();
+  };
 }
