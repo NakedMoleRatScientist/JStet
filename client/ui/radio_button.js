@@ -2,7 +2,7 @@
 function RadioButton()
 {
   var self = this;
-  self.type = 1;
+  self.ui = new UiObject(self,1);
   self.state = false;
   self.height = 10;
   self.width = 10;
