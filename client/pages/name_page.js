@@ -35,4 +35,15 @@ function NamePage(var pages)
     text("Name of the game is.. " + self.pages.data.get("name"),120,210);
     text("Is this the name of the game you wish it to be?",150,210); 
   };
+  self.act = function()
+  {
+    if (self.state == 0)
+    {
+      self.state = 1;
+    }
+    else
+    {
+      self.state = 0;
+    }
+  };
 }
