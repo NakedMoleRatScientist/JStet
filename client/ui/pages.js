@@ -60,7 +60,7 @@ function Pages()
   };
   self.type_enter = function()
   {
-    self.pages[self.on].effects.act();
+    self.collision.effects.check(self.input);
   };
   self.initialize = function()
   {
