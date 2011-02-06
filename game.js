@@ -386,6 +386,16 @@ function PasswordEffects(var pages)
   };
 }
 
+function NameEffects(var pages)
+{
+  var self = this;
+  self.pages = pages;
+  self.check = function(var object)
+  {
+    self.pages.data.update("name",self.pages.input.string);
+  };
+}
+
 function NamePage(var pages)
 {
   var self = this;
@@ -700,7 +710,6 @@ function RadioButton()
   self.diameter = self.radius * 2;
   self.x = 0;
   self.y = 0;
-  self.member = 0;
   self.set = function(var x, var y)
   {
     self.x = x;
@@ -2128,6 +2137,13 @@ function Effect(var parent)
       self.collision.add(self.elements[i]);
     }
   };
+}
+
+function UiObject(var parent, var t)
+{
+  var self = parent;
+  self.member = 0;
+  self.type = t;
 }
 
 function LobbyMode()
