@@ -394,6 +394,7 @@ function NameEffects(var pages)
     if (object.type == 2)
     {
       self.pages.data.update("name",self.pages.input.string);
+      self.pages.act();
     }
   };
 }
@@ -403,17 +404,26 @@ function NamePage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = true;
+  self.state = 0;
   self.initialize = function()
   {
     self.yes = new RadioButton();
+    self.yes.set(150,220);
     self.no = new RadioButton();
     self.radio_switch = new RadioSwitch();
-    self.pages.collision.effects.add(new NameEffects(self.pages));
+    self.pages.collision.effects.add_effect(new NameEffects(self.pages));
   };
   self.call = function()
   {
     textFont(font,18);
-    self.type_text();
+    if (self.state == 0)
+    {
+      self.type_text();
+    }
+    else
+    {
+      self.confirm_text();
+    }
   };
   self.type_text = function()
   {
@@ -423,8 +433,19 @@ function NamePage(var pages)
   };
   self.confirm_text = function()
   {
-    text("Name of the game is.. " + self.pages.data.get("name"),120,210);
+    text("Name of the game is.. " + self.pages.data.get("name"),150,190);
     text("Is this the name of the game you wish it to be?",150,210); 
+  };
+  self.act = function()
+  {
+    if (self.state == 0)
+    {
+      self.state = 1;
+    }
+    else
+    {
+      self.state = 0;
+    }
   };
 }
 
@@ -681,12 +702,16 @@ function Pages()
   };
   self.type_enter = function()
   {
-    self.pages[self.on].effects.act();
+    self.collision.effects.check(self.input);
   };
   self.initialize = function()
   {
     self.pages[self.on].initialize();
     self.collision.effects.add_effect(self.effect);
+  };
+  self.act = function()
+  {
+    self.pages[self.on].act();
   };
 }
 
