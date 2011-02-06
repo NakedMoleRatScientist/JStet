@@ -21,6 +21,6 @@ function NamePage(var pages)
   };
   self.confirm_text = function()
   {
-    
+    text("Is this the name of the game you wish it to be?",150,210); 
   };
 }
