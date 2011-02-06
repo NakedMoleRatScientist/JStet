@@ -58,7 +58,7 @@ function Pages()
       }
     }
   };
-  self.type_enter = function(var info)
+  self.type_enter = function()
   {
     self.pages[self.on].effects.act();
   };
