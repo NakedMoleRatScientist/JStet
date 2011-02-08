@@ -10,6 +10,7 @@ function NamePage(var pages)
     self.yes = new RadioButton();
     self.yes.set(300,220);
     self.no = new RadioButton();
+    self.no.set(400,220);
     self.radio_switch = new RadioSwitch();
     self.pages.collision.effects.add_effect(new NameEffects(self.pages));
   };
