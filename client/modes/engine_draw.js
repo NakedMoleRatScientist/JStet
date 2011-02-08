@@ -33,6 +33,10 @@ function EngineDraw()
   };
   self.field_draw_mode = function()
   {
+    if (self.drawMode == 0)
+    {
+      self.two_players_field();
+    }
   };
   self.player_one = function()
   {
