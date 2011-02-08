@@ -20,6 +20,7 @@ function NamePage(var pages)
     self.submit_effects.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.name);
     self.pages.collision.effects.add_effect(self.radio_switch);
+    self.pages.collision.effects.add_self.submit_effects);
   };
   self.call = function()
   {
