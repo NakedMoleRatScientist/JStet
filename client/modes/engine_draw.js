@@ -22,7 +22,8 @@ function EngineDraw()
   };
   self.one_player_field = function()
   {
-    text("Player One",350,50); 
+    text("Player One",350,50);
+    rect(self.drawField.x,self.drawField.y,self.drawField.width,self.drawField.height);
   };
   self.field_draw_mode = function()
   {
