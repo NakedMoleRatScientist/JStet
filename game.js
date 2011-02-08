@@ -394,7 +394,7 @@ function SubmitEffects(var pages,radio)
   {
     if (object.type == 0)
     {
-      if (self.radio.which_key == -1)
+      if (self.radio.which_key == -1 || self.radio.which_key == 1)
       {
 	self.pages.act();
       }
@@ -442,7 +442,7 @@ function NamePage(var pages)
     self.submit_effects.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.name);
     self.pages.collision.effects.add_effect(self.radio_switch);
-    self.pages.collision.effects.add_self.submit_effects);
+    self.pages.collision.effects.add_self(self.submit_effects);
   };
   self.call = function()
   {
@@ -776,7 +776,7 @@ function RadioSwitch()
   {
     for (var i = 0; i < self.elements.length; i++)
     {
-      if (self.elements[i] == true)
+      if (self.elements[i].state == true)
       {
 	return i;
       }
@@ -1194,21 +1194,21 @@ function Collision()
       {
 	if (self.check_rect(x,y,i) == true)
 	{
-	  self.effects.check(self.elements[i]);
+	  self.send(self.elements[i]);
 	}
       }
       else if(self.elements[i].type == 1)
       {
 	if (self.check_circle(x,y,i) == true)
 	{
-	  self.effects.check(self.elements[i]);
+	  self.send(self.elements[i]);
 	}
       }
     }
   };
   self.send = function(var object)
   {
-    self.effects.check(self.elements[i]);
+    self.effects.check(object);
   };
 }
 
