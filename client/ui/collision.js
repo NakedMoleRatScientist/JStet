@@ -52,7 +52,7 @@ function Collision()
       {
 	if (self.check_rect(x,y,i) == true)
 	{
-	  self.effects.check(self.elements[i]);
+	  self.send(self.elements[i]);
 	}
       }
       else if(self.elements[i].type == 1)
