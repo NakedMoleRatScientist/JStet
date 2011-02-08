@@ -14,8 +14,6 @@ function EngineDraw()
     //player one...
     self.field_draw_mode();
     //player two
-    
-    rect(self.drawField.x + 400,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
     rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
     self.instruct();
     self.player_one();
