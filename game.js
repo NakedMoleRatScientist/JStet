@@ -1698,13 +1698,14 @@ function PlayField()
 
 function PlayFieldDraw()
 {
-  this.x = 50;
-  this.y = 50;
-  this.width = 200;
-  this.height = 400;
-  self.display = function()
+  var self = this;
+  self.x = 50;
+  self.y = 50;
+  self.width = 200;
+  self.height = 400;
+  self.display = function(var x = 0, var y = 0)
   {
-    rect(self.x,self.y,self.width,self.height);
+    rect(self.x + x,self.y + y,self.width,self.height);
     rect(self.x + self.width,self.y,100,self.height);
   };
 }
@@ -2308,6 +2309,7 @@ function Player()
   self.instruction = new Instruction();
   self.drawField = new PlayFieldDraw();
   self.drawShape = new TetrominoDraw();
+  self.drawMode = 0;
   self.display = function()
   {
     textFont(font,18);
@@ -2329,11 +2331,21 @@ function Player()
     text("Player One",350,50);
     self.drawField.display();
   };
-  self.field_draw_mode = function()
+  self.two_players_field = function()
   {
     text("Player One",75,50);
     self.drawField.display();
-    rect(self.drawField.x + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
+  };
+  self.field_draw_mode = function()
+  {
+    if (self.drawMode == 0)
+    {
+      self.one_player_field();
+    }
+    else
+    {
+      self.two.players.field();
+    }
   };
   self.player_one = function()
   {
