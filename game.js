@@ -398,6 +398,10 @@ function SubmitEffects(var pages,radio)
       {
 	self.pages.act();
       }
+      else if (self.radio.which_key == 0)
+      {
+	self.pages.collision.send(new TurnEvent());
+      }
     }
   };
 }
@@ -433,10 +437,12 @@ function NamePage(var pages)
     self.radio_switch.add(self.yes);
     self.radio_switch.add(self.no);
     self.submit = new TextButton("Submit",100,350,270);
-    self.effects = new NameEffects(self.pages);
-    self.effects.add(self.submit.rect);
-    self.pages.collision.effects.add_effect(self.effects);
+    self.name = new NameEffects(self.pages);
+    self.submit_effects = new SubmitEffects(self.pages,self.radio_switch);
+    self.submit_effects.add(self.submit.rect);
+    self.pages.collision.effects.add_effect(self.name);
     self.pages.collision.effects.add_effect(self.radio_switch);
+    self.pages.collision.effects.add_self.submit_effects);
   };
   self.call = function()
   {
@@ -1199,6 +1205,10 @@ function Collision()
 	}
       }
     }
+  };
+  self.send = function(var object)
+  {
+    self.effects.check(self.elements[i]);
   };
 }
 
