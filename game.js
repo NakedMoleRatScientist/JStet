@@ -384,6 +384,24 @@ function PasswordEffects(var pages)
   };
 }
 
+function SubmitEffects(var pages,radio)
+{
+  var self = this;
+  self.pages = pages;
+  self.radio = radio;
+  self.effect = new Effect(self);
+  self.check = function(var object)
+  {
+    if (object.type == 0)
+    {
+      if (self.radio.which_key == -1)
+      {
+	self.pages.act();
+      }
+    }
+  };
+}
+
 function NameEffects(var pages)
 {
   var self = this;
@@ -414,7 +432,7 @@ function NamePage(var pages)
     self.radio_switch = new RadioSwitch();
     self.radio_switch.add(self.yes);
     self.radio_switch.add(self.no);
-    self.submit = new TextButton("Submit",150,350,270);
+    self.submit = new TextButton("Submit",100,350,270);
     self.effects = new NameEffects(self.pages);
     self.effects.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.effects);
@@ -747,6 +765,17 @@ function RadioSwitch()
 	}
       }
     }
+  };
+  self.which_key = function()
+  {
+    for (var i = 0; i < self.elements.length; i++)
+    {
+      if (self.elements[i] == true)
+      {
+	return i;
+      }
+    }
+    return -1;
   };
 }
 
