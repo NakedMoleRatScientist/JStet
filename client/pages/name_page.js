@@ -38,7 +38,8 @@ function NamePage(var pages)
   {
     text("What do you wish the name of the game to be?",150,210);
     text(self.pages.input.string,170,240);
-    text("When you're done, presse enter",180,265); 
+    text("When you're done, presse enter",180,265);
+    rect(300,300,200,200);
   };
   self.confirm_text = function()
   {
@@ -49,7 +50,6 @@ function NamePage(var pages)
     self.no.text("No");
     self.no.display();
     self.submit.display();
-    rect(300,300,200,200);
   };
   self.act = function()
   {
