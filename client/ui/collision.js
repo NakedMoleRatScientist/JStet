@@ -59,7 +59,7 @@ function Collision()
       {
 	if (self.check_circle(x,y,i) == true)
 	{
-	  self.effects.check(self.elements[i]);
+	  self.send(self.elements[i]));
 	}
       }
     }
