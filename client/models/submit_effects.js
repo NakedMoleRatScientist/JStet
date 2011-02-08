@@ -13,7 +13,7 @@ function SubmitEffects(var pages,radio)
       {
 	self.pages.act();
       }
-      else if (self.radio.which_key == 0)
+      else if (self.radio.which_key()== 0)
       {
 	self.pages.collision.send(new TurnEvent());
       }
