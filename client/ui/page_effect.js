@@ -10,7 +10,7 @@ function PageEffect(var pages)
     if (object.type == 3)
     {
       console.log("doop");
-      self.pages.collision.clean()
+      self.collision.clean()
       self.pages.forward();
       self.pages.initialize();
     }
