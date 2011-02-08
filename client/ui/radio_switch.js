@@ -29,6 +29,6 @@ function RadioSwitch()
 	return i;
       }
     }
-    return false;
+    return -1;
   };
 }
