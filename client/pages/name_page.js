@@ -44,6 +44,7 @@ function NamePage(var pages)
     self.yes.display();
     self.no.text("No");
     self.no.display();
+    self.submit.display();
   };
   self.act = function()
   {
