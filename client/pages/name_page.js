@@ -16,6 +16,7 @@ function NamePage(var pages)
     self.radio_switch.add(self.no);
     self.submit = new TextButton("Submit",350,270);
     self.name = new NameEffects(self.pages);
+    self.name.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.name);
     self.pages.collision.effects.add_effect(self.radio_switch);
   };
