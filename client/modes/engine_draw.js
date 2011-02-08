@@ -11,9 +11,7 @@ function EngineDraw()
     stroke(205,201,201);
     fill(0,0,0);
     //player one...
-    text("Player One",75,50);
-    rect(self.drawField.x,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
-    rect(self.drawField.x + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
+    self.field_draw_mode();
     //player two
     text("Player Two",75,450);
     rect(self.drawField.x + 400,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
@@ -21,6 +19,12 @@ function EngineDraw()
     self.instruct();
     self.player_one();
     self.score();
+  };
+  self.field_draw_mode = function()
+  {
+    text("Player One",75,50);
+    rect(self.drawField.x,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
+    rect(self.drawField.x + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
   };
   self.player_one = function()
   {
