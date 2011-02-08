@@ -29,7 +29,6 @@ function EngineDraw()
   {
     text("Player One",75,50);
     self.drawField.display();
-    rect(self.drawField.x + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
   };
   self.player_one = function()
   {
