@@ -38,6 +38,7 @@ function NamePage(var pages)
     text("Is this the name of the game you wish it to be?",150,210);
     self.yes.text("Yes");
     self.yes.display();
+    self.no.text("No");
     self.no.display();
   };
   self.act = function()
