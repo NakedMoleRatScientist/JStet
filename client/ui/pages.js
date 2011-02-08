@@ -15,7 +15,7 @@ function Pages()
   self.forward = function ()
   {
     self.on ++;
-    if (self.on > self.pages.length - 1)
+    if (self.on > self.pages.length)
     {
       self.on --;
     }
