@@ -408,10 +408,14 @@ function NamePage(var pages)
   self.initialize = function()
   {
     self.yes = new RadioButton();
-    self.yes.set(150,220);
+    self.yes.set(300,220);
     self.no = new RadioButton();
+    self.no.set(400,220);
     self.radio_switch = new RadioSwitch();
+    self.radio_switch.add(self.yes);
+    self.radio_switch.add(self.no);
     self.pages.collision.effects.add_effect(new NameEffects(self.pages));
+    self.pages.collision.effects.add_effect(self.radio_switch);
   };
   self.call = function()
   {
@@ -434,7 +438,11 @@ function NamePage(var pages)
   self.confirm_text = function()
   {
     text("Name of the game is.. " + self.pages.data.get("name"),150,190);
-    text("Is this the name of the game you wish it to be?",150,210); 
+    text("Is this the name of the game you wish it to be?",150,210);
+    self.yes.text("Yes");
+    self.yes.display();
+    self.no.text("No");
+    self.no.display();
   };
   self.act = function()
   {
