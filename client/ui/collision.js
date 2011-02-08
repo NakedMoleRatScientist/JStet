@@ -66,6 +66,6 @@ function Collision()
   };
   self.send = function(var object)
   {
-    self.effects.check(self.elements[i]);
+    self.effects.check(object);
   };
 }
