@@ -28,7 +28,7 @@ function EngineDraw()
   self.field_draw_mode = function()
   {
     text("Player One",75,50);
-    rect(self.drawField.x,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
+    self.drawField.display();
     rect(self.drawField.x + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
   };
   self.player_one = function()
