@@ -6,11 +6,9 @@ function PageEffect(var pages)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
-    console.log("boop");
     if (object.type == 3)
     {
-      console.log("doop");
-      self.collision.clean()
+      self.pages.collision = new Collision();
       self.pages.forward();
       self.pages.initialize();
     }
