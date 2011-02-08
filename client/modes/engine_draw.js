@@ -25,10 +25,13 @@ function EngineDraw()
     text("Player One",350,50);
     self.drawField.display();
   };
-  self.field_draw_mode = function()
+  self.two_players_field = function()
   {
     text("Player One",75,50);
     self.drawField.display();
+  };
+  self.field_draw_mode = function()
+  {
   };
   self.player_one = function()
   {
