@@ -394,11 +394,11 @@ function SubmitEffects(var pages,radio)
   {
     if (object.type == 0)
     {
-      if (self.radio.which_key == -1 || self.radio.which_key == 1)
+      if (self.radio.which_key() == 1)
       {
 	self.pages.act();
       }
-      else if (self.radio.which_key == 0)
+      else if (self.radio.which_key()== 0)
       {
 	self.pages.collision.send(new TurnEvent());
       }
@@ -442,7 +442,7 @@ function NamePage(var pages)
     self.submit_effects.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.name);
     self.pages.collision.effects.add_effect(self.radio_switch);
-    self.pages.collision.effects.add_self(self.submit_effects);
+    self.pages.collision.effects.add_effect(self.submit_effects);
   };
   self.call = function()
   {
@@ -460,7 +460,8 @@ function NamePage(var pages)
   {
     text("What do you wish the name of the game to be?",150,210);
     text(self.pages.input.string,170,240);
-    text("When you're done, presse enter",180,265); 
+    text("When you're done, presse enter",180,265);
+    rect(170,220,400,25);
   };
   self.confirm_text = function()
   {
@@ -659,6 +660,12 @@ function DataCollect()
   {
     return self.data[self.find(name)].value;
   };
+}
+
+function TurnEvent()
+{
+  var self = this;
+  self.type = 3;
 }
 
 function PageEffect(var pages)
