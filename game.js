@@ -414,9 +414,10 @@ function NamePage(var pages)
     self.radio_switch = new RadioSwitch();
     self.radio_switch.add(self.yes);
     self.radio_switch.add(self.no);
-    self.submit = new TextButton("Submit",350,270);
-    self.name = new NameEffects(self.pages);
-    self.pages.collision.effects.add_effect(self.name);
+    self.submit = new TextButton("Submit",150,350,270);
+    self.effects = new NameEffects(self.pages);
+    self.effects.add(self.submit.rect);
+    self.pages.collision.effects.add_effect(self.effects);
     self.pages.collision.effects.add_effect(self.radio_switch);
   };
   self.call = function()
@@ -645,7 +646,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
-      self.collision.clean()
+      self.pages.collision = new Collision();
       self.pages.forward();
       self.pages.initialize();
     }
@@ -1111,11 +1112,6 @@ function Collision()
   var self = this;
   self.elements = [];
   self.effects = new CollisionEffects(self);
-  self.clean = function()
-  {
-    self.elements = [];
-    self.effects.clean();
-  };
   self.check_rect = function(var x, var y, var i)
   {
     var conditions = [false,false];
