@@ -35,7 +35,11 @@ function EngineDraw()
   {
     if (self.drawMode == 0)
     {
-      self.two_players_field();
+      self.one_player_field();
+    }
+    else
+    {
+      self.two.players.field();
     }
   };
   self.player_one = function()
