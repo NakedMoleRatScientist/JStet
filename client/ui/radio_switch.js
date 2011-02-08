@@ -20,4 +20,15 @@ function RadioSwitch()
       }
     }
   };
+  self.which_key = function()
+  {
+    for (var i = 0; i < self.elements.length; i++)
+    {
+      if (self.elements[i] == true)
+      {
+	return i;
+      }
+    }
+    return false;
+  };
 }
