@@ -15,7 +15,7 @@ function SubmitEffects(var pages,radio)
       }
       else if (self.radio.which_key == 0)
       {
-	self.pages.collision.send(new TurnObject());
+	self.pages.collision.send(new TurnEvent());
       }
     }
   };
