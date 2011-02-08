@@ -29,7 +29,7 @@ function EngineDraw()
     text("Player One",75,50);
     self.drawField.display();
     text("Player Two",75,450);
-    self.drawField.display(400);
+    self.drawField.display();
   };
   self.field_draw_mode = function()
   {
