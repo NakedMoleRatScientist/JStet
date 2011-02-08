@@ -15,6 +15,7 @@ function NamePage(var pages)
     self.radio_switch.add(self.yes);
     self.radio_switch.add(self.no);
     self.pages.collision.effects.add_effect(new NameEffects(self.pages));
+    self.pages.collision.effects.add_effect(self.radio_switch);
   };
   self.call = function()
   {
