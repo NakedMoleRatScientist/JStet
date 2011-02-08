@@ -13,6 +13,7 @@ function NamePage(var pages)
     self.no.set(400,220);
     self.radio_switch = new RadioSwitch();
     self.radio_switch.add(self.yes);
+    self.radio_switch.add(self.no);
     self.pages.collision.effects.add_effect(new NameEffects(self.pages));
   };
   self.call = function()
