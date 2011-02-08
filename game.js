@@ -1703,10 +1703,15 @@ function PlayFieldDraw()
   self.y = 50;
   self.width = 200;
   self.height = 400;
-  self.display = function(var x = 0, var y = 0)
+  self.display = function()
   {
-    rect(self.x + x,self.y + y,self.width,self.height);
+    rect(self.x,self.y,self.width,self.height);
     rect(self.x + self.width,self.y,100,self.height);
+  };
+  self.display_offset = function(var x)
+  {
+    rect(self.x + x,self.y,self.width,self.height);
+    rect(self.x + x + self.width,self.y,100,self.height);
   };
 }
 
@@ -2319,9 +2324,6 @@ function Player()
     //player one...
     self.field_draw_mode();
     //player two
-    text("Player Two",75,450);
-    rect(self.drawField.x + 400,self.drawField.y,self.drawField.width,self.drawField.height); //playfield
-    rect(self.drawField.x + 400 + self.drawField.width,self.drawField.y,100,self.drawField.height); //Info display field
     self.instruct();
     self.player_one();
     self.score();
@@ -2335,6 +2337,8 @@ function Player()
   {
     text("Player One",75,50);
     self.drawField.display();
+    text("Player Two",75,450);
+    self.drawField.display_offset(400);
   };
   self.field_draw_mode = function()
   {
