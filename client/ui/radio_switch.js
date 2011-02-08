@@ -24,7 +24,7 @@ function RadioSwitch()
   {
     for (var i = 0; i < self.elements.length; i++)
     {
-      if (self.elements[i] == true)
+      if (self.elements[i].state == true)
       {
 	return i;
       }
