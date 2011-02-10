@@ -949,6 +949,19 @@ function SearchProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.process_data = function(var data)
+  {
+    switch(data[1])
+    {
+    case 0:
+      console.log("Search initialized.");
+    }
+  };
+  self.request_search = function()
+  {
+    var data = [3,0];
+    self.net.send(data);
+  };
 }
 
 function ListProtocol(var net)
@@ -2220,6 +2233,10 @@ function LobbyEffects()
       {
 	mode.change(6);
       }
+      else if (object.member == 2)
+      {
+	mode.change(8);
+      }
     }
   };
 }
@@ -2271,6 +2288,7 @@ function LobbyMode()
     self.chat.display();
     self.play.display();
     self.session.display();
+    self.find.display();
     noFill();
     stroke(255);
     rect(0,580,800,20);
@@ -2281,9 +2299,12 @@ function LobbyMode()
 function ListGameMode()
 {
   var self = this;
+  self.refresh = new TextButton("Refresh",100,450,20);
   self.display = function()
   {
     background(0,0,0);
+    stroke(255);
+    self.refresh.display();
   };
 }
 
