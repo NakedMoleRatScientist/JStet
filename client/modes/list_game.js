@@ -6,5 +6,6 @@ function ListGameMode()
   self.display = function()
   {
     background(0,0,0);
+    refresh.display();
   };
 }
