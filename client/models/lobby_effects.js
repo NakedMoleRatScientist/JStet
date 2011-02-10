@@ -15,6 +15,10 @@ function LobbyEffects()
       {
 	mode.change(6);
       }
+      else if (object.member == 2)
+      {
+	mode.change(8);
+      }
     }
   };
 }
