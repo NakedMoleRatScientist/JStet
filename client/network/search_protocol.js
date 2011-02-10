@@ -11,4 +11,9 @@ function SearchProtocol(var net)
       console.log("Search initialized.");
     }
   };
+  self.request_search = function()
+  {
+    var data = [3,0];
+    self.net.send(data);
+  };
 }
