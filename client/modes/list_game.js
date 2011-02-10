@@ -2,6 +2,7 @@
 function ListGameMode()
 {
   var self = this;
+  self.pages = new Pages();
   self.refresh = new TextButton("Refresh",100,450,20);
   self.display = function()
   {
