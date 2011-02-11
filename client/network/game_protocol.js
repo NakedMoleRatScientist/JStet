@@ -15,6 +15,10 @@ function GameProtocol(var net)
   };
   self.request_multi = function(var password, var name)
   {
+    if (password == "")
+    {
+      password = null;
+    }
     var data[2,3,name,password];
     self.net.send(data);
   };
