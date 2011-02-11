@@ -7,8 +7,11 @@ function PassEffects(var pages)
   {
     if (object.type == 2)
     {
-      self.pages.data.update("password",self.pages.input.string);
-      self.pages.act();
+      if (object.member == 0)
+      {
+	self.pages.data.update("password",self.pages.input.string);
+	self.pages.act();
+      }
     }
   };
 }
