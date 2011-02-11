@@ -7,6 +7,9 @@ function Session()
   var self = this;
   self.events = new Array();
   self.id = null;
+  self.name = null;
+  self.password = null;
+  self.players = null;
   self.game = game.create_new();
   self.initialize = function(id)
   {
