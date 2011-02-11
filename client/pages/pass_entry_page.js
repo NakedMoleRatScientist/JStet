@@ -32,4 +32,15 @@ function PassEntryPage(var pages)
   {
     text("Please retype the password again. Press enter when you're done.",100,250);
   };
+  self.act = function()
+  {
+    if (self.state == 0)
+    {
+      self.state = 1;
+    }
+    else
+    {
+      self.state = 0;
+    }
+  };
 }
