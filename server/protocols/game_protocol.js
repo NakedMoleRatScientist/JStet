@@ -66,7 +66,7 @@ exports.process = function(data,id)
   {
   case 0:
     sys.log("Game created.");
-    new_game = new Session();
+    var new_game = new Session();
     new_game.initialize(id);
     sessions.push(new_game);
     break;
@@ -76,6 +76,13 @@ exports.process = function(data,id)
   case 2:
     sys.log("Movement instruction received");
     move(id,data[2]);
+    break;
+  case 3:
+    sys.log("Game created.");
+    var new_game = new Session();
+    newgame.initialize(id);
+    newgame.players = 2;
+    newgame.name = data[2];
     break;
   }
 };
