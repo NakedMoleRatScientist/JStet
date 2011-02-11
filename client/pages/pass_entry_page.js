@@ -8,7 +8,7 @@ function PassEntryPage(var pages)
   {
     self.effects = new PassEffects(self.pages,self);
     self.state = 0;
-    self.pages.collision.effects.add_effects(self.effects);
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
