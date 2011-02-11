@@ -4,6 +4,7 @@ function PassEffects(var pages, pass)
   var self = this;
   self.pass = pass;
   self.pages = pages;
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
     if (object.type == 2)
@@ -12,6 +13,7 @@ function PassEffects(var pages, pass)
       {
 	self.pages.data.update("password",self.pages.input.string);
 	self.pages.act();
+	self.pages.input.clean();
       }
       else
       {
