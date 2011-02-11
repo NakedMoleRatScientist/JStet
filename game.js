@@ -222,6 +222,11 @@ function GameProtocol(var net)
     var data = [2,0];
     self.net.send(data);
   };
+  self.request_multi = function(var password, var name)
+  {
+    var data[2,3,name,password];
+    self.net.send(data);
+  };
   self.move_right = function()
   {
     var data = [2,2,1];
@@ -2299,6 +2304,7 @@ function LobbyMode()
 function ListGameMode()
 {
   var self = this;
+  self.pages = new Pages();
   self.refresh = new TextButton("Refresh",100,450,20);
   self.display = function()
   {
