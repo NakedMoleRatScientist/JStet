@@ -9,6 +9,7 @@ function PassEntryPage(var pages)
     self.effects = new PassEffects(self.pages,self);
     self.state = 0;
     self.retry = new TextButton("Retry",100,350,350);
+    self.effects.add(self.retry.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
