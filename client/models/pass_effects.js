@@ -21,6 +21,10 @@ function PassEffects(var pages, pass)
 	{
 	  game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
 	}
+	else
+	{
+	  self.pass.state = 2;
+	}
       }
     }
   };
