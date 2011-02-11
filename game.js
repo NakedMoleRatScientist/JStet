@@ -353,13 +353,28 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
-function PassEffects(var pages)
+function PassEffects(var pages, pass)
 {
   var self = this;
+  self.pass = pass;
   self.pages = pages;
   self.check = function(var object)
   {
-    self.pages.data.update("password",self.pages.input.string);
+    if (object.type == 2)
+    {
+      if (self.pass.state == 0)
+      {
+	self.pages.data.update("password",self.pages.input.string);
+	self.pages.act();
+      }
+      else
+      {
+	if (self.pages.data.get("password") == self.pages.input.string)
+	{
+	  console.log("success");
+	}
+      }
+    }
   };
 }
 
@@ -496,10 +511,11 @@ function PassEntryPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = true;
-  self.effects = new PassEffects(self.pages);
-  self.state = 0;
   self.initialize = function()
   {
+    self.effects = new PassEffects(self.pages);
+    self.state = 0;
+    self.pages.collision.effects.add_effects(self.effects);
   };
   self.call = function()
   {
@@ -523,6 +539,17 @@ function PassEntryPage(var pages)
   self.second_stage = function()
   {
     text("Please retype the password again. Press enter when you're done.",100,250);
+  };
+  self.act = function()
+  {
+    if (self.state == 0)
+    {
+      self.state = 1;
+    }
+    else
+    {
+      self.state = 0;
+    }
   };
 }
 
@@ -685,6 +712,7 @@ function PageEffect(var pages)
       self.pages.collision = new Collision();
       self.pages.forward();
       self.pages.initialize();
+      self.pages.input = new Input();
     }
   };
 }
