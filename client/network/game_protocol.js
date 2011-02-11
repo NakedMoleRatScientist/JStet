@@ -52,6 +52,7 @@ function GameProtocol(var net)
     //initialize game mode.
     case 0:
       console.log("Game initialized.");
+      self.net.send([4]);
       self.engine.start(data[0]);
       mode.change(4);
       break;
