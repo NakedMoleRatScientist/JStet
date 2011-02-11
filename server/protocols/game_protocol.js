@@ -167,7 +167,7 @@ exports.destroy = function(id)
   sessions.splice(location,1); 
 }
 
-exports.find = function (var data,var id)
+exports.find = function (data,id)
 {
   
 }
