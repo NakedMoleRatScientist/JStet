@@ -385,6 +385,13 @@ function PassEffects(var pages, pass)
 	}
       }
     }
+    else if(object.type == 0)
+    {
+      if (self.pass.state == 2)
+      {
+	self.state = 0;
+      }
+    }
   };
 }
 
@@ -525,6 +532,8 @@ function PassEntryPage(var pages)
   {
     self.effects = new PassEffects(self.pages,self);
     self.state = 0;
+    self.retry = new TextButton("Retry",100,350,350);
+    self.effects.add(self.retry.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
@@ -534,9 +543,13 @@ function PassEntryPage(var pages)
     {
       self.first_stage();
     }
-    else
+    else if (self.state == 1)
     {
       self.second_stage();
+    }
+    else
+    {
+      self.fail_pass();
     }
     text(self.pages.input.string,150,300);
     
