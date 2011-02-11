@@ -1,7 +1,8 @@
 
-function PassEffects(var pages)
+function PassEffects(var pages, pass)
 {
   var self = this;
+  self.pass = pass;
   self.pages = pages;
   self.check = function(var object)
   {
