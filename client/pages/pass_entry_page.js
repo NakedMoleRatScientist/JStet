@@ -48,9 +48,5 @@ function PassEntryPage(var pages)
     {
       self.state = 0;
     }
-    else
-    {
-      self.state = 2;
-    }
   };
 }
