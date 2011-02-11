@@ -84,6 +84,10 @@ exports.process = function(data,id)
     new_game.password = data[3];
     sessions.push(new_game);
     break;
+  case 4:
+    sys.log("Game is running");
+    self.sessions[find_by_id(id)].run();
+    break;
   }
 };
 
