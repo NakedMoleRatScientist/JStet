@@ -9,7 +9,7 @@ function Session()
   self.id = null;
   self.name = null;
   self.password = null;
-  self.players = null;
+  self.players = 1;
   self.game = game.create_new();
   self.initialize = function(id)
   {
