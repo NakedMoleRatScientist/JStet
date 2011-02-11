@@ -83,6 +83,7 @@ exports.process = function(data,id)
     newgame.initialize(id);
     newgame.players = 2;
     newgame.name = data[2];
+    newgame.password = data[3];
     break;
   }
 };
