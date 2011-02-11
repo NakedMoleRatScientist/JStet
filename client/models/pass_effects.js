@@ -8,7 +8,7 @@ function PassEffects(var pages, pass)
   {
     if (object.type == 2)
     {
-      if (object.member == 0)
+      if (self.pass.state == 0)
       {
 	self.pages.data.update("password",self.pages.input.string);
 	self.pages.act();
