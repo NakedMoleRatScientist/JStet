@@ -55,10 +55,6 @@ function Session()
   {
     return self.game.score;
   };
-  self.size = function()
-  {
-    return self.events.length;
-  };
 }
 
 exports.process = function(data,id)
