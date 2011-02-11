@@ -224,6 +224,10 @@ function GameProtocol(var net)
   };
   self.request_multi = function(var password, var name)
   {
+    if (password == "")
+    {
+      password = null;
+    }
     var data[2,3,name,password];
     self.net.send(data);
   };
@@ -358,6 +362,7 @@ function PassEffects(var pages, pass)
   var self = this;
   self.pass = pass;
   self.pages = pages;
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
     if (object.type == 2)
@@ -366,12 +371,17 @@ function PassEffects(var pages, pass)
       {
 	self.pages.data.update("password",self.pages.input.string);
 	self.pages.act();
+	self.pages.input.clean();
       }
       else
       {
 	if (self.pages.data.get("password") == self.pages.input.string)
 	{
-	  console.log("success");
+	  game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
+	}
+	else
+	{
+	  self.pass.state = 2;
 	}
       }
     }
@@ -513,9 +523,9 @@ function PassEntryPage(var pages)
   self.typing = true;
   self.initialize = function()
   {
-    self.effects = new PassEffects(self.pages);
+    self.effects = new PassEffects(self.pages,self);
     self.state = 0;
-    self.pages.collision.effects.add_effects(self.effects);
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
@@ -540,13 +550,18 @@ function PassEntryPage(var pages)
   {
     text("Please retype the password again. Press enter when you're done.",100,250);
   };
+  self.faill_pass = function()
+  {
+    text("Password mistach error.",100,250);
+    text("press enter to restart password entry.",100,270);
+  };
   self.act = function()
   {
     if (self.state == 0)
     {
       self.state = 1;
     }
-    else
+    else if(self.state == 1)
     {
       self.state = 0;
     }
