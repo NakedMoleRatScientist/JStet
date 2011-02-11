@@ -57,6 +57,10 @@ function Session()
   {
     return self.game.score;
   };
+  self.run = function()
+  {
+    self.game.run();
+  };
 }
 
 exports.process = function(data,id)
