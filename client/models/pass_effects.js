@@ -12,6 +12,13 @@ function PassEffects(var pages)
 	self.pages.data.update("password",self.pages.input.string);
 	self.pages.act();
       }
+      else
+      {
+	if (self.pages.data.get("password") == self.pages.input.string)
+	{
+	  console.log("success");
+	}
+      }
     }
   };
 }
