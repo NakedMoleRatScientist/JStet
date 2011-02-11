@@ -17,9 +17,13 @@ function PassEntryPage(var pages)
     {
       self.first_stage();
     }
-    else
+    else if (self.state == 1)
     {
       self.second_stage();
+    }
+    else
+    {
+      self.fail_pass();
     }
     text(self.pages.input.string,150,300);
     
