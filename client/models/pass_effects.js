@@ -5,6 +5,10 @@ function PassEffects(var pages)
   self.pages = pages;
   self.check = function(var object)
   {
-    self.pages.data.update("password",self.pages.input.string);
+    if (object.type == 2)
+    {
+      self.pages.data.update("password",self.pages.input.string);
+      self.pages.act();
+    }
   };
 }
