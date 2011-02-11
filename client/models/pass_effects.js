@@ -27,5 +27,12 @@ function PassEffects(var pages, pass)
 	}
       }
     }
+    else if(object.type == 0)
+    {
+      if (self.pass.state == 2)
+      {
+	self.state = 0;
+      }
+    }
   };
 }
