@@ -4,10 +4,10 @@ function PassEntryPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = true;
-  self.effects = new PassEffects(self.pages);
-  self.state = 0;
   self.initialize = function()
   {
+    self.effects = new PassEffects(self.pages);
+    self.state = 0;
   };
   self.call = function()
   {
