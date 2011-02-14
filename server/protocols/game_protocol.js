@@ -59,7 +59,7 @@ function Session()
   };
   self.run = function()
   {
-    self.game.run();
+    self.game.run_game();
   };
 }
 
