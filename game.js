@@ -228,7 +228,7 @@ function GameProtocol(var net)
     {
       password = null;
     }
-    var data[2,3,name,password];
+    var data = [2,3,name,password];
     self.net.send(data);
   };
   self.move_right = function()
@@ -261,8 +261,8 @@ function GameProtocol(var net)
     //initialize game mode.
     case 0:
       console.log("Game initialized.");
-      self.net.send([2,4]);
-      self.engine.start(data[0]);
+      self.net.send([2,8]);
+      self.engine.you = data[0];
       mode.change(4);
       break;
     case 1:
@@ -379,6 +379,7 @@ function PassEffects(var pages, pass)
 	if (self.pages.data.get("password") == self.pages.input.string)
 	{
 	  game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
+	  mode.change(7);
 	}
 	else
 	{
@@ -457,6 +458,11 @@ function NameEffects(var pages)
       self.pages.act();
     }
   };
+}
+
+function GameListPage()
+{
+  var self = this;
 }
 
 function NamePage(var pages)
