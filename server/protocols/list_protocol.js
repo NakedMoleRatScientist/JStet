@@ -1,7 +1,8 @@
 var sys = require('sys');
 var game = require('../protocol/game_protocol');
 
-function ListProtocol()
+
+exports.find = function(data, id)
 {
-  var self = this;
+  
 }
