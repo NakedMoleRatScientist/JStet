@@ -7,7 +7,7 @@ function ListEffects()
   {
     if (object.type == 0)
     {
-      console.log('success');
+      list.request_list();
     }
   };
 }
