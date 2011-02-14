@@ -460,9 +460,19 @@ function NameEffects(var pages)
   };
 }
 
-function GameListPage()
+function GameListPage(var pages)
 {
   var self = this;
+  self.pages = pages;
+  self.typing = false;
+  self.initialize = function()
+  {
+    self.refresh = new TextButton("Refresh",100,450,20);
+  };
+  self.call = function()
+  {
+    
+  };
 }
 
 function NamePage(var pages)
@@ -655,7 +665,7 @@ function PlayersEffects(var pages)
   };
 }
 
-function PlayersPage(pages)
+function PlayersPage(var pages)
 {
   var self = this;
   self.pages = pages;
@@ -2368,12 +2378,11 @@ function ListGameMode()
 {
   var self = this;
   self.pages = new Pages();
-  self.refresh = new TextButton("Refresh",100,450,20);
+  self.pages.add(new GameListPage(self.pages));
   self.display = function()
   {
     background(0,0,0);
     stroke(255);
-    self.refresh.display();
   };
 }
 
