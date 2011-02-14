@@ -33,6 +33,8 @@ function Net()
 	console.log("Acknowledged.");
 	title.connected = true;
 	break;
+      case 5:
+	self.list.process_data(data[1]);
       }
     };
     self.ws.onclose = function()
