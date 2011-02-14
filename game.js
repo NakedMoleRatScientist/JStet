@@ -468,10 +468,13 @@ function GameListPage(var pages)
   self.initialize = function()
   {
     self.refresh = new TextButton("Refresh",100,450,20);
+    self.effects = new ListEffects();
+    self.effects.add(self.refresh.rect);
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
-    
+    self.refresh.display();
   };
 }
 
@@ -627,6 +630,12 @@ function PasswordPage(var pages)
     self.no.display();
     self.pages.display();
   };
+}
+
+function ListEffects()
+{
+  var self = this;
+  self.effect = new Effect(self);
 }
 
 function PlayersEffects(var pages)
@@ -2383,6 +2392,7 @@ function ListGameMode()
   {
     background(0,0,0);
     stroke(255);
+    self.pages.run();
   };
 }
 
