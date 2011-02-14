@@ -3,6 +3,7 @@ function ListProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.net.list = self;
   self.request_list = function()
   {
     var data = [4,0];
