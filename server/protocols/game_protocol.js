@@ -174,7 +174,7 @@ exports.destroy = function(id)
   sessions.splice(location,1); 
 }
 
-exports.find = function (data,id)
+exports.size = function()
 {
-  
+  return sessions.size;
 }
