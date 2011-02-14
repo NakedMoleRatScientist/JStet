@@ -7,6 +7,7 @@ function Net()
   self.game = null;
   self.score = null;
   self.lobby = null;
+  self.list = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
