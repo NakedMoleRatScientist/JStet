@@ -19,7 +19,7 @@ function GameProtocol(var net)
     {
       password = null;
     }
-    var data[2,3,name,password];
+    var data = [2,3,name,password];
     self.net.send(data);
   };
   self.move_right = function()
