@@ -7,6 +7,7 @@ function GameListPage(var pages)
   self.initialize = function()
   {
     self.refresh = new TextButton("Refresh",100,450,20);
+    self.effects = new ListEffects();
   };
   self.call = function()
   {
