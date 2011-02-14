@@ -9,6 +9,7 @@ function GameListPage(var pages)
     self.refresh = new TextButton("Refresh",100,450,20);
     self.effects = new ListEffects();
     self.effects.add(self.refresh.rect);
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
