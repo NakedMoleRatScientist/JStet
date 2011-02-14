@@ -8,4 +8,8 @@ function GameListPage(var pages)
   {
     
   };
+  self.call = function()
+  {
+    
+  };
 }
