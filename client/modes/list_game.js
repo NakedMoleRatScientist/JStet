@@ -8,5 +8,6 @@ function ListGameMode()
   {
     background(0,0,0);
     stroke(255);
+    self.pages.run();
   };
 }
