@@ -90,7 +90,7 @@ exports.process = function(data,id)
     break;
   case 4:
     sys.log("Game is running");
-    self.sessions[find_by_id(id)].run();
+    sessions[find_by_id(id)].run();
     break;
   }
 };
