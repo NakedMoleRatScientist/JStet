@@ -1,5 +1,5 @@
 
-function PlayersPage(pages)
+function PlayersPage(var pages)
 {
   var self = this;
   self.pages = pages;
