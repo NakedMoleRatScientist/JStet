@@ -1,8 +1,8 @@
 
-function ListEffects(var mode)
+function ListEffects(var list)
 {
   var self = this;
-  self.mode = mode;
+  self.list = list;
   self.effect = new Effect(self);
   self.check = function(var object)
   {
