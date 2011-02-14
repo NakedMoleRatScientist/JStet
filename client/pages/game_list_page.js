@@ -10,6 +10,6 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    
+    self.refresh.display();
   };
 }
