@@ -465,10 +465,11 @@ function GameListPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
+  self.games = [];
   self.initialize = function()
   {
     self.refresh = new TextButton("Refresh",100,450,20);
-    self.effects = new ListEffects();
+    self.effects = new ListEffects(self);
     self.effects.add(self.refresh.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
@@ -632,10 +633,18 @@ function PasswordPage(var pages)
   };
 }
 
-function ListEffects()
+function ListEffects(var list)
 {
   var self = this;
+  self.list = list;
   self.effect = new Effect(self);
+  self.check = function(var object)
+  {
+    if (object.type == 0)
+    {
+      list.request_list();
+    }
+  };
 }
 
 function PlayersEffects(var pages)
@@ -1055,6 +1064,19 @@ function ListProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.request_list = function()
+  {
+    var data = [4,0];
+    self.net.send(data);
+  };
+  self.process_data = function(var data)
+  {
+    switch(data[1])
+    {
+    case 0:
+      
+    }
+  };
 }
 
 
@@ -2629,6 +2651,7 @@ var create = new CreateGameMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network,lobby);
+var list_protocol = new ListProtocol(network);
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
