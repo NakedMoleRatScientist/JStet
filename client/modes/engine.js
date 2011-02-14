@@ -98,6 +98,7 @@ var create = new CreateGameMode();
 var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network,lobby);
+var list_protocol = new ListProtocol(network);
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
