@@ -584,7 +584,7 @@ function PassEntryPage(var pages)
   {
     text("Please retype the password again. Press enter when you're done.",100,250);
   };
-  self.faill_pass = function()
+  self.fail_pass = function()
   {
     text("Password mistach error.",100,250);
     text("press enter to restart password entry.",100,270);
@@ -633,10 +633,10 @@ function PasswordPage(var pages)
   };
 }
 
-function ListEffects(var list)
+function ListEffects(var page)
 {
   var self = this;
-  self.list = list;
+  self.page = page;
   self.effect = new Effect(self);
   self.check = function(var object)
   {
@@ -1064,6 +1064,7 @@ function ListProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.net.list = self;
   self.request_list = function()
   {
     var data = [4,0];
@@ -1110,6 +1111,7 @@ function Net()
   self.game = null;
   self.score = null;
   self.lobby = null;
+  self.list = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -1136,6 +1138,8 @@ function Net()
 	console.log("Acknowledged.");
 	title.connected = true;
 	break;
+      case 5:
+	self.list.process_data(data[1]);
       }
     };
     self.ws.onclose = function()
@@ -1235,6 +1239,11 @@ void titleKey()
     network.initialize();
     break;
   }
+}
+
+void listMouse()
+{
+  creates.pages.collision.check(mouseX,mouseY);
 }
 
 void createMouse()
@@ -1614,6 +1623,9 @@ void mousePressed()
     break;
   case 6:
     createMouse();
+    break;
+  case 8:
+    listMouse();
     break;
   }
 }
@@ -2410,6 +2422,7 @@ function ListGameMode()
   var self = this;
   self.pages = new Pages();
   self.pages.add(new GameListPage(self.pages));
+  self.pages.initialize();
   self.display = function()
   {
     background(0,0,0);
