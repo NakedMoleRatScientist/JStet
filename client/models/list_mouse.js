@@ -1,5 +1,5 @@
 
 void listMouse()
 {
-  creates.pages.collision.check(mouseX,mouseY);
+  list.pages.collision.check(mouseX,mouseY);
 }
