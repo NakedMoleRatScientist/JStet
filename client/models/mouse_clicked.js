@@ -9,5 +9,8 @@ void mousePressed()
   case 6:
     createMouse();
     break;
+  case 8:
+    listMouse();
+    break;
   }
 }
