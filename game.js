@@ -642,7 +642,7 @@ function ListEffects(var page)
   {
     if (object.type == 0)
     {
-      list.request_list();
+      list_protocol.request_list();
     }
   };
 }
@@ -1243,7 +1243,7 @@ void titleKey()
 
 void listMouse()
 {
-  creates.pages.collision.check(mouseX,mouseY);
+  list.pages.collision.check(mouseX,mouseY);
 }
 
 void createMouse()
