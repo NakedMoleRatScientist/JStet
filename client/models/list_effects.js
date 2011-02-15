@@ -1,8 +1,8 @@
 
-function ListEffects(var list)
+function ListEffects(var page)
 {
   var self = this;
-  self.list = list;
+  self.page = page;
   self.effect = new Effect(self);
   self.check = function(var object)
   {
