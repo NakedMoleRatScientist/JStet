@@ -176,5 +176,5 @@ exports.destroy = function(id)
 
 exports.size = function()
 {
-  return sessions.length();
+  return sessions.length;
 }
