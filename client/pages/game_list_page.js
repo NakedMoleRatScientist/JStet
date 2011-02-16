@@ -28,6 +28,7 @@ function GameListPage(var pages)
   {
     textFont(font,18);
     self.games();
+    self.names();
     self.refresh.display();
   };
 }
