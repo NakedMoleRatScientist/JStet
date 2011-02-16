@@ -1087,7 +1087,9 @@ function ListProtocol(var net)
     switch(data[0])
     {
     case 0:
-      self.games = data[1];
+      {
+	self.games = data[1];
+      }
     }
   };
 }
