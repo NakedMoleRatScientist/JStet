@@ -18,6 +18,10 @@ function GameListPage(var pages)
     {
       text("There are no games running.",0,18);
     }
+    else
+    {
+      text("There are games running.",0,18);
+    }
   };
   self.call = function()
   {
