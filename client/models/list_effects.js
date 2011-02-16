@@ -9,6 +9,7 @@ function ListEffects(var page)
     if (object.type == 0)
     {
       list_protocol.request_size();
+      list_protocol.request_names();
     }
   };
 }
