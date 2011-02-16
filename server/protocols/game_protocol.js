@@ -178,3 +178,14 @@ exports.size = function()
 {
   return sessions.length;
 }
+
+
+exports.names = function()
+{
+  var names = [];
+  for (var i = 0; i < sessions.length; i++)
+  {
+    names.push(sessions.name);
+  }
+  return names;
+}
