@@ -18,6 +18,7 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
+    textFont(font,18);
     self.refresh.display();
   };
 }
