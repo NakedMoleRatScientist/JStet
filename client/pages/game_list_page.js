@@ -13,14 +13,14 @@ function GameListPage(var pages)
   };
   self.games = function()
   {
-    var games = list_protocol.games;
-    if (games == 0)
+    var size = list_protocol.games;
+    if (size == 0)
     {
       text("There are no games running.");
     }
     else
     {
-      text("There are " + games + " games running",0,18);
+      text("There are " + size + " games running",0,18);
     }
   };
   self.call = function()
