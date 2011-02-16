@@ -14,7 +14,7 @@ function names()
   return data;
 }
 
-exports.process_data = function(var request)
+exports.process_data = function(request)
 {
   switch(request)
   {
