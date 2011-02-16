@@ -465,7 +465,6 @@ function GameListPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
-  self.games = [];
   self.initialize = function()
   {
     self.refresh = new TextButton("Refresh",100,450,20);
@@ -475,7 +474,15 @@ function GameListPage(var pages)
   };
   self.games = function()
   {
-    text("There are " + list_protocol.games + " games running.",0,18);
+    var size = list_protocol.games;
+    if (size == 0)
+    {
+      text("There are no games running.",0,18);
+    }
+    else
+    {
+      text("There are games running.",0,18);
+    }
   };
   self.call = function()
   {
@@ -1079,10 +1086,10 @@ function ListProtocol(var net)
   };
   self.process_data = function(var data)
   {
-    switch(data[1])
+    switch(data[0])
     {
     case 0:
-      self.games = data[2];
+      self.games = data[1];
     }
   };
 }
@@ -1162,10 +1169,8 @@ function Net()
   };
   self.send = function(data)
   {
-    console.log("beep");
     data = JSON.stringify(data);
     self.ws.send(data);
-    console.log("tree");
   };
 }
 
@@ -2365,7 +2370,7 @@ function LobbyEffects()
       }
       else if (object.member == 2)
       {
-	list_protocol.rquest_list();
+	list_protocol.request_list();
 	mode.change(8);
       }
     }
