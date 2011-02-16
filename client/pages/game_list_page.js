@@ -16,7 +16,7 @@ function GameListPage(var pages)
     var size = list_protocol.games;
     if (size == 0)
     {
-      text("There are no games running.");
+      text("There are no games running.",0,18);
     }
   };
   self.call = function()
