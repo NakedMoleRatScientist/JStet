@@ -18,10 +18,6 @@ function GameListPage(var pages)
     {
       text("There are no games running.");
     }
-    else
-    {
-      text("There are " + size + " games running",0,18);
-    }
   };
   self.call = function()
   {
