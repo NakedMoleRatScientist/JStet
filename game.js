@@ -474,15 +474,7 @@ function GameListPage(var pages)
   };
   self.games = function()
   {
-    var size = list_protocol.games;
-    if (size == 0)
-    {
-      text("There are no games running.",0,18);
-    }
-    else
-    {
-      text("There are games running.",0,18);
-    }
+    text("There are " + list_protocol.games + " game(s) running",0,18);
   };
   self.call = function()
   {
@@ -655,7 +647,7 @@ function ListEffects(var page)
   {
     if (object.type == 0)
     {
-      list_protocol.request_list();
+      list_protocol.request_size();
     }
   };
 }
@@ -1079,9 +1071,15 @@ function ListProtocol(var net)
   self.net = net;
   self.net.list = self;
   self.games = 0;
-  self.request_list = function()
+  self.names = [];
+  self.request_size = function()
   {
     var data = [4,0];
+    self.net.send(data);
+  };
+  self.request_names = function()
+  {
+    var data = [4,1];
     self.net.send(data);
   };
   self.process_data = function(var data)
@@ -2370,7 +2368,7 @@ function LobbyEffects()
       }
       else if (object.member == 2)
       {
-	list_protocol.request_list();
+	list_protocol.request_size();
 	mode.change(8);
       }
     }
