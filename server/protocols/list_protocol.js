@@ -8,6 +8,11 @@ function size()
   return data;
 }
 
+function names()
+{
+  var data = [5,[1,game.names()]];
+  return data;
+}
 
 exports.process_data = function(var request)
 {
