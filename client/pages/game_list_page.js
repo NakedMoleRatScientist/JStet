@@ -19,6 +19,7 @@ function GameListPage(var pages)
   self.call = function()
   {
     textFont(font,18);
+    self.games();
     self.refresh.display();
   };
 }
