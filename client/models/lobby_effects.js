@@ -18,6 +18,7 @@ function LobbyEffects()
       else if (object.member == 2)
       {
 	list_protocol.request_size();
+	list_protocol.request_names();
 	mode.change(8);
       }
     }
