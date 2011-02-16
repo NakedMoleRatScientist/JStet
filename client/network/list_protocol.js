@@ -11,7 +11,7 @@ function ListProtocol(var net)
     var data = [4,0];
     self.net.send(data);
   };
-  self.quest_names = function()
+  self.request_names = function()
   {
     var data = [4,1];
     self.net.send(data);
