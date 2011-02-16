@@ -15,7 +15,14 @@ function GameListPage(var pages)
   self.games = function()
   {
     var games = list_protocol.games;
-    text("There are " + games + " games running",0,18);
+    if (games == 0)
+    {
+      text("There are no games running.");
+    }
+    else
+    {
+      text("There are " + games + " games running",0,18);
+    }
   };
   self.call = function()
   {
