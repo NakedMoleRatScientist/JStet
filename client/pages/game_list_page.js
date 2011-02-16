@@ -14,7 +14,8 @@ function GameListPage(var pages)
   };
   self.games = function()
   {
-    text("There are " + list_protocol.games + " games running.",0,18);
+    var games = list_protocol.games;
+    text("There are " + games + " games running",0,18);
   };
   self.call = function()
   {
