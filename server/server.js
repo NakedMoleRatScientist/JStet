@@ -67,7 +67,7 @@ server.addListener("connection",function(conn){
       game.destroy(conn._id);
       break;
     case 4:
-      server.send(conn._id,list.find());
+      server.send(conn._id,list.process_data(data));
       break
     }
   });
