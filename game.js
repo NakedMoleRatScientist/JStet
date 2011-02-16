@@ -472,6 +472,15 @@ function GameListPage(var pages)
     self.effects.add(self.refresh.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
+  self.names = function()
+  {
+    var increment = 36;
+    for (var i = 0; i < list_protocol.names.length; i++)
+    {
+      text(list_protocol.names[i],100,increment);
+      increment += 18;
+    } 
+  };
   self.games = function()
   {
     text("There are " + list_protocol.games + " game(s) running",0,18);
@@ -480,6 +489,7 @@ function GameListPage(var pages)
   {
     textFont(font,18);
     self.games();
+    self.names();
     self.refresh.display();
   };
 }
@@ -648,6 +658,7 @@ function ListEffects(var page)
     if (object.type == 0)
     {
       list_protocol.request_size();
+      list_protocol.request_names();
     }
   };
 }
@@ -1089,6 +1100,12 @@ function ListProtocol(var net)
     case 0:
       {
 	self.games = data[1];
+	break;
+      }
+    case 1:
+      {
+	self.names = data[1];
+	break;
       }
     }
   };
@@ -2371,6 +2388,7 @@ function LobbyEffects()
       else if (object.member == 2)
       {
 	list_protocol.request_size();
+	list_protocol.request_names();
 	mode.change(8);
       }
     }
