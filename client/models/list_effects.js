@@ -8,7 +8,7 @@ function ListEffects(var page)
   {
     if (object.type == 0)
     {
-      list_protocol.request_list();
+      list_protocol.request_size();
     }
   };
 }
