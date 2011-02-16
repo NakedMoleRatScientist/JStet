@@ -16,8 +16,11 @@ function names()
 
 exports.process_data = function(var request)
 {
-  if (request == 0)
+  switch(request)
   {
-    return JSON.stringify(size());
+  case 0:
+    {
+      return JSON.stringify(size());
+    }
   }
 }
