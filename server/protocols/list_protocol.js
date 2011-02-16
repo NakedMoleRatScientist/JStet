@@ -22,5 +22,9 @@ exports.process_data = function(var request)
     {
       return JSON.stringify(size());
     }
+  case 1:
+    {
+      return JSON.stringify(names());
+    }
   }
 }
