@@ -23,10 +23,12 @@ function ListProtocol(var net)
     case 0:
       {
 	self.games = data[1];
+	break;
       }
     case 1:
       {
 	self.names = data[1];
+	break;
       }
     }
   };
