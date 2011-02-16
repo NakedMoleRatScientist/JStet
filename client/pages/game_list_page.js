@@ -12,6 +12,10 @@ function GameListPage(var pages)
     self.effects.add(self.refresh.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
+  self.games = function()
+  {
+    text("There are " + list_protocol.games + " games running.",0,18);
+  };
   self.call = function()
   {
     self.refresh.display();
