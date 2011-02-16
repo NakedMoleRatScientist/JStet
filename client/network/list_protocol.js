@@ -12,10 +12,10 @@ function ListProtocol(var net)
   };
   self.process_data = function(var data)
   {
-    switch(data[1])
+    switch(data[0])
     {
     case 0:
-      self.games = data[2];
+      self.games = data[1];
     }
   };
 }
