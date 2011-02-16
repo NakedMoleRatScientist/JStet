@@ -5,6 +5,7 @@ function ListProtocol(var net)
   self.net = net;
   self.net.list = self;
   self.games = 0;
+  self.names = [];
   self.request_list = function()
   {
     var data = [4,0];
