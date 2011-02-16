@@ -17,7 +17,7 @@ function LobbyEffects()
       }
       else if (object.member == 2)
       {
-	list_protocol.rquest_list();
+	list_protocol.request_list();
 	mode.change(8);
       }
     }
