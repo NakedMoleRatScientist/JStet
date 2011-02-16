@@ -5,6 +5,7 @@ function ListGameMode()
   self.pages = new Pages();
   self.pages.add(new GameListPage(self.pages));
   self.pages.initialize();
+  list_protocol.request_list();
   self.display = function()
   {
     background(0,0,0);
