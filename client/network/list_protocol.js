@@ -24,6 +24,10 @@ function ListProtocol(var net)
       {
 	self.games = data[1];
       }
+    case 1:
+      {
+	self.names = data[1];
+      }
     }
   };
 }
