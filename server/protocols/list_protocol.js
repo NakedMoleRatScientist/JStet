@@ -13,6 +13,6 @@ exports.process_data = function(var request)
 {
   if (request == 0)
   {
-    return JSON.stringify(find());
+    return JSON.stringify(size());
   }
 }
