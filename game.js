@@ -483,7 +483,7 @@ function GameListPage(var pages)
       text(list_protocol.names[i],100,increment);
       increment += 18;
     }
-    ellipse(100,100 + (self.pointer * 16),20,20);
+    ellipse(300,100 + (self.pointer * 16),10,10);
   };
   self.games = function()
   {
@@ -491,6 +491,7 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
+    listKey();
     textFont(font,18);
     self.games();
     self.names();
@@ -1273,6 +1274,17 @@ void titleKey()
     title.connected = true;
     network.initialize();
     break;
+  }
+}
+
+function listKey(var list)
+{
+  switch(key)
+  {
+  case "up":
+    {
+      list.pointer += 1;
+    }
   }
 }
 
