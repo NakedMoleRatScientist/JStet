@@ -22,7 +22,10 @@ function GameListPage(var pages)
       text(list_protocol.names[i],100,increment);
       increment += 18;
     }
-    ellipse(300,95 + (self.pointer * 16),10,10);
+    if (list_protocol.names.length > 0)
+    {
+      ellipse(300,95 + (self.pointer * 16),10,10);
+    }
   };
   self.games = function()
   {
