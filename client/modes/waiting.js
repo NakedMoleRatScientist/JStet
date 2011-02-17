@@ -11,6 +11,7 @@ function WaitingMode()
     if (self.password != null)
     {
       text("Give the password below and give it to your friend.",250,370);
+      text(self.password,250,380);
     }
   };
 }
