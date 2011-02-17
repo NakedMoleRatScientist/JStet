@@ -5,7 +5,7 @@ function listKey(var list)
   {
   case "up":
     {
-      
+      list.pointer += 1;
     }
   }
 }
