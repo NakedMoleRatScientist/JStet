@@ -407,6 +407,7 @@ function PasswordEffects(var pages)
   {
     if (object.type == 3 && self.status == 1)
     {
+      game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
       mode.change(7);
     }
     else if(object.type == 1)
@@ -2503,11 +2504,17 @@ function ListGameMode()
 function WaitingMode()
 {
   var self = this;
+  self.password = null;
   self.display = function()
   {
     background(0,0,0);
     textFont(font,18);
     text("Waiting for another player to join...",250,350);
+    if (self.password != null)
+    {
+      text("Give the password below and give it to your friend.",250,370);
+      text(self.password,250,380);
+    }
   };
 }
 
