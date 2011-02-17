@@ -13,7 +13,7 @@ function GameListPage(var pages)
   };
   self.names = function()
   {
-    var increment = 36;
+    var increment = 100;
     for (var i = 0; i < list_protocol.names.length; i++)
     {
       text(list_protocol.names[i],100,increment);
