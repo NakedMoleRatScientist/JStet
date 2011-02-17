@@ -4,6 +4,7 @@ function GameListPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
+  self.pointer = 0;
   self.initialize = function()
   {
     self.refresh = new TextButton("Refresh",100,450,20);
