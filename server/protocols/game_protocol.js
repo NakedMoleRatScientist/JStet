@@ -69,6 +69,7 @@ exports.process = function(data,id)
   case 0:
     sys.log("Game created.");
     var new_game = new Session();
+    new_game.id = id;
     new_game.initialize();
     sessions.push(new_game);
     break;
