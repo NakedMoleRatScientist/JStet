@@ -465,6 +465,7 @@ function GameListPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
+  self.pointer = 0;
   self.initialize = function()
   {
     self.refresh = new TextButton("Refresh",100,450,20);
@@ -474,12 +475,15 @@ function GameListPage(var pages)
   };
   self.names = function()
   {
-    var increment = 36;
+    text("Available Games:",112,80);
+    line(100,85,300,85);
+    var increment = 100;
     for (var i = 0; i < list_protocol.names.length; i++)
     {
       text(list_protocol.names[i],100,increment);
       increment += 18;
-    } 
+    }
+    ellipse(100,100 + (self.pointer * 16),20,20);
   };
   self.games = function()
   {
