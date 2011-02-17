@@ -9,6 +9,7 @@ function PasswordEffects(var pages)
   {
     if (object.type == 3 && self.status == 1)
     {
+      game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
       mode.change(7);
     }
     else if(object.type == 1)
