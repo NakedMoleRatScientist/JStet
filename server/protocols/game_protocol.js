@@ -82,6 +82,7 @@ exports.process = function(data,id)
   case 3:
     sys.log("Game created.");
     var new_game = new Session();
+    new_game.id = id;
     new_game.players = 2;
     new_game.name = data[2];
     new_game.password = data[3];
