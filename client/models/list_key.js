@@ -7,7 +7,12 @@ function listKey(var list)
     switch(key)
     {
       //arrow key up
-    case 65535:
+    case "w":
+      {
+	list.pointer -= 1;
+	break;
+      }
+    case "s":
       {
 	list.pointer += 1;
 	break;
