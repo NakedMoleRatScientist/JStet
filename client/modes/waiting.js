@@ -10,7 +10,7 @@ function WaitingMode()
     text("Waiting for another player to join...",250,350);
     if (self.password != null)
     {
-      text("Give this password to your friend.",250,370);
+      text("Give the password below and give it to your friend.",250,370);
     }
   };
 }
