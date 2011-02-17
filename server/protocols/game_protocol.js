@@ -185,7 +185,10 @@ exports.names = function()
   var names = [];
   for (var i = 0; i < sessions.length; i++)
   {
-    names.push(sessions[i].name);
+    if (sessions[i].players == 2)
+    {
+       names.push(sessions[i].name);
+    }
   }
   return names;
 }
