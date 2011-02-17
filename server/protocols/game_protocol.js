@@ -185,7 +185,7 @@ exports.names = function()
   var names = [];
   for (var i = 0; i < sessions.length; i++)
   {
-    names.push(sessions.name);
+    names.push(sessions[i].name);
   }
   return names;
 }
