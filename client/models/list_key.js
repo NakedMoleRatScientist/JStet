@@ -3,7 +3,7 @@ void listKey()
 {
   switch(key)
   {
-    case "up"
+  case "up":
     {
       
     }
