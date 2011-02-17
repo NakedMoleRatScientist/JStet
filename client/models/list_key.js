@@ -2,6 +2,7 @@
 function listKey(var list)
 {
   if (keyPressed)
+  {
     switch(key)
     {
       //arrow key up
@@ -12,5 +13,4 @@ function listKey(var list)
       }
     }
   }
-
 }
