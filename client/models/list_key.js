@@ -7,12 +7,12 @@ function listKey(var list)
     switch(key)
     {
       //arrow key up
-    case "w":
+    case 119:
       {
 	list.pointer -= 1;
 	break;
       }
-    case "s":
+    case 115:
       {
 	list.pointer += 1;
 	break;
