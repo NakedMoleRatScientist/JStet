@@ -1,5 +1,5 @@
 
-void listKey()
+function listKey()
 {
   switch(key)
   {
