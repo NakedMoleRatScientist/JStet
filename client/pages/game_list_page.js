@@ -30,7 +30,7 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    listKey(self,list_protocol.names.length);
+    listKey(self,list_protocol.names.length - 1);
     textFont(font,18);
     self.games();
     self.names();
