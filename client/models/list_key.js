@@ -1,6 +1,7 @@
 
 function listKey(var list)
 {
+  frameRate(20);
   if (keyPressed)
   {
     switch(key)
