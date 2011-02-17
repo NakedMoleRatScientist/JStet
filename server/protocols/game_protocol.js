@@ -11,9 +11,8 @@ function Session()
   self.password = null;
   self.players = 1;
   self.game = game.create_new();
-  self.initialize = function(id)
+  self.initialize = function()
   {
-    self.id = id;
     self.add_events([[self.id,0]]); //0 tell the client to initialize game mode.
     self.game.initialize(id);
     self.update_events();
