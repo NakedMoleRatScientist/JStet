@@ -17,7 +17,10 @@ function listKey(var list)
       }
     case 115:
       {
-	list.pointer += 1;
+	if (list.pointer < list.games.length)
+	{
+	  list.pointer += 1;
+	}
 	break;
       }
     }
