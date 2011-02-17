@@ -21,7 +21,8 @@ function GameListPage(var pages)
     {
       text(list_protocol.names[i],100,increment);
       increment += 18;
-    } 
+    }
+    ellipse(100,100 + (self.pointer * 16),20,20);
   };
   self.games = function()
   {
