@@ -13,7 +13,7 @@ function GameListPage(var pages)
   };
   self.names = function()
   {
-    text("Available Games:",100,69);
+    text("Available Games:",112,80);
     line(100,85,300,85);
     var increment = 100;
     for (var i = 0; i < list_protocol.names.length; i++)
