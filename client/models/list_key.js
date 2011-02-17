@@ -9,7 +9,10 @@ function listKey(var list)
       //arrow key up
     case 119:
       {
-	list.pointer -= 1;
+	if (list.pointer > 0)
+	{
+	  list.pointer -= 1;
+	}
 	break;
       }
     case 115:
