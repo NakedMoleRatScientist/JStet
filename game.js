@@ -483,7 +483,10 @@ function GameListPage(var pages)
       text(list_protocol.names[i],100,increment);
       increment += 18;
     }
-    ellipse(300,100 + (self.pointer * 16),10,10);
+    if (list_protocol.names.length > 0)
+    {
+      ellipse(300,95 + (self.pointer * 16),10,10);
+    }
   };
   self.games = function()
   {
@@ -491,7 +494,7 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    listKey(self);
+    listKey(self,list_protocol.names.length - 1);
     textFont(font,18);
     self.games();
     self.names();
@@ -1277,7 +1280,7 @@ void titleKey()
   }
 }
 
-function listKey(var list)
+function listKey(var list,var size)
 {
   frameRate(10);
   if (keyPressed)
@@ -1287,12 +1290,18 @@ function listKey(var list)
       //arrow key up
     case 119:
       {
-	list.pointer -= 1;
+	if (list.pointer > 0)
+	{
+	  list.pointer -= 1;
+	}
 	break;
       }
     case 115:
       {
-	list.pointer += 1;
+	if (list.pointer < size)
+	{
+	  list.pointer += 1;
+	}
 	break;
       }
     }
