@@ -1,12 +1,16 @@
 
 function listKey(var list)
 {
-  switch(key)
-  {
-    //arrow key up
-  case 65535:
+  if (keyPressed)
+    switch(key)
     {
-      list.pointer += 1;
+      //arrow key up
+    case 65535:
+      {
+	list.pointer += 1;
+	break;
+      }
     }
   }
+
 }
