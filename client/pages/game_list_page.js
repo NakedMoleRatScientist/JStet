@@ -16,7 +16,7 @@ function GameListPage(var pages)
     var increment = 36;
     for (var i = 0; i < list_protocol.names.length; i++)
     {
-      text(list_protocol.names[i].name,100,increment);
+      text(list_protocol.names[i],100,increment);
       increment += 18;
     } 
   };
