@@ -491,7 +491,7 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    listKey();
+    listKey(self);
     textFont(font,18);
     self.games();
     self.names();
@@ -1279,11 +1279,22 @@ void titleKey()
 
 function listKey(var list)
 {
-  switch(key)
+  frameRate(10);
+  if (keyPressed)
   {
-  case "up":
+    switch(key)
     {
-      list.pointer += 1;
+      //arrow key up
+    case 119:
+      {
+	list.pointer -= 1;
+	break;
+      }
+    case 115:
+      {
+	list.pointer += 1;
+	break;
+      }
     }
   }
 }
