@@ -3,7 +3,7 @@ function listKey(var list)
 {
   switch(key)
   {
-  case "up":
+  case 65535:
     {
       list.pointer += 1;
     }
