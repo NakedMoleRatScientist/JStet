@@ -17,7 +17,7 @@ function listKey(var list)
       }
     case 115:
       {
-	if (list.pointer < list.games.length)
+	if (list.pointer < size)
 	{
 	  list.pointer += 1;
 	}
