@@ -462,6 +462,19 @@ function NameEffects(var pages)
   };
 }
 
+function JoinPage(var pages)
+{
+  var self = this;
+  self.pages = pages;
+  self.typing = true;
+  self.state = 0;
+  self.initialize = function()
+  {
+    self.yes = new TextButton("Yes",100,100,100);
+    self.no = new TextButton("No",100,200,100);
+  };
+}
+
 function GameListPage(var pages)
 {
   var self = this;
@@ -489,6 +502,10 @@ function GameListPage(var pages)
     {
       ellipse(300,95 + (self.pointer * 16),10,10);
     }
+  };
+  self.enter = function()
+  {
+    self.pages.forward();    
   };
   self.games = function()
   {
@@ -655,6 +672,15 @@ function PasswordPage(var pages)
     self.no.text("No");
     self.no.display();
     self.pages.display();
+  };
+}
+
+function JoinEffects()
+{
+  var self = this;
+  self.check = function(var object)
+  {
+    
   };
 }
 
