@@ -262,7 +262,7 @@ function GameProtocol(var net)
     case 0:
       console.log("Game initialized.");
       self.net.send([2,8]);
-      self.engine.you = data[0];
+      self.engine.start(data[0]); //Create a new player instance
       mode.change(4);
       break;
     case 1:
@@ -2668,7 +2668,6 @@ function Engine(protocol,mode)
 	return self.players[i];
       }
     }
-
   };
   self.write_shape = function(id,name,choice,type)
   {
