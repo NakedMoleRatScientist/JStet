@@ -26,10 +26,6 @@ function Engine(protocol,mode)
 	return self.players[i];
       }
     }
-    if (id == self.you)
-    {
-      return self.you;
-    }
   };
   self.write_shape = function(id,name,choice,type)
   {
