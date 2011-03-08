@@ -99,7 +99,7 @@ function GameProtocol(var net)
       break;
     case 6:
       //destruction of the game
-      self.engine.stop();
+      self.engine.stop(data[0]);
       self.net.send([3]);
       break;
     case 7:
