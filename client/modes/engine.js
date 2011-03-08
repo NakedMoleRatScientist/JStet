@@ -59,8 +59,9 @@ function Engine(protocol,mode)
     var player = self.find_player(id);
     player.field.move_lines(player.field.clear_line(line));
   };
-  self.stop = function()
+  self.stop = function(id)
   {
+    self.destroy(id);
     console.log("Game over");
     self.mode.change(1);
   };
