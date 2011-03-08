@@ -65,6 +65,16 @@ function Engine(protocol,mode)
     console.log("Game over");
     self.mode.change(1);
   };
+  self.destory = function(id)
+  {
+    for (var i = 0; i < self.players.length; i++)
+    {
+      if (self.players[i] == id)
+      {
+	self.players.splice(i,1);
+      }
+    }
+  };
   self.high_score = function()
   {
     console.log("High score, detected!");
