@@ -70,6 +70,9 @@ exports.process = function(data,id)
     sys.log("Game created.");
     var new_game = new Session();
     new_game.id = id;
+    new_game.players = 1;
+    new_game.name = "single_player";
+    new_game.password = "";
     new_game.initialize();
     sessions.push(new_game);
     break;
