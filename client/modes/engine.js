@@ -65,7 +65,7 @@ function Engine(protocol,mode)
     console.log("Game over");
     self.mode.change(1);
   };
-  self.destory = function(id)
+  self.destroy = function(id)
   {
     for (var i = 0; i < self.players.length; i++)
     {
