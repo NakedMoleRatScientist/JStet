@@ -69,9 +69,10 @@ function Engine(protocol,mode)
   {
     for (var i = 0; i < self.players.length; i++)
     {
-      if (self.players[i] == id)
+      if (self.players[i].id == id)
       {
 	self.players.splice(i,1);
+	break;
       }
     }
   };
