@@ -103,6 +103,7 @@ function GameProtocol(var net)
       self.net.send([3]);
       break;
     case 7:
+      self.engine.stop(self.engine.you);
       self.engine.high_score();
       self.net.send([3]);
       break;
