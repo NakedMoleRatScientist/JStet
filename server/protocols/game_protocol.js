@@ -73,7 +73,6 @@ exports.process = function(data,id)
     new_game.players = 1;
     new_game.name = "single_player";
     new_game.password = "";
-    new_game.initialize();
     sessions.push(new_game);
     break;
   case 1:
