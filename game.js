@@ -44,7 +44,6 @@ function LobbyProtocol(net,lobby)
     text("w - rotate",50,590);
   };
 }
-
 function PlayButton()
 {
   var self = this;
@@ -261,7 +260,7 @@ function GameProtocol(var net)
     //initialize game mode.
     case 0:
       console.log("Game initialized.");
-      self.net.send([2,8]);
+      self.net.send([2,4]);
       self.engine.start(data[0]); //Create a new player instance
       mode.change(4);
       break;
@@ -307,10 +306,12 @@ function GameProtocol(var net)
       }
       break;
     case 6:
-      self.engine.stop();
+      //destruction of the game
+      self.engine.stop(self.engine.you);
       self.net.send([3]);
       break;
     case 7:
+      self.engine.stop(self.engine.you);
       self.engine.high_score();
       self.net.send([3]);
       break;
@@ -2701,10 +2702,22 @@ function Engine(protocol,mode)
     var player = self.find_player(id);
     player.field.move_lines(player.field.clear_line(line));
   };
-  self.stop = function()
+  self.stop = function(id)
   {
+    self.destroy(id);
     console.log("Game over");
     self.mode.change(1);
+  };
+  self.destroy = function(id)
+  {
+    for (var i = 0; i < self.players.length; i++)
+    {
+      if (self.players[i].id == id)
+      {
+	self.players.splice(i,1);
+	break;
+      }
+    }
   };
   self.high_score = function()
   {
