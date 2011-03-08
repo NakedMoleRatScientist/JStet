@@ -27,6 +27,10 @@ function GameListPage(var pages)
       ellipse(300,95 + (self.pointer * 16),10,10);
     }
   };
+  self.enter = function()
+  {
+    
+  };
   self.games = function()
   {
     text("There are " + list_protocol.games + " game(s) running",0,18);
