@@ -466,12 +466,19 @@ function JoinPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = true;
-  self.state = 0;
+  self.typing = false;
+  self.pointer = 0;
   self.initialize = function()
   {
+    self.pointer = self.pages.data.get("pointer");
     self.yes = new TextButton("Yes",100,100,100);
     self.no = new TextButton("No",100,200,100);
+  };
+  self.call = function()
+  {
+    textFont(font,18);
+    self.yes.display();
+    self.no.display();
   };
 }
 
@@ -1330,6 +1337,11 @@ function listKey(var list,var size)
 	{
 	  list.pointer += 1;
 	}
+	break;
+      }
+    case 10:
+      {
+	list.enter();
 	break;
       }
     }
@@ -2518,7 +2530,9 @@ function ListGameMode()
 {
   var self = this;
   self.pages = new Pages();
+  self.pages.data.create("pointer");
   self.pages.add(new GameListPage(self.pages));
+  self.pages.add(new JoinPage(self.pages));
   self.pages.initialize();
   self.display = function()
   {
