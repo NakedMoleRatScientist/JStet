@@ -4,6 +4,7 @@ function ListGameMode()
   var self = this;
   self.pages = new Pages();
   self.pages.add(new GameListPage(self.pages));
+  self.pages.add(new JoinPage(self.pages));
   self.pages.initialize();
   self.display = function()
   {
