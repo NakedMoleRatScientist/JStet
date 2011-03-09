@@ -8,10 +8,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
-      self.pages.collision = new Collision();
-      self.pages.forward();
-      self.pages.initialize();
-      self.pages.input = new Input();
+      self.pages.turn();
     }
   };
 }
