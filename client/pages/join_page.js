@@ -3,7 +3,7 @@ function JoinPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = true;
+  self.typing = false;
   self.state = 0;
   self.initialize = function()
   {
