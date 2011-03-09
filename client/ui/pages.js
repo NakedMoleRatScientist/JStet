@@ -30,10 +30,10 @@ function Pages()
   }
   self.turn = function()
   {
-    self.pages.collision = new Collision();
-    self.pages.forward();
-    self.pages.initialize();
-    self.pages.input = new Input();
+    self.collision = new Collision();
+    self.forward();
+    self.initialize();
+    self.input = new Input();
   };
   self.display = function()
   {
