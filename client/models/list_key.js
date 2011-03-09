@@ -23,7 +23,7 @@ function listKey(var list,var size)
 	}
 	break;
       }
-    case 10:
+    case 13:
       {
 	list.enter();
 	break;
