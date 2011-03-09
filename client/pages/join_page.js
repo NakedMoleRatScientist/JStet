@@ -10,4 +10,8 @@ function JoinPage(var pages)
     self.yes = new TextButton("Yes",100,100,100);
     self.no = new TextButton("No",100,200,100);
   };
+  self.call = function()
+  {
+    textFont(font,18);
+  };
 }
