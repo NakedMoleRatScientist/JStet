@@ -4,7 +4,7 @@ function JoinPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
-  self.state = 0;
+  self.pointer = 0;
   self.initialize = function()
   {
     self.yes = new TextButton("Yes",100,100,100);
