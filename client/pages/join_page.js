@@ -8,8 +8,8 @@ function JoinPage(var pages)
   self.initialize = function()
   {
     self.pointer = self.pages.data.get("pointer");
-    self.yes = new TextButton("Yes",100,100,100);
-    self.no = new TextButton("No",100,200,100);
+    self.yes = new TextButton("Yes",100,300,300);
+    self.no = new TextButton("No",100,400,300);
   };
   self.call = function()
   {
