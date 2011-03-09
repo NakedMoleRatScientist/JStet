@@ -7,6 +7,7 @@ function JoinPage(var pages)
   self.pointer = 0;
   self.initialize = function()
   {
+    self.pointer = self.pages.pages[0].pointer;
     self.yes = new TextButton("Yes",100,100,100);
     self.no = new TextButton("No",100,200,100);
   };
