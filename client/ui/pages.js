@@ -28,6 +28,13 @@ function Pages()
       self.on ++;
     }
   }
+  self.turn = function()
+  {
+    self.pages.collision = new Collision();
+    self.pages.forward();
+    self.pages.initialize();
+    self.pages.input = new Input();
+  };
   self.display = function()
   {
     self.turn.display();
