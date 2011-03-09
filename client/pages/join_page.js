@@ -13,5 +13,7 @@ function JoinPage(var pages)
   self.call = function()
   {
     textFont(font,18);
+    self.yes.display();
+    self.no.display();
   };
 }
