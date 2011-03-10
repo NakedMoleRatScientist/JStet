@@ -24,11 +24,13 @@ function ListProtocol(var net)
     {
     case 0:
       {
+	//update game size.
 	self.games = data[1];
 	break;
       }
     case 1:
       {
+	//update names.
 	self.names = data[1];
 	break;
       }
