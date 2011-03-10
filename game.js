@@ -519,20 +519,15 @@ function GameListPage(var pages)
     text("Available Games:",112,80);
     line(100,85,300,85);
     var increment = 100;
-    for (var i = 0; i < list_protocol.names.length; i++)
+    var games = list_protocol.games;
+    for (var i = 0; i < games.length; i++)
     {
-      text(list_protocol.names[i],100,increment);
+      text(games[i].name,100,increment);
       increment += 18;
     }
-    if (list_protocol.names.length > 0)
+    if (games.length > 0)
     {
       ellipse(300,95 + (self.pointer * 16),10,10);
-    }
-  };
-  self.passwds = function()
-  {
-    for (var i = 0; i < list_protocol.passwds.length; i++)
-    {
     }
   };
   self.enter = function()
@@ -550,7 +545,6 @@ function GameListPage(var pages)
     textFont(font,18);
     self.games();
     self.names();
-    self.passwds();
     self.refresh.display();
   };
 }
@@ -1170,7 +1164,7 @@ function ListProtocol(var net)
   var self = this;
   self.net = net;
   self.net.list = self;
-  self.games = 0;
+  self.size = 0;
   self.games = [];
   //Get size of games.
   self.request_size = function()
@@ -1178,22 +1172,11 @@ function ListProtocol(var net)
     var data = [4,0];
     self.net.send(data);
   };
-  //Get names of games.
-  self.request_names = function()
+  //Get games info.
+  self.request_games = function()
   {
     var data = [4,1];
     self.net.send(data);
-  };
-  //get a name by index.
-  self.get_name = function(var n)
-  {
-    return self.names[n];
-  };
-  //which have passwords?
-  self.request_password = function(var n)
-  {
-    var data = [4,2];
-    self.net.send(data)
   };
   self.process_data = function(var data)
   {
@@ -1202,7 +1185,7 @@ function ListProtocol(var net)
     case 0:
       {
 	//update game size.
-	self.games = data[1];
+	self.size = data[1];
 	break;
       }
     case 1:
@@ -2525,7 +2508,7 @@ function LobbyEffects()
       else if (object.member == 2)
       {
 	list_protocol.request_size();
-	list_protocol.request_names();
+	list_protocol.request_games();
 	mode.change(8);
       }
     }
