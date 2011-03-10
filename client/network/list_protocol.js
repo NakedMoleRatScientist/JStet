@@ -19,6 +19,11 @@ function ListProtocol(var net)
     var data = [4,1];
     self.net.send(data);
   };
+  self.request_passwds = function()
+  {
+    var data = [4,2];
+    self.net.send(data);
+  }
   //get a name by index.
   self.get_name = function(var n)
   {
