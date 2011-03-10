@@ -42,7 +42,7 @@ function GameListPage(var pages)
     listKey(self,list_protocol.games.length - 1);
     textFont(font,18);
     self.size();
-    self.names();
+    self.games();
     self.refresh.display();
   };
 }
