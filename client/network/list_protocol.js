@@ -12,8 +12,8 @@ function ListProtocol(var net)
     var data = [4,0];
     self.net.send(data);
   };
-  //Get names of games.
-  self.request_names = function()
+  //Get games info.
+  self.request_games = function()
   {
     var data = [4,1];
     self.net.send(data);
