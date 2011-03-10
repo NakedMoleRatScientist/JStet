@@ -359,6 +359,13 @@ function PrivateButton()
     text("Create Game",450,110);
   };
 }
+function SecureEffects(var pages, var secure)
+{
+  var self = this;
+  self.pages = pages;
+  self.secure = secure;
+}
+
 function PassEffects(var pages, pass)
 {
   var self = this;
@@ -515,6 +522,12 @@ function GameListPage(var pages)
       ellipse(300,95 + (self.pointer * 16),10,10);
     }
   };
+  self.passwds = function()
+  {
+    for (var i = 0; i < list_protocol.passwds.length; i++)
+    {
+    }
+  };
   self.enter = function()
   {
     self.pages.data.update("game",list_protocol.get_name(self.pointer));
@@ -530,6 +543,7 @@ function GameListPage(var pages)
     textFont(font,18);
     self.games();
     self.names();
+    self.passwds();
     self.refresh.display();
   };
 }
@@ -748,9 +762,19 @@ function PlayersEffects(var pages)
   };
 }
 
-function SecurePage()
+function SecurePage(var pages)
 {
   var self = this;
+  self.pages = pages;
+  self.initialize = function()
+  {
+    self.effects = new SecureEffects(self.pages,self);
+  };
+  self.call = function()
+  {
+    textFont(font,18);
+    text("Please enter the password for this game",300,300);
+  };
 }
 
 function PlayersPage(var pages)
@@ -1141,6 +1165,7 @@ function ListProtocol(var net)
   self.net.list = self;
   self.games = 0;
   self.names = [];
+  self.passwds = [];
   //Get size of games.
   self.request_size = function()
   {
@@ -1158,6 +1183,12 @@ function ListProtocol(var net)
   {
     return self.names[n];
   };
+  //which have passwords?
+  self.request_password = function(var n)
+  {
+    var data = [4,2];
+    self.net.send(data)
+  };
   self.process_data = function(var data)
   {
     switch(data[0])
@@ -1172,6 +1203,11 @@ function ListProtocol(var net)
       {
 	//update names.
 	self.names = data[1];
+	break;
+      }
+    case 2:
+      {
+	self.passwds = data[1];
 	break;
       }
     }
