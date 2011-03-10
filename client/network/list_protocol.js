@@ -18,6 +18,11 @@ function ListProtocol(var net)
     var data = [4,1];
     self.net.send(data);
   };
+  //get a name by index.
+  self.get_name = function(n)
+  {
+    return self.names[n];
+  };
   self.process_data = function(var data)
   {
     switch(data[0])
