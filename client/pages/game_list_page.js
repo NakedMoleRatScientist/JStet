@@ -33,9 +33,9 @@ function GameListPage(var pages)
     self.pages.data.update("game",list_protocol.get_name(self.pointer));
     self.pages.turn();
   };
-  self.games = function()
+  self.size = function()
   {
-    text("There are " + list_protocol.games + " game(s) running",0,18);
+    text("There are " + list_protocol.size + " game(s) running",0,18);
   };
   self.call = function()
   {
