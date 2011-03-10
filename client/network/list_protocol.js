@@ -4,7 +4,7 @@ function ListProtocol(var net)
   var self = this;
   self.net = net;
   self.net.list = self;
-  self.games = 0;
+  self.size = 0;
   self.games = [];
   //Get size of games.
   self.request_size = function()
