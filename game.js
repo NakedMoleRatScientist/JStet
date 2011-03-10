@@ -1171,8 +1171,7 @@ function ListProtocol(var net)
   self.net = net;
   self.net.list = self;
   self.games = 0;
-  self.names = [];
-  self.passwds = [];
+  self.games = [];
   //Get size of games.
   self.request_size = function()
   {
@@ -1185,12 +1184,6 @@ function ListProtocol(var net)
     var data = [4,1];
     self.net.send(data);
   };
-  //learn which game have passwords and which don't
-  self.request_passwds = function()
-  {
-    var data = [4,2];
-    self.net.send(data);
-  }
   //get a name by index.
   self.get_name = function(var n)
   {
@@ -1214,13 +1207,8 @@ function ListProtocol(var net)
       }
     case 1:
       {
-	//update names.
-	self.names = data[1];
-	break;
-      }
-    case 2:
-      {
-	self.passwds = data[1];
+	//update games
+	self.games.push(new GameInfo(data[1][0],data[1][1]));
 	break;
       }
     }
