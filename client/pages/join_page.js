@@ -13,6 +13,7 @@ function JoinPage(var pages)
     self.effects = new JoinEffects();
     self.effects.add(self.yes.rect);
     self.effects.add(self.no.rect);
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
