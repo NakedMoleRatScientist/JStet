@@ -471,12 +471,13 @@ function JoinPage(var pages)
   self.initialize = function()
   {
     self.pointer = self.pages.data.get("pointer");
-    self.yes = new TextButton("Yes",100,100,100);
-    self.no = new TextButton("No",100,200,100);
+    self.yes = new TextButton("Yes",100,300,300);
+    self.no = new TextButton("No",100,400,300);
   };
   self.call = function()
   {
     textFont(font,18);
+    text("Do you wish to join the game",280,280);
     self.yes.display();
     self.no.display();
   };
@@ -512,7 +513,7 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    self.pages.forward();    
+    self.pages.turn();
   };
   self.games = function()
   {
@@ -831,10 +832,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
-      self.pages.collision = new Collision();
-      self.pages.forward();
-      self.pages.initialize();
-      self.pages.input = new Input();
+      self.pages.turn();
     }
   };
 }
@@ -868,6 +866,13 @@ function Pages()
       self.on ++;
     }
   }
+  self.turn = function()
+  {
+    self.collision = new Collision();
+    self.forward();
+    self.initialize();
+    self.input = new Input();
+  };
   self.display = function()
   {
     self.turn.display();
@@ -1339,7 +1344,7 @@ function listKey(var list,var size)
 	}
 	break;
       }
-    case 10:
+    case 13:
       {
 	list.enter();
 	break;
