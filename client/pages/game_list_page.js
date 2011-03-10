@@ -27,6 +27,12 @@ function GameListPage(var pages)
       ellipse(300,95 + (self.pointer * 16),10,10);
     }
   };
+  self.passwds = function()
+  {
+    for (var i = 0; i < list_protocol.passwds.length; i++)
+    {
+    }
+  };
   self.enter = function()
   {
     self.pages.data.update("game",list_protocol.get_name(self.pointer));
