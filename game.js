@@ -44,11 +44,11 @@ function LobbyProtocol(net,lobby)
     text("w - rotate",50,590);
   };
 }
-function GameInfo()
+function GameInfo(var password,var name)
 {
   var self = this;
-  self.password = null;
-  self.name = null;
+  self.password = password;
+  self.name = name;
 }
 
 function PlayButton()
@@ -514,7 +514,7 @@ function GameListPage(var pages)
     self.effects.add(self.refresh.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
-  self.names = function()
+  self.games = function()
   {
     text("Available Games:",112,80);
     line(100,85,300,85);
@@ -523,6 +523,7 @@ function GameListPage(var pages)
     for (var i = 0; i < games.length; i++)
     {
       text(games[i].name,100,increment);
+      text(games[i].password,200,increment);
       increment += 18;
     }
     if (games.length > 0)
@@ -532,19 +533,19 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    self.pages.data.update("game",list_protocol.get_name(self.pointer));
+    self.pages.data.update("game",list_protocol.games[self.pointer].name);
     self.pages.turn();
   };
-  self.games = function()
+  self.size = function()
   {
-    text("There are " + list_protocol.games + " game(s) running",0,18);
+    text("There are " + list_protocol.size + " game(s) running",0,18);
   };
   self.call = function()
   {
-    listKey(self,list_protocol.names.length - 1);
+    listKey(self,list_protocol.games.length - 1);
     textFont(font,18);
+    self.size();
     self.games();
-    self.names();
     self.refresh.display();
   };
 }
