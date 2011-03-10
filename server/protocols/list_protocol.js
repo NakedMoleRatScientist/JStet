@@ -14,6 +14,12 @@ function names()
   return data;
 }
 
+function passwd()
+{
+  var data = [5,[2,games.passwd()]];
+  return data;
+}
+
 exports.process_data = function(request)
 {
   switch(request)
