@@ -190,7 +190,12 @@ exports.games = function()
   {
     if (sessions[i].players == 2)
     {
-      games.push([sessions[i].name,sessions[i].password]);
+      var pass = false;
+      if (sessions[i].password != null)
+      {
+	pass = true;
+      }
+      games.push([sessions[i].name,pass]);
     }
   }
   return games;
