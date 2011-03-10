@@ -3,7 +3,7 @@ function ListGameMode()
 {
   var self = this;
   self.pages = new Pages();
-  self.pages.data.create("pointer");
+  self.pages.data.create("game");
   self.pages.add(new GameListPage(self.pages));
   self.pages.add(new JoinPage(self.pages));
   self.pages.initialize();
