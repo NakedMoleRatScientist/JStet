@@ -185,13 +185,13 @@ exports.size = function()
 
 exports.games = function()
 {
-  var names = [];
+  var games = [];
   for (var i = 0; i < sessions.length; i++)
   {
     if (sessions[i].players == 2)
     {
-      names.push([sessions[i].name,sessions[i].password]);
+      games.push([sessions[i].name,sessions[i].password]);
     }
   }
-  return names;
+  return games;
 }
