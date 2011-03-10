@@ -467,17 +467,21 @@ function JoinPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
-  self.pointer = null;
+  self.game = null;
   self.initialize = function()
   {
-    self.pointer = self.pages.data.get("game");
+    self.game = self.pages.data.get("game");
     self.yes = new TextButton("Yes",100,300,300);
     self.no = new TextButton("No",100,400,300);
+    self.effects = new JoinEffects();
+    self.effects.add(self.yes.rect);
+    self.effects.add(self.no.rect);
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
     textFont(font,18);
-    text("Do you wish to join the game " + self.game,280,280);
+    text("Do you wish to join the game: " + self.game,280,280);
     self.yes.display();
     self.no.display();
   };
@@ -513,7 +517,7 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    self.data.update("game",self.list_protocol.get_name(self.pointer));
+    self.pages.data.update("game",list_protocol.get_name(self.pointer));
     self.pages.turn();
   };
   self.games = function()
@@ -742,6 +746,11 @@ function PlayersEffects(var pages)
       game_protocol.request_game();
     }
   };
+}
+
+function SecurePage()
+{
+  var self = this;
 }
 
 function PlayersPage(var pages)
@@ -1145,7 +1154,7 @@ function ListProtocol(var net)
     self.net.send(data);
   };
   //get a name by index.
-  self.get_name = function(n)
+  self.get_name = function(var n)
   {
     return self.names[n];
   };
