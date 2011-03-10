@@ -184,7 +184,7 @@ exports.size = function()
 }
 
 
-exports.names = function()
+exports.games = function()
 {
   var names = [];
   for (var i = 0; i < sessions.length; i++)
