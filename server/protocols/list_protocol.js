@@ -10,7 +10,7 @@ function size()
 
 function games()
 {
-  var data = [5,[1,game.names()]];
+  var data = [5,[1,game.games()]];
   return data;
 }
 
