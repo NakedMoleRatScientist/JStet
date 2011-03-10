@@ -14,6 +14,7 @@ function JoinPage(var pages)
   self.call = function()
   {
     textFont(font,18);
+    text("Do you wish to join this game",350,280);
     self.yes.display();
     self.no.display();
   };
