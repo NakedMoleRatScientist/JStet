@@ -23,6 +23,12 @@ function ListProtocol(var net)
   {
     return self.names[n];
   };
+  //check for password by index
+  self.request_password = function(var n)
+  {
+    var data = [4,2,n,0];
+    self.net.send(data)
+  };
   self.process_data = function(var data)
   {
     switch(data[0])
