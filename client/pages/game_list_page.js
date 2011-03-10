@@ -30,7 +30,7 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    self.pages.data.update("game",list_protocol.get_name(self.pointer));
+    self.pages.data.update("game",list_protocol.games[self.pointer].name);
     self.pages.turn();
   };
   self.size = function()
