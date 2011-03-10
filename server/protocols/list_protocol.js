@@ -14,9 +14,9 @@ function names()
   return data;
 }
 
-function passwd()
+function passwds()
 {
-  var data = [5,[2,games.passwd()]];
+  var data = [5,[2,games.passwds()]];
   return data;
 }
 
