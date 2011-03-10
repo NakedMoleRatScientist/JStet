@@ -48,6 +48,7 @@ function ListProtocol(var net)
     case 2:
       {
 	self.passwds = data[1];
+	break;
       }
     }
   };
