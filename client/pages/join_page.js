@@ -10,7 +10,9 @@ function JoinPage(var pages)
     self.game = self.pages.data.get("game");
     self.yes = new TextButton("Yes",100,300,300);
     self.no = new TextButton("No",100,400,300);
-    self.effect = new JoinEffects();
+    self.effects = new JoinEffects();
+    self.effects.add(self.yes.rect);
+    self.effects.add(self.no.rect);
   };
   self.call = function()
   {
