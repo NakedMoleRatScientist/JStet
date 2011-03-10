@@ -32,9 +32,5 @@ exports.process_data = function(request)
     {
       return JSON.stringify(names());
     }
-  case 2:
-    {
-      return JSON.stringify(passwds());
-    }
   }
 }
