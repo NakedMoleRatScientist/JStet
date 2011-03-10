@@ -24,7 +24,7 @@ exports.process_data = function(request)
     }
   case 1:
     {
-      return JSON.stringify(names());
+      return JSON.stringify(games());
     }
   }
 }
