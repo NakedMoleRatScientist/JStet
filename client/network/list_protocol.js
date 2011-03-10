@@ -48,13 +48,8 @@ function ListProtocol(var net)
       }
     case 1:
       {
-	//update names.
-	self.names = data[1];
-	break;
-      }
-    case 2:
-      {
-	self.passwds = data[1];
+	//update games
+	self.games.push(new GameInfo(data[1][0],data[1][1]));
 	break;
       }
     }
