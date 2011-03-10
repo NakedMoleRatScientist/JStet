@@ -43,7 +43,6 @@ function GameListPage(var pages)
     textFont(font,18);
     self.games();
     self.names();
-    self.passwds();
     self.refresh.display();
   };
 }
