@@ -467,17 +467,17 @@ function JoinPage(var pages)
   var self = this;
   self.pages = pages;
   self.typing = false;
-  self.pointer = 0;
+  self.pointer = null;
   self.initialize = function()
   {
-    self.pointer = self.pages.data.get("pointer");
+    self.pointer = self.pages.data.get("game");
     self.yes = new TextButton("Yes",100,300,300);
     self.no = new TextButton("No",100,400,300);
   };
   self.call = function()
   {
     textFont(font,18);
-    text("Do you wish to join the game",280,280);
+    text("Do you wish to join the game " + self.game,280,280);
     self.yes.display();
     self.no.display();
   };
@@ -513,6 +513,7 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
+    self.data.update("game",self.list_protocol.get_name(self.pointer));
     self.pages.turn();
   };
   self.games = function()
@@ -1131,15 +1132,22 @@ function ListProtocol(var net)
   self.net.list = self;
   self.games = 0;
   self.names = [];
+  //Get size of games.
   self.request_size = function()
   {
     var data = [4,0];
     self.net.send(data);
   };
+  //Get names of games.
   self.request_names = function()
   {
     var data = [4,1];
     self.net.send(data);
+  };
+  //get a name by index.
+  self.get_name = function(n)
+  {
+    return self.names[n];
   };
   self.process_data = function(var data)
   {
@@ -1147,11 +1155,13 @@ function ListProtocol(var net)
     {
     case 0:
       {
+	//update game size.
 	self.games = data[1];
 	break;
       }
     case 1:
       {
+	//update names.
 	self.names = data[1];
 	break;
       }
@@ -2535,7 +2545,7 @@ function ListGameMode()
 {
   var self = this;
   self.pages = new Pages();
-  self.pages.data.create("pointer");
+  self.pages.data.create("game");
   self.pages.add(new GameListPage(self.pages));
   self.pages.add(new JoinPage(self.pages));
   self.pages.initialize();
