@@ -39,7 +39,7 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    listKey(self,list_protocol.names.length - 1);
+    listKey(self,list_protocol.games.length - 1);
     textFont(font,18);
     self.size();
     self.names();
