@@ -196,3 +196,20 @@ exports.names = function()
   }
   return names;
 }
+
+
+exports.passwds = function()
+{
+  var passwds = [];
+  for (var i = 0; i < sessions.length; i++)
+  {
+    if (sessions[i].password != null)
+    {
+      passwds.push(true);
+    }
+    else
+    {
+      passwds.push(false);
+    }
+  }
+}
