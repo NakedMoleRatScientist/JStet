@@ -8,7 +8,7 @@ function size()
   return data;
 }
 
-function names()
+function games()
 {
   var data = [5,[1,game.names()]];
   return data;
