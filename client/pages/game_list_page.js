@@ -29,7 +29,7 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    self.data.update("game",list_protocol.get_name(self.pointer));
+    self.pages.data.update("game",list_protocol.get_name(self.pointer));
     self.pages.turn();
   };
   self.games = function()
