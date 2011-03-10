@@ -7,4 +7,8 @@ function SecurePage(var pages)
   {
     self.effects = new SecureEffects(self.pages,self);
   };
+  self.call = function()
+  {
+    textFont(font,18);
+  };
 }
