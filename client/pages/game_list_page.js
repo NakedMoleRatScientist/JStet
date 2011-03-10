@@ -17,12 +17,13 @@ function GameListPage(var pages)
     text("Available Games:",112,80);
     line(100,85,300,85);
     var increment = 100;
-    for (var i = 0; i < list_protocol.names.length; i++)
+    var games = list_protocol.games;
+    for (var i = 0; i < games.length; i++)
     {
-      text(list_protocol.names[i],100,increment);
+      text(games[i].name,100,increment);
       increment += 18;
     }
-    if (list_protocol.names.length > 0)
+    if (games.length > 0)
     {
       ellipse(300,95 + (self.pointer * 16),10,10);
     }
