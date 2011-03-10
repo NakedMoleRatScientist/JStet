@@ -1,7 +1,7 @@
 
-function GameInfo()
+function GameInfo(var password,var name)
 {
   var self = this;
-  self.password = null;
-  self.name = null;
+  self.password = password;
+  self.name = name;
 }
