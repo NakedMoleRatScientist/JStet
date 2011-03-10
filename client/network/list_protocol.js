@@ -19,7 +19,7 @@ function ListProtocol(var net)
     self.net.send(data);
   };
   //get a name by index.
-  self.get_name = function(n)
+  self.get_name = function(var n)
   {
     return self.names[n];
   };
