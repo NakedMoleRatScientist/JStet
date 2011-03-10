@@ -6,11 +6,13 @@ function ListProtocol(var net)
   self.net.list = self;
   self.games = 0;
   self.names = [];
+  //Get size of games.
   self.request_size = function()
   {
     var data = [4,0];
     self.net.send(data);
   };
+  //Get names of games.
   self.request_names = function()
   {
     var data = [4,1];
