@@ -12,7 +12,7 @@ function GameListPage(var pages)
     self.effects.add(self.refresh.rect);
     self.pages.collision.effects.add_effect(self.effects);
   };
-  self.names = function()
+  self.games = function()
   {
     text("Available Games:",112,80);
     line(100,85,300,85);
