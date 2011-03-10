@@ -183,7 +183,6 @@ exports.size = function()
   return sessions.length;
 }
 
-
 exports.games = function()
 {
   var names = [];
@@ -191,7 +190,7 @@ exports.games = function()
   {
     if (sessions[i].players == 2)
     {
-       names.push(sessions[i].name);
+      names.push([sessions[i].name,sessions[i].password]);
     }
   }
   return names;
