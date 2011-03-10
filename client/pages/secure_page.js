@@ -10,5 +10,6 @@ function SecurePage(var pages)
   self.call = function()
   {
     textFont(font,18);
+    text("Please enter the password for this game",300,300);
   };
 }
