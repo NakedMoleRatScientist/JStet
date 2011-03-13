@@ -8,7 +8,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
-      self.pages.turn();
+      self.pages.next();
     }
   };
 }
