@@ -28,7 +28,7 @@ function Pages()
       self.on ++;
     }
   }
-  self.turn = function()
+  self.next = function()
   {
     self.collision = new Collision();
     self.forward();
