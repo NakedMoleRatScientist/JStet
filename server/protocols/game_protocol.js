@@ -17,7 +17,7 @@ function Session()
     {
       self.add_events([[self.ids[i],0]]); //0 tell clients to initalize game mode.
     }
-    self.game.initialize(self.id);
+    self.game.initialize(self.ids);
     self.update_events();
   };
   self.move_right = function(id)
