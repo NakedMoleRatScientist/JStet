@@ -102,6 +102,18 @@ exports.process = function(data,id)
   }
 };
 
+function find_by_name(name)
+{
+  for (var i = 0;i < sessions.length;i++)
+  {
+    if(sessions[i].name == name)
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+
 function find_by_id(id)
 {
   for (i = 0;i < sessions.length;i++)
