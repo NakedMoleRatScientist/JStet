@@ -16,7 +16,14 @@ function JoinEffects(var page, var pages)
       }
       else
       {
-	self.pages.next();
+	if (self.pages.data.get("password") == false)
+	{
+	  game_protocol.request_join(self.pages.data.get("game"));
+	}
+	else
+	{
+	  self.pages.next();
+	}
       }
       break;
     }
