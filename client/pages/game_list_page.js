@@ -37,7 +37,7 @@ function GameListPage(var pages)
   self.enter = function()
   {
     self.pages.data.update("game",list_protocol.games[self.pointer].name);
-    self.pages.turn();
+    self.pages.next();
   };
   self.size = function()
   {
