@@ -237,6 +237,18 @@ function GameProtocol(var net)
     var data = [2,3,name,password];
     self.net.send(data);
   };
+  //join a game
+  self.request_join = function(var name)
+  {
+    var data = [2,5,name,null];
+    self.net.send(data);
+  };
+  //join a game with password
+  self.request_join_pass = function(var name, var pass)
+  {
+    var data = [2,5,name,pass];
+    self.net.send(data);
+  };
   self.move_right = function()
   {
     var data = [2,2,1];
@@ -727,9 +739,13 @@ function JoinEffects(var page, var pages)
       }
       else
       {
-	if (self.pages.data.get("password") == true)
+	if (self.pages.data.get("password") == false)
 	{
-	  console.log("Please enter password");
+	  game_protocol.request_join(self.pages.data.get("game"));
+	}
+	else
+	{
+	  self.pages.next();
 	}
       }
       break;
@@ -2609,8 +2625,10 @@ function ListGameMode()
   var self = this;
   self.pages = new Pages();
   self.pages.data.create("game");
+  self.pages.data.create("password");
   self.pages.add(new GameListPage(self.pages));
   self.pages.add(new JoinPage(self.pages));
+  self.pages.add(new SecurePage(self.pages));
   self.pages.initialize();
   self.display = function()
   {
