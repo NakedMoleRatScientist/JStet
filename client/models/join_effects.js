@@ -14,6 +14,13 @@ function JoinEffects(var page, var pages)
       {
 	self.pages.back();
       }
+      else
+      {
+	if (self.pages.data.get("password") == true)
+	{
+	  console.log("Please enter password");
+	}
+      }
       break;
     }
   };
