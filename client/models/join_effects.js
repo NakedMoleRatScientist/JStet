@@ -11,7 +11,7 @@ function JoinEffects(var page)
     case 0:
       if (object.member == 1)
       {
-	console.log("beep");
+	self.pages.back();
       }
       break;
     }
