@@ -6,7 +6,7 @@ function Session()
 {
   var self = this;
   self.events = new Array();
-  self.id = null;
+  self.ids = new Array();
   self.name = null;
   self.password = null;
   self.players = 1;
