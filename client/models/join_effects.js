@@ -16,10 +16,7 @@ function JoinEffects(var page, var pages)
       }
       else
       {
-	if (self.pages.data.get("password") == true)
-	{
-	  self.pages.next();
-	}
+	self.pages.next();
       }
       break;
     }
