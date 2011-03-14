@@ -36,8 +36,8 @@ function Pages()
   }
   self.back = function()
   {
-    self.new_page();
     self.backward();
+    self.new_page();
   };
   self.next = function()
   {
