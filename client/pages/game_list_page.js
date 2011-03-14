@@ -23,7 +23,7 @@ function GameListPage(var pages)
       text(games[i].name,100,increment);
       if (games[i].password == true)
       {
-	rect(100,increment,20,20);
+	rect(300,increment - 10,10,10);
       }
       increment += 18;
     }
