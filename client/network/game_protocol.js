@@ -22,6 +22,12 @@ function GameProtocol(var net)
     var data = [2,3,name,password];
     self.net.send(data);
   };
+  //join a game
+  self.request_join = function(var name)
+  {
+    var data = [2,4,name];
+    self.net.send(data);
+  };
   self.move_right = function()
   {
     var data = [2,2,1];
