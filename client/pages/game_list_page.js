@@ -21,6 +21,10 @@ function GameListPage(var pages)
     for (var i = 0; i < games.length; i++)
     {
       text(games[i].name,100,increment);
+      if (games[i].password == true)
+      {
+	rect(100,increment,20,20);
+      }
       increment += 18;
     }
     if (games.length > 0)
