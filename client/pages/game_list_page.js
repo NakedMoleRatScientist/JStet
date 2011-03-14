@@ -29,7 +29,7 @@ function GameListPage(var pages)
     }
     if (games.length > 0)
     {
-      ellipse(300,95 + (self.pointer * 16),10,10);
+      ellipse(330,95 + (self.pointer * 16),10,10);
     }
   };
   self.enter = function()
