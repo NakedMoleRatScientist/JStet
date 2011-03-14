@@ -1,8 +1,9 @@
 
-function JoinEffects(var page)
+function JoinEffects(var page, var pages)
 {
   var self = this;
   self.page = page;
+  self.pages = pages;
   self.effect = new Effect(self);
   self.check = function(var object)
   {
