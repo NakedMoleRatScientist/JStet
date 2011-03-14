@@ -17,6 +17,7 @@ function GameListPage(var pages)
     text("Available Games" + " " + "p",112,80);
     line(100,85,450,85);
     line(280,70,280,400);
+    line(310,70,310,400);
     var increment = 100;
     var games = list_protocol.games;
     for (var i = 0; i < games.length; i++)
