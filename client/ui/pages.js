@@ -41,10 +41,8 @@ function Pages()
   };
   self.next = function()
   {
-    self.collision = new Collision();
     self.forward();
-    self.initialize();
-    self.input = new Input();
+    self.new_page();
   };
   self.display = function()
   {
