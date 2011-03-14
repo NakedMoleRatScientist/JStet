@@ -522,8 +522,7 @@ function GameListPage(var pages)
     var games = list_protocol.games;
     for (var i = 0; i < games.length; i++)
     {
-      text(games[i].name,100,increment);
-      text(games[i].password,200,increment);
+      text(games[i].name + "   " + games[i].password,100,increment);
       increment += 18;
     }
     if (games.length > 0)
@@ -868,7 +867,7 @@ function PageEffect(var pages)
   {
     if (object.type == 3)
     {
-      self.pages.turn();
+      self.pages.next();
     }
   };
 }
@@ -902,7 +901,7 @@ function Pages()
       self.on ++;
     }
   }
-  self.turn = function()
+  self.next = function()
   {
     self.collision = new Collision();
     self.forward();
@@ -1192,7 +1191,7 @@ function ListProtocol(var net)
     case 1:
       {
 	//update games
-	self.games.push(new GameInfo(data[1][0],data[1][1]));
+	self.games.push(new GameInfo(data[1][0][1],data[1][0][0]));
 	break;
       }
     }
