@@ -116,7 +116,7 @@ function find_by_name(name)
 
 function find_by_id(id)
 {
-  for (i = 0;i < sessions.length;i++)
+  for (var i = 0;i < sessions.length;i++)
   {
     if (id == sessions[i].id)
     {
