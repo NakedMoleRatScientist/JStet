@@ -17,7 +17,7 @@ function EventManager(id)
   {
     self.events.push(message);
   };
-  self.initialize = function(id)
+  self.initialize = function(ids)
   {
     var identity = players.get_player(id);
     var new_player = player.get_game(identity,self);
