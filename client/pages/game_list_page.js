@@ -15,7 +15,7 @@ function GameListPage(var pages)
   self.games = function()
   {
     text("Available Games:" + "   " + "password:",112,80);
-    line(100,130,300,85);
+    line(100,85,400,85);
     var increment = 100;
     var games = list_protocol.games;
     for (var i = 0; i < games.length; i++)
