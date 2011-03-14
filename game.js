@@ -516,18 +516,23 @@ function GameListPage(var pages)
   };
   self.games = function()
   {
-    text("Available Games:",112,80);
-    line(100,85,300,85);
+    text("Available Games" + " " + "p",112,80);
+    line(100,85,450,85);
+    line(280,70,280,400);
     var increment = 100;
     var games = list_protocol.games;
     for (var i = 0; i < games.length; i++)
     {
-      text(games[i].name + "   " + games[i].password,100,increment);
+      text(games[i].name,100,increment);
+      if (games[i].password == true)
+      {
+	rect(300,increment - 10,10,10);
+      }
       increment += 18;
     }
     if (games.length > 0)
     {
-      ellipse(300,95 + (self.pointer * 16),10,10);
+      ellipse(330,95 + (self.pointer * 16),10,10);
     }
   };
   self.enter = function()
