@@ -25,7 +25,7 @@ function GameProtocol(var net)
   //join a game
   self.request_join = function(var name)
   {
-    var data = [2,5,name];
+    var data = [2,5,name,null];
     self.net.send(data);
   };
   self.move_right = function()
