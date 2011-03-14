@@ -60,6 +60,13 @@ function Session()
   {
     self.game.run_game();
   };
+  self.authenticate = function(password,id)
+  {
+    if (password == self.password)
+    {
+      self.ids.push(id);
+    }
+  };
 }
 
 exports.process = function(data,id)
