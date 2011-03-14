@@ -539,6 +539,7 @@ function GameListPage(var pages)
   self.enter = function()
   {
     self.pages.data.update("game",list_protocol.games[self.pointer].name);
+    self.pages.data.update("password",list_protocol.games[self.pointer].password);
     self.pages.next();
   };
   self.size = function()
@@ -723,6 +724,13 @@ function JoinEffects(var page, var pages)
       if (object.member == 1)
       {
 	self.pages.back();
+      }
+      else
+      {
+	if (self.pages.data.get("password") == true)
+	{
+	  console.log("Please enter password");
+	}
       }
       break;
     }
@@ -918,12 +926,21 @@ function Pages()
       self.on ++;
     }
   }
-  self.next = function()
+  self.new_page = function()
   {
     self.collision = new Collision();
-    self.forward();
-    self.initialize();
     self.input = new Input();
+    self.initialize();
+  }
+  self.back = function()
+  {
+    self.backward();
+    self.new_page();
+  };
+  self.next = function()
+  {
+    self.forward();
+    self.new_page();
   };
   self.display = function()
   {
