@@ -28,6 +28,12 @@ function Pages()
       self.on ++;
     }
   }
+  self.new_page = function()
+  {
+    self.collision = new Collision();
+    self.input = new Input();
+    self.initialize();
+  }
   self.back = function()
   {
     self.new_page();
