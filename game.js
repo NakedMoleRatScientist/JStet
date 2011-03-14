@@ -487,7 +487,7 @@ function JoinPage(var pages)
     self.game = self.pages.data.get("game");
     self.yes = new TextButton("Yes",100,300,300);
     self.no = new TextButton("No",100,400,300);
-    self.effects = new JoinEffects();
+    self.effects = new JoinEffects(self,self.pages);
     self.effects.add(self.yes.rect);
     self.effects.add(self.no.rect);
     self.pages.collision.effects.add_effect(self.effects);
@@ -517,8 +517,9 @@ function GameListPage(var pages)
   self.games = function()
   {
     text("Available Games" + " " + "p",112,80);
-    line(100,85,450,85);
+    line(100,85,310,85);
     line(280,70,280,400);
+    line(310,70,310,400);
     var increment = 100;
     var games = list_protocol.games;
     for (var i = 0; i < games.length; i++)
@@ -526,7 +527,7 @@ function GameListPage(var pages)
       text(games[i].name,100,increment);
       if (games[i].password == true)
       {
-	rect(300,increment - 10,10,10);
+	rect(285,increment - 10,10,10);
       }
       increment += 18;
     }
@@ -538,7 +539,7 @@ function GameListPage(var pages)
   self.enter = function()
   {
     self.pages.data.update("game",list_protocol.games[self.pointer].name);
-    self.pages.turn();
+    self.pages.next();
   };
   self.size = function()
   {
@@ -708,12 +709,23 @@ function PasswordPage(var pages)
   };
 }
 
-function JoinEffects()
+function JoinEffects(var page, var pages)
 {
   var self = this;
+  self.page = page;
+  self.pages = pages;
+  self.effect = new Effect(self);
   self.check = function(var object)
   {
-    
+    switch (object.type)
+    {
+    case 0:
+      if (object.member == 1)
+      {
+	self.pages.back();
+      }
+      break;
+    }
   };
 }
 
