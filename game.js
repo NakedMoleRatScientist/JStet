@@ -393,6 +393,7 @@ function PassEffects(var pages, pass)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
+    activeType(self);
     if (object.type == 2)
     {
       if (self.pass.state == 0)
@@ -572,7 +573,6 @@ function NamePage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = true;
   self.state = 0;
   self.initialize = function()
   {
@@ -606,7 +606,7 @@ function NamePage(var pages)
   self.type_text = function()
   {
     text("What do you wish the name of the game to be?",150,210);
-    text(self.pages.input.string,170,240);
+    text(self.submit_effects.input.string,170,240);
     text("When you're done, presse enter",180,265);
     rect(170,220,400,25);
   };
@@ -637,7 +637,6 @@ function PassEntryPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = true;
   self.initialize = function()
   {
     self.effects = new PassEffects(self.pages,self);
@@ -661,8 +660,7 @@ function PassEntryPage(var pages)
     {
       self.fail_pass();
     }
-    text(self.pages.input.string,150,300);
-    
+    text(self.effects.input.string,150,300);    
   };
   self.first_stage = function()
   {
@@ -927,7 +925,6 @@ function Pages()
   self.effect = new PageEffect(self);
   self.effect.add(self.turn.rect);
   self.data = new DataCollect();
-  self.input = new Input();
   self.forward = function ()
   {
     self.on ++;
@@ -947,7 +944,6 @@ function Pages()
   self.new_page = function()
   {
     self.collision = new Collision();
-    self.input = new Input();
     self.initialize();
   }
   self.back = function()
@@ -971,28 +967,6 @@ function Pages()
   self.add = function(var object)
   {
     self.pages.push(object);
-  };
-  self.type_check = function(var info)
-  {
-    if (self.pages[self.on].typing == true)
-    {
-      if (info == -8)
-      {
-	self.input.destroy();
-      }
-      else if (info == -10)
-      {
-	self.type_enter();
-      }
-      else
-      {
-	self.input.addLetter(info);
-      }
-    }
-  };
-  self.type_enter = function()
-  {
-    self.collision.effects.check(self.input);
   };
   self.initialize = function()
   {
@@ -1069,12 +1043,6 @@ function RadioButton()
   {
     text(message,self.x + 15,self.y + 5);
   };
-}
-
-void createKey()
-{
-  var info = typing();
-  create.pages.type_check(info);
 }
 
 function CreateGameMode()
@@ -1855,9 +1823,6 @@ void keyPressed()
   case 5:
     chatKey();
     break;
-  case 6:
-    createKey();
-    break;
   }
 }
 
@@ -2566,6 +2531,16 @@ function LobbyEffects()
       }
     }
   };
+}
+
+function activeType(var parent)
+{
+  var self = parent;
+  if (self.type == true)
+  {
+    var info = typing();
+    self.check_type(info);
+  }
 }
 
 function Effect(var parent)
