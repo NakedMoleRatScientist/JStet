@@ -4,6 +4,7 @@ function Effect(var parent)
   var self = parent;
   self.elements = [];
   self.counter = 0;
+  self.input = new Input();
   self.add = function(var button)
   {
     button.member = self.counter;
