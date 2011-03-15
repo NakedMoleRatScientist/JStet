@@ -1,7 +1,7 @@
 
-function activeType(var parent)
+function activeType(var effect)
 {
-  var self = parent;
+  var self = effect;
   var info = typing();
   self.check_type(info);
 }
