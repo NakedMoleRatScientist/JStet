@@ -13,6 +13,10 @@ function TitleMode()
     textFont(font,18);
     text("Press Enter to Connect.",260,325);
   };
+  self.run = function()
+  {
+    titleKey();
+  };
   self.switch_mode = function()
   {
     if (self.connected == true)
