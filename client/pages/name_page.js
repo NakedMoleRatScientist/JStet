@@ -26,16 +26,17 @@ function NamePage(var pages)
     textFont(font,18);
     if (self.state == 0)
     {
+      self.name.type = true;
       self.type_text();
     }
     else
     {
+      self.name.type = false;
       self.confirm_text();
     }
   };
   self.type_text = function()
   {
-    self.name.type = true;
     text("What do you wish the name of the game to be?",150,210);
     text(self.name.input.string,170,240);
     text("When you're done, presse enter",180,265);
@@ -43,7 +44,6 @@ function NamePage(var pages)
   };
   self.confirm_text = function()
   {
-    self.name.type = false;
     text("Name of the game is.. " + self.pages.data.get("name"),150,190);
     text("Is this the name of the game you wish it to be?",150,210);
     self.yes.text("Yes");
