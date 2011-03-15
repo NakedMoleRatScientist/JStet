@@ -40,9 +40,7 @@ function Effect(var parent)
   };
   self.type_enter = function()
   {
-    console.log('ddd');
     self.collision.effects.check(self.input);
-    console.log("groan");
   };
   self.add_input = function()
   {
