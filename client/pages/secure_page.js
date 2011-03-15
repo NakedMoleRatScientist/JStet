@@ -11,5 +11,7 @@ function SecurePage(var pages)
   {
     textFont(font,18);
     text("Please enter the password for this game",300,300);
+    var info = typing();
+    self.effects.check_key(info);
   };
 }
