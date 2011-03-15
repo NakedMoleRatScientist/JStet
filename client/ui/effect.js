@@ -38,4 +38,8 @@ function Effect(var parent)
       }
     }
   };
+  self.add_type = function()
+  {
+    self.add(self.input);
+  };
 }
