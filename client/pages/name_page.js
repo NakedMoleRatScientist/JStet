@@ -35,15 +35,15 @@ function NamePage(var pages)
   };
   self.type_text = function()
   {
-    self.submit_effects.type = true;
+    self.name.type = true;
     text("What do you wish the name of the game to be?",150,210);
-    text(self.submit_effects.input.string,170,240);
+    text(self.name.input.string,170,240);
     text("When you're done, presse enter",180,265);
     rect(170,220,400,25);
   };
   self.confirm_text = function()
   {
-    self.submit_effects.type = false;
+    self.name.type = false;
     text("Name of the game is.. " + self.pages.data.get("name"),150,190);
     text("Is this the name of the game you wish it to be?",150,210);
     self.yes.text("Yes");
