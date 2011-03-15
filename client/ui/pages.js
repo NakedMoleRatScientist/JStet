@@ -11,7 +11,6 @@ function Pages()
   self.effect = new PageEffect(self);
   self.effect.add(self.turn.rect);
   self.data = new DataCollect();
-  self.input = new Input();
   self.forward = function ()
   {
     self.on ++;
