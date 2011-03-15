@@ -19,4 +19,22 @@ function Effect(var parent)
       self.collision.add(self.elements[i]);
     }
   };
+  self.check_type = function(var info)
+  {
+    if (self.type == true)
+    {
+      if (info == -8)
+      {
+	self.input.destroy();
+      }
+      else if (info == -10)
+      {
+	self.type_enter();
+      }
+      else
+      {
+	self.input.addLetter(info);
+      }
+    }
+  };
 }
