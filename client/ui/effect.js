@@ -6,7 +6,6 @@ function Effect(var parent)
   self.counter = 0;
   self.type == false;
   self.input = new Input();
-  self.add_type();
   self.add = function(var button)
   {
     button.member = self.counter;
