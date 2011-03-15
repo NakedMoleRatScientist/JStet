@@ -23,5 +23,6 @@ void keyPressed()
     break;
   case 6:
     createKey();
+    break;
   }
 }
