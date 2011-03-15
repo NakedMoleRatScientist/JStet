@@ -24,5 +24,8 @@ void keyPressed()
   case 6:
     createKey();
     break;
+  case 8:
+    listKey();
+    break;
   }
 }
