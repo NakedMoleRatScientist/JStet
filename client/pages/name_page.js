@@ -36,7 +36,7 @@ function NamePage(var pages)
   self.type_text = function()
   {
     text("What do you wish the name of the game to be?",150,210);
-    text(self.pages.input.string,170,240);
+    text(self.submit_effects.input.string,170,240);
     text("When you're done, presse enter",180,265);
     rect(170,220,400,25);
   };
