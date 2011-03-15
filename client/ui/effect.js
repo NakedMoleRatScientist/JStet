@@ -42,8 +42,9 @@ function Effect(var parent)
   {
     console.log('ddd');
     self.collision.effects.check(self.input);
+    console.log("groan");
   };
-  self.add_type = function()
+  self.add_input = function()
   {
     self.add(self.input);
   };
