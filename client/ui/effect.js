@@ -38,6 +38,10 @@ function Effect(var parent)
       }
     }
   };
+  self.type_enter = function()
+  {
+    self.collision.effects.check(self.input);
+  };
   self.add_type = function()
   {
     self.add(self.input);
