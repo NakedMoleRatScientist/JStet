@@ -3,7 +3,6 @@ function PassEntryPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = true;
   self.initialize = function()
   {
     self.effects = new PassEffects(self.pages,self);
@@ -27,8 +26,7 @@ function PassEntryPage(var pages)
     {
       self.fail_pass();
     }
-    text(self.pages.input.string,150,300);
-    
+    text(self.pages.input.string,150,300);    
   };
   self.first_stage = function()
   {
