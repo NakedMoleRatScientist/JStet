@@ -596,17 +596,20 @@ function NamePage(var pages)
     textFont(font,18);
     if (self.state == 0)
     {
+      self.name.type = true;
       self.type_text();
     }
     else
     {
+      self.name.type = false;
       self.confirm_text();
     }
   };
   self.type_text = function()
   {
     text("What do you wish the name of the game to be?",150,210);
-    text(self.submit_effects.input.string,170,240);
+    activeType(self.name);
+    text(self.name.input.string,170,240);
     text("When you're done, presse enter",180,265);
     rect(170,220,400,25);
   };
@@ -2533,14 +2536,11 @@ function LobbyEffects()
   };
 }
 
-function activeType(var parent)
+function activeType(var effect)
 {
-  var self = parent;
-  if (self.type == true)
-  {
-    var info = typing();
-    self.check_type(info);
-  }
+  var self = effect;
+  var info = typing();
+  self.check_type(info);
 }
 
 function Effect(var parent)
@@ -2581,6 +2581,10 @@ function Effect(var parent)
 	self.input.addLetter(info);
       }
     }
+  };
+  self.type_enter = function()
+  {
+    self.collision.effects.check(self.input);
   };
   self.add_type = function()
   {
