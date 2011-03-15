@@ -6,6 +6,7 @@ function NameEffects(var pages)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
+    activeType(self);
     if (object.type == 2)
     {
       self.pages.data.update("name",self.pages.input.string);
