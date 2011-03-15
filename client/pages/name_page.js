@@ -15,6 +15,7 @@ function NamePage(var pages)
     self.radio_switch.add(self.no);
     self.submit = new TextButton("Submit",100,350,270);
     self.name = new NameEffects(self.pages);
+    self.name.add_input();
     self.submit_effects = new SubmitEffects(self.pages,self.radio_switch);
     self.submit_effects.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.name);
@@ -38,7 +39,9 @@ function NamePage(var pages)
   self.type_text = function()
   {
     text("What do you wish the name of the game to be?",150,210);
+    console.log("bep");
     activeType(self.name);
+    console.log("dep");
     text(self.name.input.string,170,240);
     text("When you're done, presse enter",180,265);
     rect(170,220,400,25);
