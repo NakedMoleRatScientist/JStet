@@ -808,7 +808,6 @@ function SecurePage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = true;
   self.initialize = function()
   {
     self.effects = new SecureEffects(self.pages,self);
@@ -817,6 +816,8 @@ function SecurePage(var pages)
   {
     textFont(font,18);
     text("Please enter the password for this game",300,300);
+    var info = typing();
+    self.effects.check_key(info);
   };
 }
 
@@ -2572,6 +2573,8 @@ function Effect(var parent)
   var self = parent;
   self.elements = [];
   self.counter = 0;
+  self.type == false;
+  self.input = new Input();
   self.add = function(var button)
   {
     button.member = self.counter;
@@ -2585,6 +2588,28 @@ function Effect(var parent)
     {
       self.collision.add(self.elements[i]);
     }
+  };
+  self.check_type = function(var info)
+  {
+    if (self.type == true)
+    {
+      if (info == -8)
+      {
+	self.input.destroy();
+      }
+      else if (info == -10)
+      {
+	self.type_enter();
+      }
+      else
+      {
+	self.input.addLetter(info);
+      }
+    }
+  };
+  self.add_type = function()
+  {
+    self.add(self.input);
   };
 }
 
