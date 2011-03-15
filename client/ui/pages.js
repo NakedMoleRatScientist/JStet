@@ -56,28 +56,6 @@ function Pages()
   {
     self.pages.push(object);
   };
-  self.type_check = function(var info)
-  {
-    if (self.pages[self.on].typing == true)
-    {
-      if (info == -8)
-      {
-	self.input.destroy();
-      }
-      else if (info == -10)
-      {
-	self.type_enter();
-      }
-      else
-      {
-	self.input.addLetter(info);
-      }
-    }
-  };
-  self.type_enter = function()
-  {
-    self.collision.effects.check(self.input);
-  };
   self.initialize = function()
   {
     self.pages[self.on].initialize();
