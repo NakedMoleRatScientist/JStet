@@ -483,7 +483,7 @@ function NameEffects(var pages)
   {
     if (object.type == 2)
     {
-      self.pages.data.update("name",self.pages.input.string);
+      self.pages.data.update("name",self.input.string);
       self.pages.act();
     }
   };
@@ -585,6 +585,7 @@ function NamePage(var pages)
     self.radio_switch.add(self.no);
     self.submit = new TextButton("Submit",100,350,270);
     self.name = new NameEffects(self.pages);
+    self.name.add_input();
     self.submit_effects = new SubmitEffects(self.pages,self.radio_switch);
     self.submit_effects.add(self.submit.rect);
     self.pages.collision.effects.add_effect(self.name);
@@ -1544,8 +1545,6 @@ void enterHighScoreKey()
     break;
   }
 }
-
-var type_status = false;
 
 void typing()
 {
@@ -2586,7 +2585,7 @@ function Effect(var parent)
   {
     self.collision.effects.check(self.input);
   };
-  self.add_type = function()
+  self.add_input = function()
   {
     self.add(self.input);
   };
