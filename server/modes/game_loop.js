@@ -6,11 +6,10 @@ var field = require('../models/playfield');
 var db = require('../models/database');
 var player = require('../models/player');
 var players = require('../models/players_manager');
-function EventManager(id)
+function EventManager()
 {
   var self = this;
   self.events = new Array();
-  self.id = id;
   self.players = new Array();
   self.timer = timer.create_new();
   self.send = function(message)
