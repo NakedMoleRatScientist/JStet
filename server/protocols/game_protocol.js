@@ -135,9 +135,12 @@ function find_by_id(id)
 {
   for (var i = 0;i < sessions.length;i++)
   {
-    if (id == sessions[i].id)
+    for(var o = 0;o < sessions[i].ids.length;o++)
     {
-      return i;
+      if (sessions[i].ids[o] == id)
+      {
+	return i;
+      }
     }
   }
   return -1;
