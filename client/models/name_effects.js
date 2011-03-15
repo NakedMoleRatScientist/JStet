@@ -8,7 +8,7 @@ function NameEffects(var pages)
   {
     if (object.type == 2)
     {
-      self.pages.data.update("name",self.pages.input.string);
+      self.pages.data.update("name",self.input.string);
       self.pages.act();
     }
   };
