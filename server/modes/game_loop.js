@@ -19,10 +19,13 @@ function EventManager(id)
   };
   self.initialize = function(ids)
   {
-    var identity = players.get_player(id);
-    var new_player = player.get_game(identity,self);
-    new_player.initialize();
-    self.players.push(new_player);
+    for (var i = 0; i < ids.length; i++)
+    {
+      var identity = players.get_player(ids[i]);
+      var new_player = player.get_game(identity,self);
+      new_player.initialize();
+      self.players.push(new_player);
+    }
   };
   self.get_data = function()
   {
