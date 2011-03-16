@@ -1063,6 +1063,16 @@ function TitleMode()
 {
   var self = this;
   self.connected = false;
+  self.key = function()
+  {
+    switch(key)
+    {
+    case 10:
+      title.connected = true;
+      network.initialize();
+      break;
+    }
+  };
   self.display = function()
   {
     background(0,0,0);
@@ -1071,10 +1081,6 @@ function TitleMode()
     text("JStet",300,300);
     textFont(font,18);
     text("Press Enter to Connect.",260,325);
-  };
-  self.run = function()
-  {
-    titleKey();
   };
   self.switch_mode = function()
   {
@@ -1360,17 +1366,6 @@ void chatKey()
     break;
   case false:
     return;
-    break;
-  }
-}
-
-void titleKey()
-{
-  switch(key)
-  {
-  case 10:
-    title.connected = true;
-    network.initialize();
     break;
   }
 }
@@ -1803,24 +1798,27 @@ void mousePressed()
   }
 }
 
-//void keyPressed()
-//{
-//  switch(mode.status)
-//  {
-//  case 4:
-//    gameKey();
-//    break;
-//  case 1:
-//    gameOverKey();
-//    break;
-//  case 2:
-//    scoreKey();
-//    break;
-//  case 3:
-//    enterHighScoreKey();
-//    break;
-//  }
-//}
+void keyPressed()
+{
+  switch(mode.status)
+  {
+  case 0:
+    title.key();
+  case 4:
+    gameKey();
+    break;
+  case 1:
+    gameOverKey();
+    break;
+  case 2:
+    scoreKey();
+    break;
+  case 3:
+    enterHighScoreKey();
+    break;
+  }
+}
+
 
 void scoreKey()
 {
@@ -2927,7 +2925,6 @@ void draw()
   {
   case 0:
     title.display();
-    title.run();
     title.switch_mode();
     break;
   case 4:
