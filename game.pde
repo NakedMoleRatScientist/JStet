@@ -481,8 +481,6 @@ function JoinPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = false;
-  self.game = null;
   self.initialize = function()
   {
     self.game = self.pages.data.get("game");
@@ -499,6 +497,10 @@ function JoinPage(var pages)
     text("Do you wish to join the game: " + self.game,280,280);
     self.yes.display();
     self.no.display();
+  };
+  self.key = function()
+  {
+    
   };
 }
 
@@ -597,7 +599,6 @@ function NamePage(var pages)
   self.type_text = function()
   {
     text("What do you wish the name of the game to be?",150,210);
-    activeType(self.name);
     text(self.name.input.string,170,240);
     text("When you're done, presse enter",180,265);
     rect(170,220,400,25);
@@ -621,6 +622,13 @@ function NamePage(var pages)
     else
     {
       self.state = 0;
+    }
+  };
+  self.key = function()
+  {
+    if (self.state == 0)
+    {
+      activeType(self.name);  
     }
   };
 }
@@ -815,7 +823,6 @@ function PlayersPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = false;
   self.initialize = function()
   {
     self.one = new RadioButton();
@@ -837,6 +844,9 @@ function PlayersPage(var pages)
     self.two.display();
     self.two.text("Two");
     self.pages.display();
+  };
+  self.key = function()
+  {
   };
 }
 
@@ -925,6 +935,10 @@ function Pages()
       self.on --;
     }
   }
+  self.key = function()
+  {
+    self.pages[self.on].key();
+  };
   self.backward = function ()
   {
     self.on --;
@@ -1055,6 +1069,10 @@ function CreateGameMode()
     background(0,0,0);
     stroke(255);
     self.pages.run()
+  };
+  self.key = function()
+  {
+    self.pages.key();
   };
 }
 
