@@ -15,8 +15,5 @@ void keyPressed()
   case 3:
     enterHighScoreKey();
     break;
-  case 5:
-    chatKey();
-    break;
   }
 }
