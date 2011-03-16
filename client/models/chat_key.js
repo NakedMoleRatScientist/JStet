@@ -10,7 +10,7 @@ void chatKey()
   case -8:
     lobby.chat.message.destroy();
     break;
-  case -10:
+  case -13:
     lobby.chat.enter();
     break;
   case false:
