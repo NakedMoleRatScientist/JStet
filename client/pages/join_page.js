@@ -22,4 +22,8 @@ function JoinPage(var pages)
     self.yes.display();
     self.no.display();
   };
+  self.key = function()
+  {
+    
+  };
 }
