@@ -21,5 +21,8 @@ var runKey = null;
 
 void keyPressed()
 {
-  runKey();
+  if (runKey != null)
+  {
+    runKey();
+  }
 }
