@@ -154,6 +154,7 @@ void draw()
     break;
   case 3:
     high_score.display();
+    enterHighScoreKey();
     break;
   case 5:
     lobby.display();
