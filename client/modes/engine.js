@@ -154,6 +154,7 @@ void draw()
     break;
   case 5:
     lobby.display();
+    lobby.run();
     break;
   case 6:
     create.display();
