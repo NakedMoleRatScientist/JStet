@@ -17,3 +17,9 @@
 //    break;
 //  }
 //}
+var runKey = null;
+
+void keyPressed()
+{
+  runKey();
+}
