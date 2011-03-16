@@ -1,5 +1,5 @@
 
-PFont font = loadFont("monospace")
+PFont font = loadFont("monospace");
 void setup()
 {
   size(800,600);
