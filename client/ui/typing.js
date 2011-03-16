@@ -1,7 +1,7 @@
 
 void typing()
 {
-  if (keyPressed == true)
+  if (keyPressed)
   {
     switch(key)
     {
@@ -211,7 +211,9 @@ void typing()
     case 65535:
       return false;
       break;
-    default: return key;
+    default:
+      return key;
+      break;
     }
   }
 }
