@@ -42,6 +42,10 @@ function PassEntryPage(var pages)
     text("Password mistach error.",100,250);
     text("press enter to restart password entry.",100,270);
   };
+  self.key = function()
+  {
+    activeKey(self.effects);
+  };
   self.act = function()
   {
     if (self.state == 0)
