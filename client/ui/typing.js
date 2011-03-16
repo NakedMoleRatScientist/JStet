@@ -1,7 +1,7 @@
 
 void typing()
 {
-  if (keyPressed)
+  if (keyPressed == true)
   {
     switch(key)
     {
@@ -216,4 +216,5 @@ void typing()
       break;
     }
   }
+  return false;
 }
