@@ -19,6 +19,10 @@ function Pages()
       self.on --;
     }
   }
+  self.key = function()
+  {
+    self.pages[self.on].key();
+  };
   self.backward = function ()
   {
     self.on --;
