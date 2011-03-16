@@ -52,10 +52,12 @@ function PassEntryPage(var pages)
     if (self.state == 0)
     {
       self.state = 1;
+      self.effects.input.clean();
     }
     else if(self.state == 1)
     {
       self.state = 0;
+      self.effects.input.clean();
     }
   };
 }
