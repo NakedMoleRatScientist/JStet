@@ -4,6 +4,16 @@ function TitleMode()
 {
   var self = this;
   self.connected = false;
+  self.key = function()
+  {
+    switch(key)
+    {
+    case 10:
+      title.connected = true;
+      network.initialize();
+      break;
+    }
+  };
   self.display = function()
   {
     background(0,0,0);
@@ -12,10 +22,6 @@ function TitleMode()
     text("JStet",300,300);
     textFont(font,18);
     text("Press Enter to Connect.",260,325);
-  };
-  self.run = function()
-  {
-    titleKey();
   };
   self.switch_mode = function()
   {
