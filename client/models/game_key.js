@@ -5,26 +5,29 @@
 
 void gameKey()
 {
-  switch(key)
+  if (keyPressed)
   {
-  //move right, d
-  case 100:
-    game_protocol.move_right();
-    break;
-  //move down, s
-  case 115:
-    game_protocol.move_down();
-    break;
-  //move left, a
-  case 97:
-    game_protocol.move_left();
-    break;
-  //rotate, w
-  case 119:
-    game_protocol.rotate();
-    break;
-  default:
-    console.log(key);
-    break;
+    switch(key)
+    {
+      //move right, d
+    case 100:
+      game_protocol.move_right();
+      break;
+      //move down, s
+    case 115:
+      game_protocol.move_down();
+      break;
+      //move left, a
+    case 97:
+      game_protocol.move_left();
+      break;
+      //rotate, w
+    case 119:
+      game_protocol.rotate();
+      break;
+    default:
+      console.log(key);
+      break;
+    }
   }
 }
