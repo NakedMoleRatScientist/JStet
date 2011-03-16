@@ -7,7 +7,6 @@ function PassEffects(var pages, pass)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
-    activeType(self);
     if (object.type == 2)
     {
       if (self.pass.state == 0)
