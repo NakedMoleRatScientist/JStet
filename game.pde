@@ -51,18 +51,6 @@ function GameInfo(var password,var name)
   self.name = name;
 }
 
-function PlayButton()
-{
-  var self = this;
-  self.play = new RectObject(450,20,100,50);
-  self.display = function()
-  {
-    noFill();
-    textFont(font,25);
-    self.play.draw();
-    text("Play",475,55);
-  };
-}
 function TextButton(var string,var size,var x, var y)
 {
   var self = this;
@@ -1367,7 +1355,7 @@ void chatKey()
   case -8:
     lobby.chat.message.destroy();
     break;
-  case -10:
+  case -13:
     lobby.chat.enter();
     break;
   case false:
@@ -1552,6 +1540,7 @@ void enterHighScoreKey()
 
 void typing()
 {
+  frameRate(7);
   if (keyPressed == true)
   {
     switch(key)
@@ -1755,8 +1744,8 @@ void typing()
       return -8;
       break;
       //enter
-    case 10:
-      return -10;
+    case 13:
+      return -13;
       break;
       //shift, ctrl, etc
     case 65535:
@@ -1767,6 +1756,7 @@ void typing()
       break;
     }
   }
+  frameRate(24);
   return false;
 }
 
@@ -1856,29 +1846,33 @@ void scoreKey()
 
 void gameKey()
 {
-  switch(key)
+  if (keyPressed)
   {
-  //move right, d
-  case 100:
-    game_protocol.move_right();
-    break;
-  //move down, s
-  case 115:
-    game_protocol.move_down();
-    break;
-  //move left, a
-  case 97:
-    game_protocol.move_left();
-    break;
-  //rotate, w
-  case 119:
-    game_protocol.rotate();
-    break;
-  default:
-    console.log(key);
-    break;
+    switch(key)
+    {
+      //move right, d
+    case 100:
+      game_protocol.move_right();
+      break;
+      //move down, s
+    case 115:
+      game_protocol.move_down();
+      break;
+      //move left, a
+    case 97:
+      game_protocol.move_left();
+      break;
+      //rotate, w
+    case 119:
+      game_protocol.rotate();
+      break;
+    default:
+      console.log(key);
+      break;
+    }
   }
 }
+
 function TimerAction()
 {
   var self = this;
@@ -2575,7 +2569,7 @@ function Effect(var parent)
       {
 	self.input.destroy();
       }
-      else if (info == -10)
+      else if (info == -13)
       {
 	self.type_enter();
       }
@@ -2938,15 +2932,19 @@ void draw()
     break;
   case 4:
     engineDraw.display();
+    gameKey();
     break;
   case 1:
     over.display();
+    gameOverKey();
     break;
   case 2:
     board.display();
+    scoreKey();
     break;
   case 3:
     high_score.display();
+    enterHighScoreKey();
     break;
   case 5:
     lobby.display();
