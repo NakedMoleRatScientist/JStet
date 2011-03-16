@@ -45,10 +45,13 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    listKey(self,list_protocol.games.length - 1);
     textFont(font,18);
     self.size();
     self.games();
     self.refresh.display();
+  };
+  self.key = function()
+  {
+    listKey(self,list_protocol.games.length - 1);
   };
 }
