@@ -137,7 +137,6 @@ void draw()
   {
   case 0:
     title.display();
-    title.run();
     title.switch_mode();
     break;
   case 4:
