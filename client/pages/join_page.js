@@ -3,7 +3,6 @@ function JoinPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.game = null;
   self.initialize = function()
   {
     self.game = self.pages.data.get("game");
