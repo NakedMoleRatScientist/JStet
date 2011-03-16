@@ -1,6 +1,7 @@
 
 void typing()
 {
+  frameRate(5);
   if (keyPressed == true)
   {
     switch(key)
@@ -204,8 +205,8 @@ void typing()
       return -8;
       break;
       //enter
-    case 10:
-      return -10;
+    case 13:
+      return -13;
       break;
       //shift, ctrl, etc
     case 65535:
@@ -216,5 +217,6 @@ void typing()
       break;
     }
   }
+  frameRate(24);
   return false;
 }
