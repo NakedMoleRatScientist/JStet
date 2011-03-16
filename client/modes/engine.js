@@ -146,6 +146,7 @@ void draw()
     break;
   case 1:
     over.display();
+    gameOverKey();
     break;
   case 2:
     board.display();
