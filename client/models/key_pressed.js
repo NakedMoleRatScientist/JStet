@@ -8,6 +8,8 @@ void keyPressed()
   case 4:
     gameKey();
     break;
+  case 5:
+    lobby.key();
   case 1:
     gameOverKey();
     break;
