@@ -1,7 +1,7 @@
 
 void typing()
 {
-  frameRate(5);
+  frameRate(7);
   if (keyPressed == true)
   {
     switch(key)
