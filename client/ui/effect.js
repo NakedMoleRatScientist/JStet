@@ -32,6 +32,10 @@ function Effect(var parent)
       {
 	self.type_enter();
       }
+      else if(info == false)
+      {
+	return;
+      }
       else
       {
 	self.input.addLetter(info);
