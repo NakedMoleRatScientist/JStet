@@ -18,4 +18,8 @@ function CreateGameMode()
     stroke(255);
     self.pages.run()
   };
+  self.key = function()
+  {
+    self.pages.key();
+  };
 }
