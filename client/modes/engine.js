@@ -142,6 +142,7 @@ void draw()
     break;
   case 4:
     engineDraw.display();
+    gameKey();
     break;
   case 1:
     over.display();
