@@ -381,7 +381,6 @@ function PassEffects(var pages, pass)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
-    activeType(self);
     if (object.type == 2)
     {
       if (self.pass.state == 0)
@@ -508,7 +507,6 @@ function GameListPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = false;
   self.pointer = 0;
   self.initialize = function()
   {
@@ -551,11 +549,14 @@ function GameListPage(var pages)
   };
   self.call = function()
   {
-    listKey(self,list_protocol.games.length - 1);
     textFont(font,18);
     self.size();
     self.games();
     self.refresh.display();
+  };
+  self.key = function()
+  {
+    listKey(self,list_protocol.games.length - 1);
   };
 }
 
@@ -640,6 +641,7 @@ function PassEntryPage(var pages)
   self.initialize = function()
   {
     self.effects = new PassEffects(self.pages,self);
+    self.effects.type = true;
     self.state = 0;
     self.retry = new TextButton("Retry",100,350,350);
     self.effects.add(self.retry.rect);
@@ -676,15 +678,29 @@ function PassEntryPage(var pages)
     text("Password mistach error.",100,250);
     text("press enter to restart password entry.",100,270);
   };
+  self.key = function()
+  {
+    activeKey(self.effects);
+    if (self.state == 3)
+    {
+      switch(key)
+      {
+      case 10:
+	self.state = 0;
+      }
+    }
+  };
   self.act = function()
   {
     if (self.state == 0)
     {
       self.state = 1;
+      self.effects.input.clean();
     }
     else if(self.state == 1)
     {
       self.state = 0;
+      self.effects.input.clean();
     }
   };
 }
@@ -717,6 +733,10 @@ function PasswordPage(var pages)
     self.no.text("No");
     self.no.display();
     self.pages.display();
+  };
+  self.key = function()
+  {
+    
   };
 }
 
@@ -1370,33 +1390,29 @@ function Input()
 
 function listKey(var list,var size)
 {
-  frameRate(10);
-  if (keyPressed)
+  switch(key)
   {
-    switch(key)
+    //arrow key up
+  case 119:
     {
-      //arrow key up
-    case 119:
+      if (list.pointer > 0)
       {
-	if (list.pointer > 0)
-	{
-	  list.pointer -= 1;
-	}
-	break;
+	list.pointer -= 1;
       }
-    case 115:
+      break;
+    }
+  case 115:
+    {
+      if (list.pointer < size)
       {
-	if (list.pointer < size)
-	{
-	  list.pointer += 1;
-	}
-	break;
+	list.pointer += 1;
       }
-    case 13:
-      {
-	list.enter();
-	break;
-      }
+      break;
+    }
+  case 10:
+    {
+      list.enter();
+      break;
     }
   }
 }
