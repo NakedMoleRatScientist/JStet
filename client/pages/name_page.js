@@ -65,4 +65,11 @@ function NamePage(var pages)
       self.state = 0;
     }
   };
+  self.key = function()
+  {
+    if (self.state == 0)
+    {
+      activeType(self.name);  
+    }
+  };
 }
