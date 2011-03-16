@@ -150,6 +150,7 @@ void draw()
     break;
   case 2:
     board.display();
+    scoreKey();
     break;
   case 3:
     high_score.display();
