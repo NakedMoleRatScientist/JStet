@@ -6,6 +6,7 @@ function PassEntryPage(var pages)
   self.initialize = function()
   {
     self.effects = new PassEffects(self.pages,self);
+    self.effects.type = true;
     self.state = 0;
     self.retry = new TextButton("Retry",100,350,350);
     self.effects.add(self.retry.rect);
