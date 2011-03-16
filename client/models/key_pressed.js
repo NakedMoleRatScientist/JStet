@@ -3,6 +3,8 @@ void keyPressed()
 {
   switch(mode.status)
   {
+  case 0:
+    title.key();
   case 4:
     gameKey();
     break;
