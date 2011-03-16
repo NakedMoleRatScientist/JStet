@@ -1084,6 +1084,10 @@ function TitleMode()
     textFont(font,18);
     text("Press Enter to Connect.",260,325);
   };
+  self.run = function()
+  {
+    titleKey();
+  };
   self.switch_mode = function()
   {
     if (self.connected == true)
@@ -1807,9 +1811,6 @@ void keyPressed()
 {
   switch(mode.status)
   {
-  case 0:
-    titleKey();
-    break;
   case 4:
     gameKey();
     break;
@@ -1821,9 +1822,6 @@ void keyPressed()
     break;
   case 3:
     enterHighScoreKey();
-    break;
-  case 5:
-    chatKey();
     break;
   }
 }
@@ -2783,7 +2781,7 @@ function Player()
   };
 }
 
-PFont font = loadFont("monospace")
+PFont font = loadFont("monospace");
 void setup()
 {
   size(800,600);
@@ -2921,6 +2919,7 @@ void draw()
   {
   case 0:
     title.display();
+    title.run();
     title.switch_mode();
     break;
   case 4:
