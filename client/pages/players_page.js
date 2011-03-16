@@ -26,4 +26,8 @@ function PlayersPage(var pages)
     self.two.text("Two");
     self.pages.display();
   };
+  self.key = function()
+  {
+    
+  };
 }
