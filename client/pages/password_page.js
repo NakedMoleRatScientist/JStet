@@ -28,4 +28,8 @@ function PasswordPage(var pages)
     self.no.display();
     self.pages.display();
   };
+  self.key = function()
+  {
+    
+  };
 }
