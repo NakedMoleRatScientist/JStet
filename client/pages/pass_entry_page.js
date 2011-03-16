@@ -46,6 +46,14 @@ function PassEntryPage(var pages)
   self.key = function()
   {
     activeKey(self.effects);
+    if (self.state == 3)
+    {
+      switch(key)
+      {
+      case 10:
+	self.state = 0;
+      }
+    }
   };
   self.act = function()
   {
