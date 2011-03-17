@@ -26,6 +26,8 @@ function PassEntryPage(var pages)
     }
     else
     {
+      self.effects.input.clean();
+      self.effects.type = false;
       self.fail_pass();
     }
     text(self.effects.input.string,150,300);    
@@ -48,8 +50,6 @@ function PassEntryPage(var pages)
   {
     if (self.state == 2)
     {
-      self.effects.input.clean();
-      self.effects.type = false;
       switch(key)
       {
       case 10:
