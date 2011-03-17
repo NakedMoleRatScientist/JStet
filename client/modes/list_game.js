@@ -15,4 +15,8 @@ function ListGameMode()
     stroke(255);
     self.pages.run();
   };
+  self.key = function()
+  {
+    slef.pages.key();
+  };
 }
