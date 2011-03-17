@@ -25,6 +25,7 @@ function ListProtocol(var net)
     case 0:
       {
 	//update game size.
+	console.log(data[1]);
 	self.size = data[1];
 	break;
       }
@@ -32,6 +33,11 @@ function ListProtocol(var net)
       {
 	//update games
 	self.games.push(new GameInfo(data[1][0][1],data[1][0][0]));
+	break;
+      }
+    case 2:
+      {
+	console.log("Nothing found.");
 	break;
       }
     }
