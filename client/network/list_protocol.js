@@ -31,6 +31,7 @@ function ListProtocol(var net)
     case 1:
       {
 	//update games
+	self.games = [];
 	self.games.push(new GameInfo(data[1][0][1],data[1][0][0]));
 	break;
       }
