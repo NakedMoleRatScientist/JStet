@@ -17,6 +17,6 @@ function ListGameMode()
   };
   self.key = function()
   {
-    slef.pages.key();
+    self.pages.key();
   };
 }
