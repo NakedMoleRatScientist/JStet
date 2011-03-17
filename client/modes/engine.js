@@ -95,8 +95,6 @@ function Engine(protocol,mode)
   };
   self.key = function()
   {
-    if (keyPressed)
-    {
       switch(key)
       {
 	//move right, d
@@ -119,7 +117,6 @@ function Engine(protocol,mode)
 	console.log(key);
 	break;
       }
-    }
   };
 };
 
