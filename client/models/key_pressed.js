@@ -16,7 +16,7 @@ void keyPressed()
     over.key();
     break;
   case 2:
-    scoreKey();
+    score.key();
     break;
   case 3:
     high_score.key();
