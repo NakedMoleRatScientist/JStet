@@ -12,6 +12,9 @@ void keyPressed()
   case 5:
     lobby.key();
     break;
+  case 6:
+    create.key();
+    break;
   case 1:
     over.key();
     break;
