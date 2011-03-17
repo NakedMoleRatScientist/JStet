@@ -46,7 +46,7 @@ function PassEntryPage(var pages)
   };
   self.key = function()
   {
-    if (self.state == 3)
+    if (self.state == 2)
     {
       self.effects.input.clean();
       self.effects.type = false;
