@@ -544,7 +544,14 @@ function GameListPage(var pages)
   };
   self.key = function()
   {
-    var size = list_protocol.games.length - 1;
+    if (list_protocol.games.length > 0)
+    {
+      var size = list_protocol.games.length - 1;
+    }
+    else
+    {
+      var size = 0;
+    }
     switch(key)
     {
       //arrow key up
@@ -1277,6 +1284,7 @@ function ListProtocol(var net)
     case 0:
       {
 	//update game size.
+	console.log(data[1]);
 	self.size = data[1];
 	break;
       }
@@ -1284,6 +1292,11 @@ function ListProtocol(var net)
       {
 	//update games
 	self.games.push(new GameInfo(data[1][0][1],data[1][0][0]));
+	break;
+      }
+    case 2:
+      {
+	console.log("Nothing found.");
 	break;
       }
     }
@@ -1815,19 +1828,21 @@ void keyPressed()
   {
   case 0:
     title.key();
+    break;
   case 4:
-    gameKey();
+    engine.key();
     break;
   case 5:
     lobby.key();
+    break;
   case 1:
-    gameOverKey();
+    over.key();
     break;
   case 2:
-    scoreKey();
+    score.key();
     break;
   case 3:
-    enterHighScoreKey();
+    high_score.key();
     break;
   }
 }
@@ -2624,7 +2639,7 @@ function ListGameMode()
   };
   self.key = function()
   {
-    slef.pages.key();
+    self.pages.key();
   };
 }
 
@@ -2939,19 +2954,15 @@ void draw()
     break;
   case 4:
     engineDraw.display();
-    gameKey();
     break;
   case 1:
     over.display();
-    gameOverKey();
     break;
   case 2:
     board.display();
-    scoreKey();
     break;
   case 3:
     high_score.display();
-    enterHighScoreKey();
     break;
   case 5:
     lobby.display();
