@@ -52,6 +52,30 @@ function GameListPage(var pages)
   };
   self.key = function()
   {
-    listKey(self,list_protocol.games.length - 1);
+    switch(key)
+    {
+      //arrow key up
+    case 119:
+      {
+	if (list.pointer > 0)
+	{
+	  list.pointer -= 1;
+	}
+	break;
+      }
+    case 115:
+      {
+	if (list.pointer < size)
+	{
+	  list.pointer += 1;
+	}
+	break;
+      }
+    case 10:
+      {
+	list.enter();
+	break;
+      }
+    } listKey(self,list_protocol.games.length - 1);
   };
 }
