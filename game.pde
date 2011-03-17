@@ -710,7 +710,6 @@ function PasswordPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = false;
   self.initialize = function()
   {
     self.yes = new RadioButton();
@@ -834,8 +833,10 @@ function SecurePage(var pages)
   {
     textFont(font,18);
     text("Please enter the password for this game",300,300);
-    var info = typing();
-    self.effects.check_key(info);
+  };
+  self.key = function()
+  {
+    activeType(self.effects);
   };
 }
 
@@ -1357,6 +1358,26 @@ function HighScoreMode()
   {
     return self.name;
   }
+  self.key = function()
+  {
+    var info = typing();
+    switch (info)
+    {
+    case false:
+      break;
+    case -8:
+      high_score.name.destroy();
+      break;
+    case -10:
+      score_protocol.transmit_score(high_score.get_name(),engine.score);
+      high_score.name.clean();
+      mode.change(2);
+      break;
+    default:
+      high_score.name.addLetter(info);
+      break;
+    }
+  };
 }
 
 function Input()
@@ -1524,27 +1545,6 @@ function Collision()
   {
     self.effects.check(object);
   };
-}
-
-void enterHighScoreKey()
-{
-  var info = typing();
-  switch (info)
-  {
-  case false:
-    break;
-  case -8:
-    high_score.name.destroy();
-    break;
-  case -10:
-    score_protocol.transmit_score(high_score.get_name(),engine.score);
-    high_score.name.clean();
-    mode.change(2);
-    break;
-  default:
-    high_score.name.addLetter(info);
-    break;
-  }
 }
 
 void typing()
@@ -1778,19 +1778,19 @@ function GameOverMode()
     text("Press n to start a new game.",250,325);
     text("Press d to display highscore", 250,350);
   };
+  self.key = function()
+  {
+    if (key == 110)
+    {
+      game_protocol.request_game();
+    }
+    else if(key == 100)
+    {
+      mode.change(2);
+    }
+  };
 }
 
-void gameOverKey()
-{
-  if (key == 110)
-  {
-    game_protocol.request_game();
-  }
-  else if(key == 100)
-  {
-    mode.change(2);
-  }
-}
 void mousePressed()
 {
   switch(mode.status)
