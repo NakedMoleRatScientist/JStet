@@ -13,7 +13,7 @@ function PassEffects(var pages, pass)
       {
 	self.pages.data.update("password",self.input.string);
 	self.pages.act();
-	self.pages.input.clean();
+	self.input.clean();
       }
       else
       {
