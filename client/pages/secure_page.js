@@ -13,6 +13,7 @@ function SecurePage(var pages)
   {
     textFont(font,18);
     text("Please enter the password for this game",300,300);
+    text(self.effects.input.string,300,330);
   };
   self.key = function()
   {
