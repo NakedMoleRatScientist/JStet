@@ -26,6 +26,7 @@ function PassEntryPage(var pages)
     }
     else
     {
+      self.effects.type = false;
       self.fail_pass();
     }
     text(self.effects.input.string,150,300);    
