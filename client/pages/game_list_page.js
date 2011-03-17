@@ -52,7 +52,14 @@ function GameListPage(var pages)
   };
   self.key = function()
   {
-    var size = list_protocol.games.length - 1;
+    if (list_protocol.games.length > 0)
+    {
+      var size = list_protocol.games.length - 1;
+    }
+    else
+    {
+      var size = 0;
+    }
     switch(key)
     {
       //arrow key up
