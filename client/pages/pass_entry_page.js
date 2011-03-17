@@ -40,7 +40,7 @@ function PassEntryPage(var pages)
   };
   self.fail_pass = function()
   {
-    text("Password mistach error.",100,250);
+    text("Password mismatch error.",100,250);
     text("press enter to restart password entry.",100,270);
   };
   self.key = function()
