@@ -26,6 +26,7 @@ function PassEntryPage(var pages)
     }
     else
     {
+      self.effects.input.clean();
       self.effects.type = false;
       self.fail_pass();
     }
