@@ -28,7 +28,7 @@ function Effect(var parent)
       {
 	self.input.destroy();
       }
-      else if (info == -13)
+      else if (info == -10)
       {
 	self.type_enter();
       }
