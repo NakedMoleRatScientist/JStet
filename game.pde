@@ -1198,6 +1198,24 @@ function ScoreBoardMode(protocol)
     self.list();
     self.page();
   };
+  self.key = function()
+  {
+    switch(key)
+    {
+      //n is restart the game
+    case 110:
+      game_protocol.request_game();
+      break;
+      //j, view previous page
+    case 106:
+      board.previousPage();
+      break;
+      //k, view next page
+    case 107:
+      board.turnPage();
+      break;
+    }
+  };
 }
 
 
@@ -1831,24 +1849,6 @@ void keyPressed()
 }
 
 
-void scoreKey()
-{
-  switch(key)
-  {
-  //n is restart the game
-  case 110:
-    game_protocol.request_game();
-    break;
-  //j, view previous page
-  case 106:
-    board.previousPage();
-    break;
-  //k, view next page
-  case 107:
-    board.turnPage();
-    break;
-  }
-}
 
 //Use the ASCII chart to figure out what keys respond to what integer
 
@@ -2708,6 +2708,27 @@ function Mode()
     this.status = n;
   }
 }
+
+var mode = new Mode();
+var timer = new TimerAction();
+var high_score = new HighScoreMode();
+var lobby = new LobbyMode();
+var network = new Net();
+var over = new GameOverMode();
+var title = new TitleMode();
+var waiting = new WaitingMode();
+var list = new ListGameMode();
+var create = new CreateGameMode();
+var game_protocol = new GameProtocol(network);
+var score_protocol = new ScoreProtocol(network);
+var lobby_protocol = new LobbyProtocol(network,lobby);
+var list_protocol = new ListProtocol(network);
+lobby.chat.protocol = lobby_protocol;
+var board = new ScoreBoardMode(score_protocol);
+timer.addAction("network",60);
+var engine = new Engine(game_protocol,mode);
+var engineDraw = new EngineDraw();
+
 function Player()
 {
   var self = this;
@@ -2907,28 +2928,35 @@ function Engine(protocol,mode)
   {
     return self.players[n];
   };
+  self.key = function()
+  {
+    switch(key)
+    {
+      //move right, d
+    case 100:
+      game_protocol.move_right();
+      break;
+      //move down, s
+    case 115:
+      game_protocol.move_down();
+      break;
+      //move left, a
+    case 97:
+      game_protocol.move_left();
+      break;
+      //rotate, w
+    case 119:
+      game_protocol.rotate();
+      break;
+    default:
+      console.log(key);
+      break;
+    }
+  };
 };
 
 
-var mode = new Mode();
-var timer = new TimerAction();
-var high_score = new HighScoreMode();
-var lobby = new LobbyMode();
-var network = new Net();
-var over = new GameOverMode();
-var title = new TitleMode();
-var waiting = new WaitingMode();
-var list = new ListGameMode();
-var create = new CreateGameMode();
-var game_protocol = new GameProtocol(network);
-var score_protocol = new ScoreProtocol(network);
-var lobby_protocol = new LobbyProtocol(network,lobby);
-var list_protocol = new ListProtocol(network);
-lobby.chat.protocol = lobby_protocol;
-var board = new ScoreBoardMode(score_protocol);
-timer.addAction("network",60);
-var engine = new Engine(game_protocol,mode);
-var engineDraw = new EngineDraw();
+
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original developer's.
 
 
@@ -2942,6 +2970,7 @@ void sendAlive()
     network.sendAlive();
   }
 }
+
 
 void draw()
 {
