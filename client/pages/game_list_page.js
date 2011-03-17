@@ -51,7 +51,8 @@ function GameListPage(var pages)
     self.refresh.display();
   };
   self.key = function()
-  { 
+  {
+    var size = list_protocol.games.length - 1;
     switch(key)
     {
       //arrow key up
@@ -76,6 +77,6 @@ function GameListPage(var pages)
 	self.enter();
 	break;
       }
-    } listKey(self,list_protocol.games.length - 1);
+    }
   };
 }
