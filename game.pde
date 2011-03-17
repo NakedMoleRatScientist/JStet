@@ -681,6 +681,8 @@ function PassEntryPage(var pages)
     }
     else
     {
+      self.effects.input.clean();
+      self.effects.type = false;
       self.fail_pass();
     }
     text(self.effects.input.string,150,300);    
@@ -701,14 +703,18 @@ function PassEntryPage(var pages)
   };
   self.key = function()
   {
-    activeType(self.effects);
-    if (self.state == 3)
+    if (self.state == 2)
     {
       switch(key)
       {
       case 10:
 	self.state = 0;
+	self.effects.type = true;
       }
+    }
+    else
+    {
+      activeType(self.effects);
     }
   };
   self.act = function()
@@ -1291,6 +1297,7 @@ function ListProtocol(var net)
     case 1:
       {
 	//update games
+	self.games = [];
 	self.games.push(new GameInfo(data[1][0][1],data[1][0][0]));
 	break;
       }
@@ -1837,6 +1844,9 @@ void keyPressed()
     break;
   case 6:
     create.key();
+    break;
+  case 7:
+    list.key();
     break;
   case 1:
     over.key();
