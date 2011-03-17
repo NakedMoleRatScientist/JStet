@@ -45,7 +45,7 @@ function PassEntryPage(var pages)
   };
   self.key = function()
   {
-    activeKey(self.effects);
+    activeType(self.effects);
     if (self.state == 3)
     {
       switch(key)
