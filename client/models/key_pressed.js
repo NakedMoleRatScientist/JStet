@@ -15,6 +15,9 @@ void keyPressed()
   case 6:
     create.key();
     break;
+  case 7:
+    list.key();
+    break;
   case 1:
     over.key();
     break;
