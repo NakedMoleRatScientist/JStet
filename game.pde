@@ -354,18 +354,6 @@ function GameProtocol(var net)
   };
 }
 
-function PrivateButton()
-{
-  var self = this;
-  self.private_session = new RectObject(450,75,100,50);
-  self.display = function()
-  {
-    noFill();
-    textFont(font,15);
-    self.private_session.draw();
-    text("Create Game",450,110);
-  };
-}
 function SecureEffects(var pages, var secure)
 {
   var self = this;
@@ -556,7 +544,32 @@ function GameListPage(var pages)
   };
   self.key = function()
   {
-    listKey(self,list_protocol.games.length - 1);
+    var size = list_protocol.games.length - 1;
+    switch(key)
+    {
+      //arrow key up
+    case 119:
+      {
+	if (self.pointer > 0)
+	{
+	  self.pointer -= 1;
+	}
+	break;
+      }
+    case 115:
+      {
+	if (self.pointer < size)
+	{
+	  self.pointer += 1;
+	}
+	break;
+      }
+    case 10:
+      {
+	self.enter();
+	break;
+      }
+    }
   };
 }
 
@@ -1425,35 +1438,6 @@ function Input()
   {
     return self.string;
   };
-}
-
-function listKey(var list,var size)
-{
-  switch(key)
-  {
-    //arrow key up
-  case 119:
-    {
-      if (list.pointer > 0)
-      {
-	list.pointer -= 1;
-      }
-      break;
-    }
-  case 115:
-    {
-      if (list.pointer < size)
-      {
-	list.pointer += 1;
-      }
-      break;
-    }
-  case 10:
-    {
-      list.enter();
-      break;
-    }
-  }
 }
 
 void listMouse()
@@ -2612,7 +2596,7 @@ function LobbyMode()
     case -8:
       lobby.chat.message.destroy();
       break;
-    case -13:
+    case -10:
       lobby.chat.enter();
       break;
     case false:
@@ -2637,6 +2621,10 @@ function ListGameMode()
     background(0,0,0);
     stroke(255);
     self.pages.run();
+  };
+  self.key = function()
+  {
+    slef.pages.key();
   };
 }
 
