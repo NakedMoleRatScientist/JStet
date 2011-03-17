@@ -13,4 +13,15 @@ function GameOverMode()
     text("Press n to start a new game.",250,325);
     text("Press d to display highscore", 250,350);
   };
+  self.key = function()
+  {
+    if (key == 110)
+    {
+      game_protocol.request_game();
+    }
+    else if(key == 100)
+    {
+      mode.change(2);
+    }
+  };
 }
