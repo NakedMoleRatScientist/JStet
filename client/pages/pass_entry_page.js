@@ -54,6 +54,7 @@ function PassEntryPage(var pages)
       {
       case 10:
 	self.state = 0;
+	self.effects.type = true;
       }
     }
     else
