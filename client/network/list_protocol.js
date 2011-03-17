@@ -25,7 +25,6 @@ function ListProtocol(var net)
     case 0:
       {
 	//update game size.
-	console.log(data[1]);
 	self.size = data[1];
 	break;
       }
