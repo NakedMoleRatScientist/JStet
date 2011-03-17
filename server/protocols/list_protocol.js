@@ -10,8 +10,16 @@ function size()
 
 function games()
 {
-  var data = [5,[1,game.games()]];
-  return data;
+  var games = game.games();
+  if (games.length != 0)
+  {
+    var data = [5,[1,game.games()]];
+    return data;
+  }
+  else
+  {
+    return [5,[2]];
+  }
 }
 
 exports.process_data = function(request)
