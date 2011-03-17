@@ -4,7 +4,6 @@ function PasswordPage(var pages)
 {
   var self = this;
   self.pages = pages;
-  self.typing = false;
   self.initialize = function()
   {
     self.yes = new RadioButton();
