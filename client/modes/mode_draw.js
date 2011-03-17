@@ -13,15 +13,12 @@ void draw()
     break;
   case 1:
     over.display();
-    gameOverKey();
     break;
   case 2:
     board.display();
-    scoreKey();
     break;
   case 3:
     high_score.display();
-    enterHighScoreKey();
     break;
   case 5:
     lobby.display();
