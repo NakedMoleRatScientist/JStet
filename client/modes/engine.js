@@ -121,25 +121,7 @@ function Engine(protocol,mode)
 };
 
 
-var mode = new Mode();
-var timer = new TimerAction();
-var high_score = new HighScoreMode();
-var lobby = new LobbyMode();
-var network = new Net();
-var over = new GameOverMode();
-var title = new TitleMode();
-var waiting = new WaitingMode();
-var list = new ListGameMode();
-var create = new CreateGameMode();
-var game_protocol = new GameProtocol(network);
-var score_protocol = new ScoreProtocol(network);
-var lobby_protocol = new LobbyProtocol(network,lobby);
-var list_protocol = new ListProtocol(network);
-lobby.chat.protocol = lobby_protocol;
-var board = new ScoreBoardMode(score_protocol);
-timer.addAction("network",60);
-var engine = new Engine(game_protocol,mode);
-var engineDraw = new EngineDraw();
+
 //Workaround for HTTP connections being droped after two minutes. Tried many settings to keep the connection alive to no avail. However, constant sending every minute does seem to keep the connection alive. This bug may not affect machines outside of the original developer's.
 
 
