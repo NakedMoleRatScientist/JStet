@@ -6,18 +6,18 @@ void keyPressed()
   case 0:
     title.key();
   case 4:
-    gameKey();
+    engine.key();
     break;
   case 5:
     lobby.key();
   case 1:
-    gameOverKey();
+    over.key();
     break;
   case 2:
     scoreKey();
     break;
   case 3:
-    enterHighScoreKey();
+    high_score.key();
     break;
   }
 }
