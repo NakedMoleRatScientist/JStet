@@ -14,4 +14,8 @@ function SecurePage(var pages)
     var info = typing();
     self.effects.check_key(info);
   };
+  self.key = function()
+  {
+    activeType(self.effects);
+  };
 }
