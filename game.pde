@@ -359,6 +359,11 @@ function SecureEffects(var pages, var secure)
   var self = this;
   self.pages = pages;
   self.secure = secure;
+  self.effect = new Effect(self);
+  self.check = function()
+  {
+    
+  };
 }
 
 function PassEffects(var pages, pass)
@@ -855,11 +860,14 @@ function SecurePage(var pages)
   self.initialize = function()
   {
     self.effects = new SecureEffects(self.pages,self);
+    self.effects.add_input();
+    self.effects.type = true;
   };
   self.call = function()
   {
     textFont(font,18);
     text("Please enter the password for this game",300,300);
+    text(self.effects.input.string,300,330);
   };
   self.key = function()
   {
@@ -1845,7 +1853,7 @@ void keyPressed()
   case 6:
     create.key();
     break;
-  case 7:
+  case 8:
     list.key();
     break;
   case 1:
