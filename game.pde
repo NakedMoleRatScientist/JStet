@@ -373,13 +373,13 @@ function PassEffects(var pages, pass)
     {
       if (self.pass.state == 0)
       {
-	self.pages.data.update("password",self.pages.input.string);
+	self.pages.data.update("password",self.input.string);
 	self.pages.act();
-	self.pages.input.clean();
+	self.input.clean();
       }
       else
       {
-	if (self.pages.data.get("password") == self.pages.input.string)
+	if (self.pages.data.get("password") == self.input.string)
 	{
 	  game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
 	  mode.change(7);
@@ -661,6 +661,7 @@ function PassEntryPage(var pages)
   self.initialize = function()
   {
     self.effects = new PassEffects(self.pages,self);
+    self.effects.add_input();
     self.effects.type = true;
     self.state = 0;
     self.retry = new TextButton("Retry",100,350,350);
@@ -695,12 +696,12 @@ function PassEntryPage(var pages)
   };
   self.fail_pass = function()
   {
-    text("Password mistach error.",100,250);
+    text("Password mismatch error.",100,250);
     text("press enter to restart password entry.",100,270);
   };
   self.key = function()
   {
-    activeKey(self.effects);
+    activeType(self.effects);
     if (self.state == 3)
     {
       switch(key)
@@ -800,7 +801,7 @@ function ListEffects(var page)
     if (object.type == 0)
     {
       list_protocol.request_size();
-      list_protocol.request_names();
+      list_protocol.request_games();
     }
   };
 }
@@ -1284,7 +1285,6 @@ function ListProtocol(var net)
     case 0:
       {
 	//update game size.
-	console.log(data[1]);
 	self.size = data[1];
 	break;
       }
@@ -1834,6 +1834,9 @@ void keyPressed()
     break;
   case 5:
     lobby.key();
+    break;
+  case 6:
+    create.key();
     break;
   case 1:
     over.key();
@@ -2544,7 +2547,7 @@ function Effect(var parent)
       {
 	self.input.destroy();
       }
-      else if (info == -13)
+      else if (info == -10)
       {
 	self.type_enter();
       }
