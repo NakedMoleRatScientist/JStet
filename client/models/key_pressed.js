@@ -15,7 +15,7 @@ void keyPressed()
   case 6:
     create.key();
     break;
-  case 7:
+  case 8:
     list.key();
     break;
   case 1:
