@@ -3,7 +3,10 @@ var game = requrie('../protocols/game_protocol');
 
 function join(data)
 {
-  var data = [6,[0,game.authenticate(data[1],data[2]]]);
+  if (game.authenticate(data[1],data[2]) == true)
+  {
+    var data = [6,[0]];
+  }
   return data;
 }
 exports.process_data = function(data)
