@@ -11,7 +11,7 @@ exports.process_data = function(data)
   {
   case 0:
     {
-      return JSON.stringify(join());
+      return JSON.stringify(join(data));
     }
   }
 }
