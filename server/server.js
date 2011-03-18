@@ -71,6 +71,7 @@ server.addListener("connection",function(conn){
       break;
     case 5:
       server.send(conn._id,join.process_data[1]);
+      break;
     }
   });
 
