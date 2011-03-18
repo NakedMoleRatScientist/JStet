@@ -67,8 +67,9 @@ function Session()
   {
     if (password == self.password)
     {
-      self.ids.push(id);
+      return true;
     }
+    return false;
   };
 }
 
