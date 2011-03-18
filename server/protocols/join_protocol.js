@@ -14,13 +14,13 @@ function join(data,id)
   }
   return data;
 }
-exports.process_data = function(data)
+exports.process_data = function(data,id)
 {
   switch(data[0])
   {
   case 0:
     {
-      return JSON.stringify(join(data));
+      return JSON.stringify(join(data,id));
     }
   }
 }
