@@ -5,9 +5,9 @@ function join(data)
 {
   
 }
-exports.process_data = function(request)
+exports.process_data = function(data)
 {
-  switch(request)
+  switch(data[0])
   {
   case 0:
     {
