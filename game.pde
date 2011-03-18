@@ -1261,9 +1261,10 @@ function JoinProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.state = 0;
   self.request_join = function(var name,var pass)
   {
-    var data [5,0,name,pass];
+    var data = [5,0,name,pass];
     self.net.send(data);
   };
   self.process_data = function(var data)
@@ -1272,7 +1273,13 @@ function JoinProtocol(var net)
     {
     case 0:
       {
-	console.log("success");
+	self.state = 1;
+	break;
+      }
+    case 1:
+      {
+	self.engine.start(data[0]);
+	mode.change(4);
 	break;
       }
     }
