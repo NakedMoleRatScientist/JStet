@@ -68,7 +68,7 @@ server.addListener("connection",function(conn){
       break;
     case 4:
       server.send(conn._id,list.process_data(data[1]));
-      break
+      break;
     }
   });
 
