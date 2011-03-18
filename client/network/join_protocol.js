@@ -20,6 +20,7 @@ function JoinProtocol(var net)
     case 1:
       {
 	self.engine.start(data[0]);
+	break;
       }
     }
   };
