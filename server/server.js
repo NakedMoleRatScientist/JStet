@@ -4,6 +4,7 @@ var game = require('./protocols/game_protocol');
 var players = require('./models/players_manager');
 var lobby = require('./protocols/lobby_protocol');
 var list = require('./protocols/list_protocol');
+var join = require('./protocols/join_protocol');
 //server stuff
 var db = require('./models/database');
 //start of actual server code.
