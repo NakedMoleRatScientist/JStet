@@ -36,6 +36,7 @@ function Net()
 	break;
       case 5:
 	self.list.process_data(data[1]);
+	break;
       case 6:
 	self.join.process_data(data[1]);
 	break;
