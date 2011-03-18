@@ -36,6 +36,9 @@ function Net()
 	break;
       case 5:
 	self.list.process_data(data[1]);
+      case 6:
+	self.join.process_data(data[1]);
+	break;
       }
     };
     self.ws.onclose = function()
