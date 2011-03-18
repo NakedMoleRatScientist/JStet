@@ -360,9 +360,12 @@ function SecureEffects(var pages, var secure)
   self.pages = pages;
   self.secure = secure;
   self.effect = new Effect(self);
-  self.check = function()
+  self.check = function(object)
   {
-    
+    if (object.type == 2)
+    {
+      join_protocol.request_join(self.secure.name,self.input.string);
+    }
   };
 }
 
