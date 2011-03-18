@@ -17,6 +17,10 @@ function JoinProtocol(var net)
 	console.log("failure");
 	break;
       }
+    case 1:
+      {
+	self.engine.start(data[0]);
+      }
     }
   };
 }
