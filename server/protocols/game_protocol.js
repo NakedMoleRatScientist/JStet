@@ -236,3 +236,9 @@ exports.games = function()
   }
   return games;
 }
+
+
+exports.authenticate = function(name,pass)
+{
+  
+}
