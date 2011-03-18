@@ -1,4 +1,4 @@
-
+var sys = require('sys');
 
 
 function join(data)
