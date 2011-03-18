@@ -19,6 +19,8 @@ function Net()
       //1 - Lobby
       //2 - Game
       //4 - Acknowledge
+      //5 - list
+      //6 - join
       switch (data[0])
       {
       case 0:
