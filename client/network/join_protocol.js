@@ -15,7 +15,7 @@ function JoinProtocol(var net)
     {
     case 0:
       {
-	console.log("failure");
+	self.state = 1;
 	break;
       }
     case 1:
