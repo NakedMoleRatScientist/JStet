@@ -5,7 +5,7 @@ function JoinProtocol(var net)
   self.net = net;
   self.request_join = function(var name,var pass)
   {
-    var data [5,name,pass];
+    var data [5,0,name,pass];
     self.net.send(data);
   };
   self.process_data = function(var data)
