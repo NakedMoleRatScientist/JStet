@@ -1254,6 +1254,28 @@ function ScoreBoardMode(protocol)
 }
 
 
+function JoinProtocol(var net)
+{
+  var self = this;
+  self.net = net;
+  self.request_join = function(var name,var pass)
+  {
+    var data [5,name,pass];
+    self.net.send(data);
+  };
+  self.process_data = function(var data)
+  {
+    switch(data[0])
+    {
+    case 0:
+      {
+	console.log("success");
+	break;
+      }
+    }
+  };
+}
+
 function SearchProtocol(var net)
 {
   var self = this;
@@ -1350,6 +1372,7 @@ function Net()
   self.score = null;
   self.lobby = null;
   self.list = null;
+  self.join = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
@@ -1361,6 +1384,8 @@ function Net()
       //1 - Lobby
       //2 - Game
       //4 - Acknowledge
+      //5 - list
+      //6 - join
       switch (data[0])
       {
       case 0:
@@ -1378,6 +1403,10 @@ function Net()
 	break;
       case 5:
 	self.list.process_data(data[1]);
+	break;
+      case 6:
+	self.join.process_data(data[1]);
+	break;
       }
     };
     self.ws.onclose = function()
@@ -2714,6 +2743,7 @@ var game_protocol = new GameProtocol(network);
 var score_protocol = new ScoreProtocol(network);
 var lobby_protocol = new LobbyProtocol(network,lobby);
 var list_protocol = new ListProtocol(network);
+var join_protocol = new JoinProtocol(network);
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
