@@ -3,6 +3,7 @@ function JoinProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.net.join = self;
   self.state = 0;
   self.request_join = function(var name,var pass)
   {
