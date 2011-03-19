@@ -36,7 +36,7 @@ function GameListPage(var pages)
   self.enter = function()
   {
     self.pages.data.update("password",list_protocol.games[self.pointer].password);
-    self.pages.data.update("game",list_protocol.games[self.pointer].name);
+    self.pages.data.update("name",list_protocol.games[self.pointer].name);
     self.pages.next();
   };
   self.size = function()
