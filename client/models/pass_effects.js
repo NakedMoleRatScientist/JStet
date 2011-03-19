@@ -20,6 +20,7 @@ function PassEffects(var pages, pass)
 	if (self.pages.data.get("password") == self.input.string)
 	{
 	  game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
+	  waiting.password = self.pages.data.get("password");
 	  mode.change(7);
 	}
 	else
