@@ -364,7 +364,6 @@ function SecureEffects(var pages, var secure)
   {
     if (object.type == 2)
     {
-      console.log(self.pages.data.get("name"));
       join_protocol.request_join(self.pages.data.get("name"),self.input.string);
     }
   };
@@ -479,7 +478,7 @@ function JoinPage(var pages)
   self.pages = pages;
   self.initialize = function()
   {
-    self.game = self.pages.data.get("game");
+    self.name = self.pages.data.get("name");
     self.yes = new TextButton("Yes",100,300,300);
     self.no = new TextButton("No",100,400,300);
     self.effects = new JoinEffects(self,self.pages);
@@ -490,7 +489,7 @@ function JoinPage(var pages)
   self.call = function()
   {
     textFont(font,18);
-    text("Do you wish to join the game: " + self.game,280,280);
+    text("Do you wish to join the game: " + self.name,280,280);
     self.yes.display();
     self.no.display();
   };
@@ -536,9 +535,8 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    console.log(list_protocol.games[self.pointer].name);
     self.pages.data.update("password",list_protocol.games[self.pointer].password);
-    self.pages.data.update("game",list_protocol.games[self.pointer].name);
+    self.pages.data.update("name",list_protocol.games[self.pointer].name);
     self.pages.next();
   };
   self.size = function()
@@ -1264,6 +1262,7 @@ function JoinProtocol(var net)
 {
   var self = this;
   self.net = net;
+  self.net.join = self;
   self.state = 0;
   self.request_join = function(var name,var pass)
   {
@@ -2688,7 +2687,7 @@ function ListGameMode()
 {
   var self = this;
   self.pages = new Pages();
-  self.pages.data.create("game");
+  self.pages.data.create("name");
   self.pages.data.create("password");
   self.pages.add(new GameListPage(self.pages));
   self.pages.add(new JoinPage(self.pages));
