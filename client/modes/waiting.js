@@ -7,11 +7,11 @@ function WaitingMode()
   {
     background(0,0,0);
     textFont(font,18);
-    text("Waiting for another player to join...",250,350);
+    text("Waiting for another player to join...",250,330);
     if (self.password != null)
     {
       text("Give the password below and give it to your friend.",250,370);
-      text(self.password,250,380);
+      text(self.password,250,390);
     }
   };
 }
