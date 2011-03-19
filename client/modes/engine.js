@@ -88,12 +88,9 @@ function Engine(protocol,mode)
     console.log("High score, detected!");
     self.mode.change(3);
   };
-  self.start = function(id)
+  self.start = function(var id)
   {
-    new_player = new Player();
-    new_player.start();
-    new_player.id = id;
-    self.players.push(new_player);
+    self.create(id);
     self.you = id;
   };
   self.get_player = function(n)
