@@ -81,7 +81,7 @@ function Engine(protocol,mode)
     var new_player = new Player();
     new_player.start();
     new_player.id = id;
-    self.players.push(new_playe);
+    self.players.push(new_player);
   };
   self.high_score = function()
   {
