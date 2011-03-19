@@ -228,7 +228,7 @@ exports.games = function()
 }
 
 
-exports.authenticate = function(name,pass)
+exports.authenticate = function(name,pass,id)
 {
-  return sessions[find_by_name(name)].authenticate(pass);
+  return sessions[find_by_name(name)].authenticate(pass,id);
 }
