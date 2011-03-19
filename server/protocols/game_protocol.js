@@ -63,7 +63,7 @@ function Session()
   {
     self.game.run_game();
   };
-  self.authenticate = function(password)
+  self.authenticate = function(password,id)
   {
     if (password == self.password)
     {
