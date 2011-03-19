@@ -10,7 +10,7 @@ function join(data,id)
   }
   else
   {
-    var data = [6,[1,authenticate]];
+    var data = [6,[1,id]];
   }
   return data;
 }
