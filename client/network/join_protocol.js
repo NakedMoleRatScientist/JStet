@@ -26,6 +26,12 @@ function JoinProtocol(var net)
 	mode.change(4);
 	break;
       }
+    case 2:
+      {
+	engine.create(data[1]);
+	mode.change(4);
+	break;
+      }
     }
   };
 }
