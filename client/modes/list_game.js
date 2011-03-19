@@ -4,7 +4,6 @@ function ListGameMode()
   var self = this;
   self.pages = new Pages();
   self.pages.data.create("game");
-  self.pages.data.create("password");
   self.pages.add(new GameListPage(self.pages));
   self.pages.add(new JoinPage(self.pages));
   self.pages.add(new SecurePage(self.pages));
