@@ -390,6 +390,7 @@ function PassEffects(var pages, pass)
 	if (self.pages.data.get("password") == self.input.string)
 	{
 	  game_protocol.request_multi(self.pages.data.get("password"),self.pages.data.get("name"));
+	  waiting.password = self.pages.data.get("password");
 	  mode.change(7);
 	}
 	else
@@ -1280,7 +1281,8 @@ function JoinProtocol(var net)
       }
     case 1:
       {
-	self.engine.start(data[0]);
+	engine.start(data[1]);
+	engine.create(data[2]);
 	mode.change(4);
 	break;
       }
@@ -2713,11 +2715,11 @@ function WaitingMode()
   {
     background(0,0,0);
     textFont(font,18);
-    text("Waiting for another player to join...",250,350);
+    text("Waiting for another player to join...",250,330);
     if (self.password != null)
     {
       text("Give the password below and give it to your friend.",250,370);
-      text(self.password,250,380);
+      text(self.password,250,390);
     }
   };
 }
@@ -2944,17 +2946,21 @@ function Engine(protocol,mode)
       }
     }
   };
+  self.create = function(var id)
+  {
+    var new_player = new Player();
+    new_player.start();
+    new_player.id = id;
+    self.players.push(new_player);
+  };
   self.high_score = function()
   {
     console.log("High score, detected!");
     self.mode.change(3);
   };
-  self.start = function(id)
+  self.start = function(var id)
   {
-    new_player = new Player();
-    new_player.start();
-    new_player.id = id;
-    self.players.push(new_player);
+    self.create(id);
     self.you = id;
   };
   self.get_player = function(n)
