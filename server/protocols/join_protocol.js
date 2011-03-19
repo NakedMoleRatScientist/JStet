@@ -3,7 +3,7 @@ var game = require('../protocols/game_protocol');
 
 function join(data,id)
 {
-  var authenticate = game.authenticate(data[1],data[2],id);
+  var authenticate = game.authenticate(data[2],data[3],id);
   if (authenticate == true)
   {
     var data = [6,[0]];
@@ -16,7 +16,7 @@ function join(data,id)
 }
 exports.process_data = function(data,id)
 {
-  switch(data[0])
+  switch(data[1])
   {
   case 0:
     {
