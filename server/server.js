@@ -71,8 +71,7 @@ server.addListener("connection",function(conn){
       server.send(conn._id,list.process_data(data[1]));
       break;
     case 5:
-      sys.log("hello");
-      server.send(conn._id,join.process_data(data[1],conn._id));
+      server.send(conn._id,join.process_data(data,conn._id));
       break;
     }
   });
