@@ -21,7 +21,7 @@ function JoinProtocol(var net)
       }
     case 1:
       {
-	engine.start(data[0]);
+	engine.start(data[1]);
 	mode.change(4);
 	break;
       }
