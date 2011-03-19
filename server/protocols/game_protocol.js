@@ -107,16 +107,6 @@ exports.process = function(data,id)
     sys.log("Game is running");
     sessions[find_by_id(id)].run();
     break;
-  case 5:
-    sys.log("Attempt game joining");
-    var game = sessions[find_by_name(data[2])];
-    if (game != -1)
-    {
-      if (game.authenticate(data[3],id) == true)
-      {
-	sys.log("success");
-      }
-    }
   }
 };
 
