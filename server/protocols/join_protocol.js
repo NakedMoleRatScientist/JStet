@@ -1,5 +1,5 @@
 var sys = require('sys');
-var game = requrie('../protocols/game_protocol');
+var game = require('../protocols/game_protocol');
 
 function join(data,id)
 {
