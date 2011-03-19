@@ -9,7 +9,7 @@ function SecureEffects(var pages, var secure)
   {
     if (object.type == 2)
     {
-      join_protocol.request_join(self.secure.name,self.input.string);
+      join_protocol.request_join(self.pages.data.get("name"),self.input.string);
     }
   };
 }
