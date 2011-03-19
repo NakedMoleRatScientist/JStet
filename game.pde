@@ -364,7 +364,8 @@ function SecureEffects(var pages, var secure)
   {
     if (object.type == 2)
     {
-      join_protocol.request_join(self.secure.name,self.input.string);
+      console.log(self.pages.data.get("name"));
+      join_protocol.request_join(self.pages.data.get("name"),self.input.string);
     }
   };
 }
@@ -535,8 +536,9 @@ function GameListPage(var pages)
   };
   self.enter = function()
   {
-    self.pages.data.update("game",list_protocol.games[self.pointer].name);
+    console.log(list_protocol.games[self.pointer].name);
     self.pages.data.update("password",list_protocol.games[self.pointer].password);
+    self.pages.data.update("game",list_protocol.games[self.pointer].name);
     self.pages.next();
   };
   self.size = function()
