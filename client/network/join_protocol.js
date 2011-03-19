@@ -10,6 +10,11 @@ function JoinProtocol(var net)
     var data = [5,0,name,pass];
     self.net.send(data);
   };
+  self.join_msg = function(var id)
+  {
+    var data = [5,1,id];
+    self.net.send(data);
+  };
   self.process_data = function(var data)
   {
     switch(data[0])
