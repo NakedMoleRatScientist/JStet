@@ -865,6 +865,7 @@ function SecurePage(var pages)
     self.effects = new SecureEffects(self.pages,self);
     self.effects.add_input();
     self.effects.type = true;
+    self.pages.collision.effects.add_effect(self.effects);
   };
   self.call = function()
   {
