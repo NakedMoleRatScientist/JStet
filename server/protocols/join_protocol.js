@@ -11,7 +11,7 @@ function join(data,id)
   else
   {
     //since we authenticate an existing game session, the id for player joining the game come last, thus authenticate[1] first and then authenticate[0] last;
-    var data = [6,[1,authenticate[2],authenticate[1]]];
+    var data = [6,[1,authenticate[1],authenticate[0]]];
   }
   return data;
 }
