@@ -5,7 +5,7 @@ function JoinPage(var pages)
   self.pages = pages;
   self.initialize = function()
   {
-    self.game = self.pages.data.get("game");
+    self.name = self.pages.data.get("name");
     self.yes = new TextButton("Yes",100,300,300);
     self.no = new TextButton("No",100,400,300);
     self.effects = new JoinEffects(self,self.pages);
@@ -16,7 +16,7 @@ function JoinPage(var pages)
   self.call = function()
   {
     textFont(font,18);
-    text("Do you wish to join the game: " + self.game,280,280);
+    text("Do you wish to join the game: " + self.name,280,280);
     self.yes.display();
     self.no.display();
   };
