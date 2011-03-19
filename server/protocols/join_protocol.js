@@ -4,7 +4,7 @@ var game = require('../protocols/game_protocol');
 function join(data,id)
 {
   var authenticate = game.authenticate(data[2],data[3],id);
-  if (authenticate == true)
+  if (authenticate == false)
   {
     var data = [6,[0]];
   }
