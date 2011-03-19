@@ -76,6 +76,13 @@ function Engine(protocol,mode)
       }
     }
   };
+  self.create = function(var id)
+  {
+    var new_player = new Player();
+    new_player.start();
+    new_player.id = id;
+    self.players.push(new_playe);
+  };
   self.high_score = function()
   {
     console.log("High score, detected!");
