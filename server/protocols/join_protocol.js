@@ -23,5 +23,9 @@ exports.process_data = function(data,id)
     {
       return JSON.stringify(join(data,id));
     }
+  case 1:
+    {
+      return JSON.stringify(acknowledge(data,id));
+    }
   }
 }
