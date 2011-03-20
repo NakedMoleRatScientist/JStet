@@ -1,8 +1,9 @@
 var sys = require('sys');
 var game = require('../protocols/game_protocol');
 
-function join(data,id)
+function join(data)
 {
+  //data[2] is name, data[3] is pass, data[4] is id
   var authenticate = game.authenticate(data[2],data[3],id);
   if (authenticate == false)
   {
