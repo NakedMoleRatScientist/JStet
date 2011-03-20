@@ -25,8 +25,8 @@ exports.process_data = function(data,id)
     {
       //swapping details for ability to send data to two players in slightly different arrangement
       var join_data = join(data,id);
-      var swap = join_data[2];
-      var swap_2 = join_data[3];
+      var swap = join_data[1][0];
+      var swap_2 = join_data[1][1];
       var second = [6,[1,swap_2,swap]];
       return [join_data,second];
     }
