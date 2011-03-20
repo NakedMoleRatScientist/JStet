@@ -2816,7 +2816,7 @@ function Player()
     self.field_draw_mode();
     //player two
     self.instruct();
-    self.player_one();
+    self.decide_draw();
     self.score();
   };
   self.player_one_field = function()
@@ -2832,26 +2832,33 @@ function Player()
   self.field_draw_mode = function()
   {
     self.player_one_field();
-    if (engine.players == 2)
+    if (engine.players.length == 2)
     {
       self.player_two_field();
     }
   };
-  self.player_one = function()
+  self.decide_draw = function()
   {
-    var one = engine.find_player(engine.you);
-    if (one.current.draw == true)
+    self.player_draw(engine.players[0]);
+    if (engine.players.length == 2)
     {
-      self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
+      self.player_draw(engine.players[1]);
+    }
+  };
+  self.player_draw = function(var player)
+  {
+    if (player.current.draw == true)
+    {
+      self.drawShape.create_blocks(player.current.get_list(),player.current.x,player.current.y,player.current.shape.color);
       text("Current: ",250,135);
-      self.drawShape.create_blocks(one.current.get_list(),225,100,one.current.shape.color);
+      self.drawShape.create_blocks(player.current.get_list(),225,100,player.current.shape.color);
     }
     text("Next: ", 250,250);
-    if (one.future.draw == true)
+    if (player.future.draw == true)
     {
-      self.drawShape.create_blocks(one.future.get_list(),225,210,one.future.shape.color);
+      self.drawShape.create_blocks(player.future.get_list(),225,210,player.future.shape.color);
     }
-    self.drawShape.draw_field(one.field.field);
+    self.drawShape.draw_field(player.field.field);
   };
   self.instruct = function()
   {
@@ -2861,7 +2868,6 @@ function Player()
   {
     text("Score", 350,18);
     text("P1: " + engine.score,350,35);
-    text("Player One",75,50);
   };
 }
 
