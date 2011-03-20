@@ -23,10 +23,8 @@ function EngineDraw()
     text("Player One",75,50);
     self.drawField.display();
   };
-  self.two_players_field = function()
+  self.player_two_field = function()
   {
-    text("Player One",75,50);
-    self.drawField.display();
     text("Player Two",75,450);
     self.drawField.display_offset(400);
   };
