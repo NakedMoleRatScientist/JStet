@@ -1,9 +1,9 @@
 var sys = require('sys');
 var game = require('../protocols/game_protocol');
 
-function join(data)
+function join(data,id)
 {
-  //data[2] is name, data[3] is pass, data[4] is id
+  //data[2] is name, data[3] is pass
   var authenticate = game.authenticate(data[2],data[3],id);
   if (authenticate == false)
   {
@@ -23,7 +23,7 @@ exports.process_data = function(data,id)
   {
   case 0:
     {
-      return [JSON.stringify(join(data)),JSON.stringify(join(data))];
+      return [JSON.stringify(join(data,id)),JSON.stringify(join(data))];
     }
   }
 }
