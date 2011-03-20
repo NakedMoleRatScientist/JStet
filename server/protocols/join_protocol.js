@@ -23,6 +23,7 @@ exports.process_data = function(data,id)
   {
   case 0:
     {
+      var join_data = join(data,id);
       return [JSON.stringify(join(data,id)),JSON.stringify(join(data))];
     }
   }
