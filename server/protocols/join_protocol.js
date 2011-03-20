@@ -24,7 +24,10 @@ exports.process_data = function(data,id)
   case 0:
     {
       var join_data = join(data,id);
-      return [JSON.stringify(join(data,id)),JSON.stringify(join(data))];
+      var swap = join_data[2];
+      var swap_2 = join_data[3];
+      var second = [6,[1,swap_2,swap]];
+      return [join_data,second];
     }
   }
 }
