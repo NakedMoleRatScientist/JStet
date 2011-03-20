@@ -48,6 +48,7 @@ function Session()
   {
     self.add_events(self.game.get_data());
   };
+  //clear all the old events.
   self.clear = function()
   {
     self.events = new Array();
