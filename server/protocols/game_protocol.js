@@ -70,8 +70,7 @@ function Session()
   {
     if (password == self.password)
     {
-      self.ids.push(id);
-      self.events.broadcasts.push(id);
+      self.push_id(id);
       return self.ids;
     }
     return false;
