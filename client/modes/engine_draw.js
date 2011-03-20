@@ -18,13 +18,9 @@ function EngineDraw()
     self.player_one();
     self.score();
   };
-  self.player_one_text = function()
+  self.player_one_field = function()
   {
     text("Player One",75,50);
-  };
-  self.one_player_field = function()
-  {
-    text("Player One",350,50);
     self.drawField.display();
   };
   self.two_players_field = function()
