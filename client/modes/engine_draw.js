@@ -15,7 +15,7 @@ function EngineDraw()
     self.field_draw_mode();
     //player two
     self.instruct();
-    self.player_one();
+    self.decide_draw();
     self.score();
   };
   self.player_one_field = function()
