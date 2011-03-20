@@ -1270,11 +1270,6 @@ function JoinProtocol(var net)
     var data = [5,0,name,pass];
     self.net.send(data);
   };
-  self.join_msg = function(var id,var player)
-  {
-    var data = [5,1,id,player];
-    self.net.send(data);
-  };
   self.process_data = function(var data)
   {
     switch(data[0])
@@ -1288,14 +1283,6 @@ function JoinProtocol(var net)
       {
 	engine.start(data[1]);
 	engine.create(data[2]);
-	mode.change(4);
-	//send a join message to the other player
-	self.join_msg(data[2],data[1]);
-	break;
-      }
-    case 2:
-      {
-	engine.create(data[1]);
 	mode.change(4);
 	break;
       }
