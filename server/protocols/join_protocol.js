@@ -16,9 +16,9 @@ function join(data,id)
   return data;
 }
 
-function acknowledge(data,id)
+function acknowledge(data)
 {
-  var data = [6,[2,id]];
+  var data = [6,[2,data[1]]];
   return data;
 }
 exports.process_data = function(data,id)
@@ -31,7 +31,7 @@ exports.process_data = function(data,id)
     }
   case 1:
     {
-      return [1,JSON.stringify(acknowledge(data,id))];
+      return [1,JSON.stringify(acknowledge(data))];
     }
   }
 }
