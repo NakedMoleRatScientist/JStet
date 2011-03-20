@@ -1270,9 +1270,9 @@ function JoinProtocol(var net)
     var data = [5,0,name,pass];
     self.net.send(data);
   };
-  self.join_msg = function(var id)
+  self.join_msg = function(var id,var player)
   {
-    var data = [5,1,id];
+    var data = [5,1,id,player];
     self.net.send(data);
   };
   self.process_data = function(var data)
@@ -1289,7 +1289,8 @@ function JoinProtocol(var net)
 	engine.start(data[1]);
 	engine.create(data[2]);
 	mode.change(4);
-	self.join_msg(data[2]);
+	//send a join message to the other player
+	self.join_msg(data[2],data[1]);
 	break;
       }
     case 2:
@@ -2732,6 +2733,7 @@ function WaitingMode()
     {
       text("Give the password below and give it to your friend.",250,370);
       text(self.password,250,390);
+      rect(250,380,200,20);
     }
   };
 }
