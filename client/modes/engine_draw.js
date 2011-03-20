@@ -38,7 +38,7 @@ function EngineDraw()
   };
   self.player_one = function()
   {
-    var one = engine.find_player(engine.you);
+    var one = engine.players[0];
     if (one.current.draw == true)
     {
       self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
