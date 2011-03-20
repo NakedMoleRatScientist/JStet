@@ -16,22 +16,13 @@ function join(data,id)
   return data;
 }
 
-function acknowledge(data)
-{
-  var data = [6,[2,data[2]]];
-  return data;
-}
 exports.process_data = function(data,id)
 {
   switch(data[1])
   {
   case 0:
     {
-      return [0,JSON.stringify(join(data,id))];
-    }
-  case 1:
-    {
-      return [1,JSON.stringify(acknowledge(data))];
+      return [JSON.stringify(join(data)),JSON.stringify(join(data))];
     }
   }
 }
