@@ -18,6 +18,10 @@ function EngineDraw()
     self.player_one();
     self.score();
   };
+  self.player_one_text = function()
+  {
+    text("Player One",75,50);
+  };
   self.one_player_field = function()
   {
     text("Player One",350,50);
