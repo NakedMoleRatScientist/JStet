@@ -36,21 +36,21 @@ function EngineDraw()
       self.player_two_field();
     }
   };
-  self.player_one = function()
+  self.player_draw = function(var player)
   {
-    var one = engine.players[0];
-    if (one.current.draw == true)
+    var player = engine.players[0];
+    if (player.current.draw == true)
     {
-      self.drawShape.create_blocks(one.current.get_list(),one.current.x,one.current.y,one.current.shape.color);
+      self.drawShape.create_blocks(player.current.get_list(),player.current.x,player.current.y,player.current.shape.color);
       text("Current: ",250,135);
-      self.drawShape.create_blocks(one.current.get_list(),225,100,one.current.shape.color);
+      self.drawShape.create_blocks(player.current.get_list(),225,100,player.current.shape.color);
     }
     text("Next: ", 250,250);
-    if (one.future.draw == true)
+    if (player.future.draw == true)
     {
-      self.drawShape.create_blocks(one.future.get_list(),225,210,one.future.shape.color);
+      self.drawShape.create_blocks(player.future.get_list(),225,210,player.future.shape.color);
     }
-    self.drawShape.draw_field(one.field.field);
+    self.drawShape.draw_field(player.field.field);
   };
   self.instruct = function()
   {
