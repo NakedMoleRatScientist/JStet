@@ -36,6 +36,10 @@ function EngineDraw()
       self.player_two_field();
     }
   };
+  self.decide_draw = function()
+  {
+    self.player_draw(engine.players[0]);
+  };
   self.player_draw = function(var player)
   {
     var player = engine.players[0];
