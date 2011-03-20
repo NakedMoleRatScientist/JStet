@@ -15,6 +15,12 @@ function join(data,id)
   }
   return data;
 }
+
+function acknowledge(data,id)
+{
+  var data = [6,[2,id]];
+  return data;
+}
 exports.process_data = function(data,id)
 {
   switch(data[1])
