@@ -39,6 +39,10 @@ function EngineDraw()
   self.decide_draw = function()
   {
     self.player_draw(engine.players[0]);
+    if (engine.players.length == 2)
+    {
+      self.player_draw(engine.players[1]);
+    }
   };
   self.player_draw = function(var player)
   {
