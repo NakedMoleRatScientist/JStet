@@ -12,7 +12,7 @@ function WaitingMode()
     {
       text("Give the password below and give it to your friend.",250,370);
       text(self.password,250,390);
-      rect(50,50,250,390);
+      rect(250,380,200,20);
     }
   };
 }
