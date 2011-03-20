@@ -67,6 +67,5 @@ function EngineDraw()
   {
     text("Score", 350,18);
     text("P1: " + engine.score,350,35);
-    text("Player One",75,50);
   };
 }
