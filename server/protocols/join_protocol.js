@@ -23,6 +23,7 @@ exports.process_data = function(data,id)
   {
   case 0:
     {
+      //swapping details for ability to send data to two players in slightly different arrangement
       var join_data = join(data,id);
       var swap = join_data[2];
       var swap_2 = join_data[3];
