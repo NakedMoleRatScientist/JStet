@@ -76,6 +76,11 @@ function Session()
     }
     return false;
   };
+  self.push_id = function(id)
+  {
+    self.ids.push(id);
+    self.events.broadcasts.push(id);
+  };
 }
 
 exports.process = function(data,id)
