@@ -12,6 +12,7 @@ function EventManager()
   self.events = new Array();
   self.players = new Array();
   self.timer = timer.create_new();
+  self.broadcasts = new Array();
   self.send = function(message)
   {
     //by default, each new message first array element contain the player's id.
