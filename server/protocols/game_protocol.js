@@ -71,6 +71,7 @@ function Session()
     if (password == self.password)
     {
       self.ids.push(id);
+      self.events.broadcasts.push(id);
       return self.ids;
     }
     return false;
