@@ -52,6 +52,7 @@ function Session()
   {
     self.events = new Array();
   };
+  //get all the individual events of that session.
   self.get_data = function()
   {
     return self.events;
