@@ -100,7 +100,7 @@ server.addListener("connection",function(conn){
 	}
       }
     }, 10);*/
-    var sessions = game.get_sessions();
+    var sessions = game.get_sessions(); //get all sessions in progress
     for (var i = 0; i < sessions.length; i++)
     {
       sessions[i].update_events()
@@ -110,6 +110,7 @@ server.addListener("connection",function(conn){
       {
 	for (var n = 0;i < events.length;i ++)
 	{
+	  //the first argument is probably the id
 	  server.send(events[i][1][0],JSON.stringify(events[i]));
 	}
       }
