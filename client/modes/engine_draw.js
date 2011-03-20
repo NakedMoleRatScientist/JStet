@@ -31,7 +31,7 @@ function EngineDraw()
   self.field_draw_mode = function()
   {
     self.player_one_field();
-    if (engine.players == 2)
+    if (engine.players.length == 2)
     {
       self.player_two_field();
     }
