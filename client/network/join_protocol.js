@@ -30,7 +30,7 @@ function JoinProtocol(var net)
 	engine.create(data[2]);
 	mode.change(4);
 	//send a join message to the other player
-	self.join_msg(data[2]);
+	self.join_msg(data[2],data[1]);
 	break;
       }
     case 2:
