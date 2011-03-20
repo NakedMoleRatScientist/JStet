@@ -2819,27 +2819,22 @@ function Player()
     self.player_one();
     self.score();
   };
-  self.one_player_field = function()
-  {
-    text("Player One",350,50);
-    self.drawField.display();
-  };
-  self.two_players_field = function()
+  self.player_one_field = function()
   {
     text("Player One",75,50);
     self.drawField.display();
+  };
+  self.player_two_field = function()
+  {
     text("Player Two",75,450);
     self.drawField.display_offset(400);
   };
   self.field_draw_mode = function()
   {
-    if (self.drawMode == 0)
+    self.player_one_field();
+    if (engine.players == 2)
     {
-      self.one_player_field();
-    }
-    else
-    {
-      self.two.players.field();
+      self.player_two_field();
     }
   };
   self.player_one = function()
