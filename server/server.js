@@ -74,6 +74,7 @@ server.addListener("connection",function(conn){
       var msg = join.process_data(data,conn._id);
       server.send(msg[0][1][2],JSON.stringify(msg[0]));
       server.send(msg[1][1][2],JSON.stringify(msg[1]));
+      break;
     }
   });
 
