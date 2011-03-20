@@ -30,13 +30,10 @@ function EngineDraw()
   };
   self.field_draw_mode = function()
   {
-    if (self.drawMode == 0)
+    self.player_one_field();
+    if (engine.players == 2)
     {
-      self.one_player_field();
-    }
-    else
-    {
-      self.two.players.field();
+      self.player_two_field();
     }
   };
   self.player_one = function()
