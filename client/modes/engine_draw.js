@@ -42,7 +42,6 @@ function EngineDraw()
   };
   self.player_draw = function(var player)
   {
-    var player = engine.players[0];
     if (player.current.draw == true)
     {
       self.drawShape.create_blocks(player.current.get_list(),player.current.x,player.current.y,player.current.shape.color);
