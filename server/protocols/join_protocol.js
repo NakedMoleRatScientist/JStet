@@ -27,11 +27,11 @@ exports.process_data = function(data,id)
   {
   case 0:
     {
-      return JSON.stringify(join(data,id));
+      return [0,JSON.stringify(join(data,id))];
     }
   case 1:
     {
-      return JSON.stringify(acknowledge(data,id));
+      return [1,JSON.stringify(acknowledge(data,id))];
     }
   }
 }
