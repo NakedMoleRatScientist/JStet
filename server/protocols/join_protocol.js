@@ -18,7 +18,7 @@ function join(data,id)
 
 function acknowledge(data)
 {
-  var data = [6,[2,data[1]]];
+  var data = [6,[2,data[2]]];
   return data;
 }
 exports.process_data = function(data,id)
