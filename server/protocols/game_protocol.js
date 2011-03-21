@@ -10,6 +10,7 @@ function Session()
   self.name = null;
   self.password = null;
   self.players = 1;
+  self.confirm = [false,false];
   self.game = game.create_new();
   self.initialize = function()
   {
