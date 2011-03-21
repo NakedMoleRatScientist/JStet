@@ -61,7 +61,7 @@ function EngineDraw()
   };
   self.ready = function()
   {
-    text("Press Enter When You're Ready"400,300);
+    text("Press Enter When You're Ready",400,300);
   };
   self.instruct = function()
   {
