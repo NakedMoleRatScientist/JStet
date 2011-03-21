@@ -121,7 +121,7 @@ function Engine(protocol,mode)
     case 10:
       if (self.state == 0)
       {
-	self.state = 1;
+	game_protocol.confirm();
       }
       break;
     default:
