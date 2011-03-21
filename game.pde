@@ -2814,9 +2814,8 @@ function Player()
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
-    //player one...
+    self.ready();
     self.field_draw_mode();
-    //player two
     self.instruct();
     self.decide_draw();
     self.score();
@@ -2866,6 +2865,7 @@ function Player()
   {
     if (engine.state == 0)
     {
+      rect(350,290,100,100);
       text("Press Enter When You're Ready",400,300);
     }
   };
