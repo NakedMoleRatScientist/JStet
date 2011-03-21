@@ -114,6 +114,9 @@ function GameProtocol(var net)
       self.engine.high_score();
       self.net.send([3]);
       break;
+    case 8:
+      self.engine.start(data[0]);
+      break;
     }
   };
   self.pushMessage = function(var data)
