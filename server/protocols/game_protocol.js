@@ -80,6 +80,16 @@ function Session()
   {
     self.ids.push(id);
   };
+  self.ready = function(id)
+  {
+    for (var i = 0; i < self.ids.length; i++)
+    {
+      if (self.ids[i] == id)
+      {
+	return i;
+      }
+    }
+  };
 }
 
 exports.process = function(data,id)
