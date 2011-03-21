@@ -231,12 +231,6 @@ function GameProtocol(var net)
     var data = [2,5,name,null];
     self.net.send(data);
   };
-  //join a game with password
-  self.request_join_pass = function(var name, var pass)
-  {
-    var data = [2,5,name,pass];
-    self.net.send(data);
-  };
   self.move_right = function()
   {
     var data = [2,2,1];
@@ -2862,7 +2856,7 @@ function Player()
   };
   self.ready = function()
   {
-    text("Press Enter When You're Ready"400,300);
+    text("Press Enter When You're Ready",400,300);
   };
   self.instruct = function()
   {
