@@ -95,7 +95,10 @@ function Session()
 	self.initialize();
       }
     }
-    
+    else if(self.confirm[0] == true)
+    {
+      self.initialize();
+    }
   };
 }
 
