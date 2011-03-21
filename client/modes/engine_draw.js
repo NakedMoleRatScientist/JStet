@@ -10,6 +10,7 @@ function EngineDraw()
     background(0,0,0);
     stroke(205,201,201);
     fill(0,0,0);
+    self.ready();
     self.field_draw_mode();
     self.instruct();
     self.decide_draw();
