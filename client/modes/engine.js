@@ -118,6 +118,12 @@ function Engine(protocol,mode)
     case 119:
       game_protocol.rotate();
       break;
+    case 10:
+      if (self.state == 0)
+      {
+	self.state = 1;
+      }
+      break;
     default:
       console.log(key);
       break;
