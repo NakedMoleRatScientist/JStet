@@ -4,7 +4,6 @@ function EngineDraw()
   self.instruction = new Instruction();
   self.drawField = new PlayFieldDraw();
   self.drawShape = new TetrominoDraw();
-  self.drawMode = 0;
   self.display = function()
   {
     textFont(font,18);
