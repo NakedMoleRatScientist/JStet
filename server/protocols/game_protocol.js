@@ -117,7 +117,7 @@ exports.process = function(data,id)
     sessions[find_by_id(id)].run();
     break;
   case 5:
-    sessions[find_by_id(id)].ready();
+    sessions[find_by_id(id)].ready(id);
     break;
   }
 };
