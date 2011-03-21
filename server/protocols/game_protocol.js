@@ -80,7 +80,7 @@ function Session()
   {
     self.ids.push(id);
   };
-  self.ready = function(id)
+  self.find_by_id = function(id)
   {
     for (var i = 0; i < self.ids.length; i++)
     {
