@@ -16,7 +16,7 @@ function Session()
   {
     for (var i = 0; i < self.ids.length; i++)
     {
-      self.add_events([[self.ids[i],0]]); //0 tell clients to initalize game mode.
+      self.add_events([[0]]); //0 tell clients to initalize game mode.
     }
     self.game.initialize(self.ids);
     self.update_events();
