@@ -216,6 +216,11 @@ function GameProtocol(var net)
     var data = [2,0];
     self.net.send(data);
   };
+  self.setup = function()
+  {
+    var data = [2,6];
+    self.net.send(data);
+  };
   self.request_multi = function(var password, var name)
   {
     if (password == "")
@@ -317,7 +322,8 @@ function GameProtocol(var net)
       break;
     case 8:
       self.engine.start(data[0]);
-      mode.change.(4);
+      mode.change(4);
+      self.request_game();
       break;
     }
   };
@@ -2858,7 +2864,10 @@ function Player()
   };
   self.ready = function()
   {
-    text("Press Enter When You're Ready",400,300);
+    if (engine.state == 0)
+    {
+      text("Press Enter When You're Ready",400,300);
+    }
   };
   self.instruct = function()
   {
@@ -2989,6 +2998,12 @@ function Engine(protocol,mode)
       //rotate, w
     case 119:
       game_protocol.rotate();
+      break;
+    case 10:
+      if (self.state == 0)
+      {
+	game_protocol.confirm();
+      }
       break;
     default:
       console.log(key);
