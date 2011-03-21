@@ -90,6 +90,15 @@ function Session()
       }
     }
   };
+  self.ready = function(id)
+  {
+    var n = self.find_by_id(id);
+    self.confirm[n] = true;
+    if (self.confirm[0] == true && self.confirm[1] == true)
+    {
+      self.initialize();
+    }
+  };
 }
 
 exports.process = function(data,id)
