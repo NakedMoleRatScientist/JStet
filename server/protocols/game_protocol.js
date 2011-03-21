@@ -78,7 +78,6 @@ function Session()
   self.push_id = function(id)
   {
     self.ids.push(id);
-    self.events.broadcasts.push(id);
   };
 }
 
