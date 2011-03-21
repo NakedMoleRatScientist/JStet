@@ -110,8 +110,11 @@ server.addListener("connection",function(conn){
       {
 	for (var n = 0;i < events.length;i ++)
 	{
-	  //the first argument is probably the id
-	  server.send(events[i][1][0],JSON.stringify(events[i]));
+	  server.send(sessions[i].ids[0],JSON.stringify(events[i]));
+	  if (sessions[i].ids.length == 2)
+	  {
+	    server.send(sessions[i].ids[1],JSON.stringify(events[i]));
+	  }
 	}
       }
     }
