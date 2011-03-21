@@ -116,6 +116,9 @@ exports.process = function(data,id)
     sys.log("Game is running");
     sessions[find_by_id(id)].run();
     break;
+  case 5:
+    sessions[find_by_id(id)].ready();
+    break;
   }
 };
 
