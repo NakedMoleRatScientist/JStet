@@ -60,7 +60,6 @@ function GameProtocol(var net)
       console.log("Game initialized.");
       self.net.send([2,4]);
       self.engine.state = 1;
-      mode.change(4);
       break;
     case 1:
       //Get new shape.
