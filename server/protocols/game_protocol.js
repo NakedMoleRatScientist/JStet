@@ -88,10 +88,14 @@ function Session()
   {
     var n = self.find_by_id(id);
     self.confirm[n] = true;
-    if (self.confirm[0] == true && self.confirm[1] == true)
+    if (self.ids.length == 2)
     {
-      self.initialize();
+      if (self.confirm[0] == true && self.confirm[1] == true)
+      {
+	self.initialize();
+      }
     }
+    
   };
 }
 
