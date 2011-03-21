@@ -11,6 +11,7 @@ function EventManager()
   var self = this;
   self.events = new Array();
   self.players = new Array();
+  self.confirm = [false,false];
   self.timer = timer.create_new();
   self.send = function(message)
   {
