@@ -225,10 +225,10 @@ function GameProtocol(var net)
     var data = [2,3,name,password];
     self.net.send(data);
   };
-  //join a game
-  self.request_join = function(var name)
+  //confirm to tell the server the player is ready to play
+  self.confirm = function(var)
   {
-    var data = [2,5,name,null];
+    var data = [2,5];
     self.net.send(data);
   };
   self.move_right = function()
@@ -262,8 +262,7 @@ function GameProtocol(var net)
     case 0:
       console.log("Game initialized.");
       self.net.send([2,4]);
-      self.engine.start(data[0]); //Create a new player instance
-      mode.change(4);
+      self.engine.state = 1;
       break;
     case 1:
       //Get new shape.
@@ -315,6 +314,10 @@ function GameProtocol(var net)
       self.engine.stop(self.engine.you);
       self.engine.high_score();
       self.net.send([3]);
+      break;
+    case 8:
+      self.engine.start(data[0]);
+      mode.change.(4);
       break;
     }
   };
@@ -2799,7 +2802,6 @@ function Player()
   self.instruction = new Instruction();
   self.drawField = new PlayFieldDraw();
   self.drawShape = new TetrominoDraw();
-  self.drawMode = 0;
   self.display = function()
   {
     textFont(font,18);
@@ -2887,6 +2889,7 @@ function Engine(protocol,mode)
   self.you = 0;
   protocol.engine = self;
   self.score = 0;
+  self.state = 0;
   self.find_player = function(id)
   { 
     for (var i = 0;i < self.players.length;i++)
