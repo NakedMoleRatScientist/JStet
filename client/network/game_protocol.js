@@ -60,6 +60,7 @@ function GameProtocol(var net)
       console.log("Game initialized.");
       self.net.send([2,4]);
       self.engine.start(data[0]); //Create a new player instance
+      self.engine.state = 1;
       mode.change(4);
       break;
     case 1:
