@@ -22,9 +22,9 @@ function GameProtocol(var net)
     var data = [2,3,name,password];
     self.net.send(data);
   };
-  self.confirm = function(var name)
+  self.confirm = function(var)
   {
-    var data = [2,5,name,null];
+    var data = [2,5];
     self.net.send(data);
   };
   self.move_right = function()
