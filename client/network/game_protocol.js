@@ -120,6 +120,7 @@ function GameProtocol(var net)
     case 8:
       self.engine.start(data[0]);
       mode.change(4);
+      self.request_game();
       break;
     }
   };
