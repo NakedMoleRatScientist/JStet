@@ -59,6 +59,10 @@ function EngineDraw()
     }
     self.drawShape.draw_field(player.field.field);
   };
+  self.ready = function()
+  {
+    text("Press Enter When You're Ready"400,300);
+  };
   self.instruct = function()
   {
     text("Instruction: ",50,450);
