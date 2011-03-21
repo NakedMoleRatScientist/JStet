@@ -22,6 +22,7 @@ function GameProtocol(var net)
     var data = [2,3,name,password];
     self.net.send(data);
   };
+  //confirm to tell the server the player is ready to play
   self.confirm = function(var)
   {
     var data = [2,5];
