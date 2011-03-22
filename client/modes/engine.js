@@ -28,7 +28,7 @@ function Engine(protocol,mode)
       }
     }
   };
-  self.write_shape = function(id,name,choice,type)
+  self.write_shape = function(var id,var name,var choice,var type)
   {
     var player = self.find_player(id);
     player.write_shape(name,choice,type);
