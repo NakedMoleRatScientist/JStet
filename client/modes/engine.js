@@ -50,7 +50,7 @@ function Engine(protocol,mode)
       player.current.move(-x,-y);
     }
   };
-  self.rotate = function(id,choice)
+  self.rotate = function(var id, var choice)
   {
     var player = self.find_player(id);
     player.current.rotate(choice);
