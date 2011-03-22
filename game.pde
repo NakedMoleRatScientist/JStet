@@ -2899,7 +2899,7 @@ function Engine(protocol,mode)
   protocol.engine = self;
   self.score = 0;
   self.state = 0;
-  self.find_player = function(id)
+  self.find_player = function(var id)
   { 
     for (var i = 0;i < self.players.length;i++)
     {
@@ -2909,7 +2909,7 @@ function Engine(protocol,mode)
       }
     }
   };
-  self.write_shape = function(id,name,choice,type)
+  self.write_shape = function(var id,var name,var choice,var type)
   {
     var player = self.find_player(id);
     player.write_shape(name,choice,type);
@@ -2921,7 +2921,7 @@ function Engine(protocol,mode)
     player.current.x = x;
     player.current.y = y;
   };
-  self.move = function(x,y)
+  self.move = function(var x,var y)
   {
     var player = self.find_player(self.you);
     player.current.move(x,y);
@@ -2931,7 +2931,7 @@ function Engine(protocol,mode)
       player.current.move(-x,-y);
     }
   };
-  self.rotate = function(id,choice)
+  self.rotate = function(var id, var choice)
   {
     var player = self.find_player(id);
     player.current.rotate(choice);
