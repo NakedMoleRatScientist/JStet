@@ -40,7 +40,7 @@ function Engine(protocol,mode)
     player.current.x = x;
     player.current.y = y;
   };
-  self.move = function(x,y)
+  self.move = function(var x,var y)
   {
     var player = self.find_player(self.you);
     player.current.move(x,y);
