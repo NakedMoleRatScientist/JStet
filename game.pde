@@ -261,6 +261,7 @@ function GameProtocol(var net)
   };
   self.process_data = function(var data)
   {
+    console.log(data[1]);
     switch(data[1])
     {
     case 0:
