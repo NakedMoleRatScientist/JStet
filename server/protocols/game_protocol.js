@@ -60,6 +60,7 @@ function Session()
   self.run = function()
   {
     self.game.run_game();
+    self.add_events([2,8]);
   };
   self.authenticate = function(password,id)
   {
