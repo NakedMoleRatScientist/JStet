@@ -106,7 +106,7 @@ server.addListener("connection",function(conn){
       sessions[i].update_events()
       var events = sessions[i].get_data()
       sessions[i].clear();
-      if (events != false && events.length != 0)
+      if (events != false)
       {
 	for (var n = 0;n < events.length;n ++)
 	{
