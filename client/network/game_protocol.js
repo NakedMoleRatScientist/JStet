@@ -60,10 +60,9 @@ function GameProtocol(var net)
   {
     switch(data[1])
     {
-    //initialize game mode.
     case 0:
       console.log("Game initialized.");
-      self.net.send([2,4]);
+      self.net.send([2,5]);
       self.engine.state = 1;
       break;
     case 1:
