@@ -119,9 +119,9 @@ function GameProtocol(var net)
       self.net.send([3]);
       break;
     case 8:
+      //change into game mode
       self.engine.start(data[0]);
       mode.change(4);
-      self.request_game();
       break;
     }
   };
