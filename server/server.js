@@ -108,12 +108,12 @@ server.addListener("connection",function(conn){
       sessions[i].clear();
       if (events != false && events.length != 0)
       {
-	for (var n = 0;i < events.length;i ++)
+	for (var n = 0;n < events.length;n ++)
 	{
-	  server.send(sessions[i].ids[0],JSON.stringify(events[i]));
+	  server.send(sessions[i].ids[0],JSON.stringify(events[n]));
 	  if (sessions[i].ids.length == 2)
 	  {
-	    server.send(sessions[i].ids[1],JSON.stringify(events[i]));
+	    server.send(sessions[i].ids[1],JSON.stringify(events[n]));
 	  }
 	}
       }
