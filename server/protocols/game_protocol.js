@@ -60,7 +60,6 @@ function Session()
   self.run = function()
   {
     self.game.run_game();
-    self.add_events([2,8]);
   };
   self.authenticate = function(password,id)
   {
@@ -94,11 +93,13 @@ function Session()
       if (self.confirm[0] == true && self.confirm[1] == true)
       {
 	self.initialize();
+	self.add_events([2,8]);
       }
     }
     else if(self.confirm[0] == true)
     {
       self.initialize();
+      self.add_events([2,8]);
     }
   };
 }
