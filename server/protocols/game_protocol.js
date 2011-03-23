@@ -139,6 +139,7 @@ exports.process = function(data,id)
     sessions[find_by_id(id)].run();
     break;
   case 5:
+    sys.log("Ready for action!");
     sessions[find_by_id(id)].ready(id);
     break;
   }
