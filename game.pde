@@ -231,7 +231,7 @@ function GameProtocol(var net)
     self.net.send(data);
   };
   //confirm to tell the server the player is ready to play
-  self.confirm = function(var)
+  self.confirm = function()
   {
     var data = [2,5];
     self.net.send(data);
@@ -263,11 +263,9 @@ function GameProtocol(var net)
   {
     switch(data[1])
     {
-    //initialize game mode.
     case 0:
       console.log("Game initialized.");
-      self.net.send([2,4]);
-      self.engine.state = 1;
+      self.net.send([2,5]);
       break;
     case 1:
       //Get new shape.
@@ -316,14 +314,16 @@ function GameProtocol(var net)
       self.net.send([3]);
       break;
     case 7:
+      //destruction of the game; high score
       self.engine.stop(self.engine.you);
       self.engine.high_score();
       self.net.send([3]);
       break;
     case 8:
+      //change into game mode
+      self.engine.state = 1;
       self.engine.start(data[0]);
       mode.change(4);
-      self.request_game();
       break;
     }
   };
