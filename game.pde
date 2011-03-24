@@ -32,17 +32,6 @@ function LobbyProtocol(net,lobby)
     var data = [1,2,nick];
     self.net.send(data);
   };
-}function Instruction()
-{
-  var self = this;
-  self.display = function()
-  {
-    text("Instruction: ",50,500);
-    text("a - left",50,530);
-    text("s - down",50,550);
-    text("d - right",50,570);
-    text("w - rotate",50,590);
-  };
 }
 function GameInfo(var password,var name)
 {
@@ -332,8 +321,10 @@ function GameProtocol(var net)
       //start the game
       if (self.checkIdentical(data))
       {
+	console.log("Starting game.");
 	self.engine.state = 1;
-	self.engine.start(data[0]);
+	self.engine.start(data[2]);
+	self.net.send([2,4]);
       }
       break;
     }
@@ -2739,16 +2730,6 @@ function WaitingMode()
   };
 }
 
-function SearchUi()
-{
-  var self = this;
-  self.animate = 0;
-  self.animate_one = function()
-  {
-    
-  };
-}
-
 function Mode()
 {
   this.status = 0;
@@ -2883,10 +2864,10 @@ function Player()
   self.instruct = function()
   {
     text("Instruction: ",50,460);
-    text("a - left",50,440);
-    text("s - down",50,460);
-    text("d - right",50,480);
-    text("w - rotate",50,500);
+    text("a - left",50,480);
+    text("s - down",50,500);
+    text("d - right",50,520);
+    text("w - rotate",50,540);
   };
   self.score = function()
   {
