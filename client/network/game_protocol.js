@@ -129,6 +129,7 @@ function GameProtocol(var net)
       //start the game
       if (self.checkIdentical(data))
       {
+	console.log("Starting game.");
 	self.engine.state = 1;
 	self.engine.start(data[0]);
 	self.net.send([2,4]);
