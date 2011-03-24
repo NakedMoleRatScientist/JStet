@@ -62,7 +62,10 @@ function GameProtocol(var net)
     {
     case 0:
       console.log("Game initialized.");
-      mode.change(4); 
+      if (self.checkIdentical(data))
+      {
+	mode.change(4); 
+      }
       break;
     case 1:
       //Get new shape.
