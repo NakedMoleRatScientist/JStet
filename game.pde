@@ -2816,7 +2816,6 @@ function Player()
 }function EngineDraw()
 {
   var self = this;
-  self.instruction = new Instruction();
   self.drawField = new PlayFieldDraw();
   self.drawShape = new TetrominoDraw();
   self.display = function()
@@ -2828,9 +2827,9 @@ function Player()
     {
       self.field_draw_mode();
       self.decide_draw();
+      self.instruct();
+      self.score();
     }
-    self.instruct();
-    self.score();
   };
   self.player_one_field = function()
   {
@@ -2883,7 +2882,11 @@ function Player()
   };
   self.instruct = function()
   {
-    text("Instruction: ",50,450);
+    text("Instruction: ",50,460);
+    text("a - left",50,440);
+    text("s - down",50,460);
+    text("d - right",50,480);
+    text("w - rotate",50,500);
   };
   self.score = function()
   {
@@ -2993,33 +2996,41 @@ function Engine(protocol,mode)
   };
   self.key = function()
   {
-    switch(key)
+    if (self.state == 1)
     {
-      //move right, d
-    case 100:
-      game_protocol.move_right();
-      break;
-      //move down, s
-    case 115:
-      game_protocol.move_down();
-      break;
-      //move left, a
-    case 97:
-      game_protocol.move_left();
-      break;
-      //rotate, w
-    case 119:
-      game_protocol.rotate();
-      break;
-    case 10:
-      if (self.state == 0)
+      switch(key)
       {
-	game_protocol.confirm();
+      case 100:
+	//move right, d
+	game_protocol.move_right();
+	break;
+	//move down, s
+      case 115:
+	game_protocol.move_down();
+	break;
+	//move left, a
+      case 97:
+	game_protocol.move_left();
+	break;
+	//rotate, w
+      case 119:
+	game_protocol.rotate();
+	break;
+      default:
+	console.log(key);
       }
-      break;
-    default:
-      console.log(key);
-      break;
+    }
+    else
+    {
+      switch(key)
+      {
+      case 10:
+	game_protocol.confirm();
+	break;
+      default:
+	console.log(key);
+	break;
+      }
     }
   };
 };
