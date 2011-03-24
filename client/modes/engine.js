@@ -105,6 +105,7 @@ function Engine(protocol,mode)
       switch(key)
       {
       case 100:
+	//move right, d
 	game_protocol.move_right();
 	break;
 	//move down, s
@@ -125,8 +126,6 @@ function Engine(protocol,mode)
     }
     switch(key)
     {
-      //move right, d
-    
     case 10:
       if (self.state == 0)
       {
