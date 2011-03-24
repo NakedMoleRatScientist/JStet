@@ -41,7 +41,6 @@ function GameProtocol(var net)
   self.move_left = function()
   {
     var data = [2,2,2];
-    self.engine.move(-20,0);
     self.net.send(data);
   };
   self.move_down = function()
