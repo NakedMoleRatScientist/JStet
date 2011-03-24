@@ -127,8 +127,11 @@ function GameProtocol(var net)
       break;
     case 8:
       //start the game
-      self.engine.state = 1;
-      self.engine.start(data[0]);
+      if (self.checkIdentical(data))
+      {
+	self.engine.state = 1;
+	self.engine.start(data[0]);
+      }
       break;
     }
   };
