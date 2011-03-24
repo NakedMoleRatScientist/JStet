@@ -2823,12 +2823,13 @@ function Player()
   {
     textFont(font,18);
     background(0,0,0);
-    stroke(205,201,201);
-    fill(0,0,0);
     self.ready();
-    self.field_draw_mode();
+    if (engine.state == 1)
+    {
+      self.field_draw_mode();
+      self.decide_draw();
+    }
     self.instruct();
-    self.decide_draw();
     self.score();
   };
   self.player_one_field = function()
@@ -2843,13 +2844,10 @@ function Player()
   };
   self.field_draw_mode = function()
   {
-    if (self.engine.players.length > 0)
+    self.player_one_field();
+    if (engine.players.length == 2)
     {
-      self.player_one_field();
-      if (engine.players.length == 2)
-      {
-	self.player_two_field();
-      }
+      self.player_two_field();
     }
   };
   self.decide_draw = function()
@@ -2879,8 +2877,8 @@ function Player()
   {
     if (engine.state == 0)
     {
-      rect(350,290,100,100);
-      text("Press Enter When You're Ready",400,300);
+      rect(260,280,318,25);
+      text("Press Enter When You're Ready",260,300);
     }
   };
   self.instruct = function()
