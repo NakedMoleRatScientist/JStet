@@ -66,10 +66,6 @@ function GameProtocol(var net)
       {
 	mode.change(4);
 	engine.start(data[2]);
-	if (data[3] != null)
-	{
-	  engine.create(data[3]);
-	}
       }
       break;
     case 1:
