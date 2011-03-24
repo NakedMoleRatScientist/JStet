@@ -31,13 +31,10 @@ function EngineDraw()
   };
   self.field_draw_mode = function()
   {
-    if (self.engine.players.length > 0)
+    self.player_one_field();
+    if (engine.players.length == 2)
     {
-      self.player_one_field();
-      if (engine.players.length == 2)
-      {
-	self.player_two_field();
-      }
+      self.player_two_field();
     }
   };
   self.decide_draw = function()
