@@ -124,17 +124,20 @@ function Engine(protocol,mode)
 	console.log(key);
       }
     }
-    switch(key)
+    else
     {
-    case 10:
-      if (self.state == 0)
+      switch(key)
       {
-	game_protocol.confirm();
+      case 10:
+	if (self.state == 0)
+	{
+	  game_protocol.confirm();
+	}
+	break;
+      default:
+	console.log(key);
+	break;
       }
-      break;
-    default:
-      console.log(key);
-      break;
     }
   };
 };
