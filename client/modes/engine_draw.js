@@ -1,7 +1,6 @@
 function EngineDraw()
 {
   var self = this;
-  self.instruction = new Instruction();
   self.drawField = new PlayFieldDraw();
   self.drawShape = new TetrominoDraw();
   self.display = function()
