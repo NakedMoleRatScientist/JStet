@@ -131,6 +131,7 @@ function GameProtocol(var net)
       {
 	self.engine.state = 1;
 	self.engine.start(data[0]);
+	self.net.send([2,4]);
       }
       break;
     }
