@@ -256,7 +256,8 @@ function GameProtocol(var net)
       console.log("Game initialized.");
       if (self.checkIdentical(data))
       {
-	mode.change(4); 
+	mode.change(4);
+	engine.start(data[2]);
       }
       break;
     case 1:
@@ -323,7 +324,6 @@ function GameProtocol(var net)
       {
 	console.log("Starting game.");
 	self.engine.state = 1;
-	self.engine.start(data[2]);
 	self.net.send([2,4]);
       }
       break;
@@ -1292,25 +1292,6 @@ function JoinProtocol(var net)
 	break;
       }
     }
-  };
-}
-
-function SearchProtocol(var net)
-{
-  var self = this;
-  self.net = net;
-  self.process_data = function(var data)
-  {
-    switch(data[1])
-    {
-    case 0:
-      console.log("Search initialized.");
-    }
-  };
-  self.request_search = function()
-  {
-    var data = [3,0];
-    self.net.send(data);
   };
 }
 
@@ -2983,6 +2964,7 @@ function Engine(protocol,mode)
       {
       case 100:
 	//move right, d
+	self.move(20,0);
 	game_protocol.move_right();
 	break;
 	//move down, s
