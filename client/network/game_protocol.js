@@ -118,9 +118,12 @@ function GameProtocol(var net)
       break;
     case 7:
       //destruction of the game; high score
-      self.engine.stop(self.engine.you);
-      self.engine.high_score();
-      self.net.send([3]);
+      if (self.checkIdentical(data))
+      {
+	self.engine.stop(self.engine.you);
+	self.engine.high_score();
+	self.net.send([3]);
+      }
       break;
     case 8:
       //start the game
