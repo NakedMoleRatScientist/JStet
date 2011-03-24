@@ -111,6 +111,7 @@ function Engine(protocol,mode)
 	break;
 	//move down, s
       case 115:
+	self.move(20,0);
 	game_protocol.move_down();
 	break;
 	//move left, a
