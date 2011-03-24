@@ -13,9 +13,9 @@ function EngineDraw()
     {
       self.field_draw_mode();
       self.decide_draw();
+      self.instruct();
+      self.score();
     }
-    self.instruct();
-    self.score();
   };
   self.player_one_field = function()
   {
