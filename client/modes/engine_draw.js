@@ -8,7 +8,7 @@ function EngineDraw()
   {
     textFont(font,18);
     background(0,0,0);
-    stroke(205,201,201);
+    stroke(255,255,255);
     fill(0,0,0);
     self.ready();
     if (engine.state == 1)
