@@ -129,10 +129,7 @@ function Engine(protocol,mode)
       switch(key)
       {
       case 10:
-	if (self.state == 0)
-	{
-	  game_protocol.confirm();
-	}
+	game_protocol.confirm();
 	break;
       default:
 	console.log(key);
