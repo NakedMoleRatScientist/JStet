@@ -62,7 +62,7 @@ function GameProtocol(var net)
     {
     case 0:
       console.log("Game initialized.");
-      self.net.send([2,5]);
+      mode.change(4); 
       break;
     case 1:
       //Get new shape.
@@ -117,10 +117,9 @@ function GameProtocol(var net)
       self.net.send([3]);
       break;
     case 8:
-      //change into game mode
+      //start the game
       self.engine.state = 1;
       self.engine.start(data[0]);
-      mode.change(4);
       break;
     }
   };
