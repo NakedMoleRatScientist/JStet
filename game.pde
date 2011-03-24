@@ -228,19 +228,16 @@ function GameProtocol(var net)
   self.move_right = function()
   {
     var data = [2,2,1];
-    self.engine.move(20,0);
     self.net.send(data);
   };
   self.move_left = function()
   {
     var data = [2,2,2];
-    self.engine.move(-20,0);
     self.net.send(data);
   };
   self.move_down = function()
   {
     var data = [2,2,3];
-    self.engine.move(0,20);
     self.net.send(data);
   };
   self.rotate = function()
@@ -2969,14 +2966,17 @@ function Engine(protocol,mode)
 	break;
 	//move down, s
       case 115:
+	self.move(0,20);
 	game_protocol.move_down();
 	break;
 	//move left, a
       case 97:
+	self.move(-20,0);
 	game_protocol.move_left();
 	break;
 	//rotate, w
-      case 119:
+      case 119
+	self.rotate();
 	game_protocol.rotate();
 	break;
       default:
