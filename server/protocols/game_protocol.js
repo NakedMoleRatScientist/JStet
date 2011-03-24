@@ -92,6 +92,7 @@ function Session()
     {
       if (self.confirm[0] == true && self.confirm[1] == true)
       {
+	sys.log("Engaging game loop initialization...");
 	self.initialize();
 	self.add_events([2,8]);
       }
