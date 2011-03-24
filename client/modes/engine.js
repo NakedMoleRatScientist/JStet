@@ -120,7 +120,8 @@ function Engine(protocol,mode)
 	game_protocol.move_left();
 	break;
 	//rotate, w
-      case 119:
+      case 119
+	self.move(0,20);:
 	game_protocol.rotate();
 	break;
       default:
