@@ -11,7 +11,7 @@ function EngineDraw()
     stroke(205,201,201);
     fill(0,0,0);
     self.ready();
-    if (self.players.length > 0)
+    if (engine.players.length > 0)
     {
       self.field_draw_mode();
       self.decide_draw();
