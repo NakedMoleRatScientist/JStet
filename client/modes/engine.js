@@ -106,6 +106,7 @@ function Engine(protocol,mode)
       {
       case 100:
 	//move right, d
+	self.move(20,0);
 	game_protocol.move_right();
 	break;
 	//move down, s
