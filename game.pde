@@ -261,12 +261,14 @@ function GameProtocol(var net)
   };
   self.process_data = function(var data)
   {
-    console.log(data[1]);
     switch(data[1])
     {
     case 0:
       console.log("Game initialized.");
-      self.net.send([2,5]);
+      if (self.checkIdentical(data))
+      {
+	mode.change(4); 
+      }
       break;
     case 1:
       //Get new shape.
@@ -311,20 +313,28 @@ function GameProtocol(var net)
       break;
     case 6:
       //destruction of the game
-      self.engine.stop(self.engine.you);
-      self.net.send([3]);
+      if (self.checkIdentical(data))
+      {
+	self.engine.stop(self.engine.you);
+	self.net.send([3]);
+      }
       break;
     case 7:
       //destruction of the game; high score
-      self.engine.stop(self.engine.you);
-      self.engine.high_score();
-      self.net.send([3]);
+      if (self.checkIdentical(data))
+      {
+	self.engine.stop(self.engine.you);
+	self.engine.high_score();
+	self.net.send([3]);
+      }
       break;
     case 8:
-      //change into game mode
-      self.engine.state = 1;
-      self.engine.start(data[0]);
-      mode.change(4);
+      //start the game
+      if (self.checkIdentical(data))
+      {
+	self.engine.state = 1;
+	self.engine.start(data[0]);
+      }
       break;
     }
   };
@@ -2833,10 +2843,13 @@ function Player()
   };
   self.field_draw_mode = function()
   {
-    self.player_one_field();
-    if (engine.players.length == 2)
+    if (self.engine.players.length > 0)
     {
-      self.player_two_field();
+      self.player_one_field();
+      if (engine.players.length == 2)
+      {
+	self.player_two_field();
+      }
     }
   };
   self.decide_draw = function()
