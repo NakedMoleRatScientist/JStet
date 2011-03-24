@@ -11,9 +11,12 @@ function EngineDraw()
     stroke(205,201,201);
     fill(0,0,0);
     self.ready();
-    self.field_draw_mode();
+    if (self.players.length > 0)
+    {
+      self.field_draw_mode();
+      self.decide_draw();
+    }
     self.instruct();
-    self.decide_draw();
     self.score();
   };
   self.player_one_field = function()
