@@ -116,6 +116,7 @@ function Engine(protocol,mode)
 	break;
 	//move left, a
       case 97:
+	self.move(-20,0);
 	game_protocol.move_left();
 	break;
 	//rotate, w
