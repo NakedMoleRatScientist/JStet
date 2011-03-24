@@ -64,7 +64,7 @@ function EngineDraw()
   {
     if (engine.state == 0)
     {
-      rect(350,290,100,200);
+      rect(300,290,100,200);
       text("Press Enter When You're Ready",400,300);
     }
   };
