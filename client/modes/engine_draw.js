@@ -68,10 +68,10 @@ function EngineDraw()
   self.instruct = function()
   {
     text("Instruction: ",50,460);
-    text("a - left",50,440);
-    text("s - down",50,460);
-    text("d - right",50,480);
-    text("w - rotate",50,500);
+    text("a - left",50,480);
+    text("s - down",50,500);
+    text("d - right",50,520);
+    text("w - rotate",50,540);
   };
   self.score = function()
   {
