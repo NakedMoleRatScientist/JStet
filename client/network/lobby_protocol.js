@@ -1,21 +1,20 @@
 
-function LobbyProtocol(lobby)
+function LobbyProtocol()
 {
   var self = this;
-  self.mode = lobby;
   self.process_data = function(data)
   {
     switch(data[0])
     {
     case 1:
       console.log("Typing detected.");
-      self.mode.chat.add_message(data[1]);
+      lobby.chat.add_message(data[1]);
       break;
     case 2:
-      self.mode.chat.add_message("Nick change unsuccessful.");
+      lobby.chat.add_message("Nick change unsuccessful.");
       break;
     case 3:
-      self.mode.chat.add_message("Nick change successful.");
+      lobby.chat.add_message("Nick change successful.");
       break;
     }
   };
