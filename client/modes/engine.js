@@ -55,7 +55,7 @@ function Engine(protocol,mode)
     var player = self.find_player(id);
     player.current.rotate(choice);
   };
-  self.line_action = function(id,line)
+  self.line_action = function(var id,var line)
   {
     var player = self.find_player(id);
     player.field.move_lines(player.field.clear_line(line));
