@@ -25,23 +25,23 @@ function Net()
       switch (data[0])
       {
       case 0:
-        self.score.change_data(data[1]);
+        score_protocol.change_data(data[1]);
 	break;
       case 1:
-	self.lobby.process_data(data[1]);
+	lobby_protocol.process_data(data[1]);
 	break;
       case 2:
-	self.game.process_data(data[1]);
+	game_protocol.process_data(data[1]);
 	break;
       case 4:
 	console.log("Acknowledged.");
 	title.connected = true;
 	break;
       case 5:
-	self.list.process_data(data[1]);
+	list_protocol.process_data(data[1]);
 	break;
       case 6:
-	self.join.process_data(data[1]);
+	join_protocol.process_data(data[1]);
 	break;
       }
     };
