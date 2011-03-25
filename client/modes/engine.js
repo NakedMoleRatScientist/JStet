@@ -8,11 +8,10 @@ void setup()
   frameRate(24);
 }
 
-function Engine(mode)
+function Engine()
 {
   var self = this;
   game_protocol.engine = self;
-  self.mode = mode;
   self.players = [];
   self.you = 0;
   self.score = 0;
