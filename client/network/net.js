@@ -4,11 +4,6 @@ function Net()
 {
   var self = this;
   self.ws = null;
-  self.game = null;
-  self.score = null;
-  self.lobby = null;
-  self.list = null;
-  self.join = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
