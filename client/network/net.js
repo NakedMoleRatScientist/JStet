@@ -14,7 +14,7 @@ function Net()
     self.ws = new WebSocket('ws://localhost:7000');
     self.ws.onmessage = function(event)
     {
-      data = JSON.parse(event.data);
+      var data = JSON.parse(event.data);
       //data[0] notates data types so we know how to process the data.
       //0 - Score
       //1 - Lobby
