@@ -34,7 +34,7 @@ function Engine(protocol,mode)
     player.write_shape(name,choice,type);
   };
   //Update location.
-  self.update_location = function(id,x,y)
+  self.update_location = function(var id,var x,var y)
   {
     var player = self.find_player(id);
     player.current.x = x;
