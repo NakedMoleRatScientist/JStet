@@ -2735,7 +2735,7 @@ var join_protocol = new JoinProtocol(network);
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
-var engine = new Engine(game_protocol,mode);
+var engine = new Engine();
 var engineDraw = new EngineDraw();
 
 function Player()
@@ -2863,14 +2863,12 @@ void setup()
   frameRate(24);
 }
 
-function Engine(protocol,mode)
+function Engine()
 {
   var self = this;
-  self.protocol = protocol;
-  self.mode = mode;
+  game_protocol.engine = self;
   self.players = [];
   self.you = 0;
-  protocol.engine = self;
   self.score = 0;
   self.state = 0;
   self.find_player = function(var id)
@@ -2889,7 +2887,7 @@ function Engine(protocol,mode)
     player.write_shape(name,choice,type);
   };
   //Update location.
-  self.update_location = function(id,x,y)
+  self.update_location = function(var id,var x,var y)
   {
     var player = self.find_player(id);
     player.current.x = x;
@@ -2910,18 +2908,18 @@ function Engine(protocol,mode)
     var player = self.find_player(id);
     player.current.rotate(choice);
   };
-  self.line_action = function(id,line)
+  self.line_action = function(var id,var line)
   {
     var player = self.find_player(id);
     player.field.move_lines(player.field.clear_line(line));
   };
-  self.stop = function(id)
+  self.stop = function(var id)
   {
     self.destroy(id);
     console.log("Game over");
-    self.mode.change(1);
+    mode.change(1);
   };
-  self.destroy = function(id)
+  self.destroy = function(var id)
   {
     for (var i = 0; i < self.players.length; i++)
     {
@@ -2942,14 +2940,14 @@ function Engine(protocol,mode)
   self.high_score = function()
   {
     console.log("High score, detected!");
-    self.mode.change(3);
+    mode.change(3);
   };
   self.start = function(var id)
   {
     self.create(id);
     self.you = id;
   };
-  self.get_player = function(n)
+  self.get_player = function(var n)
   {
     return self.players[n];
   };
