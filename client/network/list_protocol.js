@@ -2,21 +2,19 @@
 function ListProtocol(var net)
 {
   var self = this;
-  self.net = net;
-  self.net.list = self;
   self.size = 0;
   self.games = [];
   //Get size of games.
   self.request_size = function()
   {
     var data = [4,0];
-    self.net.send(data);
+    net.send(data);
   };
   //Get games info.
   self.request_games = function()
   {
     var data = [4,1];
-    self.net.send(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
