@@ -8,14 +8,13 @@ void setup()
   frameRate(24);
 }
 
-function Engine(protocol,mode)
+function Engine(mode)
 {
   var self = this;
-  self.protocol = protocol;
+  game_protocol.engine = self;
   self.mode = mode;
   self.players = [];
   self.you = 0;
-  protocol.engine = self;
   self.score = 0;
   self.state = 0;
   self.find_player = function(var id)
