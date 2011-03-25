@@ -14,7 +14,7 @@ function GameProtocol()
   self.setup = function()
   {
     var data = [2,6];
-    self.net.send(data);
+    net.send(data);
   };
   self.request_multi = function(var password, var name)
   {
@@ -23,33 +23,33 @@ function GameProtocol()
       password = null;
     }
     var data = [2,3,name,password];
-    self.net.send(data);
+    net.send(data);
   };
   //confirm to tell the server the player is ready to play
   self.confirm = function()
   {
     var data = [2,5];
-    self.net.send(data);
+    net.send(data);
   };
   self.move_right = function()
   {
     var data = [2,2,1];
-    self.net.send(data);
+    net.send(data);
   };
   self.move_left = function()
   {
     var data = [2,2,2];
-    self.net.send(data);
+    net.send(data);
   };
   self.move_down = function()
   {
     var data = [2,2,3];
-    self.net.send(data);
+    net.send(data);
   };
   self.rotate = function()
   {
     var data = [2,2,4];
-    self.net.send(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
@@ -69,7 +69,7 @@ function GameProtocol()
       {
         console.log("New shape, ordered.");
 	self.engine.write_shape(data[0],data[2],data[3],data[4]);
-        self.net.send([2,1]);
+        net.send([2,1]);
       }
       break;
     case 2:
@@ -78,7 +78,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	self.engine.update_location(data[0],data[2],data[3]);
-	self.net.send([2,1]);
+	net.send([2,1]);
       }
       break;
     case 3:
@@ -87,7 +87,7 @@ function GameProtocol()
       {
 	console.log("Rotation detected.");
 	self.engine.rotate(data[0],data[2]);
-	self.net.send([2,1]);
+	net.send([2,1]);
       }
       break;
     case 4:
@@ -109,7 +109,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	self.engine.stop(self.engine.you);
-	self.net.send([3]);
+	net.send([3]);
       }
       break;
     case 7:
@@ -118,7 +118,7 @@ function GameProtocol()
       {
 	self.engine.stop(self.engine.you);
 	self.engine.high_score();
-	self.net.send([3]);
+	net.send([3]);
       }
       break;
     case 8:
@@ -127,7 +127,7 @@ function GameProtocol()
       {
 	console.log("Starting game.");
 	self.engine.state = 1;
-	self.net.send([2,4]);
+	net.send([2,4]);
       }
       break;
     }
