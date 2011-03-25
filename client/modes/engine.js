@@ -94,7 +94,7 @@ function Engine(protocol,mode)
     self.create(id);
     self.you = id;
   };
-  self.get_player = function(n)
+  self.get_player = function(var n)
   {
     return self.players[n];
   };
