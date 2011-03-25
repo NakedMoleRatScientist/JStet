@@ -1,38 +1,36 @@
 
-function LobbyProtocol(net,lobby)
+function LobbyProtocol()
 {
   var self = this;
-  self.mode = lobby
-  self.net = net;
-  self.net.lobby = self;
   self.process_data = function(data)
   {
     switch(data[0])
     {
     case 1:
       console.log("Typing detected.");
-      self.mode.chat.add_message(data[1]);
+      lobby.chat.add_message(data[1]);
       break;
     case 2:
-      self.mode.chat.add_message("Nick change unsuccessful.");
+      lobby.chat.add_message("Nick change unsuccessful.");
       break;
     case 3:
-      self.mode.chat.add_message("Nick change successful.");
+      lobby.chat.add_message("Nick change successful.");
       break;
     }
   };
   self.send = function(message)
   {
     var data = [1,1,message];
-    self.net.send(data);
+    net.send(data);
   };
 
   self.nick = function(nick)
   {
     var data = [1,2,nick];
-    self.net.send(data);
+    net.send(data);
   };
 }
+
 function GameInfo(var password,var name)
 {
   var self = this;
@@ -1365,17 +1363,12 @@ function Net()
 {
   var self = this;
   self.ws = null;
-  self.game = null;
-  self.score = null;
-  self.lobby = null;
-  self.list = null;
-  self.join = null;
   self.initialize = function()
   {
     self.ws = new WebSocket('ws://localhost:7000');
     self.ws.onmessage = function(event)
     {
-      data = JSON.parse(event.data);
+      var data = JSON.parse(event.data);
       //data[0] notates data types so we know how to process the data.
       //0 - Score
       //1 - Lobby
@@ -1386,23 +1379,23 @@ function Net()
       switch (data[0])
       {
       case 0:
-        self.score.change_data(data[1]);
+        score_protocol.change_data(data[1]);
 	break;
       case 1:
-	self.lobby.process_data(data[1]);
+	lobby_protocol.process_data(data[1]);
 	break;
       case 2:
-	self.game.process_data(data[1]);
+	game_protocol.process_data(data[1]);
 	break;
       case 4:
 	console.log("Acknowledged.");
 	title.connected = true;
 	break;
       case 5:
-	self.list.process_data(data[1]);
+	list_protocol.process_data(data[1]);
 	break;
       case 6:
-	self.join.process_data(data[1]);
+	join_protocol.process_data(data[1]);
 	break;
       }
     };
@@ -2721,17 +2714,17 @@ var mode = new Mode();
 var timer = new TimerAction();
 var high_score = new HighScoreMode();
 var lobby = new LobbyMode();
-var network = new Net();
+var net = new Net();
 var over = new GameOverMode();
 var title = new TitleMode();
 var waiting = new WaitingMode();
 var list = new ListGameMode();
 var create = new CreateGameMode();
-var game_protocol = new GameProtocol(network);
-var score_protocol = new ScoreProtocol(network);
-var lobby_protocol = new LobbyProtocol(network,lobby);
-var list_protocol = new ListProtocol(network);
-var join_protocol = new JoinProtocol(network);
+var game_protocol = new GameProtocol();
+var score_protocol = new ScoreProtocol();
+var lobby_protocol = new LobbyProtocol(lobby);
+var list_protocol = new ListProtocol();
+var join_protocol = new JoinProtocol();
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
@@ -2973,7 +2966,7 @@ function Engine()
 	game_protocol.move_left();
 	break;
 	//rotate, w
-      case 119
+      case 119:
 	self.rotate();
 	game_protocol.rotate();
 	break;
