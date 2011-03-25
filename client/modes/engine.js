@@ -85,7 +85,7 @@ function Engine()
   self.high_score = function()
   {
     console.log("High score, detected!");
-    self.mode.change(3);
+    mode.change(3);
   };
   self.start = function(var id)
   {
