@@ -2,13 +2,11 @@
 function JoinProtocol(var net)
 {
   var self = this;
-  self.net = net;
-  self.net.join = self;
   self.state = 0;
   self.request_join = function(var name,var pass)
   {
     var data = [5,0,name,pass];
-    self.net.send(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
