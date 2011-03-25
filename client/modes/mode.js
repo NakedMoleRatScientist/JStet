@@ -26,5 +26,5 @@ var join_protocol = new JoinProtocol(network);
 lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode(score_protocol);
 timer.addAction("network",60);
-var engine = new Engine(game_protocol,mode);
+var engine = new Engine();
 var engineDraw = new EngineDraw();
