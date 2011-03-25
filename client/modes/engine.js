@@ -118,7 +118,7 @@ function Engine()
 	game_protocol.move_left();
 	break;
 	//rotate, w
-      case 119
+      case 119:
 	self.rotate();
 	game_protocol.rotate();
 	break;
