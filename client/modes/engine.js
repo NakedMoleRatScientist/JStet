@@ -62,7 +62,7 @@ function Engine()
   {
     self.destroy(id);
     console.log("Game over");
-    self.mode.change(1);
+    mode.change(1);
   };
   self.destroy = function(var id)
   {
