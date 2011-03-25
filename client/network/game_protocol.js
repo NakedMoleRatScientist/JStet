@@ -1,11 +1,9 @@
 
 
 //Data type is 2 for gameplay commands.
-function GameProtocol(var net)
+function GameProtocol()
 {
   var self = this;
-  self.net = net;
-  self.net.game = self;
   self.engine = null;
   self.lastMessage = null;
   self.request_game = function()
