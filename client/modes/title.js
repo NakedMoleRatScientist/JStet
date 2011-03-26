@@ -10,7 +10,7 @@ function TitleMode()
     {
     case 10:
       title.connected = true;
-      network.initialize();
+      net.initialize();
       break;
     }
   };
