@@ -9,7 +9,7 @@ function GameProtocol()
   self.request_game = function()
   {
     var data = [2,0];
-    self.net.send(data);
+    net.send(data);
   };
   self.setup = function()
   {
