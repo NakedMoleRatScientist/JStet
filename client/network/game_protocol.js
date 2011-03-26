@@ -4,7 +4,6 @@
 function GameProtocol()
 {
   var self = this;
-  self.engine = null;
   self.lastMessage = null;
   self.request_game = function()
   {
