@@ -191,22 +191,19 @@ function Chat()
 
 
 //Data type is 2 for gameplay commands.
-function GameProtocol(var net)
+function GameProtocol()
 {
   var self = this;
-  self.net = net;
-  self.net.game = self;
-  self.engine = null;
   self.lastMessage = null;
   self.request_game = function()
   {
     var data = [2,0];
-    self.net.send(data);
+    net.send(data);
   };
   self.setup = function()
   {
     var data = [2,6];
-    self.net.send(data);
+    net.send(data);
   };
   self.request_multi = function(var password, var name)
   {
@@ -215,36 +212,37 @@ function GameProtocol(var net)
       password = null;
     }
     var data = [2,3,name,password];
-    self.net.send(data);
+    net.send(data);
   };
   //confirm to tell the server the player is ready to play
   self.confirm = function()
   {
     var data = [2,5];
-    self.net.send(data);
+    net.send(data);
   };
   self.move_right = function()
   {
     var data = [2,2,1];
-    self.net.send(data);
+    net.send(data);
   };
   self.move_left = function()
   {
     var data = [2,2,2];
-    self.net.send(data);
+    net.send(data);
   };
   self.move_down = function()
   {
     var data = [2,2,3];
-    self.net.send(data);
+    net.send(data);
   };
   self.rotate = function()
   {
     var data = [2,2,4];
-    self.net.send(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
+    console.log(data[1]);
     switch(data[1])
     {
     case 0:
@@ -260,8 +258,8 @@ function GameProtocol(var net)
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
-	self.engine.write_shape(data[0],data[2],data[3],data[4]);
-        self.net.send([2,1]);
+	engine.write_shape(data[0],data[2],data[3],data[4]);
+        net.send([2,1]);
       }
       break;
     case 2:
@@ -269,8 +267,8 @@ function GameProtocol(var net)
       //Get movement update for current.
       if (self.checkIdentical(data))
       {
-	self.engine.update_location(data[0],data[2],data[3]);
-	self.net.send([2,1]);
+	engine.update_location(data[0],data[2],data[3]);
+	net.send([2,1]);
       }
       break;
     case 3:
@@ -278,39 +276,39 @@ function GameProtocol(var net)
       if (self.checkIdentical(data))
       {
 	console.log("Rotation detected.");
-	self.engine.rotate(data[0],data[2]);
-	self.net.send([2,1]);
+	engine.rotate(data[0],data[2]);
+	net.send([2,1]);
       }
       break;
     case 4:
       //Kill some lines.
       if (self.checkIdentical(data))
       {
-	self.engine.line_action(data[0],data[2]);
+	engine.line_action(data[0],data[2]);
       }
       break;
     case 5:
       //Get score data.
       if (self.checkIdentical(data))
       {
-	self.engine.score = data[2];
+	engine.score = data[2];
       }
       break;
     case 6:
       //destruction of the game
       if (self.checkIdentical(data))
       {
-	self.engine.stop(self.engine.you);
-	self.net.send([3]);
+	engine.stop(engine.you);
+	net.send([3]);
       }
       break;
     case 7:
       //destruction of the game; high score
       if (self.checkIdentical(data))
       {
-	self.engine.stop(self.engine.you);
-	self.engine.high_score();
-	self.net.send([3]);
+	engine.stop(engine.you);
+	engine.high_score();
+	net.send([3]);
       }
       break;
     case 8:
@@ -318,8 +316,8 @@ function GameProtocol(var net)
       if (self.checkIdentical(data))
       {
 	console.log("Starting game.");
-	self.engine.state = 1;
-	self.net.send([2,4]);
+	engine.state = 1;
+	net.send([2,4]);
       }
       break;
     }
@@ -1148,7 +1146,7 @@ function TitleMode()
     {
     case 10:
       title.connected = true;
-      network.initialize();
+      net.initialize();
       break;
     }
   };
@@ -1262,13 +1260,11 @@ function ScoreBoardMode(protocol)
 function JoinProtocol(var net)
 {
   var self = this;
-  self.net = net;
-  self.net.join = self;
   self.state = 0;
   self.request_join = function(var name,var pass)
   {
     var data = [5,0,name,pass];
-    self.net.send(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
@@ -1290,24 +1286,22 @@ function JoinProtocol(var net)
   };
 }
 
-function ListProtocol(var net)
+function ListProtocol()
 {
   var self = this;
-  self.net = net;
-  self.net.list = self;
   self.size = 0;
   self.games = [];
   //Get size of games.
   self.request_size = function()
   {
     var data = [4,0];
-    self.net.send(data);
+    net.send(data);
   };
   //Get games info.
   self.request_games = function()
   {
     var data = [4,1];
-    self.net.send(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
@@ -1336,12 +1330,10 @@ function ListProtocol(var net)
 }
 
 
-function ScoreProtocol(net)
+function ScoreProtocol()
 {
   var self = this;
   self.data = null;
-  self.net = net;
-  self.net.score = self;
   self.change_data = function(data)
   {
     self.data = data;
@@ -1354,7 +1346,7 @@ function ScoreProtocol(net)
   {
     //0 indicating score
     var message = [0,name];
-    self.net.send(message);
+    net.send(message);
   };
 }
 
@@ -2722,7 +2714,7 @@ var list = new ListGameMode();
 var create = new CreateGameMode();
 var game_protocol = new GameProtocol();
 var score_protocol = new ScoreProtocol();
-var lobby_protocol = new LobbyProtocol(lobby);
+var lobby_protocol = new LobbyProtocol();
 var list_protocol = new ListProtocol();
 var join_protocol = new JoinProtocol();
 lobby.chat.protocol = lobby_protocol;
