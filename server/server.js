@@ -103,13 +103,13 @@ server.addListener("connection",function(conn){
     var sessions = game.get_sessions(); //get all sessions in progress
     for (var i = 0; i < sessions.length; i++)
     {
-      sessions[i].update_events()
-      var events = sessions[i].get_data()
+      sessions[i].update_events();
+      var events = sessions[i].get_data();
       sessions[i].clear();
       if (events != false)
       {
 	for (var n = 0;n < events.length;n ++)
-	{
+	{ 
 	  server.send(sessions[i].ids[0],JSON.stringify(events[n]));
 	  if (sessions[i].ids.length == 2)
 	  {
