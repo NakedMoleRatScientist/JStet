@@ -1,5 +1,5 @@
 
-function ListProtocol(var net)
+function ListProtocol()
 {
   var self = this;
   self.size = 0;
