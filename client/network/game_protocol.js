@@ -67,7 +67,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
         console.log("New shape, ordered.");
-	self.engine.write_shape(data[0],data[2],data[3],data[4]);
+	engine.write_shape(data[0],data[2],data[3],data[4]);
         net.send([2,1]);
       }
       break;
@@ -76,7 +76,7 @@ function GameProtocol()
       //Get movement update for current.
       if (self.checkIdentical(data))
       {
-	self.engine.update_location(data[0],data[2],data[3]);
+	engine.update_location(data[0],data[2],data[3]);
 	net.send([2,1]);
       }
       break;
@@ -85,7 +85,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	console.log("Rotation detected.");
-	self.engine.rotate(data[0],data[2]);
+	engine.rotate(data[0],data[2]);
 	net.send([2,1]);
       }
       break;
@@ -93,21 +93,21 @@ function GameProtocol()
       //Kill some lines.
       if (self.checkIdentical(data))
       {
-	self.engine.line_action(data[0],data[2]);
+	engine.line_action(data[0],data[2]);
       }
       break;
     case 5:
       //Get score data.
       if (self.checkIdentical(data))
       {
-	self.engine.score = data[2];
+	engine.score = data[2];
       }
       break;
     case 6:
       //destruction of the game
       if (self.checkIdentical(data))
       {
-	self.engine.stop(self.engine.you);
+	engine.stop(engine.you);
 	net.send([3]);
       }
       break;
@@ -115,8 +115,8 @@ function GameProtocol()
       //destruction of the game; high score
       if (self.checkIdentical(data))
       {
-	self.engine.stop(self.engine.you);
-	self.engine.high_score();
+	engine.stop(engine.you);
+	engine.high_score();
 	net.send([3]);
       }
       break;
@@ -125,7 +125,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	console.log("Starting game.");
-	self.engine.state = 1;
+	engine.state = 1;
 	net.send([2,4]);
       }
       break;
