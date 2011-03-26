@@ -106,10 +106,10 @@ server.addListener("connection",function(conn){
       sessions[i].update_events();
       var events = sessions[i].get_data();
       sessions[i].clear();
-      if (events != false)
+      if (events != false && events.length != 0)
       {
 	for (var n = 0;n < events.length;n ++)
-	{ 
+	{
 	  server.send(sessions[i].ids[0],JSON.stringify(events[n]));
 	  if (sessions[i].ids.length == 2)
 	  {
