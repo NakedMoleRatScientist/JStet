@@ -84,22 +84,6 @@ server.addListener("connection",function(conn){
 
   setInterval(function() {
     var all_players = players.get();
-    /* for (var i = 0; i < all_players.length; i++)
-      {
-      events = game.get_data(all_players[i].id);
-      if (events != false)
-      {
-      if (events.length != 0)
-	{
-	for (var a = 0;a < events.length;a++)
-	  {
-	    var message = JSON.stringify(events[a]);
-	    server.send(all_players[i].id,message);
-	    }
-	  }
-	}
-      }
-    }, 10);*/
     var sessions = game.get_sessions(); //get all sessions in progress
     for (var i = 0; i < sessions.length; i++)
     {
