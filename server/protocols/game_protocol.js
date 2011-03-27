@@ -36,6 +36,7 @@ function Session()
   };
   self.add_events = function(loop_events)
   {
+    sys.log(loop_events);
     self.events.push([2,loop_events]);
   };
   //add all the new events that happened in the game. 
@@ -44,7 +45,7 @@ function Session()
     var data = self.game.get_data();
     if (data.length != 0)
     {
-      self.add_events(self.game.get_data());
+      self.add_events(data);
     }
   };
   //clear all the old events.
