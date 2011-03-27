@@ -4,7 +4,6 @@ function Chat()
   var self = this;
   self.messages = new Array();
   self.message = new Input();
-  self.protocol = null;
   self.scroll = 0;
   self.limit = 550f;
   self.horizontal = 0;
