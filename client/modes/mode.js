@@ -23,7 +23,6 @@ var score_protocol = new ScoreProtocol();
 var lobby_protocol = new LobbyProtocol();
 var list_protocol = new ListProtocol();
 var join_protocol = new JoinProtocol();
-lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode();
 timer.addAction("network",60);
 var engine = new Engine();
