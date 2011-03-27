@@ -12,7 +12,7 @@ function ScoreProtocol()
   {
     return self.data;
   };
-  self.transmit_score = function(name,points)
+  self.transmit_score = function(var name, var points)
   {
     //0 indicating score
     var message = [0,name];
