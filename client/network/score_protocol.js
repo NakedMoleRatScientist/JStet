@@ -12,9 +12,9 @@ function ScoreProtocol()
   {
     return self.data;
   };
-  self.transmit_score = function(var name, var points)
+  self.request_score = function(var name, var points)
   {
-    //0 indicating score
+    //0 indicating request for score
     var message = [0,name];
     net.send(message);
   };
