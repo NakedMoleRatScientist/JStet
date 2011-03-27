@@ -290,7 +290,7 @@ function GameProtocol()
       //Get score data.
       if (self.checkIdentical(data))
       {
-	engine.score = data[2];
+	engine.change_score(data[0],data[2]);
       }
       break;
     case 6:
@@ -1167,10 +1167,9 @@ function TitleMode()
   };
 }
 
-function ScoreBoardMode(protocol)
+function ScoreBoardMode()
 {
   var self = this;
-  self.protocol = protocol;
   self.start = 0;
   self.turn = false;
   self.title = function()
@@ -1193,7 +1192,7 @@ function ScoreBoardMode(protocol)
   };
   self.list = function()
   {
-    var data = self.protocol.get_data();
+    var data = score_protocol.get_data();
     var y = 70;
     var limit = self.start + 20;
     self.turn = true;
@@ -1333,7 +1332,7 @@ function ScoreProtocol()
 {
   var self = this;
   self.data = null;
-  self.change_data = function(data)
+  self.change_data = function(var data)
   {
     self.data = data;
   };
@@ -1341,7 +1340,7 @@ function ScoreProtocol()
   {
     return self.data;
   };
-  self.transmit_score = function(name,points)
+  self.transmit_score = function(var name, var points)
   {
     //0 indicating score
     var message = [0,name];
@@ -2835,7 +2834,11 @@ function Player()
   self.score = function()
   {
     text("Score", 350,18);
-    text("P1: " + engine.score,350,35);
+    text("P1: " + engine.score_one,350,35);
+    if (engine.players.length == 2)
+    {
+      text("P2: " + engine.score_two,350,45);
+    }
   };
 }
 
@@ -2854,7 +2857,8 @@ function Engine()
   game_protocol.engine = self;
   self.players = [];
   self.you = 0;
-  self.score = 0;
+  self.score_one = 0;
+  self.score_two = 0;
   self.state = 0;
   self.find_player = function(var id)
   { 
