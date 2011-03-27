@@ -158,7 +158,7 @@ function Chat()
     var verify = self.parse(self.message.get_text());
     if (verify == false)
     {
-      self.protocol.send(self.message.get_text());
+      lobby_protocol.send(self.message.get_text());
     }
     self.message = new Input();
   };
@@ -1188,6 +1188,7 @@ function ScoreBoardMode()
     text("n - new game",500,75);
     text("k - next page",500,100);
     text("j - previous page",500,125);
+    text("q - quit and return to lobby",500,150);
   };
   self.list = function()
   {
@@ -1243,7 +1244,6 @@ function ScoreBoardMode()
       break;
       //j, view previous page
     case 106:
-      console.log('hello world');
       self.previousPage();
       break;
       //k, view next page
@@ -1869,7 +1869,7 @@ void keyPressed()
     over.key();
     break;
   case 2:
-    score.key();
+    board.key();
     break;
   case 3:
     high_score.key();
@@ -2693,10 +2693,11 @@ function WaitingMode()
 
 function Mode()
 {
-  this.status = 0;
-  this.change = function(n)
+  var self = this;
+  self.status = 0;
+  self.change = function(var n)
   {
-    this.status = n;
+    self.status = n;
   }
 }
 
@@ -2715,7 +2716,6 @@ var score_protocol = new ScoreProtocol();
 var lobby_protocol = new LobbyProtocol();
 var list_protocol = new ListProtocol();
 var join_protocol = new JoinProtocol();
-lobby.chat.protocol = lobby_protocol;
 var board = new ScoreBoardMode();
 timer.addAction("network",60);
 var engine = new Engine();
