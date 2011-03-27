@@ -41,7 +41,11 @@ function Session()
   //add all the new events that happened in the game. 
   self.update_events = function()
   {
-    self.add_events(self.game.get_data());
+    var data = self.game.get_data();
+    if (data.length != 0)
+    {
+      self.add_events(self.game.get_data());
+    }
   };
   //clear all the old events.
   self.clear = function()
