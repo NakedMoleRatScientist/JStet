@@ -29,7 +29,7 @@ function HighScoreMode()
       high_score.name.destroy();
       break;
     case -10:
-      score_protocol.transmit_score(high_score.get_name(),engine.score);
+      score_protocol.transmit_score(high_score.get_name(),engine.score_one);
       high_score.name.clean();
       mode.change(2);
       break;
