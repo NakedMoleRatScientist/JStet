@@ -14,7 +14,7 @@ function Session()
   self.game = game.create_new();
   self.initialize = function()
   {
-    self.add_events([2,0,self.ids]); //0 tell clients to initalize game mode.
+    self.add_event([2,0,self.ids]); //0 tell clients to initalize game mode.
     self.game.initialize(self.ids);
     self.update_events();
   };
@@ -34,7 +34,7 @@ function Session()
   {
     self.game.rotate(id);
   };
-  self.add_events = function(loop_events)
+  self.add_event = function(loop_events)
   {
     self.events.push([2,loop_events]);
   };
@@ -46,7 +46,7 @@ function Session()
     {
       for (var i = 0; i < data.length; i++)
       {
-	self.add_events(data[i]);
+	self.add_event(data[i]);
       }
     }
   };
@@ -101,13 +101,13 @@ function Session()
       {
 	sys.log("Engaging game loop initialization...");
 	self.initialize();
-	self.add_events([2,8]);
+	self.add_event([2,8]);
       }
     }
     else if(self.confirm[0] == true)
     {
       sys.log("Engaging game loop initialization...")
-      self.add_events([2,8]);
+      self.add_event([2,8]);
     }
   };
 }
