@@ -74,7 +74,6 @@ function Chat()
   var self = this;
   self.messages = new Array();
   self.message = new Input();
-  self.protocol = null;
   self.scroll = 0;
   self.limit = 550f;
   self.horizontal = 0;
@@ -143,7 +142,7 @@ function Chat()
 	if (nick.match(/\s/) == null)
 	{
 	  console.log("Nick is being changed to " + nick);
-	  self.protocol.nick(nick);
+	  lobby_protocol.nick(nick);
 	  return true;
 	}
 	console.log("Invalid nick.");
@@ -1244,11 +1243,12 @@ function ScoreBoardMode()
       break;
       //j, view previous page
     case 106:
-      board.previousPage();
+      console.log('hello world');
+      self.previousPage();
       break;
       //k, view next page
     case 107:
-      board.turnPage();
+      self.turnPage();
       break;
     }
   };
@@ -1340,9 +1340,9 @@ function ScoreProtocol()
   {
     return self.data;
   };
-  self.transmit_score = function(var name, var points)
+  self.request_score = function(var name)
   {
-    //0 indicating score
+    //0 indicating request for score
     var message = [0,name];
     net.send(message);
   };
@@ -1437,7 +1437,7 @@ function HighScoreMode()
       high_score.name.destroy();
       break;
     case -10:
-      score_protocol.transmit_score(high_score.get_name(),engine.score);
+      score_protocol.request_score(high_score.get_name());
       high_score.name.clean();
       mode.change(2);
       break;
@@ -2716,7 +2716,7 @@ var lobby_protocol = new LobbyProtocol();
 var list_protocol = new ListProtocol();
 var join_protocol = new JoinProtocol();
 lobby.chat.protocol = lobby_protocol;
-var board = new ScoreBoardMode(score_protocol);
+var board = new ScoreBoardMode();
 timer.addAction("network",60);
 var engine = new Engine();
 var engineDraw = new EngineDraw();
@@ -2907,6 +2907,17 @@ function Engine()
     self.destroy(id);
     console.log("Game over");
     mode.change(1);
+  };
+  self.change_score = function(var id,var score)
+  {
+    if (id == self.you)
+    {
+      self.score_one = score;
+    }
+    else
+    {
+      self.score_two = score;
+    }
   };
   self.destroy = function(var id)
   {
