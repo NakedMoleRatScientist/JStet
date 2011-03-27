@@ -77,6 +77,6 @@ function EngineDraw()
   self.score = function()
   {
     text("Score", 350,18);
-    text("P1: " + engine.score,350,35);
+    text("P1: " + engine.score_one,350,35);
   };
 }
