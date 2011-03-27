@@ -3,7 +3,7 @@ function Mode()
 {
   var self = this;
   self.status = 0;
-  self.change = function(n)
+  self.change = function(var n)
   {
     self.status = n;
   }
