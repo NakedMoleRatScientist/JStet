@@ -1,6 +1,7 @@
 
 function Mode()
 {
+  var self = this;
   this.status = 0;
   this.change = function(n)
   {
