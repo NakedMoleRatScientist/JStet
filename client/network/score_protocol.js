@@ -12,7 +12,7 @@ function ScoreProtocol()
   {
     return self.data;
   };
-  self.request_score = function(var name, var points)
+  self.request_score = function(var name)
   {
     //0 indicating request for score
     var message = [0,name];
