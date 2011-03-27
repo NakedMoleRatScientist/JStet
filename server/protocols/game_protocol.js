@@ -44,7 +44,10 @@ function Session()
     var data = self.game.get_data();
     if (data.length != 0)
     {
-      self.add_events(data);
+      for (var i = 0; i < data.length; i++)
+      {
+	self.add_events(data[i]);
+      }
     }
   };
   //clear all the old events.
