@@ -4,7 +4,7 @@ function ScoreProtocol()
 {
   var self = this;
   self.data = null;
-  self.change_data = function(data)
+  self.change_data = function(var data)
   {
     self.data = data;
   };
