@@ -15,6 +15,7 @@ function Engine()
   self.players = [];
   self.you = 0;
   self.score_one = 0;
+  self.score_two = 0;
   self.state = 0;
   self.find_player = function(var id)
   { 
