@@ -36,7 +36,6 @@ function Session()
   };
   self.add_events = function(loop_events)
   {
-    sys.log(loop_events);
     self.events.push([2,loop_events]);
   };
   //add all the new events that happened in the game. 
