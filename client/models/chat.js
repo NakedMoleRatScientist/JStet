@@ -72,7 +72,7 @@ function Chat()
 	if (nick.match(/\s/) == null)
 	{
 	  console.log("Nick is being changed to " + nick);
-	  self.protocol.nick(nick);
+	  lobby_protocol.nick(nick);
 	  return true;
 	}
 	console.log("Invalid nick.");
