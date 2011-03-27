@@ -242,7 +242,6 @@ function GameProtocol()
   };
   self.process_data = function(var data)
   {
-    console.log(data[1]);
     switch(data[1])
     {
     case 0:
@@ -2787,6 +2786,7 @@ function Player()
   };
   self.field_draw_mode = function()
   {
+    fill(0,0,0);
     self.player_one_field();
     if (engine.players.length == 2)
     {
@@ -2959,7 +2959,6 @@ function Engine()
 	break;
 	//rotate, w
       case 119:
-	self.rotate();
 	game_protocol.rotate();
 	break;
       default:
@@ -2993,7 +2992,7 @@ void sendAlive()
 {
   if (timer.getEvent() == "network")
   {
-    network.sendAlive();
+    net.sendAlive();
   }
 }
 
