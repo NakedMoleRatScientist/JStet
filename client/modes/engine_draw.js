@@ -78,5 +78,9 @@ function EngineDraw()
   {
     text("Score", 350,18);
     text("P1: " + engine.score_one,350,35);
+    if (engine.players.length == 2)
+    {
+      text("P2: " + engine.score_two,350,45);
+    }
   };
 }
