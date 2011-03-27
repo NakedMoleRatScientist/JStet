@@ -21,6 +21,7 @@ function ScoreBoardMode()
     text("n - new game",500,75);
     text("k - next page",500,100);
     text("j - previous page",500,125);
+    text("q - quit and return to lobby",500,150);
   };
   self.list = function()
   {
