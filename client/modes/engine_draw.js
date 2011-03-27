@@ -28,6 +28,7 @@ function EngineDraw()
   };
   self.field_draw_mode = function()
   {
+    fill(0,0,0);
     self.player_one_field();
     if (engine.players.length == 2)
     {
