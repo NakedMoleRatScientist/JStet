@@ -88,7 +88,7 @@ function Chat()
     var verify = self.parse(self.message.get_text());
     if (verify == false)
     {
-      lobby_protocol..send(self.message.get_text());
+      lobby_protocol.send(self.message.get_text());
     }
     self.message = new Input();
   };
