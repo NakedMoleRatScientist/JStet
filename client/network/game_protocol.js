@@ -100,7 +100,7 @@ function GameProtocol()
       //Get score data.
       if (self.checkIdentical(data))
       {
-	engine.score = data[2];
+	engine.change_score(data[0],data[2]);
       }
       break;
     case 6:
