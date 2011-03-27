@@ -2,10 +2,10 @@
 function Mode()
 {
   var self = this;
-  this.status = 0;
-  this.change = function(n)
+  self.status = 0;
+  self.change = function(n)
   {
-    this.status = n;
+    self.status = n;
   }
 }
 
