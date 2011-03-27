@@ -119,7 +119,6 @@ function Engine()
 	break;
 	//rotate, w
       case 119:
-	self.rotate();
 	game_protocol.rotate();
 	break;
       default:
