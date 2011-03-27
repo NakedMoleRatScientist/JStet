@@ -152,7 +152,7 @@ void sendAlive()
 {
   if (timer.getEvent() == "network")
   {
-    network.sendAlive();
+    net.sendAlive();
   }
 }
 
