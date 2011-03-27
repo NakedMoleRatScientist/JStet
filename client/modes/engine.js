@@ -65,6 +65,17 @@ function Engine()
     console.log("Game over");
     mode.change(1);
   };
+  self.change_score = function(var id,var score)
+  {
+    if (id == self.you)
+    {
+      self.score_one = score;
+    }
+    else
+    {
+      self.score_two = score;
+    }
+  };
   self.destroy = function(var id)
   {
     for (var i = 0; i < self.players.length; i++)
