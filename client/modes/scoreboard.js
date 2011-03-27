@@ -76,11 +76,11 @@ function ScoreBoardMode()
       break;
       //j, view previous page
     case 106:
-      board.previousPage();
+      self.previousPage();
       break;
       //k, view next page
     case 107:
-      board.turnPage();
+      self.turnPage();
       break;
     }
   };
