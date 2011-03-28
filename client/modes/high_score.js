@@ -31,6 +31,7 @@ function HighScoreMode()
     case -10:
       score_protocol.request_score(self.get_name());
       self.name.clean();
+      game_protocol.request_delete();
       mode.change(2);
       break;
     default:
