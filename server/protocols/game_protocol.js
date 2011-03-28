@@ -117,7 +117,10 @@ exports.process = function(data,id)
   switch(data[1])
   {
   case 0:
-    check_game(id);
+    if (find_by_id(id) != -1)
+    {
+      return;
+    }
     sys.log("Game created.");
     var new_game = new Session();
     new_game.push_id(id);
