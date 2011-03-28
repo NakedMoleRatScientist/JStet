@@ -1240,6 +1240,7 @@ function ScoreBoardMode()
     {
       //n is restart the game
     case 110:
+      reset();
       game_protocol.request_game();
       break;
       //j, view previous page
@@ -2691,6 +2692,12 @@ function WaitingMode()
   };
 }
 
+function reset()
+{
+  engine = new Engine();  
+}
+
+
 function Mode()
 {
   var self = this;
@@ -2842,14 +2849,7 @@ function Player()
   };
 }
 
-PFont font = loadFont("monospace");
-void setup()
-{
-  size(800,600);
-  stroke(255);
-  textFont(font,18);
-  frameRate(24);
-}
+
 
 function Engine()
 {
@@ -3047,4 +3047,12 @@ void draw()
     list.display();
     break;
   }
+}
+PFont font = loadFont("monospace");
+void setup()
+{
+  size(800,600);
+  stroke(255);
+  textFont(font,18);
+  frameRate(24);
 }
