@@ -53,7 +53,7 @@ function GameProtocol()
   self.request_delete = function()
   {
     var data = [3];
-    net.sent(data);
+    net.send(data);
   };
   self.process_data = function(var data)
   {
