@@ -16,7 +16,7 @@ function HighScoreMode()
   };
   self.get_name = function()
   {
-    return self.name;
+    return self.name.string;
   }
   self.key = function()
   {
