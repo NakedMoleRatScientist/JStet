@@ -68,7 +68,11 @@ function EventManager()
     player.rotate();
   };
  
-  
+  self.get_score = function(id)
+  {
+    var player = self.find_by_id(id);
+    return player.score;
+  };
   //run a game loop
   self.run_game = function()
   {
