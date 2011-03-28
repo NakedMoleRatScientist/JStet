@@ -50,6 +50,11 @@ function GameProtocol()
     var data = [2,2,4];
     net.send(data);
   };
+  self.request_delete = function()
+  {
+    var data = [3];
+    net.sent(data);
+  };
   self.process_data = function(var data)
   {
     switch(data[1])
