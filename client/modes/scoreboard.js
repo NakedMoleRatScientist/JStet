@@ -73,6 +73,7 @@ function ScoreBoardMode()
     {
       //n is restart the game
     case 110:
+      reset();
       game_protocol.request_game();
       break;
       //j, view previous page
