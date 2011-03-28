@@ -112,12 +112,11 @@ function GameProtocol()
       }
       break;
     case 7:
-      //destruction of the game; high score
+      //high score
       if (self.checkIdentical(data))
       {
 	engine.stop(engine.you);
 	engine.high_score();
-	net.send([3]);
       }
       break;
     case 8:
