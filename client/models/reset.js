@@ -1,2 +1,6 @@
 
-engine = new Engine();
+function reset()
+{
+  engine = new Engine();  
+}
+
