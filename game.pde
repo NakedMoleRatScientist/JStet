@@ -239,6 +239,11 @@ function GameProtocol()
     var data = [2,2,4];
     net.send(data);
   };
+  self.request_delete = function()
+  {
+    var data = [3];
+    net.send(data);
+  };
   self.process_data = function(var data)
   {
     switch(data[1])
@@ -301,12 +306,11 @@ function GameProtocol()
       }
       break;
     case 7:
-      //destruction of the game; high score
+      //high score
       if (self.checkIdentical(data))
       {
 	engine.stop(engine.you);
 	engine.high_score();
-	net.send([3]);
       }
       break;
     case 8:
@@ -1425,7 +1429,7 @@ function HighScoreMode()
   };
   self.get_name = function()
   {
-    return self.name;
+    return self.name.string;
   }
   self.key = function()
   {
@@ -1435,15 +1439,16 @@ function HighScoreMode()
     case false:
       break;
     case -8:
-      high_score.name.destroy();
+      self.name.destroy();
       break;
     case -10:
-      score_protocol.request_score(high_score.get_name());
-      high_score.name.clean();
+      score_protocol.request_score(self.get_name());
+      self.name.clean();
+      game_protocol.request_delete();
       mode.change(2);
       break;
     default:
-      high_score.name.addLetter(info);
+      self.name.addLetter(info);
       break;
     }
   };
@@ -1822,6 +1827,7 @@ function GameOverMode()
   {
     if (key == 110)
     {
+      reset();
       game_protocol.request_game();
     }
     else if(key == 100)
@@ -2939,7 +2945,7 @@ function Engine()
   };
   self.high_score = function()
   {
-    console.log("High score, detected!");
+    console.log("High score detected!");
     mode.change(3);
   };
   self.start = function(var id)
