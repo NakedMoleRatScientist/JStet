@@ -26,15 +26,15 @@ function HighScoreMode()
     case false:
       break;
     case -8:
-      high_score.name.destroy();
+      self.name.destroy();
       break;
     case -10:
-      score_protocol.request_score(high_score.get_name());
-      high_score.name.clean();
+      score_protocol.request_score(self.get_name());
+      self.name.clean();
       mode.change(2);
       break;
     default:
-      high_score.name.addLetter(info);
+      self.name.addLetter(info);
       break;
     }
   };
