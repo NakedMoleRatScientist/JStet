@@ -89,7 +89,7 @@ function Engine()
   };
   self.high_score = function()
   {
-    console.log("High score, detected!");
+    console.log("High score detected!");
     mode.change(3);
   };
   self.start = function(var id)
