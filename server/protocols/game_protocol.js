@@ -154,6 +154,15 @@ exports.process = function(data,id)
     sys.log("Ready for action!");
     sessions[find_by_id(id)].ready(id);
     break;
+  case 6:
+    sys.log("Multiplayer nopassword created");
+    var new_game = new Session();
+    new_game.push_id(id);
+    new_game.players = 2;
+    new_game.name = "Game: " + id;
+    new_game.password == null;
+    sessions.push(new_game);
+    break;
   }
 };
 
