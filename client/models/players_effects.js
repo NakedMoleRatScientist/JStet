@@ -10,7 +10,7 @@ function PlayersEffects(var pages)
     {
       if (object.member == 1)
       {
-	self.update_players(object);
+	self.pages.next();
       }
     }
   };
