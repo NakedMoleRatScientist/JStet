@@ -113,7 +113,6 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	engine.stop(engine.you);
-	net.send([3]);
       }
       break;
     case 7:
