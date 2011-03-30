@@ -122,7 +122,7 @@ exports.process = function(data,id)
       return;
     }
     sys.log("Single player game created.");
-    create_game(id,1,"single_player: " + id,null);
+    create_game(id,1,"single_player: " + id,null,true);
     break;
   case 1:
     sys.log("Reaction clear.");
@@ -133,7 +133,7 @@ exports.process = function(data,id)
     break;
   case 3:
     sys.log("Custom game created.");
-    create_game(id,2,data[2],data[3]);
+    create_game(id,2,data[2],data[3],false);
     break;
   case 4:
     sys.log("Game is running");
@@ -145,7 +145,7 @@ exports.process = function(data,id)
     break;
   case 6:
     sys.log("Multiplayer nopassword created");
-    create_game(id,2,"Game: " + id,null);
+    create_game(id,2,"Game: " + id,null,false);
     break;
   }
 };
