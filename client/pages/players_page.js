@@ -15,6 +15,7 @@ function PlayersPage(var pages)
   self.call = function()
   {
     textFont(font,18);
+    self.instant.display();
   };
   self.key = function()
   {
