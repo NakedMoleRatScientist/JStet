@@ -14,15 +14,4 @@ function PlayersEffects(var pages)
       }
     }
   };
-  self.update_players = function(var object)
-  {
-    if (object.member == 0)
-    {
-      self.page.data.update("players",1);
-    }
-    else
-    {
-      self.page.data.update("players",2);
-    }
-  };
 }
