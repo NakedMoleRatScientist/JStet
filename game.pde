@@ -204,6 +204,11 @@ function GameProtocol()
     var data = [2,6];
     net.send(data);
   };
+  self.request_multi_empty = function()
+  {
+    var data = [2,6];
+    net.send(data);
+  };
   self.request_multi = function(var password, var name)
   {
     if (password == "")
@@ -828,28 +833,14 @@ function PlayersEffects(var pages)
   {
     if (object.type == 0)
     {
-      if (object.member == 1)
+      if (object.member == 0)
       {
-	self.update_players(object);
+	game_protocol.request_multi_empty();
       }
-    }
-  };
-  self.update_players = function(var object)
-  {
-    if (object.member == 0)
-    {
-      self.page.data.update("players",1);
-    }
-    else
-    {
-      self.page.data.update("players",2);
-    }
-  };
-  self.end = function(var object)
-  {
-    if (self.page.data.get("players") == 1)
-    {
-      game_protocol.request_game();
+      else if (object.member == 1)
+      {
+	self.pages.next();
+      }
     }
   };
 }
