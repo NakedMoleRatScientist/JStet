@@ -150,7 +150,7 @@ exports.process = function(data,id)
     break;
   case 6:
     sys.log("Multiplayer nopassword created");
-    create_game(id,2,"Game: " + id,null,false);
+    create_game(id,2,"Game_" + id,null,false);
     break;
   }
 };
