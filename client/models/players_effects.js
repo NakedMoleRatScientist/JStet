@@ -10,7 +10,7 @@ function PlayersEffects(var pages)
     {
       if (object.member == 0)
       {
-	game_protocol.request_multi("",self.pages.data.get("name"));
+	game_protocol.request_multi_empty();
       }
       else if (object.member == 1)
       {
