@@ -105,6 +105,7 @@ function Session()
       }
       else
       {
+	sys.log("A player is ready to rumble!");
 	self.add_event([2,9]);
       }
     }
