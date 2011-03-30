@@ -132,7 +132,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	console.log("Starting game.");
-	engine.state = 2;
+	engine.state = 1;
 	net.send([2,4]);
       }
       break;
