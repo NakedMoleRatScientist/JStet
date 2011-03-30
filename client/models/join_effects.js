@@ -18,7 +18,7 @@ function JoinEffects(var page, var pages)
       {
 	if (self.pages.data.get("password") == false)
 	{
-	  game_protocol.request_join(self.pages.data.get("name"));
+	  join_protocol.request_join(self.pages.data.get("name"));
 	}
 	else
 	{
