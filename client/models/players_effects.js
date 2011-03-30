@@ -25,11 +25,4 @@ function PlayersEffects(var pages)
       self.page.data.update("players",2);
     }
   };
-  self.end = function(var object)
-  {
-    if (self.page.data.get("players") == 1)
-    {
-      game_protocol.request_game();
-    }
-  };
 }
