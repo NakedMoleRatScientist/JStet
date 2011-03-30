@@ -14,7 +14,7 @@ function JoinProtocol()
     {
     case 0:
       {
-	engine.state = 1;
+	self.state = 1;
 	break;
       }
     case 1:
