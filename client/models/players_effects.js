@@ -8,7 +8,11 @@ function PlayersEffects(var pages)
   {
     if (object.type == 0)
     {
-      if (object.member == 1)
+      if (object.member == 0)
+      {
+	game_protocol.request_multi("",self.pages.data.get("name"));
+      }
+      else if (object.member == 1)
       {
 	self.pages.next();
       }
