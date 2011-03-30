@@ -166,6 +166,15 @@ exports.process = function(data,id)
   }
 };
 
+function create_game(id, games, name, password)
+{
+  var new_game = new Session();
+  new_game.push_id(id);
+  new_game.players = games;
+  new_game.name = name;
+  new_game.password == null;
+  sessions.push(new_game);
+}
 function find_by_name(name)
 {
   for (var i = 0;i < sessions.length;i++)
