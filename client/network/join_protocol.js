@@ -1,5 +1,5 @@
 
-function JoinProtocol(var net)
+function JoinProtocol()
 {
   var self = this;
   self.state = 0;
