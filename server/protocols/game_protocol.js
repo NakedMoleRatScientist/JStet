@@ -150,13 +150,17 @@ exports.process = function(data,id)
   }
 };
 
-function create_game(id, games, name, password)
+function create_game(id, games, name, password, init)
 {
   var new_game = new Session();
   new_game.push_id(id);
   new_game.players = games;
   new_game.name = name;
   new_game.password = null;
+  if (init == true)
+  {
+    new_game.initialize();
+  }
   sessions.push(new_game);
 }
 function find_by_name(name)
