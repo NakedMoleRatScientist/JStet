@@ -68,7 +68,7 @@ function EngineDraw()
     else if (engine.state == 1)
     {
       rect(260,280,318,25);
-      text("Ready to rumble!,260,300");
+      text("Ready to rumble!",260,300);
     }
   };
   self.instruct = function()
