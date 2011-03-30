@@ -172,7 +172,7 @@ function create_game(id, games, name, password)
   new_game.push_id(id);
   new_game.players = games;
   new_game.name = name;
-  new_game.password == null;
+  new_game.password = null;
   sessions.push(new_game);
 }
 function find_by_name(name)
