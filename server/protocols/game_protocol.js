@@ -138,7 +138,7 @@ exports.process = function(data,id)
     move(id,data[2]);
     break;
   case 3:
-    sys.log("Game created.");
+    sys.log("Custom game created.");
     var new_game = new Session();
     new_game.push_id(id);
     new_game.players = 2;
