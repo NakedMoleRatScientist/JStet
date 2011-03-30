@@ -234,7 +234,7 @@ exports.get_score = function(id)
   {
     return false;
   }
-  var score = sessions[location].get_score();
+  var score = sessions[location].get_score(id);
   return score;
 }
 
