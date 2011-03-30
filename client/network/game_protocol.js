@@ -120,7 +120,6 @@ function GameProtocol()
       //high score
       if (self.checkIdentical(data))
       {
-	engine.stop(engine.you);
 	engine.high_score();
       }
       break;
