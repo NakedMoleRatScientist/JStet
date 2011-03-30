@@ -5,8 +5,8 @@ function PlayersPage(var pages)
   self.pages = pages;
   self.initialize = function()
   {
-    self.instant = new TextButton("Instant Multiplayer",100,100);
-    self.custom = new TextButton("Custom Game",100,200);
+    self.instant = new TextButton("Instant Multiplayer",100,100,100);
+    self.custom = new TextButton("Custom Game",100,100,200);
     self.pages.collision.effects.add_effect(new PlayersEffects(self.pages));    
   };
   self.call = function()
