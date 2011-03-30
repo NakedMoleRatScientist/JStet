@@ -122,13 +122,7 @@ exports.process = function(data,id)
       return;
     }
     sys.log("Single player game created.");
-    var new_game = new Session();
-    new_game.push_id(id);
-    new_game.players = 1;
-    new_game.name = "single_player";
-    new_game.password = "";
-    new_game.initialize();
-    sessions.push(new_game);
+    create_game(id,1,"single_player: " + id,null);
     break;
   case 1:
     sys.log("Reaction clear.");
