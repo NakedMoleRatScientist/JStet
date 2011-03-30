@@ -321,15 +321,18 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	console.log("Starting game.");
-	engine.state = 2;
+	engine.state = 1;
 	net.send([2,4]);
       }
       break;
     case 9:
-      if (self.checkIdentifical(data))
+      if (self.checkIdentical(data))
       {
-	console.log("Ready for action!");
-	engine.state = 1;
+	if (data[0] == self.engine.you)
+	{
+	  console.log("Ready for action!");
+	  engine.ready = 1;
+	}
       }
       break;
     }
@@ -2824,10 +2827,10 @@ function Player()
       rect(260,280,318,25);
       text("Press Enter When You're Ready",260,300);
     }
-    else if (engine.state == 1)
+    else if (engine.ready == 1)
     {
       rect(260,280,318,25);
-      text("Ready to rumble!,260,300");
+      text("Ready to rumble!",260,300);
     }
   };
   self.instruct = function()
@@ -2860,6 +2863,7 @@ function Engine()
   self.score_one = 0;
   self.score_two = 0;
   self.state = 0;
+  self.ready = 0;
   self.find_player = function(var id)
   { 
     for (var i = 0;i < self.players.length;i++)
