@@ -142,7 +142,7 @@ function GameProtocol()
 	if (data[0] == self.engine.you)
 	{
 	  console.log("Ready for action!");
-	  engine.state = 1;
+	  engine.ready = 1;
 	}
       }
       break;
