@@ -321,8 +321,15 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	console.log("Starting game.");
-	engine.state = 1;
+	engine.state = 2;
 	net.send([2,4]);
+      }
+      break;
+    case 9:
+      if (self.checkIdentifical(data))
+      {
+	console.log("Ready for action!");
+	engine.state = 1;
       }
       break;
     }
@@ -797,7 +804,7 @@ function JoinEffects(var page, var pages)
       {
 	if (self.pages.data.get("password") == false)
 	{
-	  game_protocol.request_join(self.pages.data.get("name"));
+	  join_protocol.request_join(self.pages.data.get("name"));
 	}
 	else
 	{
@@ -1242,7 +1249,7 @@ function ScoreBoardMode()
 }
 
 
-function JoinProtocol(var net)
+function JoinProtocol()
 {
   var self = this;
   self.state = 0;
@@ -2760,7 +2767,7 @@ function Player()
     textFont(font,18);
     background(0,0,0);
     self.ready();
-    if (engine.state == 1)
+    if (engine.state == 2)
     {
       self.field_draw_mode();
       self.decide_draw();
@@ -2816,6 +2823,11 @@ function Player()
     {
       rect(260,280,318,25);
       text("Press Enter When You're Ready",260,300);
+    }
+    else if (engine.state == 1)
+    {
+      rect(260,280,318,25);
+      text("Ready to rumble!,260,300");
     }
   };
   self.instruct = function()
