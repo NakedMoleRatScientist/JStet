@@ -136,6 +136,13 @@ function GameProtocol()
 	net.send([2,4]);
       }
       break;
+    case 9:
+      if (self.checkIdentifical(data))
+      {
+	console.log("Ready for action!");
+	engine.state = 1;
+      }
+      break;
     }
   };
   self.pushMessage = function(var data)
