@@ -139,12 +139,7 @@ exports.process = function(data,id)
     break;
   case 3:
     sys.log("Custom game created.");
-    var new_game = new Session();
-    new_game.push_id(id);
-    new_game.players = 2;
-    new_game.name = data[2];
-    new_game.password = data[3];
-    sessions.push(new_game);
+    create_game(id,2,data[2],data[3]);
     break;
   case 4:
     sys.log("Game is running");
