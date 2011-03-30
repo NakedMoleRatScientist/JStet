@@ -121,7 +121,7 @@ exports.process = function(data,id)
     {
       return;
     }
-    sys.log("Game created.");
+    sys.log("Single player game created.");
     var new_game = new Session();
     new_game.push_id(id);
     new_game.players = 1;
