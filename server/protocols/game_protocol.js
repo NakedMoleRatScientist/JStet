@@ -60,9 +60,9 @@ function Session()
   {
     return self.events;
   };
-  self.get_score = function()
+  self.get_score = function(id)
   {
-    return self.game.score;
+    return self.game.get_score(id);
   };
   self.run = function()
   {
