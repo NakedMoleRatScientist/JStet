@@ -826,13 +826,12 @@ function PlayersEffects(var pages)
   self.effect = new Effect(self);
   self.check = function(var object)
   {
-    if (object.type == 1)
+    if (object.type == 0)
     {
-      self.update_players(object);
-    }
-    else if (object.type == 3)
-    {
-      self.end();
+      if (object.member == 1)
+      {
+	self.update_players(object);
+      }
     }
   };
   self.update_players = function(var object)
@@ -884,13 +883,18 @@ function PlayersPage(var pages)
   self.pages = pages;
   self.initialize = function()
   {
-    self.instant = new TextButton("Instant Multiplayer",100,100);
-    self.custom = new TextButton("Custom Game",100,200);
-    self.pages.collision.effects.add_effect(new PlayersEffects(self.pages));    
+    self.instant = new TextButton("Instant Multiplayer",100,100,100);
+    self.custom = new TextButton("Custom Game",100,100,200);
+    self.effects = new PlayersEffects(self.pages);
+    self.effects.add(self.instant.rect);
+    self.effects.add(self.custom.rect);
+    self.pages.collision.effects.add_effect(self.effects);    
   };
   self.call = function()
   {
     textFont(font,18);
+    self.instant.display();
+    self.custom.display();
   };
   self.key = function()
   {
