@@ -5,6 +5,7 @@ function PlayersPage(var pages)
   self.pages = pages;
   self.initialize = function()
   {
+    self.instant = new TextButton("Instant Multiplayer",100,100);
     self.pages.collision.effects.add_effect(self.radio_switch);
     self.pages.collision.effects.add_effect(new PlayersEffects(self.pages));    
   };
