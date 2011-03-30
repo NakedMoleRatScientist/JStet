@@ -103,6 +103,10 @@ function Session()
 	self.initialize();
 	self.add_event([2,8]);
       }
+      else
+      {
+	self.add_event([2,9]);
+      }
     }
     else if(self.confirm[0] == true)
     {
