@@ -9,6 +9,7 @@ function PlayersPage(var pages)
     self.custom = new TextButton("Custom Game",100,100,200);
     self.effects = new PlayersEffects(self.pages);
     self.effects.add(self.instant.rect);
+    self.effects.add(self.custom.rect);
     self.pages.collision.effects.add_effect(self.effects);    
   };
   self.call = function()
