@@ -16,6 +16,7 @@ function PlayersPage(var pages)
   {
     textFont(font,18);
     self.instant.display();
+    self.custom.display();
   };
   self.key = function()
   {
