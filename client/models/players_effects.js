@@ -11,6 +11,7 @@ function PlayersEffects(var pages)
       if (object.member == 0)
       {
 	game_protocol.request_multi_empty();
+	mode.change(7);
       }
       else if (object.member == 1)
       {
