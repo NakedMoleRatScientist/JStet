@@ -43,7 +43,7 @@ function EngineDraw()
       self.player_draw(engine.players[1]);
     }
   };
-  self.player_draw = function(var player)
+  self.player_draw = function(var player, var offset)
   {
     if (player.current.draw == true)
     {
