@@ -8,7 +8,7 @@ function EngineDraw()
     textFont(font,18);
     background(0,0,0);
     self.ready();
-    if (engine.state == 2)
+    if (engine.state == 1)
     {
       self.field_draw_mode();
       self.decide_draw();
