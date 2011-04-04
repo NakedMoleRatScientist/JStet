@@ -258,7 +258,6 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	mode.change(4);
-	engine.start(data[2]);
       }
       break;
     case 1:
@@ -328,7 +327,7 @@ function GameProtocol()
     case 9:
       if (self.checkIdentical(data))
       {
-	if (data[0] == self.engine.you)
+	if (data[2] == self.engine.you)
 	{
 	  console.log("Ready for action!");
 	  engine.ready = 1;
@@ -1272,8 +1271,8 @@ function JoinProtocol()
       }
     case 1:
       {
-	engine.start(data[1]);
-	engine.create(data[2]);
+	engine.start(data[2]);
+	engine.create(data[1]);
 	mode.change(4);
 	break;
       }
@@ -2770,7 +2769,7 @@ function Player()
     textFont(font,18);
     background(0,0,0);
     self.ready();
-    if (engine.state == 2)
+    if (engine.state == 1)
     {
       self.field_draw_mode();
       self.decide_draw();
@@ -2822,7 +2821,7 @@ function Player()
   };
   self.ready = function()
   {
-    if (engine.state == 0)
+    if (engine.ready == 0)
     {
       rect(260,280,318,25);
       text("Press Enter When You're Ready",260,300);
