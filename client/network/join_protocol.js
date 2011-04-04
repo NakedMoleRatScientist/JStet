@@ -19,8 +19,8 @@ function JoinProtocol()
       }
     case 1:
       {
-	engine.start(data[1]);
-	engine.create(data[2]);
+	engine.start(data[2]);
+	engine.create(data[1]);
 	mode.change(4);
 	break;
       }
