@@ -1,7 +1,7 @@
 
 function TetrominoDraw()
 {
-  this.create_blocks = function(pos,x,y,color)
+  this.create_blocks = function(var pos,var x,var y,var color)
   {
     for (var i = 0; i < pos.length; i++)
     {
