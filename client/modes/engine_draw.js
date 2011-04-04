@@ -56,7 +56,7 @@ function EngineDraw()
     {
       self.drawShape.create_blocks(player.future.get_list(),225 + offset,210,player.future.shape.color);
     }
-    self.drawShape.draw_field(player.field.field);
+    self.drawShape.draw_field(player.field.field,offset);
   };
   self.ready = function()
   {
