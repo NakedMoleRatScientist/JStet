@@ -2480,7 +2480,7 @@ function getShape (choice)
 }
 function TetrominoDraw()
 {
-  this.create_blocks = function(pos,x,y,color)
+  this.create_blocks = function(var pos,var x,var y,var color)
   {
     for (var i = 0; i < pos.length; i++)
     {
@@ -2491,7 +2491,7 @@ function TetrominoDraw()
       fill(255);
     }
   }
-  this.draw_field = function(field)
+  this.draw_field = function(var field,var offset)
   {
     for (var x = 0; x < 10; x++)
     {
@@ -2501,7 +2501,7 @@ function TetrominoDraw()
         {
           stroke(field[x][y]);
           fill(field[x][y]);
-          rect((x * 20) + 50,(y * 20) + 50,20,20);
+          rect((x * 20) + 50 + offset,(y * 20) + 50,20,20);
           stroke(255);
           fill(255);
         }
@@ -2798,26 +2798,26 @@ function Player()
   };
   self.decide_draw = function()
   {
-    self.player_draw(engine.players[0]);
+    self.player_draw(engine.players[0],0);
     if (engine.players.length == 2)
     {
-      self.player_draw(engine.players[1]);
+      self.player_draw(engine.players[1],400);
     }
   };
-  self.player_draw = function(var player)
+  self.player_draw = function(var player, var offset)
   {
     if (player.current.draw == true)
     {
-      self.drawShape.create_blocks(player.current.get_list(),player.current.x,player.current.y,player.current.shape.color);
-      text("Current: ",250,135);
-      self.drawShape.create_blocks(player.current.get_list(),225,100,player.current.shape.color);
+      self.drawShape.create_blocks(player.current.get_list(),player.current.x + offset,player.current.y,player.current.shape.color);
+      text("Current: ",250 + offset,135);
+      self.drawShape.create_blocks(player.current.get_list(),225 + offset,100,player.current.shape.color);
     }
-    text("Next: ", 250,250);
+    text("Next: ", 250 + offset,250);
     if (player.future.draw == true)
     {
-      self.drawShape.create_blocks(player.future.get_list(),225,210,player.future.shape.color);
+      self.drawShape.create_blocks(player.future.get_list(),225 + offset,210,player.future.shape.color);
     }
-    self.drawShape.draw_field(player.field.field);
+    self.drawShape.draw_field(player.field.field,offset);
   };
   self.ready = function()
   {
