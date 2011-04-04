@@ -139,7 +139,7 @@ function GameProtocol()
     case 9:
       if (self.checkIdentical(data))
       {
-	if (data[0] == self.engine.you)
+	if (data[2] == self.engine.you)
 	{
 	  console.log("Ready for action!");
 	  engine.ready = 1;
