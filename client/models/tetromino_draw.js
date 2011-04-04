@@ -12,7 +12,7 @@ function TetrominoDraw()
       fill(255);
     }
   }
-  this.draw_field = function(var field)
+  this.draw_field = function(var field,var offset)
   {
     for (var x = 0; x < 10; x++)
     {
