@@ -22,7 +22,7 @@ function TetrominoDraw()
         {
           stroke(field[x][y]);
           fill(field[x][y]);
-          rect((x * 20) + 50,(y * 20) + 50,20,20);
+          rect((x * 20) + 50 + offset,(y * 20) + 50,20,20);
           stroke(255);
           fill(255);
         }
