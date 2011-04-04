@@ -47,14 +47,14 @@ function EngineDraw()
   {
     if (player.current.draw == true)
     {
-      self.drawShape.create_blocks(player.current.get_list(),player.current.x,player.current.y,player.current.shape.color);
-      text("Current: ",250,135);
-      self.drawShape.create_blocks(player.current.get_list(),225,100,player.current.shape.color);
+      self.drawShape.create_blocks(player.current.get_list(),player.current.x + offset,player.current.y,player.current.shape.color);
+      text("Current: ",250 + offset,135);
+      self.drawShape.create_blocks(player.current.get_list(),225 + offset,100,player.current.shape.color);
     }
-    text("Next: ", 250,250);
+    text("Next: ", 250 + offset,250);
     if (player.future.draw == true)
     {
-      self.drawShape.create_blocks(player.future.get_list(),225,210,player.future.shape.color);
+      self.drawShape.create_blocks(player.future.get_list(),225 + offset,210,player.future.shape.color);
     }
     self.drawShape.draw_field(player.field.field);
   };
