@@ -106,7 +106,7 @@ function Session()
       else
       {
 	sys.log("A player is ready to rumble!");
-	self.add_event([id,2,9]);
+	self.add_event([2,9,id]);
       }
     }
     else if(self.confirm[0] == true)
