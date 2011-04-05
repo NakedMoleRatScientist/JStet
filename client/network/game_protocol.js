@@ -132,6 +132,7 @@ function GameProtocol()
       {
 	console.log("Starting game.");
 	engine.state = 1;
+	engine.ready = 2;
 	net.send([2,4]);
       }
       break;
