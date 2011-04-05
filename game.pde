@@ -258,11 +258,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	mode.change(4);
-	if (engine.you != 0)
-	{
-	  engine.start(data[2]);
-	}
-	
+	self.engine.start(data[2]);
       }
       break;
     case 1:
@@ -2060,7 +2056,7 @@ function PlayFieldDraw()
   self.display = function(var x)
   {
     rect(self.x + x,self.y,self.width,self.height);
-    rect(self.x + + xself.width,self.y,100,self.height);
+    rect(self.x + x + self.width,self.y,100,self.height);
   };
 }
 
@@ -2778,26 +2774,21 @@ function Player()
       self.score();
     }
   };
-  self.player_one_field = function(var name,var offset)
+  self.player_field = function(var name,var offset)
   {
     if (engine.over == 0)
     {
-      text("Player " + name,75,50);
+      text("Player " + name,75 + offset,50);
       self.drawField.display(offset);
     }
-  };
-  self.player_two_field = function()
-  {
-    text("Player Two",75,450);
-    self.drawField.display_offset(400);
   };
   self.field_draw_mode = function()
   {
     fill(0,0,0);
-    self.player_one_field();
+    self.player_field("One",0);
     if (engine.players.length == 2)
     {
-      self.player_two_field();
+      self.player_field("Two",400);
     }
   };
   self.decide_draw = function()
@@ -2860,7 +2851,6 @@ function Player()
 function Engine()
 {
   var self = this;
-  game_protocol.engine = self;
   self.players = [];
   self.you = 0;
   self.score_one = 0;
