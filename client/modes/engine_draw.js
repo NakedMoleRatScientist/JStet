@@ -24,11 +24,6 @@ function EngineDraw()
       self.drawField.display(offset);
     }
   };
-  self.player_two_field = function()
-  {
-    text("Player Two",75,450);
-    self.drawField.display_offset(400);
-  };
   self.field_draw_mode = function()
   {
     fill(0,0,0);
