@@ -27,10 +27,10 @@ function EngineDraw()
   self.field_draw_mode = function()
   {
     fill(0,0,0);
-    self.player_one_field();
+    self.player_field("One",0);
     if (engine.players.length == 2)
     {
-      self.player_two_field();
+      self.player_field("Two",400);
     }
   };
   self.decide_draw = function()
