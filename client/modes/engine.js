@@ -4,7 +4,6 @@
 function Engine()
 {
   var self = this;
-  game_protocol.engine = self;
   self.players = [];
   self.you = 0;
   self.score_one = 0;
