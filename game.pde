@@ -258,6 +258,11 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	mode.change(4);
+	if (engine.you != 0)
+	{
+	  engine.start(data[2]);
+	}
+	
       }
       break;
     case 1:
@@ -321,6 +326,7 @@ function GameProtocol()
       {
 	console.log("Starting game.");
 	engine.state = 1;
+	engine.ready = 2;
 	net.send([2,4]);
       }
       break;
@@ -2051,15 +2057,10 @@ function PlayFieldDraw()
   self.y = 50;
   self.width = 200;
   self.height = 400;
-  self.display = function()
-  {
-    rect(self.x,self.y,self.width,self.height);
-    rect(self.x + self.width,self.y,100,self.height);
-  };
-  self.display_offset = function(var x)
+  self.display = function(var x)
   {
     rect(self.x + x,self.y,self.width,self.height);
-    rect(self.x + x + self.width,self.y,100,self.height);
+    rect(self.x + + xself.width,self.y,100,self.height);
   };
 }
 
@@ -2777,10 +2778,13 @@ function Player()
       self.score();
     }
   };
-  self.player_one_field = function()
+  self.player_one_field = function(var name,var offset)
   {
-    text("Player One",75,50);
-    self.drawField.display();
+    if (engine.over == 0)
+    {
+      text("Player " + name,75,50);
+      self.drawField.display(offset);
+    }
   };
   self.player_two_field = function()
   {
@@ -2863,6 +2867,7 @@ function Engine()
   self.score_two = 0;
   self.state = 0;
   self.ready = 0;
+  self.over = 0;
   self.find_player = function(var id)
   { 
     for (var i = 0;i < self.players.length;i++)
@@ -2922,6 +2927,7 @@ function Engine()
       self.score_two = score;
     }
   };
+
   self.destroy = function(var id)
   {
     for (var i = 0; i < self.players.length; i++)
