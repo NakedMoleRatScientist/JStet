@@ -16,7 +16,7 @@ function EngineDraw()
       self.score();
     }
   };
-  self.player_one_field = function(var name,var offset)
+  self.player_field = function(var name,var offset)
   {
     if (engine.over == 0)
     {
