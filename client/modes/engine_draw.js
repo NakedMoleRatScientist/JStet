@@ -20,8 +20,8 @@ function EngineDraw()
   {
     if (engine.over == 0)
     {
-      text("Player One",75,50);
-      self.drawField.display();
+      text("Player " + name,75,50);
+      self.drawField.display(offset);
     }
   };
   self.player_two_field = function()
