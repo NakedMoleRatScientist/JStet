@@ -18,8 +18,11 @@ function EngineDraw()
   };
   self.player_one_field = function()
   {
-    text("Player One",75,50);
-    self.drawField.display();
+    if (engine.over == 0)
+    {
+      text("Player One",75,50);
+      self.drawField.display();
+    }
   };
   self.player_two_field = function()
   {
