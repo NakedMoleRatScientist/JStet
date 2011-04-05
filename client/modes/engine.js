@@ -20,6 +20,7 @@ function Engine()
 	return self.players[i];
       }
     }
+    return -1;
   };
   self.write_shape = function(var id,var name,var choice,var type)
   {
