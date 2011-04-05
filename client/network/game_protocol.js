@@ -65,11 +65,10 @@ function GameProtocol()
     switch(data[1])
     {
     case 0:
-      console.log("Game initialized.");
       if (self.checkIdentical(data))
       {
 	mode.change(4);
-	self.engine.start(data[2]);
+	engine.start(data[2]);
       }
       break;
     case 1:
@@ -140,7 +139,7 @@ function GameProtocol()
     case 9:
       if (self.checkIdentical(data))
       {
-	if (data[2] == self.engine.you)
+	if (data[2] == engine.you)
 	{
 	  console.log("Ready for action!");
 	  engine.ready = 1;
