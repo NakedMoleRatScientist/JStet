@@ -65,6 +65,7 @@ function GameProtocol()
     switch(data[1])
     {
     case 0:
+      console.log("game initialized");
       if (self.checkIdentical(data))
       {
 	mode.change(4);
