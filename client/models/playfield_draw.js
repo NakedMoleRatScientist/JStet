@@ -9,6 +9,6 @@ function PlayFieldDraw()
   self.display = function(var x)
   {
     rect(self.x + x,self.y,self.width,self.height);
-    rect(self.x + + xself.width,self.y,100,self.height);
+    rect(self.x + x + self.width,self.y,100,self.height);
   };
 }
