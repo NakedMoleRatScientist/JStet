@@ -69,6 +69,7 @@ function GameProtocol()
       if (self.checkIdentical(data))
       {
 	mode.change(4);
+	self.engine.start(data[2]);
       }
       break;
     case 1:
