@@ -6,7 +6,7 @@ function Player()
   self.id = 0;
   self.future = new Tetromino();
   self.field = new PlayField();
-  self.write_shape = function(name,choice,type)
+  self.write_shape = function(var name,var choice,var type)
   {
     if (type == 0)
     {
