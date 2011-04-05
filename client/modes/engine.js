@@ -96,8 +96,11 @@ function Engine()
   };
   self.start = function(var id)
   {
-    self.create(id);
-    self.you = id;
+    if (self.you != id)
+    {
+      self.create(id);
+      self.you = id;
+    }
   };
   self.get_player = function(var n)
   {
