@@ -11,6 +11,7 @@ function Engine()
   self.score_two = 0;
   self.state = 0;
   self.ready = 0;
+  self.over = 0;
   self.find_player = function(var id)
   { 
     for (var i = 0;i < self.players.length;i++)
@@ -70,6 +71,7 @@ function Engine()
       self.score_two = score;
     }
   };
+
   self.destroy = function(var id)
   {
     for (var i = 0; i < self.players.length; i++)
