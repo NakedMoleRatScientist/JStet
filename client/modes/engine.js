@@ -97,7 +97,7 @@ function Engine()
   };
   self.start = function(var id)
   {
-    if (self.you != id)
+    if (self.you == 0)
     {
       self.create(id);
       self.you = id;
