@@ -254,11 +254,11 @@ function GameProtocol()
     switch(data[1])
     {
     case 0:
-      console.log("Game initialized.");
+      console.log("game initialized");
       if (self.checkIdentical(data))
       {
 	mode.change(4);
-	self.engine.start(data[2]);
+	engine.start(data[2]);
       }
       break;
     case 1:
@@ -329,7 +329,7 @@ function GameProtocol()
     case 9:
       if (self.checkIdentical(data))
       {
-	if (data[2] == self.engine.you)
+	if (data[2] == engine.you)
 	{
 	  console.log("Ready for action!");
 	  engine.ready = 1;
@@ -2729,7 +2729,7 @@ function Player()
   self.id = 0;
   self.future = new Tetromino();
   self.field = new PlayField();
-  self.write_shape = function(name,choice,type)
+  self.write_shape = function(var name,var choice,var type)
   {
     if (type == 0)
     {
@@ -2756,7 +2756,8 @@ function Player()
     self.future = new Tetromino();
     self.field.start();
   };
-}function EngineDraw()
+}
+function EngineDraw()
 {
   var self = this;
   self.drawField = new PlayFieldDraw();
@@ -2779,8 +2780,12 @@ function Player()
     if (engine.over == 0)
     {
       text("Player " + name,75 + offset,50);
-      self.drawField.display(offset);
     }
+    else if (engine.over == 1)
+    {
+      text("Game over!",275 + offset, 200);
+    }
+    self.drawField.display(offset);
   };
   self.field_draw_mode = function()
   {
@@ -2867,6 +2872,7 @@ function Engine()
 	return self.players[i];
       }
     }
+    return -1;
   };
   self.write_shape = function(var id,var name,var choice,var type)
   {
@@ -2943,8 +2949,11 @@ function Engine()
   };
   self.start = function(var id)
   {
-    self.create(id);
-    self.you = id;
+    if (self.you == 0)
+    {
+      self.create(id);
+      self.you = id;
+    }
   };
   self.get_player = function(var n)
   {
