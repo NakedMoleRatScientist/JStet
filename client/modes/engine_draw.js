@@ -21,12 +21,12 @@ function EngineDraw()
     if (engine.over == 0)
     {
       text("Player " + name,75 + offset,50);
-      self.drawField.display(offset);
     }
     else if (engine.over == 1)
     {
       text("Game over!",275 + offset, 200);
     }
+    self.drawField.display(offset);
   };
   self.field_draw_mode = function()
   {
