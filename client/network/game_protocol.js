@@ -114,10 +114,10 @@ function GameProtocol()
       }
       break;
     case 6:
-      //destruction of the game
+      //game over for the player.
       if (self.checkIdentical(data))
       {
-	engine.stop(engine.you);
+	engine.stop(data[0]);
       }
       break;
     case 7:
