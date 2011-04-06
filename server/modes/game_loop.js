@@ -87,6 +87,7 @@ function EventManager()
 	    game_over += 1;
 	  }
 	}
+	//Enough game over, meaning the game is terminated.
 	if (game_over == self.players.length)
 	{
 	  clearInterval(game);
