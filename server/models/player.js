@@ -22,7 +22,7 @@ function PlayerGameMode(player,manager)
   self.score = 0;
   self.create_over_message = function()
   {
-    var message = [self.player.id,6,1];
+    var message = [self.player.id,6];
     self.manager.send(message);
   };
   //rotate.
