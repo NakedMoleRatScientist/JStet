@@ -1,6 +1,6 @@
 var sys = require('sys');
 var couch = require('cradle');
-var db = new(cradle.Connection)().database('server');
+var db = new(couch.Connection)().database('server');
 
 var document =
   {
