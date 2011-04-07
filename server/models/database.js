@@ -1,7 +1,7 @@
-var sys = require('sys')
-var couch = require('node-couchdb/lib/couchdb')
+var sys = require('sys');
+var couch = require('cradle');
 var client = couch.createClient(5984,'localhost');
-var db = client.db('server')
+var db = client.db('server');
 
 var document =
   {
