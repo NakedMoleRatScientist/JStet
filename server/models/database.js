@@ -82,7 +82,7 @@ exports.save = function()
   exports.getRev(function(rev){
     document._rev = rev;
     sys.puts("save score");
-    db.saveDoc('score',document,function(er,ok){
+    db.save('score',document,function(er,ok){
       if (er) throw new Error(JSON.stringify(er));
     });
   });
