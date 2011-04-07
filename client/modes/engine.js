@@ -56,7 +56,6 @@ function Engine()
   };
   self.stop = function(var id)
   {
-    self.destroy(id);
     console.log("Game over");
     mode.change(1);
   };
