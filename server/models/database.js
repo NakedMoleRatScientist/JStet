@@ -1,6 +1,6 @@
 var sys = require('sys');
 var couch = require('cradle');
-var client = couch.createClient(5984,'localhost');
+var client = new(cradle.Connection)().database('server');
 var db = client.db('server');
 
 var document =
