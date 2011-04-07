@@ -99,7 +99,7 @@ exports.destroy = function()
 
 exports.getRev = function(callback)
 {
-  db.getDoc('score',function(er,doc){
+  db.get('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
     rev = doc._rev;
     callback(rev);
