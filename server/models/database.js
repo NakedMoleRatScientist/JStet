@@ -90,10 +90,10 @@ exports.save = function()
 
 exports.destroy = function()
 {
-  db.getDoc('score',function(er,doc){
+  db.get('score',function(er,doc){
     if (er) throw new Error(JSON.stringify(er));
-    sys.puts("destroy a document")
-    db.removeDoc(doc._id,doc._rev);
+    sys.puts("destroy a document");
+    db.remove(doc._id,doc._rev);
   });
 }
 
