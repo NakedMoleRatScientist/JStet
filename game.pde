@@ -303,10 +303,10 @@ function GameProtocol()
       }
       break;
     case 6:
-      //destruction of the game
+      //game over for the player.
       if (self.checkIdentical(data))
       {
-	engine.stop(engine.you);
+	engine.stop(data[0]);
       }
       break;
     case 7:
@@ -838,7 +838,7 @@ function ListEffects(var page)
 function PlayersEffects(var pages)
 {
   var self = this;
-  self.page = pages;
+  self.pages = pages;
   self.effect = new Effect(self);
   self.check = function(var object)
   {
