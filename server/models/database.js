@@ -122,5 +122,5 @@ exports.getDoc = function()
 
 exports.use_db = function(name)
 {
-  db = new(cradle.Connection)().database(name);
+  db = new(couch.Connection)().database(name);
 }
