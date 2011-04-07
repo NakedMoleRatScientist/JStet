@@ -71,7 +71,7 @@ exports.get_lowest = function(points)
 
 exports.create = function()
 {
-  db.saveDoc('score', document,function(er,ok) {
+  db.save('score', document,function(er,ok) {
      if (er) throw new Error(JSON.stringify(er));
     sys.puts("create score");
   });
