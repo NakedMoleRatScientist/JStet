@@ -122,5 +122,5 @@ exports.getDoc = function()
 
 exports.use_db = function(name)
 {
-  db = client.db(name);
+  db = new(cradle.Connection)().database(name);
 }
