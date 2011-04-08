@@ -1353,7 +1353,7 @@ function Net()
   self.ws = null;
   self.initialize = function()
   {
-    self.ws = new WebSocket('ws://localhost:7000');
+    self.ws = new WebSocket('ws://jstet.kibabase.com:7000');
     self.ws.onmessage = function(event)
     {
       var data = JSON.parse(event.data);
@@ -2910,7 +2910,6 @@ function Engine()
   {
     if (id = self.you)
     {
-      console.log(id);
       console.log("Game over");
       mode.change(1);
     }
