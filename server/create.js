@@ -1,4 +1,6 @@
 var sys = require('sys');
-var db = require('./models/database');
+var cradle = require('cradle');
+var c = new (cradle.Connection);
 
+var db = c.database('server');
 db.create();
