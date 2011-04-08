@@ -2908,9 +2908,12 @@ function Engine()
   };
   self.stop = function(var id)
   {
-    self.destroy(id);
-    console.log("Game over");
-    mode.change(1);
+    if (id = self.you)
+    {
+      console.log(id);
+      console.log("Game over");
+      mode.change(1);
+    }
   };
   self.change_score = function(var id,var score)
   {
