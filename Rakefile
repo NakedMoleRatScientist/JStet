@@ -17,6 +17,7 @@ end
 
 task :development do
   sh "echo connect"
+end
 
 task :copy do
   if os == "i486-linux"
