@@ -16,7 +16,7 @@ task :production do
 end
 
 task :development do
-  sh "echo connect"
+  sh "echo \"connect = 'ws://127.0.0.1:7000'\" > client/network/connect.js"
 end
 
 task :copy do
