@@ -5,7 +5,6 @@ end
 os = RUBY_PLATFORM
 
 task :db => [:delete,:create]
-task :deploy => [:concat]
 task :copy => [:concat]
 task :concat do
   sh "rm game.pde"
