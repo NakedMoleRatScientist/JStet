@@ -117,6 +117,7 @@ function GameProtocol()
       //game over for the player.
       if (self.checkIdentical(data))
       {
+	console.log(data[0]);
 	engine.stop(data[0]);
       }
       break;

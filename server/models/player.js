@@ -23,6 +23,7 @@ function PlayerGameMode(player,manager)
   self.create_over_message = function()
   {
     var message = [self.player.id,6];
+    console.log(message);
     self.manager.send(message);
   };
   //rotate.

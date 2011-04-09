@@ -306,6 +306,7 @@ function GameProtocol()
       //game over for the player.
       if (self.checkIdentical(data))
       {
+	console.log(data[0]);
 	engine.stop(data[0]);
       }
       break;
@@ -3066,3 +3067,4 @@ void setup()
   textFont(font,18);
   frameRate(24);
 }
+connect = 'ws://127.0.0.1:7000'
