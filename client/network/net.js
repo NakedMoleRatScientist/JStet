@@ -6,7 +6,7 @@ function Net()
   self.ws = null;
   self.initialize = function()
   {
-    self.ws = new WebSocket('ws://jstet.kibabase.com:7000');
+    self.ws = new WebSocket(connect);
     self.ws.onmessage = function(event)
     {
       var data = JSON.parse(event.data);
