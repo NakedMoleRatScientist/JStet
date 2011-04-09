@@ -30,16 +30,6 @@ task :test do
   sh "node test/score.db.test.js"
 end
 
-task :deploy do
-  ftp = Net::FTP.new()
-  ftp.connect("kibabase.com",21)
-  ftp.login(USER,PASS)
-  ftp.chdir("kibabase.com")
-  ftp.put("game.js")
-  ftp.put("jstet.html")
-  ftp.close()
-end
-
 task :start do
   sh "node server/server.js"
 end
