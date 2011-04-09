@@ -12,8 +12,11 @@ task :concat do
 end
 
 task :production do
-  sh "echo connect = 'ws://jstet.kibabase.com:7000'"
+  sh "echo \"connect = 'ws://jstet.kibabase.com:7000'\" > client/network/connect.js"
 end
+
+task :development do
+  sh "echo connect"
 
 task :copy do
   if os == "i486-linux"
