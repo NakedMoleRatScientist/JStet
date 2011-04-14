@@ -56,7 +56,7 @@ function Engine()
   };
   self.stop = function(var id)
   {
-    if (id = self.you)
+    if (id == self.you)
     {
       console.log("Game over");
       mode.change(1);
