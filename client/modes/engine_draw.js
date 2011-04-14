@@ -19,7 +19,7 @@ function EngineDraw()
   self.player_field = function(var name,var offset)
   {   
     text("Player " + name,75 + offset,50);
-    else if (engine.over == 1)
+    if (engine.over == 1)
     {
       text("Game over!",275 + offset, 200);
     }
