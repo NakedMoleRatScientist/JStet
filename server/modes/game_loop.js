@@ -80,15 +80,25 @@ function EventManager()
     var game = setInterval(function() {
       if (self.timer.react() == true)
       {
-	var game_over = 0;
 	for (var i = 0;i < self.players.length;i++)
 	{
-	  if (self.players[i].move() == true)
+	  if (self.players[i].over == false)
 	  {
-	    game_over += 1;
+	    if (self.players[i].move() == true)
+	    {
+	      self.players[i].over = true;
+	    }
 	  }
 	}
-	//Enough game over, meaning the game is terminated.
+	var game_over = 0;
+	//All game over, meaning the game is terminated.
+	for (var i = 0; i < self.players.length; i++)
+	{
+	  if (self.players[i].over == true)
+	  {
+	    game_over ++;
+	  }
+	}
 	if (game_over == self.players.length)
 	{
 	  clearInterval(game);
