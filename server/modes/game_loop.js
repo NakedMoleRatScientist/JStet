@@ -15,7 +15,6 @@ function EventManager()
   self.send = function(message)
   {
     //by default, each new message first array element contain the player's id.
-    console.log(message);
     self.events.push(message);
   };
   self.initialize = function(ids)
