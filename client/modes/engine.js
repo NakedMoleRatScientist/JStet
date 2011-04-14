@@ -61,6 +61,10 @@ function Engine()
       console.log("Game over");
       mode.change(1);
     }
+    else
+    {
+      self.over = 1;
+    }
   };
   self.change_score = function(var id,var score)
   {
