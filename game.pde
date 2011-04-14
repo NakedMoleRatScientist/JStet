@@ -306,7 +306,6 @@ function GameProtocol()
       //game over for the player.
       if (self.checkIdentical(data))
       {
-	console.log(data[0]);
 	engine.stop(data[0]);
       }
       break;
@@ -2777,12 +2776,9 @@ function EngineDraw()
     }
   };
   self.player_field = function(var name,var offset)
-  {
-    if (engine.over == 0)
-    {
-      text("Player " + name,75 + offset,50);
-    }
-    else if (engine.over == 1)
+  {   
+    text("Player " + name,75 + offset,50);
+    if (engine.over == 1)
     {
       text("Game over!",275 + offset, 200);
     }
@@ -2909,10 +2905,14 @@ function Engine()
   };
   self.stop = function(var id)
   {
-    if (id = self.you)
+    if (id == self.you)
     {
       console.log("Game over");
       mode.change(1);
+    }
+    else
+    {
+      self.over = 1;
     }
   };
   self.change_score = function(var id,var score)
