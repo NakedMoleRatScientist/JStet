@@ -83,10 +83,7 @@ function EventManager()
 	{
 	  if (self.players[i].over == false)
 	  {
-	    if (self.players[i].move() == true)
-	    {
-	      self.players[i].over = true;
-	    }
+	    self.players[i].move();
 	  }
 	}
 	var game_over = 0;
