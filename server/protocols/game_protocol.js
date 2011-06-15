@@ -256,22 +256,12 @@ exports.get_score = function(id)
 
 function destroy_game(id)
 {
-  if (sessions[find_by_id(id)).over == 2)
-      {
-	  destroy(id);
-      }
-}
-
-function destroy(id)
-{
   var location = find_by_id(id);
-  if (location == -1)
+  if (location.over == true)
   {
-    return false;
+    sessions.splice(location,1);
+    sys.log("Destroy game: " + id);
   }
-  sys.log("Destroyed game: " + id);
-  sessions[location].over = true;
-  sessions.splice(location,1); 
 }
 
 exports.size = function()
