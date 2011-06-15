@@ -83,7 +83,7 @@ function EventManager()
 	{
 	  if (self.players[i].over == false)
 	  {
-	    self.players[i].move();
+	    self.players[i].move_down();
 	  }
 	}
 	var game_over = 0;
@@ -97,7 +97,6 @@ function EventManager()
 	}
 	if (game_over == self.players.length)
 	{
-	  sys.log("Game should be terminated.");
 	  clearInterval(game);
 	}
       }
