@@ -306,6 +306,7 @@ function GameProtocol()
       //game over for the player.
       if (self.checkIdentical(data))
       {
+        game_protocol.request_delete();
 	engine.stop(data[0]);
       }
       break;
@@ -1831,6 +1832,10 @@ function GameOverMode()
     {
       mode.change(2);
     }
+    else
+    {
+      console.log(key);
+    }
   };
 }
 
@@ -2521,6 +2526,7 @@ function LobbyEffects()
     {
       if (object.member == 0)
       {
+	reset();
 	game_protocol.request_game();
       }
       else if (object.member == 1)
@@ -2699,7 +2705,7 @@ function WaitingMode()
 
 function reset()
 {
-  engine = new Engine();  
+  engine = new Engine();
 }
 
 
@@ -2831,6 +2837,7 @@ function EngineDraw()
   {
     if (engine.ready == 0)
     {
+      noFill();
       rect(260,280,318,25);
       text("Press Enter When You're Ready",260,300);
     }
