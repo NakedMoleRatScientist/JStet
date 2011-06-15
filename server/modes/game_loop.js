@@ -19,9 +19,12 @@ function EventManager()
   };
   self.over_status = function()
   {
-    if (self.players[0].over == true && self.players[1].over == true)
+    for (var i = 0; i < self.players.length; i++)
     {
-      return true;
+      if (self.players[i].over == false)
+      {
+	return true;
+      }
     }
     return false;
   };
