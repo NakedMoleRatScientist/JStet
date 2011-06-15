@@ -101,8 +101,7 @@ function PlayerGameMode(player,manager)
       self.current.move(-x,-y);
       if (self.current.y == 0)
       {
-	self.over = true;
-	sys.log("Game over.");
+	  self.game_over();
       }
       self.cycle();
     }
