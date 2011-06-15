@@ -246,7 +246,7 @@ function GameProtocol()
   };
   self.request_delete = function()
   {
-    var data = [3];
+    var data = [2,3];
     net.send(data);
   };
   self.process_data = function(var data)
@@ -328,6 +328,7 @@ function GameProtocol()
       }
       break;
     case 9:
+    //tell the game that you're ready.
       if (self.checkIdentical(data))
       {
 	if (data[2] == engine.you)
@@ -1820,22 +1821,30 @@ function GameOverMode()
     textFont(font,18);
     text("Press n to start a new game.",250,325);
     text("Press d to display highscore", 250,350);
+    text("Press q to return to lobby mode",250,375);
   };
   self.key = function()
   {
-    if (key == 110)
-    {
-      reset();
-      game_protocol.request_game();
-    }
-    else if(key == 100)
-    {
-      mode.change(2);
-    }
-    else
-    {
-      console.log(key);
-    }
+      switch(key)
+      {
+	  case 110:
+	  {
+	      reset();
+	      game_protocol.request_game();
+	      break;
+	  }
+	  case 100:
+	  {
+	      mode.change(2);
+	      break;
+	  }
+	  case 113:
+	  {
+	      mode.change(5);
+	      break;
+	  }
+      }
+	  
   };
 }
 
@@ -2524,25 +2533,33 @@ function LobbyEffects()
   {
     if (object.type == 0)
     {
-      if (object.member == 0)
-      {
-	reset();
-	game_protocol.request_game();
-      }
-      else if (object.member == 1)
-      {
-	mode.change(6);
-      }
-      else if (object.member == 2)
-      {
-	list_protocol.request_size();
-	list_protocol.request_games();
-	mode.change(8);
-      }
-      else if (object.member == 3)
-      {
-	mode.change(2);
-      }
+      switch(object.member)
+	{
+        case 0:
+	    {
+	      reset();
+	      game_protocol.request_game();
+              break;
+	    }
+	case 1:
+	    {
+		mode.change(6);
+		break;
+	    }
+	case 2:
+	    {
+		reset();
+		list_protocol.request_size();
+		list_protocol.request_games();
+		mode.change(8);
+		break;
+	    }
+	    case 3:
+	    {
+		mode.change(2);
+		break;
+	    }
+	}
     }
   };
 }
