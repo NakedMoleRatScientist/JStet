@@ -17,7 +17,6 @@ function GameOverMode()
   {
     if (key == 110)
     {
-      game_protocol.request_delete();
       reset();
       game_protocol.request_game();
     }
