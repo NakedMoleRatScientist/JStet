@@ -253,6 +253,9 @@ exports.get_score = function(id)
   return score;
 }
 
+function destroy_game(id)
+{
+}
 
 function destroy(id)
 {
