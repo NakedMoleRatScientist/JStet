@@ -57,7 +57,7 @@ function GameProtocol()
   };
   self.request_delete = function()
   {
-    var data = [2,3];
+    var data = [2,7];
     net.send(data);
   };
   self.process_data = function(var data)
