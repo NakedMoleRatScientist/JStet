@@ -1248,6 +1248,10 @@ function ScoreBoardMode()
     case 107:
       self.turnPage();
       break;
+    // q, return to lobby mode
+    case 113:
+      mode.change(5);
+      break;
     }
   };
 }
