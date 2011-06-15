@@ -82,6 +82,18 @@ function PlayerGameMode(player,manager)
     return false;
   };
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
+  self.game_over = function()
+  {
+    sys.log("Game over.");
+    if (self.check_score() == true)
+    {
+      self.create_success_message();
+    }
+    else
+    {
+      self.create_over_message();
+    }
+  }
   self.collision_effect_down = function(x,y)
   {
     if (self.collision(x,y))
@@ -124,6 +136,7 @@ function PlayerGameMode(player,manager)
   //a high score is detected.
   self.create_success_message = function()
   {
+    sys.log("yapyayapado!");
     var message = [self.player.id,7,1];
     self.manager.send(message);
   };
@@ -176,14 +189,7 @@ function PlayerGameMode(player,manager)
     self.move_down()
     if (self.over == true)
     {
-      if (self.check_score() == true)
-      {
-	self.create_success_message();
-      }
-      else
-      {
-	self.create_over_message();
-      }
+  
       return true;
     }
     return false;
