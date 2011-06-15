@@ -256,7 +256,7 @@ exports.get_score = function(id)
 function destroy_game(id)
 {
   var location = find_by_id(id);
-  if (location.over == true)
+  if (location.game.over_status == true)
   {
     sessions.splice(location,1);
     sys.log("Destroy game: " + id);
