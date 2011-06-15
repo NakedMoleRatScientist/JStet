@@ -255,6 +255,10 @@ exports.get_score = function(id)
 
 function destroy_game(id)
 {
+  if (sessions[find_by_id(id)).over == 2)
+      {
+	  destroy(id);
+      }
 }
 
 function destroy(id)
