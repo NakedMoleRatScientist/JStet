@@ -122,7 +122,7 @@ exports.process = function(data,id)
   switch(data[1])
   {
   case 0:
-  if (find_by_id(id) != -1)  //Find if a game session already exists and deny.
+    if (find_by_id(id) != -1)  //Find if a game session already exists and deny.
     {
       return;
     }
@@ -262,6 +262,10 @@ exports.destroy_game = function(id)
 	{
 	  sessions.splice(location,1);
 	  sys.log("Destroy game: " + id);
+	}
+	else
+	{
+	  location.game.pop_id(id);
 	}
     }
  
