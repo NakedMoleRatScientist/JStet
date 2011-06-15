@@ -117,6 +117,7 @@ function GameProtocol()
       //game over for the player.
       if (self.checkIdentical(data))
       {
+        game_protocol.request_delete();
 	engine.stop(data[0]);
       }
       break;
