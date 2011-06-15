@@ -63,10 +63,6 @@ server.addListener("connection",function(conn){
     case 2:
       game.process(data,conn._id);
       break;
-    //Destroy game.
-    case 3:
-      game.destroy(conn._id);
-      break;
     case 4:
       server.send(conn._id,list.process_data(data[1]));
       break;
