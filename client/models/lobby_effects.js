@@ -9,6 +9,7 @@ function LobbyEffects()
     {
       if (object.member == 0)
       {
+	reset();
 	game_protocol.request_game();
       }
       else if (object.member == 1)
