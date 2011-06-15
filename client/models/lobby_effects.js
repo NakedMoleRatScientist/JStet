@@ -21,6 +21,10 @@ function LobbyEffects()
 	list_protocol.request_games();
 	mode.change(8);
       }
+      else if (object.member == 3)
+      {
+	mode.change(3);
+      }
     }
   };
 }
