@@ -17,6 +17,14 @@ function EventManager()
     //by default, each new message first array element contain the player's id.
     self.events.push(message);
   };
+  self.over_status = function()
+  {
+    if (self.players[0].over == true && self.players[1].over == true)
+    {
+      return true;
+    }
+    return false;
+  };
   self.initialize = function(ids)
   {
     for (var i = 0; i < ids.length; i++)
