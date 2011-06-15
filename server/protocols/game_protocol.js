@@ -122,7 +122,7 @@ exports.process = function(data,id)
   switch(data[1])
   {
   case 0:
-    if (find_by_id(id) != -1)
+  if (find_by_id(id) != -1)  //Find if a game session already exists and deny.
     {
       return;
     }
@@ -154,7 +154,7 @@ exports.process = function(data,id)
     break;
   case 7:
     sys.log("Attempt kill");
-    destroy_game(id);
+    exports.destroy_game(id);
     break;
   }
 };
@@ -255,8 +255,8 @@ exports.get_score = function(id)
 
 exports.destroy_game = function(id)
 {
-  var location = find_by_id(id);
-  if (location != -1)
+  var location = sessions[find_by_id(id)];
+  if (location)
     {
 	if (location.game.over_status == true || location.game.players.size == 1)
 	{
