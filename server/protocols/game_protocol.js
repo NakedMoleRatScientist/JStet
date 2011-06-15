@@ -152,6 +152,10 @@ exports.process = function(data,id)
     sys.log("Multiplayer nopassword created");
     create_game(id,2,"Game_" + id,null,false);
     break;
+  case 7:
+    sys.log("Attempt kill");
+    destroy_game(id);
+    break;
   }
 };
 
