@@ -11,7 +11,7 @@ function LobbyEffects()
 	{
         case 0:
 	    {
-	      mreset();
+	      reset();
 	      game_protocol.request_game();
               break;
 	    }
