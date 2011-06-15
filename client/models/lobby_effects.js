@@ -23,7 +23,7 @@ function LobbyEffects()
       }
       else if (object.member == 3)
       {
-	mode.change(3);
+	mode.change(8);
       }
     }
   };
