@@ -84,6 +84,7 @@ function PlayerGameMode(player,manager)
   //If collision, then revert position. It can also declare game over if self.current.y is 0.
   self.game_over = function()
   {
+    self.over = true;
     sys.log("Game over.");
     if (self.check_score() == true)
     {
