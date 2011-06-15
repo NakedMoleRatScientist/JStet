@@ -21,6 +21,7 @@ function GameOverMode()
 	  case 110:
 	  {
 	      reset();
+	      game_protocol.request_delete();
 	      game_protocol.request_game();
 	      break;
 	  }
