@@ -57,7 +57,7 @@ function GameProtocol()
   };
   self.request_delete = function()
   {
-    var data = [3];
+    var data = [2,3];
     net.send(data);
   };
   self.process_data = function(var data)
@@ -139,6 +139,7 @@ function GameProtocol()
       }
       break;
     case 9:
+    //tell the game that you're ready.
       if (self.checkIdentical(data))
       {
 	if (data[2] == engine.you)
