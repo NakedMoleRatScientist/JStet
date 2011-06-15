@@ -1,6 +1,7 @@
 
 function reset()
 {
-  engine = new Engine();  
+  engine = new Engine();
+  engineDraw = new EngineDraw();
 }
 
