@@ -20,15 +20,9 @@ task :development do
 end
 
 task :copy do
-  if os == "i486-linux"
-    sh "cp jstet.html /var/www/"
-    sh "cp game.pde/var/www/"
-    sh "cp -r vendor /var/www/"
-  else
-    sh "cp jstet.html /srv/http"
-    sh "cp game.pde /srv/http"
-    sh "cp -r vendor /srv/http"
-  end
+  sh "cp jstet.html /var/www/"
+  sh "cp game.pde /var/www/"
+  sh "cp -r vendor /var/www/"
 end
 
 task :test do
