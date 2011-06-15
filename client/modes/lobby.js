@@ -12,6 +12,7 @@ function LobbyMode()
   self.effect.add(self.play.rect);
   self.effect.add(self.session.rect);
   self.effect.add(self.find.rect);
+  self.effect.add(self.score.rect);
   self.collision.effects.add_effect(self.effect);
   self.display = function()
   {
