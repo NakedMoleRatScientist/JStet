@@ -184,16 +184,6 @@ function PlayerGameMode(player,manager)
     self.collision_effect_down(0,20);
     self.create_xy_message();
   };
-  self.move = function()
-  {
-    self.move_down()
-    if (self.over == true)
-    {
-  
-      return true;
-    }
-    return false;
-  };
   //move right
   self.move_right = function()
   {
