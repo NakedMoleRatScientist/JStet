@@ -29,6 +29,11 @@ function GameOverMode()
 	      mode.change(2);
 	      break;
 	  }
+	  case 113:
+	  {
+	      mode.change(5);
+	      break;
+	  }
       }
 	  
   }
