@@ -32,7 +32,7 @@ server.addListener("connection",function(conn){
   conn.addListener("close",function(){
     db.save();
     players.destroy(conn._id);
-    game.destroy(conn._id);
+    game.destroy_game(conn._id);
     sys.log("<"+conn._id+"> onClose");
   });
   
