@@ -61,6 +61,7 @@ function EngineDraw()
   {
     if (engine.ready == 0)
     {
+      noFill();
       rect(260,280,318,25);
       text("Press Enter When You're Ready",260,300);
     }
