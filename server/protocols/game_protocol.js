@@ -253,7 +253,7 @@ exports.get_score = function(id)
   return score;
 }
 
-function destroy_game(id)
+exports.destroy_game = function(id)
 {
   var location = find_by_id(id);
   if (location.game.over_status == true)
