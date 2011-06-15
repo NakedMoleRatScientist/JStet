@@ -16,18 +16,20 @@ function GameOverMode()
   };
   self.key = function()
   {
-    if (key == 110)
-    {
-      reset();
-      game_protocol.request_game();
-    }
-    else if(key == 100)
-    {
-      mode.change(2);
-    }
-    else
-    {
-      console.log(key);
-    }
-  };
+      switch(key)
+      {
+	  case 110:
+	  {
+	      reset();
+	      game_protocol.request_game();
+	      break;
+	  }
+	  case 100:
+	  {
+	      mode.change(2);
+	      break;
+	  }
+      }
+	  
+  }
 }
