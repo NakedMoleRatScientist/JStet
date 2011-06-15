@@ -97,6 +97,7 @@ function EventManager()
 	}
 	if (game_over == self.players.length)
 	{
+	  sys.log("Game should be terminated.");
 	  clearInterval(game);
 	}
       }
