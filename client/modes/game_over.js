@@ -12,6 +12,7 @@ function GameOverMode()
     textFont(font,18);
     text("Press n to start a new game.",250,325);
     text("Press d to display highscore", 250,350);
+    text("Press q to return to lobby mode",250,375);
   };
   self.key = function()
   {
