@@ -5,13 +5,15 @@ Warnings:
 1. Do not hack game.js! game.js is a result of concating several various files from the client folder.
 
 
-Create New Server:
+Inital setup:
 
 1. Start couchdb
-2. rake create
-3. rake start
+2. access http://127.0.0.1:5984/_utils/ and create databae "server"
+2. command: rake create
+3. command: rake start
 
 
 Run Server:
 
-Repeat step 1 and 3 in Create New Server section.
+1. start couchdb
+2. command: rake start
