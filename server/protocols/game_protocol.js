@@ -11,7 +11,6 @@ function Session()
   self.password = null;
   self.players = 1;
   self.confirm = [false,false];
-  self.over = false;
   self.game = game.create_new();
   self.initialize = function()
   {
