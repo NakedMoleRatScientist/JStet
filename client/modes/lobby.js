@@ -21,6 +21,7 @@ function LobbyMode()
     self.play.display();
     self.session.display();
     self.find.display();
+    self.score.display();
     noFill();
     stroke(255);
     rect(0,580,800,20);
