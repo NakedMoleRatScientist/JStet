@@ -256,11 +256,15 @@ exports.get_score = function(id)
 exports.destroy_game = function(id)
 {
   var location = find_by_id(id);
-  if (location.game.over_status == true || location.game.players.size == 1)
-  {
-    sessions.splice(location,1);
-    sys.log("Destroy game: " + id);
-  }
+  if (location != false)
+      {
+	  if (location.game.over_status == true || location.game.players.size == 1)
+	  {
+	      sessions.splice(location,1);
+	      sys.log("Destroy game: " + id);
+	  }
+      }
+ 
 }
 
 exports.size = function()
