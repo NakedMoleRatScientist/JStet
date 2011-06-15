@@ -36,5 +36,5 @@ function GameOverMode()
 	  }
       }
 	  
-  }
+  };
 }
