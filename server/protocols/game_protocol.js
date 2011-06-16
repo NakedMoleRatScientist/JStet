@@ -278,7 +278,7 @@ exports.destroy_game = function(id)
 	}
 	else
 	{
-	  location.game.pop_id(id);
+	  location.pop_id(id);
 	}
     }
  
