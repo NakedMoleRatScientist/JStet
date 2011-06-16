@@ -81,6 +81,17 @@ function Session()
   {
     self.ids.push(id);
   };
+  self.pop_id = function(id)
+  {
+    for (var i = 0; i < self.ids.length; i++)
+    {
+      if (self.ids[i] == id)
+      {
+        self.ids.splice(i,1);
+      }
+    }
+  }
+
   self.find_by_id = function(id)
   {
     for (var i = 0; i < self.ids.length; i++)
