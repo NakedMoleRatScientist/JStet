@@ -271,7 +271,7 @@ exports.destroy_game = function(id)
   var location = sessions[find_by_id(id)];
   if (location)
     {
-	if (location.game.over_status == true || location.game.players.size == 1)
+	if (location.game.over_status == true || location.ids.size == 1)
 	{
 	  sessions.splice(location,1);
 	  sys.log("Destroy game: " + id);
