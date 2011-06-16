@@ -90,7 +90,7 @@ function Session()
         self.ids.splice(i,1);
       }
     }
-  }
+  };
 
   self.find_by_id = function(id)
   {
