@@ -90,6 +90,7 @@ function Session()
 	return i;
       }
     }
+    return -1;
   };
   self.ready = function(id)
   {
@@ -124,6 +125,7 @@ exports.process = function(data,id)
   case 0:
     if (find_by_id(id) != -1)  //Find if a game session already exists and deny.
     {
+	sys.log("ye reject me!");
       return;
     }
     sys.log("Single player game created.");
