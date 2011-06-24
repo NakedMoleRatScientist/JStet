@@ -107,7 +107,6 @@ function EventManager()
     {
       if (self.players[i].over != true)
       {
-	sys.log("tweet");
 	self.players[i].move_down();
       }
     }
