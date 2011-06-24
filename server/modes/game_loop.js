@@ -100,13 +100,7 @@ function EventManager()
     var game = setInterval(function() {
       if (self.timer.react() == true)
       {
-	for (var i = 0;i < self.players.length;i++)
-	{
-	  if (self.players[i].over == false)
-	  {
-	    self.players[i].move_down();
-	  }
-	}
+	self.player_run();
 	var game_over = 0;
 	//All game over, meaning the game is terminated.
 	for (var i = 0; i < self.players.length; i++)
