@@ -84,6 +84,16 @@ function EventManager()
     var player = self.find_by_id(id);
     return player.score;
   };
+  self.player_run = function()
+  {
+    for (var i = 0; i < self.players.length; i++)
+    {
+      if !(self.players[i].over == true)
+      {
+	self.players[i].move_down();
+      }
+    }
+  };
   //run a game loop
   self.run_game = function()
   {
