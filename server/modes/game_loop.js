@@ -85,7 +85,7 @@ function EventManager()
     return player.score;
   };
 
-  self.over_check = function()
+  self.over_check = function(game)
   {
     var game_over = 0;
     //All game over, meaning the game is terminated.
@@ -118,7 +118,7 @@ function EventManager()
       if (self.timer.react() == true)
       {
 	self.player_run();
-	self.over_check();
+	self.over_check(game);
       }
     },10);
   }
