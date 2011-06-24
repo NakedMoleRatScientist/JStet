@@ -119,7 +119,7 @@ function EventManager()
       if (self.timer.react() == true)
       {
 	self.player_run();
-
+	self.over_check();
       }
     },10);
   }
