@@ -1,3 +1,4 @@
 *.html~
 *.js~
+/node_modules
 secret.rb
