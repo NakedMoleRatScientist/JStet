@@ -105,7 +105,7 @@ function EventManager()
   {
     for (var i = 0; i < self.players.length; i++)
     {
-      if !(self.players[i].over == true)
+      if (self.players[i].over != true)
       {
 	self.players[i].move_down();
       }
